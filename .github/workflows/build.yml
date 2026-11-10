@@ -1,0 +1,32 @@
+name: build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  lean:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Lean project
+        uses: leanprover/lean-action@v1
+        with:
+          auto-config: false
+          build: true
+      - name: Axiom audit
+        run: lake env lean Q1Paper/Audit.lean
+
+  paper:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile the paper
+        uses: xu-cheng/latex-action@v3
+        with:
+          working_directory: paper
+          root_file: q1_parametric_algorithms.tex
+      - uses: actions/upload-artifact@v4
+        with:
+          name: paper
+          path: paper/q1_parametric_algorithms.pdf

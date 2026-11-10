@@ -1,0 +1,13 @@
+name = "Q1Paper"
+version = "0.1.0"
+defaultTargets = ["q1paper"]
+
+[[lean_lib]]
+name = "Q1Paper"
+
+# Mathlib pinned to the release matching lean-toolchain (leanprover/lean4:v4.35.0).
+# The first `lake build` fetches it; run `lake exe cache get` once for a fast start.
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "v4.35.0"
