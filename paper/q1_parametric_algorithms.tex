@@ -388,35 +388,6 @@ Because $B$ has full row rank,
 Thus $\eqref{eq:5b}$ is equivalent to $\operatorname{rank}(\lambda X-G)=\omega\quad\forall\lambda\in\mathbb C$.
 
 
-Let $\omega>0$ and choose a pivot set $J$, $|J|=\omega$, such that $X=H_{:,J}$ has full column rank. Then $H=XB$ for a unique $B\in\mathbb C^{\omega\times k}$ with $B_{:,J}=I_\omega$: the columns in $J$ determine the coordinates, and the remaining columns are the coordinates of the corresponding columns of $H$ in the basis $X$.
-
-If $H_A=FH$, set $G=FX$. Then $H_A=GB$. Conversely, if $H_A=GB$ and $X_LX=I_\omega$, then $F=GX_L$ satisfies $FH=GX_LXB=GB=H_A$. This is the algebraic content of the substitution $G=FX$.
-
-Because $B$ has full row rank (its columns $J$ form $I_\omega$),
-
-\begin{equation}
-\operatorname{rank}P(\lambda)
-=\operatorname{rank}((\lambda X-G)B)
-=\operatorname{rank}(\lambda X-G).
-\end{equation}
-For the linear system $Mb=c$, consistency is equivalent to $c\in\operatorname{im}M$. Over the reals,
-
-\begin{equation}
-\operatorname{im}M=\operatorname{im}(MM^{\mathsf T}),
-\qquad
-\operatorname{im}[M\ c]=\operatorname{im}(MM^{\mathsf T}+cc^{\mathsf T}).
-\end{equation}
-Hence
-
-\begin{equation}
-\exists b:\ Mb=c
-\iff
-\operatorname{rank}(MM^{\mathsf T})
-=\operatorname{rank}(MM^{\mathsf T}+cc^{\mathsf T}).
-\end{equation}
-For a positive semidefinite matrix $\Gamma$, the $t$-th elementary symmetric polynomial satisfies $e_t(\Gamma)>0$ and $e_{t+1}(\Gamma)=0$ exactly when $\operatorname{rank}\Gamma=t$. Applying this to $\Gamma=MM^{\mathsf T}$ and $\Gamma'=MM^{\mathsf T}+cc^{\mathsf T}$, and using $\Gamma'\succeq\Gamma$, gives the displayed disjunction in Lemma 3.
-
-
 \subsection{The spectral certificate}\label{sec:spectrum}
 \paragraph*{Bezout degree bound}\label{sec:bezout}
 \begin{lem}[4] Let $\omega\ge1$ and let $f_1,\ldots,f_s\in\mathbb R[\lambda]$ have degree at most $\omega$ and no common complex root. Then there exist real polynomials $g_i$ with $\deg g_i<\omega$ such that
