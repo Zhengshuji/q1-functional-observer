@@ -1,4 +1,4 @@
-\documentclass[journal]{IEEEtran}
+﻿\documentclass[journal]{IEEEtran}
 \usepackage{amsmath,amssymb,mathtools}
 \usepackage{amsthm}
 \usepackage{booktabs,array}
@@ -932,11 +932,11 @@ pencil/gcd bridge, the matrix form of $\mathcal T$, the Gram/rank identity, the 
 \toprule
 Statement & Evidence & Formal name \\
 \midrule
-Compression criterion (Lemma 1) & Lean & \texttt{ker\_compressed\_iff} \\
-Space of row pairs (Lemma 2) & Lean & \texttt{freePairSpace},
+Compression criterion (Lemma 1) & Lean core & \texttt{ker\_compressed\_iff} \\
+Space of row pairs (Lemma 2) & Lean core & \texttt{freePairSpace},
 \texttt{kappaObs\_eq\_mul\_freePairSpace} \\
-Rank consistency (Lemma 3) & Lean & \texttt{RankConsistency} \\
-B\'ezout, left inverse (Lemma 4) & Lean & \texttt{bezout\_of\_gcd\_eq\_one} \\
+Rank consistency (Lemma 3) & Lean core & \texttt{RankConsistency} \\
+B\'ezout, left inverse (Lemma 4) & Lean core & \texttt{bezout\_of\_gcd\_eq\_one} \\
 Gram certificate (Lemma 5) & proof, exact check & --- \\
 Zero-free-row test (Proposition 1) & proof, exact check & --- \\
 Encoding (Theorem 3) & proof, witness check & --- \\
