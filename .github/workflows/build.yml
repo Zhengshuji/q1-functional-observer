@@ -30,3 +30,21 @@ jobs:
         with:
           name: paper
           path: paper/q1_parametric_algorithms.pdf
+
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install sympy
+        run: pip install sympy
+      - name: Exact checks on the paper's identities
+        working-directory: verification
+        env:
+          PYTHONPATH: "."
+        run: |
+          python c317_cauchy_binet_random.py
+          python c318_r0_linear_system.py
+          python c319_encoding_and_rowspace.py
