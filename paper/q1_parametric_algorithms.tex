@@ -370,7 +370,7 @@ Equivalently, with $\Gamma=MM^{\mathsf T}$, $\Gamma'=MM^{\mathsf T}+cc^{\mathsf 
 where $d_1=\min(\text{rows},\text{cols})$ of $M$ and $e_j$ is the $j$-th elementary symmetric polynomial of the eigenvalues.
 
 \end{lem}
-\emph{Proof.} $Mb=c$ is consistent iff $c\in\operatorname{im}M$. Since $\operatorname{im}\Gamma=\operatorname{im}M$ and $\operatorname{im}\Gamma'=\operatorname{im}[M\ c]$, this is equivalent to equality of the two ranks. For a positive semidefinite matrix $\Gamma$, $e_t(\Gamma)>0$ and $e_{t+1}(\Gamma)=0$ exactly when $\operatorname{rank}\Gamma=t$; the last condition forces $\operatorname{rank}\Gamma'\le t$, and $\Gamma'\succeq\Gamma$ gives equality.
+\emph{Proof.} $Mb=c$ is consistent iff $c\in\operatorname{im}M$. Since $\operatorname{im}\Gamma=\operatorname{im}M$ and $\operatorname{im}\Gamma'=\operatorname{im}[M\ c]$, this is equivalent to equality of the two ranks. For a positive semidefinite $\Gamma$ one has $e_j(\Gamma)=\sum_{|I|=j}\det\Gamma_{I,I}$, and every principal minor of $\Gamma$ is nonnegative; hence $e_j(\Gamma)=0$ exactly when all $j\times j$ principal minors vanish, which happens exactly when $\operatorname{rank}\Gamma<j$. Therefore $e_t(\Gamma)>0$ and $e_{t+1}(\Gamma)=0$ exactly when $\operatorname{rank}\Gamma=t$; the last condition forces $\operatorname{rank}\Gamma'\le t$, and $\Gamma'\succeq\Gamma$ gives equality.
 
 \paragraph*{Spectral reduction}\label{sec:spectral}
 Because $B$ has full row rank,
