@@ -434,27 +434,27 @@ B\'ezout identity then gives $u,v$ with $ug+vh=1$ and $\deg u,\deg v<\omega$, an
 expanding $g,h$ in the $f_i$ yields $\sum_ig_if_i=1$ with $\deg g_i<\omega$.
 
 \paragraph*{Gram certificate}\label{sec:gram}
-Let $f_i$ be the maximal minors of $P(\lambda)$. Form a matrix $B$ whose rows are indexed by $(i,j)$, $0\le j<\omega$, and whose columns are indexed by $t=0,\ldots,2\omega-1$, with $B_{(i,j),t}=c_{i,t-j}$,
+Let $f_i$ be the maximal minors of $P(\lambda)$. Form a matrix $Z$ whose rows are indexed by $(i,j)$, $0\le j<\omega$, and whose columns are indexed by $t=0,\ldots,2\omega-1$, with $Z_{(i,j),t}=c_{i,t-j}$,
 
 where $c_{i,a}$ is the coefficient of $\lambda^a$ in $f_i$. Then
 
 \[
-\eqref{eq:5b}\iff e_0\in\operatorname{row}B
-\iff\exists x\in\mathbb R^{2\omega}:\ B^{\mathsf T}Bx=e_0,
+\eqref{eq:5b}\iff e_0\in\operatorname{row}Z
+\iff\exists x\in\mathbb R^{2\omega}:\ Z^{\mathsf T}Zx=e_0,
 \]
 with $e_0=(1,0,\ldots,0)$.
 
-\emph{Proof.} The rows of $B$ are the coefficient vectors of $\lambda^j f_i$. Their row space is exactly the set of coefficient vectors of $\sum g_i f_i$ with $\deg g_i<\omega$ (Lemma 5 below). Lemma 4 gives a representation of $1$ exactly when $\eqref{eq:5b}$ holds. For real $B$, $\operatorname{row}B=\operatorname{im}(B^{\mathsf T}B)$, giving the equivalent linear system.
+\emph{Proof.} The rows of $Z$ are the coefficient vectors of $\lambda^j f_i$. Their row space is exactly the set of coefficient vectors of $\sum g_i f_i$ with $\deg g_i<\omega$ (Lemma 5 below). Lemma 4 gives a representation of $1$ exactly when $\eqref{eq:5b}$ holds. For real $Z$, $\operatorname{row}Z=\operatorname{im}(Z^{\mathsf T}Z)$, giving the equivalent linear system.
 
-\begin{lem}[5] Let $f_1,\dots,f_s\in\mathbb R[\lambda]$ have degree at most $\omega$, let $c_{i,a}$ be the coefficient of $\lambda^a$ (with $c_{i,a}=0$ for $a<0$ or $a>\omega$), and let $B$ be the matrix with rows $(i,j)$, $0\le j<\omega$, columns $t=0,\dots,2\omega-1$, and $B_{(i,j),t}=c_{i,t-j}$. Then, reading vectors in the basis $1,\lambda,\dots,\lambda^{2\omega-1}$,
+\begin{lem}[5] Let $f_1,\dots,f_s\in\mathbb R[\lambda]$ have degree at most $\omega$, let $c_{i,a}$ be the coefficient of $\lambda^a$ (with $c_{i,a}=0$ for $a<0$ or $a>\omega$), and let $Z$ be the matrix with rows $(i,j)$, $0\le j<\omega$, columns $t=0,\dots,2\omega-1$, and $Z_{(i,j),t}=c_{i,t-j}$. Then, reading vectors in the basis $1,\lambda,\dots,\lambda^{2\omega-1}$,
 
 \[
-\operatorname{row}B
+\operatorname{row}Z
 =\Bigl\{\,\text{coefficient vector of }\textstyle\sum_i g_if_i
 \ :\ \deg g_i<\omega\,\Bigr\}.
 \]
 \end{lem}
-\emph{Proof.} Row $(i,j)$ of $B$ is the coefficient vector of $\lambda^jf_i$. Hence a combination with weights $y_{i,j}$ is the coefficient vector of $\sum_{i,j}y_{i,j}\lambda^jf_i=\sum_ig_if_i$ with $g_i=\sum_jy_{i,j}\lambda^j$, and $\deg g_i<\omega$; conversely every $\sum_ig_if_i$ with $\deg g_i<\omega$ arises this way. Since $\deg(\lambda^jf_i)\le\omega+j\le2\omega-1$, all coefficients fit in the displayed $2\omega$ columns, and the convention $c_{i,a}=0$ outside $0\le a\le\omega$ makes the truncation automatic. $\square$
+\emph{Proof.} Row $(i,j)$ of $Z$ is the coefficient vector of $\lambda^jf_i$. Hence a combination with weights $y_{i,j}$ is the coefficient vector of $\sum_{i,j}y_{i,j}\lambda^jf_i=\sum_ig_if_i$ with $g_i=\sum_jy_{i,j}\lambda^j$, and $\deg g_i<\omega$; conversely every $\sum_ig_if_i$ with $\deg g_i<\omega$ arises this way. Since $\deg(\lambda^jf_i)\le\omega+j\le2\omega-1$, all coefficients fit in the displayed $2\omega$ columns, and the convention $c_{i,a}=0$ outside $0\le a\le\omega$ makes the truncation automatic. $\square$
 
 \paragraph*{Cauchy--Binet compression}\label{sec:cb}
 Define
@@ -481,7 +481,7 @@ Two consequences are used below.
 \begin{enumerate}
 \item \emph{Cost.} Computing $K$ needs only $\binom{k}{\omega}\le2^{\kappa_{\rm obs}}$ determinants of order $\omega$, one per column set $J$; the $\binom q\omega\binom k\omega$ individual minors are never enumerated.
 \item \emph{Coefficient identity.} Writing $S_{a,b}$ for the coefficient of $\lambda^a\mu^b$ in $K$ and $c_{i,a}$ for the coefficient of $\lambda^a$ in $f_i$, one has $S_{a,b}=\sum_ic_{i,a}c_{i,b}$, hence, with the row indexing of Lemma 5, \[
-(B^{\mathsf T}B)_{t,t'}
+(Z^{\mathsf T}Z)_{t,t'}
    =\sum_{j=0}^{\omega-1}\sum_ic_{i,t-j}c_{i,t'-j}
    =\sum_{j=0}^{\omega-1}S_{t-j,t'-j}.
 \]
@@ -501,7 +501,7 @@ condition on the coefficients, not by evaluating $K$ at complex points.
 \item for each column set $J\subseteq[k]$, $|J|=\omega$, form the $\omega\times\omega$ pencil $P(\lambda)_{:,J}^{\mathsf T}P(\mu)_{:,J}$;
 \item compute its bivariate coefficients (degree at most $\omega$ in each variable);
 \item sum the coefficients over $J$;
-\item recover $B^{\mathsf T}B$ from the shifted identity above.
+\item recover $Z^{\mathsf T}Z$ from the shifted identity above.
 \end{enumerate}
 The cost is $\binom{k}{\omega}$ determinants of order $\omega$; the $\binom q\omega\binom k\omega$ minors of $P$ are never formed, and no hidden enumeration replaces them. In particular this is what keeps the certificate matrix parameter-sized when $q$ is large and $k$ is bounded.
 
@@ -514,25 +514,25 @@ The individual ingredients are classical; the contribution lies in their algorit
 \[
 1=\sum_i (u a_i+v b_i) f_i,
 \]
-and each multiplier $u a_i+v b_i$ has degree $<\omega$, because $a_i,b_i$ are constants and $\deg u,\deg v<\omega$. This is the two-polynomial core verified in \texttt{Q1Paper.bezout\_\allowbreak{}of\_\allowbreak{}gcd\_\allowbreak{}eq\_\allowbreak{}one}; the degree bookkeeping is paper-level.
+and each multiplier $u a_i+v b_i$ has degree $<\omega$, because $a_i,b_i$ are constants and $\deg u,\deg v<\omega$. This is the two-polynomial case; the degree bookkeeping is elementary.
 
-\textbf{Gram certificate.} Let $f_i$ be the maximal minors of $P(\lambda)$, indexed by $i=(I,J)$; each has degree at most $\omega$. Let $B$ have rows indexed by $(i,j)$, $0\le j<\omega$, columns indexed by $t=0,\dots,2\omega-1$, and entries $B_{(i,j),t}=c_{i,t-j}$,
+\textbf{Gram certificate.} Let $f_i$ be the maximal minors of $P(\lambda)$, indexed by $i=(I,J)$; each has degree at most $\omega$. Let $Z$ have rows indexed by $(i,j)$, $0\le j<\omega$, columns indexed by $t=0,\dots,2\omega-1$, and entries $Z_{(i,j),t}=c_{i,t-j}$,
 
 where $c_{i,a}$ is the coefficient of $\lambda^a$ in $f_i$ and $c_{i,a}=0$ outside $0\le a\le\omega$. Thus the number of rows is $\omega\binom{k}{\omega}$ and the number of columns is $2\omega$. The row indexed by $(i,j)$ is the coefficient vector of $\lambda^j f_i$, whose degree is at most $j+\deg f_i\le2\omega-1$. Consequently
 
 \[
-\operatorname{row}B
+\operatorname{row}Z
 =\left\{\text{coefficient vector of }\sum_i g_i f_i:
 \deg g_i<\omega\right\}.
 \]
 Therefore
 
 \[
-e_0\in\operatorname{row}B
+e_0\in\operatorname{row}Z
 \iff
 \exists g_i,\ \deg g_i<\omega,\ \sum_i g_i f_i=1.
 \]
-By the Bezout lemma, the right-hand side is equivalent to $\eqref{eq:5b}$. For real $B$, $\operatorname{row}B=\operatorname{im}(B^{\mathsf T}B)$, so this is further equivalent to the linear system $B^{\mathsf T}Bx=e_0$.
+By the Bezout lemma, the right-hand side is equivalent to $\eqref{eq:5b}$. For real $Z$, $\operatorname{row}Z=\operatorname{im}(Z^{\mathsf T}Z)$, so this is further equivalent to the linear system $Z^{\mathsf T}Zx=e_0$.
 
 \textbf{Cauchy--Binet.} We use the rectangular identity
 
@@ -559,7 +559,7 @@ K(\lambda,\mu)&=\sum_{|J|=\omega}
 If $S_{a,b}$ is the coefficient of $\lambda^a\mu^b$ in $K$, then
 
 \[
-(B^{\mathsf T}B)_{t,t'}=\sum_{j=0}^{\omega-1}S_{t-j,t'-j}.
+(Z^{\mathsf T}Z)_{t,t'}=\sum_{j=0}^{\omega-1}S_{t-j,t'-j}.
 \]
 Only $\binom{k}{\omega}\le2^{\kappa_{\rm obs}}$ minors of order $\omega$ occur. The general Cauchy--Binet identity is paper-level because Mathlib currently has no rectangular Cauchy--Binet theorem.
 
@@ -614,7 +614,7 @@ bit operations.
 \item the rank-consistency formula of Lemma 3 for the parametric system $M(X,G)b=c(X,G)$, with $B_{:,J}=I_\omega$;
 \item the fixed-row equations $X_iB=h_i^0$, $G_iB=g_i^0$ for $i\le r_0$;
 \item the free-row equations $D[(X_iB)^{\mathsf T};(G_iB)^{\mathsf T}]=0$;
-\item the spectral certificate $B^{\mathsf T}Bx=e_0$, where $B$ is built from the maximal minors of $\lambda X-G$.
+\item the spectral certificate $Z^{\mathsf T}Zx=e_0$, where $Z$ is built from the maximal minors of $\lambda X-G$.
 \end{enumerate}
 Run a real-feasibility algorithm on the finite disjunction $\bigvee_{\omega,J}\Phi_{\omega,J}$.
 
@@ -722,9 +722,9 @@ and $r$ is the number of free observer rows. For $r=0$ the bound sharpens to $\o
 together with the $2\omega$-variable certificate
 
 \[
-B^{\mathsf T}Bx=e_0
+Z^{\mathsf T}Zx=e_0
 \]
-of Lemma 5, where $B$ is built from the maximal minors of $P(\lambda)=\lambda H(t)-H_A(t)$ and $B^{\mathsf T}B$ is computed from $K(\lambda,\mu)$ by Cauchy--Binet. The branch $\omega=0$ is the one of Section~\ref{sec:deg}: there $H=0$ and $\eqref{eq:5b}$ is $H_A=0$; Lemma 5 is not applied at $\omega=0$.
+of Lemma 5, where $Z$ is built from the maximal minors of $P(\lambda)=\lambda H(t)-H_A(t)$ and $Z^{\mathsf T}Z$ is computed from $K(\lambda,\mu)$ by Cauchy--Binet. The branch $\omega=0$ is the one of Section~\ref{sec:deg}: there $H=0$ and $\eqref{eq:5b}$ is $H_A=0$; Lemma 5 is not applied at $\omega=0$.
 
 If a feasible $L=[L_0;R]$ exists, let $t$ be the coordinates of its free rows. Then $H=LN$, $H_A=LAN$; the Gram conditions encode $\eqref{eq:5a}$ (Lemma 2 and the positivity of elementary symmetric functions), and the certificate encodes $\eqref{eq:5b}$ (Lemma 5). Hence the formula is true.
 
@@ -836,9 +836,9 @@ where $N$ is the number of real variables, $s$ the number of polynomials, $D$ th
 \begin{enumerate}
 \item the kernel basis $N$, the matrix $D$, and the entries of $H,H_A,G_H,G_S$ have bit length $\operatorname{poly}(n,\mathcal L)$;
 \item every maximal minor $f_i$ of $P(\lambda)=\lambda H-H_A$, and every coefficient of $f_i$, has bit length $\operatorname{poly}(n,\mathcal L)$;
-\item the entries of $B^{\mathsf T}B$ and of $e_j(G_H),e_j(G_S)$ for $j\le\kappa_{\rm obs}+1$ have bit length $f(\kappa_{\rm obs})\operatorname{poly}(\mathcal L)$.
+\item the entries of $Z^{\mathsf T}Z$ and of $e_j(G_H),e_j(G_S)$ for $j\le\kappa_{\rm obs}+1$ have bit length $f(\kappa_{\rm obs})\operatorname{poly}(\mathcal L)$.
 \end{enumerate}
-\emph{Proof.} Gaussian elimination on $[C;CA]$ writes $N$ as ratios of minors of the input; Cramer's rule and Hadamard's bound give $\operatorname{poly}(n,\mathcal L)$ bits. The same applies to $D$. Each entry of $H=LN$ is a sum of $n$ products, and each Gram entry is a sum of $q$ such products, so the bit length remains $\operatorname{poly}(n,\mathcal L)$. A maximal minor of $P$ is a determinant of an $\omega\times\omega$ matrix whose entries are linear in the entries of $H,H_A$; Hadamard's bound gives $\operatorname{poly}(n,\mathcal L)$ bits for each coefficient. The matrix $B^{\mathsf T}B$ has at most $2^{\kappa_{\rm obs}}$ determinant terms, and $e_j$ has at most $k^{j}\le\kappa_{\rm obs}^{\kappa_{\rm obs}}$ terms; summing gives $f(\kappa_{\rm obs})\operatorname{poly}(\mathcal L)$. $\square$
+\emph{Proof.} Gaussian elimination on $[C;CA]$ writes $N$ as ratios of minors of the input; Cramer's rule and Hadamard's bound give $\operatorname{poly}(n,\mathcal L)$ bits. The same applies to $D$. Each entry of $H=LN$ is a sum of $n$ products, and each Gram entry is a sum of $q$ such products, so the bit length remains $\operatorname{poly}(n,\mathcal L)$. A maximal minor of $P$ is a determinant of an $\omega\times\omega$ matrix whose entries are linear in the entries of $H,H_A$; Hadamard's bound gives $\operatorname{poly}(n,\mathcal L)$ bits for each coefficient. The matrix $Z^{\mathsf T}Z$ has at most $2^{\kappa_{\rm obs}}$ determinant terms, and $e_j$ has at most $k^{j}\le\kappa_{\rm obs}^{\kappa_{\rm obs}}$ terms; summing gives $f(\kappa_{\rm obs})\operatorname{poly}(\mathcal L)$. $\square$
 
 \paragraph*{Fixed $q$}
 For fixed $q$, the algorithm enumerates at most $(q+1)k^q$ pivot charts. In one chart the quantified variables are the entries of $X,G$ and the spectral certificate, so $N=q\omega+q\omega+2\omega=2q\omega+2\omega\le2q^2+2q$.
@@ -855,7 +855,7 @@ bit operations. The cases $\omega=0$, $k=0$, $q<r_0$ and $r=0$ are treated in Se
 \paragraph*{Fixed $\kappa_{\rm obs}$}
 Assume $r\ge1$, so $k\le d_0\le\kappa_{\rm obs}$; both inequalities are elementary rank-nullity bounds. The Gram matrices $G_H=H^{\mathsf T}H$ and $G_S=H^{\mathsf T}H+H_A^{\mathsf T}H_A$ are $k\times k$, hence of size at most $\kappa_{\rm obs}$. Their elementary symmetric polynomials $e_j$ for $j\le\omega+1\le\kappa_{\rm obs}+1$ can be evaluated by determinant expansion in $k^{O(j)}=f(\kappa_{\rm obs})$ operations.
 
-The matrix $B^{\mathsf T}B$ is computed from the Cauchy--Binet kernel $K(\lambda,\mu)$. The sum has at most $\binom{k}{\omega}\le2^{\kappa_{\rm obs}}$ terms, each an $\omega\times \omega$ determinant; all coefficients are rational of bit length $f(\kappa_{\rm obs})\operatorname{poly}(\mathcal L)$. Thus the preprocessing costs $f(\kappa_{\rm obs})\operatorname{poly}(\mathcal L)$.
+The matrix $Z^{\mathsf T}Z$ is computed from the Cauchy--Binet kernel $K(\lambda,\mu)$. The sum has at most $\binom{k}{\omega}\le2^{\kappa_{\rm obs}}$ terms, each an $\omega\times \omega$ determinant; all coefficients are rational of bit length $f(\kappa_{\rm obs})\operatorname{poly}(\mathcal L)$. Thus the preprocessing costs $f(\kappa_{\rm obs})\operatorname{poly}(\mathcal L)$.
 
 The real-feasibility problem has
 
