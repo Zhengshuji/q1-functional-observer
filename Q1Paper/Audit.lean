@@ -3,6 +3,7 @@ import Q1Paper.RankIdentity
 import Q1Paper.HyperplaneAvoid
 import Q1Paper.BezoutDeg
 import Q1Paper.G2Assembly
+import Q1Paper.G3Adjugate
 import Q1Paper.Compression
 import Q1Paper.FreeRows
 import Q1Paper.RankConsistency
@@ -26,6 +27,7 @@ import Q1Paper.Legacy
 #print axioms Q1Paper.isCoprime_of_no_common_root
 #print axioms Q1Paper.exists_bezout_deg_lt
 #print axioms Q1Paper.exists_bezout_family
+#print axioms Q1Paper.adjRowInverse_mul
 #print axioms Q1Paper.ker_compressed_iff
 #print axioms Q1Paper.mem_freePairSpace_iff
 #print axioms Q1Paper.finrank_domain_le_freePairSpace
