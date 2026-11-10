@@ -23,6 +23,7 @@ import Q1Paper.Legacy
 #print axioms Q1Paper.exists_forall_apply_ne_zero
 #print axioms Q1Paper.exists_ne_zero_with_finite_roots
 #print axioms Q1Paper.isCoprime_of_no_common_root
+#print axioms Q1Paper.exists_bezout_deg_lt
 #print axioms Q1Paper.ker_compressed_iff
 #print axioms Q1Paper.mem_freePairSpace_iff
 #print axioms Q1Paper.finrank_domain_le_freePairSpace
