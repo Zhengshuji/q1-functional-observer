@@ -69,11 +69,14 @@ indices the minimum dimension permitted by the algebraic condition, the complete
 augmentations attaining it, and necessary and sufficient spectral conditions for that
 dimension to be optimal, while \cite{fer26b} characterizes the interval between that
 minimum and the endpoint set by functional observability, using a nullspace representation
-of the algebraic condition and a matrix-pencil form of the spectral one. Neither work
-states a decision procedure with a running-time or bit-complexity bound, and the per-order
-conditions are existential statements over a chart and a parameter. The complexity of
-deciding feasibility at a prescribed order is therefore left open by the characterization
-literature. This paper takes the conditions as given and studies that complexity.
+of the algebraic condition and a matrix-pencil form of the spectral one. The latter work
+also describes an order-by-order procedure: at each order it parameterizes the nullspace
+over Grassmann charts with $d(m_L-d)=(n-p-q)(q-r)$ free parameters per chart and tests the
+two conditions chart by chart. Neither work states a running-time or bit-complexity bound,
+and for fixed $q$ the number of chart parameters above still grows linearly in $n$. The
+complexity of deciding feasibility at a prescribed order is therefore left open by the
+characterization literature. This paper takes the conditions as given and studies that
+complexity.
 
 Adjacent design problems are known to be hard, which makes the question natural but does
 not answer it. Choosing a minimal set of sensors that renders a system functionally
@@ -111,9 +114,12 @@ separately, by a finite rational linear system obtained from a polynomial left i
 The contributions are the following.
 
 \begin{enumerate}
-\item A compression of the two observer conditions to a row-space inclusion and to the
-constant rank of a pencil, together with the identification of the effective dimension
-$\kappa_{\rm obs}$ of the free observer data as the structural parameter of the problem.
+\item A compression of the two observer conditions, which are taken from the existing
+characterization, to a row-space inclusion and to the constant rank of a pencil, together
+with the identification of the effective dimension $\kappa_{\rm obs}$ of the free observer
+data as the structural parameter of the problem. The compression uses $O(q^2)$ variables,
+independently of the state dimension, which the chart parameterization of
+\cite{fer26b} does not.
 \item A finite algebraic certificate for the spectral condition, and its compression by
 Cauchy--Binet to a matrix of size controlled by $\kappa_{\rm obs}$; no enumeration of
 maximal minors is required.
@@ -539,7 +545,11 @@ The individual ingredients are classical; the contribution lies in their algorit
 
 \section{The fixed-order algorithm}\label{sec:fixedq}
 The decision procedure underlying Theorem 1 is summarized in
-Algorithm~\ref{alg:fixed-q}.
+Algorithm~\ref{alg:fixed-q}. It quantifies, in each pivot chart, only over the entries of
+$X$, $G$ and the certificate vector, that is over $2q\omega+2\omega=O(q^2)$ real variables;
+the chart coordinates of the order-by-order procedure of \cite{fer26b} number
+$d(m_L-d)=(n-p-q)(q-r)$ and still grow linearly in $n$ when $q$ is fixed, which is what the
+compression removes.
 
 \begin{algorithm}[!t]
 \caption{Deciding $\mathrm{DEC}(q)$ for a fixed order $q$}
@@ -876,7 +886,7 @@ The two upper bounds are parameterized: the exponent in Theorem 1 depends on $q$
 Three outcomes remain compatible with the present results: $q1\in\mathrm P$; $\mathrm{DEC}$ is $\exists\mathbb R$-complete; or $\mathrm{DEC}$ has an intermediate parameterized classification. The paper makes no claim among them.
 
 \subsection{Limitations and what is not claimed}\label{sec:limits}
-We do not claim that $q1\in\mathrm P$, nor that it is $\exists\mathbb R$-complete, nor any hardness result. The two upper bounds are compatible with all three outcomes: a polynomial algorithm, $\exists\mathbb R$-completeness, or an intermediate parameterized classification. Hardness and gadget constructions are outside the scope of this paper.
+We do not claim that $q1\in\mathrm P$, nor that it is $\exists\mathbb R$-complete, nor any hardness result. The two upper bounds are compatible with all three outcomes: a polynomial algorithm, $\exists\mathbb R$-completeness, or an intermediate parameterized classification. Hardness and gadget constructions are outside the scope of this paper. We also do not claim the feasibility characterization as new: the two conditions, their per-order form and a finite chart parameterization are those of \cite{fer10,dar25,fer26a,fer26b}, and what is new here is the compression to $O(q^2)$ variables and the complexity bounds that follow from it.
 \begin{enumerate}
 \item \textbf{The $r=0$ branch: resolved, with a residual audit.} For $r=0$ the two conditions reduce to a constant-rank test and the constancy of the rank of the degree-one pencil $\lambda X-G$. Section~\ref{sec:zero} decides the latter by a finite rational linear system derived from the degree bound $2\omega-2$; the test is deterministic and exact, with $\operatorname{poly}(q,\omega)$ unknowns and equations, and it returns an explicit witness. The remaining issue is to complete the explicit bit-complexity audit: the constants in the bit bound of Section~\ref{sec:zero} are standard Hadamard/elimination bounds but have not been checked line by line.
 \item \textbf{Coefficient bounds.} The coefficient-size lemma in Section~\ref{sec:fpt} is paper-level; its constants have not been independently audited.
