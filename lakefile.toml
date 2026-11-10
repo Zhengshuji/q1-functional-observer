@@ -1,6 +1,6 @@
 name = "Q1Paper"
 version = "0.1.0"
-defaultTargets = ["q1paper"]
+defaultTargets = ["Q1Paper"]
 
 [[lean_lib]]
 name = "Q1Paper"
