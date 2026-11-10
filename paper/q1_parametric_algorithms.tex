@@ -299,6 +299,7 @@ row by exactly $d_0$ real coordinates.
 \begin{lem}[2] Every free row pair lies in $\mathcal T$, and writing the $r$ free rows in
 a basis of $\mathcal T$ represents them by
 \begin{equation}
+\label{eq:kappa}
 \kappa_{\rm obs}=r d_0
 \end{equation}
 coordinates. Moreover,
@@ -514,62 +515,6 @@ The cost is $\binom{k}{\omega}$ determinants of order $\omega$; the $\binom q\om
 The individual ingredients are classical; the contribution lies in their algorithmic combination, namely the use of the compression to keep the certificate parameter-sized.
 
 
-\textbf{Bezout.} Let $f_1,\dots,f_s\in\mathbb R[\lambda]$ have degree at most $\omega$ and no common complex root. Choose a nonzero real combination $g=\sum a_i f_i$. If $g$ is constant, then $g^{-1}a_i$ are constant multipliers. Otherwise $g$ has finitely many complex roots. At every root $\alpha$ of $g$, not all $f_i(\alpha)$ vanish, so the condition $h(\alpha)=0$ for $h=\sum b_i f_i$ is a proper real linear condition on $b$. Avoiding the finite union of these proper subspaces gives $h=\sum b_i f_i$ with no common root with $g$. Then $g,h$ are coprime. The Euclidean Bezout identity gives $ug+vh=1$ with $\deg u<\deg h\le\omega$ and $\deg v<\deg g\le\omega$. Substituting the definitions of $g,h$,
-
-\begin{equation}
-1=\sum_i (u a_i+v b_i) f_i,
-\end{equation}
-and each multiplier $u a_i+v b_i$ has degree $<\omega$, because $a_i,b_i$ are constants and $\deg u,\deg v<\omega$. This is the two-polynomial case; the degree bookkeeping is elementary.
-
-\textbf{Gram certificate.} Let $f_i$ be the maximal minors of $P(\lambda)$, indexed by $i=(I,J)$; each has degree at most $\omega$. Let $Z$ have rows indexed by $(i,j)$, $0\le j<\omega$, columns indexed by $t=0,\dots,2\omega-1$, and entries $Z_{(i,j),t}=c_{i,t-j}$,
-
-where $c_{i,a}$ is the coefficient of $\lambda^a$ in $f_i$ and $c_{i,a}=0$ outside $0\le a\le\omega$. Thus the number of rows is $\omega\binom{k}{\omega}$ and the number of columns is $2\omega$. The row indexed by $(i,j)$ is the coefficient vector of $\lambda^j f_i$, whose degree is at most $j+\deg f_i\le2\omega-1$. Consequently
-
-\begin{equation}
-\operatorname{row}Z
-=\left\{\text{coefficient vector of }\sum_i g_i f_i:
-\deg g_i<\omega\right\}.
-\end{equation}
-Therefore
-
-\begin{equation}
-e_0\in\operatorname{row}Z
-\iff
-\exists g_i,\ \deg g_i<\omega,\ \sum_i g_i f_i=1.
-\end{equation}
-By the Bezout lemma, the right-hand side is equivalent to $\eqref{eq:5b}$. For real $Z$, $\operatorname{row}Z=\operatorname{im}(Z^{\mathsf T}Z)$, so this is further equivalent to the linear system $Z^{\mathsf T}Zx=e_0$.
-
-\textbf{Cauchy--Binet.} We use the rectangular identity
-
-\begin{equation}
-\det(AC)=\sum_{|J|=\omega}\det(A_{:,J})\det(C_{J,:}),
-\end{equation}
-For each column set $J$, apply it to $A=P(\lambda)_{:,J}^{\mathsf T}$ and $C=P(\mu)_{:,J}$; the sum over row sets $I$ gives
-
-\begin{equation}
-\det\left(P(\lambda)_{:,J}^{\mathsf T}P(\mu)_{:,J}\right)
-=\sum_{|I|=\omega}
-f_{I,J}(\lambda)f_{I,J}(\mu).
-\end{equation}
-Summing over $J$,
-
-\begin{equation}
-\begin{gathered}
-\begin{aligned}
-K(\lambda,\mu)&=\sum_{|J|=\omega}
-\det\left(P(\lambda)_{:,J}^{\mathsf T}P(\mu)_{:,J}\right)\\
-&=\sum_{I,J}f_{I,J}(\lambda)f_{I,J}(\mu)
-=\sum_i f_i(\lambda)f_i(\mu).
-\end{aligned}
-\end{gathered}
-\end{equation}
-If $S_{a,b}$ is the coefficient of $\lambda^a\mu^b$ in $K$, then
-
-\begin{equation}
-(Z^{\mathsf T}Z)_{t,t'}=\sum_{j=0}^{\omega-1}S_{t-j,t'-j}.
-\end{equation}
-Only $\binom{k}{\omega}\le2^{\kappa_{\rm obs}}$ minors of order $\omega$ occur. The general Cauchy--Binet identity is paper-level because Mathlib currently has no rectangular Cauchy--Binet theorem.
-
 
 \section{The fixed-order algorithm}\label{sec:fixedq}
 The decision procedure underlying Theorem 1 is summarized in
@@ -605,11 +550,7 @@ $D\gets$ rational matrix with $\ker D=\operatorname{row}[N\ AN]$
 \end{algorithmic}
 \end{algorithm}
 
-\begin{thm}[1] For every fixed $q$, $\mathrm{DEC}$ is decidable in deterministic polynomial time. More precisely, the algorithm described below runs in
-
-\begin{equation}
-\mathcal L^{O(q^2)}
-\end{equation}
+\begin{thm}[1] For every fixed $q$, $\mathrm{DEC}$ is decidable in deterministic polynomial time. More precisely, the algorithm described below runs in $\mathcal L^{O(q^2)}$
 bit operations.
 \end{thm}
 
@@ -708,16 +649,8 @@ $\kappa_{\rm obs}\gets rd_0$
 \end{algorithm}
 
 \begin{thm}[2] For rational input and every $r\ge0$, $\mathrm{DEC}$ is decidable in
-
-\begin{equation}
-f(\kappa_{\rm obs})\operatorname{poly}(\mathcal L)
-\end{equation}
-bit operations, where
-
-\begin{equation}
-\kappa_{\rm obs}=r\operatorname{rank}[N\ AN]
-\end{equation}
-and $r$ is the number of free observer rows. For $r=0$ the bound sharpens to $\operatorname{poly}(\mathcal L)$.
+$f(\kappa_{\rm obs})\operatorname{poly}(\mathcal L)$ bit operations, where
+$\kappa_{\rm obs}=r\operatorname{rank}[N\ AN]=r d_0$ is the parameter of \eqref{eq:kappa} and $r$ is the number of free observer rows. For $r=0$ the bound sharpens to $\operatorname{poly}(\mathcal L)$.
 
 \end{thm}
 \emph{Proof.} The two cases are separated, because the free-row parametrization degenerates at $r=0$.
@@ -751,10 +684,7 @@ B(\log B)(\log\log B)(sD)^{O(N)}
 \end{equation}
 for integer-coefficient input, where $N,s,D,B$ are the variable count, the number of polynomials, the maximum degree, and the maximum coefficient bit length. Substituting the bounds above gives
 
-\begin{equation}
-f(\kappa_{\rm obs})\operatorname{poly}(\mathcal L)
-\end{equation}
-bit operations. This makes the bit-model statement unconditional, subject to the coefficient-size estimate in Section~\ref{sec:fpt}.
+the stated bound of $f(\kappa_{\rm obs})\operatorname{poly}(\mathcal L)$ bit operations. This makes the bit-model statement unconditional, subject to the coefficient-size estimate in Section~\ref{sec:fpt}.
 
 \begin{cor}[1] The same algorithm uses $f(\kappa_{\rm obs})\operatorname{poly}(\mathcal L)$ arithmetic operations.
 \end{cor}
