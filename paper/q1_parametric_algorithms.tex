@@ -914,7 +914,8 @@ Growth of the parameter-dependent factor. Renegar's bound is $(sD)^{O(N)}$ with 
 
 The results of this paper rest on three kinds of evidence, and the accompanying artifact records which
 statement rests on which. The compression identity, the compression criterion, the space of attainable row
-pairs, the rank-consistency criterion and the B\'ezout core of the certificate are formalized
+pairs, the rank-consistency criterion, the B\'ezout core of the certificate and the hyperplane-avoidance
+step of the B\'ezout argument are formalized
 in Lean~4 with Mathlib, and every declaration is checked by the kernel against only the three standard axioms
 (\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}). The Cauchy--Binet compression, the
 degree bounds, the coefficient-size estimates and the existential-real encoding are paper-level
@@ -941,7 +942,7 @@ Space of row pairs (Lemma 2) & Lean core & \texttt{freePairSpace},
 \texttt{kappaObs\_eq\_mul\_freePairSpace} \\
 Rank consistency (Lemma 3) & Lean core & \texttt{RankConsistency} \\
 B\'ezout, left inverse (Lemma 4) & Lean core & \texttt{bezout\_of\_gcd\_eq\_one},
-\texttt{exists\_forall\_apply\_ne\_zero} \\
+\texttt{isCoprime\_of\_no\_common\_root} \\
 Gram certificate (Lemma 5) & proof, exact check & --- \\
 Zero-free-row test (Proposition 1) & proof, exact check & --- \\
 Encoding (Theorem 3) & proof, witness check & --- \\
