@@ -1,5 +1,6 @@
 import Q1Paper.Basic
 import Q1Paper.RankIdentity
+import Q1Paper.HyperplaneAvoid
 import Q1Paper.Compression
 import Q1Paper.FreeRows
 import Q1Paper.RankConsistency
