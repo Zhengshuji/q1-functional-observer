@@ -1,4 +1,4 @@
-﻿\documentclass[journal]{IEEEtran}
+\documentclass[journal]{IEEEtran}
 \usepackage{amsmath,amssymb,mathtools}
 \usepackage{amsthm}
 \usepackage{booktabs,array}
@@ -23,7 +23,7 @@
 
 \begin{abstract}
 We study the computational complexity of deciding whether a prescribed-order functional observer exists for a linear system with rational input data and a fixed observer row block. Building on the existing algebraic characterization of functional-observer feasibility, we develop two parameterized decision algorithms. First, we show that feasibility is decidable in deterministic polynomial time for every fixed observer order $q$, with a bit-complexity bound of $\mathcal L^{O(q^2)}$, where $\mathcal L$ is the input bit length. Second, we establish fixed-parameter tractability with respect to the effective free-row dimension $\kappa_{\rm obs}=r\operatorname{rank}[N\ AN]$,
-obtaining a bound $f(\kappa_{\rm obs})\operatorname{poly}(\mathcal L)$; the algorithm combines a direct parameterization of the attainable free-row pairs with a finite algebraic certificate for the spectral rank condition. We also close the boundary case of no free observer rows by an exact polynomial-time test based on polynomial left inverses, and we establish membership of the prescribed-order decision problem, and of its finite threshold version, in the existential theory of the reals. These results are parameterized upper bounds; they do not resolve the unrestricted complexity of functional-observer feasibility.
+obtaining a bound $f(\kappa_{\rm obs})\operatorname{poly}(\mathcal L)$; the key algorithmic step is a Cauchy--Binet compression of the Gram certificate, which avoids enumerating the maximal minors explicitly. We also close the boundary case of no free observer rows by an exact polynomial-time test based on polynomial left inverses, and we establish membership of the prescribed-order decision problem, and of its finite threshold version, in the existential theory of the reals. These results are parameterized upper bounds: they do not resolve the unrestricted complexity of functional-observer feasibility, and the dependence on $\kappa_{\rm obs}$ is structural rather than practical for large parameter values.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -131,10 +131,15 @@ $\mathcal L$ denotes the total input bit length; $q\le n$ throughout. A matrix $
 row vectors by $x\mapsto xM$; $\operatorname{rank}M$ is the dimension of its row space and
 $\operatorname{row}M$ that row space; $\ker M$ is the kernel of the map $v\mapsto Mv$. For
 a matrix pencil $P(\lambda)$, its $\omega\times\omega$ minors are the maximal minors when
-$\operatorname{rank}P(\lambda)=\omega$. Ranks are computed over $\mathbb C$, which for real
-matrices agrees with the rank over $\mathbb R$; the spectral variable is complex. If a
-complex observer is allowed, realification doubles the free coordinates and replaces every
-transpose by the conjugate transpose, which changes no bound below.
+$\operatorname{rank}P(\lambda)=\omega$. Ranks of the rational input data are taken over
+$\mathbb Q$; for a real matrix the rank is the same over $\mathbb R$ and over $\mathbb C$,
+while the rank of the pencil at a spectral point $\lambda\in\mathbb C$ is taken over
+$\mathbb C$. Maximal minors of a rational pencil have rational coefficients, and their
+greatest common divisor is taken in $\mathbb C[\lambda]$; since the coefficients are
+rational, it is constant in $\mathbb C[\lambda]$ exactly when it is constant in
+$\mathbb Q[\lambda]$. If a complex observer is allowed, realification doubles the free
+coordinates and replaces every transpose by the conjugate transpose, which changes no
+bound below.
 
 \subsection{The observer conditions}\label{sec:conditions}
 
@@ -194,6 +199,26 @@ H=LN\in\mathbb R^{q\times k},\quad H_A=LAN\in\mathbb R^{q\times k},\quad
 \omega=\operatorname{rank}H.
 \]
 
+All compressions below rest on one identity. Let $J$ be a matrix and $N$ a basis of
+$\ker J$; for every matrix $M$,
+\begin{equation}\label{eq:rankid}
+\operatorname{rank}\begin{bmatrix}J\\M\end{bmatrix}
+=\operatorname{rank}J+\operatorname{rank}(MN).
+\end{equation}
+Indeed, the map $x\mapsto xN$ has kernel $\operatorname{row}J$, so its restriction to
+$\operatorname{row}M$ has kernel $\operatorname{row}M\cap\operatorname{row}J$ and image
+$\operatorname{row}(MN)$; rank-nullity gives \eqref{eq:rankid}.
+
+With $J=[CA;C]$ and $M=[LA;L]$, identity \eqref{eq:rankid} turns \eqref{eq:5a} into
+$\operatorname{rank}[H_A;H]=\operatorname{rank}H$; with $M=\lambda L-LA$ it turns
+\eqref{eq:5b} into the constant-rank condition
+\begin{equation}\label{eq:constrank}
+\operatorname{rank}(\lambda H-H_A)=\operatorname{rank}H\quad\text{for all }\lambda\in\mathbb C .
+\end{equation}
+Equation \eqref{eq:constrank} is what makes the spectral condition a condition on a
+\emph{pencil} rather than a mere row-space inclusion: it is an equality of ranks at every
+$\lambda$, not an inclusion.
+
 \subsection{The compression and the pencil criterion}\label{sec:compression}
 \begin{lem}[1] With $H$, $H_A$ and $\omega$ as above,
 
@@ -221,51 +246,20 @@ have no common complex root; equivalently, their greatest common divisor in $\ma
 \emph{(iv)} Evaluate (iii) at $\lambda=0$, where $\lambda H-H_A=-H_A$: then $\operatorname{rank}H_A=\operatorname{rank}H$.
 
 
-Both rank statements have the same one-line justification. Put $B_0=[CA;C]$ and let $N$ be a basis of $\ker B_0$; then for every matrix $M$,
-
-\[
-\operatorname{rank}\begin{bmatrix}M\\B_0\end{bmatrix}
-=\operatorname{rank}B_0+\operatorname{rank}(MN).
-\]
-With $M=[LA;L]$ this gives $\eqref{eq:5a}\iff\operatorname{rank}[H_A;H]=\operatorname{rank}H$, and with $M=\lambda L-LA$ it gives
-
-\[
-\eqref{eq:5b}_\lambda\iff\operatorname{rank}(\lambda H-H_A)=\operatorname{rank}H .
-\]
-The second identity is what makes the spectral condition a \emph{constant-rank pencil} condition rather than a mere row-space inclusion: a rank equality at every $\lambda$, not an inclusion.
 
 \emph{Interpretation.} Under $\eqref{eq:5a}$ one has $H_A=FH$, hence $\lambda H-H_A=(\lambda I-F)H$.
 
 So $\eqref{eq:5b}$ reads: at every finite complex $\lambda$, the map $\lambda I-F$ destroys no direction of $\operatorname{row}H$. This is the form in which the condition is used below.
 
 
-Let $K_0=\ker[C;CA]$, let $N$ be a basis of $K_0$, and let $H=LN$, $H_A=LAN$. Write $\mathcal J=\operatorname{row}[C;CA]$. The annihilator identity
+Write $\mathcal J=\operatorname{row}[C;CA]$. The annihilator identity
 
 \[
 K_0^{\perp}=\mathcal J
 \]
 holds for the standard bilinear form: a row vector vanishes on $K_0$ exactly when it is a linear combination of the rows of $[C;CA]$.
 
-The rank equality $\eqref{eq:5a}$ is equivalent to $\operatorname{row}(LA)\subseteq\operatorname{row}[L;CA;C]$. To pass to the compressed matrices, use the identity
-
-\[
-\operatorname{rank}\begin{bmatrix}J\\ M\end{bmatrix}
-=\operatorname{rank}J+\operatorname{rank}(MN),
-\qquad N\text{ a basis of }\ker J,
-\]
-which holds because restriction of row functionals to $\ker J$ has kernel $\operatorname{row}J$. Apply it with $J=[C;CA]$ and with $M=[LA;L]$. Then
-
-\[
-\operatorname{rank}[LA;L;CA;C]
-=\operatorname{rank}J+\operatorname{rank}[H_A;H],
-\]
-while
-
-\[
-\operatorname{rank}[L;CA;C]
-=\operatorname{rank}J+\operatorname{rank}H.
-\]
-Hence $\eqref{eq:5a}$ is equivalent to $\operatorname{rank}[H_A;H]=\operatorname{rank}H$, i.e. to $\operatorname{row}H_A\subseteq\operatorname{row}H$.
+The rank equality $\eqref{eq:5a}$ is equivalent to $\operatorname{row}(LA)\subseteq\operatorname{row}[L;CA;C]$. Applying \eqref{eq:rankid} with $J=[C;CA]$ and $M=[LA;L]$ gives $\operatorname{rank}[LA;L;CA;C]=\operatorname{rank}J+\operatorname{rank}[H_A;H]$, while the same identity with $M=L$ gives $\operatorname{rank}[L;CA;C]=\operatorname{rank}J+\operatorname{rank}H$; hence $\eqref{eq:5a}$ is equivalent to $\operatorname{rank}[H_A;H]=\operatorname{rank}H$, that is, to $\operatorname{row}H_A\subseteq\operatorname{row}H$.
 
 Conversely, assume $H_A=FH$. Then $(LA-FL)N=0$.
 
@@ -390,7 +384,7 @@ Thus $\eqref{eq:5b}$ is equivalent to $\operatorname{rank}(\lambda X-G)=\omega\q
 
 Let $\omega>0$ and choose a pivot set $J$, $|J|=\omega$, such that $X=H_{:,J}$ has full column rank. Then $H=XB$ for a unique $B\in\mathbb C^{\omega\times k}$ with $B_{:,J}=I_\omega$: the columns in $J$ determine the coordinates, and the remaining columns are the coordinates of the corresponding columns of $H$ in the basis $X$.
 
-If $H_A=FH$, set $G=FX$. Then $H_A=GB$. Conversely, if $H_A=GB$ and $X_LX=I_\omega$, then $F=GX_L$ satisfies $FH=GX_LXB=GB=H_A$. This is the algebraic content of the substitution $G=FX$; it is Lean-verified in \texttt{Q1Paper.G\_\allowbreak{}form\_\allowbreak{}iff}.
+If $H_A=FH$, set $G=FX$. Then $H_A=GB$. Conversely, if $H_A=GB$ and $X_LX=I_\omega$, then $F=GX_L$ satisfies $FH=GX_LXB=GB=H_A$. This is the algebraic content of the substitution $G=FX$.
 
 Because $B$ has full row rank (its columns $J$ form $I_\omega$),
 
@@ -425,7 +419,19 @@ For a positive semidefinite matrix $\Gamma$, the $t$-th elementary symmetric pol
 \sum_i g_i f_i=1.
 \]
 \end{lem}
-\emph{Proof.} Choose a nonzero real combination $g=\sum a_i f_i$. At each complex root $\alpha$ of $g$, the condition $h(\alpha)=0$ for $h=\sum b_i f_i$ is a proper real linear condition on $b$; avoiding the finite union of these proper subspaces gives $h$ with no common root with $g$. Then $g,h$ are coprime and the two-polynomial Bezout identity gives multipliers of degree less than $\omega$; expanding gives the claim.
+\emph{Proof.} Choose a nonzero real combination $g=\sum_i a_if_i$, which is a nonzero
+polynomial because the $f_i$ have no common root. Let $\alpha_1,\dots,\alpha_m$ be the
+distinct complex roots of $g$. For a fixed $\alpha_j$, the value
+$h(\alpha_j)=\sum_i b_if_i(\alpha_j)$ of a second combination $h=\sum_i b_if_i$ is a
+complex number whose real and imaginary parts are two real linear forms in
+$b=(b_1,\dots,b_s)$; these forms do not both vanish identically, because some
+$f_i(\alpha_j)$ is nonzero, lest $\alpha_j$ be a common root. Hence
+$\{b\in\mathbb R^s:h(\alpha_j)=0\}$ is a proper real linear subspace of $\mathbb R^s$,
+and neither is its union over $j=1,\dots,m$: a finite union of proper subspaces cannot
+cover $\mathbb R^s$. Choosing $b$ outside that union gives $h(\alpha_j)\neq0$ for every
+$j$, so $g$ and $h$ have no common root, hence are coprime. The two-polynomial
+B\'ezout identity then gives $u,v$ with $ug+vh=1$ and $\deg u,\deg v<\omega$, and
+expanding $g,h$ in the $f_i$ yields $\sum_ig_if_i=1$ with $\deg g_i<\omega$.
 
 \paragraph*{Gram certificate}\label{sec:gram}
 Let $f_i$ be the maximal minors of $P(\lambda)$. Form a matrix $B$ whose rows are indexed by $(i,j)$, $0\le j<\omega$, and whose columns are indexed by $t=0,\ldots,2\omega-1$, with $B_{(i,j),t}=c_{i,t-j}$,
@@ -479,6 +485,15 @@ Two consequences are used below.
    =\sum_{j=0}^{\omega-1}\sum_ic_{i,t-j}c_{i,t'-j}
    =\sum_{j=0}^{\omega-1}S_{t-j,t'-j}.
 \]
+\item \emph{Common roots.} Since the coefficients of $P$ are real, specialising at
+$(\lambda,\mu)=(\alpha,\bar\alpha)$ gives
+\[
+K(\alpha,\bar\alpha)=\sum_{I,J}\left|f_{I,J}(\alpha)\right|^2,
+\]
+so $K(\alpha,\bar\alpha)=0$ if and only if every maximal minor of $P$ vanishes at
+$\alpha$. This identity explains why the coefficient matrix of $K$ carries exactly the
+information of the common-root condition; the algorithm below nevertheless decides that
+condition on the coefficients, not by evaluating $K$ at complex points.
 \end{enumerate}
 \emph{Algorithmic reading.} The identity is classical (an exterior-power Gram identity; see e.g. \cite{emi99} for the B\'ezoutian/elimination background). What the algorithm uses is the compression, and it is worth writing the four steps out:
 
@@ -799,7 +814,13 @@ which is $2\omega-2$ for $d=1$. Degree bounds for polynomial-matrix left inverse
 \end{enumerate}
 \emph{Correctness.} Since $B$ is of full row rank, $\operatorname{rank}(\lambda H-H_A)=\operatorname{rank}((\lambda X-G)B) =\operatorname{rank}(\lambda X-G)$ for every $\lambda$, and $\eqref{eq:5b}$ is $\operatorname{rank}(\lambda H-H_A)=\omega$ for all $\lambda$. Lemma 6 therefore decides $\eqref{eq:5b}$. Step 1 is $\eqref{eq:5a}$, and step 2 is the exact $\omega=0$ reading of the same identity. $\square$
 
-\emph{Complexity.} Step 1 is one rank computation; step 3 is a rank factorization and an exact linear solve; step 4 is $\operatorname{poly}(q,\omega,\mathcal L_0)\subseteq\operatorname{poly}(n,\mathcal L)$ by Lemma 6. All steps use rational arithmetic on data of polynomial bit length.
+\emph{Complexity.} Step 1 is one rank computation; step 3 is a rank factorization and an
+exact linear solve; step 4 is $\operatorname{poly}(q,\omega,\mathcal L_0)\subseteq\operatorname{poly}(n,\mathcal L)$ by Lemma 6. Every step is a rank computation or an exact linear solve on a matrix of at most
+$2\omega+1$ rows and $q$ columns whose entries, by the coefficient-size lemma of
+Section~\ref{sec:fpt}, have bit length $\operatorname{poly}(n,\mathcal L)$; Gaussian
+elimination over $\mathbb Q$ on such a matrix costs
+$\operatorname{poly}(n,\mathcal L)$ bit operations, so the test runs within the stated
+bound and returns the coefficients of $S$ explicitly.
 
 \emph{Interpretation in Kronecker canonical form.} The pencil $Q$ has full column rank at every finite complex value if and only if its Kronecker form (in the sense of \cite{bee88}) contains no right singular block and no finite regular elementary-divisor block. Left singular blocks and \emph{infinite} regular elementary divisors are permitted: they do not produce a rank drop at any finite $\lambda$. For instance $Q(\lambda)=1$ has an infinite elementary divisor of size one and satisfies the condition; so does $Q(\lambda)=I_2$, and so does the nonconstant pencil $Q(\lambda)=\begin{bmatrix}1&\lambda\\0&1\end{bmatrix}$, whose determinant is the constant $1$. Equivalently, in the language of Appendix~\ref{app:encoding}, the condition is that the ideal generated by the maximal minors is the unit ideal; only the \emph{finite} spectrum is constrained.
 
@@ -832,7 +853,7 @@ since $q$ is fixed, and the chart enumeration contributes the factor $(q+1)k^q\l
 bit operations. The cases $\omega=0$, $k=0$, $q<r_0$ and $r=0$ are treated in Section~\ref{sec:deg} (the last by Proposition 1).
 
 \paragraph*{Fixed $\kappa_{\rm obs}$}
-Assume $r\ge1$, so $k\le d_0\le\kappa_{\rm obs}$; both inequalities are Lean-verified (\texttt{finrank\_\allowbreak{}domain\_\allowbreak{}le\_\allowbreak{}freePairSpace}, \texttt{freePairDim\_\allowbreak{}le\_\allowbreak{}kappaObs}). The Gram matrices $G_H=H^{\mathsf T}H$ and $G_S=H^{\mathsf T}H+H_A^{\mathsf T}H_A$ are $k\times k$, hence of size at most $\kappa_{\rm obs}$. Their elementary symmetric polynomials $e_j$ for $j\le\omega+1\le\kappa_{\rm obs}+1$ can be evaluated by determinant expansion in $k^{O(j)}=f(\kappa_{\rm obs})$ operations.
+Assume $r\ge1$, so $k\le d_0\le\kappa_{\rm obs}$; both inequalities are elementary rank-nullity bounds. The Gram matrices $G_H=H^{\mathsf T}H$ and $G_S=H^{\mathsf T}H+H_A^{\mathsf T}H_A$ are $k\times k$, hence of size at most $\kappa_{\rm obs}$. Their elementary symmetric polynomials $e_j$ for $j\le\omega+1\le\kappa_{\rm obs}+1$ can be evaluated by determinant expansion in $k^{O(j)}=f(\kappa_{\rm obs})$ operations.
 
 The matrix $B^{\mathsf T}B$ is computed from the Cauchy--Binet kernel $K(\lambda,\mu)$. The sum has at most $\binom{k}{\omega}\le2^{\kappa_{\rm obs}}$ terms, each an $\omega\times \omega$ determinant; all coefficients are rational of bit length $f(\kappa_{\rm obs})\operatorname{poly}(\mathcal L)$. Thus the preprocessing costs $f(\kappa_{\rm obs})\operatorname{poly}(\mathcal L)$.
 
