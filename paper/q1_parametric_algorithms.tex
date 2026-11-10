@@ -22,8 +22,23 @@
 \maketitle
 
 \begin{abstract}
-We study the computational complexity of deciding whether a prescribed-order functional observer exists for a linear system with rational input data and a fixed observer row block. Building on the existing algebraic characterization of functional-observer feasibility, we develop two parameterized decision algorithms. First, we show that feasibility is decidable in deterministic polynomial time for every fixed observer order $q$, with a bit-complexity bound of $\mathcal L^{O(q^2)}$, where $\mathcal L$ is the input bit length. Second, we establish fixed-parameter tractability with respect to the effective free-row dimension $\kappa_{\rm obs}=r\operatorname{rank}[N\ AN]$,
-obtaining a bound $f(\kappa_{\rm obs})\operatorname{poly}(\mathcal L)$; the key algorithmic step is a Cauchy--Binet compression of the Gram certificate, which avoids enumerating the maximal minors explicitly. We also close the boundary case of no free observer rows by an exact polynomial-time test based on polynomial left inverses, and we establish membership of the prescribed-order decision problem, and of its finite threshold version, in the existential theory of the reals. These results are parameterized upper bounds: they do not resolve the unrestricted complexity of functional-observer feasibility, and the dependence on $\kappa_{\rm obs}$ is structural rather than practical for large parameter values.
+We study the parameterized complexity of deciding whether a prescribed-order functional
+observer exists for a linear system with rational data and a fixed block of observer rows.
+The two feasibility conditions are coupled, because the observer matrix and its product
+with the system matrix are built from the same free-row block; exploiting this coupling, we
+compress the free rows to the space of attainable matrix pairs, whose dimension induces the
+parameter $\kappa_{\rm obs}=r\operatorname{rank}[N\ AN]$, with $N$ a basis of
+$\ker[C;CA]$. On this reduction we build a finite algebraic certificate for the spectral
+condition and compress it by Cauchy--Binet to a Gram matrix whose size depends on
+$\kappa_{\rm obs}$ rather than on the number of maximal minors. This yields a deterministic
+algorithm with bit-complexity $\mathcal L^{O(q^2)}$ for every fixed order $q$, where
+$\mathcal L$ is the input bit length, and a fixed-parameter algorithm with bound
+$f(\kappa_{\rm obs})\operatorname{poly}(\mathcal L)$. We also give an exact
+polynomial-time test for the case of no free rows, based on polynomial left inverses, and
+establish membership of the decision problem, and of its finite threshold version, in the
+existential theory of the reals. The results are parameterized upper bounds: they do not
+resolve the unrestricted complexity, and the dependence on $\kappa_{\rm obs}$ is structural
+rather than practical for large parameter values.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -242,7 +257,12 @@ have no common complex root; equivalently, their greatest common divisor in $\ma
 
 \emph{(ii)} By (i) every row of $H_A$ is a linear combination of the rows of $H$; the matrix of coefficients is $F$.
 
-\emph{(iii)} A pencil of rank $\omega$ loses rank at exactly those $\lambda$ at which all its $\omega\times\omega$ maximal minors vanish, which is the standard maximal-minor criterion for constant rank.
+\emph{(iii)} Under \eqref{eq:5a} every row of $H_A$ is a combination of rows of $H$, so
+$\operatorname{row}(\lambda H-H_A)\subseteq\operatorname{row}H$ and hence
+$\operatorname{rank}(\lambda H-H_A)\le\omega$ for every $\lambda$. For a fixed $\lambda$ a matrix has
+rank $<\omega$ exactly when all its $\omega\times\omega$ minors vanish, so
+$\operatorname{rank}(\lambda H-H_A)=\omega$ for all $\lambda$ exactly when no common root of the maximal
+minors exists. For $\omega=0$ the condition is empty, since a rank cannot fall below zero.
 
 \emph{(iv)} Evaluate (iii) at $\lambda=0$, where $\lambda H-H_A=-H_A$: then $\operatorname{rank}H_A=\operatorname{rank}H$.
 
@@ -310,7 +330,11 @@ k\le d_0\le\kappa_{\rm obs}
 when $r\ge1$.
 
 \end{lem}
-\emph{Proof.} The identity $(H_i,(H_A)_i)=r_i[N\ AN]$ gives membership. The dimension count is the rank-nullity theorem for $r_i\mapsto(r_iN,r_iAN)$, whose image is $\mathcal T$. Since $N$ has full column rank, its columns are independent in $[N\ AN]$, hence $k\le d_0$; and $d_0\le rd_0=\kappa_{\rm obs}$ for $r\ge1$.
+\emph{Proof.} The identity $(H_i,(H_A)_i)=r_i[N\ AN]$ gives membership. For the dimension count,
+let $\Phi:x\mapsto(xN,xAN)=x[N\ AN]$. Its kernel is $\{x:x[N\ AN]=0\}$, of dimension
+$n-\operatorname{rank}[N\ AN]$, and its image is $\mathcal T$; rank-nullity gives
+$d_0=\dim\mathcal T=\operatorname{rank}[N\ AN]$. The $r$ free rows are independent, so their joint
+reachable space is the direct product of $r$ copies of $\mathcal T$, of dimension $rd_0$. Since $N$ has full column rank, its columns are independent in $[N\ AN]$, hence $k\le d_0$; and $d_0\le rd_0=\kappa_{\rm obs}$ for $r\ge1$.
 
 \emph{Basis invariance.} Replacing $N$ by $NQ$ with $Q$ nonsingular changes the coordinates of $\mathcal T$ but neither $\mathcal T$ nor $d_0=\dim\mathcal T$; likewise the coordinates $t$ change by $Q$, so the number of parameters does not depend on the choice of basis.
 
@@ -376,7 +400,11 @@ Equivalently, with $\Gamma=MM^{\mathsf T}$, $\Gamma'=MM^{\mathsf T}+cc^{\mathsf 
 where $d_1=\min(\text{rows},\text{cols})$ of $M$ and $e_j$ is the $j$-th elementary symmetric polynomial of the eigenvalues.
 
 \end{lem}
-\emph{Proof.} $Mb=c$ is consistent iff $c\in\operatorname{im}M$. Since $\operatorname{im}\Gamma=\operatorname{im}M$ and $\operatorname{im}\Gamma'=\operatorname{im}[M\ c]$, this is equivalent to equality of the two ranks. For a positive semidefinite $\Gamma$ one has $e_j(\Gamma)=\sum_{|I|=j}\det\Gamma_{I,I}$, and every principal minor of $\Gamma$ is nonnegative; hence $e_j(\Gamma)=0$ exactly when all $j\times j$ principal minors vanish, which happens exactly when $\operatorname{rank}\Gamma<j$. Therefore $e_t(\Gamma)>0$ and $e_{t+1}(\Gamma)=0$ exactly when $\operatorname{rank}\Gamma=t$; the last condition forces $\operatorname{rank}\Gamma'\le t$, and $\Gamma'\succeq\Gamma$ gives equality.
+\emph{Proof.} $Mb=c$ is consistent iff $c\in\operatorname{im}M$, and
+$\operatorname{im}[M\ c]=\operatorname{im}M+\operatorname{span}\{c\}$; hence
+$c\in\operatorname{im}M$ iff $\operatorname{im}[M\ c]=\operatorname{im}M$ iff
+$\operatorname{rank}[M\ c]=\operatorname{rank}M$. Since $\operatorname{im}\Gamma=\operatorname{im}M$ and
+$\operatorname{im}\Gamma'=\operatorname{im}[M\ c]$, this is the equality of the two ranks. For a positive semidefinite $\Gamma$ one has $e_j(\Gamma)=\sum_{|I|=j}\det\Gamma_{I,I}$, and every principal minor of $\Gamma$ is nonnegative; hence $e_j(\Gamma)=0$ exactly when all $j\times j$ principal minors vanish, which happens exactly when $\operatorname{rank}\Gamma<j$. Therefore $e_t(\Gamma)>0$ and $e_{t+1}(\Gamma)=0$ exactly when $\operatorname{rank}\Gamma=t$; the last condition forces $\operatorname{rank}\Gamma'\le t$, and $\Gamma'\succeq\Gamma$ gives equality.
 
 \paragraph*{Spectral reduction}\label{sec:spectral}
 Because $B$ has full row rank,
@@ -545,10 +573,11 @@ Conversely, suppose $\Phi_{\omega,J}$ is true. Rank consistency gives $B$ with $
 
 The constraints are the rank-consistency disjunction over $t\le\min(\text{rows},\text{cols})$ of $M$ (at most $O(k)$ branches, each with $O(k)$ polynomials of degree $O(k)$), the $2r_0$ fixed-row equations, the free-row equations, and the Gram/spectral certificates (degree $2\omega+1$). Hence $s=O(k^2)$, $D=O(k)\le O(n)$, and all coefficients have bit length $\operatorname{poly}(n,\mathcal L)$ by the coefficient-size lemma of Section~\ref{sec:fpt}. Renegar's Part II bound $B(\log B)(\log\log B)(sD)^{O(N)}$ gives
 
-\begin{equation}
-(sD)^{O(N)}=\operatorname{poly}(n)^{O(q^2)}=\mathcal L^{O(q^2)}
-\end{equation}
-because $q$ is fixed; the chart factor $(q+1)k^q\le\mathcal L^{O(q)}$ is absorbed. The degenerate cases are listed in Section~\ref{sec:deg}.
+$\mathcal L^{O(q^2)}$ bit operations per chart, since $sD=\operatorname{poly}(n)$ and $N\le2q^2+2q$
+with $q$ fixed. The number of charts is $B(q,k)=(q+1)k^{q}$; because $k\le n\le\mathcal L$ and
+$q+1\le2^{q}\le\mathcal L^{q}$ for $q\ge1$ and $\mathcal L\ge2$, one has $B(q,k)\le\mathcal L^{2q}$,
+and $\mathcal L^{O(q^2)}\cdot\mathcal L^{2q}=\mathcal L^{O(q^2)}$. The degenerate cases $k=0$ and
+$q=r_0$ are listed in Section~\ref{sec:deg}.
 
 The quantities entering the bound are collected here.
 
@@ -746,7 +775,11 @@ where $N$ is the number of real variables, $s$ the number of polynomials, $D$ th
 \item every maximal minor $f_i$ of $P(\lambda)=\lambda H-H_A$, and every coefficient of $f_i$, has bit length $\operatorname{poly}(n,\mathcal L)$;
 \item the entries of $Z^{\mathsf T}Z$ and of $e_j(G_H),e_j(G_S)$ for $j\le\kappa_{\rm obs}+1$ have bit length $f(\kappa_{\rm obs})\operatorname{poly}(\mathcal L)$.
 \end{enumerate}
-\emph{Proof.} Gaussian elimination on $[C;CA]$ writes $N$ as ratios of minors of the input; Cramer's rule and Hadamard's bound give $\operatorname{poly}(n,\mathcal L)$ bits. The same applies to $D$. Each entry of $H=LN$ is a sum of $n$ products, and each Gram entry is a sum of $q$ such products, so the bit length remains $\operatorname{poly}(n,\mathcal L)$. A maximal minor of $P$ is a determinant of an $\omega\times\omega$ matrix whose entries are linear in the entries of $H,H_A$; Hadamard's bound gives $\operatorname{poly}(n,\mathcal L)$ bits for each coefficient. The matrix $Z^{\mathsf T}Z$ has at most $2^{\kappa_{\rm obs}}$ determinant terms, and $e_j$ has at most $k^{j}\le\kappa_{\rm obs}^{\kappa_{\rm obs}}$ terms; summing gives $f(\kappa_{\rm obs})\operatorname{poly}(\mathcal L)$. $\square$
+\emph{Proof.} Write $m=n^2+pn+r_0n$ for the number of rational input entries. Multiplying by the product of their denominators turns the input into an integer matrix all of whose entries are bounded in absolute value by $2^{O(m\mathcal L)}$. Hadamard's inequality gives, for a $t\times t$ minor $M_{I,J}$ of that integer matrix,
+\begin{equation}
+\begin{gathered}|\det M_{I,J}|\le(\sqrt t\,B)^t,\\\operatorname{bits}\det M_{I,J}=O\bigl(t(\log B+\log t)\bigr),\end{gathered}
+\end{equation}
+where $B$ bounds the entries; with $t\le n$ and $B=2^{O(m\mathcal L)}$ this is $\operatorname{poly}(n,\mathcal L)$. Both the kernel basis $N$ of $[C;CA]$ and the row-space basis of $[N\ AN]$, and hence the matrix $D$, are obtained by Cramer's rule or by reduced row echelon form, so each of their entries is a ratio of such minors; the common denominator can be chosen as the product of the pivot minors, whose bit length is again $\operatorname{poly}(n,\mathcal L)$. Each entry of $H=LN$ is a sum of $n$ products of an input entry with an entry of $N$, and each entry of $G_H$ or $G_S$ is a sum of at most $q$ such products, which adds only $O(\log n)$ bits. A maximal minor $f_i$ of $P(\lambda)=\lambda H-H_A$ is a determinant of an $\omega\times\omega$ matrix whose entries are linear in those of $H,H_A$; Hadamard applied to its coefficient matrix bounds every coefficient of $f_i$ by $\operatorname{poly}(n,\mathcal L)$ bits. Finally $Z^{\mathsf T}Z$ is a sum of at most $\binom{k}{\omega}\le2^{\kappa_{\rm obs}}$ terms, each a product of two coefficients of the $f_i$, and $e_j$ is a sum of at most $k^{j}\le\kappa_{\rm obs}^{\kappa_{\rm obs}}$ principal minors; the bit length of a sum of $T$ terms of bit length $b$ is $b+\log T$, which gives $f(\kappa_{\rm obs})\operatorname{poly}(\mathcal L)$. $\square$
 
 \paragraph*{Fixed $q$}
 For fixed $q$, the algorithm enumerates at most $(q+1)k^q$ pivot charts. In one chart the quantified variables are the entries of $X,G$ and the spectral certificate, so $N=q\omega+q\omega+2\omega=2q\omega+2\omega\le2q^2+2q$.
@@ -796,7 +829,16 @@ The Kronecker form is not used by the algorithm. The reading recorded in Section
 \begin{thm}[3] For every fixed $q$, $\mathrm{DEC}(q)\in\exists\mathbb R$. Consequently the threshold problem $\mathrm{MINDEC}(Q)$ is in $\exists\mathbb R$ for every $Q$.
 
 \end{thm}
-\emph{Proof.} By Appendix~\ref{app:encoding}: the encoding is a finite disjunction over $\omega=0,\dots,\min(q,k)$, each branch a polynomial-size system with the data constraints \eqref{eq:B1}--\eqref{eq:B2}, and its solutions correspond exactly to feasible $L$. For $\mathrm{MINDEC}(Q)$ take the finite disjunction over $q=r_0,\dots,Q$. $\square$
+\emph{Proof.} Appendix~\ref{app:encoding} constructs, for each
+$\omega=0,\dots,\min(q,k)$, an existential formula $\Phi_\omega$ with
+$O(q\omega+\omega k+\omega q+(2\omega-1)\omega q)=O(n^3)$ real variables and $O(n^3)$
+equations of degree at most two, and with no enumeration of column sets. The disjunction
+$\bigvee_\omega\Phi_\omega$ therefore has $O(k)$ branches of polynomial size, is built in
+polynomial time from the input, and its solutions correspond exactly to feasible $L$; this
+is a polynomial-time reduction to the existential theory of the reals, so
+$\mathrm{DEC}(q)\in\exists\mathbb R$. Decidability of the target theory is a separate
+classical result and is not used here. For $\mathrm{MINDEC}(Q)$ take the finite disjunction
+over $q=r_0,\dots,Q$. $\square$
 
 \begin{cor}[2] For every $r\ge0$, the decision time in the bit model satisfies $T\le\min\{\mathcal L^{O(q^2)},\ f(\kappa_{\rm obs})\operatorname{poly}(\mathcal L)\}$.
 \end{cor}
