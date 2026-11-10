@@ -1,6 +1,7 @@
 import Q1Paper.Basic
 import Q1Paper.RankIdentity
 import Q1Paper.HyperplaneAvoid
+import Q1Paper.BezoutDeg
 import Q1Paper.Compression
 import Q1Paper.FreeRows
 import Q1Paper.RankConsistency
@@ -20,6 +21,7 @@ import Q1Paper.Legacy
 #print axioms Q1Paper.freePairDim_le_kappaObs
 #print axioms Q1Paper.finrank_range_prod
 #print axioms Q1Paper.exists_forall_apply_ne_zero
+#print axioms Q1Paper.exists_ne_zero_with_finite_roots
 #print axioms Q1Paper.ker_compressed_iff
 #print axioms Q1Paper.mem_freePairSpace_iff
 #print axioms Q1Paper.finrank_domain_le_freePairSpace
