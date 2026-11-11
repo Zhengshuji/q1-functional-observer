@@ -97,4 +97,22 @@ theorem spoly_mul_pencil_eq_one {d : ℕ} (S : Fin (d + 1) → Matrix (Fin ω) (
   simp only [Fin.val_zero, pow_zero, one_smul, hg0]
   abel
 
+/-- The coefficient functional passes through a finite sum. -/
+theorem coeff_sum_finset {α : Type*} (s : Finset α) (f : α → K[X]) (k : ℕ) :
+    (∑ a ∈ s, f a).coeff k = ∑ a ∈ s, (f a).coeff k := by
+  classical
+  induction s using Finset.induction_on with
+  | empty => simp
+  | insert a s ha ih => simp [ha, ih]
+
+/-- Coefficient of a matrix product, entrywise. -/
+theorem coeff_mul_apply {ω n p : ℕ} (A : Matrix (Fin ω) (Fin n) K[X])
+    (B : Matrix (Fin n) (Fin p) K[X]) (i : Fin ω) (j : Fin p) (k : ℕ) :
+    ((A * B) i j).coeff k
+      = ∑ a : Fin n, ∑ x ∈ Finset.antidiagonal k,
+          (A i a).coeff x.1 * (B a j).coeff x.2 := by
+  classical
+  rw [Matrix.mul_apply, coeff_sum_finset]
+  simp_rw [Polynomial.coeff_mul]
+
 end Q1Paper

@@ -7,6 +7,8 @@ import Q1Paper.G3Adjugate
 import Q1Paper.G3LeftInverse
 import Q1Paper.DegreeBounds
 import Q1Paper.G3Coeff
+import Q1Paper.G5GramRank
+import Q1Paper.G4RankIdentity
 import Q1Paper.Compression
 import Q1Paper.FreeRows
 import Q1Paper.RankConsistency
@@ -42,6 +44,9 @@ import Q1Paper.Legacy
 #print axioms Q1Paper.spoly_mul_pencil
 #print axioms Q1Paper.spoly_mul_pencil_zero
 #print axioms Q1Paper.spoly_mul_pencil_eq_one
+#print axioms Q1Paper.coeff_mul_apply
+#print axioms Q1Paper.augment_mul_transpose
+#print axioms Q1Paper.rank_vstack_add_rank_mul
 #print axioms Q1Paper.ker_compressed_iff
 #print axioms Q1Paper.mem_freePairSpace_iff
 #print axioms Q1Paper.finrank_domain_le_freePairSpace

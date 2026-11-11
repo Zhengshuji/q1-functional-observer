@@ -7,6 +7,8 @@ import Q1Paper.G3Adjugate
 import Q1Paper.G3LeftInverse
 import Q1Paper.DegreeBounds
 import Q1Paper.G3Coeff
+import Q1Paper.G5GramRank
+import Q1Paper.G4RankIdentity
 import Q1Paper.Compression
 import Q1Paper.FreeRows
 import Q1Paper.RankConsistency
