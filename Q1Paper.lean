@@ -4,6 +4,9 @@ import Q1Paper.HyperplaneAvoid
 import Q1Paper.BezoutDeg
 import Q1Paper.G2Assembly
 import Q1Paper.G3Adjugate
+import Q1Paper.G3LeftInverse
+import Q1Paper.DegreeBounds
+import Q1Paper.G3Coeff
 import Q1Paper.Compression
 import Q1Paper.FreeRows
 import Q1Paper.RankConsistency

@@ -4,6 +4,9 @@ import Q1Paper.HyperplaneAvoid
 import Q1Paper.BezoutDeg
 import Q1Paper.G2Assembly
 import Q1Paper.G3Adjugate
+import Q1Paper.G3LeftInverse
+import Q1Paper.DegreeBounds
+import Q1Paper.G3Coeff
 import Q1Paper.Compression
 import Q1Paper.FreeRows
 import Q1Paper.RankConsistency
@@ -28,6 +31,17 @@ import Q1Paper.Legacy
 #print axioms Q1Paper.exists_bezout_deg_lt
 #print axioms Q1Paper.exists_bezout_family
 #print axioms Q1Paper.adjRowInverse_mul
+#print axioms Q1Paper.exists_leftInverse
+#print axioms Q1Paper.natDegree_intCast_le
+#print axioms Q1Paper.natDegree_det_le
+#print axioms Q1Paper.natDegree_det_le_sum
+#print axioms Q1Paper.sum_ite_eq_zero_one
+#print axioms Q1Paper.natDegree_adjugate_le
+#print axioms Q1Paper.natDegree_adjRowInverse_le
+#print axioms Q1Paper.exists_leftInverse_linear
+#print axioms Q1Paper.spoly_mul_pencil
+#print axioms Q1Paper.spoly_mul_pencil_zero
+#print axioms Q1Paper.spoly_mul_pencil_eq_one
 #print axioms Q1Paper.ker_compressed_iff
 #print axioms Q1Paper.mem_freePairSpace_iff
 #print axioms Q1Paper.finrank_domain_le_freePairSpace
