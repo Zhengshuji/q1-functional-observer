@@ -6,7 +6,7 @@ range of the pair map, and its dimension is the rank of [N; AN].
 -/
 
 import Q1Paper.Basic
-import Q1Paper.Legacy.KappaObs
+import Q1Paper.KappaObs
 
 set_option linter.unusedSectionVars false
 
@@ -25,12 +25,8 @@ def freePairSpace (f g : E →ₗ[K] F) : Submodule K (F × F) :=
 
 /-- Membership in the free-pair space is exactly being a pair image. -/
 theorem mem_freePairSpace_iff (f g : E →ₗ[K] F) (y : F × F) :
-    y ∈ freePairSpace f g ↔ ∃ x : E, (f x, g x) = y := by
-  constructor
-  · rintro ⟨x, hx⟩
-    exact ⟨x, by simpa [KappaObs.pairMap] using hx⟩
-  · rintro ⟨x, rfl⟩
-    exact ⟨x, rfl⟩
+    y ∈ freePairSpace f g ↔ ∃ x : E, (f x, g x) = y :=
+  Iff.rfl
 
 /-- The dimension of the free-pair space plus the common-kernel dimension is
 the state dimension. -/

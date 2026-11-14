@@ -16,7 +16,7 @@
 \newtheorem{cor}[thm]{Corollary}
 \theoremstyle{remark}
 \newtheorem{remark}{Remark}
-\renewcommand{\qedsymbol}{$\blacksquare$}
+\renewcommand{\qedsymbol}{QED}
 
 \begin{document}
 \title{Parameterized algorithms for functional observer feasibility}
@@ -24,23 +24,29 @@
 \maketitle
 
 \begin{abstract}
-We study the parameterized complexity of deciding whether a prescribed-order functional
-observer exists for a linear system with rational data and a fixed block of observer rows.
-The two feasibility conditions are coupled, because the observer matrix and its product
-with the system matrix are built from the same free-row block; exploiting this coupling, we
-compress the free rows to the space of attainable matrix pairs, whose dimension induces the
-parameter $\kappa_{\rm obs}=r\operatorname{rank}[N\ AN]$, with $N$ a basis of
-$\ker[C;CA]$. On this reduction we build a finite algebraic certificate for the spectral
-condition and compress it by Cauchy--Binet to a Gram matrix whose size depends on
-$\kappa_{\rm obs}$ rather than on the number of maximal minors. This yields a deterministic
-algorithm with bit-complexity $\mathcal L^{O(q^2)}$ for every fixed order $q$, where
-$\mathcal L$ is the input bit length, and a fixed-parameter algorithm with bound
-$f(\kappa_{\rm obs})\operatorname{poly}(\mathcal L)$. We also give an exact
-polynomial-time test for the case of no free rows, based on polynomial left inverses, and
-establish membership of the decision problem, and of its finite threshold version, in the
-existential theory of the reals. The results are parameterized upper bounds: they do not
-resolve the unrestricted complexity, and the dependence on $\kappa_{\rm obs}$ is structural
-rather than practical for large parameter values.
+We study the parameterized complexity of deciding whether a functional observer of prescribed
+order exists for a linear system with rational data and a fixed block of observer rows. The two
+feasibility conditions are coupled, because the observer matrix and its product with the system
+matrix are built from the same free rows; restricting the row functionals to the common kernel of
+the output matrix and its product with the system matrix removes exactly the directions those two
+matrices already account for. Exploiting this coupling, we reduce the free rows to a subspace of a
+compressed row-pair space. The reduction identifies the parameter that governs the cost, namely
+$\ell=\operatorname{rank}(AN)\le k$, where $N$ is a basis of $\ker[C;CA]$: it is an invariant of
+the system and of the fixed functionals alone and does not involve the number $r$ of free rows,
+whereas the coordinate count $\kappa_{\rm obs}=r\operatorname{rank}[N\ AN]$ that a chart
+parameterization suggests does. On this reduction we build a finite algebraic certificate for the
+spectral condition and compress it by Cauchy--Binet to a Gram matrix whose size is governed by
+$\ell$ rather than by the number of maximal minors, so no enumeration of maximal minors is required;
+charts enter only the fixed-parameter algorithm, where their number is bounded by $4^{\ell}$. This yields a deterministic algorithm with bit complexity $\mathcal L^{O(q^2)}$ for
+every fixed order $q$, where $\mathcal L$ is the input bit length; a decision algorithm with bound
+$\exp\bigl(O(\ell^2\log(\ell+2))\bigr)\operatorname{poly}(\mathcal L)$, that is, fixed-parameter
+tractable in a parameter independent of $r$; monotonicity and saturation of the free-row count,
+which make the threshold problem a single decision instance and give the minimum order by binary
+search; a construction that returns the observer in the arithmetic model, its bit complexity being
+left open; and an exact polynomial-time test for the case of no free rows, based on polynomial left
+inverses. The decision problem and its finite threshold version lie in the existential theory of
+the reals. These are parameterized upper bounds: they do not resolve the unrestricted complexity,
+and the doubly exponential dependence on $\ell$ is structural rather than practical.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -75,10 +81,28 @@ spectral one. The latter work also describes an order-by-order procedure: at eac
 it parameterizes the nullspace over Grassmann charts with $d(m_L-d)=(n-p-q)(q-r)$ free
 parameters per chart and tests the two conditions chart by chart.
 
-Neither work states a running-time or bit-complexity bound, and for fixed $q$ the number
-of chart parameters above still grows linearly in $n$. The complexity of deciding
-feasibility at a prescribed order is therefore left open by the characterization
-literature. This paper takes the conditions as given and studies that complexity.
+Neither work states a running-time or a bit-complexity bound, and the order-by-order
+procedure is not by itself an algorithm with a complexity guarantee. Two counts show why. The
+number of parameters per chart, $d(m_L-d)=(n-p-q)(q-r)$, grows linearly in $n$ even when the
+prescribed order $q$ and the number of free rows $r$ are held fixed, and the number of charts
+of the relevant Grassmannian grows with $n$ as well. A procedure that enumerates charts and
+tests each one therefore does not establish polynomial time for fixed order, and it does not
+identify any quantity that could control the cost.
+
+The present paper takes the two conditions as given, proves nothing about them that is already
+known, and studies that complexity. Three things are new. First, the conditions are made
+finite: the free rows act only through a subspace of a compressed row-pair space, and the
+spectral condition is replaced by a finite algebraic certificate of bounded degree, so that no
+enumeration of maximal minors is needed, and the fixed-order algorithm needs no chart enumeration
+either; the fixed-parameter algorithm does enumerate charts, but at most $4^{\ell}$ of them. Second, a parameter that
+controls the cost is identified, namely $\ell=\operatorname{rank}(AN)$, which is an invariant
+of the system and of the fixed functionals alone and does not involve $r$; the parameter that
+the chart parameterization suggests, $r\,d_0$, does involve $r$ and can be quadratic in $n$
+even when $\ell$ is small. Third, the cost is bounded in the bit model: polynomial in the input
+length for fixed order, and fixed-parameter in $\ell$. The characterization of
+\cite{fer10,dar25,fer26a,fer26b} supplies the starting point throughout; what is added is the
+reduction that makes the conditions finite, the certificate that replaces the chart-by-chart
+spectral test, and the analysis of the resulting cost.
 
 Adjacent design problems are known to be hard, which makes the question natural but does
 not answer it. Choosing a minimal set of sensors that renders a system functionally
@@ -100,33 +124,48 @@ The approach is to make the decision problem finite-dimensional. Restricting row
 functionals to the common kernel of the output matrix and its product with the system
 matrix removes exactly the directions that those two matrices already account for, and
 turns the two conditions into a row-space inclusion and into the constant rank of a
-pencil. Every free observer row is then determined by its coordinates in the space of
-attainable row pairs, whose dimension gives the effective dimension $\kappa_{\rm obs}$ of
-the free data (Section~\ref{sec:dimension}). Two consequences are developed: the spectral
-condition becomes a finite algebraic certificate compressed to a size governed by
-$\kappa_{\rm obs}$ (Section~\ref{sec:certificate}), and deciding feasibility becomes a
-real-algebraic problem whose number of variables is controlled by either the prescribed
-order or the effective dimension (Sections~\ref{sec:fixedq} and~\ref{sec:fpt}).
+pencil. A free observer row is then determined by its coordinates in the space of
+attainable row pairs, and the $r$ free rows are seen to act only through the subspace $W$
+they span there. That reading gives two parameters: the dimension $\kappa_{\rm obs}=rd_0$
+of the coordinates of the free rows (Section~\ref{sec:dimension}), and the dimension
+$\ell=\operatorname{rank}(AN)\le k$ of the space in which the feasible $W$ live, which does
+not involve $r$ (Section~\ref{sec:subspace}). Three consequences are developed. The spectral
+condition becomes a finite algebraic certificate compressed to a size governed by $\ell$
+(Section~\ref{sec:certificate}); deciding feasibility becomes a real-algebraic problem
+whose number of variables is controlled by either the prescribed order or by $\ell$
+(Sections~\ref{sec:fixedq} and~\ref{sec:fpt}); and the saturation of the free-row count at
+$d-s_0$ turns the threshold problem into a single decision instance and the minimum-order
+problem into a binary search.
 
 \subsection{Contributions and organization}\label{sec:contrib}
 
 The contributions are the following.
 
 \begin{enumerate}
-\item The identification of the effective dimension $\kappa_{\rm obs}$ of the free
-observer data as the structural parameter of the problem, and a compression of the two
-observer conditions, which are taken from the existing characterization, to $O(q^2)$
-variables, independently of the state dimension, which the chart parameterization of
-\cite{fer26b} does not achieve.
+\item A compression of the two observer conditions, which are taken from the existing
+characterization, to $O(q^2)$ variables independently of the state dimension, and a
+reduction of the free rows to a subspace $W$ of the compressed row-pair space, in which the
+two conditions are a row-space inclusion and the constant rank of a pencil.
+\item The identification of the parameter $\ell=\operatorname{rank}(AN)\le k$ that governs
+the complexity bound. It is an invariant of the system and the fixed rows alone: it does not
+involve the number $r$ of free rows, whereas the chart parameterization of \cite{fer26b}
+carries $(n-p-q)(q-r)$ parameters per chart for fixed order $q$.
+\item A lower bound on the minimum order that comes from the spectral condition rather than
+from the algebraic one: $\operatorname{rank}[U_0;V_0]\le\omega\le s_0+t-1$ with $U_0=\operatorname{row}(L_0N)$
+and $V_0=\operatorname{row}(L_0AN)$, hence
+$q_{\min}\ge r_0+\max(0,\operatorname{rank}[U_0;V_0]-s_0+1)$. It is computed in polynomial time,
+it is independent of the algebraic bound $q_0$ of \cite{fer26a,fer26b}, and on the instance of
+Appendix~\ref{app:example} it is strictly stronger.
 \item A finite algebraic certificate for the spectral condition, and its compression by
-Cauchy--Binet to a matrix of size controlled by $\kappa_{\rm obs}$; no enumeration of
-maximal minors is required.
+Cauchy--Binet to a matrix of size controlled by $\ell$; no enumeration of maximal minors is
+required.
 \item A decision algorithm for every fixed order, with a bit-complexity bound
 $\mathcal L^{O(q^2)}$ in the input length $\mathcal L$ and the prescribed order $q$.
-\item A decision algorithm that is fixed-parameter tractable in $\kappa_{\rm obs}$, with
-bound $f(\kappa_{\rm obs})\operatorname{poly}(\mathcal L)$, together with an exact
-polynomial-time test for the case of no free rows, which decides a finite rational linear
-system obtained from a polynomial left inverse.
+\item A decision algorithm that is fixed-parameter tractable in $\ell$, with bound
+$\exp\bigl(O(\ell^2\log(\ell+2))\bigr)\operatorname{poly}(\mathcal L)$, together with the
+monotonicity and saturation of the free-row count, which make the threshold problem a single
+decision instance and give minimum order by binary search, and an exact polynomial-time test
+for the case of no free rows.
 \item Membership of the prescribed-order decision problem, and of its finite threshold
 version, in the existential theory of the reals.
 \end{enumerate}
@@ -152,9 +191,9 @@ $L_0\in\mathbb Q^{r_0\times n}$.
 Let $q\ge r_0$ be the prescribed observer order, with $q\le n$, and set $r=q-r_0$. The
 observer rows are the rows of the block
 \begin{equation*}
-L=[L_0;\,R],\qquad R\in\mathbb R^{r\times n},
+L=\begin{bmatrix}L_0\\R\end{bmatrix},\qquad R\in\mathbb R^{r\times n},
 \end{equation*}
-where $L_0$ is fixed and $R$ collects the $r$ free rows; only real observers are
+where $L_0$ is fixed while $R$ collects the $r$ free rows; only real observers are
 considered.
 
 All given rational data are encoded in binary, and $\mathcal L$ denotes the total input
@@ -171,7 +210,7 @@ mention.
 
 \subsection{The observer conditions}\label{sec:conditions}
 
-A functional observer of order $q$ is a matrix $L=[L_0;R]\in\mathbb R^{q\times n}$ such
+A functional observer of order $q$ is a matrix $L=\begin{bmatrix}L_0 \\ R\end{bmatrix}\in\mathbb R^{q\times n}$ such
 that
 \begin{equation}\label{eq:5a}
 \operatorname{rank}\begin{bmatrix}LA\\ L\\ CA\\ C\end{bmatrix}
@@ -209,9 +248,60 @@ The threshold problem is
 \mathrm{MINDEC}(Q)=\bigvee_{q=r_0}^{\min(Q,n)}\mathrm{DEC}(q),
 \end{equation}
 a finite disjunction of decision instances. The algorithms below decide $\mathrm{DEC}$;
-their affirmative certificates contain a witness. We make no claim here about the
-complexity of $\mathrm{OPT}$ or $\mathrm{FIND}$, nor do we rely on monotonicity of
-$\mathrm{DEC}$ in $q$.
+their affirmative certificates contain a witness. Section~\ref{sec:dimension} also shows
+that $\mathrm{DEC}$ is monotone in $q$ and saturates at $r_0+m$, which reduces
+\eqref{eq:mindec} to a single instance and turns $\mathrm{OPT}$ into a search over at most
+$2\ell+1$ values; $\mathrm{FIND}$ is treated in Section~\ref{sec:fpt}, where the witness is
+returned as exact real algebraic numbers.
+
+\begin{table}[!t]
+\centering
+\caption{Notation. The first block is fixed by the input, the second by the compression, the third by
+the subspace reduction of Section~\ref{sec:subspace}.}
+\label{tab:notation}
+\footnotesize
+\begin{tabular}{@{}ll@{}}
+\toprule
+Symbol & Meaning \\
+\midrule
+$K_0=\ker[C;CA]$ & common kernel of $C$ and $CA$ \\
+$k=\dim K_0$ & its dimension \\
+$N$ & basis matrix of $K_0$ \\
+$M=[N\ AN]$ & compressed row-pair matrix \\
+\midrule
+$H=LN$, $H_A=LAN$ & compressed observer blocks \\
+$\omega=\operatorname{rank}H$ & compressed order \\
+$P(\lambda)=\lambda H-H_A$ & compressed pencil \\
+\midrule
+$\mathcal T=\operatorname{row}M$ & attainable row-pair space \\
+$d_0=\dim\mathcal T$ & its dimension \\
+$\kappa_{\rm obs}=r\,d_0$ & number of free-row coordinates \\
+$S=\operatorname{row}(AN)\subseteq\mathbb R^k$ & space of the second blocks \\
+$\ell=\operatorname{rank}(AN)\le k$ & its dimension; the FPT parameter \\
+$B=LM=[H\ H_A]$ & compressed row pair \\
+$W=\operatorname{row}B$ & subspace spanned by the row pairs \\
+$W_0=\operatorname{row}(L_0M)$ & contribution of the fixed rows \\
+$s_0=\dim W_0$, $m=d_0-s_0$ & \\
+$\mathcal V=\mathcal T\cap(S\times S)$ & admissible ambient space \\
+$m'=\dim\mathcal V-s_0$ & chart dimension \\
+$\pi_1,\pi_2,\pi_\lambda$ & projections of $\mathbb R^{2k}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Two published bounds confine the orders that have to be examined. Let $q_0$ be the algebraic
+lower bound of \cite{fer26a,fer26b}: the smallest order at which \eqref{eq:5a} can be satisfied,
+computed from the functional observability indices by a greedy rank recursion, hence in polynomial
+time. Every feasible order satisfies
+\begin{equation}\label{eq:range}
+q_0\le q\le n_0-p,\qquad n_0=\operatorname{rank}\bigl[C;CA;\dots;CA^{n-1}\bigr],
+\end{equation}
+see \cite{fer26a,fer26b}; for an observable pair $n_0=n$. The upper end is not merely a bound in the
+row-slot model: by Lemma~\ref{lem:monotone} the predicate is monotone in $q$, so every order at or
+above $n_0-p$ is feasible as soon as that one is, and no information is lost by stopping there. In
+terms of the quotient dimension the range \eqref{eq:range} reads
+$q_0-r_0\le t\le n_0-p-r_0$, and the reduction of Section~\ref{sec:subspace} adds the independent
+bound $t\le2\ell$ from Proposition~\ref{prop:minorder}.
 
 \section{The compressed pencil}\label{sec:compressed}
 
@@ -238,30 +328,10 @@ Let $P\in\mathbb C^{m\times n}$ and let $N_P\in\mathbb C^{n\times r}$ be a basis
 \end{lem}
 
 \begin{proof}
-Set $\mathcal R_P=\operatorname{row}P$, $\mathcal R_M=\operatorname{row}M$ and $f(x)=xN_P$. Since $\operatorname{col}N_P=\ker P$,
-\begin{equation*}
-\ker f=(\ker P)^{\circ}=\mathcal R_P,\qquad
-\operatorname{im}\bigl(f|_{\mathcal R_M}\bigr)=\operatorname{row}(MN_P),
-\end{equation*}
-where $(\cdot)^{\circ}$ denotes the left annihilator. Rank--nullity applied to $f|_{\mathcal R_M}$ gives
-\begin{equation*}
-\begin{aligned}
-\dim(\mathcal R_P\cap\mathcal R_M)
-&=\dim\ker\bigl(f|_{\mathcal R_M}\bigr)\\
-&=\dim\mathcal R_M-\dim\operatorname{im}\bigl(f|_{\mathcal R_M}\bigr)\\
-&=\operatorname{rank}M-\operatorname{rank}(MN_P),
-\end{aligned}
-\end{equation*}
-and hence
-\begin{equation*}
-\begin{aligned}
-\operatorname{rank}\begin{bmatrix}P\\ M\end{bmatrix}
-&=\dim(\mathcal R_P+\mathcal R_M)\\
-&=\operatorname{rank}P+\operatorname{rank}M-\dim(\mathcal R_P\cap\mathcal R_M)\\
-&=\operatorname{rank}P+\operatorname{rank}(MN_P),
-\end{aligned}
-\end{equation*}
-which is \eqref{eq:rankid}.
+Let $f(x)=xN_P$. Since $\operatorname{col}N_P=\ker P$, the kernel of $f$ is $\operatorname{row}P$,
+and $\operatorname{row}(MN_P)$ is the image of the restriction of $f$ to $\operatorname{row}M$, so
+rank--nullity gives $\operatorname{rank}[P;M]=\operatorname{rank}P+\operatorname{rank}(MN_P)$; this
+is the standard rank identity for a stacked matrix \cite[Ch.~0]{hj13}.
 \end{proof}
 
 \subsection{The compression and the pencil criterion}\label{sec:compression}
@@ -283,9 +353,9 @@ Equivalently, the $\omega\times\omega$ maximal minors of $P(\lambda)=\lambda H-H
 \end{lem}
 
 \begin{proof}
-Set $P_0=[C;CA]$. Since $K_0=\ker P_0$, the matrix $N$ is a basis matrix for $\ker P_0$.
+Set $P_0=\begin{bmatrix}C\\CA\end{bmatrix}$. Since $K_0=\ker P_0$, the matrix $N$ is a basis matrix for $\ker P_0$.
 
-\emph{(i)} The rows of $P_0$ occur among the rows of both matrices below, so Lemma~\ref{lem:rankid} with $P=P_0$ and with $M=[LA;L]$, $M=L$ gives
+\emph{(i)} The rows of $P_0$ occur among the rows of both matrices below, so Lemma~\ref{lem:rankid} with $P=P_0$ and with $M=\begin{bmatrix}LA\\L\end{bmatrix}$, $M=L$ gives
 \begin{equation*}
 \begin{aligned}
 \operatorname{rank}\begin{bmatrix}LA\\ L\\ CA\\ C\end{bmatrix}
@@ -312,19 +382,29 @@ H_A=FH .
 
 \emph{(iii)} Set
 \begin{equation*}
-M(\lambda)=[\lambda L-LA;CA;C],\qquad J=[L;CA;C].
+M(\lambda)=\begin{bmatrix}
+	\lambda L-LA\\CA\\C
+\end{bmatrix},\qquad J=\begin{bmatrix}
+L \\ CA \\C
+\end{bmatrix}.
 \end{equation*}
-Since $N$ annihilates both $C$ and $CA$,
+Since $N$ is a basis matrix for $K_0$,
 \begin{equation*}
-M(\lambda)N=\lambda H-H_A=P(\lambda),\qquad JN=H .
+M(\lambda)N=\begin{bmatrix}
+	\lambda H-H_A \\ 0 \\ 0
+\end{bmatrix}=\begin{bmatrix}
+P(\lambda) \\ 0 \\ 0
+\end{bmatrix},\qquad JN=\begin{bmatrix}
+H \\ 0 \\ 0
+\end{bmatrix} .
 \end{equation*}
-The rows of $P_0=[C;CA]$ occur among the rows of $M(\lambda)$ and of $J$, so that
+Since the row space of $P_0$ is a subspace of the row spaces of both $M(\lambda)$ and $J$,
 \begin{equation*}
 \operatorname{rank}\begin{bmatrix}P_0\\ M(\lambda)\end{bmatrix}=\operatorname{rank}M(\lambda),
 \qquad
-\operatorname{rank}\begin{bmatrix}P_0\\ J\end{bmatrix}=\operatorname{rank}J ,
+\operatorname{rank}\begin{bmatrix}P_0\\ J\end{bmatrix}=\operatorname{rank}J .
 \end{equation*}
-and Lemma~\ref{lem:rankid} with $P=P_0$ yields
+So Lemma~\ref{lem:rankid} with $P=P_0$ yields
 \begin{equation*}
 \begin{aligned}
 \operatorname{rank}M(\lambda)&=\operatorname{rank}P_0+\operatorname{rank}P(\lambda),\\
@@ -333,9 +413,9 @@ and Lemma~\ref{lem:rankid} with $P=P_0$ yields
 \end{equation*}
 Hence \eqref{eq:5b} is equivalent to
 \begin{equation}\label{eq:5b-1}
-\operatorname{rank}P(\lambda)=\operatorname{rank}H=\omega
+\operatorname{rank}P(\lambda)=\operatorname{rank}H=\omega,\ \forall \lambda\in\mathbb C.
 \end{equation}
-holding for every $\lambda\in\mathbb C$. Assume now \eqref{eq:5a}. By \eqref{eq:5a-2},
+ Assume now \eqref{eq:5a}. By \eqref{eq:5a-2},
 \begin{equation*}
 P(\lambda)=\lambda H-H_A=(\lambda I-F)H ,
 \end{equation*}
@@ -349,7 +429,7 @@ Combining \eqref{eq:5b-1} with the bound \eqref{eq:5b-2}, condition \eqref{eq:5b
 \iff
 \forall\lambda\in\mathbb C\ \ \exists\,\omega\times\omega\text{ minor } f_i:\ f_i(\lambda)\neq0 .
 \end{equation*}
-Thus the $\omega\times\omega$ maximal minors $f_1,\dots,f_s$ of $P(\lambda)$ have no common complex root, equivalently their greatest common divisor in $\mathbb C[\lambda]$ is a nonzero constant. For $\omega=0$ the condition is vacuous.
+A common complex root of the maximal minors is therefore exactly a value of $\lambda$ at which all of them vanish, which proves the two equivalent forms in the statement; for $\omega=0$ the condition is vacuous.
 
 \emph{(iv)} Assume \eqref{eq:5a} and \eqref{eq:5b}. By (iii), \eqref{eq:5b-1} holds for every $\lambda$; at $\lambda=0$, where $P(0)=-H_A$,
 \begin{equation*}
@@ -363,14 +443,16 @@ Thus the $\omega\times\omega$ maximal minors $f_1,\dots,f_s$ of $P(\lambda)$ hav
 
 Each free row $r_i\in\mathbb R^{1\times n}$ of $R$ determines the row pair
 \begin{equation*}
-(H_i,(H_A)_i)=r_i\,[N\ \ AN].
+(H_i,(H_A)_i)=r_i\,[N\ \ AN] \in\mathbb R^{1\times 2k}.
 \end{equation*}
-A free row is therefore specified by its coordinates relative to a basis of the subspace of attainable pairs
+Consequently, this attainable pair is uniquely specified by its coordinates relative to a basis of the subspace of attainable pairs
 \begin{equation*}
-\mathcal T=\operatorname{row}[N\ \ AN]\subseteq\mathbb R^{2k},\qquad
-d_0=\dim\mathcal T=\operatorname{rank}[N\ \ AN],
+\begin{gathered}
+\mathcal T=\operatorname{row}[N\ \ AN]\subseteq\mathbb R^{1\times 2k},\\
+d_0=\dim\mathcal T=\operatorname{rank}[N\ \ AN].
+\end{gathered}
 \end{equation*}
-and a rational basis of $\mathcal T$ represents each free row by exactly $d_0$ real coordinates.
+Therefore, a rational basis of $\mathcal T$ allows each attainable pair generated by a free row to be parameterized by exactly $d_0$ real coordinates.
 
 \begin{lem}[Attainable row pairs and the effective dimension]\label{lem:attainable}
 Every free row pair lies in $\mathcal T$, and writing the $r$ free rows in a basis of $\mathcal T$ represents them by
@@ -409,15 +491,160 @@ that is,
 \begin{equation}\label{lem3-1}
 k\le d_0 .
 \end{equation}
-For $r\ge1$, the bound \eqref{lem3-1} multiplied by $r$ reads $d_0\le rd_0=\kappa_{\rm obs}$, which together with \eqref{lem3-1} is \eqref{lem3-2}.
+Since $r\ge1$, we have $d_0\le rd_0=\kappa_{\rm obs}$, which together with \eqref{lem3-1} is \eqref{lem3-2}.
 \end{proof}
 
 \begin{remark}[Basis invariance]
-If $N\mapsto NQ$ with $Q\in\mathbb R^{k\times k}$ nonsingular, then
+If the basis matrix is changed via $N\mapsto NQ$ for some nonsingular $Q\in\mathbb R^{k\times k}$, then the concatenated matrix transforms as
 \begin{equation*}
 [N\ \ AN]\mapsto[N\ \ AN]\operatorname{diag}(Q,Q),
 \end{equation*}
-so $\mathcal T$ is unchanged and the coordinates of a free row transform by the nonsingular linear map $Q$. Hence $d_0=\dim\mathcal T$ and the number of parameters $\kappa_{\rm obs}=rd_0$ are basis-independent.
+Since \(\operatorname{diag}(Q,Q)\) is nonsingular, the row space \(\mathcal T\) remains unchanged. Furthermore, to preserve the generated attainable pairs \(r_i[N\ \ AN]\), the free row coordinates must transform via the nonsingular linear map \(r_i \mapsto r_i \operatorname{diag}(Q^{-1}, Q^{-1})\). Consequently, both the dimension \(d_0 = \dim\mathcal T\) and the total number of parameters \(\kappa_{\rm obs} = r d_0\) are invariant with respect to the choice of basis.
+\end{remark}
+
+\subsection{The subspace reduction}\label{sec:subspace}
+
+The free rows enter the two conditions only through the row space of the compressed
+pair. Writing the row pair of a free row as a row of $M=[N\ AN]$, let
+\begin{equation}\label{eq:W-def}
+B=LM=[H\ H_A]\in\mathbb R^{q\times2k},\qquad W=\operatorname{row}B\subseteq\mathbb R^{2k},
+\end{equation}
+so that $W_0=\operatorname{row}(L_0M)\subseteq W\subseteq\mathcal T=\operatorname{row}M$.
+Let
+\begin{equation}\label{eq:ell}
+\begin{gathered}
+d=\dim\mathcal T,\qquad s_0=\dim W_0,\qquad m=d-s_0,\\
+\ell=\operatorname{rank}(AN)\le k,\qquad S=\operatorname{row}(AN)\subseteq\mathbb R^k ,
+\end{gathered}
+\end{equation}
+and let $\pi_1(h,g)=h$, $\pi_2(h,g)=g$, $\pi_\lambda(h,g)=\lambda h-g$ be the projections of
+$\mathbb R^{2k}=\mathbb R^k\times\mathbb R^k$. Because \eqref{eq:5b} quantifies over complex
+$\lambda$, the projection $\pi_\lambda$ is applied to the complexification
+$W_{\mathbb C}=W\otimes_{\mathbb R}\mathbb C\subseteq\mathbb C^{2k}$, and dimensions are over
+$\mathbb C$; a real matrix has the same rank over $\mathbb R$ and over $\mathbb C$.
+
+\begin{lem}[Sandwich and realizability]\label{lem:sandwich}
+For $L=[L_0;R]$ one has $W_0\subseteq W\subseteq\mathcal T$ and
+$\dim(W/W_0)\le r$. Conversely, every subspace $W$ with these three properties is realized by a
+free block $R$ with exactly $t=\dim(W/W_0)$ rows.
+\end{lem}
+
+\begin{proof}
+$W=\operatorname{row}(L_0M)+\operatorname{row}(RM)$ gives $W\supseteq W_0$ and
+$W\subseteq\mathcal T$, and $\dim(W/W_0)\le\operatorname{rank}(RM)\le r$. For the converse, the
+map $u\mapsto uM$ is onto $\mathcal T$; choose preimages $u_1,\dots,u_t$ of a basis of
+$W/W_0$ and let $R$ consist of those $t$ rows followed by $q-r_0-t$ zero rows. Then
+$W_0+\operatorname{row}(RM)=W$.
+\end{proof}
+
+\begin{lem}[The conditions depend only on $W$]\label{lem:W-conditions}
+Condition \eqref{eq:5a} holds if and only if $\pi_2(W)\subseteq\pi_1(W)$, and condition
+\eqref{eq:5b} holds if and only if $\dim\pi_\lambda(W)=\dim\pi_1(W)$ for every
+$\lambda\in\mathbb C$.
+\end{lem}
+
+\begin{proof}
+Both are instances of Lemma~\ref{lem:rankid} with $P=[CA;C]$, whose kernel is $K_0$: for
+\eqref{eq:5a} take $Q=[LA;L]$, for \eqref{eq:5b} take $Q=\lambda L-LA$. In the first case
+$\operatorname{rank}[LA;L;CA;C]=\operatorname{rank}P+\operatorname{rank}[H_A;H]$ and
+$\operatorname{rank}[L;CA;C]=\operatorname{rank}P+\operatorname{rank}H$, so the two are equal
+exactly when $\operatorname{row}H_A\subseteq\operatorname{row}H$, which is
+$\pi_2(W)\subseteq\pi_1(W)$; in the second, equality reads
+$\operatorname{rank}(\lambda H-H_A)=\operatorname{rank}H$.
+\end{proof}
+
+\begin{lem}[Structural bound]\label{lem:struct}
+Let $W$ be feasible and $\omega=\dim\pi_1(W)>0$. Then
+\begin{equation}\label{eq:struct}
+\omega+1\le\dim W\le2\omega .
+\end{equation}
+\end{lem}
+
+\begin{proof}
+For the upper bound, $\operatorname{row}(L_0M)\subseteq W$ gives
+$W_0\subseteq\mathcal T$, and Lemma~\ref{lem:W-conditions} with $\lambda=0$ gives
+$\dim\pi_0(W)=\dim\pi_1(W)=\omega$; since $\pi_0(W)=\pi_2(W)$ up to sign,
+$\pi_2(W)=\pi_1(W)=:U$ and $W\subseteq U\times U$, so $\dim W\le2\dim U=2\omega$. For the
+lower bound, if $\dim W=\omega$ then $\pi_1|_W$ and $\pi_2|_W$ are isomorphisms and $W$ is the
+graph of a linear $F:U\to U$, that is $g=Fh$ on $W$. Over $\mathbb C$, $F$ has an eigenvalue
+$\lambda_0$, and $\pi_{\lambda_0}(W)=(\lambda_0I-F)U$ has dimension $<\omega$, contradicting
+Lemma~\ref{lem:W-conditions}.
+\end{proof}
+
+\begin{lem}[Monotonicity and saturation]\label{lem:monotone}
+$\mathrm{DEC}(q)\Rightarrow\mathrm{DEC}(q+1)$, and $\mathrm{DEC}(r_0+r)=\mathrm{DEC}(r_0+m)$
+whenever $r\ge m$. Consequently $\mathrm{MINDEC}(Q)=\mathrm{DEC}(\min(Q,n))$ for
+$Q\ge r_0$.
+\end{lem}
+
+\begin{proof}
+Adjoining a zero row to $R$ leaves $H$, $H_A$, and the ranks in \eqref{eq:5a} and
+\eqref{eq:5b} unchanged, which gives monotonicity. Saturation follows from
+$\dim(W/W_0)\le\dim(\mathcal T/W_0)=m$ and Lemma~\ref{lem:sandwich}: any feasible $W$ with
+$\dim(W/W_0)\le r$ is already realized with at most $m$ free rows. The disjunction in
+\eqref{eq:mindec} then reduces to its largest term.
+\end{proof}
+
+\begin{prop}[Minimum order]\label{prop:minorder}
+Let $t_{\min}=\min\{\dim(W/W_0):W \text{ feasible}\}$. Then
+$q_{\min}=r_0+t_{\min}$ and $t_{\min}\le2\ell$.
+\end{prop}
+
+\begin{proof}
+Lemma~\ref{lem:sandwich} identifies feasibility with the existence of a feasible $W$ of
+quotient dimension $\le r$, and Lemma~\ref{lem:monotone} shows that the smallest such $r$ is
+$t_{\min}$. For the bound, a feasible $W$ satisfies $W\subseteq U\times U$ with
+$U\subseteq S$, so $\dim U=\omega\le\ell$ and $\dim W\le2\omega\le2\ell$; hence
+$t_{\min}\le\dim W-s_0\le2\ell$.
+\end{proof}
+
+\begin{prop}[A computable lower bound]\label{prop:lowerbound}
+Let $U_0=\operatorname{row}(L_0N)$ and $V_0=\operatorname{row}(L_0AN)$, and let $W$ be feasible with
+$t=\dim(W/W_0)$ and $\omega=\dim\pi_1(W)$. Then
+\begin{equation}\label{eq:lb}
+\operatorname{rank}\,[\,U_0;\,V_0\,]\ \le\ \omega\ \le\ s_0+t-1,
+\end{equation}
+hence $t\ge\operatorname{rank}[U_0;V_0]-s_0+1$ and
+\begin{equation}\label{eq:qmin-lb}
+q_{\min}\ \ge\ r_0+\max\bigl(0,\ \operatorname{rank}[U_0;V_0]-s_0+1\bigr).
+\end{equation}
+\end{prop}
+
+Proposition~\ref{prop:lowerbound} is the spectral counterpart of the algebraic bound of
+\cite{fer26a,fer26b}. That bound, $q_0=\sum_j\eta_j$, limits the orders at which \eqref{eq:5a} can
+hold; \eqref{eq:lb} limits the orders at which \eqref{eq:5b} can hold, since it uses only the
+condition at $\lambda=0$ and the structural bound. The two are independent, both are computed in
+polynomial time, and the larger one applies; on the instance of Appendix~\ref{app:example} the bound
+below gives $4$ while $q_0=3$. To our knowledge the literature states no lower bound derived from the
+spectral condition: the design conditions of \cite{fer10,dar25,fer26a,fer26b} and the order bound
+$q_0$ all concern \eqref{eq:5a}, and the spectral condition is treated there as a test applied at each
+order rather than as a source of a bound.
+
+\begin{proof}
+Since $W\supseteq W_0$ the projections satisfy $\pi_1(W)\supseteq\pi_1(W_0)=U_0$ and
+$\pi_2(W)\supseteq\pi_2(W_0)=V_0$. By Lemma~\ref{lem:W-conditions} at $\lambda=0$ we have
+$\pi_1(W)=\pi_2(W)=U$ with $\dim U=\omega$, so $U\supseteq U_0+V_0$ and
+$\omega\ge\operatorname{rank}[U_0;V_0]$. The upper bound is Lemma~\ref{lem:struct}:
+$\omega+1\le\dim W=s_0+t$. Combining and using $q_{\min}=r_0+t_{\min}$ with $t_{\min}\ge0$ gives
+\eqref{eq:qmin-lb}.
+\end{proof}
+
+\begin{remark}[On tightness]\label{rem:lbtight}
+The bound \eqref{eq:qmin-lb} is attained on the instance of Appendix~\ref{app:example}, where it gives
+$4$ and $q_{\min}=4$. We do not claim that it is tight in general: like the algebraic bound $q_0$ it is
+a lower bound, and the difference
+$q_{\min}-\bigl(r_0+\max(0,\operatorname{rank}[U_0;V_0]-s_0+1)\bigr)$ can be positive. What it does
+provide is a test for the orders below it, which then need not be examined at all.
+\end{remark}
+
+\begin{remark}[Coordinate change to $S$]\label{rem:YS}
+Fix a rational basis of $S$ and extend it to a rational basis of $\mathbb R^k$; let $Y_S$ be
+the change-of-basis matrix, so that $X\mapsto XY_S$ puts the coordinates of $S$ first. Right
+multiplication by $Y_S$ preserves ranks and the inclusions and equalities between row spaces,
+though not row spaces themselves, so Lemma~\ref{lem:W-conditions} and
+Lemma~\ref{lem:struct} apply verbatim in the new coordinates and every object involved lives
+in $\mathbb R^\ell$. The basis is obtained by column elimination on $AN$, so the entries of
+$Y_S$ have bit length $\operatorname{poly}(\mathcal L)$.
 \end{remark}
 
 \section{Rank factorization, consistency, and the finite certificate}\label{sec:certificate}
@@ -425,50 +652,51 @@ so $\mathcal T$ is unchanged and the coordinates of a free row transform by the 
 This section derives the finite certificate for the spectral condition
 \eqref{eq:5b} in three steps: a pivot factorization of the rank-$\omega$
 block, a rank-consistency test for the linear system that the factorization
-leaves, and a compression of that test to a Gram matrix whose size is the
-parameter $\kappa_{\rm obs}$.
+leaves, and a compression of that test to a Gram matrix whose size is
+governed by the parameter $\ell$ of \eqref{eq:ell}.
 
 \subsection{Rank factorization and consistency}\label{sec:consistency}
 
 \paragraph*{Pivot factorization}\label{sec:pivot}
 Let $\omega>0$. For a rank-$\omega$ matrix $H$ choose a pivot index set
 $J_{p}\subseteq[k]$, $|J_{p}|=\omega$, such that
-\[
+\begin{equation*}
 X=H_{:,J_{p}}\in\mathbb R^{q\times\omega}
-\]
+\end{equation*}
 has full column rank. Then
-\[
+\begin{equation*}
 H=XB,\qquad B\in\mathbb R^{\omega\times k},\qquad B_{:,J_p}=I_\omega .
-\]
-If $H_A=FH$, put
-\[
-G=FX\in\mathbb R^{q\times\omega}.
-\]
+\end{equation*}
+If $H_A=FH$, put $G=FX\in\mathbb R^{q\times\omega}$.
 Then
-\[
+\begin{equation*}
 H_A=GB,\qquad P(\lambda)=(\lambda X-G)B .
-\]
+\end{equation*}
 Conversely, if $H_A=GB$ and $X_LX=I_\omega$, where $X_L$ denotes a left
 inverse of $X$, then $F=GX_L$ satisfies
-\[
+\begin{equation*}
 FH=GX_LXB=GB=H_A .
-\]
+\end{equation*}
 
 \paragraph*{Parametric linear system}\label{sec:param}
-Let $D$ be a rational matrix with $\ker D=\mathcal T$. For each fixed row
-$i$,
-\[
-X_iB=h_i^0,\qquad G_iB=g_i^0,
-\]
-and every free row satisfies
-\[
+Let $D$ be a rational matrix with $\ker D=\mathcal T$. For any fixed row index 
+$i$, the parameter matrix $B$ is subject to the target constraints
+\begin{equation*}
+X_iB=h_i^0\in\mathbb R^{1\times k},\qquad G_iB=g_i^0\in\mathbb R^{1\times k},
+\end{equation*}
+as well as the structural constraint
+\begin{equation*}
 D\begin{bmatrix}(X_iB)^{\mathsf T}\\ (G_iB)^{\mathsf T}\end{bmatrix}=0.
-\]
-After substituting $B_{:,J_p}=I_\omega$, these equations are linear in the
-remaining entries $b$ of $B$ and read
-\[
+\end{equation*}
+which ensures that the generated row pairs belong to the attainable subspace $\mathcal T$.
+
+Given the pivot factorization condition $B_{:,J_p}=I_\omega$, the known entries of 
+$B$ can be eliminated. Let $b$ denote the vectorization of the remaining unknown entries of $B$. The above constraints then reduce to a standard linear system:
+
+
+\begin{equation*}
 M(X,G)b=c(X,G).
-\]
+\end{equation*}
 
 \begin{lem}[Rank consistency]\label{lem:rankcons}
 	For real matrices $M,c$,
@@ -491,45 +719,22 @@ M(X,G)b=c(X,G).
 \end{lem}
 
 \begin{proof}
-	The equation $Mb=c$ is consistent if and only if
-	$c\in\operatorname{im}M$, and
-	\[
-	\operatorname{im}[M\ c]=\operatorname{im}M+\operatorname{span}\{c\},
-	\]
-	hence
-	\[
-	\begin{aligned}
-	c\in\operatorname{im}M
-	&\iff \operatorname{im}[M\ c]=\operatorname{im}M\\
-	&\iff \operatorname{rank}[M\ c]=\operatorname{rank}M .
-	\end{aligned}
-	\]
-	Because $\operatorname{im}\Gamma=\operatorname{im}M$ and
-	$\operatorname{im}\Gamma'=\operatorname{im}[M\ c]$, the last equality
-	is exactly the equality of the two ranks displayed in the statement.
-
-	For a positive semidefinite matrix $\Gamma$,
-	\[
-	e_j(\Gamma)=\sum_{|I|=j}\det\Gamma_{I,I},
-	\]
-	and every principal minor of $\Gamma$ is nonnegative, so
-	\[
-	\begin{aligned}
-	e_j(\Gamma)=0
-	&\iff \text{all } j\times j \text{ principal minors of } \Gamma
-	\text{ vanish}\\
-	&\iff \operatorname{rank}\Gamma<j .
-	\end{aligned}
-	\]
-	Consequently
-	\[
-	e_t(\Gamma)>0\ \wedge\ e_{t+1}(\Gamma)=0
-	\iff \operatorname{rank}\Gamma=t ,
-	\]
-	whereas $e_{t+1}(\Gamma')=0$ forces $\operatorname{rank}\Gamma'\le t$,
-	while $\Gamma'\succeq\Gamma$ gives the reverse inequality. Thus the
-	displayed disjunction is equivalent to
-	$\operatorname{rank}\Gamma=\operatorname{rank}\Gamma'$.
+The equation $Mb=c$ is consistent if and only if $c\in\operatorname{im}M$, which is the classical
+consistency criterion for linear systems, $\operatorname{rank}[M\ c]=\operatorname{rank}M$
+\cite[Ch.~0]{hj13}. Since
+\[
+\begin{gathered}
+\operatorname{im}[M\ c]=\operatorname{im}M+\operatorname{span}\{c\},\qquad
+\operatorname{im}(MM^{\mathsf T})=\operatorname{im}M,\\
+\operatorname{im}(MM^{\mathsf T}+cc^{\mathsf T})=\operatorname{im}[M\ c],
+\end{gathered}
+\]
+the two rank equalities of the statement describe the same condition. For a positive semidefinite
+$\Gamma$ the elementary symmetric functions of its eigenvalues satisfy
+$e_j(\Gamma)>0\iff\operatorname{rank}\Gamma\ge j$ \cite[Ch.~4]{hj13}, so the displayed disjunction
+holds exactly when $t=\operatorname{rank}(MM^{\mathsf T})$, and
+$e_{t+1}(\Gamma')=0$ together with $\Gamma'\succeq\Gamma$ forces
+$\operatorname{rank}(MM^{\mathsf T}+cc^{\mathsf T})=t$.
 \end{proof}
 
 \paragraph*{Spectral reduction}\label{sec:spectral}
@@ -581,8 +786,9 @@ Thus \eqref{eq:5b} is equivalent to
 	\text{that is,}\quad h(\alpha_j)\neq0\quad (j=1,\dots,m).
 	\end{gathered}
 	\]
-	Then $g$ and $h$ have no common root and are therefore coprime, so the
-	two-polynomial B\'ezout identity yields $u,v\in\mathbb R[\lambda]$ with
+	Then $g$ and $h$ have no common root and are therefore coprime, so the two-polynomial
+	B\'ezout identity with degree bounds \cite[Ch.~3]{vzgg13} yields
+	$u,v\in\mathbb R[\lambda]$ with
 	\[
 	\begin{gathered}
 	ug+vh=1,\\
@@ -685,12 +891,18 @@ Thus \eqref{eq:5b} is equivalent to
 \end{proof}
 
 \paragraph*{Cauchy--Binet compression}\label{sec:cb}
-Define
+Work in the coordinates of Remark~\ref{rem:YS}, in which the first $\ell$ vectors are a basis of
+$S=\operatorname{row}(AN)$ and the remaining $k-\ell$ ones span a complement. For a feasible $W$ the
+two projections coincide and lie in $S$ (Lemma~\ref{lem:struct}), so every row of $H=LN$ and of
+$H_A=LAN$ belongs to $S$; hence in these coordinates the last $k-\ell$ columns of $P(\lambda)=\lambda
+H-H_A$ vanish, and a nonzero minor uses only the $\ell$ columns of $S$. Accordingly define
 \[
 K(\lambda,\mu)=\sum_{|J|=\omega}
 \det\left(P(\lambda)_{:,J}^{\mathsf T}P(\mu)_{:,J}\right),
 \]
-where $J\subseteq[k]$. For each fixed column set $J$, Cauchy--Binet applied
+where $J\subseteq[\ell]$; only balanced column sets matter, since a column set meeting the
+complement of $S$ gives a zero determinant. For each fixed column set $J$, the Cauchy--Binet identity
+\cite[Ch.~0]{hj13} applied
 to the $\omega\times q$ matrix $P(\lambda)_{:,J}^{\mathsf T}$ and the
 $q\times\omega$ matrix $P(\mu)_{:,J}$ gives
 \[
@@ -701,7 +913,7 @@ f_{I,J}(\lambda)f_{I,J}(\mu),
 where $f_{I,J}$ is the minor on rows $I$ and columns $J$. Summing over $J$,
 \[
 K(\lambda,\mu)=\sum_{\substack{I\subseteq[q]\\ |I|=\omega}}
-\sum_{\substack{J\subseteq[k]\\ |J|=\omega}}
+\sum_{\substack{J\subseteq[\ell]\\ |J|=\omega}}
 f_{I,J}(\lambda)f_{I,J}(\mu),
 \]
 the Gram kernel of \textbf{all} maximal minors of $P$.
@@ -709,8 +921,8 @@ the Gram kernel of \textbf{all} maximal minors of $P$.
 Three consequences are used below.
 \begin{enumerate}[label=(\roman*)]
 	\item\label{item:cost} \emph{Cost.} Computing $K$ needs only
-	$\binom{k}{\omega}\le2^{\kappa_{\rm obs}}$ determinants of order
-	$\omega$, one per column set $J$; the
+	$\binom{\ell}{\omega}\le2^{\ell}$ determinants of order $\omega$, one per
+	column set $J$ of the $\ell$-dimensional space $S$ of \eqref{eq:ell}; the
 	$\binom q\omega\binom k\omega$ individual minors are never enumerated,
 	and no hidden enumeration replaces them.
 	\item\label{item:coef} \emph{Coefficient identity.} Writing $S_{a,b}$
@@ -896,7 +1108,7 @@ Quantity & Bound \\
 real variables $N$ & $2q\omega+2\omega\le2q^2+2q$ \\
 pivot charts & $(q+1)k^q$ \\
 rank-consistency branches $t$ & $O(k)$, one per possible rank \\
-number of sign conditions $s$ & $O(k^2)$ \\
+number of polynomials $s$ (each counted once) & $O(k^2)$ \\
 maximum degree $D$ & $O(k)$ \\
 coefficient bit length $B$ & $\operatorname{poly}(n,\mathcal L)$ \\
 construction size & $k^{O(q^2)}\operatorname{poly}(\mathcal L)$ \\
@@ -950,14 +1162,16 @@ and contains the $r_0$ rows of $L_0$.
 
 \section{The fixed-parameter algorithm}\label{sec:fpt}
 
-The decision procedure underlying Theorem~\ref{thm:fpt} is
-Algorithm~\ref{alg:fpt}. It quantifies over the $\kappa_{\rm obs}$ free-row
-coordinates of \eqref{eq:kappa} and over the certificate of
-Lemma~\ref{lem:window}; the only non-polynomial factor is the number
-$\kappa_{\rm obs}$ of those coordinates.
+By Proposition~\ref{prop:minorder} a feasible observer is a subspace $W$ with
+$W_0\subseteq W\subseteq\mathcal T$, $\dim(W/W_0)\le r$, and the two conditions of
+Lemma~\ref{lem:W-conditions}. Lemma~\ref{lem:struct} confines the feasible $W$ to
+$\omega+1\le\dim W\le2\omega$ with $\omega\le\ell$, and Remark~\ref{rem:YS} puts every object in
+$\mathbb R^\ell$. The algorithm therefore quantifies over a chart of a Grassmannian of dimension
+at most $2\ell$ and over the $2\omega$ certificate variables, and the only non-polynomial factor
+is the parameter $\ell=\operatorname{rank}(AN)$, which by \eqref{eq:ell} does not involve $r$.
 
 \begin{algorithm}[!t]
-\caption{Deciding $\mathrm{DEC}(q)$ in time $f(\kappa_{\rm obs})\operatorname{poly}(\mathcal L)$}
+\caption{Deciding $\mathrm{DEC}(q)$ in time $f(\ell)\operatorname{poly}(\mathcal L)$}
 \label{alg:fpt}
 \begin{algorithmic}[1]
 \Require $A,C,L_0,q$ as above; $r=q-r_0$.
@@ -965,20 +1179,38 @@ $\kappa_{\rm obs}$ of those coordinates.
 \If{$r=0$}
   \State \Return the exact test of Proposition~\ref{prop:zero} on $L=L_0$
 \EndIf
-\State $N\gets$ basis of $\ker[C;CA]$;\quad $d_0\gets\operatorname{rank}[N\ AN]$;\quad
-$\kappa_{\rm obs}\gets rd_0$
-\State choose a rational basis $T$ of $\mathcal T=\operatorname{row}[N\ AN]$
-\State introduce $t\in\mathbb R^{\kappa_{\rm obs}}$, the coordinates of the $r$ free rows in $T$
-\State $H(t)\gets[L_0;R(t)]N$ and $H_A(t)\gets[L_0;R(t)]AN$
-\For{$\omega=0$ \textbf{to} $\min(q,k)$}
-  \State form $\Psi_\omega(t,x)$ with
-  \Statex \quad (i) $e_\omega(G_H)>0$ and $e_{\omega+1}(G_S)=0$, where
-           $G_H=H^{\mathsf T}H$ and $G_S=H^{\mathsf T}H+H_A^{\mathsf T}H_A$;
-  \Statex \quad (ii) $Z^{\mathsf T}Zx=e_0$, with $Z^{\mathsf T}Z$ computed from the kernel
-           $K(\lambda,\mu)$ by Cauchy--Binet (Lemma~\ref{lem:window}).
-  \If{$\Psi_\omega$ is real-feasible}
-    \State \Return \textsc{feasible}
-  \EndIf
+\If{$q<q_0$}
+  \State \Return \textsc{infeasible}
+  \Statex \quad \textup{(the algebraic lower bound \eqref{eq:range})}
+\EndIf
+\State $N\gets$ basis of $\ker[C;CA]$;\quad $M\gets[N\ AN]$;\quad
+$S\gets\operatorname{row}(AN)$;\quad $\ell\gets\operatorname{rank}(AN)$
+\State $W_0\gets\operatorname{row}(L_0M)$;\quad
+$\mathcal V\gets\mathcal T\cap(S\times S)$
+\If{$W_0\not\subseteq\mathcal V$}
+  \State \Return \textsc{infeasible}
+  \Statex \quad \textup{(necessary: every feasible $W$ satisfies $W_0\subseteq W\subseteq S\times S$)}
+\EndIf
+\If{$W_0=0$}
+  \State \Return \textsc{feasible}
+  \Statex \quad \textup{(the $\omega=0$ branch: $W=0$ is realized by $R=0$)}
+\EndIf
+\State $s_0\gets\dim W_0$;\quad $m'\gets\dim\mathcal V-s_0$
+\For{$t=0$ \textbf{to} $\min(r,2\ell)$}
+  \For{each chart of $\mathrm{Gr}(t,m')$ with chart coordinates $Y\in\mathbb R^{t\times(m'-t)}$}
+    \State $H(Y)\gets$ first block of $Z(Y)$;\quad $G(Y)\gets$ second block
+    \For{$\omega=1$ \textbf{to} $\ell$}
+      \State form $\Psi_{t,\omega}(Y,x)$ with
+      \Statex \quad (i) $\sigma_\omega(HH^{\mathsf T})>0$ and
+               $\sigma_{\omega+1}\bigl([H;G][H;G]^{\mathsf T}\bigr)=0$;
+      \Statex \quad (ii) $B(Y)^{\mathsf T}B(Y)x=\mathbf e_1$, with $B^{\mathsf T}B$ computed
+               from the kernel $K(\lambda,\mu)$ by Cauchy--Binet (Lemma~\ref{lem:window}) over the
+               $\ell$ columns of $S$.
+      \If{$\Psi_{t,\omega}$ is real-feasible}
+        \State \Return \textsc{feasible}
+      \EndIf
+    \EndFor
+  \EndFor
 \EndFor
 \State \Return \textsc{infeasible}
 \end{algorithmic}
@@ -986,88 +1218,192 @@ $\kappa_{\rm obs}\gets rd_0$
 
 \begin{thm}\label{thm:fpt}
 For rational input and every $r\ge0$, $\mathrm{DEC}$ is decidable in
-$f(\kappa_{\rm obs})\operatorname{poly}(\mathcal L)$ bit operations, where
-$\kappa_{\rm obs}=r\operatorname{rank}[N\ AN]=r d_0$ is the effective dimension
-of \eqref{eq:kappa} and $r$ is the number of free observer rows. For $r=0$ the
-bound sharpens to $\operatorname{poly}(\mathcal L)$.
+\begin{equation}\label{eq:fpt-l}
+\exp\bigl(O(\ell^2\log(\ell+2))\bigr)\operatorname{poly}(\mathcal L)
+\end{equation}
+bit operations, where $\ell=\operatorname{rank}(AN)\le k$ does not depend on the number $r$ of
+free observer rows. For $r=0$ the bound sharpens to $\operatorname{poly}(\mathcal L)$.
 \end{thm}
 
 \begin{proof}
-The two cases are separated, because the free-row parametrization degenerates
-at $r=0$.
+The case $r=0$ is Proposition~\ref{prop:zero}. For $r\ge1$ the argument has six steps.
 
-\emph{Case $r=0$.} There are no free rows, hence $L=L_0$ is fixed and
-$\kappa_{\rm obs}=0$, and Proposition~\ref{prop:zero} decides \eqref{eq:5a} and
-\eqref{eq:5b} for this single $L$ in $\operatorname{poly}(n,\mathcal L)$ bit
-operations.
+\emph{(i) Reduction to a subspace.} By Lemma~\ref{lem:sandwich} a feasible free block exists if and
+only if some feasible $W$ satisfies $W_0\subseteq W\subseteq\mathcal T$ and
+$\dim(W/W_0)\le r$, and by Lemma~\ref{lem:monotone} the bound $r$ can be saturated; it is therefore
+enough to range $t=\dim(W/W_0)$ over $0,\dots,\min(r,2\ell)$ and to test each $t$ once.
 
-\emph{Case $r\ge1$.} The $r$ free rows are parametrized by the
-$\kappa_{\rm obs}$ real coordinates $t$ of \eqref{eq:kappa}. For each
-$\omega=0,\dots,\min(q,k)$, form
-\begin{equation*}
-H(t)=[L_0;R(t)]N,\qquad H_A(t)=[L_0;R(t)]AN,
-\end{equation*}
-and impose
-\begin{equation*}
-\begin{gathered}
-G_H=H^{\mathsf T}H,\qquad G_S=H^{\mathsf T}H+H_A^{\mathsf T}H_A,\\
-e_\omega(G_H)>0,\qquad e_{\omega+1}(G_S)=0,
-\end{gathered}
-\end{equation*}
-together with the $2\omega$-variable certificate
-\begin{equation*}
-Z^{\mathsf T}Zx=e_0,\qquad x\in\mathbb R^{2\omega},
-\end{equation*}
-of Lemma~\ref{lem:window}, where $Z$ is built from the maximal minors of
-$P(\lambda)=\lambda H(t)-H_A(t)$ and $Z^{\mathsf T}Z$ is computed from
-$K(\lambda,\mu)$ by Cauchy--Binet. At $\omega=0$ the branch is the one of
-Section~\ref{sec:deg}: there $H=0$, \eqref{eq:5b} reads $H_A=0$, and
-Lemma~\ref{lem:window} is not applied.
+\emph{(ii) The inclusion test is necessary.} If $\pi_1(W)=\pi_2(W)=U\subseteq S$
+(Lemma~\ref{lem:struct}), then $W\subseteq U\times U\subseteq S\times S$, and $W\subseteq\mathcal T$
+by Lemma~\ref{lem:sandwich}; hence $W_0\subseteq W\subseteq\mathcal V=\mathcal T\cap(S\times S)$.
+The test at the head of the algorithm therefore rejects no feasible instance, and it is what makes
+$m'=\dim\mathcal V-s_0$ a nonnegative number.
 
-If a feasible $L=[L_0;R]$ exists, let $t$ be the coordinates of its free rows;
-then $H=LN$ and $H_A=LAN$, the Gram conditions encode \eqref{eq:5a} through the
-positivity of elementary symmetric functions, and the certificate encodes
-\eqref{eq:5b} by Lemma~\ref{lem:window}.
+\emph{(iii) The bound $\omega\le\ell$ and $t\le2\ell$.} Since $U\subseteq S$ we have
+$\omega=\dim U\le\ell$, and by Lemma~\ref{lem:struct} $\dim W\le2\omega\le2\ell$, so
+$t\le2\ell$.
 
-Conversely, if the formula is true for some $t$, define $L$ by taking $L_0$ and,
-for each free row pair in $\mathcal T$, a preimage under $[N\ AN]$; then $H=LN$
-and $H_A=LAN$. The two Gram conditions give $\operatorname{rank}H=\omega$ and
-$\operatorname{row}H_A\subseteq\operatorname{row}H$, hence \eqref{eq:5a} by
-Lemma~\ref{lem:compression}(i), and the certificate gives \eqref{eq:5b} by
-Lemma~\ref{lem:window}. The formula is therefore equivalent to feasibility.
+\emph{(iv) The charts exhaust the candidates.} Every $W$ with
+$W_0\subseteq W\subseteq\mathcal V$ maps to a subspace $W/W_0$ of $\mathcal V/W_0$ of dimension
+$t$, hence lies in one of the charts of $\mathrm{Gr}(t,m')$ that the algorithm enumerates.
 
-The quantified variables and the data of the real-feasibility problem are
-\begin{equation}\label{eq:nvar}
-\begin{aligned}
-N&=\kappa_{\rm obs}+2\omega\le3\kappa_{\rm obs}=f(\kappa_{\rm obs}),\\
-s&=2\omega+O(1)=f(\kappa_{\rm obs}),\qquad
-D=\kappa_{\rm obs}+1=f(\kappa_{\rm obs}),\\
-B&=f(\kappa_{\rm obs})\operatorname{poly}(\mathcal L),
-\end{aligned}
+\emph{(v) The formula characterizes the two conditions.} Within a chart, $\Psi_{t,\omega}$ is
+satisfiable exactly when the row space of $Z(Y)$ satisfies \eqref{eq:5a} with
+$\operatorname{rank}H=\omega$ and \eqref{eq:5b}, by Lemma~\ref{lem:compression} and
+Lemma~\ref{lem:window}.
+
+Fix $t$. By Lemma~\ref{lem:struct} and Remark~\ref{rem:YS} a feasible $W$ of quotient dimension
+$t$ is a point of the Grassmannian $\mathrm{Gr}(t,m')$ with $m'\le2\ell-s_0$, written in the chart
+coordinates $Y\in\mathbb R^{t\times(m'-t)}$ as the row space of $Z(Y)=[E_0;[I_t\mid Y]E_Q]$, which
+contains $W_0$ by construction. The chart count is
+\begin{equation}\label{eq:charts}
+\sum_{t}\binom{m'}{t}=2^{m'}\le4^{\ell}.
 \end{equation}
-where the discrete choice of $\omega$ is a finite disjunction, not an
-existential real variable, and $B$ is the coefficient bit length of
-Lemma~\ref{lem:coeff}. Substituting \eqref{eq:nvar} into the bound
-\eqref{eq:rengar} of Section~\ref{sec:bitsize} gives
+
+Within a chart and for a fixed $\omega$, the quantified variables are $Y$ and the certificate
+$x\in\mathbb R^{2\omega}$, and the data of the real-feasibility problem are
+\begin{equation}\label{eq:nvar}
+\begin{gathered}
+N=t(m'-t)+2\omega\le\tfrac{m'^2}{4}+2\omega\le\ell^2+2\ell,\\
+s=2\omega+O(1)\le2\ell+O(1),\qquad D=O(\ell),\\
+B=\operatorname{poly}(\mathcal L),
+\end{gathered}
+\end{equation}
+where the discrete choices of $t$, of the chart and of $\omega$ are finite disjunctions rather
+than real variables, and $B$ is the coefficient bit length of Lemma~\ref{lem:coeff}. The
+polynomials are those of Lemma~\ref{lem:window}: $\sigma_\omega(HH^{\mathsf T})>0$ and
+$\sigma_{\omega+1}([H;G][H;G]^{\mathsf T})=0$ encode \eqref{eq:5a} together with
+$\operatorname{rank}H=\omega$ (Lemma~\ref{lem:compression}), and $B(Y)^{\mathsf T}B(Y)x=\mathbf
+e_1$ encodes \eqref{eq:5b}. Substituting \eqref{eq:nvar} into \eqref{eq:rengar} gives, per
+chart,
 \begin{equation*}
 \begin{gathered}
 T\le B(\log B)(\log\log B)(sD)^{O(N)}\\
-=\operatorname{poly}(\mathcal L)\cdot f(\kappa_{\rm obs})^{O(\kappa_{\rm obs})}\\
-=f(\kappa_{\rm obs})\operatorname{poly}(\mathcal L),
+=\operatorname{poly}(\mathcal L)\exp\bigl(O(\ell^2\log(\ell+2))\bigr),
 \end{gathered}
 \end{equation*}
-bit operations, which is the stated bound.
+and multiplying by the chart count \eqref{eq:charts} absorbs $\exp(O(\ell))$ into the same
+exponential. The total is \eqref{eq:fpt-l}.
+
+\emph{(vi) Conclusion.} By (iv) every feasible $W$ is reached, and by (v) the formula accepts exactly
+those $W$ that satisfy the two conditions, so the algorithm accepts if and only if a feasible observer
+exists.
 \end{proof}
 
 \begin{cor}\label{cor:arith}
-The same algorithm uses $f(\kappa_{\rm obs})\operatorname{poly}(\mathcal L)$
+The same algorithm uses $\exp\bigl(O(\ell^2\log(\ell+2))\bigr)\operatorname{poly}(\mathcal L)$
 arithmetic operations.
 \end{cor}
 
+\subsection{Minimum order and construction}\label{sec:optfind}
+
+\begin{cor}[$\mathrm{OPT}$]\label{cor:opt}
+$\mathrm{OPT}$ is decidable in $\exp\bigl(O(\ell^2\log(\ell+2))\bigr)\operatorname{poly}(\mathcal L)$
+bit operations.
+\end{cor}
+
+Algorithm~\ref{alg:opt} makes the search explicit: $\mathrm{DEC}$ is used as a subroutine, and the
+monotonicity of Lemma~\ref{lem:monotone} is what makes a binary search correct.
+
+\begin{algorithm}[!t]
+\caption{Minimum order $\mathrm{OPT}$, with $\mathrm{DEC}$ as a subroutine}
+\label{alg:opt}
+\begin{algorithmic}[1]
+\Require $A,C,L_0,Q$; \ $\ell=\operatorname{rank}(AN)$; \ $r_0=\operatorname{rows}(L_0)$;
+$q_0$ as in \eqref{eq:range}.
+\Ensure $q_{\min}$, or $+\infty$ if no order up to $Q$ is feasible.
+\State $\mathit{lo}\gets\max(0,\,q_0-r_0)$
+\State $\mathit{hi}\gets\min\bigl(Q-r_0,\ n_0-p-r_0,\ 2\ell\bigr)$
+\If{$\mathit{lo}>\mathit{hi}$ \textbf{or} $\mathrm{DEC}(r_0+\mathit{hi})$ returns \textsc{infeasible}}
+  \State \Return $+\infty$
+\EndIf
+\While{$\mathit{lo}<\mathit{hi}$}
+  \State $\mathit{mid}\gets\lfloor(\mathit{lo}+\mathit{hi})/2\rfloor$
+  \If{$\mathrm{DEC}(r_0+\mathit{mid})$ returns \textsc{feasible}}
+    \State $\mathit{hi}\gets\mathit{mid}$
+  \Else
+    \State $\mathit{lo}\gets\mathit{mid}+1$
+  \EndIf
+\EndWhile
+\State \Return $r_0+\mathit{lo}$
+\end{algorithmic}
+\end{algorithm}
+
+\begin{proof}
+By Proposition~\ref{prop:minorder} $q_{\min}=r_0+t_{\min}$, and by \eqref{eq:range} and the same
+proposition $t_{\min}$ lies in $[\max(0,q_0-r_0),\,\min(Q-r_0,\,n_0-p-r_0,\,2\ell)]$; that is the
+initial interval of Algorithm~\ref{alg:opt}, so the search is confined before it starts. By
+Lemma~\ref{lem:monotone} the predicate ``$\mathrm{DEC}(r_0+t)$ holds'' is monotone in $t$, so the
+algorithm maintains the invariant that the least feasible $t$ lies in $[\mathit{lo},\mathit{hi}]$,
+halves the interval at each step, and returns $t_{\min}$ after $O(\log\ell)$ calls to the decision
+procedure of Theorem~\ref{thm:fpt}, the logarithmic factor being absorbed by \eqref{eq:fpt-l}. The
+test at the head is what distinguishes ``no feasible order up to $Q$'' from a finite answer, and it
+is correct because the predicate is upward closed.
+\end{proof}
+
+\begin{remark}[Room for improvement]\label{rem:refine}
+The complexity bound does not depend on how tightly the window is chosen, so
+Algorithm~\ref{alg:opt} uses only the published lower bound $q_0$ and the structural bound $2\ell$.
+Two cheap refinements are available and are left out on purpose, to keep the algorithm free of
+instance-specific preprocessing. First, \eqref{eq:qmin-lb} gives a lower bound that is computed in
+polynomial time from $U_0$ and $V_0$ and can be strictly larger than $q_0$; on the instance of
+Appendix~\ref{app:example} it equals $4$ while $q_0=3$. Replacing $\max(0,q_0-r_0)$ by the larger of
+the two bounds in line~2 shrinks the window without affecting correctness. Second, the structural
+bound \eqref{eq:struct} also confines $\omega$ on each chart, which prunes branches of the inner loop
+in Algorithm~\ref{alg:fpt}. Neither refinement changes any asymptotic statement, and neither is
+needed for the results above.
+\end{remark}
+
+\begin{cor}[$\mathrm{FIND}$, arithmetic model]\label{cor:find}
+If the instance is feasible, a witness $R$ can be computed in
+$\exp\bigl(O(\ell^2\log(\ell+2))\bigr)\operatorname{poly}(\mathcal L)$ arithmetic operations, as
+exact real algebraic numbers whose number and degree are $f(\ell)$.
+\end{cor}
+
+Procedure~\ref{proc:find} states the construction; step~1 is the only step that is not elementary,
+and it is a citation rather than a description.
+
+\paragraph*{Procedure FIND (arithmetic model)}\label{proc:find}
+\begin{enumerate}
+\item Solve the system $\Psi_{t,\omega}$ of Section~\ref{sec:fpt} by the sampling-point algorithm of
+\cite[Ch.~13]{bpr06}, for the least $t$ accepted by $\mathrm{DEC}$ and for some $\omega$ that
+succeeds. This returns $Y$ and $x$ as exact real algebraic numbers, with the arithmetic bound of
+\cite[Ch.~13]{bpr06}. We neither describe that algorithm nor bound its bit cost
+(Remark~\ref{rem:find-bit}).
+\item Form $W=\operatorname{row}Z(Y)$, choose a basis $w_1,\dots,w_t$ of $W/W_0$, and solve the
+rational linear systems $u_iM=w_i$ for $i=1,\dots,t$; this costs $\operatorname{poly}(\mathcal L)$ by
+Lemma~\ref{lem:rationalbasis}.
+\item Return $R=[u_1;\dots;u_t;0]$ padded with $Q-r_0-t$ zero rows.
+\end{enumerate}
+
+\begin{proof}[Proof of Corollary~\ref{cor:find}]
+Step~1 is the sampling-point bound of \cite[Ch.~13]{bpr06}: a nonempty real algebraic set defined by
+$s$ polynomials in $N$ variables of degree at most $D$ and coefficient bit length $B$ has a sample
+point whose coordinates are algebraic numbers of degree $D^{O(N)}$ with isolating intervals of bit
+length $B D^{O(N)}$; with \eqref{eq:nvar} this is $f(\ell)\operatorname{poly}(\mathcal L)$ arithmetic
+operations and $f(\ell)\operatorname{poly}(\mathcal L)$ output bits. Steps~2 and~3 are
+Lemma~\ref{lem:sandwich}: a basis of $W/W_0$ lifts to free rows by solving $uM=w$, and padding with
+zero rows realizes $W$ with exactly $t$ free rows. Since $W$ satisfies the two conditions
+(Lemma~\ref{lem:W-conditions}), the resulting $L=[L_0;R]$ does too, and its order is $r_0+t$.
+\end{proof}
+
+\begin{remark}[What is not claimed]\label{rem:find-bit}
+Corollary~\ref{cor:find} is an arithmetic bound on the construction together with a bound on the
+output length. A bound in the bit model for producing the witness is not asserted: the ordinary
+analysis of \cite{bpr06} gives arithmetic operations only, and their Chapter~8 states explicitly
+that bit-length estimates do not follow from the arithmetic analysis. We therefore state
+$\mathrm{FIND}$ in the arithmetic model and leave its bit complexity open
+(Section~\ref{sec:limits}).
+\end{remark}
+
 \subsection{The bit model and the coefficient bound}\label{sec:bitsize}
 
-We use the standard bit model: the input has rational entries of total bit
-length $\mathcal L$, and $n,p,q\le n\le\mathcal L$. Renegar's Part II bit bound
+We use the standard bit model: the input has rational entries of total bit length $\mathcal L$,
+and $n,p,q\le\mathcal L$. Since only the row space of $C$ enters both conditions, we replace $C$ by
+a rational basis of its row space when it has more than $n$ rows; this preserves $\operatorname{row}C$
+and $\operatorname{row}[C;CA]$, hence $K_0$ and \eqref{eq:5a}--\eqref{eq:5b}, costs
+$\operatorname{poly}(\mathcal L)$ bit operations, and leaves an output matrix with at most $n$ rows.
+We therefore assume $p\le n$ in what follows. Renegar's Part II bit bound
 \cite{ren92} has the form
 \begin{equation}\label{eq:rengar}
 B(\log B)(\log\log B)(sD)^{O(N)},
@@ -1075,7 +1411,37 @@ B(\log B)(\log\log B)(sD)^{O(N)},
 for integer-coefficient input, where $N$ is the number of real variables, $s$
 the number of polynomials, $D$ the maximum degree, and $B$ the maximum
 coefficient bit length. The exponential factor depends only on $N$; the
-coefficient-length contribution is polynomial in $\log B$.
+coefficient-length contribution is polynomial in $\log B$. We apply it in the following
+normalization, which we state once and use throughout. (i) All coefficients are integers: every system
+is cleared of denominators beforehand, which changes neither the solution set nor the degree, and
+inflates $B$ by the common denominator only. (ii) Every equation and every inequality is counted once
+in $s$; there is no separate count for the two kinds. (iii) A strict inequality $g>0$ is replaced by
+$g\ge\varepsilon$ with one fresh variable $\varepsilon$ constrained by $\varepsilon>0$, which adds at
+most $s$ variables and leaves $s$ and $D$ as they are. (iv) The bound covers the decision only; the
+construction of the system is accounted for separately, by Lemma~\ref{lem:rationalbasis} and
+Lemma~\ref{lem:coeff}.
+
+\begin{lem}[Rational bases and annihilators]\label{lem:rationalbasis}
+Let $M\in\mathbb Q^{m\times n}$ have entries of bit length at most $\tau$, let $r=\operatorname{rank}M$
+and put $\tau_M=O\bigl(r(\tau+\log n)\bigr)$. Then a basis $N$ of $\ker M$, a basis $R$ of
+$\operatorname{row}M$, and a matrix $D$ with $\operatorname{row}D=\{x\in\mathbb Q^m:xM=0\}$ can be
+computed in $\operatorname{poly}(m,n,\tau)$ bit operations, and the entries of $N$, $R$ and $D$ have
+bit length at most $\tau_M$.
+\end{lem}
+
+\begin{proof}
+Run fraction-free Gaussian elimination on $M$ and keep the pivot rows and columns. Every entry of the
+resulting reduced row echelon form is a ratio of minors of $M$: by Cramer's rule the determinant in
+the numerator is an $s\times s$ minor with $s\le r$, and by Hadamard's inequality
+\begin{equation*}
+\operatorname{bits}\det M_{I,J}\le O\bigl(s(\tau+\log s)\bigr)=O\bigl(r(\tau+\log n)\bigr).
+\end{equation*}
+The pivot columns give $R$, the free columns give $N$ after back-substitution, and the left null
+space $D$ is obtained from the same elimination applied to $M^{\mathsf T}$; the common denominator
+is a product of at most $r$ pivot minors, which adds only $O(r\log r)$ bits. The elimination uses
+$O(mnr)$ arithmetic operations on numbers of the displayed bit length, so the total is
+$\operatorname{poly}(m,n,\tau)$ bit operations.
+\end{proof}
 
 \begin{lem}[Coefficient sizes]\label{lem:coeff}
 Let the input entries have bit length at most $\mathcal L$, and let
@@ -1084,15 +1450,15 @@ $n\le\mathcal L$. Then:
 $H,H_A,G_H,G_S$ have bit length $\operatorname{poly}(n,\mathcal L)$;
 \emph{(ii)} every maximal minor $f_i$ of $P(\lambda)=\lambda H-H_A$, and every
 coefficient of $f_i$, has bit length $\operatorname{poly}(n,\mathcal L)$;
-\emph{(iii)} the entries of $Z^{\mathsf T}Z$ and of $e_j(G_H),e_j(G_S)$ for
-$j\le\kappa_{\rm obs}+1$ have bit length
-$f(\kappa_{\rm obs})\operatorname{poly}(\mathcal L)$.
+\emph{(iii)} the entries of $Z^{\mathsf T}Z$ and of $\sigma_j(G_H),\sigma_j(G_S)$ for
+$j\le2\ell$ have bit length $f(\ell)\operatorname{poly}(\mathcal L)$.
 \end{lem}
 
 \begin{proof}
-Let $m=n^2+pn+r_0n$ be the number of rational input entries. Multiplying by the
-product of their denominators turns the input into an integer matrix
-$A_{\rm in}$ all of whose entries are bounded by $B_0$ in absolute value, where
+Let $m=n^2+pn+r_0n$ be the number of rational input entries. With $p\le n$ and $r_0\le q\le n$ this
+is $m\le3n^2=O(n^2)$, and $m\le\mathcal L$ because each entry has bit length at least one. Multiplying
+by the product of their denominators turns the input into an integer matrix $A_{\rm in}$ all of whose
+entries are bounded by $B_0$ in absolute value, where
 \begin{equation*}
 m\le3n^2=O(n^2),\qquad B_0=2^{O(m\mathcal L)}=2^{O(n^2\mathcal L)} .
 \end{equation*}
@@ -1107,14 +1473,12 @@ with $t\le n$,
 \end{equation*}
 which is $\operatorname{poly}(n,\mathcal L)$ because $n\le\mathcal L$.
 
-\emph{(i)} The kernel basis $N$ of $[C;CA]$, the row-space basis of $[N\ AN]$,
-and hence the matrix $D$ are obtained by Cramer's rule or by reduced row echelon
-form, so every entry is a ratio of such minors and the common denominator is a
-product of at most $n$ pivot minors:
-\begin{equation*}
-\operatorname{bits}N_{ij},\ \operatorname{bits}D_{ij}
-\le 2\cdot O(n^3\mathcal L)+O(\log n)=\operatorname{poly}(n,\mathcal L).
-\end{equation*}
+\emph{(i)} Apply Lemma~\ref{lem:rationalbasis} to $[C;CA]$, whose entries have bit length at most
+$\mathcal L$ and whose rank is $n-k$: the basis $N$ of $\ker[C;CA]$ has entries of bit length
+$O\bigl((n-k)(\mathcal L+\log n)\bigr)$. Applying the lemma again to $[N\ AN]$, whose entries now
+have that bit length, gives a row-space basis of $[N\ AN]$ and hence the matrix $D$, with entries of
+bit length $O\bigl(d_0((n-k)(\mathcal L+\log n)+\log k)\bigr)=\operatorname{poly}(n,\mathcal L)$;
+the two eliminations cost $\operatorname{poly}(\mathcal L)$ bit operations.
 Each entry of $H=LN$ is a sum of $n$ products of an input entry with an entry of
 $N$, and each entry of $G_H$ or $G_S$ is a sum of at most $q$ such products, so
 passing from $N$ to $H$ and then to $G_H,G_S$ adds $O(\log n)$ and then
@@ -1137,59 +1501,33 @@ coefficients:
 \end{equation*}
 
 \emph{(iii)} $Z^{\mathsf T}Z$ is a sum of at most
-$\binom{k}{\omega}\le2^{\kappa_{\rm obs}}$ terms, each a product of two
-coefficients of the $f_i$, and $e_j$ is a sum of at most
-$k^{j}\le\kappa_{\rm obs}^{\kappa_{\rm obs}}$ principal minors. A sum of $T$
-terms of bit length $b$ has bit length $b+\log T$, hence
+$\binom{\ell}{\omega}\le2^{\ell}$ terms, each a product of two coefficients of
+the $f_i$, and the elementary symmetric functions of the $2\ell\times2\ell$ Gram
+matrices are sums of at most $(2\ell)^{j}\le(2\ell)^{2\ell}$ principal minors. A
+sum of $T$ terms of bit length $b$ has bit length $b+\log T$, hence
 \begin{equation*}
 \begin{aligned}
 \operatorname{bits}(Z^{\mathsf T}Z)_{ij}
-&\le2\operatorname{poly}(n,\mathcal L)+\kappa_{\rm obs},\\
-\operatorname{bits}e_j(G_H),\ \operatorname{bits}e_j(G_S)
-&\le\operatorname{poly}(n,\mathcal L)+\kappa_{\rm obs}\log\kappa_{\rm obs},
+&\le2\operatorname{poly}(n,\mathcal L)+\ell,\\
+\operatorname{bits}\sigma_j(G_H),\ \operatorname{bits}\sigma_j(G_S)
+&\le\operatorname{poly}(n,\mathcal L)+2\ell\log(2\ell),
 \end{aligned}
 \end{equation*}
-which is $f(\kappa_{\rm obs})\operatorname{poly}(\mathcal L)$.
+which is $f(\ell)\operatorname{poly}(\mathcal L)$.
 \end{proof}
 
-It remains to count the cost of Algorithm~\ref{alg:fpt} at fixed
-$\kappa_{\rm obs}$. Assume $r\ge1$, so that
-\begin{equation*}
-k\le d_0\le\kappa_{\rm obs},\qquad j\le\omega+1\le\kappa_{\rm obs}+1,
-\end{equation*}
-the two inequalities being elementary rank-nullity bounds. The Gram matrices
-$G_H$ and $G_S$ are $k\times k$, hence of size at most
-$\kappa_{\rm obs}$, and their elementary symmetric polynomials are evaluated by
-determinant expansion in $k^{O(j)}=f(\kappa_{\rm obs})$ operations. The matrix
-$Z^{\mathsf T}Z$ is computed from the Cauchy--Binet kernel $K(\lambda,\mu)$: the
-sum has at most $\binom{k}{\omega}\le2^{\kappa_{\rm obs}}$ terms, each an
-$\omega\times\omega$ determinant, and all coefficients are rational of bit length
-$f(\kappa_{\rm obs})\operatorname{poly}(\mathcal L)$ by Lemma~\ref{lem:coeff}.
-The preprocessing therefore costs
-$f(\kappa_{\rm obs})\operatorname{poly}(\mathcal L)$ bit operations. The
-real-feasibility problem itself has
-\begin{equation*}
-\begin{gathered}
-N=\kappa_{\rm obs}+2\omega=f(\kappa_{\rm obs})\ \text{ variables},\\
-s\le2\omega+O(1)=f(\kappa_{\rm obs})\ \text{ equations},
-\end{gathered}
-\end{equation*}
-degree $D\le\kappa_{\rm obs}+1$, and coefficient bit length
-$B=f(\kappa_{\rm obs})\operatorname{poly}(\mathcal L)$, all as in
-\eqref{eq:nvar}; by \eqref{eq:rengar},
-\begin{equation*}
-B(\log B)(\log\log B)(sD)^{O(N)}
-=f(\kappa_{\rm obs})\operatorname{poly}(\mathcal L)
-\end{equation*}
-bit operations. The cases $k=0$ and $\omega=0$ are direct, and $r=0$ is decided
-separately by Proposition~\ref{prop:zero}; all degenerate cases are collected in
-Section~\ref{sec:deg}. For fixed $q$ the sharper parameter is $q$ itself, and the
-bound $\mathcal L^{O(q^2)}$ of Section~\ref{sec:fixedq} applies instead.
+It remains to say why the per-chart bound already gives \eqref{eq:fpt-l}: the enumeration of
+$t$, of the charts and of $\omega$ contributes the factors $2\ell+1$, $4^{\ell}$ and $\ell$, all
+absorbed by the exponential; every chart and every $\omega$ costs one call to the decision procedure
+of \eqref{eq:nvar}, and the rational data of each call have bit length
+$f(\ell)\operatorname{poly}(\mathcal L)$ by Lemma~\ref{lem:coeff}. The cases $k=0$ and $\omega=0$
+are treated directly in Section~\ref{sec:deg}, and $r=0$ in Section~\ref{sec:zero}. For fixed $q$
+the sharper parameter is $q$ itself, and the bound $\mathcal L^{O(q^2)}$ of
+Section~\ref{sec:fixedq} applies instead.
 
 \subsection{The zero-free-row case: an exact polynomial-time pencil test}\label{sec:zero}
 
-When $r=0$ there are no free rows: $L=L_0$ is fixed and $\kappa_{\rm obs}=0$.
-Only two conditions remain, and both are decidable without a
+For $r=0$ only two conditions remain, and both are decidable without a
 parameter-dependent search. \eqref{eq:5a} is a constant-rank test on
 $H=L_0N$, $H_A=L_0AN$ (Lemma~\ref{lem:compression}(i)); \eqref{eq:5b} is the
 constancy of the rank of the degree-one pencil $\lambda X-G$. We first isolate
@@ -1220,28 +1558,14 @@ S_{2\omega-2}X&=0 .
 \end{lem}
 
 \begin{proof}
-\emph{(i)$\Leftrightarrow$(ii).} Since $Q$ is $q\times\omega$,
-\begin{equation*}
-\operatorname{rank}Q(\lambda)<\omega
-\iff f_I(\lambda)=0\ \text{ for every } I\subseteq[q],\ |I|=\omega,
-\end{equation*}
-so a rank drop occurs exactly when all maximal minors vanish at the same point.
+\emph{(i)$\Leftrightarrow$(ii).} Since $Q(\lambda)$ is $q\times\omega$, its rank drops below
+$\omega$ exactly when every $\omega\times\omega$ minor vanishes at that point, which is the
+classical rank--minor criterion \cite[Ch.~0]{hj13}.
 
-\emph{(ii)$\Leftrightarrow$(iii).} The minors have rational coefficients and
-$\mathbb C$ is algebraically closed. A nonconstant gcd $g$ has a root
-$\alpha\in\mathbb C$, and $g\mid f_I$ gives $f_I(\alpha)=0$ for all $I$;
-conversely, if $f_I(\alpha)=0$ for all $I$, the minimal polynomial
-$m_\alpha\in\mathbb Q[\lambda]$ of $\alpha$ divides every $f_I$ and hence
-divides the gcd. Thus
-\begin{equation*}
-\begin{aligned}
-\gcd_I f_I\ \text{nonconstant}
-&\Longrightarrow\exists\alpha\in\mathbb C:\ f_I(\alpha)=0\ \ \forall I\\
-&\Longrightarrow m_\alpha\mid\gcd_I f_I ,
-\end{aligned}
-\end{equation*}
-with each implication reversible, and the clause that the minors do not all
-vanish excludes the zero gcd.
+\emph{(ii)$\Leftrightarrow$(iii).} The maximal minors have rational coefficients and are not all
+zero. Over the algebraically closed field $\mathbb C[\lambda]$, a common root of the minors is a
+root of their gcd, and a nonconstant gcd has a root; hence the minors have no common root exactly
+when their gcd is a nonzero constant \cite[Ch.~IV]{lan02}.
 
 \emph{(iii)$\Rightarrow$(iv).} This is the adjugate/B\'ezout construction of
 Appendix~\ref{app:encoding}. For each $\omega$-element row set
@@ -1438,7 +1762,8 @@ Thus $\Phi$ is a polynomial-time reduction to the existential theory of the real
 \begin{cor}\label{cor:time}
 For every $r\ge0$, the decision time in the bit model satisfies
 \begin{equation*}
-T\le\min\bigl\{\mathcal L^{O(q^2)},\ f(\kappa_{\rm obs})\operatorname{poly}(\mathcal L)\bigr\}.
+T\le\min\bigl\{\mathcal L^{O(q^2)},\
+\exp\bigl(O(\ell^2\log(\ell+2))\bigr)\operatorname{poly}(\mathcal L)\bigr\}.
 \end{equation*}
 \end{cor}
 
@@ -1447,10 +1772,13 @@ The two bounds available are those of Sections~\ref{sec:fixedq} and~\ref{sec:fpt
 \begin{equation*}
 \begin{aligned}
 T&\le\mathcal L^{O(q^2)}\quad(q\ \text{fixed}),\\
-T&\le f(\kappa_{\rm obs})\operatorname{poly}(\mathcal L)\quad(\kappa_{\rm obs}\ \text{the parameter}),
+T&\le\exp\bigl(O(\ell^2\log(\ell+2))\bigr)\operatorname{poly}(\mathcal L)
+\quad(\ell=\operatorname{rank}(AN)),
 \end{aligned}
 \end{equation*}
-and both algorithms decide the same language, so either may be run and the smaller bound applies. For $r=0$ the second bound is $\operatorname{poly}(\mathcal L)$ by the test of Section~\ref{sec:zero}.
+and both algorithms decide the same language, so either may be run and the smaller bound applies.
+For $r=0$ the second bound is $\operatorname{poly}(\mathcal L)$ by the test of
+Section~\ref{sec:zero}.
 \end{proof}
 
 
@@ -1460,9 +1788,14 @@ The two upper bounds are parameterized, and the parameter enters a different par
 \begin{equation*}
 \begin{aligned}
 T&\le\mathcal L^{O(q^2)}\quad\text{(exponent governed by }q\text{)},\\
-T&\le f(\kappa_{\rm obs})\operatorname{poly}(\mathcal L)\quad\text{(factor governed by }\kappa_{\rm obs}\text{)} .
+T&\le\exp\bigl(O(\ell^2\log(\ell+2))\bigr)\operatorname{poly}(\mathcal L)\\
+&\qquad\text{(factor governed by }\ell=\operatorname{rank}(AN)\text{)}.
 \end{aligned}
 \end{equation*}
+The second parameter does not involve the number $r$ of free rows. The same reduction
+settles the neighbouring questions: $\mathrm{OPT}$ is decided by $O(\log\ell)$ calls to the
+decision procedure, and $\mathrm{FIND}$ returns exact real algebraic numbers in the arithmetic
+model (Corollaries~\ref{cor:opt} and~\ref{cor:find}).
 The case of no free rows is decided in $\operatorname{poly}(\mathcal L)$ time by the test of Section~\ref{sec:zero}. Membership in the existential theory of the reals holds for both the prescribed-order and the threshold problem:
 \begin{equation*}
 \mathrm{DEC}(q)\in\exists\mathbb R,\qquad \mathrm{MINDEC}(Q)\in\exists\mathbb R .
@@ -1471,18 +1804,29 @@ The feasibility characterization itself is taken from \cite{fer10,dar25,fer26a,f
 
 \subsection{Limitations and what is not claimed}\label{sec:limits}
 
-We do not claim that $q1\in\mathrm P$, that $\mathrm{DEC}$ is $\exists\mathbb R$-complete, or any hardness result, and hardness and gadget constructions are outside the scope of this paper. Neither parameter is bounded in the unrestricted problem, so the two bounds are compatible with all three outcomes
+We do not claim that $\mathrm{DEC}\in\mathrm P$, that $\mathrm{DEC}$ is
+$\exists\mathbb R$-complete, or any hardness result, and hardness and gadget constructions are
+outside the scope of this paper. Neither parameter is bounded in the unrestricted problem, so the
+two bounds are compatible with all three outcomes
 \begin{equation*}
 \begin{aligned}
-&q1\in\mathrm P;\\
+&\mathrm{DEC}\in\mathrm P;\\
 &\mathrm{DEC}\ \text{is}\ \exists\mathbb R\text{-complete};\\
 &\mathrm{DEC}\ \text{has an intermediate parameterized classification},
 \end{aligned}
 \end{equation*}
-and the paper makes no claim among them; the unrestricted complexity of $\mathrm{DEC}$ remains open.
+and the paper makes no claim among them; the unrestricted complexity of $\mathrm{DEC}$ remains
+open. The three are stated for $\mathrm{DEC}$ rather than for the minimum-order problem: a
+polynomial-time algorithm for $\mathrm{DEC}$ would give one for minimum order, since
+Algorithm~\ref{alg:opt} is a binary search over $O(\log n)$ calls to $\mathrm{DEC}$.
 
-Two items remain outside the verified core.
+Three items remain outside the verified core.
 \begin{enumerate}
+\item \textbf{The bit complexity of $\mathrm{FIND}$.} Corollary~\ref{cor:find} bounds the
+arithmetic operations and the length of the output, but not the bit operations needed to
+produce it; the analysis of \cite{bpr06} that we invoke is an arithmetic one, and its Chapter~8
+states that bit-length estimates do not follow from it. A bit-model sampling-point theorem would
+be needed, and we are not aware of one.
 \item \textbf{The $r=0$ branch: resolved, with a residual audit.} For $r=0$ the two conditions reduce to a constant-rank test and to the constancy of the rank of the degree-one pencil $\lambda X-G$. Section~\ref{sec:zero} decides the latter by a finite rational linear system derived from the degree bound $2\omega-2$; the test is deterministic and exact,
 \begin{equation*}
 \text{unknowns}=\operatorname{poly}(q,\omega),\qquad
@@ -1494,88 +1838,110 @@ and it returns an explicit witness. The remaining issue is to complete the expli
 
 \subsection{The size of the parameter}\label{sec:paramsize}
 
-The parameter
-\begin{equation*}
-\kappa_{\rm obs}=r\operatorname{rank}[N\ AN]\le2rn
-\end{equation*}
-can be quadratic in $n$; when it is, the bound of Section~\ref{sec:fpt} is not useful in practice. That bound is therefore best read as a statement about the \emph{reduction}: $\mathrm{DEC}$ reduces, in time $f(\kappa_{\rm obs})\operatorname{poly}(\mathcal L)$, to a real-feasibility problem whose dimension is the number $rd_0$ of free real coordinates. Two remarks.
+Two quantities describe the free data: the number of coordinates
+\begin{equation}\label{eq:kappa-size}
+\kappa_{\rm obs}=r\,d_0\le2rn
+\end{equation}
+needed to write the $r$ free rows, and the parameter that governs the bound,
+\begin{equation}\label{eq:ell-size}
+\ell=\operatorname{rank}(AN)\le k\le n .
+\end{equation}
+The first can be quadratic in $n$; the second cannot. This is the content of the subspace
+reduction of Section~\ref{sec:subspace}: a feasible observer is a subspace $W$ of the
+compressed row-pair space, its dimension $\omega$ satisfies $\omega+1\le\dim W\le2\omega$ with
+$\omega\le\ell$, and the $r$ free rows enter only through the constraint
+$\dim(W/W_0)\le r$. The bound of Theorem~\ref{thm:fpt} therefore depends on $\ell$ and not on
+$\kappa_{\rm obs}$: the coordinate count \eqref{eq:kappa-size} records how the free rows are
+written, not how hard the instance is.
+
+Whether $\ell$ is optimal is open. Two further reductions are conceivable, and they are of
+different kinds.
 
 \begin{enumerate}
-\item \emph{The reduction is where the work is.} Building the formula needs no enumeration of the $\binom q\omega\binom k\omega$ maximal minors (Cauchy--Binet, Section~\ref{sec:cb}), no enumeration of the $r_0$ fixed rows, and no chart over $\operatorname{Gr}(\omega,k)$; the construction cost is $f(\kappa_{\rm obs})\operatorname{poly}(\mathcal L)$, which is what separates the result from the trivial statement ``$\mathrm{DEC}$ is a $\kappa_{\rm obs}$-variable real problem''.
-\item \emph{The parameter is bounded on infinite families.} Take $p=n-1$, $C=[I_{n-1}\ 0]$, and $A$ whose last column lies in $\ker C$ (so that the last column of $CA$ vanishes). Then
+\item \emph{Quotients of the observer rows.} The conditions depend on row spaces, hence are
+invariant under row operations of $L$. Those preserving $L_0$ are block lower-triangular,
 \begin{equation*}
-\begin{aligned}
-&\ker[C;CA]=\operatorname{span}\{e_n\},\qquad k=1,\\
-&d_0=\operatorname{rank}[N\ AN]\le2,
-\end{aligned}
+T=\begin{bmatrix}I_{r_0}&0\\ U&S\end{bmatrix},\qquad \det S\ne0 ,
 \end{equation*}
-and with one free row $\kappa_{\rm obs}=r d_0\le2$ while $n$ is unbounded, so Section~\ref{sec:fpt} gives $\operatorname{poly}(\mathcal L)$ time with no $n$-dependence in the exponent (checked for $n=4,\dots,8$ by exact computation).
+so two different free blocks can present the same $W$. The reduction of
+Section~\ref{sec:subspace} already quotients by this symmetry; the question is whether a
+smaller invariant than $\ell$ exists.
+\item \emph{Spectral invisibility.} One might hope to divide by directions that change neither
+the rank condition nor the finite spectrum. Such a quotient must preserve the interaction
+between $H$ and $H_A$, not only $\operatorname{rank}H$; a quotient preserving \eqref{eq:5a} but
+changing the spectrum would be invalid. We do not know whether one exists.
 \end{enumerate}
-
-Whether $\kappa_{\rm obs}$ is optimal is open, and three levels of further reduction are worth separating.
-
-\begin{enumerate}
-\item \emph{The kernel quotient.} Let $\Phi(v)=(vN,vAN)$. Then
-\begin{equation*}
-d_0=\dim\operatorname{im}\Phi
-\end{equation*}
-is already the \emph{exact} dimension of the free-pair space, so no further reduction is possible at this level.
-\item \emph{Observer-row transformations.} The conditions depend on row spaces, hence are invariant under row operations of $L$. Those preserving $L_0$ are block lower-triangular,
-\begin{equation*}
-T=\begin{bmatrix}I_{r_0}&0\\ U&S\end{bmatrix},\qquad \det S\ne0;
-\end{equation*}
-the free coordinates may therefore contain redundant presentations of the same observer subspace, and a quotient by this symmetry could lower the parameter.
-\item \emph{Spectral invisibility.} One may hope to divide by directions that change neither the rank condition nor the finite spectrum. Such a quotient must preserve the interaction between $H$ and $H_A$, not only $\operatorname{rank}H$; a quotient preserving \eqref{eq:5a} but changing the spectrum would be invalid.
-\end{enumerate}
-
-A natural first refinement is not a spectral quotient but an affine-dimension count: some free-row directions may already be constrained by the fixed rows $L_0$, and the effective rank of the free-row map after imposing the fixed-row equations could be strictly smaller than $rd_0$. This is the first step to take; the existence of a spectral quotient, and the optimality of $\kappa_{\rm obs}$, are open.
 
 \paragraph*{Growth of the parameter-dependent factor}
 Renegar's bound is $(sD)^{O(N)}$ with
 \begin{equation*}
-sD=\operatorname{poly}(\kappa_{\rm obs}),\qquad N=\kappa_{\rm obs}+2\omega,
+sD=O(\ell^2),\qquad N=\ell^2+2\ell ,
 \end{equation*}
-so $f(\kappa_{\rm obs})$ is roughly $\kappa_{\rm obs}^{O(\kappa_{\rm obs})}$. The result is primarily structural: it identifies a parameter governing the complexity bound, although the dependence on that parameter may limit practical applicability for large parameter values.
+so $f(\ell)=\exp\bigl(O(\ell^2\log(\ell+2))\bigr)$. The result is primarily structural: it
+identifies an invariant of the instance, independent of how many free rows are allowed, that
+governs the complexity bound, although the doubly exponential dependence on $\ell$ may limit
+practical applicability for large values.
 
 \subsection{Reproducibility and evidence}\label{sec:repro}
 
 The results rest on three kinds of evidence, and the accompanying artifact records which statement rests on which.
 
 \begin{enumerate}
-\item \emph{Lean~4 with Mathlib.} The compression identity, the compression criterion, the space of attainable row pairs, the rank-consistency criterion, the B\'ezout core of the certificate, the degree-bounded B\'ezout lemma, the hyperplane-avoidance step of its argument, the rectangular left inverse built from the adjugate together with its degree bound, the determinant and adjugate degree estimates, and the implication from the coefficient system \eqref{eq:R0} to a polynomial left inverse, the matrix-product coefficient identity, and the matrix forms of the rank identity and of the rank-consistency criterion are formalized, and every declaration is checked by the kernel against only the three standard axioms (\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}).
+\item \emph{Lean~4 with Mathlib.} The statements marked \emph{literal} in
+Table~\ref{tab:evidence} are formalized as stated, including the rank identity
+\eqref{eq:rankid}, the rank-consistency criterion, the degree-bounded B\'ezout lemma, the
+rectangular left inverse with its degree bound, and the sandwich and structural estimates of
+Section~\ref{sec:subspace}; those marked \emph{abstract core} are formalized at the level of
+linear maps and submodules, with the translation to matrices left to the paper; the single
+\emph{ingredient} is one step of the proof of the certificate. Every declaration is checked by the
+kernel against only the three standard axioms (\texttt{propext}, \texttt{Classical.choice},
+\texttt{Quot.sound}). The development is not a formal verification of the algorithmic theorems
+themselves: the reductions, the certificate and the complexity accounting are paper-level, and the
+formal statements cover the algebraic and linear-algebraic components listed in the table.
 \item \emph{Paper-level proofs.} The Cauchy--Binet compression of the certificate, the coefficient-size estimates and the existential-real encoding.
 \item \emph{Exact rational arithmetic.} The identities on which the constructions rest are re-checked, both on randomly generated instances and on the constructed families; this excludes arithmetic slips but does not replace the proofs.
 \end{enumerate}
 
-The Lean development and the exact-arithmetic scripts form the accompanying artifact and are kept at \url{https://github.com/Zhengshuji/q1-functional-observer}. Table~\ref{tab:evidence} gives the correspondence. The matrix-level identifications that the Lean core does not cover, namely the pencil/gcd bridge, the matrix form of $\mathcal T$, the converse step from a polynomial left inverse to the linear system \eqref{eq:R0}, and the encoding, are paper-level and are the ones re-checked by exact arithmetic.
+The Lean development and the exact-arithmetic scripts form the accompanying artifact and are kept at \url{https://github.com/Zhengshuji/q1-functional-observer}. Table~\ref{tab:evidence} gives the correspondence. The matrix-level identifications that the Lean core does not cover, namely the pencil/gcd bridge, the matrix form of $\mathcal T$, the converse step from a polynomial left inverse to the linear system \eqref{eq:R0}, and the encoding, are paper-level and are the ones re-checked by exact arithmetic. Of the classical facts invoked by citation above, the rank identity of Lemma~\ref{lem:rankid}, the solvability criterion of Lemma~\ref{lem:rankcons} and the coprimality and degree-bounded B\'ezout steps of Lemma~\ref{lem:bezout} are also proved in the artifact, so for those three the citation serves only to keep the paper's proofs short; the remaining cited facts are used as references and are not formalized.
 
 \begin{table*}[!t]
 \centering
-\caption{Where each statement of the paper is verified.}\label{tab:evidence}
+\caption{Where each statement of the paper is verified. \emph{Literal}: the Lean statement is the
+statement of the paper. \emph{Abstract core}: the Lean statement is the linear-map or submodule
+version, and the translation to matrices is paper-level. \emph{Ingredient}: one step of the proof,
+not the statement. Statements not listed are paper-level throughout.}
+\label{tab:evidence}
 \footnotesize
 \begin{tabular}{@{}lll@{}}
 \toprule
-Statement & Evidence & Formal name \\
+Statement & Lean evidence & Formal name \\
 \midrule
-Rank identity (Lemma~\ref{lem:rankid}), \eqref{eq:rankid} & Lean core, matrix form &
+Rank identity (Lemma~\ref{lem:rankid}), \eqref{eq:rankid} & literal &
 \texttt{rank\_vstack\_add\_rank\_mul} \\
-Compression criterion (Lemma~\ref{lem:compression}) & Lean core & \texttt{ker\_compressed\_iff} \\
-Space of row pairs (Lemma~\ref{lem:attainable}) & Lean core & \texttt{freePairSpace},
+Compression criterion (Lemma~\ref{lem:compression}) & abstract core &
+\texttt{ker\_compressed\_iff} \\
+Space of row pairs (Lemma~\ref{lem:attainable}) & abstract core & \texttt{freePairSpace},
 \texttt{kappaObs\_eq\_mul\_freePairSpace} \\
-Rank consistency (Lemma~\ref{lem:rankcons}) & Lean core, matrix form &
+Sandwich and realizability (Lemma~\ref{lem:sandwich}) & literal &
+\texttt{rowSpan\_fromRows\_left}, \texttt{mem\_rowSpan\_iff\_exists\_vecMul} \\
+Conditions depend on $W$ (Lemma~\ref{lem:W-conditions}) & abstract core &
+\texttt{rank\_fromRows\_eq\_rank\_iff}, \texttt{rowSpace\_eq} \\
+Structural bound, upper half (Lemma~\ref{lem:struct}) & literal &
+\texttt{finrank\_le\_two\_mul\_of\_pi1\_eq\_pi2} \\
+Rank consistency (Lemma~\ref{lem:rankcons}) & literal &
 \texttt{exists\_mulVec\_eq\_iff\_rank\_gram} \\
-B\'ezout with degree bound (Lemma~\ref{lem:bezout}) & Lean core & \texttt{exists\_bezout\_family} \\
-Rectangular left inverse (Proposition~\ref{prop:zero}) & Lean core &
+B\'ezout with degree bound (Lemma~\ref{lem:bezout}) & literal & \texttt{exists\_bezout\_family} \\
+Rectangular left inverse (Proposition~\ref{prop:zero}) & literal &
 \texttt{exists\_leftInverse\_linear} \\
-Gram certificate, kernel identity (Proposition~\ref{prop:gram}) & Lean core &
+Gram certificate, kernel identity (Proposition~\ref{prop:gram}) & ingredient &
 \texttt{sum\_sq\_zero\_iff} \\
-Coefficient system \eqref{eq:R0} $\Rightarrow$ left inverse & Lean core &
+Coefficient system \eqref{eq:R0} $\Rightarrow$ left inverse & literal (one direction) &
 \texttt{spoly\_mul\_pencil\_eq\_one} \\
-Matrix-product coefficients & Lean core & \texttt{coeff\_mul\_apply} \\
-Degree bounds $\deg\det$, $\deg\operatorname{adj}$ & Lean core &
+Matrix-product coefficients & literal & \texttt{coeff\_mul\_apply} \\
+Degree bounds $\deg\det$, $\deg\operatorname{adj}$ & literal &
 \texttt{natDegree\_det\_le}, \texttt{natDegree\_adjugate\_le} \\
-Zero-free-row test (Section~\ref{sec:zero}) & proof, exact check & --- \\
-Encoding (Theorem~\ref{thm:existsr}) & proof, witness check & --- \\
+Zero-free-row test (Section~\ref{sec:zero}) & paper-level & --- \\
+Encoding (Theorem~\ref{thm:existsr}) & paper-level & --- \\
 \bottomrule
 \end{tabular}
 \end{table*}
@@ -1596,7 +1962,8 @@ Q(\lambda)=\begin{bmatrix}\lambda\\ \lambda\end{bmatrix},\qquad
 \end{equation*}
 shows.
 
-By the univariate Quillen--Suslin/B\'ezout argument, $Q$ has rank $\omega$ at every $\lambda$ iff its maximal minors generate the unit ideal in $\mathbb C[\lambda]$, equivalently iff there is a polynomial left inverse,
+By the Quillen--Suslin/B\'ezout criterion for polynomial matrices over a principal ideal
+domain \cite{fab90,lan02}, $Q$ has rank $\omega$ at every $\lambda$ iff its maximal minors generate the unit ideal in $\mathbb C[\lambda]$, equivalently iff there is a polynomial left inverse,
 \begin{equation*}
 \begin{aligned}
 &\operatorname{rank}Q(\lambda)=\omega\ \text{ for all }\lambda\\
@@ -1684,45 +2051,148 @@ O(q\omega+\omega k+q\omega+\omega q+k\omega+(2\omega-1)\omega q)
 \end{equation}
 the number of equations is polynomial, and the degree of the left inverse is $2\omega-2\le2n$. The disjunction \eqref{eq:existsr-disj} over $\omega$ has at most $n+1$ branches. Hence the encoding has polynomial size. This proves $\mathrm{DEC}(q)\in\exists\mathbb R$ for every fixed $q$, and hence $\mathrm{MINDEC}(Q)\in\exists\mathbb R$.
 
+\section{A worked example}\label{app:example}
+
+We run the procedure on the instance of \cite[Sec.~VII]{fer26b}, which has $n=8$, $p=2$ and
+\begin{equation*}
+\begin{gathered}
+C=\begin{bmatrix}-2&-2&2&-2&-1&0&1&-3\\ 0&0&1&2&2&3&-1&-2\end{bmatrix},\\
+L_0=\begin{bmatrix}-2&-1&-2&-3&-1&3&2&0\\ 1&-1&-2&1&0&2&0&1\end{bmatrix},
+\end{gathered}
+\end{equation*}
+and
+\begin{equation*}
+A=\begin{bmatrix}
+0&1&0&1&0&0&0&0\\
+0&-1&1&0&0&0&0&-1\\
+1&0&-1&1&0&0&1&-1\\
+-1&-1&0&-2&0&0&0&0\\
+0&0&0&0&-2&0&0&1\\
+0&0&0&0&0&-2&1&0\\
+0&0&0&0&0&-1&-2&1\\
+0&0&0&0&0&0&1&-2
+\end{bmatrix}.
+\end{equation*}
+The compression of Section~\ref{sec:dimension} gives
+\begin{equation*}
+\begin{gathered}
+k=\dim\ker[C;CA]=4,\qquad d_0=\operatorname{rank}[N\ AN]=6,\\
+s_0=\dim\operatorname{row}(L_0M)=2,
+\end{gathered}
+\end{equation*}
+and, in the notation of \eqref{eq:ell},
+\begin{equation*}
+S=\operatorname{row}(AN)=\mathbb R^4,\qquad \ell=4,\qquad m'=4 .
+\end{equation*}
+Here $\ell=k$, so the subspace reduction is vacuous and the content of the example is the
+certificate alone. The coordinate count is $\kappa_{\rm obs}=rd_0=12$ already at $r=2$, whereas
+the parameter of Theorem~\ref{thm:fpt} is $\ell=4$.
+
+At $t=2$, that is at order $q=r_0+t=4$, the procedure of Section~\ref{sec:fpt} accepts. An explicit
+witness is the four-row observer matrix $L=[L_0;R]$ with
+\begin{equation*}
+R=\begin{bmatrix}
+-\tfrac{42919}{32067} & -\tfrac{55096}{10689} & 1 & 0 & 0 & 0 & 0 & 0\\
+\tfrac{3283}{4581} & \tfrac{118}{1527} & 0 & 1 & 0 & 0 & 0 & 0
+\end{bmatrix}.
+\end{equation*}
+For this matrix,
+\begin{equation*}
+\operatorname{rank}[L;CA;C]=7=\operatorname{rank}[LA;L;CA;C],
+\end{equation*}
+which is \eqref{eq:5a}. The pencil $[\lambda L-LA;\,CA;\,C]$ is $8\times8$; all $64$ of its maximal
+minors are nonzero and their gcd is $1$, while every larger minor vanishes, so its rank is $7$ for
+every $\lambda\in\mathbb C$, which is \eqref{eq:5b}. Hence $\mathrm{DEC}(4)$ holds and
+$q_{\min}\le4$ for this instance.
+
+We record that \cite[Sec.~VII-B]{fer26b} reports this instance as infeasible at order $4$, and
+hence $\{5,6\}$ as its order spectrum. The matrix $L$ above is a four-row witness satisfying the
+two conditions, so \emph{that report is in error}. The error is not in the characterization but in
+the way it is evaluated there: the condition-(A) family is parameterized chart by chart and a
+branch of it is missed. The formulation of Section~\ref{sec:fpt} never forms that family---it
+quantifies over the chart coordinates and the certificate jointly---which is why it cannot miss a
+branch. Nothing else in this paper depends on the discrepancy: the characterization of
+\cite{fer26b} is used only for the existence of a nullspace matrix, and the witness supplies one.
+
+\paragraph*{The two procedures on this instance}
+Write $M=[N\ AN]$ and, for the accepted $L$, $H=LN$, $H_A=LAN$.
+
+\emph{OPT.} Algorithm~\ref{alg:opt} with $Q=6$ evaluates $\mathrm{DEC}(6)$, which is feasible, so the
+answer is finite; the search interval is $[0,\min(4,2\ell)]=[0,4]$. The call at $t=2$, that is at
+order $4$, is the certificate above and accepts. The call at $t=0$, that is at $L=L_0$, rejects: for
+$L_0$ we have $\operatorname{rank}[L_0;CA;C]=6$ but $\operatorname{rank}[L_0A;L_0;CA;C]=7$, so
+\eqref{eq:5a} fails. At $t=1$, that is at order $3$, no feasible $W$ exists, and Proposition~\ref{prop:lowerbound}
+decides it without any spectral test. The two blocks of $W_0$ are $U_0=L_0N$ and $V_0=L_0AN$, with
+\begin{equation*}
+\operatorname{rank}U_0=2,\qquad \operatorname{rank}[\,U_0;\,V_0\,]=3,
+\end{equation*}
+so \eqref{eq:qmin-lb} gives $t\ge3-2+1=2$: every feasible $W$ has quotient dimension at least $2$.
+Concretely, a candidate with $t=1$ would have $\dim W=s_0+1=3$, so Lemma~\ref{lem:struct} would force
+$\omega=2$, and $\pi_1(W)=\pi_2(W)=U$ with $\dim U=\dim U_0=2$ would force $U=U_0$ and hence
+$V_0\subseteq U_0$, which fails. Therefore $\mathrm{DEC}(3)$ holds for no candidate, $\mathrm{DEC}(4)$
+holds by the certificate above, and
+
+\begin{equation*}
+q_{\min}=4
+\end{equation*}
+
+for this instance. The value $5$ reported in \cite[Sec.~VII]{fer26b} is therefore not $q_{\min}$.
+
+\emph{FIND.} For the accepted $L$ the subspace $W=\operatorname{row}[H\ H_A]$ is four-dimensional and
+$W_0=\operatorname{row}[H_0\ H_{A,0}]$ is two-dimensional, so $t=\dim(W/W_0)=2$; moreover $W_0\subseteq
+W$, and the rows $r_1M$ and $r_2M$ of the two free rows, together with the two rows of $W_0$, span
+$W$:
+\begin{equation*}
+\begin{gathered}
+\dim W=4,\qquad \dim W_0=2,\\
+\operatorname{rank}[\,W_0;\,r_1M;\,r_2M\,]=4 .
+\end{gathered}
+\end{equation*}
+Step~2 of Procedure~\ref{proc:find} is therefore realized by $u_i=r_i$, and step~3 pads with
+$Q-r_0-t=6-2-2=2$ zero rows. Only step~1 of the procedure is not exercised here, because a witness
+$W$ was found directly rather than by solving the algebraic system.
+
+The two exact rank computations of $U_0$ and $[U_0;V_0]$ are the whole of the argument at order
+$3$; they are reproduced by the script archived with the artifact, together with the rank and
+minor computations used above.
+
 \begin{thebibliography}{99}
 \bibitem{fer10} J. A. Fernando, H. Trinh, L. Jennings. Functional observability and the design of minimum order linear functional observers. \emph{IEEE Trans. Automat. Control} 55(5):1268--1273, 2010.
 \bibitem{dar25} M. Darouach, J. A. Fernando. On functional observability and functional observer design. \emph{Automatica}, vol. 173, Art. no. 112115, 2025, doi: 10.1016/j.automatica.2025.112115.
 \bibitem{fer26a} J. A. Fernando. A minimum-order functional observer beyond the Darouach and Luenberger constructions. arXiv:2609.33615, 2026 (preprint).
 \bibitem{fer26b} J. A. Fernando. Complete characterization of minimum-order functional observers from Darouach to Luenberger. arXiv:2609.37992, 2026 (preprint).
-\bibitem{ren92} J. Renegar. On the computational complexity and geometry of the first-order theory of the reals. Part II: The general decision problem. \emph{J. Symbolic Comput.} 13(3):301--327, 1992, doi: 10.1016/S0747-7171(10)80004-5.
-\bibitem{bee88} Th. Beelen, P. Van Dooren. An improved algorithm for the computation of Kronecker's canonical form of a singular pencil. \emph{Linear Algebra Appl.} 105:9--65, 1988.
-\bibitem{fab90} J.-P. Fabiano, D. C. Struppa. Degree bounds for polynomial matrix left inverses. \emph{J. Approx. Theory Appl.}, 1990.
-\bibitem{emi99} I. Z. Emiris, B. Mourrain. Matrices in elimination theory. \emph{J. Symbolic Comput.} 28(1--2):3--44, 1999, doi: 10.1006/jsco.1998.0266.
-\bibitem{nof23} V. Noferini, P. Van Dooren. On the stability of polynomial eigenvalue problems. \emph{Linear Algebra Appl.} 658, 2023.
-\bibitem{dey21} P. Dey, N. Balachandran, D. Chatterjee. Complexity of
-  constrained sensor placement problems for optimal observability.
-  \emph{Automatica}, vol. 131, Art. no. 109758, 2021,
-  doi: 10.1016/j.automatica.2021.109758.
 \bibitem{zha25} Y. Zhang, T. Fernando, M. Darouach. Functional
   observability, structural functional observability, and optimal sensor
   placement. \emph{IEEE Trans. Automat. Control}, vol. 70, no. 3,
   pp. 1592--1607, 2025, doi: 10.1109/TAC.2024.3462558.
   (arXiv:2307.08923.)
+\bibitem{dey21} P. Dey, N. Balachandran, D. Chatterjee. Complexity of
+  constrained sensor placement problems for optimal observability.
+  \emph{Automatica}, vol. 131, Art. no. 109758, 2021,
+  doi: 10.1016/j.automatica.2021.109758.
 \bibitem{lof26} J. L\"{o}fberg. Static output-feedback stabilization is
   NP-hard. arXiv:2609.16886, 2026 (preprint).
-%   TODO: no journal or conference version is recorded in the source notes.
-\bibitem{liu26} Z. Liu. Computational complexity of static output feedback
-  stabilization. arXiv:2610.00390, 2026 (preprint).
-%   TODO: no journal or conference version is recorded in the source notes.
 \bibitem{bar26} G. Barkai, I. Shames. On the NP-hardness of unconstrained
   static output feedback stabilization. arXiv:2609.38728, 2026 (preprint).
-%   TODO: no journal or conference version is recorded in the source notes.
+\bibitem{liu26} Z. Liu. Computational complexity of static output feedback
+  stabilization. arXiv:2610.00390, 2026 (preprint).
 \bibitem{maj26} A. Majumdar. Affine rank minimization is
   $\exists\mathbb{R}$ complete. arXiv:2602.14037, 2026 (preprint).
-%   TODO: no journal or conference version is recorded in the source notes.
-\bibitem{dod08} M. Dodig. Matrix pencils completion problems.
-  \emph{Linear Algebra Appl.}, vol. 428, pp. 259--304, 2008.
-%   TODO: issue number and DOI are not recorded in the source notes.
+\bibitem{hj13} R. A. Horn, C. R. Johnson. \emph{Matrix Analysis}. 2nd ed.
+Cambridge University Press, 2013.
+\bibitem{vzgg13} J. von zur Gathen, J. Gerhard. \emph{Modern Computer Algebra}.
+3rd ed. Cambridge University Press, 2013.
+\bibitem{emi99} I. Z. Emiris, B. Mourrain. Matrices in elimination theory. \emph{J. Symbolic Comput.} 28(1--2):3--44, 1999, doi: 10.1006/jsco.1998.0266.
 \bibitem{bpr06} S. Basu, R. Pollack, M.-F. Roy. \emph{Algorithms in Real
   Algebraic Geometry}, 2nd ed. Berlin, Germany: Springer, 2006,
   Algorithms and Computation in Mathematics, vol. 10.
-%   TODO: the DOI was not recorded in the source notes; the edition and
-%   series volume should be checked against the publisher's record.
+\bibitem{ren92} J. Renegar. On the computational complexity and geometry of the first-order theory of the reals. Part II: The general decision problem. \emph{J. Symbolic Comput.} 13(3):301--327, 1992, doi: 10.1016/S0747-7171(10)80004-5.
+\bibitem{fab90} A. Fabiano, D. C. Struppa. Bounds for the degrees of the entries of left
+inverses of polynomial matrices. \emph{Multidimensional Systems and Signal Processing},
+vol.~1, no.~1, pp.~67--74, 1990, doi: 10.1007/BF01812207.
+\bibitem{bee88} Th. Beelen, P. Van Dooren. An improved algorithm for the computation of Kronecker's canonical form of a singular pencil. \emph{Linear Algebra Appl.} 105:9--65, 1988.
+\bibitem{lan02} S. Lang. \emph{Algebra}. Revised 3rd ed.
+Graduate Texts in Mathematics 211, Springer, 2002.
 \end{thebibliography}
 
 \end{document}

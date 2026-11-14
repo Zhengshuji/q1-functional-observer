@@ -8,14 +8,21 @@ import Q1Paper.G3LeftInverse
 import Q1Paper.DegreeBounds
 import Q1Paper.G3Coeff
 import Q1Paper.G5GramRank
+import Q1Paper.Q1Compression
+import Q1Paper.Q1Subspace
+import Q1Paper.Monotone
+import Q1Paper.Q1RowSpace
+import Q1Paper.Q1Projection
+import Q1Paper.Q1Pencil
+import Q1Paper.Q1Step3
 import Q1Paper.G4RankIdentity
+import Q1Paper.KappaObs
 import Q1Paper.Compression
 import Q1Paper.FreeRows
 import Q1Paper.RankConsistency
 import Q1Paper.SpectralCertificate
 import Q1Paper.FixedOrder
 import Q1Paper.FPT
-import Q1Paper.Legacy
 
 #print axioms Q1Paper.pairMap_apply
 #print axioms Q1Paper.ker_pairMap
@@ -57,6 +64,15 @@ import Q1Paper.Legacy
 #print axioms Q1Paper.exists_solution_iff_range_eq_sup_span
 #print axioms Q1Paper.bezout_of_gcd_eq_one
 #print axioms Q1Paper.sum_sq_eq_zero_iff
-#print axioms b24_factor
-#print axioms b24_factor_unique
+#print axioms Q1Subspace.range_eq_rowSpan
+#print axioms Q1Subspace.mem_rowSpan_iff_exists_vecMul
+#print axioms Q1Subspace.rowSpan_fromRows_left
+#print axioms Q1Subspace.rank_fromRows_eq_rank_iff
+#print axioms Q1Subspace.pi1_eq_pi2_of_le_of_finrank_eq
+#print axioms Q1Subspace.hasConstantRank_iff_rankIndependent
+#print axioms Q1Subspace.rowSpace_eq
 #print axioms KappaObs.kappaObs_eq_row_count
+#print axioms Q1Subspace.finrank_le_pi1_add_pi2
+#print axioms Q1Subspace.finrank_le_two_mul_of_pi1_eq_pi2
+#print axioms Q1Paper.rank_fromRows_zero
+#print axioms Q1Paper.rowSpan_fromRows_zero
