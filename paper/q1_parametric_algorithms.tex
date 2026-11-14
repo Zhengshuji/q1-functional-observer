@@ -25,14 +25,14 @@
 
 \begin{abstract}
 We study the parameterized complexity of deciding whether a functional observer of prescribed
-order exists for a linear system with rational data and a fixed block of observer rows. The two
+order exists for a linear system with rational data and a prescribed block of observer rows. The two
 feasibility conditions are coupled, because the observer matrix and its product with the system
-matrix are built from the same free rows; restricting the row functionals to the common kernel of
+matrix are built from the same free rows; restricting the observer rows to the common kernel of
 the output matrix and its product with the system matrix removes exactly the directions those two
 matrices already account for. Exploiting this coupling, we reduce the free rows to a subspace of a
 compressed row-pair space. The reduction identifies the parameter that governs the cost, namely
 $\ell=\operatorname{rank}(AN)\le k$, where $N$ is a basis of $\ker[C;CA]$: it is an invariant of
-the system and of the fixed functionals alone and does not involve the number $r$ of free rows,
+the system and of the prescribed rows alone and does not involve the number $r$ of free rows,
 whereas the coordinate count $\kappa_{\rm obs}=r\operatorname{rank}[N\ AN]$ that a chart
 parameterization suggests does. On this reduction we build a finite algebraic certificate for the
 spectral condition and compress it by Cauchy--Binet to a Gram matrix whose size is governed by
@@ -65,7 +65,7 @@ for which a functional observer exists?
 
 For a linear system with measured output, Fernando, Trinh and Jennings \cite{fer10}
 reduced that question to two rank conditions on the observer matrix: with the observer
-rows written as a block $L$ that contains the given functional rows $L_0$, one condition
+rows written as a block $L$ that contains the prescribed rows $L_0$, one condition
 is algebraic and one is spectral. They characterize the feasible rows for a prescribed
 order, but they do not address the cost of deciding whether such rows exist.
 
@@ -96,7 +96,7 @@ spectral condition is replaced by a finite algebraic certificate of bounded degr
 enumeration of maximal minors is needed, and the fixed-order algorithm needs no chart enumeration
 either; the fixed-parameter algorithm does enumerate charts, but at most $4^{\ell}$ of them. Second, a parameter that
 controls the cost is identified, namely $\ell=\operatorname{rank}(AN)$, which is an invariant
-of the system and of the fixed functionals alone and does not involve $r$; the parameter that
+of the system and of the prescribed rows alone and does not involve $r$; the parameter that
 the chart parameterization suggests, $r\,d_0$, does involve $r$ and can be quadratic in $n$
 even when $\ell$ is small. Third, the cost is bounded in the bit model: polynomial in the input
 length for fixed order, and fixed-parameter in $\ell$. The characterization of \cite{fer10,dar25,fer26a,fer26b} supplies the starting point
@@ -142,7 +142,7 @@ characterization, to $O(q^2)$ variables independently of the state dimension, an
 reduction of the free rows to a subspace $W$ of the compressed row-pair space, in which the
 two conditions are a row-space inclusion and the constant rank of a pencil.
 \item The identification of the parameter $\ell=\operatorname{rank}(AN)\le k$ that governs
-the complexity bound. It is an invariant of the system and the fixed rows alone: it does not
+the complexity bound. It is an invariant of the system and the prescribed rows alone: it does not
 involve the number $r$ of free rows, whereas the chart parameterization of \cite{fer26b}
 carries $(n-p-q)(q-r)$ parameters per chart for fixed order $q$.
 \item A lower bound on the minimum order that comes from the spectral condition rather than
@@ -188,8 +188,9 @@ observer rows are the rows of the block
 \begin{equation*}
 L=\begin{bmatrix}L_0\\R\end{bmatrix},\qquad R\in\mathbb R^{r\times n},
 \end{equation*}
-where $L_0$ is fixed while $R$ collects the $r$ free rows; only real observers are
-considered.
+where $L_0$ is fixed while $R$ collects the $r$ free rows. Throughout we call the $r_0$ rows of
+$L_0$ the \emph{prescribed rows}, the $r$ rows of $R$ the \emph{free rows}, and the $q$ rows of $L$
+the \emph{observer rows}; only real observers are considered.
 
 All given rational data are encoded in binary, and $\mathcal L$ denotes the total input
 bit length. The free parameter $R$ is not part of the given input data and is therefore
@@ -273,9 +274,8 @@ $d_0=\dim\mathcal T$ & its dimension \\
 $\kappa_{\rm obs}=r\,d_0$ & number of free-row coordinates \\
 $S=\operatorname{row}(AN)\subseteq\mathbb R^k$ & space of the second blocks \\
 $\ell=\operatorname{rank}(AN)\le k$ & its dimension; the FPT parameter \\
-$B=LM=[H\ H_A]$ & compressed row pair \\
-$W=\operatorname{row}B$ & subspace spanned by the row pairs \\
-$W_0=\operatorname{row}(L_0M)$ & contribution of the fixed rows \\
+$W=\operatorname{row}[H\ H_A]$ & row space of the compressed pairs \\
+$W_0=\operatorname{row}(L_0M)$ & contribution of the prescribed rows \\
 $s_0=\dim W_0$, $m=d_0-s_0$ & dimensions of $W_0$ and of $\mathcal T/W_0$ \\
 $\mathcal V=\mathcal T\cap(S\times S)$ & admissible ambient space \\
 $m'=\dim\mathcal V-s_0$ & chart dimension \\
@@ -465,7 +465,7 @@ nonsingular change $r_i\mapsto r_i\operatorname{diag}(Q^{-1},Q^{-1})$.
 The free rows enter the two conditions only through the row space of the compressed
 pair. Writing the row pair of a free row as a row of $M=[N\ AN]$, let
 \begin{equation}\label{eq:W-def}
-B=LM=[H\ H_A]\in\mathbb R^{q\times2k},\qquad W=\operatorname{row}B\subseteq\mathbb R^{2k},
+W=\operatorname{row}[H\ H_A]\subseteq\mathbb R^{2k},
 \end{equation}
 so that $W_0=\operatorname{row}(L_0M)\subseteq W\subseteq\mathcal T=\operatorname{row}M$.
 Let
@@ -653,7 +653,7 @@ $B$ can be eliminated. Let $b$ denote the vectorization of the remaining unknown
 
 
 \begin{equation*}
-M(X,G)b=c(X,G).
+\mathcal M(X,G)\,b=c(X,G).
 \end{equation*}
 
 \begin{lem}[Rank consistency]\label{lem:rankcons}
@@ -929,7 +929,7 @@ $D\gets$ rational matrix with $\ker D=\operatorname{row}[N\ AN]$
     \Statex \quad (i) $e_\omega(X^{\mathsf T}X)>0$ (the left inverse $U$ is
            not quantified);
     \Statex \quad (ii) the rank-consistency formula of
-           Lemma~\ref{lem:rankcons} for $M(X,G)b=c(X,G)$, $B_{:,J}=I_\omega$;
+           Lemma~\ref{lem:rankcons} for $\mathcal M(X,G)\,b=c(X,G)$, $B_{:,J}=I_\omega$;
     \Statex \quad (iii) $X_iB=h_i^0$ and $G_iB=g_i^0$ for $i\le r_0$;
     \Statex \quad (iv) $D[(X_iB)^{\mathsf T};(G_iB)^{\mathsf T}]=0$ for
            $i>r_0$;
@@ -1001,16 +1001,16 @@ exists, which is the test performed by Algorithm~\ref{alg:fixed-q}.
 N &= 2q\omega+2\omega\le 2q^2+2q,\\
 s &= O(k)\cdot O(k)+O(1)=O(k^2),\\
 D &= \max\{O(k),\,2\omega+1\}=O(k)\le O(n),\\
-B &= \operatorname{poly}(n,\mathcal L),
+\beta &= \operatorname{poly}(n,\mathcal L),
 \end{align}
 where the two factors of $s$ count the rank-consistency branches
 $t\le\min\{\text{rows},\text{cols}\}(M)$, at most $O(k)$ of them, and the
 $O(k)$ polynomials of degree $O(k)$ carried by each branch, while $2\omega+1$
 is the degree of the Gram and certificate constraints; the last line is the
 coefficient-size lemma of Section~\ref{sec:fpt}. Renegar's Part II bound
-$B(\log B)(\log\log B)(sD)^{O(N)}$ therefore gives, per chart,
+$\beta(\log\beta)(\log\log\beta)(sD)^{O(N)}$ therefore gives, per chart,
 \[
-B(\log B)(\log\log B)(sD)^{O(N)}
+\beta(\log \beta)(\log\log \beta)(sD)^{O(N)}
 =\operatorname{poly}(n)^{O(q^2)}
 =\mathcal L^{O(q^2)},
 \]
@@ -1047,7 +1047,7 @@ pivot charts & $(q+1)k^q$ \\
 rank-consistency branches $t$ & $O(k)$, one per possible rank \\
 number of polynomials $s$ (each counted once) & $O(k^2)$ \\
 maximum degree $D$ & $O(k)$ \\
-coefficient bit length $B$ & $\operatorname{poly}(n,\mathcal L)$ \\
+coefficient bit length $\beta$ & $\operatorname{poly}(n,\mathcal L)$ \\
 construction size & $k^{O(q^2)}\operatorname{poly}(\mathcal L)$ \\
 \bottomrule
 \end{tabular}
@@ -1129,14 +1129,15 @@ $\mathcal V\gets\mathcal T\cap(S\times S)$
 \State $s_0\gets\dim W_0$;\quad $m'\gets\dim\mathcal V-s_0$
 \For{$t=0$ \textbf{to} $\min(r,2\ell)$}
   \For{each chart of $\mathrm{Gr}(t,m')$ with chart coordinates $Y\in\mathbb R^{t\times(m'-t)}$}
-    \State $H(Y)\gets$ first block of $Z(Y)$;\quad $G(Y)\gets$ second block
+    \State $H(Y),G(Y)\gets$ the two $t\times\ell$ blocks of the chart matrix
+             $[E_0;\,[I_t\mid Y]E_Q]$
     \For{$\omega=1$ \textbf{to} $\ell$}
       \State form $\Psi_{t,\omega}(Y,x)$ with
       \Statex \quad (i) $\sigma_\omega(HH^{\mathsf T})>0$ and
                $\sigma_{\omega+1}\bigl([H;G][H;G]^{\mathsf T}\bigr)=0$;
-      \Statex \quad (ii) $B(Y)^{\mathsf T}B(Y)x=\mathbf e_1$, with $B^{\mathsf T}B$ computed
-               from the kernel $K(\lambda,\mu)$ by Cauchy--Binet (Lemma~\ref{lem:window}) over the
-               $\ell$ columns of $S$.
+      \Statex \quad (ii) $Z(Y)^{\mathsf T}Z(Y)x=e_0$, with $Z(Y)$ the window matrix of
+               Lemma~\ref{lem:window} for $\lambda H(Y)-H_A(Y)$, computed from $K(\lambda,\mu)$ by
+               Cauchy--Binet over the $\ell$ columns of $S$.
       \If{$\Psi_{t,\omega}$ is real-feasible}
         \State \Return \textsc{feasible}
       \EndIf
@@ -1153,7 +1154,7 @@ For rational input and every $r\ge0$, $\mathrm{DEC}$ is decidable in
 \exp\bigl(O(\ell^2\log(\ell+2))\bigr)\operatorname{poly}(\mathcal L)
 \end{equation}
 bit operations, where $\ell=\operatorname{rank}(AN)\le k$ does not depend on the number $r$ of
-free observer rows. For $r=0$ the bound sharpens to $\operatorname{poly}(\mathcal L)$.
+free rows. For $r=0$ the bound sharpens to $\operatorname{poly}(\mathcal L)$.
 \end{thm}
 
 \begin{proof}
@@ -1197,19 +1198,19 @@ $x\in\mathbb R^{2\omega}$, and the data of the real-feasibility problem are
 \begin{gathered}
 N=t(m'-t)+2\omega\le\tfrac{m'^2}{4}+2\omega\le\ell^2+2\ell,\\
 s=2\omega+O(1)\le2\ell+O(1),\qquad D=O(\ell),\\
-B=\operatorname{poly}(\mathcal L),
+\beta=\operatorname{poly}(\mathcal L),
 \end{gathered}
 \end{equation}
 where the discrete choices of $t$, of the chart and of $\omega$ are finite disjunctions rather
-than real variables, and $B$ is the coefficient bit length of Lemma~\ref{lem:coeff}. The
+than real variables, and $\beta$ is the coefficient bit length of Lemma~\ref{lem:coeff}. The
 polynomials are those of Lemma~\ref{lem:window}: $\sigma_\omega(HH^{\mathsf T})>0$ and
 $\sigma_{\omega+1}([H;G][H;G]^{\mathsf T})=0$ encode \eqref{eq:5a} together with
-$\operatorname{rank}H=\omega$ (Lemma~\ref{lem:compression}), and $B(Y)^{\mathsf T}B(Y)x=\mathbf
-e_1$ encodes \eqref{eq:5b}. Substituting \eqref{eq:nvar} into \eqref{eq:rengar} gives, per
+$\operatorname{rank}H=\omega$ (Lemma~\ref{lem:compression}), and
+$Z(Y)^{\mathsf T}Z(Y)x=e_0$ encodes \eqref{eq:5b}. Substituting \eqref{eq:nvar} into \eqref{eq:rengar} gives, per
 chart,
 \begin{equation*}
 \begin{gathered}
-T\le B(\log B)(\log\log B)(sD)^{O(N)}\\
+T\le\beta(\log\beta)(\log\log\beta)(sD)^{O(N)}\\
 =\operatorname{poly}(\mathcal L)\exp\bigl(O(\ell^2\log(\ell+2))\bigr),
 \end{gathered}
 \end{equation*}
@@ -1309,9 +1310,9 @@ Lemma~\ref{lem:rationalbasis}.
 
 \begin{proof}[Proof of Corollary~\ref{cor:find}]
 Step~1 is the sampling-point bound of \cite[Ch.~13]{bpr06}: a nonempty real algebraic set defined by
-$s$ polynomials in $N$ variables of degree at most $D$ and coefficient bit length $B$ has a sample
+$s$ polynomials in $N$ variables of degree at most $D$ and coefficient bit length $\beta$ has a sample
 point whose coordinates are algebraic numbers of degree $D^{O(N)}$ with isolating intervals of bit
-length $B D^{O(N)}$; with \eqref{eq:nvar} this is $f(\ell)\operatorname{poly}(\mathcal L)$ arithmetic
+length $\beta D^{O(N)}$; with \eqref{eq:nvar} this is $f(\ell)\operatorname{poly}(\mathcal L)$ arithmetic
 operations and $f(\ell)\operatorname{poly}(\mathcal L)$ output bits. Steps~2 and~3 are
 Lemma~\ref{lem:sandwich}: a basis of $W/W_0$ lifts to free rows by solving $uM=w$, and padding with
 zero rows realizes $W$ with exactly $t$ free rows. Since $W$ satisfies the two conditions
@@ -1337,13 +1338,13 @@ $\operatorname{poly}(\mathcal L)$ bit operations, and leaves an output matrix wi
 We therefore assume $p\le n$ in what follows. Renegar's Part II bit bound
 \cite{ren92} has the form
 \begin{equation}\label{eq:rengar}
-B(\log B)(\log\log B)(sD)^{O(N)},
+\beta(\log\beta)(\log\log\beta)(sD)^{O(N)},
 \end{equation}
-for integer-coefficient input, where $N,s,D,B$ are the number of real variables, the number of
+for integer-coefficient input, where $N,s,D,\beta$ are the number of real variables, the number of
 polynomials, the maximum degree and the maximum coefficient bit length. Only $(sD)^{O(N)}$ is
-exponential; the dependence on $B$ is polynomial in $\log B$. We apply \eqref{eq:rengar} in the
+exponential; the dependence on $\beta$ is polynomial in $\log\beta$. We apply \eqref{eq:rengar} in the
 following normalization, used throughout: every system is cleared of denominators (the solution set
-and the degree are unchanged and $B$ is inflated by the common denominator only); equations and
+and the degree are unchanged and $\beta$ is inflated by the common denominator only); equations and
 inequalities count once each in $s$; a strict $g>0$ is replaced by $g\ge\varepsilon$ with one fresh
 variable $\varepsilon>0$, adding at most $s$ variables and leaving $s,D$ fixed; and the bound covers
 the decision only, the construction being accounted for by Lemmas~\ref{lem:rationalbasis}
@@ -1375,10 +1376,10 @@ $\operatorname{poly}(m,n,\tau)$ bit operations.
 Let the input entries have bit length at most $\mathcal L$, and let
 $n\le\mathcal L$. Then:
 \emph{(i)} the kernel basis $N$, the matrix $D$, and the entries of
-$H,H_A,G_H,G_S$ have bit length $\operatorname{poly}(n,\mathcal L)$;
+$H,H_A,\Gamma_H,\Gamma_S$ have bit length $\operatorname{poly}(n,\mathcal L)$;
 \emph{(ii)} every maximal minor $f_i$ of $P(\lambda)=\lambda H-H_A$, and every
 coefficient of $f_i$, has bit length $\operatorname{poly}(n,\mathcal L)$;
-\emph{(iii)} the entries of $Z^{\mathsf T}Z$ and of $\sigma_j(G_H),\sigma_j(G_S)$ for
+\emph{(iii)} the entries of $Z^{\mathsf T}Z$ and of $\sigma_j(\Gamma_H),\sigma_j(\Gamma_S)$ for
 $j\le2\ell$ have bit length $f(\ell)\operatorname{poly}(\mathcal L)$.
 \end{lem}
 
@@ -1386,17 +1387,17 @@ $j\le2\ell$ have bit length $f(\ell)\operatorname{poly}(\mathcal L)$.
 Let $m=n^2+pn+r_0n$ be the number of rational input entries. With $p\le n$ and $r_0\le q\le n$ this
 is $m\le3n^2=O(n^2)$, and $m\le\mathcal L$ because each entry has bit length at least one. Multiplying
 by the product of their denominators turns the input into an integer matrix $A_{\rm in}$ all of whose
-entries are bounded by $B_0$ in absolute value, where
+entries are bounded by $\beta_0$ in absolute value, where
 \begin{equation*}
-m\le3n^2=O(n^2),\qquad B_0=2^{O(m\mathcal L)}=2^{O(n^2\mathcal L)} .
+m\le3n^2=O(n^2),\qquad \beta_0=2^{O(m\mathcal L)}=2^{O(n^2\mathcal L)} .
 \end{equation*}
 Hadamard's inequality gives, for a $t\times t$ minor $M_{I,J}$ of $A_{\rm in}$
 with $t\le n$,
 \begin{equation*}
 \begin{aligned}
-|\det M_{I,J}|&\le(\sqrt t\,B_0)^t,\\
+|\det M_{I,J}|&\le(\sqrt t\,\beta_0)^t,\\
 \operatorname{bits}\det M_{I,J}
-&=O\bigl(t(\log B_0+\log t)\bigr)=O(n^3\mathcal L),
+&=O\bigl(t(\log\beta_0+\log t)\bigr)=O(n^3\mathcal L),
 \end{aligned}
 \end{equation*}
 which is $\operatorname{poly}(n,\mathcal L)$ because $n\le\mathcal L$.
@@ -1408,13 +1409,13 @@ have that bit length, gives a row-space basis of $[N\ AN]$ and hence the matrix 
 bit length $O\bigl(d_0((n-k)(\mathcal L+\log n)+\log k)\bigr)=\operatorname{poly}(n,\mathcal L)$;
 the two eliminations cost $\operatorname{poly}(\mathcal L)$ bit operations.
 Each entry of $H=LN$ is a sum of $n$ products of an input entry with an entry of
-$N$, and each entry of $G_H$ or $G_S$ is a sum of at most $q$ such products, so
-passing from $N$ to $H$ and then to $G_H,G_S$ adds $O(\log n)$ and then
+$N$, and each entry of $\Gamma_H$ or $\Gamma_S$ is a sum of at most $q$ such products, so
+passing from $N$ to $H$ and then to $\Gamma_H,\Gamma_S$ adds $O(\log n)$ and then
 $O(\log q)$ bits:
 \begin{equation*}
 \begin{aligned}
 \operatorname{bits}H_{ij}&\le\mathcal L+\operatorname{poly}(n,\mathcal L)+O(\log n),\\
-\operatorname{bits}(G_H)_{ij},\ \operatorname{bits}(G_S)_{ij}
+\operatorname{bits}(\Gamma_H)_{ij},\ \operatorname{bits}(\Gamma_S)_{ij}
 &\le2\operatorname{poly}(n,\mathcal L)+O(\log q).
 \end{aligned}
 \end{equation*}
@@ -1437,7 +1438,7 @@ sum of $T$ terms of bit length $b$ has bit length $b+\log T$, hence
 \begin{aligned}
 \operatorname{bits}(Z^{\mathsf T}Z)_{ij}
 &\le2\operatorname{poly}(n,\mathcal L)+\ell,\\
-\operatorname{bits}\sigma_j(G_H),\ \operatorname{bits}\sigma_j(G_S)
+\operatorname{bits}\sigma_j(\Gamma_H),\ \operatorname{bits}\sigma_j(\Gamma_S)
 &\le\operatorname{poly}(n,\mathcal L)+2\ell\log(2\ell),
 \end{aligned}
 \end{equation*}
@@ -1869,13 +1870,13 @@ for all $\lambda$. Also $H_A=GB=(GU)XB=FH$ with $F=GU$, so \eqref{eq:5a} holds.
 It remains to tie $(H,H_A)$ to the input. The rows of $H=LN$, $H_A=LAN$ satisfy, with $h_i^0=(L_0N)_i$ and $g_i^0=(L_0AN)_i$,
 \begin{equation}
 X_iB=h_i^0,\qquad G_iB=g_i^0\qquad(1\le i\le r_0),
-\tag{B.1}\label{eq:B1}
+\tag{A.1}\label{eq:B1}
 \end{equation}
 and, for the free rows, $(H_i,H_{A,i})\in\mathcal T=\operatorname{row}[N\ AN]$, equivalently
 \begin{equation}
 D\begin{bmatrix}(X_iB)^{\mathsf T}\\ (G_iB)^{\mathsf T}\end{bmatrix}=0
 \qquad(r_0<i\le q),
-\tag{B.2}\label{eq:B2}
+\tag{A.2}\label{eq:B2}
 \end{equation}
 where $D$ is a rational matrix with $\ker D=\mathcal T$. Both are polynomial (in fact bilinear) equations. They are not optional: without \eqref{eq:B1}--\eqref{eq:B2} the encoding would accept arbitrary pairs $(H,H_A)$.
 
