@@ -259,7 +259,7 @@ The threshold problem is
 a finite disjunction of decision instances. The algorithms below decide $\mathrm{DEC}$ and their
 affirmative certificates contain a witness. Only $\mathrm{DEC}$ is studied here: $\mathrm{OPT}$ and
 $\mathrm{FIND}$, together with the monotonicity and saturation of $\mathrm{DEC}$ in $q$ that make them
-tractable, are treated in the companion paper.
+tractable, are treated in the companion paper \cite{companion2}.
 
 \begin{table}[!t]
 \centering
@@ -876,8 +876,9 @@ $D\gets$ rational matrix with $\ker D=\operatorname{row}[N\ AN]$
 \end{algorithm}
 
 \begin{thm}\label{thm:fixedq}
-For every fixed $q$, $\mathrm{DEC}$ is decidable in deterministic polynomial
-time. More precisely, Algorithm~\ref{alg:fixed-q} runs in
+For every fixed $q\ge1$, $\mathrm{DEC}$ is decidable in deterministic polynomial
+time. More precisely, The case $q=0$ is trivial, since then $r_0=0$ and $L$ is empty.
+Algorithm~\ref{alg:fixed-q} runs in
 $\mathcal L^{O(q^2)}$ bit operations.
 \end{thm}
 
@@ -1546,6 +1547,52 @@ variable $\varepsilon>0$, adding at most $s$ variables and leaving $s,D$ fixed; 
 the decision only, the construction being accounted for by Lemmas~\ref{lem:rationalbasis}
 and~\ref{lem:coeff}.
 
+The estimates below are the ones the bound \eqref{eq:fpt-l} and the counting of
+Section~\ref{sec:fixedq} rely on. Each is stated with the mechanism that produces it and with its audit
+status: an entry marked \emph{Hadamard} rests on the Hadamard bound for a determinant of a matrix whose
+entry bit length is already known, so the dependence on $\mathcal L$ is polynomial but the elementary
+constant has not been re-derived here.
+
+\begin{table}[!t]
+\centering
+\caption{Bit lengths of the objects entering the bound. $n,p,q\le\mathcal L$ and every entry of the
+input has bit length at most $\mathcal L$; $\tau$ denotes the entry bit length of the matrix at the
+stage concerned.}
+\label{tab:bitlen}
+\footnotesize
+\begin{tabular}{@{}p{0.30\columnwidth}p{0.30\columnwidth}p{0.26\columnwidth}@{}}
+\toprule
+Object & Bit length & Mechanism \\
+\midrule
+$C$, $A$, $L_0$ & $\le\mathcal L$ & input \\
+kernel basis $N$ of $[C;CA]$ & $O\bigl(k(\tau+\log n)\bigr)\le\operatorname{poly}(\mathcal L)$ &
+Hadamard + Cramer \\
+$M=[N\ AN]$ & $O(\tau_M+\log n)$ & submultiplicativity \\
+$D$ with $\ker D=\operatorname{row}M$ & $O\bigl(d_0(\tau_M+\log k)\bigr)$ & Hadamard + Cramer \\
+pivot block $X$ of $H=XB$ & $\operatorname{poly}(\mathcal L)$ & fraction-free elimination,
+entry growth $O(n)$ per step \\
+windows $Z$ of the minors of $\lambda X-G$ & $\operatorname{poly}(\mathcal L)$ & sum over
+$\binom{2\omega}{\omega}$ products of $\omega$ entries \\
+$Z^{\mathsf T}Z$ & $\operatorname{poly}(\mathcal L)$ & Cauchy--Binet, $\binom{2\omega}{\omega}$
+terms \\
+$e_\omega(X^{\mathsf T}X)$, $e_0$ & $O(\omega\log\omega)$ above $\tau_Z$ & binomial coefficients,
+$\lambda$-free \\
+cleared system $\Psi$ & $\beta=\operatorname{poly}(\mathcal L)$ & one common denominator per
+equation \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The two entries that need care are the pivot block and the Cauchy--Binet compression. The first comes
+from Gaussian elimination on a rational matrix of size at most $n\times k$ whose entries are rational
+functions of the input: with fraction-free elimination the intermediate numerators grow by at most one
+factor of a subdeterminant per step, so the growth is $O(n)$ in the exponent and the entries stay of
+poly$(n,\mathcal L)$ bit length \cite[Ch.~6]{vzgg13}. The second is a sum of $\binom{2\omega}{\omega}$
+products of $\omega$ minors, and each minor is itself a determinant of a $2\omega\times2\omega$ matrix
+with entries of bit length $\tau_Z$; Hadamard gives $\omega\tau_Z+O(\omega\log\omega)$ for the minor and
+the sum adds $\log\binom{2\omega}{\omega}$ bits, which is $O(\omega)$ by Stirling. Both are polynomial
+in $\mathcal L$ because $\omega\le k\le n\le\mathcal L$.
+
 \begin{lem}[Rational bases and annihilators]\label{lem:rationalbasis}
 Let $M\in\mathbb Q^{m\times n}$ have entries of bit length at most $\tau$, let $r=\operatorname{rank}M$
 and put $\tau_M=O\bigl(r(\tau+\log n)\bigr)$. Then a basis $N$ of $\ker M$, a basis $R$ of
@@ -1763,12 +1810,14 @@ Cambridge University Press, 2013.
 \bibitem{emi99} I. Z. Emiris, B. Mourrain. Matrices in elimination theory. \emph{J. Symbolic Comput.} 28(1--2):3--44, 1999, doi: 10.1006/jsco.1998.0266.
 \bibitem{lan02} S. Lang. \emph{Algebra}. Revised 3rd ed.
 Graduate Texts in Mathematics 211, Springer, 2002.
-\end{thebibliography}
 \bibitem{fab90} A. Fabiano, D. C. Struppa. Bounds for the degrees of the entries of left
 inverses of polynomial matrices. \emph{Multidimensional Systems and Signal Processing},
 vol.~1, no.~1, pp.~67--74, 1990, doi: 10.1007/BF01812207.
 \bibitem{bee88} Th. Beelen, P. Van Dooren. An improved algorithm for the computation of Kronecker's canonical form of a singular pencil. \emph{Linear Algebra Appl.} 105:9--65, 1988.
 \bibitem{ren92} J. Renegar. On the computational complexity and geometry of the first-order theory of the reals. Part II: The general decision problem. \emph{J. Symbolic Comput.} 13(3):301--327, 1992, doi: 10.1016/S0747-7171(10)80004-5.
+\bibitem{companion2} Minimum order and minimum-order construction for functional observers.
+Companion manuscript, 2026. Cited for the optimization and construction problems and for the
+spectral lower bound on the minimum order.
 \end{thebibliography}
 
 \end{document}

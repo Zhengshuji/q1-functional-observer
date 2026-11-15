@@ -63,7 +63,7 @@ about the *set* of admissible orders and about the witness: how small can the or
 structured, and how is a minimum-order observer obtained?
 
 The deciding question for a prescribed order --- is there an observer of order $q$? --- is treated in a
-companion paper, where it is compressed to a finite algebraic certificate and decided in
+companion paper \cite{companion1}, where it is compressed to a finite algebraic certificate and decided in
 $f(\ell)\operatorname{poly}(\mathcal L)$ bit operations with $\ell=\operatorname{rank}(AN)$. The present
 paper takes that decision procedure as an interface and asks what follows for the minimum order.
 
@@ -814,6 +814,55 @@ The Lean development and the exact-arithmetic scripts form the artifact at
 the rank identity of Lemma~\ref{lem:rankid} is also proved in the artifact, where it is used at the
 level of linear maps; the remaining cited facts are used as references and are not formalized.
 
+\appendices
+
+\section{The witness system $\Psi_{t,\omega}$}\label{app:psi}
+
+Section~\ref{sec:compute} takes as given a subspace $W$ realizing an accepted order. This appendix
+records the algebraic system that produces such a $W$, so that the construction can be read without the
+companion paper. Nothing is re-proved: the system is stated in the notation of this paper, and the
+companion paper contains the derivation and the bound on its size.
+
+Fix an order $q=r_0+t$ and a rank $\omega\le\min(q,k)$, and let $J\subseteq[k]$ with $|J|=\omega$.
+The unknown chart matrices are
+\begin{equation*}
+X,G\in\mathbb R^{q\times\omega},\qquad x\in\mathbb R^{2\omega},
+\end{equation*}
+and $B\in\mathbb R^{\omega\times k}$ is the matrix determined by $X$ and $J$ through $XB=X$ on the
+columns in $J$ and $B_{:,J}=I_\omega$; this is possible exactly when the columns of $X_J$ are
+independent, which the system enforces below. Then $W=\operatorname{row}[XB\ \ GB]$, and
+$\Psi_{t,\omega}$ is the disjunction of the following systems over $J$, with $h^0=L_0N$,
+$g^0=L_0AN$ and $D$ a rational matrix with $\ker D=\operatorname{row}[N\ AN]$:
+
+\begin{enumerate}\itemsep2pt
+\item $e_\omega(X^{\mathsf T}X)>0$, the elementary symmetric polynomial of degree $\omega$ in the
+eigenvalues of $X^{\mathsf T}X$ being positive: this is $\operatorname{rank}X=\omega$, hence
+$\dim W=\omega$.
+\item the rank-consistency equations $\mathcal M(X,G)\,b=c(X,G)$ of the companion paper, which say
+that $B$ is defined by $X$ alone and is consistent with the second block $G$;
+\item $X_iB=h_i^0$ and $G_iB=g_i^0$ for $i\le r_0$, the prescribed rows;
+\item $D\,[(X_iB)^{\mathsf T};(G_iB)^{\mathsf T}]=0$ for $i>r_0$, which places the remaining row pairs
+in $\mathcal T$;
+\item $Z^{\mathsf T}Zx=e_0$, where $Z$ is the matrix of coefficient windows of the $\omega\times\omega$
+maximal minors of $\lambda X-G$ and $e_0$ is the first elementary symmetric polynomial: this is the
+finite form of \eqref{eq:pencil}.
+\end{enumerate}
+
+Items (i)--(ii) make $W$ a well-defined $\omega$-dimensional subspace of the chart, (iii)--(iv) place it
+in the sandwich $W_0\subseteq W\subseteq\mathcal T$ with $\dim(W/W_0)=t$, and (v) is the spectral
+condition by the companion paper's certificate. The system is thus the compressed form of
+\eqref{eq:5a}--\eqref{eq:5b} at order $q=r_0+t$, and its real solutions are exactly the feasible $W$
+of that order with $\dim\pi_1(W)=\omega$.
+
+Two points are worth isolating, because the construction in Section~\ref{sec:compute} uses them.
+First, a real solution exists if and only if $\mathrm{DEC}(r_0+t)$ holds with $\omega$ as the rank of
+the compressed block; that is the equivalence proved in the companion paper. Second, the solution set
+is a real algebraic set defined by $O(\ell^2)$ polynomials in $\ell^2+2\ell$ variables of degree
+$O(\ell)$, so a real sample point exists whose coordinates are algebraic numbers of degree
+$D^{O(N)}=\exp\bigl(O(\ell^2\log(\ell+2))\bigr)$ --- the bound quoted in
+Corollary~\ref{cor:find}. Reducing the coordinates to the row space $W$ is the step performed in the
+arithmetic model.
+
 \begin{thebibliography}{99}
 \bibitem{fer26a} J. A. Fernando. A minimum-order functional observer beyond the Darouach and Luenberger constructions. arXiv:2609.33615, 2026 (preprint).
 \bibitem{fer26b} J. A. Fernando. Complete characterization of minimum-order functional observers from Darouach to Luenberger. arXiv:2609.37992, 2026 (preprint).
@@ -826,6 +875,9 @@ Cambridge University Press, 2013.
   Algorithms and Computation in Mathematics, vol. 10.
 \bibitem{lan02} S. Lang. \emph{Algebra}. Revised 3rd ed.
 Graduate Texts in Mathematics 211, Springer, 2002.
+\bibitem{companion1} Deciding functional observer feasibility: compression, certificates, and
+parameterized algorithms. Companion manuscript, 2026. Cited for the decision procedure, its
+finite certificate and its complexity bounds.
 \end{thebibliography}
 
 \end{document}
