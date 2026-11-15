@@ -837,13 +837,14 @@ needed to write the $r$ free rows, and the parameter that governs the bound,
 \begin{equation}\label{eq:ell-size}
 \ell=\operatorname{rank}(AN)\le k\le n .
 \end{equation}
-Only the first can be quadratic in $n$. By the subspace reduction of Section~\ref{sec:subspace}
-(Lemmas~\ref{lem:struct} and~\ref{lem:sandwich}) the bound of the companion paper depends on
-$\ell$ and not on $\kappa_{\rm obs}$: the coordinate count \eqref{eq:kappa-size} records how the
-free rows are written, not how hard the instance is.
+Only the first can be quadratic in $n$, and only the second bounds the search here: by
+Lemma~\ref{lem:sandwich} and Lemma~\ref{lem:struct} a feasible $W$ satisfies
+$0\le\dim(W/W_0)\le2\ell$, so the coordinate count \eqref{eq:kappa-size} records how the free rows are
+written, whereas $\ell$ is the quantity that both the minimum-order search and the decision procedure
+of the companion paper depend on.
 
-Whether $\ell$ is optimal is open. Two further reductions are conceivable, and they are of
-different kinds.
+Whether $\ell$ is optimal is open. Two further reductions are conceivable, and they are of different
+kinds.
 
 \begin{enumerate}
 \item \emph{Quotients of the observer rows.} The conditions depend on row spaces, hence are
@@ -859,16 +860,6 @@ the rank condition nor the finite spectrum. Such a quotient must preserve the in
 between $H$ and $H_A$, not only $\operatorname{rank}H$; a quotient preserving \eqref{eq:5a} but
 changing the spectrum would be invalid. We do not know whether one exists.
 \end{enumerate}
-
-\paragraph*{Growth of the parameter-dependent factor}
-Renegar's bound is $(sD)^{O(N)}$ with
-\begin{equation*}
-sD=O(\ell^2),\qquad N=\ell^2+2\ell ,
-\end{equation*}
-so $f(\ell)=\exp\bigl(O(\ell^2\log(\ell+2))\bigr)$. The result is primarily structural: it
-identifies an invariant of the instance, independent of how many free rows are allowed, that
-governs the complexity bound, although the doubly exponential dependence on $\ell$ may limit
-practical applicability for large values.
 
 \subsection{Reproducibility and evidence}\label{sec:repro}
 
@@ -898,42 +889,15 @@ the rank identity of Lemma~\ref{lem:rankid} is also proved in the artifact, wher
 level of linear maps; the remaining cited facts are used as references and are not formalized.
 
 \begin{thebibliography}{99}
-\bibitem{fer10} J. A. Fernando, H. Trinh, L. Jennings. Functional observability and the design of minimum order linear functional observers. \emph{IEEE Trans. Automat. Control} 55(5):1268--1273, 2010.
-\bibitem{dar25} M. Darouach, J. A. Fernando. On functional observability and functional observer design. \emph{Automatica}, vol. 173, Art. no. 112115, 2025, doi: 10.1016/j.automatica.2025.112115.
 \bibitem{fer26a} J. A. Fernando. A minimum-order functional observer beyond the Darouach and Luenberger constructions. arXiv:2609.33615, 2026 (preprint).
 \bibitem{fer26b} J. A. Fernando. Complete characterization of minimum-order functional observers from Darouach to Luenberger. arXiv:2609.37992, 2026 (preprint).
-\bibitem{zha25} Y. Zhang, T. Fernando, M. Darouach. Functional
-  observability, structural functional observability, and optimal sensor
-  placement. \emph{IEEE Trans. Automat. Control}, vol. 70, no. 3,
-  pp. 1592--1607, 2025, doi: 10.1109/TAC.2024.3462558.
-  (arXiv:2307.08923.)
-\bibitem{dey21} P. Dey, N. Balachandran, D. Chatterjee. Complexity of
-  constrained sensor placement problems for optimal observability.
-  \emph{Automatica}, vol. 131, Art. no. 109758, 2021,
-  doi: 10.1016/j.automatica.2021.109758.
-\bibitem{lof26} J. L\"{o}fberg. Static output-feedback stabilization is
-  NP-hard. arXiv:2609.16886, 2026 (preprint).
-\bibitem{bar26} G. Barkai, I. Shames. On the NP-hardness of unconstrained
-  static output feedback stabilization. arXiv:2609.38728, 2026 (preprint).
-\bibitem{liu26} Z. Liu. Computational complexity of static output feedback
-  stabilization. arXiv:2610.00390, 2026 (preprint).
-\bibitem{maj26} A. Majumdar. Affine rank minimization is
-  $\exists\mathbb R$ complete. arXiv:2602.14037, 2026 (preprint).
+\bibitem{fer10} J. A. Fernando, H. Trinh, L. Jennings. Functional observability and the design of minimum order linear functional observers. \emph{IEEE Trans. Automat. Control} 55(5):1268--1273, 2010.
 \bibitem{hj13} R. A. Horn, C. R. Johnson. \emph{Matrix Analysis}. 2nd ed.
 Cambridge University Press, 2013.
-\bibitem{vzgg13} J. von zur Gathen, J. Gerhard. \emph{Modern Computer Algebra}.
-3rd ed. Cambridge University Press, 2013.
-\bibitem{emi99} I. Z. Emiris, B. Mourrain. Matrices in elimination theory. \emph{J. Symbolic Comput.} 28(1--2):3--44, 1999, doi: 10.1006/jsco.1998.0266.
+\bibitem{dar25} M. Darouach, J. A. Fernando. On functional observability and functional observer design. \emph{Automatica}, vol. 173, Art. no. 112115, 2025, doi: 10.1016/j.automatica.2025.112115.
 \bibitem{bpr06} S. Basu, R. Pollack, M.-F. Roy. \emph{Algorithms in Real
   Algebraic Geometry}, 2nd ed. Berlin, Germany: Springer, 2006,
   Algorithms and Computation in Mathematics, vol. 10.
-\bibitem{ren92} J. Renegar. On the computational complexity and geometry of the first-order theory of the reals. Part II: The general decision problem. \emph{J. Symbolic Comput.} 13(3):301--327, 1992, doi: 10.1016/S0747-7171(10)80004-5.
-\bibitem{fab90} A. Fabiano, D. C. Struppa. Bounds for the degrees of the entries of left
-inverses of polynomial matrices. \emph{Multidimensional Systems and Signal Processing},
-vol.~1, no.~1, pp.~67--74, 1990, doi: 10.1007/BF01812207.
-\bibitem{bee88} Th. Beelen, P. Van Dooren. An improved algorithm for the computation of Kronecker's canonical form of a singular pencil. \emph{Linear Algebra Appl.} 105:9--65, 1988.
-\bibitem{lan02} S. Lang. \emph{Algebra}. Revised 3rd ed.
-Graduate Texts in Mathematics 211, Springer, 2002.
 \end{thebibliography}
 
 \end{document}
