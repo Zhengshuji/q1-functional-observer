@@ -38,7 +38,7 @@ Second, the spectral condition yields a lower bound,
 $q_{\min}\ge r_0+\max(0,\operatorname{rank}[U_0;V_0]-s_0+1)$, that comes from a different necessary
 condition than the published algebraic bound $q_0$, is computed in polynomial time, and is strictly
 stronger on the instance below. Third, given a decision procedure for a prescribed order, the minimum
-order is found by binary search in $O(\log\ell)$ calls, and a minimum-order observer is recovered by
+order is found by binary search in $O(\log(\ell+2))$ calls, and a minimum-order observer is recovered by
 lifting a basis of $W/W_0$; the lifting is exact, while the algebraic solve that produces $W$ is
 bounded in the arithmetic model, its bit complexity being open. The results are applied to a
 published example, whose reported minimum order we correct to $4$.
@@ -110,7 +110,7 @@ q_{\min}\ \ge\ r_0+\max\bigl(0,\ \operatorname{rank}[U_0;V_0]-s_0+1\bigr).
 The published bound $q_0$ of \cite{fer26a,fer26b} comes from the algebraic condition; this one comes
 from the spectral condition, so the two rest on different necessary conditions and the larger applies.
 \item \emph{Computation and construction} (Section~\ref{sec:compute}). Given a decision procedure for
-a prescribed order, the minimum order is found in $O(\log\ell)$ calls, and a minimum-order observer is
+a prescribed order, the minimum order is found in $O(\log(\ell+2))$ calls, and a minimum-order observer is
 recovered by lifting a basis of $W/W_0$ to free rows. The lifting is exact; the algebraic solve is
 bounded in the arithmetic model, and its bit complexity is left open.
 \item \emph{A published value corrected} (Section~\ref{sec:example}). On the instance of
@@ -120,10 +120,9 @@ $q_{\min}=4$.
 \end{enumerate}
 
 \paragraph*{Roadmap}
-Section~\ref{sec:compressed} compresses the conditions to $N$, Section~\ref{sec:dimension} turns a
-design into a subspace $W$ and proves the structural bound that bounds the search, and
-Sections~\ref{sec:monotone}--\ref{sec:lowerbound} derive the minimum-order formula and the spectral
-lower bound. Section~\ref{sec:compute} reduces optimization and construction to the decision problem
+Section~\ref{sec:compressed} compresses the conditions to $N$ and turns a design into a subspace $W$,
+and proves the structural bound that bounds the search; Section~\ref{sec:monotone} derives the
+minimum-order formula and the spectral lower bound. Section~\ref{sec:compute} reduces optimization and construction to the decision problem
 of the companion paper through an explicit interface, and Section~\ref{sec:example} applies the
 results. The decision problem itself, its finite certificate and its complexity bounds are not
 reproved here.
@@ -131,6 +130,11 @@ reproved here.
 \section{Preliminaries}\label{sec:prelim}
 
 \subsection{Notation and conventions}\label{sec:notation}
+
+We take $C$ to have full row rank, $p=\operatorname{rank}C$: otherwise $C$ is replaced by a basis of
+its row space, which leaves $\operatorname{row}[C;CA]$ unchanged and hence leaves \eqref{eq:5a} and
+\eqref{eq:5b} unchanged, since both are rank identities on matrices whose rows are augmented by $C$ and
+$CA$. The integer $p$ in the order range \eqref{eq:range} is this rank.
 
 Consider the linear time-invariant system
 \begin{equation}\label{system}
@@ -428,8 +432,8 @@ $\dim(W/W_0)\le r$ is already realized with at most $m$ free rows. The disjuncti
 \end{proof}
 
 \begin{prop}[Minimum order]\label{prop:minorder}
-Let $t_{\min}=\min\{\dim(W/W_0):W \text{ feasible}\}$. Then
-$q_{\min}=r_0+t_{\min}$ and $t_{\min}\le2\ell$.
+Let $t_{\min}=\min\{\dim(W/W_0):W \text{ feasible}\}$, and $t_{\min}=q_{\min}=+\infty$ when no $W$
+is feasible. Then $q_{\min}=r_0+t_{\min}$ and $t_{\min}\le2\ell$.
 \end{prop}
 
 \begin{proof}
@@ -488,7 +492,7 @@ argument of the companion paper has to be repeated here.
 \begin{thm}[Interface]\label{thm:interface}
 Suppose that $\mathrm{DEC}(q)$ can be decided in time $T(q)$ for every order $q$ in the window
 \eqref{eq:range}, and let $\ell=\operatorname{rank}(AN)$. Then:
-\emph{(i)} $t_{\min}$, and hence $q_{\min}$, is computed with $O(\log\ell)$ calls to $\mathrm{DEC}$;
+\emph{(i)} $t_{\min}$, and hence $q_{\min}$, is computed with $O(\log(\ell+2))$ calls to $\mathrm{DEC}$;
 \emph{(ii)} given an accepted order and a subspace $W$ realizing it, an observer matrix $R$ with exactly
 $t=\dim(W/W_0)$ rows and $R[N\ AN]=Z$ is obtained by solving $t$ rational linear systems of size
 $n\times2k$.
@@ -519,7 +523,7 @@ proposition $t_{\min}$ lies in $[\max(0,q_0-r_0),\,\min(Q-r_0,\,n_0-p-r_0,\,2\el
 initial interval of Algorithm~\ref{alg:opt}, so the search is confined before it starts. By
 Lemma~\ref{lem:monotone} the predicate ``$\mathrm{DEC}(r_0+t)$ holds'' is monotone in $t$, so the
 algorithm maintains the invariant that the least feasible $t$ lies in $[\mathit{lo},\mathit{hi}]$,
-halves the interval at each step, and returns $t_{\min}$ after $O(\log\ell)$ calls to the decision
+halves the interval at each step, and returns $t_{\min}$ after $O(\log(\ell+2))$ calls to the decision
 procedure of Theorem~\ref{thm:interface}, the logarithmic factor being absorbed by the cost of that
 procedure. The
 test at the head is what distinguishes ``no feasible order up to $Q$'' from a finite answer, and it
@@ -586,8 +590,9 @@ succeeds. This returns $Y$ and $x$ as exact real algebraic numbers, with the ari
 \cite[Ch.~13]{bpr06}. We neither describe that algorithm nor bound its bit cost
 (Remark~\ref{rem:find-bit}).
 \item Form $W=\operatorname{row}Z(Y)$, choose a basis $w_1,\dots,w_t$ of $W/W_0$, and solve the
-rational linear systems $u_iM=w_i$ for $i=1,\dots,t$; this costs $\operatorname{poly}(\mathcal L)$, as
-the bit-size estimates of the companion paper show.
+linear systems $u_iM=w_i$ for $i=1,\dots,t$, whose coefficient matrix $M$ is rational while the
+right-hand side is algebraic; this costs $\operatorname{poly}(\mathcal L)$ arithmetic operations in the
+arithmetic model, as the bit-size estimates of the companion paper show.
 \item Return $R=[u_1;\dots;u_t;0]$ padded with $Q-r_0-t$ zero rows.
 \end{enumerate}
 
@@ -668,12 +673,12 @@ $q_{\min}\le4$ for this instance.
 
 We record that \cite[Sec.~VII-B]{fer26b} reports this instance as infeasible at order $4$, and
 hence $\{5,6\}$ as its order spectrum. The matrix $L$ above is a four-row witness satisfying the
-two conditions, so \emph{that report is in error}. The error is not in the characterization but in
-the way it is evaluated there: the condition-(A) family is parameterized chart by chart and a
-branch of it is missed. The formulation of the companion paper never forms that family---it
-quantifies over the chart coordinates and the certificate jointly---which is why it cannot miss a
-branch. Nothing else in this paper depends on the discrepancy: the characterization of
-\cite{fer26b} is used only for the existence of a nullspace matrix, and the witness supplies one.
+two conditions, so \emph{that report is in error}. We do not identify the source of the discrepancy:
+to do so we would have to reproduce the enumeration used there and locate the branch at fault, which
+we have not done. The explicit witness is enough to contradict the reported infeasibility at order
+four, and that is all we use. Nothing else in this paper depends on the discrepancy: the
+characterization of \cite{fer26b} is used only for the existence of a nullspace matrix, and the
+witness supplies one.
 
 \paragraph*{The two procedures on this instance}
 Write $M=[N\ AN]$ and, for the accepted $L$, $H=LN$, $H_A=LAN$.
@@ -723,7 +728,7 @@ $q_{\min}=r_0+t_{\min}$ with $t_{\min}\le2\ell$ (Proposition~\ref{prop:minorder}
 condition gives the lower bound \eqref{eq:qmin-lb}, which rests on a different necessary condition than
 the algebraic bound $q_0$ of \cite{fer26a,fer26b} and is strictly stronger on the instance of
 Section~\ref{sec:example}. Given a decision procedure for a prescribed order, minimum order and a
-minimum-order observer are obtained in $O(\log\ell)$ calls and one lifting step
+minimum-order observer are obtained in $O(\log(\ell+2))$ calls and one lifting step
 (Theorem~\ref{thm:interface}), and on a published instance the resulting value is $4$, not the $5$ that
 was reported. The feasibility characterization itself is taken from
 \cite{fer10,dar25,fer26a,fer26b}.
@@ -819,6 +824,8 @@ Cambridge University Press, 2013.
 \bibitem{bpr06} S. Basu, R. Pollack, M.-F. Roy. \emph{Algorithms in Real
   Algebraic Geometry}, 2nd ed. Berlin, Germany: Springer, 2006,
   Algorithms and Computation in Mathematics, vol. 10.
+\bibitem{lan02} S. Lang. \emph{Algebra}. Revised 3rd ed.
+Graduate Texts in Mathematics 211, Springer, 2002.
 \end{thebibliography}
 
 \end{document}

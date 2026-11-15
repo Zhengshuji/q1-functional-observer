@@ -183,6 +183,11 @@ minimum order, are treated in a companion paper.
 
 \subsection{Notation and conventions}\label{sec:notation}
 
+We take $C$ to have full row rank, $p=\operatorname{rank}C$: otherwise $C$ is replaced by a basis of
+its row space, which leaves $\operatorname{row}[C;CA]$ unchanged and hence leaves \eqref{eq:5a} and
+\eqref{eq:5b} unchanged, since both are rank identities on matrices whose rows are augmented by $C$ and
+$CA$. The integer $p$ in the order range \eqref{eq:range} is this rank.
+
 Consider the linear time-invariant system
 \begin{equation}\label{system}
 \dot{x}=Ax+Bu,\quad y=Cx,\quad z=L_0x,
@@ -480,7 +485,8 @@ d=\dim\mathcal T,\qquad s_0=\dim W_0,\qquad m=d-s_0,\\
 \end{gathered}
 \end{equation}
 and let $\pi_1(h,g)=h$, $\pi_2(h,g)=g$, $\pi_\lambda(h,g)=\lambda h-g$ be the projections of
-$\mathbb R^{2k}=\mathbb R^k\times\mathbb R^k$. Because \eqref{eq:5b} quantifies over complex
+$\mathbb R^{2k}=\mathbb R^k\times\mathbb R^k$. The parameter $\ell$ is computed in polynomial time: $N$ comes from exact rational elimination on
+$[C;CA]$ and $\ell$ is the rank of the rational matrix $AN$. Because \eqref{eq:5b} quantifies over complex
 $\lambda$, the projection $\pi_\lambda$ is applied to the complexification
 $W_{\mathbb C}=W\otimes_{\mathbb R}\mathbb C\subseteq\mathbb C^{2k}$, and dimensions are over
 $\mathbb C$; a real matrix has the same rank over $\mathbb R$ and over $\mathbb C$.
@@ -841,6 +847,9 @@ $L_0\in\mathbb Q^{r_0\times n}$, integer $q\ge r_0$.
 \State $N\gets$ basis of $\ker[C;CA]$;\quad $k\gets$ number of columns of $N$
 \State $h^0\gets L_0N$;\quad $g^0\gets L_0AN$;\quad
 $D\gets$ rational matrix with $\ker D=\operatorname{row}[N\ AN]$
+\If{$r=0$}
+  \State \Return the exact test of Section~\ref{sec:zero} \Comment{no free rows}
+\EndIf
 \For{$\omega=0$ \textbf{to} $\min(q,k)$}
   \For{each $J\subseteq[k]$ with $|J|=\omega$}
     \State form $\Phi_{\omega,J}(X,G,x)$ over $X,G\in\mathbb R^{q\times\omega}$,
@@ -854,6 +863,9 @@ $D\gets$ rational matrix with $\ker D=\operatorname{row}[N\ AN]$
            $i>r_0$;
     \Statex \quad (v) $Z^{\mathsf T}Zx=e_0$, with $Z$ from the maximal minors
            of $\lambda X-G$ (Proposition~\ref{prop:gram}).
+    \Statex \quad At $\omega=0$ the factors $X,G$ are $q\times0$ and items (i) and (v) are vacuous,
+           while (iii)–(iv) read $h^0=0$ and $g^0=0$, which is the correct test: \eqref{eq:5a} forces
+           $H_A=0$ when $H=0$, and \eqref{eq:5b} is then void.
     \If{$\Phi_{\omega,J}$ is real-feasible}
       \State \Return \textsc{feasible}
     \EndIf
@@ -1109,7 +1121,27 @@ T\le\beta(\log\beta)(\log\log\beta)(sD)^{O(N)}\\
 \end{gathered}
 \end{equation*}
 and multiplying by the chart count \eqref{eq:charts} absorbs $\exp(O(\ell))$ into the same
-exponential. The total is \eqref{eq:fpt-l}.
+exponential. The total is \eqref{eq:fpt-l}; Table~\ref{tab:fptcount} collects the sources.
+
+\begin{table}[!t]
+\centering
+\caption{Sources of the fixed-parameter bound \eqref{eq:fpt-l}, each counted as in the proof.}
+\label{tab:fptcount}
+\footnotesize
+\begin{tabular}{@{}ll@{}}
+\toprule
+Source & Bound \\
+\midrule
+quotient dimension $t$ (one per candidate order) & at most $2\ell+1$ \\
+Grassmann charts for $t$ & $\sum_t\binom{m'}{t}=2^{m'}\le4^{\ell}$ \\
+rank $\omega$ of the compressed block & at most $\ell$ \\
+real variables of the chart and certificate & $\ell^2+2\ell$ \\
+polynomials per branch & $O(\ell^2)$ \\
+maximum degree & $O(\ell)$ \\
+coefficient bit length & $\operatorname{poly}(\mathcal L)$ \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \emph{(vi) Conclusion.} By (iv) every feasible $W$ is reached, and by (v) the formula accepts exactly
 those $W$ that satisfy the two conditions, so the algorithm accepts if and only if a feasible observer
