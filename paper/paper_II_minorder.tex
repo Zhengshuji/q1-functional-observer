@@ -139,7 +139,8 @@ Consider the linear time-invariant system
 where $A\in\mathbb Q^{n\times n}$, $C\in\mathbb Q^{p\times n}$ and
 $L_0\in\mathbb Q^{r_0\times n}$.
 
-Let $q\ge r_0$ be the prescribed observer order, with $q\le n$, and set $r=q-r_0$. The
+Table~\ref{tab:notation} collects the notation. Let $q\ge r_0$ be the prescribed observer order,
+with $q\le n$, and set $r=q-r_0$. The
 observer rows are the rows of the block
 \begin{equation*}
 L=\begin{bmatrix}L_0\\R\end{bmatrix},\qquad R\in\mathbb R^{r\times n},
@@ -285,89 +286,29 @@ rank--nullity gives $\operatorname{rank}[P;M]=\operatorname{rank}P+\operatorname
 is the standard rank identity for a stacked matrix \cite[Ch.~0]{hj13}.
 \end{proof}
 
-\subsection{The compression and the pencil criterion}\label{sec:compression}
+\subsection{The two conditions in compressed form}\label{sec:compression}
 
-\begin{lem}[Compression and pencil criterion]\label{lem:compression}
-With $H$, $H_A$ and $\omega$ as above, the following statements hold.
+Two applications of Lemma~\ref{lem:rankid}, with $P=[CA;C]$ (whose kernel is $K_0$), put the two
+conditions in compressed form.
 
-(i) Condition \eqref{eq:5a} holds if and only if $\operatorname{row}H_A\subseteq\operatorname{row}H$.
-
-(ii) If \eqref{eq:5a} holds, then there exists $F\in\mathbb R^{q\times q}$ such that $H_A=FH$.
-
-(iii) Assume \eqref{eq:5a}. Then \eqref{eq:5b} holds if and only if
-\begin{equation*}
-\operatorname{rank}(\lambda H-H_A)=\omega,\qquad \forall\lambda\in\mathbb C .
-\end{equation*}
-Equivalently, the $\omega\times\omega$ maximal minors of $P(\lambda)=\lambda H-H_A$ have no common complex root; equivalently, their greatest common divisor in $\mathbb C[\lambda]$ is a nonzero constant.
-
-(iv) If \eqref{eq:5a} and \eqref{eq:5b} hold, then $\operatorname{rank}H_A=\operatorname{rank}H$.
-\end{lem}
-
-\begin{proof}
-Set $P_0=\begin{bmatrix}C\\CA\end{bmatrix}$. Since $K_0=\ker P_0$, the matrix $N$ is a basis matrix for $\ker P_0$.
-
-\emph{(i)} The rows of $P_0$ occur among the rows of both matrices below, so Lemma~\ref{lem:rankid} with $P=P_0$ and with $M=\begin{bmatrix}LA\\L\end{bmatrix}$, $M=L$ gives
-\begin{equation*}
-\begin{aligned}
-\operatorname{rank}\begin{bmatrix}LA\\ L\\ CA\\ C\end{bmatrix}
-&=\operatorname{rank}P_0+\operatorname{rank}\begin{bmatrix}H_A\\ H\end{bmatrix},\\
-\operatorname{rank}\begin{bmatrix}L\\ CA\\ C\end{bmatrix}
-&=\operatorname{rank}P_0+\operatorname{rank}H .
-\end{aligned}
-\end{equation*}
-Up to row permutations the left-hand sides are the two sides of \eqref{eq:5a}, so \eqref{eq:5a}
-holds exactly when $\operatorname{rank}[H_A;H]=\operatorname{rank}H$, that is, when
-\begin{equation}\label{eq:5a-1}
-\operatorname{row}H_A\subseteq\operatorname{row}H .
+\begin{itemize}
+\item With $Q=[LA;L]$ it gives
+$\operatorname{rank}[LA;L;CA;C]=\operatorname{rank}P+\operatorname{rank}[H_A;H]$ and
+$\operatorname{rank}[L;CA;C]=\operatorname{rank}P+\operatorname{rank}H$. Hence \eqref{eq:5a} holds if
+and only if $\operatorname{row}H_A\subseteq\operatorname{row}H$.
+\item Assume \eqref{eq:5a} and let $F$ be such that $H_A=FH$. With $Q=\lambda L-LA$ the same identity
+gives $\operatorname{rank}[\lambda L-LA;CA;C]=\operatorname{rank}P+\operatorname{rank}(\lambda
+H-H_A)$, while $\operatorname{rank}[L;CA;C]=\operatorname{rank}P+\operatorname{rank}H$; hence
+\eqref{eq:5b} holds if and only if
+\begin{equation}\label{eq:pencil}
+\operatorname{rank}(\lambda H-H_A)=\omega\qquad\text{for every }\lambda\in\mathbb C,
 \end{equation}
+and $(\lambda H-H_A)=(\lambda I-F)H$ shows that $\operatorname{rank}P(\lambda)\le\omega$ always, so
+\eqref{eq:pencil} asks for equality. Equivalently, the $\omega\times\omega$ maximal minors of
+$P(\lambda)=\lambda H-H_A$ have no common complex root \cite[Ch.~IV]{lan02}.
+\end{itemize}
 
-\emph{(ii)} By \eqref{eq:5a-1} every row of $H_A$ is a linear combination of the rows of $H$. Let $F$ have as its $i$-th row the coefficient vector of the $i$-th row of $H_A$; then
-\begin{equation}\label{eq:5a-2}
-H_A=FH .
-\end{equation}
-
-\emph{(iii)} Set
-\begin{equation*}
-M(\lambda)=\begin{bmatrix}
-\lambda L-LA\\CA\\C
-\end{bmatrix},\qquad J=\begin{bmatrix}
-L \\ CA \\C
-\end{bmatrix}.
-\end{equation*}
-Since $N$ is a basis matrix for $K_0$, $M(\lambda)N=[P(\lambda);0;0]$ and $JN=[H;0;0]$.
-Since the row space of $P_0$ is a subspace of the row spaces of both $M(\lambda)$ and $J$,
-Lemma~\ref{lem:rankid} with $P=P_0$ yields
-\begin{equation*}
-\begin{aligned}
-\operatorname{rank}M(\lambda)&=\operatorname{rank}P_0+\operatorname{rank}P(\lambda),\\
-\operatorname{rank}J&=\operatorname{rank}P_0+\operatorname{rank}H .
-\end{aligned}
-\end{equation*}
-Hence \eqref{eq:5b} is equivalent to
-\begin{equation}\label{eq:5b-1}
-\operatorname{rank}P(\lambda)=\operatorname{rank}H=\omega,\ \forall \lambda\in\mathbb C.
-\end{equation}
- Assume now \eqref{eq:5a}. By \eqref{eq:5a-2},
-\begin{equation*}
-P(\lambda)=\lambda H-H_A=(\lambda I-F)H ,
-\end{equation*}
-so every row of $P(\lambda)$ is a linear combination of the rows of $H$, that is, $\operatorname{row}P(\lambda)\subseteq\operatorname{row}H$, and therefore
-\begin{equation}\label{eq:5b-2}
-\operatorname{rank}P(\lambda)\le\omega,\qquad \forall\lambda\in\mathbb C .
-\end{equation}
-Combining \eqref{eq:5b-1} with the bound \eqref{eq:5b-2}, condition \eqref{eq:5b} becomes the requirement that some $\omega\times\omega$ minor of $P(\lambda)$ be nonzero at every $\lambda$:
-\begin{equation*}
-\eqref{eq:5b}
-\iff
-\forall\lambda\in\mathbb C\ \ \exists\,\omega\times\omega\text{ minor } f_i:\ f_i(\lambda)\neq0 .
-\end{equation*}
-A common complex root of the maximal minors is therefore exactly a value of $\lambda$ at which all of them vanish, which proves the two equivalent forms in the statement; for $\omega=0$ the condition is vacuous.
-
-\emph{(iv)} Assume \eqref{eq:5a} and \eqref{eq:5b}. By (iii), \eqref{eq:5b-1} holds for every $\lambda$; at $\lambda=0$, where $P(0)=-H_A$,
-\begin{equation*}
-\operatorname{rank}H_A=\operatorname{rank}P(0)=\operatorname{rank}H . \qedhere
-\end{equation*}
-\end{proof}
+The rest of the paper uses \eqref{eq:pencil} rather than \eqref{eq:5b}.
 
 \subsection{The space of attainable row pairs}\label{sec:free}
 
@@ -384,28 +325,13 @@ d_0=\dim\mathcal T=\operatorname{rank}[N\ \ AN].
 \end{equation*}
 Therefore, a rational basis of $\mathcal T$ allows each attainable pair generated by a free row to be parameterized by exactly $d_0$ real coordinates.
 
-\begin{lem}[Attainable row pairs and the effective dimension]\label{lem:attainable}
-Every free row pair lies in $\mathcal T$, and writing the $r$ free rows in a basis of $\mathcal T$ represents them by
+Writing the $r$ free rows in a basis of $\mathcal T$ describes them by
 \begin{equation}\label{eq:kappa}
-\kappa_{\rm obs}=r d_0
+\kappa_{\rm obs}=r\,d_0,\qquad d_0=\dim\mathcal T=\operatorname{rank}[N\ AN],
 \end{equation}
-coordinates. Moreover, when $r\ge1$,
-\begin{equation}\label{lem3-2}
-k\le d_0\le rd_0=\kappa_{\rm obs}.
-\end{equation}
-\end{lem}
-
-\begin{proof}
-The identity $(H_i,(H_A)_i)=r_i[N\ AN]$ places every free row pair in $\mathcal T$, whose dimension
-is $d_0=\operatorname{rank}[N\ AN]$ by definition of the row space. Writing the $r$ free rows in a
-basis of $\mathcal T$ describes them by $r\dim\mathcal T=rd_0$ coordinates, which is
-\eqref{eq:kappa}. Since $N$ has full column rank,
-\begin{equation}\label{lem3-1}
-k=\operatorname{rank}N\le\operatorname{rank}[N\ AN]=d_0 ,
-\end{equation}
-and $r\ge1$ gives $d_0\le rd_0=\kappa_{\rm obs}$, which together with \eqref{lem3-1} is
-\eqref{lem3-2}.
-\end{proof}
+real coordinates, and $k\le d_0$ because $N$ has full column rank. The count $\kappa_{\rm obs}$ is
+not the parameter of the algorithms: it grows with $r$, whereas the parameter that enters
+Theorem~\ref{thm:interface} is $\ell\le k$.
 
 \begin{remark}[Basis invariance]
 If $N\mapsto NQ$ with nonsingular $Q\in\mathbb R^{k\times k}$, then
@@ -483,15 +409,7 @@ $\lambda_0$, and $\pi_{\lambda_0}(W)=(\lambda_0I-F)U$ has dimension $<\omega$, c
 Lemma~\ref{lem:W-conditions}.
 \end{proof}
 
-\begin{remark}[Coordinate change to $S$]\label{rem:YS}
-Fix a rational basis of $S$ and extend it to a rational basis of $\mathbb R^k$; let $Y_S$ be
-the change-of-basis matrix, so that $X\mapsto XY_S$ puts the coordinates of $S$ first. Right
-multiplication by $Y_S$ preserves ranks and the inclusions and equalities between row spaces,
-though not row spaces themselves, so Lemma~\ref{lem:W-conditions} and
-Lemma~\ref{lem:struct} apply verbatim in the new coordinates and every object involved lives
-in $\mathbb R^\ell$. The basis is obtained by column elimination on $AN$, so the entries of
-$Y_S$ have bit length $\operatorname{poly}(\mathcal L)$.
-\end{remark}
+
 
 \section{Minimum order and the spectral bound}\label{sec:monotone}\label{sec:lowerbound}
 
@@ -534,16 +452,6 @@ q_{\min}\ \ge\ r_0+\max\bigl(0,\ \operatorname{rank}[U_0;V_0]-s_0+1\bigr).
 \end{equation}
 \end{prop}
 
-Proposition~\ref{prop:lowerbound} is the spectral counterpart of the algebraic bound of
-\cite{fer26a,fer26b}. That bound, $q_0=\sum_j\eta_j$, limits the orders at which \eqref{eq:5a} can
-hold; \eqref{eq:lb} limits the orders at which \eqref{eq:5b} can hold, since it uses only the
-condition at $\lambda=0$ and the structural bound. The two are independent, both are computed in
-polynomial time, and the larger one applies; on the instance of Appendix~\ref{app:example} the bound
-below gives $4$ while $q_0=3$. To our knowledge the literature states no lower bound derived from the
-spectral condition: the design conditions of \cite{fer10,dar25,fer26a,fer26b} and the order bound
-$q_0$ all concern \eqref{eq:5a}, and the spectral condition is treated there as a test applied at each
-order rather than as a source of a bound.
-
 \begin{proof}
 Since $W\supseteq W_0$ the projections satisfy $\pi_1(W)\supseteq\pi_1(W_0)=U_0$ and
 $\pi_2(W)\supseteq\pi_2(W_0)=V_0$. By Lemma~\ref{lem:W-conditions} at $\lambda=0$ we have
@@ -553,8 +461,19 @@ $\omega+1\le\dim W=s_0+t$. Combining and using $q_{\min}=r_0+t_{\min}$ with $t_{
 \eqref{eq:qmin-lb}.
 \end{proof}
 
+Proposition~\ref{prop:lowerbound} is the spectral counterpart of the algebraic bound of
+\cite{fer26a,fer26b}. That bound, $q_0=\sum_j\eta_j$, limits the orders at which \eqref{eq:5a} can
+hold; \eqref{eq:lb} limits the orders at which \eqref{eq:5b} can hold, since it uses only the condition
+at $\lambda=0$ and the structural bound. The two are independent, both are computed in polynomial time,
+and the larger one applies; on the instance of Section~\ref{sec:example} the bound gives $4$ while
+$q_0=3$. To our knowledge the literature states no lower bound derived from the spectral condition: the
+design conditions of \cite{fer10,dar25,fer26a,fer26b} and the order bound $q_0$ all concern
+\eqref{eq:5a}, and the spectral condition is treated there as a test applied at each order rather than
+as a source of a bound.
+
 \begin{remark}[On tightness]\label{rem:lbtight}
-The bound \eqref{eq:qmin-lb} is attained on the instance of Appendix~\ref{app:example}, where it gives
+The bound \eqref{eq:qmin-lb} is attained on the instance of Section~\ref{sec:example}, where it
+gives
 $4$ and $q_{\min}=4$. We do not claim that it is tight in general: like the algebraic bound $q_0$ it is
 a lower bound, and the difference
 $q_{\min}-\bigl(r_0+\max(0,\operatorname{rank}[U_0;V_0]-s_0+1)\bigr)$ can be positive. What it does
@@ -594,8 +513,21 @@ $\mathrm{OPT}$ is decidable in $\exp\bigl(O(\ell^2\log(\ell+2))\bigr)\operatorna
 bit operations.
 \end{cor}
 
+\begin{proof}
+By Proposition~\ref{prop:minorder} $q_{\min}=r_0+t_{\min}$, and by \eqref{eq:range} and the same
+proposition $t_{\min}$ lies in $[\max(0,q_0-r_0),\,\min(Q-r_0,\,n_0-p-r_0,\,2\ell)]$; that is the
+initial interval of Algorithm~\ref{alg:opt}, so the search is confined before it starts. By
+Lemma~\ref{lem:monotone} the predicate ``$\mathrm{DEC}(r_0+t)$ holds'' is monotone in $t$, so the
+algorithm maintains the invariant that the least feasible $t$ lies in $[\mathit{lo},\mathit{hi}]$,
+halves the interval at each step, and returns $t_{\min}$ after $O(\log\ell)$ calls to the decision
+procedure of Theorem~\ref{thm:interface}, the logarithmic factor being absorbed by the cost of that
+procedure. The
+test at the head is what distinguishes ``no feasible order up to $Q$'' from a finite answer, and it
+is correct because the predicate is upward closed.
+\end{proof}
 Algorithm~\ref{alg:opt} makes the search explicit: $\mathrm{DEC}$ is used as a subroutine, and the
 monotonicity of Lemma~\ref{lem:monotone} is what makes a binary search correct.
+
 
 \begin{algorithm}[!t]
 \caption{Minimum order $\mathrm{OPT}$, with $\mathrm{DEC}$ as a subroutine}
@@ -621,18 +553,7 @@ $q_0$ as in \eqref{eq:range}.
 \end{algorithmic}
 \end{algorithm}
 
-\begin{proof}
-By Proposition~\ref{prop:minorder} $q_{\min}=r_0+t_{\min}$, and by \eqref{eq:range} and the same
-proposition $t_{\min}$ lies in $[\max(0,q_0-r_0),\,\min(Q-r_0,\,n_0-p-r_0,\,2\ell)]$; that is the
-initial interval of Algorithm~\ref{alg:opt}, so the search is confined before it starts. By
-Lemma~\ref{lem:monotone} the predicate ``$\mathrm{DEC}(r_0+t)$ holds'' is monotone in $t$, so the
-algorithm maintains the invariant that the least feasible $t$ lies in $[\mathit{lo},\mathit{hi}]$,
-halves the interval at each step, and returns $t_{\min}$ after $O(\log\ell)$ calls to the decision
-procedure of Theorem~\ref{thm:interface}, the logarithmic factor being absorbed by the cost of that
-procedure. The
-test at the head is what distinguishes ``no feasible order up to $Q$'' from a finite answer, and it
-is correct because the predicate is upward closed.
-\end{proof}
+
 
 \begin{remark}[Room for improvement]\label{rem:refine}
 The complexity bound does not depend on how tightly the window is chosen, so
@@ -640,7 +561,7 @@ Algorithm~\ref{alg:opt} uses only the published lower bound $q_0$ and the struct
 Two cheap refinements are available and are left out on purpose, to keep the algorithm free of
 instance-specific preprocessing. First, \eqref{eq:qmin-lb} gives a lower bound that is computed in
 polynomial time from $U_0$ and $V_0$ and can be strictly larger than $q_0$; on the instance of
-Appendix~\ref{app:example} it equals $4$ while $q_0=3$. Replacing $\max(0,q_0-r_0)$ by the larger of
+Section~\ref{sec:example} it equals $4$ while $q_0=3$. Replacing $\max(0,q_0-r_0)$ by the larger of
 the two bounds in line~2 shrinks the window without affecting correctness. Second, the structural
 bound \eqref{eq:struct} also confines $\omega$ on each chart, which prunes branches of the inner loop
 in the algorithm of the companion paper. Neither refinement changes any asymptotic statement, and

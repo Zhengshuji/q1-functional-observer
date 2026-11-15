@@ -190,6 +190,7 @@ Consider the linear time-invariant system
 where $A\in\mathbb Q^{n\times n}$, $C\in\mathbb Q^{p\times n}$ and
 $L_0\in\mathbb Q^{r_0\times n}$.
 
+Table~\ref{tab:notation} collects the notation; the rows of the observer matrix are named there.
 Let $q\ge r_0$ be the prescribed observer order, with $q\le n$, and set $r=q-r_0$. The
 observer rows are the rows of the block
 \begin{equation*}
@@ -990,8 +991,8 @@ By Lemma~\ref{lem:sandwich} a feasible observer corresponds to a subspace $W$ wi
 $W_0\subseteq W\subseteq\mathcal T$ and $\dim(W/W_0)\le r$, and by Lemma~\ref{lem:W-conditions} the
 two conditions depend on $W$ alone. Lemma~\ref{lem:struct} confines the feasible $W$ to
 $\omega+1\le\dim W\le2\omega$ with $\omega\le\ell$, and Remark~\ref{rem:YS} puts every object in
-$\mathbb R^\ell$. The algorithm therefore quantifies over a chart of a Grassmannian of dimension
-at most $2\ell$ and over the $2\omega$ certificate variables, and the only non-polynomial factor
+$\mathbb R^\ell$. Algorithm~\ref{alg:fpt} does this: it quantifies over a chart of a Grassmannian of dimension at most
+$2\ell$ and over the $2\omega$ certificate variables, and the only non-polynomial factor
 is the parameter $\ell=\operatorname{rank}(AN)$, which by \eqref{eq:ell} does not involve $r$.
 
 \begin{algorithm}[!t]
@@ -1119,6 +1120,11 @@ exists.
 The same algorithm uses $\exp\bigl(O(\ell^2\log(\ell+2))\bigr)\operatorname{poly}(\mathcal L)$
 arithmetic operations.
 \end{cor}
+
+\begin{proof}
+Immediate from Theorem~\ref{thm:fpt}: arithmetic operations are among the operations counted in the
+bit bound, and the data have bit length $\operatorname{poly}(\mathcal L)$.
+\end{proof}
 
 \section{The zero-free-row case: an exact polynomial-time pencil test}\label{sec:zero}
 
