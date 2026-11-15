@@ -134,43 +134,54 @@ $\ell$.
 
 \subsection{Contributions and organization}\label{sec:contrib}
 
-The contributions are the following.
+The results form a chain, and the paper follows it: each item states what is established and where.
 
 \begin{enumerate}
-\item A compression of the two observer conditions, which are taken from the existing
-characterization, to $O(q^2)$ variables independently of the state dimension, and a
-reduction of the free rows to a subspace $W$ of the compressed row-pair space, in which the
-two conditions are a row-space inclusion and the constant rank of a pencil.
-\item The identification of the parameter $\ell=\operatorname{rank}(AN)\le k$ that governs
-the complexity bound. It is an invariant of the system and the prescribed rows alone: it does not
-involve the number $r$ of free rows, whereas the chart parameterization of \cite{fer26b}
-carries $(n-p-q)(q-r)$ parameters per chart for fixed order $q$.
-\item A lower bound on the minimum order that comes from the spectral condition rather than
-from the algebraic one: $\operatorname{rank}[U_0;V_0]\le\omega\le s_0+t-1$ with $U_0=\operatorname{row}(L_0N)$
-and $V_0=\operatorname{row}(L_0AN)$, hence
-$q_{\min}\ge r_0+\max(0,\operatorname{rank}[U_0;V_0]-s_0+1)$. It is computed in polynomial time,
+\item \emph{The reduction} (Section~\ref{sec:compressed}). The two conditions are compressed to
+$O(q^2)$ variables independently of the state dimension, and the free rows are reduced to a subspace
+$W$ of the compressed row-pair space, in which the conditions become a row-space inclusion and the
+constant rank of a pencil.
+\item \emph{The parameter and a lower bound} (Section~\ref{sec:dimension}). The cost is governed by
+$\ell=\operatorname{rank}(AN)\le k$, an invariant of the system and of the prescribed rows alone: it
+does not involve the number $r$ of free rows, whereas the chart parameterization of \cite{fer26b}
+carries $(n-p-q)(q-r)$ parameters per chart at fixed order $q$. In addition, the spectral condition
+gives the lower bound
+$q_{\min}\ge r_0+\max\bigl(0,\operatorname{rank}[U_0;V_0]-s_0+1\bigr)$, with
+$U_0=\operatorname{row}(L_0N)$ and $V_0=\operatorname{row}(L_0AN)$; it is computed in polynomial time,
 it is independent of the algebraic bound $q_0$ of \cite{fer26a,fer26b}, and on the instance of
 Appendix~\ref{app:example} it is strictly stronger.
-\item A finite algebraic certificate for the spectral condition, and its compression by
-Cauchy--Binet to a matrix of size controlled by $\ell$; no enumeration of maximal minors is
-required.
-\item A decision algorithm for every fixed order, with a bit-complexity bound
-$\mathcal L^{O(q^2)}$ in the input length $\mathcal L$ and the prescribed order $q$.
-\item A decision algorithm that is fixed-parameter tractable in $\ell$, with bound
-$\exp\bigl(O(\ell^2\log(\ell+2))\bigr)\operatorname{poly}(\mathcal L)$, together with the
-monotonicity and saturation of the free-row count, which make the threshold problem a single
-decision instance and give minimum order by binary search, and an exact polynomial-time test
-for the case of no free rows.
-\item Membership of the prescribed-order decision problem, and of its finite threshold
-version, in the existential theory of the reals.
+\item \emph{The certificate} (Section~\ref{sec:certificate}). The spectral condition becomes a finite
+algebraic certificate, compressed by Cauchy--Binet to a matrix of size controlled by $\ell$; no
+enumeration of maximal minors is required.
+\item \emph{The fixed-order algorithm} (Section~\ref{sec:fixedq}). $\mathrm{DEC}(q)$ is decided in
+$\mathcal L^{O(q^2)}$ bit operations for every fixed order $q$.
+\item \emph{The fixed-parameter algorithm} (Section~\ref{sec:fpt}). $\mathrm{DEC}$ is decided in
+$\exp\bigl(O(\ell^2\log(\ell+2))\bigr)\operatorname{poly}(\mathcal L)$ bit operations; the monotonicity
+and saturation of the free-row count turn the threshold problem into a single decision instance and
+give the minimum order by binary search (Algorithm~\ref{alg:opt}); the witness is returned in the
+arithmetic model, and the case of no free rows is decided exactly in polynomial time.
+\item \emph{Classification} (Section~\ref{sec:existsr}). The prescribed-order decision problem and its
+finite threshold version lie in the existential theory of the reals.
 \end{enumerate}
 
-The paper is organized as follows. Section~\ref{sec:prelim} fixes the notation and states
-the decision, optimization and construction problems. Section~\ref{sec:compressed} proves
-the compression, Section~\ref{sec:dimension} identifies the effective dimension, and
-Section~\ref{sec:certificate} develops the certificate. Sections~\ref{sec:fixedq}
-and~\ref{sec:fpt} give the two algorithms, Section~\ref{sec:existsr} records the
-existential-real membership, and Section~\ref{sec:conclusions} concludes.
+\paragraph*{Proof roadmap}
+Both complexity theorems are reached in the same three stages, and the intermediate results are named
+here once, so that the later sections can also be read out of order. (i) \emph{Reduction}:
+Lemmas~\ref{lem:compression}--\ref{lem:attainable} compress the two conditions to the row space of
+$[H\ H_A]$, and Lemmas~\ref{lem:sandwich}--\ref{lem:W-conditions} make them depend on a subspace $W$
+alone, which is what makes the search finite. (ii) \emph{Structure}: Lemma~\ref{lem:struct} confines a
+feasible $W$ to $\omega+1\le\dim W\le2\omega$ with $\omega\le\ell$, Lemma~\ref{lem:monotone} gives
+monotonicity, and Proposition~\ref{prop:minorder} with Proposition~\ref{prop:lowerbound} produce the
+minimum order and the lower bound. (iii) \emph{Certificate}: Lemma~\ref{lem:bezout} and
+Lemma~\ref{lem:window} turn the spectral condition into the Gram equation $Z^{\mathsf T}Zx=e_0$ of
+Proposition~\ref{prop:gram}, which is the object both algorithms test. Theorem~\ref{thm:fixedq} then
+counts the cost at fixed order and Theorem~\ref{thm:fpt} the cost in $\ell$; the only technical lemmas
+outside this chain are Lemmas~\ref{lem:rationalbasis} and~\ref{lem:coeff}, which bound the coefficient
+sizes.
+
+Section~\ref{sec:conclusions} collects what is not claimed and the evidence behind each statement;
+Appendix~\ref{app:encoding} gives the existential-real encoding and Appendix~\ref{app:example} a worked
+example.
 
 \section{Preliminaries}\label{sec:prelim}
 
@@ -373,7 +384,7 @@ H_A=FH .
 \emph{(iii)} Set
 \begin{equation*}
 M(\lambda)=\begin{bmatrix}
-	\lambda L-LA\\CA\\C
+\lambda L-LA\\CA\\C
 \end{bmatrix},\qquad J=\begin{bmatrix}
 L \\ CA \\C
 \end{bmatrix}.
@@ -657,36 +668,36 @@ $B$ can be eliminated. Let $b$ denote the vectorization of the remaining unknown
 \end{equation*}
 
 \begin{lem}[Rank consistency]\label{lem:rankcons}
-	For real matrices $M,c$,
-	\[
-	\exists b:\ Mb=c
-	\]
-	if and only if
-	\[
-	\operatorname{rank}(MM^{\mathsf T})
-	=\operatorname{rank}(MM^{\mathsf T}+cc^{\mathsf T}).
-	\]
-	Equivalently, with $\Gamma=MM^{\mathsf T}$ and
-	$\Gamma'=MM^{\mathsf T}+cc^{\mathsf T}$,
-	\[
-	\bigvee_{t=0}^{d_1}
-	\left[e_t(\Gamma)>0\wedge e_{t+1}(\Gamma)=0\wedge e_{t+1}(\Gamma')=0\right],
-	\]
-	where $d_1=\min(\text{rows},\text{cols})$ of $M$ and $e_j$ is the
-	$j$-th elementary symmetric polynomial of the eigenvalues.
+For real matrices $M,c$,
+\begin{equation*}
+\exists b:\ Mb=c
+\end{equation*}
+if and only if
+\begin{equation*}
+\operatorname{rank}(MM^{\mathsf T})
+=\operatorname{rank}(MM^{\mathsf T}+cc^{\mathsf T}).
+\end{equation*}
+Equivalently, with $\Gamma=MM^{\mathsf T}$ and
+$\Gamma'=MM^{\mathsf T}+cc^{\mathsf T}$,
+\begin{equation*}
+\bigvee_{t=0}^{d_1}
+\left[e_t(\Gamma)>0\wedge e_{t+1}(\Gamma)=0\wedge e_{t+1}(\Gamma')=0\right],
+\end{equation*}
+where $d_1=\min(\text{rows},\text{cols})$ of $M$ and $e_j$ is the
+$j$-th elementary symmetric polynomial of the eigenvalues.
 \end{lem}
 
 \begin{proof}
 The equation $Mb=c$ is consistent if and only if $c\in\operatorname{im}M$, which is the classical
 consistency criterion for linear systems, $\operatorname{rank}[M\ c]=\operatorname{rank}M$
 \cite[Ch.~0]{hj13}. Since
-\[
+\begin{equation*}
 \begin{gathered}
 \operatorname{im}[M\ c]=\operatorname{im}M+\operatorname{span}\{c\},\qquad
 \operatorname{im}(MM^{\mathsf T})=\operatorname{im}M,\\
 \operatorname{im}(MM^{\mathsf T}+cc^{\mathsf T})=\operatorname{im}[M\ c],
 \end{gathered}
-\]
+\end{equation*}
 the two rank equalities of the statement describe the same condition. For a positive semidefinite
 $\Gamma$ the elementary symmetric functions of its eigenvalues satisfy
 $e_j(\Gamma)>0\iff\operatorname{rank}\Gamma\ge j$ \cite[Ch.~4]{hj13}, so the displayed disjunction
@@ -697,135 +708,107 @@ $\operatorname{rank}(MM^{\mathsf T}+cc^{\mathsf T})=t$.
 
 \paragraph*{Spectral reduction}\label{sec:spectral}
 Since $B$ has full row rank,
-\[
+\begin{equation*}
 \operatorname{rank}P(\lambda)
 =\operatorname{rank}\bigl((\lambda X-G)B\bigr)
 =\operatorname{rank}(\lambda X-G).
-\]
+\end{equation*}
 Thus \eqref{eq:5b} is equivalent to
-\[
+\begin{equation*}
 \operatorname{rank}(\lambda X-G)=\omega,\qquad\forall\lambda\in\mathbb C .
-\]
+\end{equation*}
 
 \subsection{The spectral certificate}\label{sec:spectrum}
 
 \begin{lem}[B\'ezout degree bound]\label{lem:bezout}\label{sec:bezout}
-	Let $\omega\ge1$, and let $f_1,\ldots,f_s\in\mathbb R[\lambda]$ have
-	degree at most $\omega$ and no common complex root. Then there exist
-	real polynomials $g_i$ with $\deg g_i<\omega$ such that
-	\[
-	\sum_i g_i f_i=1 .
-	\]
+Let $\omega\ge1$, and let $f_1,\ldots,f_s\in\mathbb R[\lambda]$ have
+degree at most $\omega$ and no common complex root. Then there exist
+real polynomials $g_i$ with $\deg g_i<\omega$ such that
+\begin{equation*}
+\sum_i g_i f_i=1 .
+\end{equation*}
 \end{lem}
 
 \begin{proof}
-	Choose $a\in\mathbb R^s$ such that
-	\[
-	g=\sum_i a_if_i\neq0,
-	\]
-	which is possible because the $f_i$ have no common complex root. Let
-	$\alpha_1,\dots,\alpha_m$ be the distinct complex roots of $g$, and for
-	$b\in\mathbb R^s$ put
-	\[
-	h=\sum_i b_if_i,\qquad
-	h(\alpha_j)=\ell_j(b)+i\,m_j(b),
-	\]
-	where $\ell_j$ and $m_j$ are real linear forms. Some $f_i(\alpha_j)$ is
-	nonzero, since otherwise $\alpha_j$ would be a common root, so the pair
-	$(\ell_j,m_j)$ does not vanish identically and
-	\[
-	V_j:=\{b\in\mathbb R^s:\ h(\alpha_j)=0\}
-	=\ker\ell_j\cap\ker m_j\subsetneq\mathbb R^s .
-	\]
-	A finite union of proper subspaces cannot cover $\mathbb R^s$, hence
-	\[
-	\begin{gathered}
-	\exists\,b\in\mathbb R^s:\quad b\notin\bigcup_{j=1}^{m}V_j,\\
-	\text{that is,}\quad h(\alpha_j)\neq0\quad (j=1,\dots,m).
-	\end{gathered}
-	\]
-	Then $g$ and $h$ have no common root and are therefore coprime, so the two-polynomial
-	B\'ezout identity with degree bounds \cite[Ch.~3]{vzgg13} yields
-	$u,v\in\mathbb R[\lambda]$ with
-	\[
-	\begin{gathered}
-	ug+vh=1,\\
-	\deg u<\deg h\le\omega,\qquad \deg v<\deg g\le\omega .
-	\end{gathered}
-	\]
-	Expanding $g,h$ in the $f_i$ and setting $g_i=ua_i+vb_i$ gives
-	\[
-	\sum_i g_i f_i=1,\qquad \deg g_i<\omega .
-	\]
+Choose $a\in\mathbb R^s$ with $g=\sum_i a_if_i\neq0$, possible because the $f_i$ have no common
+complex root, and let $\alpha_1,\dots,\alpha_m$ be the distinct roots of $g$. For $b\in\mathbb R^s$ put
+$h=\sum_i b_if_i$ and write $h(\alpha_j)=\ell_j(b)+i\,m_j(b)$, with $\ell_j,m_j$ real linear forms.
+Some $f_i(\alpha_j)$ is nonzero, since otherwise $\alpha_j$ would be a common root, so $(\ell_j,m_j)$
+does not vanish identically and $V_j=\{b:h(\alpha_j)=0\}=\ker\ell_j\cap\ker m_j$ is a proper subspace
+of $\mathbb R^s$. A finite union of proper subspaces cannot cover $\mathbb R^s$, so some $b$ satisfies
+$h(\alpha_j)\neq0$ for every $j$; then $g$ and $h$ are coprime, and the two-polynomial B\'ezout
+identity with degree bounds \cite[Ch.~3]{vzgg13} gives $u,v$ with $ug+vh=1$, $\deg u<\deg h\le\omega$
+and $\deg v<\deg g\le\omega$. Expanding $g,h$ in the $f_i$ and setting $g_i=ua_i+vb_i$ gives
+$\sum_i g_if_i=1$ with $\deg g_i<\omega$.
 \end{proof}
 
-\begin{lem}[Window]\label{lem:window}
-	Let $f_1,\dots,f_s\in\mathbb R[\lambda]$ have degree at most $\omega$,
-	let $c_{i,a}$ be the coefficient of $\lambda^a$ (with $c_{i,a}=0$ for
-	$a<0$ or $a>\omega$), and let $Z$ be the matrix with rows $(i,j)$,
-	$0\le j<\omega$, columns $t=0,\dots,2\omega-1$, and
-	$Z_{(i,j),t}=c_{i,t-j}$. For a polynomial $p$ of degree at most
-	$2\omega-1$, let $\operatorname{coef}(p)\in\mathbb R^{2\omega}$ be its
-	coefficient vector in the basis $1,\lambda,\dots,\lambda^{2\omega-1}$.
-	Then
-	\[
-	\operatorname{row}Z=
-	\Bigl\{
-	\operatorname{coef}\Bigl(\textstyle\sum_i g_if_i\Bigr)
-	:\ \deg g_i<\omega
-	\Bigr\}.
-	\]
+\begin{lem}[Degree-windowed relations]\label{lem:window}
+Let $f_1,\dots,f_s\in\mathbb R[\lambda]$ have degree at most $\omega$,
+let $c_{i,a}$ be the coefficient of $\lambda^a$ (with $c_{i,a}=0$ for
+$a<0$ or $a>\omega$), and let $Z$ be the matrix with rows $(i,j)$,
+$0\le j<\omega$, columns $t=0,\dots,2\omega-1$, and
+$Z_{(i,j),t}=c_{i,t-j}$. For a polynomial $p$ of degree at most
+$2\omega-1$, let $\operatorname{coef}(p)\in\mathbb R^{2\omega}$ be its
+coefficient vector in the basis $1,\lambda,\dots,\lambda^{2\omega-1}$.
+Then
+\begin{equation*}
+\operatorname{row}Z=
+\Bigl\{
+\operatorname{coef}\Bigl(\textstyle\sum_i g_if_i\Bigr)
+:\ \deg g_i<\omega
+\Bigr\}.
+\end{equation*}
 \end{lem}
 
 \begin{proof}
-	Row $(i,j)$ of $Z$ is $\operatorname{coef}(\lambda^jf_i)$, because
-	\[
-	\lambda^jf_i=\sum_t c_{i,t-j}\lambda^t .
-	\]
-	For weights $y_{i,j}$, the linearity of $\operatorname{coef}$ on
-	polynomials of degree at most $2\omega-1$ gives
-	\[
-	\begin{aligned}
-	\sum_{i,j}y_{i,j}\operatorname{coef}(\lambda^jf_i)
-	&=\operatorname{coef}\Bigl(\sum_{i,j}y_{i,j}\lambda^jf_i\Bigr)\\
-	&=\operatorname{coef}\Bigl(\sum_i g_if_i\Bigr),
-	\qquad g_i=\sum_j y_{i,j}\lambda^j,
-	\end{aligned}
-	\]
-	with $\deg g_i<\omega$; conversely, every family $g_i$ with
-	$\deg g_i<\omega$ arises from its own coefficients $y_{i,j}$. Since
-	$\deg(\lambda^jf_i)\le\omega+j\le2\omega-1$, all coefficients fit in
-	the $2\omega$ columns, and the convention $c_{i,a}=0$ outside
-	$0\le a\le\omega$ makes the truncation automatic.
+Row $(i,j)$ of $Z$ is $\operatorname{coef}(\lambda^jf_i)$, because
+\begin{equation*}
+\lambda^jf_i=\sum_t c_{i,t-j}\lambda^t .
+\end{equation*}
+For weights $y_{i,j}$, the linearity of $\operatorname{coef}$ on
+polynomials of degree at most $2\omega-1$ gives
+\begin{equation*}
+\begin{aligned}
+\sum_{i,j}y_{i,j}\operatorname{coef}(\lambda^jf_i)
+&=\operatorname{coef}\Bigl(\sum_{i,j}y_{i,j}\lambda^jf_i\Bigr)\\
+&=\operatorname{coef}\Bigl(\sum_i g_if_i\Bigr),
+\qquad g_i=\sum_j y_{i,j}\lambda^j,
+\end{aligned}
+\end{equation*}
+with $\deg g_i<\omega$; conversely, every family $g_i$ with
+$\deg g_i<\omega$ arises from its own coefficients $y_{i,j}$. Since
+$\deg(\lambda^jf_i)\le\omega+j\le2\omega-1$, all coefficients fit in
+the $2\omega$ columns, and the convention $c_{i,a}=0$ outside
+$0\le a\le\omega$ makes the truncation automatic.
 \end{proof}
 
 \begin{prop}[Gram certificate]\label{prop:gram}\label{sec:gram}
-	Let $\omega\ge1$, let $f_i$ be the maximal minors of $P(\lambda)$, and let $Z$ be the window
-	matrix of Lemma~\ref{lem:window} built from them, with $c_{i,a}$ the coefficient of $\lambda^a$
-	in $f_i$; let $e_0=(1,0,\ldots,0)^{\mathsf T}\in\mathbb R^{2\omega}$. Then
-	\[
-	\eqref{eq:5b}
-	\iff e_0^{\mathsf T}\in\operatorname{row}Z
-	\iff\exists x\in\mathbb R^{2\omega}:\ Z^{\mathsf T}Zx=e_0 .
-	\]
+Let $\omega\ge1$, let $f_i$ be the maximal minors of $P(\lambda)$, and let $Z$ be the window
+matrix of Lemma~\ref{lem:window} built from them, with $c_{i,a}$ the coefficient of $\lambda^a$
+in $f_i$; let $e_0=(1,0,\ldots,0)^{\mathsf T}\in\mathbb R^{2\omega}$. Then
+\begin{equation*}
+\eqref{eq:5b}
+\iff e_0^{\mathsf T}\in\operatorname{row}Z
+\iff\exists x\in\mathbb R^{2\omega}:\ Z^{\mathsf T}Zx=e_0 .
+\end{equation*}
 \end{prop}
 
 \begin{proof}
-	By construction, $\operatorname{coef}(\lambda^jf_i)$ is row $(i,j)$ of $Z$, so
-	Lemma~\ref{lem:window} identifies $\operatorname{row}Z$ with the coefficient vectors of the sums
-	$\sum_i g_if_i$ with $\deg g_i<\omega$. With $e_0^{\mathsf T}=\operatorname{coef}(1)$, this gives
-	$e_0^{\mathsf T}\in\operatorname{row}Z$ if and only if there are $g_i$ with $\deg g_i<\omega$ and
-	$\sum_i g_if_i=1$, which is the B\'ezout representation of Lemma~\ref{lem:bezout}; it exists if
-	and only if the $f_i$ have no common complex root, that is, if and only if \eqref{eq:5b}. The
-	window $\deg g_i<\omega$ is exactly the one Lemma~\ref{lem:bezout} supplies, so no bound on an
-	arbitrary relation is needed. Finally, for real $Z$,
-	\[
-	\operatorname{row}Z=\operatorname{im}Z^{\mathsf T}
-	=\operatorname{im}(Z^{\mathsf T}Z),
-	\]
-	the last equality because $\ker Z=\ker(Z^{\mathsf T}Z)$; hence
-	$e_0^{\mathsf T}\in\operatorname{row}Z$ if and only if
-	$Z^{\mathsf T}Zx=e_0$ has a real solution.
+By construction, $\operatorname{coef}(\lambda^jf_i)$ is row $(i,j)$ of $Z$, so
+Lemma~\ref{lem:window} identifies $\operatorname{row}Z$ with the coefficient vectors of the sums
+$\sum_i g_if_i$ with $\deg g_i<\omega$. With $e_0^{\mathsf T}=\operatorname{coef}(1)$, this gives
+$e_0^{\mathsf T}\in\operatorname{row}Z$ if and only if there are $g_i$ with $\deg g_i<\omega$ and
+$\sum_i g_if_i=1$, which is the B\'ezout representation of Lemma~\ref{lem:bezout}; it exists if
+and only if the $f_i$ have no common complex root, that is, if and only if \eqref{eq:5b}. The
+window $\deg g_i<\omega$ is exactly the one Lemma~\ref{lem:bezout} supplies, so no bound on an
+arbitrary relation is needed. Finally, for real $Z$,
+\begin{equation*}
+\operatorname{row}Z=\operatorname{im}Z^{\mathsf T}
+=\operatorname{im}(Z^{\mathsf T}Z),
+\end{equation*}
+the last equality because $\ker Z=\ker(Z^{\mathsf T}Z)$; hence
+$e_0^{\mathsf T}\in\operatorname{row}Z$ if and only if
+$Z^{\mathsf T}Zx=e_0$ has a real solution.
 \end{proof}
 
 \paragraph*{Cauchy--Binet compression}\label{sec:cb}
@@ -834,72 +817,72 @@ $S=\operatorname{row}(AN)$ and the remaining $k-\ell$ ones span a complement. Fo
 two projections coincide and lie in $S$ (Lemma~\ref{lem:struct}), so every row of $H=LN$ and of
 $H_A=LAN$ belongs to $S$; hence in these coordinates the last $k-\ell$ columns of $P(\lambda)=\lambda
 H-H_A$ vanish, and a nonzero minor uses only the $\ell$ columns of $S$. Accordingly define
-\[
+\begin{equation*}
 K(\lambda,\mu)=\sum_{|J|=\omega}
 \det\left(P(\lambda)_{:,J}^{\mathsf T}P(\mu)_{:,J}\right),
-\]
+\end{equation*}
 where $J$ ranges over the $\omega$-element subsets of $[\ell]$; a column set meeting the
 complement of $S$ gives a zero determinant. For each fixed column set $J$, the Cauchy--Binet identity
 \cite[Ch.~0]{hj13} applied
 to the $\omega\times q$ matrix $P(\lambda)_{:,J}^{\mathsf T}$ and the
 $q\times\omega$ matrix $P(\mu)_{:,J}$ gives
-\[
+\begin{equation*}
 \det\!\left(P(\lambda)_{:,J}^{\mathsf T}P(\mu)_{:,J}\right)
 =\sum_{\substack{I\subseteq[q]\\ |I|=\omega}}
 f_{I,J}(\lambda)f_{I,J}(\mu),
-\]
+\end{equation*}
 where $f_{I,J}$ is the minor on rows $I$ and columns $J$. Summing over $J$,
-\[
+\begin{equation*}
 K(\lambda,\mu)=\sum_{\substack{I\subseteq[q]\\ |I|=\omega}}
 \sum_{\substack{J\subseteq[\ell]\\ |J|=\omega}}
 f_{I,J}(\lambda)f_{I,J}(\mu),
-\]
+\end{equation*}
 the Gram kernel of \textbf{all} maximal minors of $P$.
 
 Three consequences are used below.
 \begin{enumerate}[label=(\roman*)]
-	\item\label{item:cost} \emph{Cost.} Computing $K$ needs only
-	$\binom{\ell}{\omega}\le2^{\ell}$ determinants of order $\omega$, one per
-	column set $J$ of the $\ell$-dimensional space $S$ of \eqref{eq:ell}; the
-	$\binom q\omega\binom k\omega$ individual minors are never enumerated,
-	and no hidden enumeration replaces them.
-	\item\label{item:coef} \emph{Coefficient identity.} Writing $S_{a,b}$
-	for the coefficient of $\lambda^a\mu^b$ in $K$ and $c_{i,a}$ for the
-	coefficient of $\lambda^a$ in $f_i$, one has
-	$S_{a,b}=\sum_i c_{i,a}c_{i,b}$. Hence, with the row indexing of
-	Lemma~\ref{lem:window},
-	\[
-	(Z^{\mathsf T}Z)_{t,t'}
-	=\sum_{j=0}^{\omega-1}\sum_i c_{i,t-j}c_{i,t'-j}
-	=\sum_{j=0}^{\omega-1}S_{t-j,t'-j}.
-	\]
-	\item\label{item:roots} \emph{Common roots.} Since the coefficients of
-	$P$ are real, specializing at $(\lambda,\mu)=(\alpha,\bar\alpha)$ gives
-	\[
-	K(\alpha,\bar\alpha)
-	=\sum_{I,J}\left|f_{I,J}(\alpha)\right|^2,
-	\]
-	so $K(\alpha,\bar\alpha)=0$ if and only if every maximal minor of $P$
-	vanishes at $\alpha$. This identity shows that the coefficient matrix of
-	$K$ encodes precisely the common-root condition; the algorithm below
-	nevertheless decides that condition at the coefficient level, without
-	evaluating $K$ at complex points.
+\item\label{item:cost} \emph{Cost.} Computing $K$ needs only
+$\binom{\ell}{\omega}\le2^{\ell}$ determinants of order $\omega$, one per
+column set $J$ of the $\ell$-dimensional space $S$ of \eqref{eq:ell}; the
+$\binom q\omega\binom k\omega$ individual minors are never enumerated,
+and no hidden enumeration replaces them.
+\item\label{item:coef} \emph{Coefficient identity.} Writing $S_{a,b}$
+for the coefficient of $\lambda^a\mu^b$ in $K$ and $c_{i,a}$ for the
+coefficient of $\lambda^a$ in $f_i$, one has
+$S_{a,b}=\sum_i c_{i,a}c_{i,b}$. Hence, with the row indexing of
+Lemma~\ref{lem:window},
+\begin{equation*}
+(Z^{\mathsf T}Z)_{t,t'}
+=\sum_{j=0}^{\omega-1}\sum_i c_{i,t-j}c_{i,t'-j}
+=\sum_{j=0}^{\omega-1}S_{t-j,t'-j}.
+\end{equation*}
+\item\label{item:roots} \emph{Common roots.} Since the coefficients of
+$P$ are real, specializing at $(\lambda,\mu)=(\alpha,\bar\alpha)$ gives
+\begin{equation*}
+K(\alpha,\bar\alpha)
+=\sum_{I,J}\left|f_{I,J}(\alpha)\right|^2,
+\end{equation*}
+so $K(\alpha,\bar\alpha)=0$ if and only if every maximal minor of $P$
+vanishes at $\alpha$. This identity shows that the coefficient matrix of
+$K$ encodes precisely the common-root condition; the algorithm below
+nevertheless decides that condition at the coefficient level, without
+evaluating $K$ at complex points.
 \end{enumerate}
 
 \begin{remark}[Algorithmic reading]\label{rem:algo}
-	The compression is computed in four steps:
-	(i) for each column set $J\subseteq[k]$, $|J|=\omega$, form the
-	$\omega\times\omega$ pencil $P(\lambda)_{:,J}^{\mathsf T}P(\mu)_{:,J}$;
-	(ii) compute its bivariate coefficients, of degree at most $\omega$ in
-	each variable;
-	(iii) sum the coefficients over $J$;
-	(iv) recover $Z^{\mathsf T}Z$ from the shifted identity of
-	item~\ref{item:coef}.
-	The identity is classical (an exterior-power Gram identity; see, e.g.,
-	\cite{emi99} for the B\'ezoutian/elimination background). What the
-	construction adds is the combination with the parameter-sized
-	certificate: by the cost bound of item~\ref{item:cost}, the certificate
-	matrix stays parameter-sized when $q$ is large and $k$ is bounded.
+The compression is computed in four steps:
+(i) for each column set $J\subseteq[k]$, $|J|=\omega$, form the
+$\omega\times\omega$ pencil $P(\lambda)_{:,J}^{\mathsf T}P(\mu)_{:,J}$;
+(ii) compute its bivariate coefficients, of degree at most $\omega$ in
+each variable;
+(iii) sum the coefficients over $J$;
+(iv) recover $Z^{\mathsf T}Z$ from the shifted identity of
+item~\ref{item:coef}.
+The identity is classical (an exterior-power Gram identity; see, e.g.,
+\cite{emi99} for the B\'ezoutian/elimination background). What the
+construction adds is the combination with the parameter-sized
+certificate: by the cost bound of item~\ref{item:cost}, the certificate
+matrix stays parameter-sized when $q$ is large and $k$ is bounded.
 \end{remark}
 
 \section{The fixed-order algorithm}\label{sec:fixedq}
@@ -953,43 +936,37 @@ $\mathcal L^{O(q^2)}$ bit operations.
 \begin{proof}
 \emph{(i) Equivalence.} Let $L=[L_0;R]$ be feasible, $H=LN$, $H_A=LAN$,
 $\omega=\operatorname{rank}H$, and let $J$ be a pivot set with
-\[
+\begin{equation*}
 H=XB,\qquad B_{:,J}=I_\omega .
-\]
-By Lemma~\ref{lem:compression}(ii) there is $F$ with $H_A=FH$; put $G=FX$.
-Then
-\[
-X_iB=H_i=h_i^0,\qquad G_iB=(H_A)_i=g_i^0\qquad(i\le r_0),
-\]
-and, since $\ker D=\mathcal T=\operatorname{row}[N\ AN]$,
-\[
-D[(X_iB)^{\mathsf T};(G_iB)^{\mathsf T}]=0\qquad(i>r_0).
-\]
-Moreover $\operatorname{rank}X=\omega$ gives $e_\omega(X^{\mathsf T}X)>0$,
+\end{equation*}
+By Lemma~\ref{lem:compression}(ii) there is $F$ with $H_A=FH$; putting $G=FX$ gives
+$X_iB=H_i=h_i^0$ and $G_iB=(H_A)_i=g_i^0$ for $i\le r_0$, while
+$D[(X_iB)^{\mathsf T};(G_iB)^{\mathsf T}]=0$ for $i>r_0$, since $\ker D=\mathcal T=\operatorname{row}[N\ AN]$.
+These are the constraints of $\Phi_{\omega,J}$. Moreover $\operatorname{rank}X=\omega$ gives $e_\omega(X^{\mathsf T}X)>0$,
 Lemma~\ref{lem:rankcons} gives the rank-consistency condition for
 $B_{:,J}=I_\omega$, and Proposition~\ref{prop:gram} turns \eqref{eq:5b} into
 $Z^{\mathsf T}Zx=e_0$. Hence $\Phi_{\omega,J}$ holds.
 
 Conversely, suppose $\Phi_{\omega,J}$ holds. Lemma~\ref{lem:rankcons} yields
 $B$ with $B_{:,J}=I_\omega$; put
-\[
+\begin{equation*}
 H=XB,\qquad H_A=GB .
-\]
+\end{equation*}
 The fixed-row equations give $H_i=h_i^0$ and $(H_A)_i=g_i^0$ for $i\le r_0$,
 and the free-row equations place each remaining pair in $\mathcal T$, so there
 are $r_i$ with
-\[
+\begin{equation*}
 (H_i,(H_A)_i)=r_i[N\ AN]\qquad(i>r_0).
-\]
+\end{equation*}
 With $L=[L_0;R]$, $R$ the matrix with rows $r_i$, this reads $H=LN$ and
 $H_A=LAN$. Since $e_\omega(X^{\mathsf T}X)>0$, $X$ has a left inverse $U$;
 hence
-\[
+\begin{equation*}
 \begin{aligned}
 G&=(GU)X,\\
 H_A&=GB=(GU)XB=FH,\qquad F=GU,
 \end{aligned}
-\]
+\end{equation*}
 so $\operatorname{row}H_A\subseteq\operatorname{row}H$, which is
 \eqref{eq:5a} by Lemma~\ref{lem:compression}(i), and $Z^{\mathsf T}Zx=e_0$ is
 \eqref{eq:5b} by Proposition~\ref{prop:gram}. Therefore the disjunction
@@ -1009,65 +986,46 @@ $O(k)$ polynomials of degree $O(k)$ carried by each branch, while $2\omega+1$
 is the degree of the Gram and certificate constraints; the last line is the
 coefficient-size lemma of Section~\ref{sec:fpt}. Renegar's Part II bound
 $\beta(\log\beta)(\log\log\beta)(sD)^{O(N)}$ therefore gives, per chart,
-\[
+\begin{equation*}
 \beta(\log \beta)(\log\log \beta)(sD)^{O(N)}
 =\operatorname{poly}(n)^{O(q^2)}
 =\mathcal L^{O(q^2)},
-\]
+\end{equation*}
 because $sD=\operatorname{poly}(n)$ and $N\le 2q^2+2q$ with $q$ fixed. The
 charts number
-\[
+\begin{equation*}
 N_{\mathrm{ch}}=(q+1)k^{q}\le 2^{q}k^{q}\le\mathcal L^{2q},
-\]
+\end{equation*}
 since $k\le n\le\mathcal L$ and $q+1\le 2^{q}\le\mathcal L^{q}$ for $q\ge1$
 and $\mathcal L\ge2$. Hence
-\[
+\begin{equation*}
 N_{\mathrm{ch}}\cdot\mathcal L^{O(q^2)}
 \le\mathcal L^{2q}\cdot\mathcal L^{O(q^2)}
 =\mathcal L^{O(q^2)} .
-\]
+\end{equation*}
 For fixed $q$ the exponent $O(q^2)$ is a constant, so the construction size
 $k^{O(q^2)}\operatorname{poly}(\mathcal L)=\mathcal L^{O(q^2)}$ matches the bound above. The rank index $t$ is a discrete branch, not a
 degree: it is counted in $s$, not folded into $D$. The degenerate cases $k=0$,
 $\omega=0$ and $r=0$ are treated in Section~\ref{sec:deg}.
 \end{proof}
 
-Table~\ref{tab:4} collects the quantities entering the bound.
 
-\begin{table*}[!t]
-\centering
-\caption{Quantities entering the fixed-order bound.}\label{tab:4}
-\small
-\begin{tabular}{p{0.450\textwidth}p{0.450\textwidth}}
-\toprule
-Quantity & Bound \\
-\midrule
-real variables $N$ & $2q\omega+2\omega\le2q^2+2q$ \\
-pivot charts & $(q+1)k^q$ \\
-rank-consistency branches $t$ & $O(k)$, one per possible rank \\
-number of polynomials $s$ (each counted once) & $O(k^2)$ \\
-maximum degree $D$ & $O(k)$ \\
-coefficient bit length $\beta$ & $\operatorname{poly}(n,\mathcal L)$ \\
-construction size & $k^{O(q^2)}\operatorname{poly}(\mathcal L)$ \\
-\bottomrule
-\end{tabular}
-\end{table*}
 
 Three representation details are worth recording.
 
 \begin{enumerate}
 \item \emph{Strict inequalities.} A condition $f>0$ is written as
-\[
+\begin{equation*}
 f>0\iff\exists u:\ fu^2=1,
-\]
+\end{equation*}
 which is equivalent over the reals. There are $O(1)$ strict inequalities per
 branch, so this adds $O(1)$ variables and changes no order.
 \item \emph{Disjunctions.} The rank-consistency disjunction is processed branch
 by branch, with one real-feasibility query per $t$ and the running times
 added:
-\[
+\begin{equation*}
 t\cdot\mathcal L^{O(q^2)}=O(k)\,\mathcal L^{O(q^2)}=\mathcal L^{O(q^2)} .
-\]
+\end{equation*}
 This is why $t$ appears in $s$ and not in $D$.
 \item \emph{Elementary symmetric polynomials.} $e_j(G)$ is represented by the
 coefficients of $\det(zI+G)$, computed by fraction-free elimination on the
@@ -2031,7 +1989,7 @@ minor computations used above.
 \bibitem{liu26} Z. Liu. Computational complexity of static output feedback
   stabilization. arXiv:2610.00390, 2026 (preprint).
 \bibitem{maj26} A. Majumdar. Affine rank minimization is
-  $\exists\mathbb{R}$ complete. arXiv:2602.14037, 2026 (preprint).
+  $\exists\mathbb R$ complete. arXiv:2602.14037, 2026 (preprint).
 \bibitem{hj13} R. A. Horn, C. R. Johnson. \emph{Matrix Analysis}. 2nd ed.
 Cambridge University Press, 2013.
 \bibitem{vzgg13} J. von zur Gathen, J. Gerhard. \emph{Modern Computer Algebra}.
