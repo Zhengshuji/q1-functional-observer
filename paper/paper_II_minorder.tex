@@ -67,6 +67,15 @@ companion paper \cite{companion1}, where it is compressed to a finite algebraic 
 $f(\ell)\operatorname{poly}(\mathcal L)$ bit operations with $\ell=\operatorname{rank}(AN)$. The present
 paper takes that decision procedure as an interface and asks what follows for the minimum order.
 
+The two lower bounds are not the same bound, and the difference is the point of the paper. Write
+$q_0$ for the smallest order at which the algebraic condition \eqref{eq:5a} alone can hold; $q_0$ is the
+published bound and is computed in polynomial time. Then $q_0\le q_{\min}$ always, and the inequality can
+be strict: an order can admit the algebraic condition without admitting the spectral one, because
+\eqref{eq:5b} is a condition on a pencil and not on a single rank. On the instance of
+Section~\ref{sec:example} the gap is exactly one, $q_0=3$ and $q_{\min}=4$. Part of what follows makes
+this gap computable: monotonicity and saturation confine the search, and the spectral lower bound of
+Section~\ref{sec:monotone} supplies a second, independent floor for it.
+
 The answer is carried by a subspace. The free rows enter the two conditions only through the row space
 $W$ of the compressed data, constrained by $W_0\subseteq W\subseteq\mathcal T$ and
 $\dim(W/W_0)\le r$; the two conditions on $W$ are a row-space inclusion and the constant rank of a
@@ -734,6 +743,26 @@ was reported. The feasibility characterization itself is taken from
 \cite{fer10,dar25,fer26a,fer26b}.
 
 \subsection{Limitations and what is not claimed}\label{sec:limits}
+
+Table~\ref{tab:models} separates the three models in which the construction is described; the last
+row is the one that is open.
+
+\begin{table}[!t]
+\centering
+\caption{What is claimed, in which model, for the construction of a minimum-order observer.}
+\label{tab:models}
+\footnotesize
+\begin{tabular}{@{}p{0.42\columnwidth}p{0.48\columnwidth}@{}}
+\toprule
+Task & Claim \\
+\midrule
+deciding the minimum order & bit complexity, $f(\ell)\operatorname{poly}(\mathcal L)$ \\
+finding the algebraic parameters of $W$ & arithmetic complexity, same $f(\ell)$ factor \\
+recovering the free rows from $W$ & exact rational lifting, $\operatorname{poly}(\mathcal L)$ \\
+the whole construction in the bit model & open: no bit-model sampling-point bound \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 Three qualifications bound what is claimed.
 

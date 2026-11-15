@@ -560,11 +560,18 @@ $Y_S$ have bit length $\operatorname{poly}(\mathcal L)$.
 
 \section{The finite certificate}\label{sec:certificate}
 
-This section derives the finite certificate for the spectral condition
-\eqref{eq:5b} in three steps: a pivot factorization of the rank-$\omega$
-block, a rank-consistency test for the linear system that the factorization
-leaves, and a compression of that test to a Gram matrix whose size is
-governed by the parameter $\ell$ of \eqref{eq:ell}.
+This section derives the finite certificate for the spectral condition \eqref{eq:5b} in three steps:
+a pivot factorization of the rank-$\omega$ block, a rank-consistency test for the linear system that
+the factorization leaves, and a compression of that test to a Gram matrix whose size is governed by the
+parameter $\ell$ of \eqref{eq:ell}.
+
+Two notions of rank have to be kept apart throughout. The quantity $\omega=\operatorname{rank}H$ is the
+\emph{generic} rank of $P(\lambda)=\lambda H-H_A$ over the rational function field $\mathbb R(\lambda)$,
+and $\operatorname{rank}P(\lambda)\le\omega$ for every $\lambda$ because $P$ factors through the
+rank-$\omega$ matrix $B$. Condition \eqref{eq:5b} asks for the \emph{pointwise} rank to equal $\omega$ at
+every $\lambda\in\mathbb C$, that is, for the pointwise rank not to drop below the generic one anywhere.
+The certificate below therefore has to express "no drop at any finite $\lambda$", not merely "generic
+rank $\omega$"; with $P=(\lambda X-G)B$ this is the constant-rank condition on the pencil $\lambda X-G$.
 
 \subsection{Rank factorization and consistency}\label{sec:consistency}
 
@@ -608,6 +615,28 @@ $B$ can be eliminated. Let $b$ denote the vectorization of the remaining unknown
 \begin{equation*}
 \mathcal M(X,G)\,b=c(X,G).
 \end{equation*}
+
+Table~\ref{tab:certdim} records the sizes of the objects that enter the certificate; the last row is
+the reason the certificate is governed by $\omega$ rather than by the number of maximal minors.
+
+\begin{table}[!t]
+\centering
+\caption{Sizes of the objects in the certificate of \eqref{eq:5b}. The $\omega\times\omega$ minors are
+never formed: their coefficients enter only through the Gram matrix of the last row.}
+\label{tab:certdim}
+\footnotesize
+\begin{tabular}{@{}lll@{}}
+\toprule
+Object & Size & Bound \\
+\midrule
+pivot block $X$ & $q\times\omega$ & $\omega\le k$ \\
+second block $G$ & $q\times\omega$ & $\omega\le k$ \\
+certificate vector $x$ & $2\omega$ & $\omega\le k$ \\
+window coefficients of the minors & $|\text{monomials}|$ & degree $\le\omega$ in $\lambda$ \\
+Gram matrix $Z^{\mathsf T}Z$ & $2\omega\times2\omega$ & independent of $\binom{k}{\omega}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \begin{lem}[Rank consistency]\label{lem:rankcons}
 For real matrices $M,c$,
@@ -661,6 +690,15 @@ Thus \eqref{eq:5b} is equivalent to
 \end{equation*}
 
 \subsection{The spectral certificate}\label{sec:spectrum}
+
+Two features of the following lemma matter for what comes after it. The hypothesis is on
+$f_1,\dots,f_s\in\mathbb R[\lambda]$, but the conclusion gives multipliers $g_i$ that are again
+\emph{real} and of degree $<\omega$. This is not a cosmetic refinement: the identity
+$\sum_ig_if_i=1$ is then substituted into a system of polynomial equations with real coefficients and
+solved over $\mathbb R$, so complex multipliers of bounded degree would not yield a real algebraic
+certificate at all. The proof achieves it by choosing the auxiliary combination $b$ among the real
+vectors that avoid finitely many hyperplanes, and by invoking the two-polynomial identity over
+$\mathbb R[\lambda]$.
 
 \begin{lem}[B\'ezout degree bound]\label{lem:bezout}\label{sec:bezout}
 Let $\omega\ge1$, and let $f_1,\ldots,f_s\in\mathbb R[\lambda]$ have
@@ -1324,6 +1362,15 @@ elementary-divisor block. Left singular blocks and \emph{infinite} regular eleme
 permitted, since they produce no rank drop at a finite $\lambda$: for instance
 $Q(\lambda)=1$, $Q(\lambda)=I_2$ and $Q(\lambda)=\begin{bmatrix}1&\lambda\\0&1\end{bmatrix}$ all
 satisfy the condition. Only the \emph{finite} spectrum is constrained.
+
+The reason is that the condition is a statement about the rank function on the finite line: a block
+contributes to a violation exactly when it makes the rank fall below the number of columns at some
+finite value, which is what a right singular block does at every finite value and what a finite
+elementary divisor does at its own root; a left singular block, by contrast, is of full row rank, so it
+adds rows without adding deficiency, and an infinite elementary divisor acts at $\lambda=\infty$, a
+point that \eqref{eq:5b} does not evaluate. This is also why the pencil of \eqref{eq:5b} is allowed to
+carry structure that a square nonsingular pencil could not: with $q>\omega$ the factor $H$ has a
+constant left null vector, and every such vector is a left null vector of $\lambda X-G$ as well.
 \end{remark}
 
 \begin{remark}[Witness]\label{rem:witness}
