@@ -1,0 +1,939 @@
+\documentclass[journal]{IEEEtran}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{amsthm}
+\usepackage{booktabs,array}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+\newtheoremstyle{plainn}{}{}{\itshape}{}{\bfseries}{.}{.5em}%
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
+\theoremstyle{plainn}
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\renewcommand{\qedsymbol}{QED}
+
+\begin{document}
+\title{Minimum order and minimum-order construction for functional observers}
+\author{}
+\maketitle
+
+\begin{abstract}
+For a linear system with a prescribed block of functional rows, deciding whether some observer of a
+given order exists is a question with a complete characterization, and its complexity is settled in a
+companion paper. This paper asks the optimization question instead: what is the smallest order at
+which a functional observer exists, and how is a minimum-order observer constructed? The feasible
+designs are subspaces $W$ of a compressed row-pair space, constrained by $W_0\subseteq W\subseteq
+\mathcal T$ and $\dim(W/W_0)\le r$, and the conditions on $W$ are a row-space inclusion and the
+constant rank of a pencil. Three results follow. First, the minimum order is $q_{\min}=r_0+t_{\min}$,
+where $t_{\min}$ is the smallest quotient dimension of a feasible $W$, and the structural bound
+$\omega+1\le\dim W\le2\omega$ gives $t_{\min}\le2\ell$ with $\ell=\operatorname{rank}(AN)$; the
+feasible orders are monotone and saturate, so the threshold problem is a single decision instance.
+Second, the spectral condition yields a lower bound,
+$q_{\min}\ge r_0+\max(0,\operatorname{rank}[U_0;V_0]-s_0+1)$, that comes from a different necessary
+condition than the published algebraic bound $q_0$, is computed in polynomial time, and is strictly
+stronger on the instance below. Third, given a decision procedure for a prescribed order, the minimum
+order is found by binary search in $O(\log\ell)$ calls, and a minimum-order observer is recovered by
+lifting a basis of $W/W_0$; the lifting is exact, while the algebraic solve that produces $W$ is
+bounded in the arithmetic model, its bit complexity being open. The results are applied to a
+published example, whose reported minimum order we correct to $4$.
+\end{abstract}
+
+\begin{IEEEkeywords}
+functional observer; minimum order; subspace constraints; lower bounds; observer construction.
+\end{IEEEkeywords}
+
+\section{Introduction}\label{sec:intro}
+
+Estimating a linear function of the state, rather than the whole state, is often what a control loop
+needs, and the order of a functional observer can be far below the order of a Luenberger observer for
+the same system. The design question is therefore quantitative: given the system and the functionals
+to be estimated, what is the smallest number of observer rows for which a functional observer exists?
+
+Two rank conditions characterize the observer rows: an algebraic one and a spectral one. The
+characterization has been completed in recent work, which determines, order by order, which orders are
+attainable \cite{fer26a,fer26b} and which augmentations attain the algebraic lower bound. Those results
+answer whether a given order is admissible; they say less about the two questions asked here, which are
+about the *set* of admissible orders and about the witness: how small can the order be, is the set
+structured, and how is a minimum-order observer obtained?
+
+The deciding question for a prescribed order --- is there an observer of order $q$? --- is treated in a
+companion paper, where it is compressed to a finite algebraic certificate and decided in
+$f(\ell)\operatorname{poly}(\mathcal L)$ bit operations with $\ell=\operatorname{rank}(AN)$. The present
+paper takes that decision procedure as an interface and asks what follows for the minimum order.
+
+The answer is carried by a subspace. The free rows enter the two conditions only through the row space
+$W$ of the compressed data, constrained by $W_0\subseteq W\subseteq\mathcal T$ and
+$\dim(W/W_0)\le r$; the two conditions on $W$ are a row-space inclusion and the constant rank of a
+pencil. The minimum-order question is therefore a constrained dimension-minimization problem over
+subspaces, and the structural bound $\omega+1\le\dim W\le2\omega$ of the companion paper is what makes
+the search finite: it forces the quotient dimension of a feasible $W$ to be at most $2\ell$.
+
+Relative to the characterization literature, we add three things. The feasible order set is shown to be
+monotone and to saturate, which turns the threshold problem into a single decision instance. A lower
+bound is derived from the spectral condition, whereas the published bound $q_0$ comes from the algebraic
+one; the two rest on different necessary conditions. And the optimization and construction problems are
+reduced to the decision problem through an explicit interface, with the construction exact and its bit
+complexity left open. The results are then applied to the published example of \cite[Sec.~VII]{fer26b},
+whose reported minimum order we correct.
+
+\subsection{Contributions and organization}\label{sec:contrib}
+
+The paper is organized around one object and three results.
+
+\emph{The object} (Section~\ref{sec:dimension}). A feasible design is a subspace $W$ with
+$W_0\subseteq W\subseteq\mathcal T$ and $\dim(W/W_0)\le r$; the observer conditions depend on $W$
+alone, so the minimum-order question becomes a constrained dimension-minimization problem.
+
+\begin{enumerate}
+\item \emph{Minimum-order characterization} (Section~\ref{sec:monotone}). The feasible orders are
+monotone and saturate at $r_0+\dim(\mathcal T/W_0)$, so the threshold problem is a single decision
+instance, and
+\begin{equation*}
+\begin{gathered}
+q_{\min}=r_0+t_{\min},\\
+t_{\min}=\min\{\dim(W/W_0):W\text{ feasible}\}\le2\ell .
+\end{gathered}
+\end{equation*}
+The three quantities play different roles: $r_0$ is fixed, $t_{\min}$ is minimized, and
+$\ell=\operatorname{rank}(AN)$ bounds the search.
+\item \emph{A spectral lower bound} (Section~\ref{sec:lowerbound}). With
+$U_0=\operatorname{row}(L_0N)$, $V_0=\operatorname{row}(L_0AN)$ and $s_0=\dim W_0$,
+\begin{equation*}
+q_{\min}\ \ge\ r_0+\max\bigl(0,\ \operatorname{rank}[U_0;V_0]-s_0+1\bigr).
+\end{equation*}
+The published bound $q_0$ of \cite{fer26a,fer26b} comes from the algebraic condition; this one comes
+from the spectral condition, so the two rest on different necessary conditions and the larger applies.
+\item \emph{Computation and construction} (Section~\ref{sec:compute}). Given a decision procedure for
+a prescribed order, the minimum order is found in $O(\log\ell)$ calls, and a minimum-order observer is
+recovered by lifting a basis of $W/W_0$ to free rows. The lifting is exact; the algebraic solve is
+bounded in the arithmetic model, and its bit complexity is left open.
+\item \emph{A published value corrected} (Section~\ref{sec:example}). On the instance of
+\cite[Sec.~VII]{fer26b} the reported minimum order is $5$; the lower bound above gives
+$q_{\min}\ge4$ and an explicit four-row observer matrix satisfies both conditions, so
+$q_{\min}=4$.
+\end{enumerate}
+
+\paragraph*{Roadmap}
+Section~\ref{sec:compressed} compresses the conditions to $N$, Section~\ref{sec:dimension} turns a
+design into a subspace $W$ and proves the structural bound that bounds the search, and
+Sections~\ref{sec:monotone}--\ref{sec:lowerbound} derive the minimum-order formula and the spectral
+lower bound. Section~\ref{sec:compute} reduces optimization and construction to the decision problem
+of the companion paper through an explicit interface, and Section~\ref{sec:example} applies the
+results. The decision problem itself, its finite certificate and its complexity bounds are not
+reproved here.
+
+\section{Preliminaries}\label{sec:prelim}
+
+\subsection{Notation and conventions}\label{sec:notation}
+
+Consider the linear time-invariant system
+\begin{equation}\label{system}
+\dot{x}=Ax+Bu,\quad y=Cx,\quad z=L_0x,
+\end{equation}
+where $A\in\mathbb Q^{n\times n}$, $C\in\mathbb Q^{p\times n}$ and
+$L_0\in\mathbb Q^{r_0\times n}$.
+
+Let $q\ge r_0$ be the prescribed observer order, with $q\le n$, and set $r=q-r_0$. The
+observer rows are the rows of the block
+\begin{equation*}
+L=\begin{bmatrix}L_0\\R\end{bmatrix},\qquad R\in\mathbb R^{r\times n},
+\end{equation*}
+where $L_0$ is fixed while $R$ collects the $r$ free rows. Throughout we call the $r_0$ rows of
+$L_0$ the \emph{prescribed rows}, the $r$ rows of $R$ the \emph{free rows}, and the $q$ rows of $L$
+the \emph{observer rows}; only real observers are considered.
+
+All given rational data are encoded in binary, and $\mathcal L$ denotes the total input
+bit length. The free parameter $R$ is not part of the given input data and is therefore
+not counted in $\mathcal L$. State vectors are column vectors, and matrices act on them by
+the usual left multiplication.
+
+Let $P(\lambda)$ be a rational matrix pencil of generic rank $\omega$, and call its
+$\omega\times\omega$ minors maximal minors. Ranks at spectral points $\lambda\in\mathbb C$
+are always computed over $\mathbb C$. Because the maximal minors have rational
+coefficients, their gcd is a nonzero constant in $\mathbb C[\lambda]$ exactly when it is a
+nonzero constant in $\mathbb Q[\lambda]$; this equivalence is used without further
+mention.
+
+\subsection{The observer conditions}\label{sec:conditions}
+
+A functional observer of order $q$ is a matrix $L=\begin{bmatrix}L_0 \\ R\end{bmatrix}\in\mathbb R^{q\times n}$ such
+that
+\begin{equation}\label{eq:5a}
+\operatorname{rank}\begin{bmatrix}LA\\ L\\ CA\\ C\end{bmatrix}
+=\operatorname{rank}\begin{bmatrix}L\\ CA\\ C\end{bmatrix},
+\end{equation}
+\begin{equation}\label{eq:5b}
+\operatorname{rank}\begin{bmatrix}\lambda L-LA\\ CA\\ C\end{bmatrix}
+=\operatorname{rank}\begin{bmatrix}L\\ CA\\ C\end{bmatrix},
+\quad \forall\lambda\in\mathbb C.
+\end{equation}
+These are the Fernando--Trinh--Jennings conditions, numbered (5a) and (5b) in
+\cite{fer10}. Condition~\eqref{eq:5a} is algebraic; \eqref{eq:5b} is spectral, and it is
+required at every $\lambda\in\mathbb C$, in particular at all finite eigenvalues of $A$.
+
+\subsection{Decision, optimization and construction}\label{sec:problems}
+
+Three problems are posed for \eqref{eq:5a} and \eqref{eq:5b}, in increasing order of
+demand.
+
+\emph{Decision.} $\mathrm{DEC}$ takes $(A,C,L_0)$ and $q$ and asks whether some $R$
+satisfies \eqref{eq:5a} and \eqref{eq:5b}; no witness is required. This is the problem
+studied in this paper.
+
+\emph{Optimization.} $\mathrm{OPT}$ asks for the minimum feasible order
+\begin{equation*}
+q_{\min}=\min\{q:\mathrm{DEC}(q)\},
+\end{equation*}
+where $\mathrm{DEC}(q)$ abbreviates $\mathrm{DEC}(A,C,L_0,q)$.
+
+\emph{Construction.} $\mathrm{FIND}$ asks for a witness $R$ at the minimum feasible
+order, $q=q_{\min}$.
+
+The threshold problem is
+\begin{equation}\label{eq:mindec}
+\mathrm{MINDEC}(Q)=\bigvee_{q=r_0}^{\min(Q,n)}\mathrm{DEC}(q),
+\end{equation}
+a finite disjunction of decision instances. This paper studies $\mathrm{OPT}$ and
+$\mathrm{FIND}$; $\mathrm{DEC}$ itself, its finite certificate and its complexity bounds are treated in
+the companion paper, whose decision procedure we use as an interface. What is added here is the
+structure of the feasible orders: they are monotone in $q$ and saturate at $r_0+m$, which reduces
+\eqref{eq:mindec} to a single instance and confines $\mathrm{OPT}$ to at most $2\ell+1$ values of
+$t=q-r_0$.
+
+\begin{table}[!t]
+\centering
+\caption{Notation. The first block is fixed by the input, the second by the compression, the third by
+the subspace reduction of Section~\ref{sec:subspace}.}
+\label{tab:notation}
+\footnotesize
+\begin{tabular}{@{}ll@{}}
+\toprule
+Symbol & Meaning \\
+\midrule
+$K_0=\ker[C;CA]$ & common kernel of $C$ and $CA$ \\
+$k=\dim K_0$ & its dimension \\
+$N$ & basis matrix of $K_0$ \\
+$M=[N\ AN]$ & compressed row-pair matrix \\
+\midrule
+$H=LN$, $H_A=LAN$ & compressed observer blocks \\
+$\omega=\operatorname{rank}H$ & compressed order \\
+$P(\lambda)=\lambda H-H_A$ & compressed pencil \\
+\midrule
+$\mathcal T=\operatorname{row}M$ & attainable row-pair space \\
+$d_0=\dim\mathcal T$ & its dimension \\
+$\kappa_{\rm obs}=r\,d_0$ & number of free-row coordinates \\
+$S=\operatorname{row}(AN)\subseteq\mathbb R^k$ & space of the second blocks \\
+$\ell=\operatorname{rank}(AN)\le k$ & its dimension; the FPT parameter \\
+$W=\operatorname{row}[H\ H_A]$ & row space of the compressed pairs \\
+$W_0=\operatorname{row}(L_0M)$ & contribution of the prescribed rows \\
+$s_0=\dim W_0$, $m=d_0-s_0$ & dimensions of $W_0$ and of $\mathcal T/W_0$ \\
+$\mathcal V=\mathcal T\cap(S\times S)$ & admissible ambient space \\
+$m'=\dim\mathcal V-s_0$ & chart dimension \\
+$\pi_1,\pi_2,\pi_\lambda$ & projections of $\mathbb R^{2k}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Two published bounds confine the orders that have to be examined. Let $q_0$ be the algebraic
+lower bound of \cite{fer26a,fer26b}: the smallest order at which \eqref{eq:5a} can be satisfied,
+computed from the functional observability indices by a greedy rank recursion, hence in polynomial
+time. Every feasible order satisfies
+\begin{equation}\label{eq:range}
+q_0\le q\le n_0-p,\qquad n_0=\operatorname{rank}\bigl[C;CA;\dots;CA^{n-1}\bigr],
+\end{equation}
+see \cite{fer26a,fer26b}; for an observable pair $n_0=n$. The upper end is not merely a bound in the
+row-slot model: by Lemma~\ref{lem:monotone} the predicate is monotone in $q$, so every order at or
+above $n_0-p$ is feasible as soon as that one is, and no information is lost by stopping there. In
+terms of the quotient dimension the range \eqref{eq:range} reads
+$q_0-r_0\le t\le n_0-p-r_0$, and the reduction of Section~\ref{sec:subspace} adds the independent
+bound $t\le2\ell$ from Proposition~\ref{prop:minorder}.
+
+\section{Setting and the reduction}\label{sec:compressed}\label{sec:dimension}
+
+Both observer conditions depend on the free rows only through the products $LN$ and $LAN$, where $N$ is a basis matrix of the common kernel of $C$ and $CA$. This section performs that compression and rewrites \eqref{eq:5a} and \eqref{eq:5b} in terms of the compressed data.
+
+\subsection{The common kernel and the compression}\label{sec:compress}
+
+Let
+\begin{equation*}
+K_0=\ker\begin{bmatrix}C\\ CA\end{bmatrix},\qquad k=\dim K_0,
+\end{equation*}
+and let $N\in\mathbb R^{n\times k}$ be a basis matrix for $K_0$. Define
+\begin{equation*}
+H=LN\in\mathbb R^{q\times k},\quad H_A=LAN\in\mathbb R^{q\times k},\quad \omega=\operatorname{rank}H .
+\end{equation*}
+The compressions below rest on a single rank identity.
+
+\begin{lem}[Rank identity]\label{lem:rankid}
+Let $P\in\mathbb C^{m\times n}$ and let $N_P\in\mathbb C^{n\times r}$ be a basis matrix for $\ker P$. Then, for every $M\in\mathbb C^{p\times n}$,
+\begin{equation}\label{eq:rankid}
+\operatorname{rank}\begin{bmatrix}P\\ M\end{bmatrix}
+=\operatorname{rank}P+\operatorname{rank}(MN_P).
+\end{equation}
+\end{lem}
+
+\begin{proof}
+Let $f(x)=xN_P$. Since $\operatorname{col}N_P=\ker P$, the kernel of $f$ is $\operatorname{row}P$,
+and $\operatorname{row}(MN_P)$ is the image of the restriction of $f$ to $\operatorname{row}M$, so
+rank--nullity gives $\operatorname{rank}[P;M]=\operatorname{rank}P+\operatorname{rank}(MN_P)$; this
+is the standard rank identity for a stacked matrix \cite[Ch.~0]{hj13}.
+\end{proof}
+
+\subsection{The compression and the pencil criterion}\label{sec:compression}
+
+\begin{lem}[Compression and pencil criterion]\label{lem:compression}
+With $H$, $H_A$ and $\omega$ as above, the following statements hold.
+
+(i) Condition \eqref{eq:5a} holds if and only if $\operatorname{row}H_A\subseteq\operatorname{row}H$.
+
+(ii) If \eqref{eq:5a} holds, then there exists $F\in\mathbb R^{q\times q}$ such that $H_A=FH$.
+
+(iii) Assume \eqref{eq:5a}. Then \eqref{eq:5b} holds if and only if
+\begin{equation*}
+\operatorname{rank}(\lambda H-H_A)=\omega,\qquad \forall\lambda\in\mathbb C .
+\end{equation*}
+Equivalently, the $\omega\times\omega$ maximal minors of $P(\lambda)=\lambda H-H_A$ have no common complex root; equivalently, their greatest common divisor in $\mathbb C[\lambda]$ is a nonzero constant.
+
+(iv) If \eqref{eq:5a} and \eqref{eq:5b} hold, then $\operatorname{rank}H_A=\operatorname{rank}H$.
+\end{lem}
+
+\begin{proof}
+Set $P_0=\begin{bmatrix}C\\CA\end{bmatrix}$. Since $K_0=\ker P_0$, the matrix $N$ is a basis matrix for $\ker P_0$.
+
+\emph{(i)} The rows of $P_0$ occur among the rows of both matrices below, so Lemma~\ref{lem:rankid} with $P=P_0$ and with $M=\begin{bmatrix}LA\\L\end{bmatrix}$, $M=L$ gives
+\begin{equation*}
+\begin{aligned}
+\operatorname{rank}\begin{bmatrix}LA\\ L\\ CA\\ C\end{bmatrix}
+&=\operatorname{rank}P_0+\operatorname{rank}\begin{bmatrix}H_A\\ H\end{bmatrix},\\
+\operatorname{rank}\begin{bmatrix}L\\ CA\\ C\end{bmatrix}
+&=\operatorname{rank}P_0+\operatorname{rank}H .
+\end{aligned}
+\end{equation*}
+Up to row permutations the left-hand sides are the two sides of \eqref{eq:5a}, so \eqref{eq:5a}
+holds exactly when $\operatorname{rank}[H_A;H]=\operatorname{rank}H$, that is, when
+\begin{equation}\label{eq:5a-1}
+\operatorname{row}H_A\subseteq\operatorname{row}H .
+\end{equation}
+
+\emph{(ii)} By \eqref{eq:5a-1} every row of $H_A$ is a linear combination of the rows of $H$. Let $F$ have as its $i$-th row the coefficient vector of the $i$-th row of $H_A$; then
+\begin{equation}\label{eq:5a-2}
+H_A=FH .
+\end{equation}
+
+\emph{(iii)} Set
+\begin{equation*}
+M(\lambda)=\begin{bmatrix}
+\lambda L-LA\\CA\\C
+\end{bmatrix},\qquad J=\begin{bmatrix}
+L \\ CA \\C
+\end{bmatrix}.
+\end{equation*}
+Since $N$ is a basis matrix for $K_0$, $M(\lambda)N=[P(\lambda);0;0]$ and $JN=[H;0;0]$.
+Since the row space of $P_0$ is a subspace of the row spaces of both $M(\lambda)$ and $J$,
+Lemma~\ref{lem:rankid} with $P=P_0$ yields
+\begin{equation*}
+\begin{aligned}
+\operatorname{rank}M(\lambda)&=\operatorname{rank}P_0+\operatorname{rank}P(\lambda),\\
+\operatorname{rank}J&=\operatorname{rank}P_0+\operatorname{rank}H .
+\end{aligned}
+\end{equation*}
+Hence \eqref{eq:5b} is equivalent to
+\begin{equation}\label{eq:5b-1}
+\operatorname{rank}P(\lambda)=\operatorname{rank}H=\omega,\ \forall \lambda\in\mathbb C.
+\end{equation}
+ Assume now \eqref{eq:5a}. By \eqref{eq:5a-2},
+\begin{equation*}
+P(\lambda)=\lambda H-H_A=(\lambda I-F)H ,
+\end{equation*}
+so every row of $P(\lambda)$ is a linear combination of the rows of $H$, that is, $\operatorname{row}P(\lambda)\subseteq\operatorname{row}H$, and therefore
+\begin{equation}\label{eq:5b-2}
+\operatorname{rank}P(\lambda)\le\omega,\qquad \forall\lambda\in\mathbb C .
+\end{equation}
+Combining \eqref{eq:5b-1} with the bound \eqref{eq:5b-2}, condition \eqref{eq:5b} becomes the requirement that some $\omega\times\omega$ minor of $P(\lambda)$ be nonzero at every $\lambda$:
+\begin{equation*}
+\eqref{eq:5b}
+\iff
+\forall\lambda\in\mathbb C\ \ \exists\,\omega\times\omega\text{ minor } f_i:\ f_i(\lambda)\neq0 .
+\end{equation*}
+A common complex root of the maximal minors is therefore exactly a value of $\lambda$ at which all of them vanish, which proves the two equivalent forms in the statement; for $\omega=0$ the condition is vacuous.
+
+\emph{(iv)} Assume \eqref{eq:5a} and \eqref{eq:5b}. By (iii), \eqref{eq:5b-1} holds for every $\lambda$; at $\lambda=0$, where $P(0)=-H_A$,
+\begin{equation*}
+\operatorname{rank}H_A=\operatorname{rank}P(0)=\operatorname{rank}H . \qedhere
+\end{equation*}
+\end{proof}
+
+\subsection{The space of attainable row pairs}\label{sec:free}
+
+Each free row $r_i\in\mathbb R^{1\times n}$ of $R$ determines the row pair
+\begin{equation*}
+(H_i,(H_A)_i)=r_i\,[N\ \ AN] \in\mathbb R^{1\times 2k}.
+\end{equation*}
+Consequently, this attainable pair is uniquely specified by its coordinates relative to a basis of the subspace of attainable pairs
+\begin{equation*}
+\begin{gathered}
+\mathcal T=\operatorname{row}[N\ \ AN]\subseteq\mathbb R^{1\times 2k},\\
+d_0=\dim\mathcal T=\operatorname{rank}[N\ \ AN].
+\end{gathered}
+\end{equation*}
+Therefore, a rational basis of $\mathcal T$ allows each attainable pair generated by a free row to be parameterized by exactly $d_0$ real coordinates.
+
+\begin{lem}[Attainable row pairs and the effective dimension]\label{lem:attainable}
+Every free row pair lies in $\mathcal T$, and writing the $r$ free rows in a basis of $\mathcal T$ represents them by
+\begin{equation}\label{eq:kappa}
+\kappa_{\rm obs}=r d_0
+\end{equation}
+coordinates. Moreover, when $r\ge1$,
+\begin{equation}\label{lem3-2}
+k\le d_0\le rd_0=\kappa_{\rm obs}.
+\end{equation}
+\end{lem}
+
+\begin{proof}
+The identity $(H_i,(H_A)_i)=r_i[N\ AN]$ places every free row pair in $\mathcal T$, whose dimension
+is $d_0=\operatorname{rank}[N\ AN]$ by definition of the row space. Writing the $r$ free rows in a
+basis of $\mathcal T$ describes them by $r\dim\mathcal T=rd_0$ coordinates, which is
+\eqref{eq:kappa}. Since $N$ has full column rank,
+\begin{equation}\label{lem3-1}
+k=\operatorname{rank}N\le\operatorname{rank}[N\ AN]=d_0 ,
+\end{equation}
+and $r\ge1$ gives $d_0\le rd_0=\kappa_{\rm obs}$, which together with \eqref{lem3-1} is
+\eqref{lem3-2}.
+\end{proof}
+
+\begin{remark}[Basis invariance]
+If $N\mapsto NQ$ with nonsingular $Q\in\mathbb R^{k\times k}$, then
+$[N\ \ AN]\mapsto[N\ \ AN]\operatorname{diag}(Q,Q)$ with $\operatorname{diag}(Q,Q)$ nonsingular, so
+$\mathcal T$, $d_0$ and $\kappa_{\rm obs}=rd_0$ are unchanged; the free-row coordinates undergo the
+nonsingular change $r_i\mapsto r_i\operatorname{diag}(Q^{-1},Q^{-1})$.
+\end{remark}
+
+\subsection{The subspace reduction}\label{sec:subspace}
+
+The free rows enter the two conditions only through the row space of the compressed
+pair. Writing the row pair of a free row as a row of $M=[N\ AN]$, let
+\begin{equation}\label{eq:W-def}
+W=\operatorname{row}[H\ H_A]\subseteq\mathbb R^{2k},
+\end{equation}
+so that $W_0=\operatorname{row}(L_0M)\subseteq W\subseteq\mathcal T=\operatorname{row}M$.
+Let
+\begin{equation}\label{eq:ell}
+\begin{gathered}
+d=\dim\mathcal T,\qquad s_0=\dim W_0,\qquad m=d-s_0,\\
+\ell=\operatorname{rank}(AN)\le k,\qquad S=\operatorname{row}(AN)\subseteq\mathbb R^k ,
+\end{gathered}
+\end{equation}
+and let $\pi_1(h,g)=h$, $\pi_2(h,g)=g$, $\pi_\lambda(h,g)=\lambda h-g$ be the projections of
+$\mathbb R^{2k}=\mathbb R^k\times\mathbb R^k$. Because \eqref{eq:5b} quantifies over complex
+$\lambda$, the projection $\pi_\lambda$ is applied to the complexification
+$W_{\mathbb C}=W\otimes_{\mathbb R}\mathbb C\subseteq\mathbb C^{2k}$, and dimensions are over
+$\mathbb C$; a real matrix has the same rank over $\mathbb R$ and over $\mathbb C$.
+
+\begin{lem}[Sandwich and realizability]\label{lem:sandwich}
+For $L=[L_0;R]$ one has $W_0\subseteq W\subseteq\mathcal T$ and
+$\dim(W/W_0)\le r$. Conversely, every subspace $W$ with these three properties is realized by a
+free block $R$ with exactly $t=\dim(W/W_0)$ rows.
+\end{lem}
+
+\begin{proof}
+$W=\operatorname{row}(L_0M)+\operatorname{row}(RM)$ gives $W\supseteq W_0$ and
+$W\subseteq\mathcal T$, and $\dim(W/W_0)\le\operatorname{rank}(RM)\le r$. For the converse, the
+map $u\mapsto uM$ is onto $\mathcal T$; choose preimages $u_1,\dots,u_t$ of a basis of
+$W/W_0$ and let $R$ consist of those $t$ rows followed by $q-r_0-t$ zero rows. Then
+$W_0+\operatorname{row}(RM)=W$.
+\end{proof}
+
+\begin{lem}[The conditions depend only on $W$]\label{lem:W-conditions}
+Condition \eqref{eq:5a} holds if and only if $\pi_2(W)\subseteq\pi_1(W)$, and condition
+\eqref{eq:5b} holds if and only if $\dim\pi_\lambda(W)=\dim\pi_1(W)$ for every
+$\lambda\in\mathbb C$.
+\end{lem}
+
+\begin{proof}
+Both are instances of Lemma~\ref{lem:rankid} with $P=[CA;C]$, whose kernel is $K_0$: for
+\eqref{eq:5a} take $Q=[LA;L]$, for \eqref{eq:5b} take $Q=\lambda L-LA$. In the first case
+$\operatorname{rank}[LA;L;CA;C]=\operatorname{rank}P+\operatorname{rank}[H_A;H]$ and
+$\operatorname{rank}[L;CA;C]=\operatorname{rank}P+\operatorname{rank}H$, so the two are equal
+exactly when $\operatorname{row}H_A\subseteq\operatorname{row}H$, which is
+$\pi_2(W)\subseteq\pi_1(W)$; in the second, equality reads
+$\operatorname{rank}(\lambda H-H_A)=\operatorname{rank}H$.
+\end{proof}
+
+\begin{lem}[Structural bound]\label{lem:struct}
+Let $W$ be feasible and $\omega=\dim\pi_1(W)>0$. Then
+\begin{equation}\label{eq:struct}
+\omega+1\le\dim W\le2\omega .
+\end{equation}
+\end{lem}
+
+\begin{proof}
+For the upper bound, $\operatorname{row}(L_0M)\subseteq W$ gives
+$W_0\subseteq\mathcal T$, and Lemma~\ref{lem:W-conditions} with $\lambda=0$ gives
+$\dim\pi_0(W)=\dim\pi_1(W)=\omega$; since $\pi_0(W)=\pi_2(W)$ up to sign,
+$\pi_2(W)=\pi_1(W)=:U$ and $W\subseteq U\times U$, so $\dim W\le2\dim U=2\omega$. For the
+lower bound, if $\dim W=\omega$ then $\pi_1|_W$ and $\pi_2|_W$ are isomorphisms and $W$ is the
+graph of a linear $F:U\to U$, that is $g=Fh$ on $W$. Over $\mathbb C$, $F$ has an eigenvalue
+$\lambda_0$, and $\pi_{\lambda_0}(W)=(\lambda_0I-F)U$ has dimension $<\omega$, contradicting
+Lemma~\ref{lem:W-conditions}.
+\end{proof}
+
+\begin{remark}[Coordinate change to $S$]\label{rem:YS}
+Fix a rational basis of $S$ and extend it to a rational basis of $\mathbb R^k$; let $Y_S$ be
+the change-of-basis matrix, so that $X\mapsto XY_S$ puts the coordinates of $S$ first. Right
+multiplication by $Y_S$ preserves ranks and the inclusions and equalities between row spaces,
+though not row spaces themselves, so Lemma~\ref{lem:W-conditions} and
+Lemma~\ref{lem:struct} apply verbatim in the new coordinates and every object involved lives
+in $\mathbb R^\ell$. The basis is obtained by column elimination on $AN$, so the entries of
+$Y_S$ have bit length $\operatorname{poly}(\mathcal L)$.
+\end{remark}
+
+\section{Minimum order and the spectral bound}\label{sec:monotone}\label{sec:lowerbound}
+
+\begin{lem}[Monotonicity and saturation]\label{lem:monotone}
+$\mathrm{DEC}(q)\Rightarrow\mathrm{DEC}(q+1)$, and $\mathrm{DEC}(r_0+r)=\mathrm{DEC}(r_0+m)$
+whenever $r\ge m$. Consequently $\mathrm{MINDEC}(Q)=\mathrm{DEC}(\min(Q,n))$ for
+$Q\ge r_0$.
+\end{lem}
+
+\begin{proof}
+Adjoining a zero row to $R$ leaves $H$, $H_A$, and the ranks in \eqref{eq:5a} and
+\eqref{eq:5b} unchanged, which gives monotonicity. Saturation follows from
+$\dim(W/W_0)\le\dim(\mathcal T/W_0)=m$ and Lemma~\ref{lem:sandwich}: any feasible $W$ with
+$\dim(W/W_0)\le r$ is already realized with at most $m$ free rows. The disjunction in
+\eqref{eq:mindec} then reduces to its largest term.
+\end{proof}
+
+\begin{prop}[Minimum order]\label{prop:minorder}
+Let $t_{\min}=\min\{\dim(W/W_0):W \text{ feasible}\}$. Then
+$q_{\min}=r_0+t_{\min}$ and $t_{\min}\le2\ell$.
+\end{prop}
+
+\begin{proof}
+Lemma~\ref{lem:sandwich} identifies feasibility with the existence of a feasible $W$ of
+quotient dimension $\le r$, and Lemma~\ref{lem:monotone} shows that the smallest such $r$ is
+$t_{\min}$. For the bound, a feasible $W$ satisfies $W\subseteq U\times U$ with
+$U\subseteq S$, so $\dim U=\omega\le\ell$ and $\dim W\le2\omega\le2\ell$; hence
+$t_{\min}\le\dim W-s_0\le2\ell$.
+\end{proof}
+
+\begin{prop}[A computable lower bound]\label{prop:lowerbound}
+Let $U_0=\operatorname{row}(L_0N)$ and $V_0=\operatorname{row}(L_0AN)$, and let $W$ be feasible with
+$t=\dim(W/W_0)$ and $\omega=\dim\pi_1(W)$. Then
+\begin{equation}\label{eq:lb}
+\operatorname{rank}\,[\,U_0;\,V_0\,]\ \le\ \omega\ \le\ s_0+t-1,
+\end{equation}
+hence $t\ge\operatorname{rank}[U_0;V_0]-s_0+1$ and
+\begin{equation}\label{eq:qmin-lb}
+q_{\min}\ \ge\ r_0+\max\bigl(0,\ \operatorname{rank}[U_0;V_0]-s_0+1\bigr).
+\end{equation}
+\end{prop}
+
+Proposition~\ref{prop:lowerbound} is the spectral counterpart of the algebraic bound of
+\cite{fer26a,fer26b}. That bound, $q_0=\sum_j\eta_j$, limits the orders at which \eqref{eq:5a} can
+hold; \eqref{eq:lb} limits the orders at which \eqref{eq:5b} can hold, since it uses only the
+condition at $\lambda=0$ and the structural bound. The two are independent, both are computed in
+polynomial time, and the larger one applies; on the instance of Appendix~\ref{app:example} the bound
+below gives $4$ while $q_0=3$. To our knowledge the literature states no lower bound derived from the
+spectral condition: the design conditions of \cite{fer10,dar25,fer26a,fer26b} and the order bound
+$q_0$ all concern \eqref{eq:5a}, and the spectral condition is treated there as a test applied at each
+order rather than as a source of a bound.
+
+\begin{proof}
+Since $W\supseteq W_0$ the projections satisfy $\pi_1(W)\supseteq\pi_1(W_0)=U_0$ and
+$\pi_2(W)\supseteq\pi_2(W_0)=V_0$. By Lemma~\ref{lem:W-conditions} at $\lambda=0$ we have
+$\pi_1(W)=\pi_2(W)=U$ with $\dim U=\omega$, so $U\supseteq U_0+V_0$ and
+$\omega\ge\operatorname{rank}[U_0;V_0]$. The upper bound is Lemma~\ref{lem:struct}:
+$\omega+1\le\dim W=s_0+t$. Combining and using $q_{\min}=r_0+t_{\min}$ with $t_{\min}\ge0$ gives
+\eqref{eq:qmin-lb}.
+\end{proof}
+
+\begin{remark}[On tightness]\label{rem:lbtight}
+The bound \eqref{eq:qmin-lb} is attained on the instance of Appendix~\ref{app:example}, where it gives
+$4$ and $q_{\min}=4$. We do not claim that it is tight in general: like the algebraic bound $q_0$ it is
+a lower bound, and the difference
+$q_{\min}-\bigl(r_0+\max(0,\operatorname{rank}[U_0;V_0]-s_0+1)\bigr)$ can be positive. What it does
+provide is a test for the orders below it, which then need not be examined at all.
+\end{remark}
+
+\section{Computing the minimum order and constructing an observer}\label{sec:compute}
+
+Both problems are reduced to the decision problem through an explicit interface, so that no complexity
+argument of the companion paper has to be repeated here.
+
+\begin{thm}[Interface]\label{thm:interface}
+Suppose that $\mathrm{DEC}(q)$ can be decided in time $T(q)$ for every order $q$ in the window
+\eqref{eq:range}, and let $\ell=\operatorname{rank}(AN)$. Then:
+\emph{(i)} $t_{\min}$, and hence $q_{\min}$, is computed with $O(\log\ell)$ calls to $\mathrm{DEC}$;
+\emph{(ii)} given an accepted order and a subspace $W$ realizing it, an observer matrix $R$ with exactly
+$t=\dim(W/W_0)$ rows and $R[N\ AN]=Z$ is obtained by solving $t$ rational linear systems of size
+$n\times2k$.
+\end{thm}
+
+\begin{proof}
+(i) By Proposition~\ref{prop:minorder} the feasible orders are monotone in $q$ and $t_{\min}\le2\ell$,
+so a binary search over the window \eqref{eq:range} locates the least feasible order in $O(\log\ell)$
+calls. (ii) By Lemma~\ref{lem:sandwich} a basis $w_1,\dots,w_t$ of $W/W_0$ lifts to rows $r_i$ with
+$r_i[N\ AN]=w_i$, and padding with zero rows realizes $W$ with exactly $t$ rows.
+\end{proof}
+
+Given the decision procedure of the companion paper, whose cost is
+$f(\ell)\operatorname{poly}(\mathcal L)$ bit operations, the interface gives $\mathrm{OPT}$ in
+$f(\ell)\operatorname{poly}(\mathcal L)$ bit operations and a construction bounded in the arithmetic
+model; the statements of the two procedures follow.
+
+
+
+\begin{cor}[$\mathrm{OPT}$]\label{cor:opt}
+$\mathrm{OPT}$ is decidable in $\exp\bigl(O(\ell^2\log(\ell+2))\bigr)\operatorname{poly}(\mathcal L)$
+bit operations.
+\end{cor}
+
+Algorithm~\ref{alg:opt} makes the search explicit: $\mathrm{DEC}$ is used as a subroutine, and the
+monotonicity of Lemma~\ref{lem:monotone} is what makes a binary search correct.
+
+\begin{algorithm}[!t]
+\caption{Minimum order $\mathrm{OPT}$, with $\mathrm{DEC}$ as a subroutine}
+\label{alg:opt}
+\begin{algorithmic}[1]
+\Require $A,C,L_0,Q$; \ $\ell=\operatorname{rank}(AN)$; \ $r_0=\operatorname{rows}(L_0)$;
+$q_0$ as in \eqref{eq:range}.
+\Ensure $q_{\min}$, or $+\infty$ if no order up to $Q$ is feasible.
+\State $\mathit{lo}\gets\max(0,\,q_0-r_0)$
+\State $\mathit{hi}\gets\min\bigl(Q-r_0,\ n_0-p-r_0,\ 2\ell\bigr)$
+\If{$\mathit{lo}>\mathit{hi}$ \textbf{or} $\mathrm{DEC}(r_0+\mathit{hi})$ returns \textsc{infeasible}}
+  \State \Return $+\infty$
+\EndIf
+\While{$\mathit{lo}<\mathit{hi}$}
+  \State $\mathit{mid}\gets\lfloor(\mathit{lo}+\mathit{hi})/2\rfloor$
+  \If{$\mathrm{DEC}(r_0+\mathit{mid})$ returns \textsc{feasible}}
+    \State $\mathit{hi}\gets\mathit{mid}$
+  \Else
+    \State $\mathit{lo}\gets\mathit{mid}+1$
+  \EndIf
+\EndWhile
+\State \Return $r_0+\mathit{lo}$
+\end{algorithmic}
+\end{algorithm}
+
+\begin{proof}
+By Proposition~\ref{prop:minorder} $q_{\min}=r_0+t_{\min}$, and by \eqref{eq:range} and the same
+proposition $t_{\min}$ lies in $[\max(0,q_0-r_0),\,\min(Q-r_0,\,n_0-p-r_0,\,2\ell)]$; that is the
+initial interval of Algorithm~\ref{alg:opt}, so the search is confined before it starts. By
+Lemma~\ref{lem:monotone} the predicate ``$\mathrm{DEC}(r_0+t)$ holds'' is monotone in $t$, so the
+algorithm maintains the invariant that the least feasible $t$ lies in $[\mathit{lo},\mathit{hi}]$,
+halves the interval at each step, and returns $t_{\min}$ after $O(\log\ell)$ calls to the decision
+procedure of Theorem~\ref{thm:interface}, the logarithmic factor being absorbed by the cost of that
+procedure. The
+test at the head is what distinguishes ``no feasible order up to $Q$'' from a finite answer, and it
+is correct because the predicate is upward closed.
+\end{proof}
+
+\begin{remark}[Room for improvement]\label{rem:refine}
+The complexity bound does not depend on how tightly the window is chosen, so
+Algorithm~\ref{alg:opt} uses only the published lower bound $q_0$ and the structural bound $2\ell$.
+Two cheap refinements are available and are left out on purpose, to keep the algorithm free of
+instance-specific preprocessing. First, \eqref{eq:qmin-lb} gives a lower bound that is computed in
+polynomial time from $U_0$ and $V_0$ and can be strictly larger than $q_0$; on the instance of
+Appendix~\ref{app:example} it equals $4$ while $q_0=3$. Replacing $\max(0,q_0-r_0)$ by the larger of
+the two bounds in line~2 shrinks the window without affecting correctness. Second, the structural
+bound \eqref{eq:struct} also confines $\omega$ on each chart, which prunes branches of the inner loop
+in the algorithm of the companion paper. Neither refinement changes any asymptotic statement, and
+neither is
+needed for the results above.
+\end{remark}
+
+\begin{cor}[$\mathrm{FIND}$, arithmetic model]\label{cor:find}
+If the instance is feasible, a witness $R$ can be computed in
+$\exp\bigl(O(\ell^2\log(\ell+2))\bigr)\operatorname{poly}(\mathcal L)$ arithmetic operations, as
+exact real algebraic numbers whose number and degree are $f(\ell)$.
+\end{cor}
+
+Procedure~\ref{proc:find} states the construction; step~1 is the only step that is not elementary,
+and it is a citation rather than a description.
+
+\paragraph*{Procedure FIND (arithmetic model)}\label{proc:find}
+\begin{enumerate}
+\item Solve the system $\Psi_{t,\omega}$ of the companion paper by the sampling-point algorithm of
+\cite[Ch.~13]{bpr06}, for the least $t$ accepted by $\mathrm{DEC}$ and for some $\omega$ that
+succeeds. This returns $Y$ and $x$ as exact real algebraic numbers, with the arithmetic bound of
+\cite[Ch.~13]{bpr06}. We neither describe that algorithm nor bound its bit cost
+(Remark~\ref{rem:find-bit}).
+\item Form $W=\operatorname{row}Z(Y)$, choose a basis $w_1,\dots,w_t$ of $W/W_0$, and solve the
+rational linear systems $u_iM=w_i$ for $i=1,\dots,t$; this costs $\operatorname{poly}(\mathcal L)$, as
+the bit-size estimates of the companion paper show.
+\item Return $R=[u_1;\dots;u_t;0]$ padded with $Q-r_0-t$ zero rows.
+\end{enumerate}
+
+\begin{proof}[Proof of Corollary~\ref{cor:find}]
+Step~1 is the sampling-point bound of \cite[Ch.~13]{bpr06}: a nonempty real algebraic set defined by
+$s$ polynomials in $N$ variables of degree at most $D$ and coefficient bit length $\beta$ has a sample
+point whose coordinates are algebraic numbers of degree $D^{O(N)}$ with isolating intervals of bit
+length $\beta D^{O(N)}$; with the parameter counts of the companion paper this is
+$f(\ell)\operatorname{poly}(\mathcal L)$ arithmetic
+operations and $f(\ell)\operatorname{poly}(\mathcal L)$ output bits. Steps~2 and~3 are
+Lemma~\ref{lem:sandwich}: a basis of $W/W_0$ lifts to free rows by solving $uM=w$, and padding with
+zero rows realizes $W$ with exactly $t$ free rows. Since $W$ satisfies the two conditions
+(Lemma~\ref{lem:W-conditions}), the resulting $L=[L_0;R]$ does too, and its order is $r_0+t$.
+\end{proof}
+
+\begin{remark}[What is not claimed]\label{rem:find-bit}
+Corollary~\ref{cor:find} is an arithmetic bound on the construction together with a bound on the
+output length. A bound in the bit model for producing the witness is not asserted: the ordinary
+analysis of \cite{bpr06} gives arithmetic operations only, and their Chapter~8 states explicitly
+that bit-length estimates do not follow from the arithmetic analysis. We therefore state
+$\mathrm{FIND}$ in the arithmetic model and leave its bit complexity open
+(Section~\ref{sec:limits}).
+\end{remark}
+
+\section{An incorrect published minimum-order value}\label{sec:example}\label{app:example}
+
+We run the procedure on the instance of \cite[Sec.~VII]{fer26b}, which has $n=8$, $p=2$ and
+\begin{equation*}
+\begin{gathered}
+C=\begin{bmatrix}-2&-2&2&-2&-1&0&1&-3\\ 0&0&1&2&2&3&-1&-2\end{bmatrix},\\
+L_0=\begin{bmatrix}-2&-1&-2&-3&-1&3&2&0\\ 1&-1&-2&1&0&2&0&1\end{bmatrix},
+\end{gathered}
+\end{equation*}
+and
+\begin{equation*}
+A=\begin{bmatrix}
+0&1&0&1&0&0&0&0\\
+0&-1&1&0&0&0&0&-1\\
+1&0&-1&1&0&0&1&-1\\
+-1&-1&0&-2&0&0&0&0\\
+0&0&0&0&-2&0&0&1\\
+0&0&0&0&0&-2&1&0\\
+0&0&0&0&0&-1&-2&1\\
+0&0&0&0&0&0&1&-2
+\end{bmatrix}.
+\end{equation*}
+The compression of Section~\ref{sec:dimension} gives
+\begin{equation*}
+\begin{gathered}
+k=\dim\ker[C;CA]=4,\qquad d_0=\operatorname{rank}[N\ AN]=6,\\
+s_0=\dim\operatorname{row}(L_0M)=2,
+\end{gathered}
+\end{equation*}
+and, in the notation of \eqref{eq:ell},
+\begin{equation*}
+S=\operatorname{row}(AN)=\mathbb R^4,\qquad \ell=4,\qquad m'=4 .
+\end{equation*}
+Here $\ell=k$, so the subspace reduction is vacuous and the content of the example is the
+certificate alone. The coordinate count is $\kappa_{\rm obs}=rd_0=12$ already at $r=2$, whereas
+the parameter of the companion paper is $\ell=4$.
+
+At $t=2$, that is at order $q=r_0+t=4$, the decision procedure of the companion paper accepts. An explicit
+witness is the four-row observer matrix $L=[L_0;R]$ with
+\begin{equation*}
+R=\begin{bmatrix}
+-\tfrac{42919}{32067} & -\tfrac{55096}{10689} & 1 & 0 & 0 & 0 & 0 & 0\\
+\tfrac{3283}{4581} & \tfrac{118}{1527} & 0 & 1 & 0 & 0 & 0 & 0
+\end{bmatrix}.
+\end{equation*}
+For this matrix,
+\begin{equation*}
+\operatorname{rank}[L;CA;C]=7=\operatorname{rank}[LA;L;CA;C],
+\end{equation*}
+which is \eqref{eq:5a}. The pencil $[\lambda L-LA;\,CA;\,C]$ is $8\times8$; all $64$ of its
+$7\times7$ minors are nonzero and have gcd $1$, while its determinant vanishes, so its rank is $7$
+for every $\lambda\in\mathbb C$, which is \eqref{eq:5b}. Hence $\mathrm{DEC}(4)$ holds and
+$q_{\min}\le4$ for this instance.
+
+We record that \cite[Sec.~VII-B]{fer26b} reports this instance as infeasible at order $4$, and
+hence $\{5,6\}$ as its order spectrum. The matrix $L$ above is a four-row witness satisfying the
+two conditions, so \emph{that report is in error}. The error is not in the characterization but in
+the way it is evaluated there: the condition-(A) family is parameterized chart by chart and a
+branch of it is missed. The formulation of the companion paper never forms that family---it
+quantifies over the chart coordinates and the certificate jointly---which is why it cannot miss a
+branch. Nothing else in this paper depends on the discrepancy: the characterization of
+\cite{fer26b} is used only for the existence of a nullspace matrix, and the witness supplies one.
+
+\paragraph*{The two procedures on this instance}
+Write $M=[N\ AN]$ and, for the accepted $L$, $H=LN$, $H_A=LAN$.
+
+\emph{OPT.} Algorithm~\ref{alg:opt} with $Q=6$ evaluates $\mathrm{DEC}(6)$, which is feasible, so the
+answer is finite; the search interval is $[0,\min(4,2\ell)]=[0,4]$. The call at $t=2$, that is at
+order $4$, is the certificate above and accepts. The call at $t=0$, that is at $L=L_0$, rejects: for
+$L_0$ we have $\operatorname{rank}[L_0;CA;C]=6$ but $\operatorname{rank}[L_0A;L_0;CA;C]=7$, so
+\eqref{eq:5a} fails. At $t=1$, that is at order $3$, no feasible $W$ exists, and Proposition~\ref{prop:lowerbound}
+decides it without any spectral test: the two blocks of $W_0$ are $U_0=L_0N$ and $V_0=L_0AN$ with
+$\operatorname{rank}U_0=2$ and $\operatorname{rank}[\,U_0;\,V_0\,]=3$, so \eqref{eq:qmin-lb} gives
+$t\ge3-2+1=2$, i.e.\ every feasible $W$ has quotient dimension at least $2$. (A candidate with $t=1$
+would have $\dim W=3$, forcing $\omega=2$ by Lemma~\ref{lem:struct} and hence $U=U_0\supseteq V_0$,
+which fails.) Therefore $\mathrm{DEC}(3)$ holds for no candidate, $\mathrm{DEC}(4)$ holds by the
+certificate above, and
+
+\begin{equation*}
+q_{\min}=4
+\end{equation*}
+
+for this instance. The value $5$ reported in \cite[Sec.~VII]{fer26b} is therefore not $q_{\min}$.
+
+\emph{FIND.} For the accepted $L$ the subspace $W=\operatorname{row}[H\ H_A]$ is four-dimensional and
+$W_0=\operatorname{row}[H_0\ H_{A,0}]$ is two-dimensional, so $t=\dim(W/W_0)=2$; moreover $W_0\subseteq
+W$, and the rows $r_1M$ and $r_2M$ of the two free rows, together with the two rows of $W_0$, span
+$W$:
+\begin{equation*}
+\begin{gathered}
+\dim W=4,\qquad \dim W_0=2,\\
+\operatorname{rank}[\,W_0;\,r_1M;\,r_2M\,]=4 .
+\end{gathered}
+\end{equation*}
+Step~2 of Procedure~\ref{proc:find} is therefore realized by $u_i=r_i$, and step~3 pads with
+$Q-r_0-t=6-2-2=2$ zero rows. Only step~1 of the procedure is not exercised here, because a witness
+$W$ was found directly rather than by solving the algebraic system.
+
+The two exact rank computations of $U_0$ and $[U_0;V_0]$ are the whole of the argument at order
+$3$; they are reproduced by the script archived with the artifact, together with the rank and
+minor computations used above.
+
+\section{Conclusions}\label{sec:conclusions}
+
+The feasible designs form a constrained family of subspaces, $W_0\subseteq W\subseteq\mathcal T$ with
+$\dim(W/W_0)\le r$, and everything in this paper follows from that reading. The family is monotone and
+saturates, so the threshold problem is a single decision instance and the minimum order is
+$q_{\min}=r_0+t_{\min}$ with $t_{\min}\le2\ell$ (Proposition~\ref{prop:minorder}). The spectral
+condition gives the lower bound \eqref{eq:qmin-lb}, which rests on a different necessary condition than
+the algebraic bound $q_0$ of \cite{fer26a,fer26b} and is strictly stronger on the instance of
+Section~\ref{sec:example}. Given a decision procedure for a prescribed order, minimum order and a
+minimum-order observer are obtained in $O(\log\ell)$ calls and one lifting step
+(Theorem~\ref{thm:interface}), and on a published instance the resulting value is $4$, not the $5$ that
+was reported. The feasibility characterization itself is taken from
+\cite{fer10,dar25,fer26a,fer26b}.
+
+\subsection{Limitations and what is not claimed}\label{sec:limits}
+
+Three qualifications bound what is claimed.
+
+\begin{enumerate}
+\item \textbf{The lower bound is not claimed to be tight.} \eqref{eq:qmin-lb} is attained on the
+instance of Section~\ref{sec:example}, where it gives $4$ and $q_{\min}=4$, but the difference
+$q_{\min}-\bigl(r_0+\max(0,\operatorname{rank}[U_0;V_0]-s_0+1)\bigr)$ can be positive in general. What
+the bound does provide is a test for the orders below it, which then need not be examined.
+\item \textbf{The construction is bounded in the arithmetic model.} Corollary~\ref{cor:find} bounds
+arithmetic operations and output length, not bit operations: the sampling-point analysis of
+\cite{bpr06} that it invokes is arithmetic, and a bit-model sampling-point theorem would be needed
+(Remark~\ref{rem:find-bit}).
+\item \textbf{The complexity statements are inherited.} Everything quantitative about
+$\mathrm{OPT}$ is inherited from the decision procedure of the companion paper through
+Theorem~\ref{thm:interface}; this paper does not reprove it, and no closed-form expression for
+$q_{\min}$ is offered beyond the characterization of Proposition~\ref{prop:minorder} and the bound of
+Proposition~\ref{prop:lowerbound}.
+\end{enumerate}
+
+\subsection{The size of the parameter}\label{sec:paramsize}
+
+Two quantities describe the free data: the number of coordinates
+\begin{equation}\label{eq:kappa-size}
+\kappa_{\rm obs}=r\,d_0\le2rn
+\end{equation}
+needed to write the $r$ free rows, and the parameter that governs the bound,
+\begin{equation}\label{eq:ell-size}
+\ell=\operatorname{rank}(AN)\le k\le n .
+\end{equation}
+Only the first can be quadratic in $n$. By the subspace reduction of Section~\ref{sec:subspace}
+(Lemmas~\ref{lem:struct} and~\ref{lem:sandwich}) the bound of the companion paper depends on
+$\ell$ and not on $\kappa_{\rm obs}$: the coordinate count \eqref{eq:kappa-size} records how the
+free rows are written, not how hard the instance is.
+
+Whether $\ell$ is optimal is open. Two further reductions are conceivable, and they are of
+different kinds.
+
+\begin{enumerate}
+\item \emph{Quotients of the observer rows.} The conditions depend on row spaces, hence are
+invariant under row operations of $L$. Those preserving $L_0$ are block lower-triangular,
+\begin{equation*}
+T=\begin{bmatrix}I_{r_0}&0\\ U&S\end{bmatrix},\qquad \det S\ne0 ,
+\end{equation*}
+so two different free blocks can present the same $W$. The reduction of
+Section~\ref{sec:subspace} already quotients by this symmetry; the question is whether a
+smaller invariant than $\ell$ exists.
+\item \emph{Spectral invisibility.} One might hope to divide by directions that change neither
+the rank condition nor the finite spectrum. Such a quotient must preserve the interaction
+between $H$ and $H_A$, not only $\operatorname{rank}H$; a quotient preserving \eqref{eq:5a} but
+changing the spectrum would be invalid. We do not know whether one exists.
+\end{enumerate}
+
+\paragraph*{Growth of the parameter-dependent factor}
+Renegar's bound is $(sD)^{O(N)}$ with
+\begin{equation*}
+sD=O(\ell^2),\qquad N=\ell^2+2\ell ,
+\end{equation*}
+so $f(\ell)=\exp\bigl(O(\ell^2\log(\ell+2))\bigr)$. The result is primarily structural: it
+identifies an invariant of the instance, independent of how many free rows are allowed, that
+governs the complexity bound, although the doubly exponential dependence on $\ell$ may limit
+practical applicability for large values.
+
+\subsection{Reproducibility and evidence}\label{sec:repro}
+
+Two kinds of evidence support the statements above, and the artifact records which statement rests on
+which.
+
+\begin{enumerate}
+\item \emph{Lean~4 with Mathlib.} The structural statements of Section~\ref{sec:dimension} are
+formalized: the row space as the range of the row map, the sandwich and the lifting
+(\texttt{rowSpan\_fromRows\_left}, \texttt{mem\_rowSpan\_iff\_exists\_vecMul}), the criterion for
+equality of the two projections, the upper half of the structural bound
+(\texttt{finrank\_le\_two\_mul\_of\_pi1\_eq\_pi2}), and the invariance of the rank under appending a
+zero row (\texttt{rank\_fromRows\_zero}), which is the content of Lemma~\ref{lem:monotone}. Every
+declaration is checked by the kernel against only (\texttt{propext}, \texttt{Classical.choice},
+\texttt{Quot.sound}). The interface of Section~\ref{sec:compute} and the counting arguments are
+paper-level, so this is not a formal verification of the complexity statements.
+\item \emph{Exact rational arithmetic.} The instance of Section~\ref{sec:example} is verified by exact
+rational computation, not by numerical evaluation: the two rank equalities of \eqref{eq:5a}, the
+vanishing of the determinant of the $8\times8$ pencil together with the nonzero $7\times7$ minors and
+their gcd, and the rank of $[U_0;V_0]$ that enters \eqref{eq:qmin-lb}. This excludes arithmetic slips
+but does not replace the proofs.
+\end{enumerate}
+
+The Lean development and the exact-arithmetic scripts form the artifact at
+\url{https://github.com/Zhengshuji/q1-functional-observer}. Of the classical facts invoked by citation,
+the rank identity of Lemma~\ref{lem:rankid} is also proved in the artifact, where it is used at the
+level of linear maps; the remaining cited facts are used as references and are not formalized.
+
+\begin{thebibliography}{99}
+\bibitem{fer10} J. A. Fernando, H. Trinh, L. Jennings. Functional observability and the design of minimum order linear functional observers. \emph{IEEE Trans. Automat. Control} 55(5):1268--1273, 2010.
+\bibitem{dar25} M. Darouach, J. A. Fernando. On functional observability and functional observer design. \emph{Automatica}, vol. 173, Art. no. 112115, 2025, doi: 10.1016/j.automatica.2025.112115.
+\bibitem{fer26a} J. A. Fernando. A minimum-order functional observer beyond the Darouach and Luenberger constructions. arXiv:2609.33615, 2026 (preprint).
+\bibitem{fer26b} J. A. Fernando. Complete characterization of minimum-order functional observers from Darouach to Luenberger. arXiv:2609.37992, 2026 (preprint).
+\bibitem{zha25} Y. Zhang, T. Fernando, M. Darouach. Functional
+  observability, structural functional observability, and optimal sensor
+  placement. \emph{IEEE Trans. Automat. Control}, vol. 70, no. 3,
+  pp. 1592--1607, 2025, doi: 10.1109/TAC.2024.3462558.
+  (arXiv:2307.08923.)
+\bibitem{dey21} P. Dey, N. Balachandran, D. Chatterjee. Complexity of
+  constrained sensor placement problems for optimal observability.
+  \emph{Automatica}, vol. 131, Art. no. 109758, 2021,
+  doi: 10.1016/j.automatica.2021.109758.
+\bibitem{lof26} J. L\"{o}fberg. Static output-feedback stabilization is
+  NP-hard. arXiv:2609.16886, 2026 (preprint).
+\bibitem{bar26} G. Barkai, I. Shames. On the NP-hardness of unconstrained
+  static output feedback stabilization. arXiv:2609.38728, 2026 (preprint).
+\bibitem{liu26} Z. Liu. Computational complexity of static output feedback
+  stabilization. arXiv:2610.00390, 2026 (preprint).
+\bibitem{maj26} A. Majumdar. Affine rank minimization is
+  $\exists\mathbb R$ complete. arXiv:2602.14037, 2026 (preprint).
+\bibitem{hj13} R. A. Horn, C. R. Johnson. \emph{Matrix Analysis}. 2nd ed.
+Cambridge University Press, 2013.
+\bibitem{vzgg13} J. von zur Gathen, J. Gerhard. \emph{Modern Computer Algebra}.
+3rd ed. Cambridge University Press, 2013.
+\bibitem{emi99} I. Z. Emiris, B. Mourrain. Matrices in elimination theory. \emph{J. Symbolic Comput.} 28(1--2):3--44, 1999, doi: 10.1006/jsco.1998.0266.
+\bibitem{bpr06} S. Basu, R. Pollack, M.-F. Roy. \emph{Algorithms in Real
+  Algebraic Geometry}, 2nd ed. Berlin, Germany: Springer, 2006,
+  Algorithms and Computation in Mathematics, vol. 10.
+\bibitem{ren92} J. Renegar. On the computational complexity and geometry of the first-order theory of the reals. Part II: The general decision problem. \emph{J. Symbolic Comput.} 13(3):301--327, 1992, doi: 10.1016/S0747-7171(10)80004-5.
+\bibitem{fab90} A. Fabiano, D. C. Struppa. Bounds for the degrees of the entries of left
+inverses of polynomial matrices. \emph{Multidimensional Systems and Signal Processing},
+vol.~1, no.~1, pp.~67--74, 1990, doi: 10.1007/BF01812207.
+\bibitem{bee88} Th. Beelen, P. Van Dooren. An improved algorithm for the computation of Kronecker's canonical form of a singular pencil. \emph{Linear Algebra Appl.} 105:9--65, 1988.
+\bibitem{lan02} S. Lang. \emph{Algebra}. Revised 3rd ed.
+Graduate Texts in Mathematics 211, Springer, 2002.
+\end{thebibliography}
+
+\end{document}
