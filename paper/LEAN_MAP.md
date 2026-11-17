@@ -38,6 +38,7 @@ The port was mechanical: the seven modules import only `Mathlib` and each other,
 | Lemma sandwich / realizability | `Q1Subspace.rowSpan_fromRows_left`, `Q1Subspace.mem_rowSpan_iff_exists_vecMul` | `Q1Subspace.lean` | sandwich and preimage; quotient dimension bound is paper-level |
 | Lemma monotonicity: adjoining a zero free row | `Q1Paper.rank_fromRows_zero` (via `rowSpan_fromRows_zero`) | `Monotone.lean` | rank-theoretic ingredient; the block bookkeeping through `Matrix.fromRows` is not done |
 | Lemma structural bound, **upper half** $\dim W\le2\omega$ | `Q1Subspace.finrank_le_two_mul_of_pi1_eq_pi2` (via `finrank_le_pi1_add_pi2`) | `Q1Projection.lean` | literal; the lower half $\omega+1\le\dim W$ is still paper-level |
+| Lemma structural bound, **lower half** $\omega+1\le\dim W$ | `Q1Subspace.finrank_add_one_le_of_spectral` (with `piLam`, `pi1_eq_pi2_of_spectral`) | `BoundLower.lean` | literal, over `[IsAlgClosed K]`; sign convention $\lambda h-g$ as in the paper |
 | Dimensional half of tightness ($\operatorname{rank}[U_0;V_0]\le\omega$) | `Q1Subspace.finrank_sup_pi_le`, `Q1Subspace.finrank_pi1_mono` | `TightDim.lean` | literal, `W₀ ≤ W` and `pi2 W ≤ pi1 W` |
 | Lemma conditions depend on $W$ | `Q1Subspace.rank_fromRows_eq_rank_iff`, `Q1Subspace.rowSpace_eq`, `Q1Subspace.hasConstantRank_iff_rankIndependent` | `Q1RowSpace.lean`, `Q1Step3.lean`, `Q1Pencil.lean` | row-space form of (5a); the two formulations of constancy of the pencil rank |
 | Remark $Y_S$ (basis change) | — | — | paper-level, deliberately |
@@ -78,7 +79,7 @@ Mathlib theorem rather than a bespoke argument.
 
 | Paper item | Why it is not formalized | Worth doing? |
 |---|---|---|
-| **Lemma structural bound** $\omega+1\le\dim W\le2\omega$ | upper bound needs the rank of a product of submodules (`Submodule.finrank_prod`-type lemma); lower bound needs the eigenvalue argument over $\mathbb C$ | **yes, highest value**: it is what bounds the chart dimension by $2\ell$ in §VII |
+| ~~Lemma structural bound~~ | **now complete**: upper half `finrank_le_two_mul_of_pi1_eq_pi2`, lower half `finrank_add_one_le_of_spectral` | done |
 | **Lemma monotonicity / saturation** | the rank invariance under appending a zero row is done (`rank_fromRows_zero`); what remains is carrying the two block equations through `Matrix.fromRows` (a `fromRows`-multiplication lemma and the double-block stacking) | **partly done** |
 | **Proposition minimum order** $q_{\min}=r_0+t_{\min}$ | depends on the two items above plus the quotient bookkeeping | yes, after those two |
 | Lemma conditions depend on $W$, quantified form | the Lean interface states constancy of the rank for a pencil $zH-H_A$; the paper's form quantifies over all complex $\lambda$ through the complexification | medium |

@@ -848,12 +848,14 @@ declaration is checked by the kernel against only (\texttt{propext}, \texttt{Cla
 \texttt{Quot.sound}). The interface of Section~\ref{sec:compute} and the counting arguments are
 paper-level, so this is not a formal verification of the complexity statements.
 
-Two statements lie outside the Lean core, and both are paper-level here. The first is the lower half
-$\omega+1\le\dim W$ of the structural bound, which rests on the eigenvalue argument of
-Lemma~\ref{lem:struct}. The second is Proposition~\ref{prop:tight}, whose proof needs, in addition to
-that lower half, the rank--nullity argument that makes $\ker\pi_1|_W$ one-dimensional and the
-Popov--Belevitch--Hautus criterion for a single-input pair; the artifact contains no controllability
-theory, so the equivalence with controllability is proved on paper only. What the artifact does cover of
+Two points about the Lean core are worth stating. First, the lower half $\omega+1\le\dim W$ of
+Lemma~\ref{lem:struct} is formalized as \texttt{finrank\_add\_one\_le\_of\_spectral}: over an
+algebraically closed field, the spectral condition rules out $\dim W=\dim\pi_1(W)$ for a feasible $W$.
+Second, Proposition~\ref{prop:tight} is only partly covered. Its dimensional half is
+\texttt{finrank\_sup\_pi\_le} and \texttt{finrank\_pi1\_mono}, and the graph argument that turns
+$\dim W=\dim\pi_1(W)$ into a one-dimensional kernel is the proof of
+\texttt{finrank\_add\_one\_le\_of\_spectral}; what remains paper-level is the
+Popov--Belevitch--Hautus criterion, since the artifact contains no controllability theory. What the artifact does cover of
 Proposition~\ref{prop:tight} is the dimensional half: for $W_0\subseteq W$ with
 $\pi_2(W)\subseteq\pi_1(W)$, the declarations \texttt{finrank\_sup\_pi\_le} and
 \texttt{finrank\_pi1\_mono} give $\dim(\pi_1(W_0)+\pi_2(W_0))\le\dim\pi_1(W)$ and
