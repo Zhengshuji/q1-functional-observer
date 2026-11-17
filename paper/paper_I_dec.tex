@@ -1706,19 +1706,19 @@ For the $\exists\mathbb R$ encoding the minors are not enumerated. For each $\om
 \begin{equation*}
 \begin{gathered}
 X\in\mathbb R^{q\times\omega},\qquad B\in\mathbb R^{\omega\times k},\\
-G\in\mathbb R^{q\times\omega},\qquad U\in\mathbb R^{\omega\times q},\\
-V\in\mathbb R^{k\times\omega},
+G\in\mathbb R^{q\times\omega},\qquad X_L\in\mathbb R^{\omega\times q},\\
+B_R\in\mathbb R^{k\times\omega},
 \end{gathered}
 \end{equation*}
 and the coefficients of $S(\lambda)=\sum_{j=0}^{2\omega-2}S_j\lambda^j$, where $S_j\in\mathbb R^{\omega\times q}$, and impose
 \begin{equation*}
 \begin{gathered}
 H=XB,\qquad H_A=GB,\\
-UX=I_\omega,\qquad BV=I_\omega,\\
+X_LX=I_\omega,\qquad BB_R=I_\omega,\\
 S(\lambda)(\lambda X-G)=I_\omega .
 \end{gathered}
 \end{equation*}
-The polynomial identity is linear in the coefficients $S_j$; comparing coefficients of $\lambda^j$ makes it the linear system \eqref{eq:R0}. The rank conditions $UX=I_\omega$ and $BV=I_\omega$ are polynomial equations, and $BV=I_\omega$ makes $B$ full row rank, hence, as in Section~\ref{sec:spectral}, $\operatorname{rank}P(\lambda)=\operatorname{rank}(\lambda X-G)=\omega$ for all $\lambda$. Also $H_A=GB=(GU)XB=FH$ with $F=GU$, so \eqref{eq:5a} holds.
+The polynomial identity is linear in the coefficients $S_j$; comparing coefficients of $\lambda^j$ makes it the linear system \eqref{eq:R0}. The rank conditions $X_LX=I_\omega$ and $BB_R=I_\omega$ are polynomial equations, and $BB_R=I_\omega$ makes $B$ full row rank, hence, as in Section~\ref{sec:spectral}, $\operatorname{rank}P(\lambda)=\operatorname{rank}(\lambda X-G)=\omega$ for all $\lambda$. Also $H_A=GB=(GX_L)XB=FH$ with $F=GX_L$, so \eqref{eq:5a} holds.
 
 It remains to tie $(H,H_A)$ to the input. The rows of $H=LN$, $H_A=LAN$ satisfy, with $h_i^0=(L_0N)_i$ and $g_i^0=(L_0AN)_i$,
 \begin{equation}
@@ -1736,10 +1736,10 @@ where $D$ is a rational matrix with $\ker D=\mathcal T$. Both are polynomial (in
 The correctness splits into two independent statements.
 
 \paragraph*{Soundness}
-Suppose the system has a solution. Set $L$ with first $r_0$ rows $L_0$ and, for each $i>r_0$, a preimage $r_i$ with $(X_iB,G_iB)=r_i[N\ AN]$, which exists by \eqref{eq:B2}. Then $H=LN$, $H_A=LAN$ and $H_A=GB=(GU)XB=FH$ with $F=GU$, so \eqref{eq:5a} holds; and $\operatorname{rank}(\lambda H-H_A)=\operatorname{rank}(\lambda X-G)=\omega$ for all $\lambda$, which gives \eqref{eq:5b} and uses $BV=I_\omega$ (full row rank of $B$) together with $S(\lambda)(\lambda X-G)=I_\omega$.
+Suppose the system has a solution. Set $L$ with first $r_0$ rows $L_0$ and, for each $i>r_0$, a preimage $r_i$ with $(X_iB,G_iB)=r_i[N\ AN]$, which exists by \eqref{eq:B2}. Then $H=LN$, $H_A=LAN$ and $H_A=GB=(GX_L)XB=FH$ with $F=GX_L$, so \eqref{eq:5a} holds; and $\operatorname{rank}(\lambda H-H_A)=\operatorname{rank}(\lambda X-G)=\omega$ for all $\lambda$, which gives \eqref{eq:5b} and uses $BB_R=I_\omega$ (full row rank of $B$) together with $S(\lambda)(\lambda X-G)=I_\omega$.
 
 \paragraph*{Completeness}
-A feasible $L$ supplies $X,B,U,V$ from a rank factorization $H=XB$ with $B_{:,J}=I_\omega$, $G=FX$ with $H_A=FH$ (Lemma~\ref{lem:compression}), and $S$ from the left-inverse construction above; then \eqref{eq:B1} and \eqref{eq:B2} hold by construction, and the remaining equations are identities.
+A feasible $L$ supplies $X,B,X_L,B_R$ from a rank factorization $H=XB$ with $B_{:,J}=I_\omega$, $G=FX$ with $H_A=FH$ (Lemma~\ref{lem:compression}), and $S$ from the left-inverse construction above; then \eqref{eq:B1} and \eqref{eq:B2} hold by construction, and the remaining equations are identities.
 
 The $\omega=0$ case is the branch $H=H_A=0$, which \eqref{eq:B1} forces when $L_0N=0$ and rejects otherwise; it is a separate algebraic branch, not a degree-negative instance of \eqref{eq:R0}. The number of variables is
 \begin{equation*}
