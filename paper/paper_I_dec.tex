@@ -321,9 +321,12 @@ their greatest common divisor in $\mathbb C[\lambda]$ being a nonzero constant.
 \end{lem}
 
 \begin{proof}
-Set $P_0=\begin{bmatrix}C\\CA\end{bmatrix}$. Since $K_0=\ker P_0$, the matrix $N$ is a basis matrix for $\ker P_0$.
+Set $P_0=[C;CA]$. Each part is one rank computation on the stacked matrices of \eqref{eq:5a} and
+\eqref{eq:5b}: with $P=P_0$ and $N$ a basis of $\ker P_0$, Lemma~\ref{lem:rankid} replaces every
+stacked rank by $\operatorname{rank}P_0$ plus the rank of a compressed block, and what remains is to
+read off the resulting row inclusion and to propagate it to $\lambda H-H_A$.
 
-\emph{(i)} The rows of $P_0$ occur among the rows of both matrices below, so Lemma~\ref{lem:rankid} with $P=P_0$ and with $M=\begin{bmatrix}LA\\L\end{bmatrix}$, $M=L$ gives
+\emph{(i)} The rows of $P_0$ occur among the rows of both matrices below, so Lemma~\ref{lem:rankid} with $P=P_0$, $M=\begin{bmatrix}LA\\L\end{bmatrix}$ and $M=L$ gives
 \begin{equation*}
 \begin{aligned}
 \operatorname{rank}\begin{bmatrix}LA\\ L\\ CA\\ C\end{bmatrix}
@@ -334,56 +337,31 @@ Set $P_0=\begin{bmatrix}C\\CA\end{bmatrix}$. Since $K_0=\ker P_0$, the matrix $N
 \end{equation*}
 Up to row permutations the left-hand sides are the two sides of \eqref{eq:5a}, so \eqref{eq:5a}
 holds exactly when $\operatorname{rank}[H_A;H]=\operatorname{rank}H$, that is, when
-\begin{equation}\label{eq:5a-1}
-\operatorname{row}H_A\subseteq\operatorname{row}H .
-\end{equation}
+$\operatorname{row}H_A\subseteq\operatorname{row}H$.
 
-\emph{(ii)} By \eqref{eq:5a-1} every row of $H_A$ is a linear combination of the rows of $H$. Let $F$ have as its $i$-th row the coefficient vector of the $i$-th row of $H_A$; then
-\begin{equation}\label{eq:5a-2}
-H_A=FH .
-\end{equation}
+\emph{(ii)} By this row inclusion every row of $H_A$ is a linear combination of the rows of $H$, so
+$H_A=FH$ for the matrix $F$ whose $i$-th row is the coefficient vector of the $i$-th row of $H_A$.
 
-\emph{(iii)} Set
-\begin{equation*}
-M(\lambda)=\begin{bmatrix}
-\lambda L-LA\\CA\\C
-\end{bmatrix},\qquad J=\begin{bmatrix}
-L \\ CA \\C
-\end{bmatrix}.
-\end{equation*}
-Since $N$ is a basis matrix for $K_0$, $M(\lambda)N=[P(\lambda);0;0]$ and $JN=[H;0;0]$.
-Since the row space of $P_0$ is a subspace of the row spaces of both $M(\lambda)$ and $J$,
-Lemma~\ref{lem:rankid} with $P=P_0$ yields
-\begin{equation*}
-\begin{aligned}
-\operatorname{rank}M(\lambda)&=\operatorname{rank}P_0+\operatorname{rank}P(\lambda),\\
-\operatorname{rank}J&=\operatorname{rank}P_0+\operatorname{rank}H .
-\end{aligned}
-\end{equation*}
-Hence \eqref{eq:5b} is equivalent to
+\emph{(iii)} With $M(\lambda)=[\lambda L-LA;CA;C]$ and $J=[L;CA;C]$, and with $N$ as above,
+$M(\lambda)N=[P(\lambda);0;0]$ and $JN=[H;0;0]$. Lemma~\ref{lem:rankid} with $P=P_0$,
+$M=\lambda L-LA$ and $M=L$ gives
+$\operatorname{rank}M(\lambda)=\operatorname{rank}P_0+\operatorname{rank}P(\lambda)$ and
+$\operatorname{rank}J=\operatorname{rank}P_0+\operatorname{rank}H$, hence \eqref{eq:5b} is equivalent
+to
 \begin{equation}\label{eq:5b-1}
 \operatorname{rank}P(\lambda)=\operatorname{rank}H=\omega,\ \forall \lambda\in\mathbb C.
 \end{equation}
- Assume now \eqref{eq:5a}. By \eqref{eq:5a-2},
-\begin{equation*}
-P(\lambda)=\lambda H-H_A=(\lambda I-F)H ,
-\end{equation*}
-so every row of $P(\lambda)$ is a linear combination of the rows of $H$, that is, $\operatorname{row}P(\lambda)\subseteq\operatorname{row}H$, and therefore
-\begin{equation}\label{eq:5b-2}
-\operatorname{rank}P(\lambda)\le\omega,\qquad \forall\lambda\in\mathbb C .
-\end{equation}
-Combining \eqref{eq:5b-1} with the bound \eqref{eq:5b-2}, condition \eqref{eq:5b} becomes the requirement that some $\omega\times\omega$ minor of $P(\lambda)$ be nonzero at every $\lambda$:
-\begin{equation*}
-\eqref{eq:5b}
-\iff
-\forall\lambda\in\mathbb C\ \ \exists\,\omega\times\omega\text{ minor } f_i:\ f_i(\lambda)\neq0 .
-\end{equation*}
-A common complex root of the maximal minors is therefore exactly a value of $\lambda$ at which all of them vanish, which proves the two equivalent forms in the statement; for $\omega=0$ the condition is vacuous.
+Assume now \eqref{eq:5a}. By $H_A=FH$, $P(\lambda)=\lambda H-H_A=(\lambda I-F)H$, so
+$\operatorname{row}P(\lambda)\subseteq\operatorname{row}H$ and therefore
+$\operatorname{rank}P(\lambda)\le\omega$ for all $\lambda\in\mathbb C$. Combining \eqref{eq:5b-1} with
+this bound, condition \eqref{eq:5b} becomes the requirement that some $\omega\times\omega$ minor of
+$P(\lambda)$ be nonzero at every $\lambda$; a common complex root of the maximal minors is therefore
+exactly a value of $\lambda$ at which all of them vanish, which gives the two equivalent forms in the
+statement, and for $\omega=0$ the condition is vacuous.
 
-\emph{(iv)} Assume \eqref{eq:5a} and \eqref{eq:5b}. By (iii), \eqref{eq:5b-1} holds for every $\lambda$; at $\lambda=0$, where $P(0)=-H_A$,
-\begin{equation*}
-\operatorname{rank}H_A=\operatorname{rank}P(0)=\operatorname{rank}H . \qedhere
-\end{equation*}
+\emph{(iv)} Assume \eqref{eq:5a} and \eqref{eq:5b}. By (iii), \eqref{eq:5b-1} holds for every
+$\lambda$; at $\lambda=0$, where $P(0)=-H_A$,
+$\operatorname{rank}H_A=\operatorname{rank}P(0)=\operatorname{rank}H$. \qedhere
 \end{proof}
 
 \subsection{The space of attainable row pairs}\label{sec:free}
@@ -413,15 +391,13 @@ k\le d_0\le rd_0=\kappa_{\rm obs}.
 \end{lem}
 
 \begin{proof}
-The identity $(H_i,(H_A)_i)=r_i[N\ AN]$ places every free row pair in $\mathcal T$, whose dimension
-is $d_0=\operatorname{rank}[N\ AN]$ by definition of the row space. Writing the $r$ free rows in a
-basis of $\mathcal T$ describes them by $r\dim\mathcal T=rd_0$ coordinates, which is
-\eqref{eq:kappa}. Since $N$ has full column rank,
+Since $N$ has full column rank,
 \begin{equation}\label{lem3-1}
 k=\operatorname{rank}N\le\operatorname{rank}[N\ AN]=d_0 ,
 \end{equation}
-and $r\ge1$ gives $d_0\le rd_0=\kappa_{\rm obs}$, which together with \eqref{lem3-1} is
-\eqref{lem3-2}.
+and $d_0\le rd_0$ for $r\ge1$, so \eqref{lem3-2} holds. The count $\kappa_{\rm obs}=rd_0$ is a
+coordinate count, not the dimension of an image, since many $R$ give the same row pairs. The case
+$r=0$ is excluded here and handled in Section~\ref{sec:zero}.
 \end{proof}
 
 \begin{remark}[Basis invariance]
@@ -505,8 +481,8 @@ at $\omega=0$ feasibility forces $H=H_A=0$ and $\dim W=0$, so the bound does not
 
 \paragraph*{The projection lies in $S$}\label{sec:US}
 For a feasible $W$, Lemma~\ref{lem:compression}(iv) gives
-$\operatorname{rank}H_A=\operatorname{rank}H$, while \eqref{eq:5a-1} gives
-$\operatorname{row}H_A\subseteq\operatorname{row}H$; the two spaces therefore coincide, and
+$\operatorname{rank}H_A=\operatorname{rank}H$, while Lemma~\ref{lem:compression}(i) gives the row
+inclusion $\operatorname{row}H_A\subseteq\operatorname{row}H$; the two spaces therefore coincide, and
 \begin{equation*}
 \pi_1(W)=\pi_2(W)=\operatorname{row}H_A\subseteq\operatorname{row}(AN)=S .
 \end{equation*}
@@ -906,6 +882,8 @@ $r=q-r_0$, Algorithm~\ref{alg:fixed-q} runs in $\mathcal L^{O(q^2)}$ bit operati
 \end{thm}
 
 \begin{proof}
+It suffices to show that $\Phi_{\omega,J}$ is satisfiable exactly when a feasible $L$ exists, and then
+to substitute the sizes of $\Phi$ into \eqref{eq:rengar} chart by chart.
 \emph{(i) Equivalence.} Let $L=[L_0;R]$ be feasible and let $X,B,G$ be as in the pivot
 factorization of Section~\ref{sec:pivot}, with $H=LN$, $H_A=LAN$, $\omega=\operatorname{rank}H$ and
 $H_A=GB$ from Lemma~\ref{lem:compression}(ii). Then $X_iB=h_i^0$, $G_iB=g_i^0$ for $i\le r_0$ and
@@ -951,8 +929,8 @@ N_{\mathrm{ch}}\cdot\mathcal L^{O(q^2)}
 =\mathcal L^{O(q^2)} .
 \end{equation*}
 For fixed $q$ the exponent $O(q^2)$ is a constant, so the construction size
-$k^{O(q^2)}\operatorname{poly}(\mathcal L)=\mathcal L^{O(q^2)}$ matches the bound above. The rank index $t$ is a discrete branch, not a
-degree: it is counted in $s$, not folded into $D$. The degenerate cases $k=0$,
+$k^{O(q^2)}\operatorname{poly}(\mathcal L)=\mathcal L^{O(q^2)}$ matches the bound above. The
+degenerate cases $k=0$,
 $\omega=0$ and $r=0$ are treated in Section~\ref{sec:deg}.
 \end{proof}
 
@@ -969,10 +947,7 @@ which is equivalent over the reals. There are $O(1)$ strict inequalities per
 branch, so this adds $O(1)$ variables and changes no order.
 \item \emph{Disjunctions.} The rank-consistency disjunction is processed branch
 by branch, with one real-feasibility query per $t$ and the running times
-added:
-\begin{equation*}
-t\cdot\mathcal L^{O(q^2)}=O(k)\,\mathcal L^{O(q^2)}=\mathcal L^{O(q^2)} .
-\end{equation*}
+added, $t\cdot\mathcal L^{O(q^2)}=O(k)\,\mathcal L^{O(q^2)}=\mathcal L^{O(q^2)}$.
 This is why $t$ appears in $s$ and not in $D$.
 \item \emph{Elementary symmetric polynomials.} $e_j(G)$ is represented by the
 coefficients of $\det(zI+G)$, computed by fraction-free elimination on the
@@ -1078,7 +1053,9 @@ free rows. For $r=0$ the bound sharpens to $\operatorname{poly}(\mathcal L)$.
 \end{thm}
 
 \begin{proof}
-The case $r=0$ is Proposition~\ref{prop:zero}. For $r\ge1$ the argument has six steps.
+The case $r=0$ is Proposition~\ref{prop:zero}. For $r\ge1$ it suffices to parameterize every feasible
+$W$ by the chart coordinates of $W/W_0\subseteq\mathcal V/W_0$ and to express the two conditions on
+that chart by a formula whose size is governed by $\ell$; the argument has six steps.
 
 \emph{(i) The bounds $\omega\le\ell$ and $t\le2\ell$.} By Section~\ref{sec:US} a feasible $W$ has
 $\pi_1(W)=\pi_2(W)=U\subseteq S$, so $\omega=\dim U\le\dim S=\ell$; by Lemma~\ref{lem:struct}
@@ -1215,24 +1192,21 @@ S_{2\omega-2}X&=0 .
 \end{lem}
 
 \begin{proof}
-\emph{(i)$\Leftrightarrow$(ii).} Since $Q(\lambda)$ is $q\times\omega$, its rank drops below
-$\omega$ exactly when every $\omega\times\omega$ minor vanishes at that point, which is the
-classical rank--minor criterion \cite[Ch.~0]{hj13}.
+The three equivalent forms (i)--(iii) are those of Lemma~\ref{lem:compression}(iii) with $(H,H_A)$
+replaced by $(X,G)$ and $k$ by $\omega$, the gcd being taken in $\mathbb Q[\lambda]$ as in
+Section~\ref{sec:notation}.
 
-\emph{(ii)$\Leftrightarrow$(iii).} The maximal minors have rational coefficients and are not all
-zero. Over the algebraically closed field $\mathbb C[\lambda]$, a common root of the minors is a
-root of their gcd, and a nonconstant gcd has a root; hence the minors have no common root exactly
-when their gcd is a nonzero constant \cite[Ch.~IV]{lan02}.
-
-\emph{(iii)$\Rightarrow$(iv).} This is the adjugate/B\'ezout construction of
-Appendix~\ref{app:encoding}. For each $\omega$-element row set
+\emph{(iii)$\Rightarrow$(iv).} For each $\omega$-element row set
 $I\subseteq[q]$, let $E_I\in\mathbb Q^{\omega\times q}$ be the row selection,
 $Q_I=E_IQ$ and $f_I=\det Q_I$. Then
 \begin{equation*}
 \operatorname{adj}(Q_I)E_IQ=f_II_\omega,\qquad
 \sum_Ig_If_I=1\ \text{ with }\ \deg g_I<\omega
 \end{equation*}
-by Lemma~\ref{lem:bezout}, so that
+by Lemma~\ref{lem:bezout}. The coefficients of the $g_I$ solve a linear system with rational data,
+because the $f_I$ have rational coefficients; a rational linear system that is solvable over
+$\mathbb R$ is solvable over $\mathbb Q$, so the $g_I$ may be taken rational. The cofactors of $Q_I$
+are rational polynomials as well, so that
 \begin{equation*}
 S=\sum_Ig_I\operatorname{adj}(Q_I)E_I
 \quad\text{satisfies}\quad
@@ -1314,30 +1288,20 @@ $H_A=GB$.
 \emph{Step 4.} Run the test of Lemma~\ref{lem:zero} on $(X,G)$.
 
 \emph{Correctness.} Since $B$ is of full row rank,
-\begin{equation*}
-\operatorname{rank}(\lambda H-H_A)
-=\operatorname{rank}\bigl((\lambda X-G)B\bigr)
-=\operatorname{rank}(\lambda X-G)
-\end{equation*}
-for every $\lambda$, and \eqref{eq:5b} is
-$\operatorname{rank}(\lambda H-H_A)=\omega$ for all $\lambda$; thus
-Lemma~\ref{lem:zero} decides \eqref{eq:5b}. Step 1 is \eqref{eq:5a}, and step 2
-is the exact $\omega=0$ reading of the same identity. The zero-free-row decision
-is therefore the conjunction of one constant-rank test and one pencil test: if
-\eqref{eq:5a} fails, the instance is infeasible and the spectral question is not
-asked.
+$\operatorname{rank}(\lambda H-H_A)=\operatorname{rank}((\lambda X-G)B)=\operatorname{rank}(\lambda X-G)$
+as in Section~\ref{sec:spectral}, for every $\lambda$, and \eqref{eq:5b} is
+$\operatorname{rank}(\lambda H-H_A)=\omega$ for all $\lambda$
+(Lemma~\ref{lem:compression}(iii)); thus
+Lemma~\ref{lem:zero} decides \eqref{eq:5b}. If \eqref{eq:5a} fails the spectral
+question is not asked.
 
-\emph{Complexity.} Step 1 is one rank computation, step 3 a rank factorization
-and an exact linear solve, and step 4 costs
+\emph{Complexity.} Every step is a rank computation or an exact linear solve on a
+matrix of at most $2\omega+1$ rows and $q$ columns whose entries have bit length
+$\operatorname{poly}(n,\mathcal L)$ by Lemma~\ref{lem:coeff}, so Gaussian
+elimination over $\mathbb Q$ on such a matrix costs $\operatorname{poly}(n,\mathcal L)$
+bit operations; step 4 costs
 $\operatorname{poly}(q,\omega,\mathcal L_0)\subseteq\operatorname{poly}(n,\mathcal L)$
-by Lemma~\ref{lem:zero}. Every step is a rank computation or an exact linear
-solve on a matrix of at most $2\omega+1$ rows and $q$ columns whose entries have
-bit length $\operatorname{poly}(n,\mathcal L)$ by Lemma~\ref{lem:coeff}, and
-Gaussian elimination over $\mathbb Q$ on such a matrix costs
-\begin{equation*}
-\operatorname{poly}(n,\mathcal L)\ \text{ bit operations};
-\end{equation*}
-the test returns the coefficients $S_0,\dots,S_{2\omega-2}$ explicitly.
+by Lemma~\ref{lem:zero}.
 \end{proof}
 
 \begin{remark}[Kronecker canonical form]\label{rem:kronecker}
@@ -1403,15 +1367,8 @@ T\le\min\bigl\{\mathcal L^{O(q^2)},\
 \end{cor}
 
 \begin{proof}
-The two bounds available are those of Sections~\ref{sec:fixedq} and~\ref{sec:fpt},
-\begin{equation*}
-\begin{aligned}
-T&\le\mathcal L^{O(q^2)}\quad(q\ \text{fixed}),\\
-T&\le\exp\bigl(O(\ell^2\log(\ell+2))\bigr)\operatorname{poly}(\mathcal L)
-\quad(\ell=\operatorname{rank}(AN)),
-\end{aligned}
-\end{equation*}
-and both algorithms decide the same language, so either may be run and the smaller bound applies.
+By \eqref{eq:fpt-l} and the bound of Theorem~\ref{thm:fixedq}, and since both algorithms decide the
+same language, the smaller bound applies.
 The exponent in the second bound does not shrink when $r=0$, since $\ell$ does not involve $r$; what
 happens for $r=0$ is that Section~\ref{sec:zero} supplies a third algorithm, of cost
 $\operatorname{poly}(\mathcal L)$, so the minimum in the statement is polynomial there.
@@ -1483,11 +1440,8 @@ changing the spectrum would be invalid. We do not know whether one exists.
 \end{enumerate}
 
 \paragraph*{Growth of the parameter-dependent factor}
-Renegar's bound is $(sD)^{O(N_{\rm var})}$ with
-\begin{equation*}
-sD=O(\ell^2),\qquad N_{\rm var}=\ell^2+2\ell ,
-\end{equation*}
-so $f(\ell)=\exp\bigl(O(\ell^2\log(\ell+2))\bigr)$. The result is primarily structural: it
+By \eqref{eq:nvar}, $sD=O(\ell^2)$ and $N_{\rm var}\le\ell^2+2\ell$, so
+$f(\ell)=\exp\bigl(O(\ell^2\log(\ell+2))\bigr)$. The result is primarily structural: it
 identifies an invariant of the instance, independent of how many free rows are allowed, that
 governs the complexity bound, although the doubly exponential dependence on $\ell$ may limit
 practical applicability for large values.
@@ -1630,22 +1584,29 @@ in $\mathcal L$ because $\omega\le k\le n\le\mathcal L$.
 
 \begin{lem}[Rational bases and annihilators]\label{lem:rationalbasis}
 Let $M\in\mathbb Q^{m\times n}$ have entries of bit length at most $\tau$, let $r=\operatorname{rank}M$
-and put $\tau_M=O\bigl(r(\tau+\log n)\bigr)$. Then a basis $N$ of $\ker M$, a basis $R$ of
-$\operatorname{row}M$, and a matrix $D$ with $\operatorname{row}D=\{x\in\mathbb Q^m:xM=0\}$ can be
-computed in $\operatorname{poly}(m,n,\tau)$ bit operations, and the entries of $N$, $R$ and $D$ have
-bit length at most $\tau_M$.
+and put $\tau_M=2r(\tau+\log(r+1)+1)+1$. Then a basis $N$ of $\ker M$, a basis $R$ of
+$\operatorname{row}M$, and a matrix $D\in\mathbb Q^{(n-r)\times n}$ with
+$\ker D=\operatorname{row}M$ can be computed in $\operatorname{poly}(m,n,\tau)$ bit operations, and
+the entries of $N$, $R$ and $D$ have bit length at most $\tau_M$.
 \end{lem}
 
 \begin{proof}
-Run fraction-free Gaussian elimination on $M$ and keep the pivot rows and columns. Every entry of the
-resulting reduced row echelon form is a ratio of minors of $M$: by Cramer's rule the determinant in
-the numerator is an $s\times s$ minor with $s\le r$, and by Hadamard's inequality
+Run fraction-free (Bareiss) Gaussian elimination on $M$ and keep the pivot rows and columns. Every
+entry of the resulting reduced row echelon form is a ratio of minors of $M$: by Cramer's rule the
+determinant in the numerator is an $s\times s$ minor with $s\le r$, and by Hadamard's inequality,
+for $s\ge1$,
 \begin{equation*}
-\operatorname{bits}\det M_{I,J}\le O\bigl(s(\tau+\log s)\bigr)=O\bigl(r(\tau+\log n)\bigr).
+\operatorname{bits}\det M_{I,J}
+\le s\bigl(\tau+\tfrac12\log s\bigr)+1
+\le r\bigl(\tau+\tfrac12\log r\bigr)+1\le\tau_M .
 \end{equation*}
-The pivot columns give $R$, the free columns give $N$ after back-substitution, and the left null
-space $D$ is obtained from the same elimination applied to $M^{\mathsf T}$; the common denominator
-is a product of at most $r$ pivot minors, which adds only $O(r\log r)$ bits. The elimination uses
+Fraction-free elimination carries a single minor as common denominator at every stage, of size at
+most $r\times r$; the entries of $N$, $R$ and $D$ are therefore ratios of two $r\times r$ minors of
+$M$, of bit length at most $\tau_M$. The pivot columns give $R$ and the free columns give $N$ after
+back-substitution; put $D=N^{\mathsf T}$. The rows of $D$ are the columns of $N$, hence a basis of
+the right null space $\{y\in\mathbb Q^n:My=0\}$ of $M$, which is the orthogonal complement of
+$\operatorname{row}M$; thus $\ker D=\operatorname{row}M$, and the bit length of $D$ is that of $N$.
+The elimination uses
 $O(mnr)$ arithmetic operations on numbers of the displayed bit length, so the total is
 $\operatorname{poly}(m,n,\tau)$ bit operations.
 \end{proof}
@@ -1653,81 +1614,71 @@ $\operatorname{poly}(m,n,\tau)$ bit operations.
 \begin{lem}[Coefficient sizes]\label{lem:coeff}
 Let the input entries have bit length at most $\mathcal L$, and let
 $n\le\mathcal L$. Then:
-\emph{(i)} the kernel basis $N$, the matrix $D$, and the entries of
-$H,H_A,\Gamma_H,\Gamma_S$ have bit length $\operatorname{poly}(n,\mathcal L)$;
-\emph{(ii)} every maximal minor $f_i$ of $P(\lambda)=\lambda H-H_A$, and every
-coefficient of $f_i$, has bit length $\operatorname{poly}(n,\mathcal L)$;
-\emph{(iii)} the entries of $Z^{\mathsf T}Z$ and of $e_j(\Gamma_H),e_j(\Gamma_S)$ for
-$j\le2\ell$ have bit length $f(\ell)\operatorname{poly}(\mathcal L)$.
+\emph{(i)} the kernel basis $N$, the matrix $D$, the pivot block $X$ and the block $G$ of the
+rank factorizations produced by the elimination of Section~\ref{sec:pivot}, the representative pair
+$H=XB$, $H_A=GB$ of such a factorization, and the prescribed products $h^0=L_0N$, $g^0=L_0AN$ have
+entries of bit length $\operatorname{poly}(n,\mathcal L)$;
+\emph{(ii)} every maximal minor $f_i$ of $P(\lambda)=\lambda H-H_A$ of the representative pair in
+(i), and every coefficient of $f_i$, has bit length $\operatorname{poly}(n,\mathcal L)$;
+\emph{(iii)} the entries of $Z^{\mathsf T}Z$ have bit length
+$\operatorname{poly}(n,\mathcal L)$.
 \end{lem}
 
 \begin{proof}
-Let $m=n^2+pn+r_0n$ be the number of rational input entries. With $p\le n$ and $r_0\le q\le n$ this
-is $m\le3n^2=O(n^2)$, and $m\le\mathcal L$ because each entry has bit length at least one. Multiplying
-by the product of their denominators turns the input into an integer matrix $A_{\rm in}$ all of whose
-entries are bounded by $\beta_0$ in absolute value, where
-\begin{equation*}
-m\le3n^2=O(n^2),\qquad \beta_0=2^{O(m\mathcal L)}=2^{O(n^2\mathcal L)} .
-\end{equation*}
-Hadamard's inequality gives, for a $t\times t$ minor $M_{I,J}$ of $A_{\rm in}$
-with $t\le n$,
-\begin{equation*}
-\begin{aligned}
-|\det M_{I,J}|&\le(\sqrt t\,\beta_0)^t,\\
-\operatorname{bits}\det M_{I,J}
-&=O\bigl(t(\log\beta_0+\log t)\bigr)=O(n^3\mathcal L),
-\end{aligned}
-\end{equation*}
-which is $\operatorname{poly}(n,\mathcal L)$ because $n\le\mathcal L$.
+Each object bounded below is a ratio of minors of the integer input, or a short sum of products of two
+such minors, so the Hadamard estimate of Lemma~\ref{lem:rationalbasis} bounds its entries.
 
 \emph{(i)} Apply Lemma~\ref{lem:rationalbasis} to $[C;CA]$, whose entries have bit length at most
 $\mathcal L$ and whose rank is $n-k$: the basis $N$ of $\ker[C;CA]$ has entries of bit length
 $O\bigl((n-k)(\mathcal L+\log n)\bigr)$. Applying the lemma again to $[N\ AN]$, whose entries now
-have that bit length, gives a row-space basis of $[N\ AN]$ and hence the matrix $D$, with entries of
-bit length $O\bigl(d_0((n-k)(\mathcal L+\log n)+\log k)\bigr)=\operatorname{poly}(n,\mathcal L)$;
+have that bit length and whose rank is $d_0$, gives the matrix
+$D\in\mathbb Q^{(2k-d_0)\times2k}$ with $\ker D=\operatorname{row}[N\ AN]$, with entries of
+bit length $O\bigl(d_0((n-k)(\mathcal L+\log n)+\log(k+1))\bigr)=\operatorname{poly}(n,\mathcal L)$;
 the two eliminations cost $\operatorname{poly}(\mathcal L)$ bit operations.
-Each entry of $H=LN$ is a sum of $n$ products of an input entry with an entry of
-$N$, and each entry of $\Gamma_H$ or $\Gamma_S$ is a sum of at most $q$ such products, so
-passing from $N$ to $H$ and then to $\Gamma_H,\Gamma_S$ adds $O(\log n)$ and then
-$O(\log q)$ bits:
-\begin{equation*}
-\begin{aligned}
-\operatorname{bits}H_{ij}&\le\mathcal L+\operatorname{poly}(n,\mathcal L)+O(\log n),\\
-\operatorname{bits}(\Gamma_H)_{ij},\ \operatorname{bits}(\Gamma_S)_{ij}
-&\le2\operatorname{poly}(n,\mathcal L)+O(\log q).
-\end{aligned}
-\end{equation*}
+The pivot block $X$, the block $G$ and the coordinate matrix $B$ are produced by the same
+elimination whenever the compressed pair is prescribed, in particular for $r=0$, where $H=L_0N$ and
+$H_A=L_0AN$: then $X$ is the pivot block of $H$, $B$ is the coefficient matrix with
+$B_{:,J}=I_\omega$, and $G=FX$ for the rational solution $F$ of $FH=H_A$, so all three are
+submatrices or ratios of minors of input-derived matrices. For $r\ge1$ the blocks
+$X,G$ are the quantified variables of \eqref{eq:phi} and enter its constraints as indeterminates. No bound on
+the entries of $H=LN$ for an arbitrary feasible $L$ is asserted. The
+prescribed products are sums of $n$ products of an input entry with an entry of $N$, hence have bit
+length $\mathcal L+\operatorname{poly}(n,\mathcal L)+O(\log n)=\operatorname{poly}(n,\mathcal L)$.
 
-\emph{(ii)} A maximal minor $f_i$ of $P(\lambda)=\lambda H-H_A$ is a determinant
-of an $\omega\times\omega$ matrix whose entries are linear in those of $H,H_A$;
-Hadamard applied to its coefficient matrix bounds each of its $\omega+1$
-coefficients:
+\emph{(ii)} A maximal minor $f_i$ of $P(\lambda)=\lambda H-H_A$ is the determinant
+of an $\omega\times\omega$ matrix whose entries are linear in those of $H,H_A$.
+Laplace expansion along the $a$ columns that carry the factor $\lambda$ shows that the coefficient
+of $\lambda^a$ is a signed sum over the $\binom{\omega}{a}$ index sets $S\subseteq[\omega]$ with
+$|S|=a$ of $\det H_{I,S}\det H_{A,I,S^{c}}$, and Hadamard's inequality bounds each of the two
+factors, hence each such product, by $O\bigl(\omega(\operatorname{bits}H+\log\omega)\bigr)$ bits:
 \begin{equation*}
 \deg f_i\le\omega,\qquad
 \operatorname{bits}c_{i,a}=\operatorname{poly}(n,\mathcal L).
 \end{equation*}
 
-\emph{(iii)} $Z^{\mathsf T}Z$ is a sum of at most
-$\binom{\ell}{\omega}\le2^{\ell}$ terms, each a product of two coefficients of
-the $f_i$, and the elementary symmetric functions of the $2\ell\times2\ell$ Gram
-matrices are sums of at most $(2\ell)^{j}\le(2\ell)^{2\ell}$ principal minors. A
-sum of $T$ terms of bit length $b$ has bit length $b+\log T$, hence
+\emph{(iii)} The case $\omega=0$ gives $Z^{\mathsf T}Z=0$; assume $\omega\ge1$. By
+item~\ref{item:coef} of Section~\ref{sec:certificate},
+$(Z^{\mathsf T}Z)_{t,t'}=\sum_{j=0}^{\omega-1}S_{t-j,t'-j}$, where each
+$S_{a,b}=\sum_ic_{i,a}c_{i,b}$ is a sum of $\#\{I\}=\binom q\omega\binom k\omega$ products of two
+coefficients. Hence $(Z^{\mathsf T}Z)_{t,t'}$ is a sum of at most $\omega\cdot\#\{I\}$ terms, each
+of bit length at most $2\operatorname{poly}(n,\mathcal L)$. A sum of $T$ terms of bit length $b$ has
+bit length $b+\log T$, and
 \begin{equation*}
-\begin{aligned}
-\operatorname{bits}(Z^{\mathsf T}Z)_{ij}
-&\le2\operatorname{poly}(n,\mathcal L)+\ell,\\
-\operatorname{bits}e_j(\Gamma_H),\ \operatorname{bits}e_j(\Gamma_S)
-&\le\operatorname{poly}(n,\mathcal L)+2\ell\log(2\ell),
-\end{aligned}
+\log\bigl(\omega\cdot\#\{I\}\bigr)\le\omega+2\omega\log n=O(n),
 \end{equation*}
-which is $f(\ell)\operatorname{poly}(\mathcal L)$.
+so
+\begin{equation*}
+\operatorname{bits}(Z^{\mathsf T}Z)_{ij}
+\le2\operatorname{poly}(n,\mathcal L)+O(n)
+=\operatorname{poly}(n,\mathcal L).
+\end{equation*}
 \end{proof}
 
 It remains to say why the per-chart bound already gives \eqref{eq:fpt-l}: the enumeration of
 $t$, of the charts and of $\omega$ contributes the factors $2\ell+1$, $4^{\ell}$ and $\ell$, all
 absorbed by the exponential; every chart and every $\omega$ costs one call to the decision procedure
 of \eqref{eq:nvar}, and the rational data of each call have bit length
-$f(\ell)\operatorname{poly}(\mathcal L)$ by Lemma~\ref{lem:coeff}. The cases $k=0$ and $\omega=0$
+$\operatorname{poly}(n,\mathcal L)$ by Lemma~\ref{lem:coeff}. The cases $k=0$ and $\omega=0$
 are treated directly in Section~\ref{sec:deg}, and $r=0$ in Section~\ref{sec:zero}. For fixed $q$
 the sharper parameter is $q$ itself, and the bound $\mathcal L^{O(q^2)}$ of
 Section~\ref{sec:fixedq} applies instead.
@@ -1747,10 +1698,9 @@ Q(\lambda)=\begin{bmatrix}\lambda\\ \lambda\end{bmatrix},\qquad
 \end{equation*}
 shows.
 
-This is the pencil of Lemma~\ref{lem:zero}. Its parts (i)$\Leftrightarrow$(iii)$\Leftrightarrow$(iv), together
-with the Quillen--Suslin/B\'ezout criterion over a principal ideal domain \cite{fab90,lan02}, identify the
-condition with the existence of a polynomial left inverse $S$ with $\deg S\le2\omega-2$; the adjugate
-construction of that lemma is not repeated here, and the encoding below never forms $S$.
+This is the pencil of Lemma~\ref{lem:zero}: by its parts (i)--(iv) and the Quillen--Suslin/B\'ezout
+criterion over a principal ideal domain \cite{fab90,lan02}, the condition is equivalent to a
+polynomial left inverse $S$ with $\deg S\le2\omega-2$, which the encoding below never forms.
 
 For the $\exists\mathbb R$ encoding the minors are not enumerated. For each $\omega=0,\dots,\min(q,k)$ introduce the blocks
 \begin{equation*}
@@ -1768,12 +1718,7 @@ UX=I_\omega,\qquad BV=I_\omega,\\
 S(\lambda)(\lambda X-G)=I_\omega .
 \end{gathered}
 \end{equation*}
-The polynomial identity is linear in the coefficients $S_j$; comparing coefficients of $\lambda^j$ makes it the linear system \eqref{eq:R0}. The rank conditions $UX=I_\omega$ and $BV=I_\omega$ are polynomial equations, and $BV=I_\omega$ makes $B$ full row rank, hence
-\begin{equation*}
-\operatorname{rank}P(\lambda)=\operatorname{rank}((\lambda X-G)B)
-=\operatorname{rank}(\lambda X-G)=\omega
-\end{equation*}
-for all $\lambda$. Also $H_A=GB=(GU)XB=FH$ with $F=GU$, so \eqref{eq:5a} holds.
+The polynomial identity is linear in the coefficients $S_j$; comparing coefficients of $\lambda^j$ makes it the linear system \eqref{eq:R0}. The rank conditions $UX=I_\omega$ and $BV=I_\omega$ are polynomial equations, and $BV=I_\omega$ makes $B$ full row rank, hence, as in Section~\ref{sec:spectral}, $\operatorname{rank}P(\lambda)=\operatorname{rank}(\lambda X-G)=\omega$ for all $\lambda$. Also $H_A=GB=(GU)XB=FH$ with $F=GU$, so \eqref{eq:5a} holds.
 
 It remains to tie $(H,H_A)$ to the input. The rows of $H=LN$, $H_A=LAN$ satisfy, with $h_i^0=(L_0N)_i$ and $g_i^0=(L_0AN)_i$,
 \begin{equation}
@@ -1791,23 +1736,10 @@ where $D$ is a rational matrix with $\ker D=\mathcal T$. Both are polynomial (in
 The correctness splits into two independent statements.
 
 \paragraph*{Soundness}
-Suppose the system has a solution. Set $L$ with first $r_0$ rows $L_0$ and, for each $i>r_0$, a preimage $r_i$ with $(X_iB,G_iB)=r_i[N\ AN]$, which exists by \eqref{eq:B2}. Then
-\begin{equation*}
-\begin{aligned}
-H&=LN,\qquad H_A=LAN,\\
-H_A&=GB=(GU)XB=FH,\qquad F=GU,
-\end{aligned}
-\end{equation*}
-so \eqref{eq:5a} holds; and
-\begin{equation*}
-\operatorname{rank}(\lambda H-H_A)=\operatorname{rank}(\lambda X-G)=\omega
-\end{equation*}
-for all $\lambda$, which gives \eqref{eq:5b} and uses $BV=I_\omega$ (full row rank of $B$) together with $S(\lambda)(\lambda X-G)=I_\omega$.
+Suppose the system has a solution. Set $L$ with first $r_0$ rows $L_0$ and, for each $i>r_0$, a preimage $r_i$ with $(X_iB,G_iB)=r_i[N\ AN]$, which exists by \eqref{eq:B2}. Then $H=LN$, $H_A=LAN$ and $H_A=GB=(GU)XB=FH$ with $F=GU$, so \eqref{eq:5a} holds; and $\operatorname{rank}(\lambda H-H_A)=\operatorname{rank}(\lambda X-G)=\omega$ for all $\lambda$, which gives \eqref{eq:5b} and uses $BV=I_\omega$ (full row rank of $B$) together with $S(\lambda)(\lambda X-G)=I_\omega$.
 
 \paragraph*{Completeness}
 A feasible $L$ supplies $X,B,U,V$ from a rank factorization $H=XB$ with $B_{:,J}=I_\omega$, $G=FX$ with $H_A=FH$ (Lemma~\ref{lem:compression}), and $S$ from the left-inverse construction above; then \eqref{eq:B1} and \eqref{eq:B2} hold by construction, and the remaining equations are identities.
-
-The two constraints $UX=I_\omega$ and $BV=I_\omega$ are not redundant bookkeeping: the first produces the factorization $H_A=FH$, the second makes $\operatorname{rank}((\lambda X-G)B)=\operatorname{rank}(\lambda X-G)$ hold at every $\lambda$.
 
 The $\omega=0$ case is the branch $H=H_A=0$, which \eqref{eq:B1} forces when $L_0N=0$ and rejects otherwise; it is a separate algebraic branch, not a degree-negative instance of \eqref{eq:R0}. The number of variables is
 \begin{equation*}
