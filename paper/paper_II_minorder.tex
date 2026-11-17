@@ -854,9 +854,11 @@ Lemma~\ref{lem:struct}. The second is Proposition~\ref{prop:tight}, whose proof 
 that lower half, the rank--nullity argument that makes $\ker\pi_1|_W$ one-dimensional and the
 Popov--Belevitch--Hautus criterion for a single-input pair; the artifact contains no controllability
 theory, so the equivalence with controllability is proved on paper only. What the artifact does cover of
-Proposition~\ref{prop:tight} is the dimensional half: the inclusions $U_0\subseteq\pi_1(W)$ and
-$V_0\subseteq\pi_2(W)$, and hence $\operatorname{rank}[U_0;V_0]\le\dim\pi_1(W)$, follow from
-\texttt{mem\_pi1}, \texttt{mem\_pi2} and monotonicity of \texttt{finrank}.
+Proposition~\ref{prop:tight} is the dimensional half: for $W_0\subseteq W$ with
+$\pi_2(W)\subseteq\pi_1(W)$, the declarations \texttt{finrank\_sup\_pi\_le} and
+\texttt{finrank\_pi1\_mono} give $\dim(\pi_1(W_0)+\pi_2(W_0))\le\dim\pi_1(W)$ and
+$\dim\pi_1(W_0)\le\dim\pi_1(W)$, which is
+$\operatorname{rank}[U_0;V_0]\le\omega$ for $U_0=\pi_1(W_0)$, $V_0=\pi_2(W_0)$.
 \item \emph{Exact rational arithmetic.} The instance of Section~\ref{sec:example} is verified by exact
 rational computation, not by numerical evaluation: the two rank equalities of \eqref{eq:5a}, the
 vanishing of the determinant of the $8\times8$ pencil together with the nonzero $7\times7$ minors and
