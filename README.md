@@ -22,6 +22,10 @@ Q1Paper/                                      # the Lean sources
 scripts/check.sh                              # lake build + Audit.lean + axiom audit
 verification/                                 # exact rational checks (Python + sympy)
 paper/                                        # LaTeX source and compiled PDF
+  paper_I_dec.tex                 # decision complexity (Paper I)
+  paper_II_minorder.tex           # minimum order (Paper II)
+  q1_parametric_algorithms.tex    # combined version of Papers I and II
+  hyperplane_layer.tex            # the hyperplane layer (Paper III)
 ```
 
 ## Build
@@ -54,6 +58,8 @@ cd paper && pdflatex q1_parametric_algorithms.tex && pdflatex q1_parametric_algo
 | $r=0$ linear system (R0) | paper proof + exact checks (`c318`) |
 | Coefficient bit-size bounds | paper proof |
 | $\exists\mathbb R$ encoding | paper proof + witness check (`c319`) |
+| Hyperplane layer: direction theorem (admissible kernel direction $=$ eigenvector of the compression) | Lean (`HyperplaneDirection.lean`) |
+| Hyperplane layer: prescribed-row orthogonality and independence of $\delta$ | Lean (`HyperplanePrescribed.lean`) |
 
 The Python scripts are **finite exact checks, not proofs**; each prints the instance data
 it checks and asserts the basic invariants first. Run them from `verification/`:

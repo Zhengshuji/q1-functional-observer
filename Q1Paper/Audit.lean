@@ -23,6 +23,8 @@ import Q1Paper.RankConsistency
 import Q1Paper.SpectralCertificate
 import Q1Paper.FixedOrder
 import Q1Paper.FPT
+import Q1Paper.HyperplaneDirection
+import Q1Paper.HyperplanePrescribed
 
 #print axioms Q1Paper.pairMap_apply
 #print axioms Q1Paper.ker_pairMap
@@ -76,3 +78,9 @@ import Q1Paper.FPT
 #print axioms Q1Subspace.finrank_le_two_mul_of_pi1_eq_pi2
 #print axioms Q1Paper.rank_fromRows_zero
 #print axioms Q1Paper.rowSpan_fromRows_zero
+
+#print axioms Q1Paper.compression_eq_of_proportional
+#print axioms Q1Paper.proportional_of_compression
+#print axioms Q1Paper.direction_iff
+#print axioms Q1Paper.le_orthogonal_span_pair
+#print axioms Q1Paper.inf_inf_orthogonal_eq

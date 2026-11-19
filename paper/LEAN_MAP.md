@@ -113,3 +113,21 @@ instead of being removed.
 4. **Minimum order** (`prop:minorder`): after 1–3.
 5. Everything else is either blocked on the expert (items 3 and 5 of `91_lean_followup.md`)
    or deliberately paper-level.
+
+## F. Paper III (hyperplane layer)
+
+Modules and the paper items they formalize. Source of truth: `~/WorkSpace/lean4/Q1Paper`;
+the copies in `Q1Paper/` are byte-identical mirrors.
+
+| Module | Declarations | Paper item |
+|---|---|---|
+| `HyperplaneDirection.lean` | `compression_eq_of_proportional`, `proportional_of_compression`, `direction_iff` | Theorem 3 (the direction theorem: the admissible kernel direction is an eigenvector of the compression) |
+| `HyperplanePrescribed.lean` | `le_orthogonal_span_pair`, `inf_inf_orthogonal_eq` | Lemma 4 (automatic orthogonality of the prescribed rows; independence of `δ`) |
+
+Both are pure inner-product-space statements: no matrices, no finiteness, no coordinates.
+All five declarations are in the axiom audit and depend only on `propext`, `Classical.choice`
+and `Quot.sound`.
+
+Deliberately not formalized (paper-level): the relative Grassmann-bundle parameterization
+(Theorem 7), the full-rank leading-coefficient lemma, the chart cover, and the fixed-`p`
+bit-complexity theorem.
