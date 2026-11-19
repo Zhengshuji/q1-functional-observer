@@ -1,4 +1,4 @@
-# Paper → Lean coverage map and gap list
+﻿# Paper → Lean coverage map and gap list
 
 ## Project
 
@@ -123,6 +123,7 @@ the copies in `Q1Paper/` are byte-identical mirrors.
 |---|---|---|
 | `HyperplaneDirection.lean` | `compression_eq_of_proportional`, `proportional_of_compression`, `direction_iff` | Theorem 3 (the direction theorem: the admissible kernel direction is an eigenvector of the compression) |
 | `HyperplanePrescribed.lean` | `le_orthogonal_span_pair`, `inf_inf_orthogonal_eq` | Lemma 4 (automatic orthogonality of the prescribed rows; independence of `δ`) |
+| `HyperplaneFibre.lean` | `mem_orthogonal_span_pair_iff`, `Dv_eq_ker`, `finrank_Dv` | Lemma 2, numerical part (`dim D_v = k - 1`: `D_v` is a hyperplane of `K`) |
 
 Both are pure inner-product-space statements: no matrices, no finiteness, no coordinates.
 All five declarations are in the axiom audit and depend only on `propext`, `Classical.choice`

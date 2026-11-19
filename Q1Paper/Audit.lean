@@ -25,6 +25,7 @@ import Q1Paper.FixedOrder
 import Q1Paper.FPT
 import Q1Paper.HyperplaneDirection
 import Q1Paper.HyperplanePrescribed
+import Q1Paper.HyperplaneFibre
 
 #print axioms Q1Paper.pairMap_apply
 #print axioms Q1Paper.ker_pairMap
@@ -84,3 +85,7 @@ import Q1Paper.HyperplanePrescribed
 #print axioms Q1Paper.direction_iff
 #print axioms Q1Paper.le_orthogonal_span_pair
 #print axioms Q1Paper.inf_inf_orthogonal_eq
+
+#print axioms Q1Paper.mem_orthogonal_span_pair_iff
+#print axioms Q1Paper.Dv_eq_ker
+#print axioms Q1Paper.finrank_Dv

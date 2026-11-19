@@ -26,5 +26,6 @@ import Q1Paper.FixedOrder
 import Q1Paper.FPT
 import Q1Paper.HyperplaneDirection
 import Q1Paper.HyperplanePrescribed
+import Q1Paper.HyperplaneFibre
 import Q1Paper.TightDim
 import Q1Paper.BoundLower
