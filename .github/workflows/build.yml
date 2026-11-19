@@ -19,17 +19,21 @@ jobs:
 
   paper:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        root: [paper_I_dec, paper_II_minorder, hyperplane_layer]
     steps:
       - uses: actions/checkout@v4
-      - name: Compile the paper
+      - name: Compile ${{ matrix.root }}
         uses: xu-cheng/latex-action@v3
         with:
           working_directory: paper
-          root_file: q1_parametric_algorithms.tex
+          root_file: ${{ matrix.root }}.tex
       - uses: actions/upload-artifact@v4
         with:
-          name: paper
-          path: paper/q1_parametric_algorithms.pdf
+          name: ${{ matrix.root }}
+          path: paper/${{ matrix.root }}.pdf
 
   verify:
     runs-on: ubuntu-latest

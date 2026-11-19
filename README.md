@@ -24,7 +24,6 @@ verification/                                 # exact rational checks (Python + 
 paper/                                        # LaTeX source and compiled PDF
   paper_I_dec.tex                 # decision complexity (Paper I)
   paper_II_minorder.tex           # minimum order (Paper II)
-  q1_parametric_algorithms.tex    # combined version of Papers I and II
   hyperplane_layer.tex            # the hyperplane layer (Paper III)
 ```
 
@@ -42,7 +41,9 @@ bash scripts/check.sh
 Paper (requires TeX Live):
 
 ```text
-cd paper && pdflatex q1_parametric_algorithms.tex && pdflatex q1_parametric_algorithms.tex
+cd paper && pdflatex paper_I_dec.tex && pdflatex paper_I_dec.tex
+cd paper && pdflatex paper_II_minorder.tex && pdflatex paper_II_minorder.tex
+cd paper && pdflatex hyperplane_layer.tex && pdflatex hyperplane_layer.tex
 ```
 
 ## What is verified, and how

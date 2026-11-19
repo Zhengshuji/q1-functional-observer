@@ -1,4 +1,4 @@
-﻿# Paper → Lean coverage map and gap list
+# Paper → Lean coverage map and gap list
 
 ## Project
 
@@ -11,7 +11,10 @@
 - Build: `lake build Q1Paper` → **9081 jobs, 0 errors**
 - Axiom audit: 52 declarations, all with only `propext`, `Classical.choice`, `Quot.sound`
 
-Paper item numbers refer to `paper/current/q1_parametric_algorithms.tex`.
+Paper item numbers refer to `paper/paper_I_dec.tex` (Lemmas A–F, the G-series, `prop:*`) for
+Paper I, to `paper/paper_II_minorder.tex` (`prop:minorder` and the order bounds
+`ω + 1 ≤ dim W ≤ 2ω`) for Paper II, and to `paper/hyperplane_layer.tex` (Theorem 3,
+Lemmas 2 and 4) for Paper III.
 
 ## Status of the two Lean trees (consolidated)
 
