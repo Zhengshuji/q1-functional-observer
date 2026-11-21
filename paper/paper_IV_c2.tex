@@ -1,0 +1,839 @@
+\documentclass[journal]{IEEEtran}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{amsthm}
+\usepackage{booktabs,array}
+\usepackage{enumitem}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{float}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+\newtheoremstyle{plainn}{}{}{\itshape}{}{\bfseries}{.}{.5em}%
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
+\theoremstyle{plainn}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{claim}[thm]{Claim}
+\newtheorem{defn}{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\renewcommand{\qedsymbol}{QED}
+\newcommand{\row}{\operatorname{row}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Prob}{\operatorname{Prob}}
+\newcommand{\poly}{\operatorname{poly}}
+\setlength{\emergencystretch}{1.5em}
+
+\begin{document}
+
+\title{Image-Space Reduction and Polynomial-Time Feasibility for Functional Observers
+with a Two-Dimensional Compressed Kernel}
+\author{}
+\maketitle
+
+\begin{abstract}
+For a linear system $(A,C)$ and a prescribed observer row block $L_0$, feasibility of a functional
+observer of order $q$ is governed by two rank conditions on the pencil $\lambda H-H_A$, where
+$H=LN$, $H_A=LAN$ and $N$ spans the unobservable subspace $K_0=\ker[C;CA]$. The layer index of a design
+is $c=k-\rank H$, $k=\dim K_0$; the case $c=1$ was settled in earlier work, where the admissible kernel
+directions are the real eigenvectors of the compression $M=\pi_{K_0}A|_{K_0}$.
+
+This paper treats $c=2$. Our main result is a \emph{reduction of the fibre variable}: for a fixed kernel
+direction $D$ the pencil depends on the fibre $W$ only through its image
+$\Phi(W)\subseteq D^\circ$, a subspace of $D^\circ$ of dimension at most $c=2$. Consequently the search
+over a Grassmannian of arbitrary dimension collapses to a search over subspaces of the image
+$\varphi(T_D)$, whose dimension is at most the codimension of $K_0$ (hence at most $2p$). We
+give the exact realizability conditions for a prescribed $\Phi$, the resulting reduced feasibility
+criterion, a classification of the invariant-plane base for simple spectrum --- with the real and the
+conjugate-complex branches treated separately --- a two-valued decision algorithm, and a
+$\mathrm{poly}(n,\tau)$ bit-complexity bound under simple spectrum. We also show that the layer index is
+\emph{not monotone} at fixed order: there are instances where the $c=2$ layer is feasible while the
+$c=1$ layer is not. All structural claims are stated for the split problem; the unrestricted problem is
+left open.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Functional observers, minimum order, compressed pencil, invariant subspaces, Grassmannian bundles,
+subresultants, bit complexity.
+\end{IEEEkeywords}
+
+\section{Introduction}\label{sec:intro}
+
+This section fixes the problem, records what the companion papers settle and what they leave open,
+lists the contributions, and closes with the notation used throughout.
+
+\emph{Setting.} The pair $(A,C)$ is given, together with a prescribed row block $L_0$. A design of order
+$q$ is a row block $\mathcal L=[L_0;R]$ with $q$ rows; its row space $V$ has dimension $q$. Write
+$K_0=\ker[C;CA]$, $k=\dim K_0$, fix a basis $N$ of $K_0$, and put $H=LN$, $H_A=LAN$. The design is
+\emph{feasible} when
+\begin{equation}\label{eq:5a}
+\row H_A\subseteq\row H,
+\end{equation}
+\begin{equation}\label{eq:5b}
+\rank(\lambda H-H_A)=\omega\quad\text{for all }\lambda\in\mathbb C,
+\end{equation}
+with $\omega=\rank H$. Condition~\eqref{eq:5b} is equivalent to the vanishing of the gcd of all
+$\omega\times\omega$ maximal minors of the pencil (a standard polarity/resultant fact; see
+Section~\ref{sec:admissible} and \cite{vzgg13}).
+
+\emph{Prior work and the gap.} The existence question, the order spectrum and the minimum-order
+characterisation were settled in \cite{companion1}, \cite{companion2} (see also \cite{fer26a},
+\cite{fer26b}): for every order $q$ there is an exact criterion, and the feasible orders are monotone and
+saturate. The \emph{complexity} of the general decision problem remains open. In \cite{companion3} the
+case $c=1$ was solved structurally: the admissible kernel directions are the real eigenvectors of the
+compression $M=\pi_{K_0}A|_{K_0}$, restricted by a prescribed-row orthogonality condition; the design
+family is a finite union of relative Grassmann bundles; and one function-field gcd per chart decides the
+whole chart.
+
+\emph{Contributions.} This paper treats $c=2$. The contributions are:
+\begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=1pt,topsep=2pt]
+\item \emph{Layer bookkeeping (Section~\ref{sec:layers}).} The layer index is $c=k-\omega$ and the
+``ambient row excess'' is $t=q-\omega$; the identity $c-t=k-q$ shows that $c$ and $t$ move together when
+$q$ is fixed. A previous, ambiguous identification of $\omega$ with $\dim(V\cap K_0)$ is corrected. We
+separate the unrestricted problem \textbf{U} from the $K_0$-split problem \textbf{S} and show by a
+counterexample that the split hypothesis cannot be derived from \eqref{eq:5a}.
+\item \emph{The two fixed-kernel fibres (Section~\ref{sec:fibres}).} For fixed $D=\ker H$ we give the
+exact fibre in both problems, including the exactness condition $K_0\cap(D+AD)=D$ in \textbf{U}, and the
+\emph{two independent} prescribed-row conditions in \textbf{S} --- one on the base
+($P_{K_0}(V_0)\subseteq D^{\perp_{K_0}}$) and one on the fibre ($W_0\subseteq W$).
+\item \emph{Image-space reduction (Section~\ref{sec:reduction}).} The pencil's row space equals the row
+space of its $D$-part plus $\Phi(W)\subseteq D^\circ$, so the fibre acts only through a subspace of a
+$c$-dimensional space. We give the general proof, the exact realizability inequalities for a prescribed
+$\Phi$, and the reduced feasibility criterion.
+\item \emph{A two-valued algorithm at $c=2$ (Sections~\ref{sec:base}--\ref{sec:decision}).} For simple
+spectrum the invariant-plane base is finite, of $O(k^2)$ points, split into a real-real and a
+conjugate-complex branch. The image space has at most one projective-line component, and on an
+image-line chart every real point is admissible, so the generic-gcd criterion is sharp in both
+directions and the algorithm decides exactly.
+\item \emph{Bit complexity (Section~\ref{sec:complexity}).} Under simple spectrum the decision runs in
+$\poly(n,\tau)$ bit operations, with arithmetic in number fields of degree at most $k^2$.
+\item \emph{A non-monotonicity example (Section~\ref{sec:layers:c}).} At one and the same order, the
+$c=2$ layer can be feasible while the $c=1$ layer is not. This rules out ``only small layers matter'' as
+a complexity strategy.
+\end{enumerate}
+
+\emph{Approach and structure.} The approach is uniform: a statement about the fibre $W$ is first pushed
+to its image $\Phi(W)$, and the resulting condition is then read on finitely many charts, one per
+subspace of $D^\circ$. Section~\ref{sec:layers} fixes the layer parameters and the split hypothesis.
+Section~\ref{sec:fibres} computes the fixed-kernel fibres in the two problems.
+Section~\ref{sec:reduction} proves the image-space reduction and the reduced criterion.
+Section~\ref{sec:base} classifies the base at $c=2$ for simple spectrum and records the general $c$.
+Section~\ref{sec:decision} gives the algorithm, its correctness and its bit cost.
+Section~\ref{sec:conclusion} consolidates the limitations and the evidence.
+Appendix~\ref{app:height} holds the height-propagation chain used in the complexity bound.
+
+\emph{Notation.} $E=\mathbb R^n$ throughout, with the Euclidean inner product. $\pi_{K_0}$ is the
+orthogonal projection; $K_0^\perp$ its kernel; $D^\circ\subseteq K_0^*$ is the annihilator of $D$ when
+$D\le K_0$. $\Gr(d,X)$ is the Grassmannian of $d$-planes in $X$. All matrices are real; $p$ is the
+number of output rows and $\tau$ the maximum bit length of the entries of $A$ and $C$. For a subspace $X$
+we write $\dim X$ for its dimension.
+
+\section{The layer parameters}\label{sec:layers}
+
+This section fixes the three integer parameters attached to a design, isolates the split hypothesis under
+which the structural results are stated, and records a counterexample showing that the layer index is not
+monotone in the order. Parts A and B are bookkeeping; Part C is the reason the later sections treat $c$
+as given rather than assuming the smallest layer.
+
+\subsection{Three quantities that must not be confused}\label{sec:layers:a}
+
+For a design $\mathcal L$ with row space $V$ of dimension $q$, define
+\begin{equation}\label{eq:params}
+\omega:=\rank H,\qquad c:=k-\omega,\qquad t:=q-\omega .
+\end{equation}
+
+\begin{claim}[layer identities]\label{clm:identities}
+\begin{enumerate}[label=(\arabic*),leftmargin=*,itemsep=1pt,topsep=2pt]
+\item {\raggedright $\omega=\rank(LN)=\dim\pi_{K_0}(V)=k-\dim(K_0\cap V^\perp)$;\par}
+\item $q=\omega+t$ and $c-t=k-q$;
+\item $\dim(V\cap K_0^\perp)=q-\omega=t$, and $\dim(V\cap K_0)$ is a third quantity, in general
+different from both $c$ and $t$.
+\end{enumerate}
+\end{claim}
+
+\begin{proof}
+For (1): $\ker(LN)=\{u:Lu=0\}\cap K_0$ as a subset of $K_0$, i.e. $K_0\cap\ker L=K_0\cap V^\perp$ (when
+$L$ has full row rank, $\ker L=V^\perp$); hence $\omega=k-\dim(K_0\cap V^\perp)$. On the other hand the
+restriction map $V\to K_0^*$, $v\mapsto\langle v,\cdot\rangle|_{K_0}$, has kernel $V\cap K_0^\perp$ and
+rank equal to the rank of its adjoint $\pi_{K_0}|_V$, so $\dim\pi_{K_0}(V)=q-\dim(V\cap K_0^\perp)$; and
+its adjoint's kernel is $K_0\cap V^\perp$, so $\dim\pi_{K_0}(V)=k-\dim(K_0\cap V^\perp)$. Both coincide
+with $\omega$. Part (2) is the definition of $t$ and $c-t=(k-\omega)-(q-\omega)=k-q$. Part (3) is the
+first computation above.
+\end{proof}
+
+\begin{remark}\label{rem:hyp}
+In the hyperplane layer $q=k$, so $c=t$ and the three quantities of Claim~\ref{clm:identities} coincide;
+this is why the distinction was invisible in \cite{companion3}. For $q\ne k$ they differ, and the layer
+index must be defined as $c=k-\omega$.
+\end{remark}
+
+The three quantities coincide in the hyperplane layer, where $q=k$; outside it $c\ne t$ by the identity
+$c-t=k-q$, and it is $c$, not $\dim(V\cap K_0)$, that indexes the layer.
+
+\subsection{The split hypothesis}\label{sec:layers:b}
+
+\begin{defn}\label{defn:split}
+A design is \textbf{$K_0$-split} (problem \textbf{S}) when $\dim(V\cap K_0)=\omega$; equivalently
+$V=(V\cap K_0)\oplus(V\cap K_0^\perp)$. Designs satisfying \eqref{eq:5a}, \eqref{eq:5b} without this
+condition form the \textbf{unrestricted} problem \textbf{U}.
+\end{defn}
+
+\begin{claim}[invariant kernel under split]\label{clm:invariant}
+Let $\mathcal L$ be split and satisfy \eqref{eq:5a}, and put $D=\ker H=K_0\cap V^\perp$,
+$M=\pi_{K_0}A|_{K_0}$. Then $M(D)\subseteq D$.
+\end{claim}
+
+\begin{proof}
+By \eqref{eq:5a}, $\ker H\subseteq\ker H_A$, i.e. $AD\perp V$. Let $\varphi_d(u)=\langle u,d\rangle$ and
+$\varphi_{Ad}(u)=\langle u,Ad\rangle$ for $u\in K_0$. Both vanish on $V\cap K_0$: the first because
+$D\subseteq V^\perp$, the second by $V\perp AD$. The annihilator of $V\cap K_0$ in $K_0^*$ has dimension
+$k-\dim(V\cap K_0)=c$, and the $\varphi_d$, $d\in D$, are $c$ independent elements of it; hence
+$\varphi_{Ad}\in\operatorname{span}\{\varphi_d\}$ and $\pi_{K_0}(Ad)\in D$.
+\end{proof}
+
+\begin{claim}[the split hypothesis is not a normalisation]\label{clm:notnormal}
+There is a design satisfying \eqref{eq:5a}, with exact kernel and $c=2$, whose $D=\ker H$ is not
+$M$-invariant.
+\end{claim}
+
+\begin{proof}[Construction]
+In $E=\mathbb{R}^8$ take $K_0=\operatorname{span}\{e_5,\dots,e_8\}$ and a compression
+$M=\operatorname{diag}(1,1,2,3)$, choose $D=\operatorname{span}\{e_1+e_2,\,e_3+e_4\}\le K_0$ (not
+$M$-invariant), put $U=D+AD$ and $V=U^\perp$. Then $\dim(D+AD)=3$, $K_0\cap(D+AD)=D$ (exactness),
+$q=\dim V=5$, $\dim(K_0\cap V^\perp)=2=c$, $AD\perp V$ so \eqref{eq:5a} holds, and yet
+$\dim(V\cap K_0)=1\ne\omega=2$, so the design is not split and $M(D)\not\subseteq D$.
+\end{proof}
+
+The split hypothesis is therefore a genuine restriction on the layer rather than a normalisation;
+consequently every structural statement below is labelled \textbf{S}, and the only statement for the
+unrestricted problem is Theorem~\ref{thm:ufibre}.
+
+\subsection{The layer index is not monotone}\label{sec:layers:c}
+
+At a fixed order $q$ the identity $c-t=k-q$ shows that $c$ and $t$ move together, so only one order
+allows both layers to be compared. Take $k=4$: then $c=1$ forces $q=3+t$ and $c=2$ forces $q=2+t$, and
+$q=3$ is the common value ($c=1,t=0$; $c=2,t=1$). For the instance $A,C$ of \cite{companion3}, \S VI,
+with the compression replaced by $\operatorname{diag}(1,1,2,3)$:
+
+\begin{thm}[non-monotonicity]\label{thm:nonmono}
+At order $q=3$ the $c=2$ layer is feasible and the $c=1$ layer is not.
+\end{thm}
+
+\begin{proof}
+\emph{$c=2$ side.} With $D=\operatorname{span}\{e_1+e_2,e_3\}$ and
+$W=\operatorname{span}\{(0,0,1,1,0,0,0,0)\}$, the design $V=D^{\perp_{K_0}}\oplus W$ has $\dim V=3$,
+$\omega=2$, satisfies \eqref{eq:5a} and exactness ($\dim(K_0\cap V^\perp)=2$), and the six maximal
+$2\times2$ minors of the pencil are
+\[
+-(\lambda-3)(\lambda-1),\ (\lambda-3)(\lambda-1),\ \lambda-1,\ 1-\lambda,\ \lambda-3,\ 3-\lambda,
+\]
+whose gcd is $1$ (indeed $\tfrac12\bigl((\lambda-1)-(\lambda-3)\bigr)=1$). So \eqref{eq:5b} holds.
+
+\emph{$c=1$ side.} At $q=3$ and $c=1$ one has $t=q-\omega=0$, so $\dim(V\cap K_0^\perp)=0$ and the design
+is automatically split; Claim~\ref{clm:invariant} therefore applies. The invariant lines are the lines of
+the eigenspace $E_1=\operatorname{span}\{e_1,e_2\}$ together with $\operatorname{span}\{e_3\}$ and
+$\operatorname{span}\{e_4\}$. For the family $D=\operatorname{span}\{e_1+se_2\}$ one computes
+\[
+H=\begin{pmatrix}-s&1&0&0\\0&0&1&0\\0&0&0&1\end{pmatrix},\qquad \rank H=3,
+\]
+and the gcd of the nonzero maximal minors equals $(\lambda-1)(\lambda-2)(\lambda-3)$,
+\textbf{independently of $s$}; the point at infinity $s=\infty$ gives the same gcd, and the two isolated
+directions give $(\lambda-1)^2(\lambda-3)$ and $(\lambda-1)^2(\lambda-2)$. Hence no $c=1$ design of order
+$3$ is feasible.
+\end{proof}
+
+\begin{remark}\label{rem:direction}
+The direction of the failure is ``the larger layer is easier'', so no monotonicity argument can replace
+the analysis of all layers.
+\end{remark}
+
+Consequently the analysis of one layer cannot replace the analysis of another at the same order, and
+Sections~\ref{sec:fibres}--\ref{sec:decision} treat $c$ as given.
+
+\section{The fixed-kernel fibre}\label{sec:fibres}
+
+This section computes, for a fixed kernel direction $D$, the exact set of admissible row spaces in the two
+problems. Part A treats the unrestricted problem \textbf{U}; Part B the split problem \textbf{S}. In both
+cases the answer is a Grassmannian fibre with an explicit dimension and an explicit non-emptiness
+condition.
+
+Throughout this section $D\le K_0$ with $\dim D=c$ is fixed, $U_D:=D+AD$, and $V_0=\row L_0$. We write
+$P_{K_0}$ and $P_{K_0^\perp}$ for the two orthogonal projections, and $M=P_{K_0}A|_{K_0}$,
+$A_{21}=P_{K_0^\perp}A|_{K_0}$, so that $Ax=Mx+A_{21}x$ for $x\in K_0$ (the two summands lie in
+complementary subspaces).
+
+\subsection{The unrestricted problem \texorpdfstring{\textbf{U}}{U}}\label{sec:fibres:u}
+
+\begin{thm}[unrestricted fibre]\label{thm:ufibre}
+Let $D\le K_0$ with $\dim D=c$.
+\begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=1pt,topsep=2pt]
+\item A $q$-dimensional $V$ satisfies $V_0\subseteq V$, $V\subseteq U_D^\perp$ and $K_0\cap V^\perp=D$ if
+and only if
+\[
+V_0\subseteq V\subseteq U_D^\perp,\qquad \dim V=q,\qquad K_0\cap(D+AD)=D .
+\]
+\item The condition $K_0\cap(D+AD)=D$ is \textbf{equivalent} to exactness of the kernel, i.e. to
+$K_0\cap V^\perp=D$ for every $V$ with $V_0\subseteq V\subseteq U_D^\perp$.
+\end{enumerate}
+\end{thm}
+
+\begin{proof}
+(1) If $K_0\cap V^\perp=D$ and \eqref{eq:5a} holds then $U_D\subseteq V^\perp$ and hence
+$K_0\cap(D+AD)\subseteq K_0\cap V^\perp=D$, while $D\subseteq D+AD$ gives the reverse inclusion.
+Conversely if $K_0\cap(D+AD)=D$, then any $V$ with $V_0\subseteq V\subseteq U_D^\perp$ satisfies
+$D\subseteq K_0\cap V^\perp\subseteq K_0\cap(D+AD)=D$. (2) is the same two lines.
+\end{proof}
+
+\begin{remark}\label{rem:ufibre}
+For $c=2$ the fibre of \textbf{U} is thus
+$\{V\in\Gr(q,U_D^\perp):V_0\subseteq V,\ K_0\cap V^\perp=D\}$, which is an open subset of a Grassmannian
+once the exactness condition holds. We do not eliminate the fibre variable in \textbf{U}.
+\end{remark}
+
+The unrestricted fibre is thus an open subset of a Grassmannian once the exactness condition
+$K_0\cap(D+AD)=D$ holds, and that condition is a property of $D$ alone.
+
+\subsection{The split problem \texorpdfstring{\textbf{S}}{S}}\label{sec:fibres:s}
+
+\begin{thm}[split fibre]\label{thm:splitfibre}
+Let $D\in\mathcal I_c(M)$ and assume the design is split. Put
+\[
+T_D:=K_0^\perp\cap(A_{21}D)^\perp,\qquad W_0:=P_{K_0^\perp}(V_0),
+\]
+\[
+w_0=\dim W_0,\qquad r(D)=\rank(A_{21}|_D).
+\]
+If $P_{K_0}(V_0)\subseteq D^{\perp_{K_0}}$ and $W_0\subseteq T_D$, then the admissible row spaces are
+\[
+V=D^{\perp_{K_0}}\oplus W,\qquad W_0\subseteq W\subseteq T_D,\quad \dim W=t,
+\]
+and the fibre is
+\[
+\mathcal F_D^{\rm split}\cong\Gr\bigl(t-w_0,\ T_D/W_0\bigr),
+\]
+of dimension $(t-w_0)\bigl((n-k)-r(D)-t\bigr)$, non-empty if and only if
+\[
+w_0\le t\le (n-k)-r(D).
+\]
+Conversely every admissible row space arises this way.
+\end{thm}
+
+\begin{proof}
+(i) $\ker(LN)=\{x\in K_0:x\perp V\}^\perp$ intersected with $K_0$; since $V$ is split, this equals
+$K_0\cap V^\perp$'s orthocomplement in $K_0$, i.e. $D^{\perp_{K_0}}$. (ii) For $d\in D$, $\langle d,V\rangle=0$
+and $\langle Ad,V\rangle=0$; writing $Ad=Md+A_{21}d$ with $Md\in D$, $\langle Md,V\rangle=0$
+automatically, so $V\perp AD\iff W\subseteq(A_{21}D)^\perp$. Since $W\le K_0^\perp$, this is
+$W\subseteq T_D$. (iii) $V_0\subseteq V$ splits into $P_{K_0}(V_0)\subseteq D^{\perp_{K_0}}$ and
+$W_0\subseteq W$, and the former is a condition on $D$ alone. (iv) The free part of $W$ modulo $W_0$
+inside $T_D$ is a Grassmannian of the stated dimension.
+\end{proof}
+
+\begin{remark}[the prescribed rows are two conditions]\label{rem:presrows}
+The condition on the base,
+\begin{equation}\label{eq:bpres}
+\begin{aligned}
+\mathcal B_{\rm pres}&:=\bigl\{D\in\mathcal I_c(M):\ P_{K_0}(V_0)\subseteq D^{\perp_{K_0}}\bigr\}\\
+&=\bigl\{D\in\mathcal I_c(M):\ D\perp P_{K_0}(V_0)\bigr\},
+\end{aligned}
+\end{equation}
+is not implied by $W_0\subseteq W$; omitting it produces ``designs'' that cannot be completed to a legal
+observer. It also removes entire components of the base: if $P_{K_0}(V_0)$ contains a vector with
+non-zero inner product with every element of a given invariant $D$, that $D$ is excluded regardless of
+the fibre.
+\end{remark}
+
+The split fibre is thus a Grassmannian of computable dimension over the field of definition of $D$, and
+its two prescribed-row conditions are independent; this is the description that
+Section~\ref{sec:reduction} compresses further.
+
+\section{Image-space reduction}\label{sec:reduction}
+
+This section proves that, for a split design with $M(D)\subseteq D$, the pencil sees the fibre $W$ only
+through its image $\Phi(W)\subseteq D^\circ$. Part A proves the reduction, Part B gives the exact
+realisability conditions for a prescribed image, and Part C states the resulting criterion.
+
+Fix $D\in\mathcal B_{\rm pres}$ and a split design $V=D^{\perp_{K_0}}\oplus W$ with
+$W_0\subseteq W\subseteq T_D$.
+
+\subsection{The reduction}\label{sec:reduction:a}
+
+For $w\in K_0^\perp$ define $\varphi_w\in K_0^*$ by $\varphi_w(u)=\langle w,A_{21}u\rangle$, and
+\begin{equation}\label{eq:Phi}
+\Phi(W):=\{\varphi_w:\ w\in W\}\subseteq D^\circ .
+\end{equation}
+(The inclusion holds because $W\subseteq T_D$ means $W\perp A_{21}D$.)
+
+\begin{thm}[image-space reduction]\label{thm:reduction}
+For every $\lambda$,
+\begin{equation}\label{eq:reduction}
+\begin{aligned}
+&\row\bigl(\lambda H-H_A\bigr)\\
+&\quad=\row\bigl(\lambda H_K-(H_A)_K\bigr)+\Phi(W),
+\end{aligned}
+\end{equation}
+where $H_K,(H_A)_K$ denote the rows carried by $D^{\perp_{K_0}}$. Consequently the pencil condition
+depends on $W$ only through $\Phi(W)$, and
+$\dim\Phi(W)\le\dim\varphi(T_D)\le\dim T_D=(n-k)-r(D)$. Moreover:
+\begin{enumerate}[label=\arabic*.,start=3,leftmargin=*,itemsep=1pt,topsep=2pt]
+\item $\row(\lambda H-H_A)\subseteq D^\circ$ for every $\lambda$, and $\dim D^\circ=k-c=\omega$;
+\item hence $\rank(\lambda H-H_A)\le\omega$ automatically, and \eqref{eq:5b} is equivalent to
+\[
+\row\bigl(\lambda H-H_A\bigr)=D^\circ\quad\text{for all }\lambda,
+\]
+\[
+\text{i.e.}\qquad R_\lambda+\Phi(W)=D^\circ\quad\forall\lambda,
+\]
+where $R_\lambda:=\row P_D(\lambda)$.
+\end{enumerate}
+\end{thm}
+
+\begin{proof}
+Regard the rows as functionals on $K_0$: for $v\in E$ put $h_v(x)=\langle v,x\rangle$ and
+$h^A_v(x)=\langle v,Ax\rangle$, and $\Psi_\lambda(v)=\lambda h_v-h^A_v$; the rows of $\lambda H-H_A$ are
+the $\Psi_\lambda(v)$ for $v$ ranging over a basis of $V$, transported to $\mathbb R^k$ by the basis $N$
+(this transport is the only place where the coordinate identification $K_0^*\simeq\mathbb R^k$ is used).
+\begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=1pt,topsep=2pt]
+\item For $w\in W\le K_0^\perp$: $h_w(x)=\langle w,x\rangle=0$ since $x\in K_0$, and
+$h^A_w(x)=\langle w,Ax\rangle=\langle w,Mx\rangle+\langle w,A_{21}x\rangle=0+\varphi_w(x)$; hence
+$\Psi_\lambda(w)=-\varphi_w$, independently of $\lambda$.
+\item For any linear $\Psi$ and any direct sum $V=P\oplus W$, $\Psi(V)=\Psi(P)+\Psi(W)$.
+\end{enumerate}
+Combining, $\Psi_\lambda(V)=\Psi_\lambda(P)+\operatorname{span}\{\varphi_w\}$, and the sign is immaterial
+because a subspace equals its negative.
+\begin{enumerate}[label=\arabic*.,start=3,leftmargin=*,itemsep=1pt,topsep=2pt]
+\item For $v\in P=D^{\perp_{K_0}}$ and $d\in D$: $\langle v,d\rangle=0$, and
+$\langle v,Ad\rangle=\langle v,Md\rangle+\langle v,A_{21}d\rangle=0+0$ because $Md\in D$ and
+$A_{21}d\in K_0^\perp$; hence every $\Psi_\lambda(v)$ annihilates $D$, i.e. lies in $D^\circ$. Since
+$\dim D^\circ=k-c=\omega$, the rank bound follows.
+\item A subspace of the $\omega$-dimensional $D^\circ$ has dimension $\omega$ if and only if it is
+$D^\circ$.
+\end{enumerate}
+\end{proof}
+
+\begin{remark}[what the reduction says]\label{rem:whatreduction}
+The spectral condition does not see $W$, only $\Phi(W)$: if $\Phi(W_1)=\Phi(W_2)$ then the two designs
+have identical pencils up to row operations. The design space is therefore quotiented by the fibres of
+$\Phi$, and the relevant parameter lives in a space of dimension at most $c$. For $c=2$ this is decisive
+(Section~\ref{sec:decision}).
+\end{remark}
+
+So the spectral condition is a condition on the image $\Phi(W)$ and not on $W$, and the fibre variable
+has been replaced by a subspace of $\varphi(T_D)$, a space whose dimension is at most the codimension of
+$K_0$.
+
+\subsection{Exact realizability}\label{sec:reduction:b}
+
+\begin{thm}[realizability of a prescribed image]\label{thm:realize}
+Let $\varphi=\varphi|_{T_D}:T_D\to D^\circ$, $\Phi_0=\varphi(W_0)$, and let
+$\bar\varphi:T_D/W_0\to D^\circ/\Phi_0$ be the induced map. A subspace $\Phi\le D^\circ$ is realised by
+some $W$ with $W_0\subseteq W\subseteq T_D$ and $\dim W=t$ if and only if
+\begin{equation}\label{eq:realize}
+\begin{aligned}
+&\Phi_0\subseteq\Phi\subseteq\varphi(T_D),\\
+&\dim\Phi-\dim\Phi_0\ \le\ t-w_0\\
+&\qquad\le\ \dim\ker\bar\varphi+\dim\Phi-\dim\Phi_0 .
+\end{aligned}
+\end{equation}
+\end{thm}
+
+\begin{proof}
+Put $S=W/W_0\le T_D/W_0$; then $\dim S=t-w_0$ and $\bar\varphi(S)=\Phi/\Phi_0$. If such $S$ exists then
+$\Phi/\Phi_0\subseteq\bar\varphi(T_D/W_0)$ and
+$\dim(\Phi/\Phi_0)=\dim\bar\varphi(S)\le\dim S\le\dim\bar\varphi^{-1}(\Phi/\Phi_0)=\dim\ker\bar\varphi+
+\dim(\Phi/\Phi_0)$. Conversely choose $S_0\subseteq\bar\varphi^{-1}(\Phi/\Phi_0)$ with
+$\bar\varphi(S_0)=\Phi/\Phi_0$ and $\dim S_0=\dim(\Phi/\Phi_0)$, and extend it inside the same preimage to
+dimension $t-w_0$; the upper inequality makes this possible.
+\end{proof}
+
+Every subspace of $D^\circ$ between $\Phi_0$ and $\varphi(T_D)$ whose dimension lies in the stated
+interval is therefore realised, and no other subspace is; the two inequalities are what the enumeration
+of Part C quantifies over.
+
+\subsection{The reduced criterion}\label{sec:reduction:c}
+
+\begin{thm}\label{thm:reduced}
+Write $P_D(\lambda)=\lambda H_K-(H_A)_K$ and $r_D(\lambda)=\dim\row P_D(\lambda)$. Then
+\begin{align}
+&\exists W\ (W_0\subseteq W\subseteq T_D,\ \dim W=t)\ \text{satisfying \eqref{eq:5b}}\notag\\
+&\iff\ \exists\Phi\ \text{satisfying Theorem~\ref{thm:realize} such that}\notag\\
+&\qquad\dim\bigl(\row P_D(\lambda)+\Phi\bigr)=\omega\quad\forall\lambda,
+\label{eq:reduced}
+\end{align}
+and the latter is equivalent to
+\begin{equation}\label{eq:reduced2}
+\dim\Phi-\dim\bigl(\Phi\cap\row P_D(\lambda)\bigr)=\omega-r_D(\lambda)\quad\forall\lambda .
+\end{equation}
+\end{thm}
+
+\begin{proof}
+Immediate from Theorem~\ref{thm:reduction} and $\dim(X+Y)=\dim X+\dim Y-\dim(X\cap Y)$.
+\end{proof}
+
+\begin{remark}\label{rem:imagesize}
+Theorems~\ref{thm:reduction}--\ref{thm:reduced} reduce the fibre problem to a quantifier over subspaces of
+$D^\circ$. Two spaces matter and they must not be confused: $D^\circ$ has dimension $\omega$, which grows
+with $k$, while the image $\varphi(T_D)$ has dimension at most
+$\dim T_D=(n-k)-r(D)\le n-k\le 2p$, where $p$ is the number of output rows. So the effective parameter
+ranges over
+\[
+\bigcup_{j\le\min(t,\,2p)}\Gr\bigl(j,\ \varphi(T_D)\bigr),
+\]
+a family of dimension at most $\lfloor\min(t,2p)^2/4\rfloor\le p^2$, \textbf{independent of $c$}. In
+particular the image parameter is a point, a projective line, or a plane only when
+$\dim\varphi(T_D)\le2$; for larger output counts the parameter is a higher-dimensional Grassmannian. A
+necessary condition for feasibility follows at once:
+$\max_\lambda(\omega-r_D(\lambda))\le\dim\Phi\le n-k$, i.e. the rank deficiency of $P_D(\lambda)$ can
+never exceed the codimension of $K_0$.
+\end{remark}
+
+\section{The base at \texorpdfstring{$c=2$}{c=2}}\label{sec:base}
+
+This section describes the base of invariant two-planes at $c=2$ for simple spectrum, and then records
+that the reduction of Section~\ref{sec:reduction} is verbatim for arbitrary $c$. Part A is the
+classification, Part B the general statement.
+
+Write $\mathcal I_2(M)=\{D\in\Gr(2,K_0):M(D)\subseteq D\}$.
+
+\subsection{Simple spectrum: the invariant-plane base}\label{sec:base:a}
+
+\begin{thm}[base, simple spectrum]\label{thm:base}
+Suppose $M$ has simple spectrum, i.e. its minimal polynomial over $\mathbb Q$ has pairwise distinct
+irreducible factors and no repeated roots. Then $\mathcal I_2(M)$ is finite, and every element is one of:
+\begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=1pt,topsep=2pt]
+\item \textbf{(branch R)} $\operatorname{span}\{v_\alpha,v_\beta\}$ for two real eigenvalues
+$\alpha\ne\beta$ with eigenvectors $v_\alpha,v_\beta$;
+\item \textbf{(branch C)} the real two-plane attached to a complex-conjugate pair: for a real
+eigenvector decomposition $z=u+iw$ of an eigenvalue $\mu=a+ib$ with $b\ne0$, the plane
+$\operatorname{span}\{u,w\}$, equivalently $\ker f(M)$ where $f$ is the irreducible quadratic factor.
+\end{enumerate}
+The total number of planes is $\binom{k_{\mathbb R}}{2}+\#\{\text{conjugate pairs}\}\le k^2$, where
+$k_{\mathbb R}$ is the number of real eigenvalues.
+\end{thm}
+
+\begin{proof}
+For a simple spectrum $M$ is diagonalisable over $\mathbb C$ and each complex eigenspace is a line. An
+invariant real two-plane either contains two real eigenvectors (branch R), or is spanned by the real and
+imaginary parts of a complex eigenvector (branch C), or is $\mathbb R^2$ for a two-dimensional $M$ with a
+non-real pair, which is the case $k=2$ of branch C. Nothing else is invariant, because the restriction of
+$M$ to $D$ has a characteristic polynomial of degree two dividing the minimal polynomial. The count is
+immediate.
+\end{proof}
+
+\begin{remark}[what is \emph{not} claimed]\label{rem:nonsimple}
+For non-simple spectra $\mathcal I_2(M)$ can be positive-dimensional (the families $\Gr(2,K_\lambda)$
+inside a repeated eigenspace, and products $\mathbb P(K_\lambda)\times\mathbb P(K_\mu)$), and the planes
+attached to a repeated irreducible quadratic form a $\mathbb{CP}^{g-1}$-family of real dimension
+$2(g-1)$, $g$ the geometric multiplicity. We make \textbf{no} claim of a rational parametrisation of the
+general invariant-plane variety; the simple-spectrum statement above is what the algorithm uses.
+\end{remark}
+
+\begin{table*}[!t]
+\centering
+\caption{The invariant-plane classification of Theorem~\ref{thm:base} at $c=2$ under simple spectrum:
+the two branches, the field over which each plane is defined (Claim~\ref{clm:arith}), and the number of
+planes. Here $k_{\mathbb R}$ is the number of real eigenvalues of $M$ and $k=\dim K_0$.}
+\label{tab:planes}
+\small
+\begin{tabular}{@{}l>{\raggedright\arraybackslash}p{0.44\textwidth}>{\raggedright\arraybackslash}p{0.24\textwidth}l@{}}
+\toprule
+Branch & Plane $D$ & Defined over & Number \\
+\midrule
+R & $\operatorname{span}\{v_\alpha,v_\beta\}$, two real eigenvalues $\alpha\ne\beta$
+& $\mathbb Q(\alpha,\beta)$, degree $\le k^2$ & $\binom{k_{\mathbb R}}{2}$ \\
+C & $\operatorname{span}\{u,w\}$ from $z=u+iw$ of $\mu=a+ib$, $b\ne0$; equivalently
+$\ker f(M)$, $f$ irreducible quadratic & $\mathbb Q$ & $\#\{\text{conjugate pairs}\}$ \\
+\midrule
+Total & & & $\le k^2$ \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+Under simple spectrum the base is therefore finite and explicit, which is what makes the enumeration of
+Section~\ref{sec:algorithm} terminate in polynomial time; Remark~\ref{rem:nonsimple} records what is not
+claimed without simplicity.
+
+\subsection{The general \texorpdfstring{$c$}{c}}\label{sec:base:b}
+
+\begin{prop}[verbatim generalisation]\label{prop:general}
+Theorems~\ref{thm:ufibre}--\ref{thm:reduced} hold with $2$ replaced by $c$: the base is
+$\mathcal B_{\rm pres}\subseteq\mathcal I_c(M)$, the fibre is $\Gr(t-w_0,T_D/W_0)$ with
+$T_D=K_0^\perp\cap(A_{21}D)^\perp$, the image space satisfies $\Phi(W)\subseteq D^\circ$ with
+$\dim D^\circ=k-c=\omega$, and the reduced criterion of Theorem~\ref{thm:reduced} is unchanged. The
+effective image parameter ranges over $\bigcup_{j\le\min(t,2p)}\Gr(j,\varphi(T_D))$, of dimension at most
+$\lfloor\min(t,2p)^2/4\rfloor\le p^2$.
+\end{prop}
+
+\begin{proof}
+The proofs of Theorems~\ref{thm:reduction}--\ref{thm:reduced} use only $\dim D=c$ and $M(D)\subseteq D$;
+the numerical value $2$ enters only in the list of possible image dimensions.
+\end{proof}
+
+\begin{remark}\label{rem:annihilator}
+Note that $\dim D^\circ=\omega$, not $c$: since $c=k-\omega$, the annihilator of a $c$-dimensional
+subspace of an $\omega+c$-dimensional space has dimension $\omega$. For $c=2$ and $k=4$ the two coincide,
+which is why the small cases are misleading; in general $D^\circ$ is large and only the image
+$\varphi(T_D)$ is small.
+\end{remark}
+
+\begin{remark}[what remains open]\label{rem:open}
+For general $c$ three obstructions persist: the enumeration of $\mathcal I_c(M)$ (exponential when $c$
+varies), the choice of $\Phi$ (a Grassmannian of dimension up to $p^2$), and the absence of a rational
+parametrisation of the base in the non-simple case. Two questions seem most promising: (a) whether the
+quantifier over $\Phi$ can be replaced by a rank or separation condition on the induced maps of
+$T_D/W_0$; (b) whether the layer index can be traded for $\dim U$ with $U=\pi_1(W)$, since
+$c=k-\dim U$. We do not know the answer to either.
+\end{remark}
+
+The reduction of Section~\ref{sec:reduction} therefore does not use $c=2$; what $c=2$ buys is a finite
+base (Theorem~\ref{thm:base}), while the smallness of the image parameter in Section~\ref{sec:decision}
+comes from the bound on $n-k$, not from the smallness of $c$ (Remark~\ref{rem:boundaries}).
+
+\section{Decision and its cost}\label{sec:decision}
+
+This section assembles the decision procedure at $c=2$: Part A shows that admissibility is automatic on
+an image-line chart, Part B states the algorithm, Part C proves it correct, and Part D bounds its bit
+cost.
+
+\subsection{Admissibility is automatic on an image-line chart}\label{sec:admissible}
+
+Recall from \cite{companion3} that a point of a chart is \emph{admissible} when some maximal minor of the
+cleared pencil keeps its generic $\lambda$-degree at that point; the specialization lemma then shows that
+the generic gcd degree is a lower bound on every admissible point, and that the generic gcd being a
+constant forces the chart to contain a real feasible point whenever the real points are Zariski dense.
+
+\begin{claim}\label{clm:admissible}
+On every chart of a split design, $\rank H=\omega$ identically. In particular, on a chart parameterising
+an image line, $H$ does not depend on the parameter and every real point of the chart is admissible.
+\end{claim}
+
+\begin{proof}
+The $W$-rows of $H$ vanish (Theorem~\ref{thm:reduction}, step 1) and the $D$-rows have rank
+$\dim D^{\perp_{K_0}}=k-c=\omega$; hence $\rank H=\omega$ for every choice of $W$. On an image-line chart
+the pencil differs from a fixed matrix only in the single row $-\varphi(s)$, whose $\lambda$-coefficient
+is zero, so there is a maximal minor whose $\lambda$-leading coefficient does not vanish and does not
+depend on $s$.
+\end{proof}
+
+Admissibility being automatic, the generic-gcd criterion of \cite{companion3} becomes an exact test rather
+than a generic one, and the algorithm can be stated in Part B without a certificate per point.
+
+\subsection{The algorithm}\label{sec:algorithm}
+
+\begin{defn}[image charts]\label{defn:charts}
+Let $\Phi_0=\varphi(W_0)$ and $V_\varphi:=\varphi(T_D)$, of dimension $\le\min(n-k,2p)$. The realisable
+image spaces are the subspaces $\Phi\le V_\varphi$ with $\Phi_0\subseteq\Phi$, $\dim\Phi\le t$, satisfying
+the inequalities of Theorem~\ref{thm:realize}; they are charted by the standard affine charts of
+$\bigcup_{j}\Gr(j,V_\varphi)$, each of which carries $j(\dim V_\varphi-j)\le p^2$ parameters. Two
+degenerate cases deserve names: $\Phi=\{0\}$ (possible only if $\Phi_0=0$ and $t\ge0$ with the lower
+inequality satisfied) and $\Phi=D^\circ$ itself (possible only if $V_\varphi=D^\circ$, i.e. only in the
+boundary case $\dim T_D=\omega$). When $\dim\Phi_0\ge1$ the one-dimensional families disappear; the line
+case occurs only when $\Phi_0=0$ and $\dim V_\varphi\ge2$.
+\end{defn}
+
+The enumeration is finite and explicit, so what remains is to say on which charts the answer is decided
+and at what cost.
+
+\begin{algorithm}[H]
+\caption{Decision at $c=2$, split, simple spectrum.}
+\label{alg:decide}
+\begin{algorithmic}[1]
+\State compute $K_0$, $N$, $M$, $A_{21}$, $\omega$, $c$, $t$;
+\State enumerate $\mathcal I_2(M)$ by Theorem~\ref{thm:base}, keeping only
+$D\in\mathcal B_{\rm pres}$;
+\State for each $D$ compute $r(D)$, $T_D$, $W_0$, $\Phi_0$, and check $W_0\subseteq T_D$;
+\State enumerate the realisable image spaces $\Phi$ by Theorem~\ref{thm:realize} and
+Remark~\ref{rem:imagesize};
+\State for each image chart, clear denominators and compute the gcd of the
+$\omega\times\omega$ maximal minors over $\mathbb Q(s)[\lambda]$ (or over the field of definition of
+$D$); if it is constant, return \emph{feasible};
+\State if every chart gives a non-constant gcd, return \emph{infeasible}.
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Correctness}\label{sec:correct}
+
+\begin{claim}[two-valued decision]\label{clm:twovalued}
+Under the hypotheses of Theorem~\ref{thm:correct} below, each real-admissible image chart satisfies both
+hypotheses of the generic-gcd criterion, hence
+\[
+\begin{aligned}
+&\text{the generic gcd on the chart is }1\\
+&\quad\iff\text{the chart contains a real feasible design}.
+\end{aligned}
+\]
+Therefore the algorithm outputs exactly \textbf{feasible} or \textbf{infeasible}.
+\end{claim}
+
+\begin{thm}[correctness]\label{thm:correct}
+Assume $c=2$, simple spectrum of $M$, and the split condition. Then Algorithm~\ref{alg:decide} terminates
+and its answer is correct.
+\end{thm}
+
+\begin{proof}
+Finite enumeration by Theorems~\ref{thm:base} and~\ref{thm:realize}; correctness on each chart by
+Claim~\ref{clm:twovalued} and Theorem~\ref{thm:reduced}; the chart cover is complete because every
+realisable $\Phi$ is one of the charts of Definition~\ref{defn:charts}.
+\end{proof}
+
+Correctness being established, the only question left is the cost of the enumeration and of the gcd
+computations, which is Part D.
+
+\subsection{Bit complexity}\label{sec:complexity}
+
+Let $\tau$ be the maximum bit length of the entries of $A$ and $C$.
+
+\begin{claim}[arithmetic of the enumeration]\label{clm:arith}
+Assume simple spectrum. Then the number of planes is $O(k^2)$, each plane is defined over a number field
+$L_D$ of degree at most $k^2$, and the field data and the bases of $D$, $D^{\perp_{K_0}}$, $T_D$,
+together with $\varphi$, $\Phi_0$ and the entries of the cleared pencil, have heights
+$\poly(n,\tau)$.
+\end{claim}
+
+\begin{proof}[Sketch]
+$M$ is rational, so its minimal polynomial has coefficients of polynomial bit length; its irreducible
+factors over $\mathbb Q$ then have polynomial height, and the roots have height bounded by the Mahler
+measure of these factors. Branch R uses $L_D=\mathbb Q(\alpha,\beta)$ with
+$[\mathbb Q(\alpha,\beta):\mathbb Q]\le d_id_j\le k^2$; eigenvectors are obtained by Cramer's rule over
+$L_D$, with denominators $f_i'(\alpha)\ne0$ by simplicity. Branch C uses $\ker f(M)$, which is
+$\mathbb Q$-defined, so the final objects live over $\mathbb Q$ even though the intermediate eigenvector
+data are computed in a complex embedding of $\mathbb Q[t]/(f)$. Orthogonal complements and kernels are
+again Cramer, and the pencil entries are obtained by polynomially many field operations.
+\end{proof}
+
+The height propagation is checked step by step in Appendix~\ref{app:height}.
+
+\begin{claim}[degrees on an image chart]\label{clm:degrees}
+On a chart of $\Gr(j,V_\varphi)$ at most $j$ rows of the pencil depend on the chart parameters, and each
+dependence is affine. Hence every maximal minor satisfies
+\[
+\deg_{\text{param}}\le j\le\min(t,\,2p),\qquad \deg_\lambda\le\omega\le k .
+\]
+In particular on a line chart ($j=1$) the parameter degree is at most one.
+\end{claim}
+
+\begin{proof}
+A maximal minor is multilinear in the rows; exactly the $j$ rows corresponding to a basis of $\Phi$ vary,
+and they vary affinely in the chart coordinates.
+\end{proof}
+
+\begin{thm}[bit complexity]\label{thm:complexity}
+Assume (i) $c=2$, (ii) simple spectrum, (iii) the split condition, and (iv) \textbf{$p$ fixed}, so that
+$n-k=\rank[C;CA]\le2p$ is bounded. Then Algorithm~\ref{alg:decide} runs in $\poly(n,\tau)$ bit operations,
+with arithmetic in number fields of degree at most $k^2$.
+\end{thm}
+
+\begin{proof}
+There are $O(k^2)$ planes; for each, the realisable image spaces live in $V_\varphi=\varphi(T_D)$, whose
+dimension is at most $2p$ and hence bounded; so the number of charts and the number of parameters per
+chart are bounded independently of $k$ (at most $O(p^2)$ parameters, by Remark~\ref{rem:imagesize}). On
+such a chart the pencil has $\deg_\lambda\le\omega$ and heights $\poly(n,\tau)$, and the gcd of the
+maximal minors over $L_D(\text{chart})[\lambda]$ costs
+$\poly(\omega,p,[L_D:\mathbb Q],\text{heights})$ by the standard subresultant bound \cite{vzgg13}.
+Summing over the $O(k^2)$ planes gives $\poly(n,\tau)$.
+\end{proof}
+
+\begin{remark}[the two boundaries, and why $p$ must be fixed]\label{rem:boundaries}
+Hypothesis (iv) of Theorem~\ref{thm:complexity} is not cosmetic. Without a bound on
+$n-k=\rank[C;CA]$ the space $V_\varphi=\varphi(T_D)$ grows with $k$, the fibre parameter has up to
+$p^2$-many free parameters, and the chartwise gcd is no longer a polynomial-time primitive. Note also
+that $c=2$ alone gives $\omega=k-2$, so $D^\circ$ is \emph{large}: it is the bound on $n-k$, not the
+smallness of $c$, that controls the fibre. Likewise, without simplicity of the spectrum the base is
+positive-dimensional (a Grassmannian of dimension $2(d_\lambda-2)=O(n)$) and the number of charts is no
+longer polynomial. With $c$ allowed to vary, the number of components is $\binom{k}{c}$, which is
+exponential. The present method therefore gives $\poly(n,\tau)$ only under fixed $p$ with simple
+spectrum, and at best $n^{O(cn+p^2)}$ in general.
+\end{remark}
+
+\section{Discussion and conclusion}\label{sec:conclusion}
+
+This section collects what the paper does not claim and records the evidence behind what it does claim.
+Part A consolidates the limitations, Part B the evidence.
+
+\subsection{Limitations}\label{sec:conclusion:limits}
+
+\begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=1pt,topsep=2pt]
+\item All structural results are for the split problem \textbf{S}; the unrestricted problem \textbf{U} is
+only reduced to a fibre description (Theorem~\ref{thm:ufibre}) and its invariant-kernel structure is
+lost.
+\item The decision algorithm and the complexity bound require simple spectrum; the non-simple case is
+left open.
+\item No uniformity in $c$ is claimed; the honest general bound is $n^{O(cn+p^2)}$.
+\item The general invariant-plane variety is used only through its defining equations; no rational
+parametrization is claimed.
+\end{enumerate}
+
+The disclaimers inside the body are part of the same statement and are not weakened here:
+Remark~\ref{rem:nonsimple} is the disclaimer attached to the classification of
+Theorem~\ref{thm:base}, Remark~\ref{rem:boundaries} lists the two boundaries of the complexity bound, and
+Remark~\ref{rem:open} lists the two questions on general $c$ that we do not answer: (a) whether the
+quantifier over $\Phi$ can be replaced by a rank or separation condition on the induced maps of
+$T_D/W_0$, and (b) whether the layer index can be traded for $\dim U$ with $U=\pi_1(W)$, since
+$c=k-\dim U$. Nothing is claimed about the complexity of the general decision problem.
+
+\subsection{Reproducibility and evidence}\label{sec:conclusion:evidence}
+
+This paper has \emph{no} machine-checked formalisation. Unlike companion manuscripts that carry Lean
+developments, no statement of Sections~\ref{sec:layers}--\ref{sec:decision} is formalised at the time of
+writing, and nothing in those sections should be read as machine-verified.
+
+The evidence behind the concrete assertions is of two kinds. First, the proofs of
+Sections~\ref{sec:layers}--\ref{sec:decision} are paper-level and complete, with one exception:
+the height chain of Claim~\ref{clm:arith} is a sketch, made step by step in Appendix~\ref{app:height},
+and a fully explicit constant is not computed. Second, the two places where the paper asserts something
+about a specific system --- the instance of Theorem~\ref{thm:nonmono} and the classification of
+Table~\ref{tab:planes} --- rest on exact rational arithmetic, not on floating-point computation. In the
+proof of Theorem~\ref{thm:nonmono} the six maximal $2\times2$ minors are expanded over $\mathbb Q$ and
+their gcd is $1$ precisely because the displayed combination
+$\tfrac12\bigl((\lambda-1)-(\lambda-3)\bigr)$ is a rational combination of two of them, and on the
+$c=1$ side the gcd $(\lambda-1)(\lambda-2)(\lambda-3)$ is read off the displayed integer matrix $H$ for
+symbolic $s$; both computations involve no algebraic extension and no rounding, so they are reproducible
+in any exact arithmetic system. Table~\ref{tab:planes} is a classification rather than a computation: its
+two counts are the combinatorial expressions of Theorem~\ref{thm:base}, and its third column is the field
+statement of Claim~\ref{clm:arith}.
+
+\appendices
+\small
+\section{Proof of the height propagation}\label{app:height}
+
+The chain is: entries of $A,C$ of bit length $\le\tau$ $\to$ entries of $M$ and $A_{21}$ (polynomial, by
+Cramer and by the inverse of the Gram matrix of $N$) $\to$ coefficients of the characteristic and minimal
+polynomials of $M$ (polynomial in $k$ and in the entry heights) $\to$ irreducible factors over
+$\mathbb Q$ (polynomial height, by Kronecker's bound) $\to$ roots $\alpha$ of these factors (height
+bounded by the Mahler measure, hence polynomial) $\to$ eigenvectors $v_\alpha=\ker(M-\alpha I)$ over
+$\mathbb Q(\alpha)$ (Cramer, denominators $f'(\alpha)\ne0$) $\to$ bases of $D$, $D^{\perp_{K_0}}$, $T_D$
+(kernels and orthogonal complements, again Cramer) $\to$ entries of $\varphi$, $\Phi_0$ and the pencil
+(polynomially many field operations) $\to$ subresultants and gcd (degree and height bounds as in
+\cite{vzgg13}). Each step multiplies the height by a factor that is polynomial in $n$ and in the degrees
+involved; the degree of the field is at most $k^2$. This yields the stated $\poly(n,\tau)$ bound. A
+fully explicit constant is not computed here.
+
+\normalsize
+
+\begin{thebibliography}{99}
+\bibitem{companion1} Deciding functional observer feasibility: compression, certificates, and
+parameterized algorithms. Companion manuscript, 2026.
+\bibitem{companion2} Minimum order and minimum-order construction for functional observers. Companion
+manuscript, 2026.
+\bibitem{companion3} Functional-observer feasibility in the hyperplane layer. Companion manuscript, 2026.
+\bibitem{fer26a} A. Fernando. \emph{Functional observer design: existence and order spectrum}.
+arXiv:2609.33615, 2026 (preprint).
+\bibitem{fer26b} A. Fernando. \emph{Functional observers: a chartwise characterisation}. arXiv:2609.37992,
+2026 (preprint).
+\bibitem{bruns88} W. Bruns, U. Vetter. \emph{Determinantal Rings}. Lecture Notes in Mathematics 1327.
+Berlin, Germany: Springer, 1988.
+\bibitem{fulton97} W. Fulton. \emph{Young Tableaux}. Cambridge, U.K.: Cambridge University Press, 1997
+(degeneracy loci, Ch.~14).
+\bibitem{bpr06} S. Basu, R. Pollack, M.-F. Roy. \emph{Algorithms in Real Algebraic Geometry}, 2nd ed.
+Berlin, Germany: Springer, 2006.
+\bibitem{vzgg13} J. von zur Gathen, J. Gerhard. \emph{Modern Computer Algebra}, 3rd ed. Cambridge, U.K.:
+Cambridge University Press, 2013 (subresultants, gcd degree bounds).
+\bibitem{emre80} E. Emre, M. L. J. Hautus. A polynomial characterization of $(A,B)$-invariant and
+reachability subspaces. \emph{SIAM J. Control Optim.}, vol.~18, no.~4, 1980.
+\end{thebibliography}
+
+\end{document}
