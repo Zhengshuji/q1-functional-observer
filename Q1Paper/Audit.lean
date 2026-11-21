@@ -2,6 +2,7 @@ import Q1Paper.Basic
 import Q1Paper.RankIdentity
 import Q1Paper.HyperplaneAvoid
 import Q1Paper.BezoutDeg
+import Q1Paper.BezoutReal
 import Q1Paper.G2Assembly
 import Q1Paper.G3Adjugate
 import Q1Paper.G3LeftInverse
@@ -45,6 +46,23 @@ import Q1Paper.BoundLower
 #print axioms Q1Paper.isCoprime_of_no_common_root
 #print axioms Q1Paper.exists_bezout_deg_lt
 #print axioms Q1Paper.exists_bezout_family
+
+-- Q1Paper/BezoutReal.lean : real-coefficient Bezout (Claim 9 of Paper I)
+#print axioms Q1Paper.complexify_injective
+#print axioms Q1Paper.complexify_ne_zero
+#print axioms Q1Paper.eval_complexify_ofReal
+#print axioms Q1Paper.exists_complex_root_of_natDegree_pos
+#print axioms Q1Paper.isCoprime_of_no_common_complex_root
+#print axioms Q1Paper.exists_bezout_of_no_common_complex_root
+#print axioms Q1Paper.combC_apply
+#print axioms Q1Paper.combC_single
+#print axioms Q1Paper.reComb_apply
+#print axioms Q1Paper.imComb_apply
+#print axioms Q1Paper.reComb_single
+#print axioms Q1Paper.imComb_single
+#print axioms Q1Paper.eval_complexify_sum
+#print axioms Q1Paper.exists_avoid_complex_roots
+#print axioms Q1Paper.exists_bezout_family_real
 #print axioms Q1Paper.adjRowInverse_mul
 #print axioms Q1Paper.exists_leftInverse
 #print axioms Q1Paper.natDegree_intCast_le

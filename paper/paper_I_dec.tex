@@ -1689,7 +1689,7 @@ Structural bound, lower half (Claim~\ref{lem:struct}) & literal &
 \texttt{finrank\_add\_one\_le\_of\_spectral} \\
 Rank consistency (Claim~\ref{lem:rankcons}) & literal &
 \texttt{exists\_mulVec\_eq\_iff\_rank\_gram} \\
-B\'ezout with degree bound (Claim~\ref{lem:bezout}) & abstract core & \texttt{exists\_bezout\_family} \\
+B\'ezout with degree bound (Claim~\ref{lem:bezout}) & literal & \texttt{exists\_bezout\_family\_real} \\
 Rectangular left inverse (Claim~\ref{lem:zero}(iii)$\Rightarrow$(iv)) & abstract core &
 \texttt{exists\_leftInverse\_linear} \\
 Gram certificate, kernel identity (Proposition~\ref{prop:gram}) & ingredient &
@@ -1747,9 +1747,9 @@ The results rest on three kinds of evidence, and the accompanying artifact recor
 formalized as stated (\emph{literal}) from those formalized at the level of linear maps,
 submodules or a general field (\emph{abstract core}), the translation to the paper's matrices being
 paper-level; the single \emph{ingredient} is one step of the proof of the certificate. The
-B\'ezout and rectangular-left-inverse rows are of this kind: the declarations produce polynomial
-multipliers, respectively a polynomial left inverse, over an algebraically closed field, and the
-passage to the real coefficients of Claim~\ref{lem:bezout} (rational, for the left inverse) is
+rectangular-left-inverse row is of this kind: its declaration produces a polynomial left
+inverse over an algebraically closed field, and the
+passage to rational coefficients is
 paper-level. Every declaration is checked by the
 kernel against only (\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}). The
 reductions, the certificate and the complexity accounting are paper-level, so this is not a formal

@@ -11,6 +11,7 @@ import Q1Paper.Q1Pencil
 import Q1Paper.Q1Step3
 import Q1Paper.HyperplaneAvoid
 import Q1Paper.BezoutDeg
+import Q1Paper.BezoutReal
 import Q1Paper.G2Assembly
 import Q1Paper.G3Adjugate
 import Q1Paper.G3LeftInverse
