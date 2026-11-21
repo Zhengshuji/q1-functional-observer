@@ -31,7 +31,6 @@ import Q1Paper.HyperplaneFibre
 import Q1Paper.TightDim
 import Q1Paper.BoundLower
 import Q1Paper.Strata
-import Q1Paper.HyperplaneC2
 import Q1Paper.MinOrder
 
 #print axioms Q1Paper.pairMap_apply
@@ -189,8 +188,3 @@ import Q1Paper.MinOrder
 #print axioms Q1Subspace.exists_mem_t_le_two_mul
 #print axioms Q1Subspace.finrank_quotient_le_two_mul
 #print axioms Q1Subspace.t_le_two_mul_of_pi1_eq_pi2
-
--- Q1Paper/HyperplaneC2.lean : c = 2 layer, K-split fibre (note 393, Proposition 2)
-#print axioms Q1Paper.sup_inf_eq_left_of_le_orthogonal
-#print axioms Q1Paper.disjoint_of_le_orthogonal
-#print axioms Q1Paper.finrank_sup_of_disjoint_of_le_orthogonal
