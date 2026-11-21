@@ -35,7 +35,7 @@ The port was mechanical: the seven modules import only `Mathlib` and each other,
 | Lemma 1, vector form | `Q1Paper.rank_fromRows_add_map` | `G4RankIdentity.lean` | literal |
 | Lemma 4 (rank consistency) | `Q1Paper.exists_mulVec_eq_iff_rank_gram` | `G5GramRank.lean` | literal, matrix form |
 | Lemma 4, augmented step | `Q1Paper.rank_augment_eq_iff` | `G5GramRank.lean` | literal |
-| Lemma 5 (Bézout, degree bound) | `Q1Paper.exists_bezout_family` | `G2Assembly.lean` | literal |
+| Lemma 5 (Bézout, degree bound) | `Q1Paper.exists_bezout_family_real` | `BezoutReal.lean` | literal (real coefficients) |
 | Lemma 6 (v) ⇒ (iv) | `Q1Paper.spoly_mul_pencil_eq_one` | `G3Coeff.lean` | literal |
 | Lemma 6, coefficient extraction | `Q1Paper.coeff_mul_apply` | `G3Coeff.lean` | literal |
 | Proposition 13 ($r=0$ construction) | `Q1Paper.exists_leftInverse_linear` | `G3LeftInverse.lean` | literal: $SQ=1$, $\deg S\le2\omega-2$ |
