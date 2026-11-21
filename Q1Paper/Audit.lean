@@ -31,6 +31,7 @@ import Q1Paper.HyperplaneFibre
 import Q1Paper.TightDim
 import Q1Paper.BoundLower
 import Q1Paper.Strata
+import Q1Paper.MinOrder
 
 #print axioms Q1Paper.pairMap_apply
 #print axioms Q1Paper.ker_pairMap
@@ -176,3 +177,14 @@ import Q1Paper.Strata
 #print axioms Q1Paper.finrank_range_normalRestrict_add_finrank_ker
 #print axioms Q1Paper.eigenStratum_eq_bot_iff_finrank_range
 #print axioms Q1Paper.exists_eigen_and_nonEigen_of_rank_between
+
+-- Q1Paper/MinOrder.lean : Paper II, the dimension count behind t_min ≤ 2 ℓ
+#print axioms Q1Subspace.finrank_quotient_eq_finrank_sub
+#print axioms Q1Subspace.t_eq_finrank_sub
+#print axioms Q1Subspace.finrank_le_two_mul_of_pi2_le_pi1
+#print axioms Q1Subspace.finrank_le_two_mul_of_pi1_eq_pi2'
+#print axioms Q1Subspace.finrank_le_two_mul_ell
+#print axioms Q1Subspace.t_le_two_mul
+#print axioms Q1Subspace.exists_mem_t_le_two_mul
+#print axioms Q1Subspace.finrank_quotient_le_two_mul
+#print axioms Q1Subspace.t_le_two_mul_of_pi1_eq_pi2

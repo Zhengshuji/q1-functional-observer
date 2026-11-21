@@ -32,3 +32,4 @@ import Q1Paper.HyperplaneFibre
 import Q1Paper.TightDim
 import Q1Paper.BoundLower
 import Q1Paper.Strata
+import Q1Paper.MinOrder
