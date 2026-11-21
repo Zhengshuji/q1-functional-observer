@@ -295,9 +295,11 @@ in Algorithm~\ref{sec4:algo:decide}.
 \emph{The direction and the two functionals.} The direction is where the layer differs from the
 compressed formulation, so it receives notation of its own.
 
-Let $V$ lie in the hyperplane layer. By \eqref{eq:compressed-data} and $c=1$ one has $\dim(V\cap K_0)=k-1$;
-hence $\ker H$ is a line $\mathbb R v$ with $v\in K_0\setminus\{0\}$, and $V\subseteq U_v^\perp$,
-where
+Let $V$ lie in the hyperplane layer and assume the layer transverse, that is
+$\dim(V\cap K_0)=k-c=k-1$; this is hypothesis \ref{sec3:S2} of Section~\ref{sec3}, not a consequence of
+\eqref{eq:compressed-data} (Remark~\ref{sec3:rem:identity}). By \eqref{eq:compressed-data} and $c=1$ one
+has $\omega=k-1$, hence $\ker H$ is a line $\mathbb R v$ with $v\in K_0\setminus\{0\}$, and
+$V\subseteq U_v^\perp$, where
 \begin{equation}
   \label{eq:Uv}
   U_v=\operatorname{span}\{v,Av\}.
@@ -310,6 +312,17 @@ Denote the two linear functionals on $K_0$ by
 \end{equation}
 The inclusion $V\subseteq U_v^\perp$ is equivalent to saying that every $x\in V$ annihilates both $v$
 and $Av$, that is, that $xN$ lies in the common kernel of the two functionals.
+
+\begin{remark}[$\omega$ is not $\dim(V\cap K_0)$]\label{sec3:rem:identity}
+By \eqref{eq:compressed-data} and $\ker(L|_{K_0})=K_0\cap V^\perp$ one has
+$\omega=\rank H=k-\dim(K_0\cap V^\perp)=\dim\pi_{K_0}(V)$, with $\pi_{K_0}$ the orthogonal projection
+onto $K_0$; so the layer index is
+$c=k-\omega=\dim(K_0\cap V^\perp)$ and counts the codimension of $\pi_{K_0}(V)$ in $K_0$, not the
+intersection $V\cap K_0$. The naive identity $\omega=\dim(V\cap K_0)$ is false: an instance with $n=8$,
+$k=4$ and a design of $q=5$ rows has $\omega=\rank H=4=k-\dim(K_0\cap V^\perp)$, while
+$\dim(V\cap K_0)=2$. The two numbers agree exactly when $\dim(V\cap K_0)=k-c$, which is the
+transversality hypothesis \ref{sec3:S2}.
+\end{remark}
 
 \begin{equation}
   \label{eq:compression}
@@ -360,7 +373,7 @@ $N$ & basis matrix of $K_0$ & $\mathbb R^{n\times k}$ &
 $U_v$ & $\operatorname{span}\{v,Av\}$ & $\mathbb R^n$, $1$ or $2$ \\
 $H$, $H_A$ & $\mathcal LN$, $\mathcal LAN$ & $\mathbb R^{q\times k}$ &
 $D_v$ & $K_0\cap U_v^\perp$ & $K_0$, $k-1$ \\
-$\omega$ & $\rank H=\dim(V\cap K_0)$ & --- &
+$\omega$ & $\rank H=k-\dim(K_0\cap V^{\perp})$ & --- &
 $\mathcal Q_v$ & $U_v^\perp/D_v$ & quotient, $r(v)$ \\
 $c$ & layer index $k-\omega$ & --- &
 $V_0$ & $\row L_0$, prescribed rows & $\mathbb R^n$, $r_0$ \\
@@ -423,11 +436,15 @@ $m$-dimensional subspaces of a vector space $Z$.
 A \emph{row space of the layer} is a $q$-dimensional subspace $V$ satisfying
 \begin{enumerate}[label=(S\arabic*),ref={(S\arabic*)},leftmargin=2.6em,itemsep=1pt,topsep=2pt]
 \item\label{sec3:S1} $V\subseteq U_v^\perp$, where $v\in K_0\setminus\{0\}$ is determined by $V$;
-\item\label{sec3:S2} $D_v\subseteq V$ (equivalently $\dim(V\cap K_0)=k-1$);
+\item\label{sec3:S2} $D_v\subseteq V$ (given \ref{sec3:S1}, equivalently $\dim(V\cap K_0)=k-1=k-c$);
 \item\label{sec3:S3} $V_0\subseteq V$.
 \end{enumerate}
 Condition~\ref{sec3:S3} belongs to the problem definition, and \ref{sec3:S1} with \ref{sec3:S2} gives
-$V\cap K_0=D_v$.
+$V\cap K_0=D_v$. Condition~\ref{sec3:S2} is an explicit hypothesis on the layer, not a consequence of
+\eqref{eq:5a}: with $M=\operatorname{diag}(1,1,2,3)$, $K_0=\operatorname{span}\{e_5,\dots,e_8\}$,
+$D=\operatorname{span}\{e_5+e_6,\ e_7+e_8\}\subseteq K_0$ not $M$-invariant, $U=D+AD$ and $V=U^\perp$ one
+has $c=2$ and \eqref{eq:5a}, but $\dim(V\cap K_0)=1\ne k-c$; what \eqref{eq:5a} yields in general is only
+the inequality $\dim(V\cap K_0)\le\omega$ of Claim~\ref{sec3:lem:direction}(iv).
 
 
 The purpose of this step is to name the direction and the space $D_v$ that every later count is built
@@ -1710,10 +1727,12 @@ rational chart point.
 \subsection{Notation}\label{sec6:sub:notation}
 
 
-We use the notation of the preceding sections. The appendix lives in the hyperplane layer $c=1$, so
-$\ker H$ is one-dimensional, say $\ker H=\mathbb{R}v$ with $v\in K_0$, every row of $\mathcal{L}$
-annihilates $v$ and $Av$, and with $U_v=\operatorname{span}\{v,Av\}$ the admissible row spaces obey
-$V\subseteq U_v^{\perp}$ and $\dim(V\cap K_0)=k-1$. Write
+We use the notation of the preceding sections. The appendix lives in the hyperplane layer $c=1$ and in
+the transverse case $\dim(V\cap K_0)=k-c=k-1$, so $\ker H$ is one-dimensional, say
+$\ker H=\mathbb{R}v$ with $v\in K_0$, every row of $\mathcal{L}$ annihilates $v$ and $Av$, and with
+$U_v=\operatorname{span}\{v,Av\}$ the admissible row spaces obey $V\subseteq U_v^{\perp}$. The fibre
+computation below uses only $V\subseteq U_v^{\perp}$ and $\dim(V\cap K_0)=k-1$: the inclusion gives
+$V\cap K_0\subseteq D_v$, and the dimension gives $V\cap K_0=D_v$, whence $\dim V/D_v=q-k+1=s$. Write
 \begin{equation}\label{sec6:eq:defs}
 D_v=K_0\cap U_v^{\perp},\qquad \mathcal{Q}_v=U_v^{\perp}/D_v,\qquad s=q-k+1 .
 \end{equation}
