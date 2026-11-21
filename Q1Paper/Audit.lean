@@ -32,6 +32,7 @@ import Q1Paper.TightDim
 import Q1Paper.BoundLower
 import Q1Paper.Strata
 import Q1Paper.MinOrder
+import Q1Paper.FullRank
 
 #print axioms Q1Paper.pairMap_apply
 #print axioms Q1Paper.ker_pairMap
@@ -188,3 +189,10 @@ import Q1Paper.MinOrder
 #print axioms Q1Subspace.exists_mem_t_le_two_mul
 #print axioms Q1Subspace.finrank_quotient_le_two_mul
 #print axioms Q1Subspace.t_le_two_mul_of_pi1_eq_pi2
+
+-- Q1Paper/FullRank.lean : Paper III, Claim sec4:lem:fullrank (full-rank leading coefficient)
+#print axioms Q1Paper.specialized_common_factor
+#print axioms Q1Paper.exists_eval_ne_zero
+#print axioms Q1Paper.C_mul_dvd_iff
+#print axioms Q1Paper.exists_primitive_common_dvd
+#print axioms Q1Paper.exists_common_factor_of_gcd

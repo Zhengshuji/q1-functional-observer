@@ -389,6 +389,7 @@ $\widetilde r$ & $r(v)-\delta$, rank left for free rows & --- \\
 \end{table*}
 
 The eigen/non-eigen stratification (Proposition~\ref{sec3:prop:strata}) is formalised in \texttt{Strata.lean} (41 declarations, abstract core); the projectivisation and the Zariski-open statement are paper-level, the Lean version uses the equivalent linear (cone) form.
+The specialisation half of Lemma~\ref{sec4:lem:fullrank} is formalised as \texttt{specialized\_common\_factor} (with \texttt{exists\_common\_factor\_of\_gcd} for a family of points and \texttt{exists\_eval\_ne\_zero} for the nonvanishing half); the chart layer and the Zariski-open statement \texttt{sec4:thm:generic} remain paper-level.
 
 
 \emph{Parameter counts and chart conventions.} The last block fixes what a parameter point is and over
