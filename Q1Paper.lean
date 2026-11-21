@@ -34,3 +34,4 @@ import Q1Paper.BoundLower
 import Q1Paper.Strata
 import Q1Paper.MinOrder
 import Q1Paper.FullRank
+import Q1Paper.Window

@@ -33,6 +33,7 @@ import Q1Paper.BoundLower
 import Q1Paper.Strata
 import Q1Paper.MinOrder
 import Q1Paper.FullRank
+import Q1Paper.Window
 
 #print axioms Q1Paper.pairMap_apply
 #print axioms Q1Paper.ker_pairMap
@@ -196,3 +197,20 @@ import Q1Paper.FullRank
 #print axioms Q1Paper.C_mul_dvd_iff
 #print axioms Q1Paper.exists_primitive_common_dvd
 #print axioms Q1Paper.exists_common_factor_of_gcd
+
+-- Q1Paper/Window.lean : Paper I, Claim 10 (`lem:window`, degree-windowed relations)
+#print axioms Q1Paper.toFn_apply
+#print axioms Q1Paper.windowMatrix
+#print axioms Q1Paper.windowMatrix_apply
+#print axioms Q1Paper.windowMatrix_row
+#print axioms Q1Paper.natDegree_X_pow_mul_le
+#print axioms Q1Paper.rowSpace_windowMatrix_eq_span_shift
+#print axioms Q1Paper.windowSet
+#print axioms Q1Paper.windowSubmodule
+#print axioms Q1Paper.toFn_sum_mem_rowSpace
+#print axioms Q1Paper.exists_vecMul_windowMatrix
+#print axioms Q1Paper.row_mem_windowSet
+#print axioms Q1Paper.rowSpace_windowMatrix_eq_windowSet
+#print axioms Q1Paper.mem_rowSpace_iff_exists_window
+#print axioms Q1Paper.toFn_injective_of_natDegree_lt
+#print axioms Q1Paper.toFn_injOn_degree_lt_two_mul
