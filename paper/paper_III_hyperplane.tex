@@ -1332,6 +1332,38 @@ directions of $E_1$.
 
 \subsection{Reproducibility and evidence}
 
+\begin{table*}[!t]
+\centering
+\caption{Where each statement of the paper is verified. \emph{Literal}: the Lean statement is the
+statement of the paper. \emph{Abstract core}: the Lean statement is the linear-map or submodule
+version, and the translation to matrices is paper-level. \emph{Ingredient}: one step of the proof,
+not the statement. Statements not listed are paper-level throughout.}
+\label{tab:evidence}
+\footnotesize
+\begin{tabular}{@{}p{0.43\textwidth}>{\raggedright\arraybackslash}p{0.15\textwidth}>{\raggedright\arraybackslash}p{0.36\textwidth}@{}}
+\toprule
+Statement & Lean evidence & Formal name \\
+\midrule
+Direction theorem (Theorem~\ref{sec3:thm:direction}), $\varphi_{Av}=\mu\varphi_v\Rightarrow Mv=\mu v$
+& abstract core & \texttt{compression\_eq\_of\_proportional} \\
+Direction theorem (Theorem~\ref{sec3:thm:direction}), $Mv=\mu v\Rightarrow\varphi_{Av}=\mu\varphi_v$,
+and the equivalence of the two & abstract core & \texttt{proportional\_of\_compression},
+\texttt{direction\_iff} \\
+Structure of the layer (Claim~\ref{sec3:lem:direction}(ii)): membership in $U_v^\perp$ &
+ingredient & \texttt{mem\_orthogonal\_span\_pair\_iff} \\
+Prescribed rows (Claim~\ref{sec3:lem:prescribed}(i)): $V_0\subseteq U_v^\perp$ &
+abstract core & \texttt{le\_orthogonal\_span\_pair} \\
+Prescribed rows (Claim~\ref{sec3:lem:prescribed}(i)): $V_0\cap D_v=V_0\cap K_0$, so $\delta$ is
+independent of $v$ & abstract core & \texttt{inf\_inf\_orthogonal\_eq} \\
+Fibre: $\dim D_v=k-1$ (Claim~\ref{sec3:lem:direction}(iii),
+Claim~\ref{sec3:lem:constantrank}) & abstract core & \texttt{Dv\_eq\_ker},
+\texttt{finrank\_Dv} \\
+Avoidance of finitely many proper hyperplanes (the linear model of the generic-point step of
+Claim~\ref{sec4:thm:generic}) & ingredient & \texttt{exists\_apply\_ne\_zero},
+\texttt{exists\_forall\_apply\_ne\_zero} \\
+\bottomrule
+\end{tabular}
+\end{table*}
 
 \textbf{Reproducibility.} The matrices $A$, $C$, $N$, $M$, $A_{21}$ and the characteristic polynomial
 are given in full in Appendix~\ref{sec6:sub:instance}; the six decisions, the divisibility certificates
@@ -1345,6 +1377,19 @@ full-rank leading-coefficient lemma of Section~\ref{sec:decision} they give the 
 Appendix~\ref{app:example}: the fibres over the five non-eigen directions are entirely bad, and
 the fibre over $(1\!:\!1)$ contains a feasible design.
 
+\textbf{Lean evidence.} The statements of Section~\ref{sec3} that concern the layer itself --- the
+direction theorem, the prescribed rows, and the dimension of the fibre --- are also formalized in
+Lean~4 with Mathlib, as are the inner-product-space facts on which they rest;
+Table~\ref{tab:evidence} lists them statement by statement, with the grade of the formalization and
+the declaration names, in the format used by the companion papers. The grades separate what is
+formalized as stated (\emph{literal}) from what is formalized at the level of linear maps, submodules
+and inner product spaces (\emph{abstract core}), the translation to the matrices $M$, $A_{21}$, $L_0$
+being paper-level, from what is one step of a proof (\emph{ingredient}). Every declaration is checked
+by the kernel against only (\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}). The
+statements that have no formalization --- the closedness of the bad locus, the function-field gcd
+criterion of Claim~\ref{sec4:thm:generic}, the bundle and Grassmannian description of the fibre in
+Claim~\ref{sec3:lem:constantrank}, and the algorithm with its correctness and complexity bounds --- are
+paper-level throughout.
 
 Everything above is exact rational arithmetic whose expanded forms are in Appendix~\ref{app:data}, and
 the proofs behind every estimate of Section~\ref{sec5} are in Appendix~\ref{appBC}; nothing in this

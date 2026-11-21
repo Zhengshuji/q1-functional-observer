@@ -738,33 +738,57 @@ changing the spectrum would be invalid. We do not know whether one exists.
 
 \subsection{Reproducibility and evidence}\label{sec:repro}
 
+\begin{table*}[!t]
+\centering
+\caption{Where each statement of the paper is verified. \emph{Literal}: the Lean statement is the
+statement of the paper. \emph{Abstract core}: the Lean statement is the linear-map or submodule
+version, and the translation to matrices is paper-level. \emph{Ingredient}: one step of the proof,
+not the statement. Statements not listed are paper-level throughout.}
+\label{tab:evidence}
+\footnotesize
+\begin{tabular}{@{}p{0.43\textwidth}>{\raggedright\arraybackslash}p{0.15\textwidth}>{\raggedright\arraybackslash}p{0.36\textwidth}@{}}
+\toprule
+Statement & Lean evidence & Formal name \\
+\midrule
+Sandwich and realizability (Claim~\ref{claim:sandwich}(i)) & literal &
+\texttt{rowSpan\_fromRows\_left}, \texttt{mem\_rowSpan\_iff\_exists\_vecMul} \\
+$\pi_1(W)=\pi_2(W)$ from \eqref{eq:5a} and \eqref{eq:5b} at $\lambda=0$
+(Claim~\ref{claim:compress}, Claim~\ref{claim:struct}) & abstract core &
+\texttt{pi1\_eq\_pi2\_of\_le\_of\_finrank\_eq} \\
+Structural bound, upper half (Claim~\ref{claim:struct}), \eqref{eq:struct} & literal &
+\texttt{finrank\_le\_two\_mul\_of\_pi1\_eq\_pi2} \\
+Structural bound, lower half (Claim~\ref{claim:struct}), \eqref{eq:struct} & literal &
+\texttt{finrank\_add\_one\_le\_of\_spectral} \\
+Monotonicity (Lemma~\ref{lem:monotone}) & ingredient & \texttt{rank\_fromRows\_zero} \\
+Lower bound \eqref{eq:lb}, the inequality $\operatorname{rank}[U_0;V_0]\le\omega$
+(Proposition~\ref{prop:lowerbound}; the dimensional half of Proposition~\ref{prop:tight}) &
+abstract core & \texttt{finrank\_sup\_pi\_le}, \texttt{finrank\_pi1\_mono} \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
 Two kinds of evidence support the statements above, and the artifact records which statement rests on
 which.
 
 \begin{enumerate}
-\item \emph{Lean~4 with Mathlib.} The structural statements of Section~\ref{sec:standing} are
-formalized: the row space as the range of the row map, the sandwich and the lifting
-(\texttt{rowSpan\_fromRows\_left}, \texttt{mem\_rowSpan\_iff\_exists\_vecMul}), the criterion for
-equality of the two projections, the upper half of the structural bound
-(\texttt{finrank\_le\_two\_mul\_of\_pi1\_eq\_pi2}), and the invariance of the rank under appending a
-zero row (\texttt{rank\_fromRows\_zero}), which is the content of Lemma~\ref{lem:monotone}. Every
-declaration is checked by the kernel against only (\texttt{propext}, \texttt{Classical.choice},
-\texttt{Quot.sound}). The interface of Section~\ref{sec:compute} and the counting arguments are
-paper-level, so this is not a formal verification of the complexity statements.
-
-Two points about the Lean core are worth stating. First, the lower half $\omega+1\le\dim W$ of
-Claim~\ref{claim:struct} is formalized as \texttt{finrank\_add\_one\_le\_of\_spectral}: over an
-algebraically closed field, the spectral condition rules out $\dim W=\dim\pi_1(W)$ for a feasible $W$.
-Second, Proposition~\ref{prop:tight} is only partly covered. Its dimensional half is
-\texttt{finrank\_sup\_pi\_le} and \texttt{finrank\_pi1\_mono}, and the graph argument that turns
-$\dim W=\dim\pi_1(W)$ into a one-dimensional kernel is the proof of
-\texttt{finrank\_add\_one\_le\_of\_spectral}; what remains paper-level is the
-Popov--Belevitch--Hautus criterion, since the artifact contains no controllability theory. What the artifact does cover of
-Proposition~\ref{prop:tight} is the dimensional half: for $W_0\subseteq W$ with
-$\pi_2(W)\subseteq\pi_1(W)$, the declarations \texttt{finrank\_sup\_pi\_le} and
-\texttt{finrank\_pi1\_mono} give $\dim(\pi_1(W_0)+\pi_2(W_0))\le\dim\pi_1(W)$ and
-$\dim\pi_1(W_0)\le\dim\pi_1(W)$, which is
-$\operatorname{rank}[U_0;V_0]\le\omega$ for $U_0=\pi_1(W_0)$, $V_0=\pi_2(W_0)$.
+\item \emph{Lean~4 with Mathlib.} The structural statements of Section~\ref{sec:standing}, together
+with the dimensional parts of Propositions~\ref{prop:lowerbound} and~\ref{prop:tight}, are formalized;
+Table~\ref{tab:evidence} lists them statement by statement, with the grade of the formalization and
+the declaration names. The grades separate what is formalized as stated (\emph{literal}) from what is
+formalized at the level of linear maps and submodules (\emph{abstract core}), the translation to
+matrices being paper-level; the single \emph{ingredient} is one step of the proof of
+Lemma~\ref{lem:monotone}. Two points about the coverage. First, the lower half $\omega+1\le\dim W$ of
+Claim~\ref{claim:struct} is formalized over an algebraically closed field, so the graph argument that
+the spectral condition rules out $\dim W=\dim\pi_1(W)$ for a feasible $W$ is covered. Second,
+Proposition~\ref{prop:tight} is only partly covered: what the artifact does cover of it is its
+dimensional half, namely, for $W_0\subseteq W$ with $\pi_2(W)\subseteq\pi_1(W)$,
+$\dim(\pi_1(W_0)+\pi_2(W_0))\le\dim\pi_1(W)$ and $\dim\pi_1(W_0)\le\dim\pi_1(W)$, which is
+$\operatorname{rank}[U_0;V_0]\le\omega$ for $U_0=\pi_1(W_0)$, $V_0=\pi_2(W_0)$. Every declaration is
+checked by the kernel against only (\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}).
+The Popov--Belevitch--Hautus criterion that turns $\dim W=\dim\pi_1(W)$ into a kernel condition is
+paper-level, since the artifact contains no controllability theory; so are the interface of
+Section~\ref{sec:compute} and the counting arguments, hence this is not a formal verification of the
+complexity statements.
 \item \emph{Exact rational arithmetic.} The instance of Appendix~\ref{app:example} is verified by exact
 rational computation, not by numerical evaluation: the two rank equalities of \eqref{eq:5a}, the
 vanishing of the determinant of the $8\times8$ pencil together with the nonzero $7\times7$ minors and
