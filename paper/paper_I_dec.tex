@@ -1663,9 +1663,10 @@ paper does not claim, and the evidence behind each statement, is recorded in Sec
 \begin{table*}[!t]
 \centering
 \caption{Where each statement of the paper is verified. \emph{Literal}: the Lean statement is the
-statement of the paper. \emph{Abstract core}: the Lean statement is the linear-map or submodule
-version, and the translation to matrices is paper-level. \emph{Ingredient}: one step of the proof,
-not the statement. Statements not listed are paper-level throughout.}
+statement of the paper. \emph{Abstract core}: the Lean statement is a linear-map, submodule or
+general-field version of it, and the passage to the paper's matrices and coefficients is
+paper-level. \emph{Ingredient}: one step of the proof, not the statement. Statements not listed
+are paper-level throughout.}
 \label{tab:evidence}
 \footnotesize
 \begin{tabular}{@{}lll@{}}
@@ -1688,8 +1689,8 @@ Structural bound, lower half (Claim~\ref{lem:struct}) & literal &
 \texttt{finrank\_add\_one\_le\_of\_spectral} \\
 Rank consistency (Claim~\ref{lem:rankcons}) & literal &
 \texttt{exists\_mulVec\_eq\_iff\_rank\_gram} \\
-B\'ezout with degree bound (Claim~\ref{lem:bezout}) & literal & \texttt{exists\_bezout\_family} \\
-Rectangular left inverse (Proposition~\ref{prop:zero}) & literal &
+B\'ezout with degree bound (Claim~\ref{lem:bezout}) & abstract core & \texttt{exists\_bezout\_family} \\
+Rectangular left inverse (Claim~\ref{lem:zero}(iii)$\Rightarrow$(iv)) & abstract core &
 \texttt{exists\_leftInverse\_linear} \\
 Gram certificate, kernel identity (Proposition~\ref{prop:gram}) & ingredient &
 \texttt{sum\_sq\_eq\_zero\_iff} \\
@@ -1743,12 +1744,18 @@ The results rest on three kinds of evidence, and the accompanying artifact recor
 
 \begin{enumerate}
 \item \emph{Lean~4 with Mathlib.} The labels of Table~\ref{tab:evidence} separate statements
-formalized as stated (\emph{literal}) from those formalized at the level of linear maps and
-submodules (\emph{abstract core}), the translation to matrices being paper-level; the single
-\emph{ingredient} is one step of the proof of the certificate. Every declaration is checked by the
+formalized as stated (\emph{literal}) from those formalized at the level of linear maps,
+submodules or a general field (\emph{abstract core}), the translation to the paper's matrices being
+paper-level; the single \emph{ingredient} is one step of the proof of the certificate. The
+B\'ezout and rectangular-left-inverse rows are of this kind: the declarations produce polynomial
+multipliers, respectively a polynomial left inverse, over an algebraically closed field, and the
+passage to the real coefficients of Claim~\ref{lem:bezout} (rational, for the left inverse) is
+paper-level. Every declaration is checked by the
 kernel against only (\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}). The
 reductions, the certificate and the complexity accounting are paper-level, so this is not a formal
-verification of the algorithmic theorems.
+verification of the algorithmic theorems. In particular the exact polynomial-time decision
+procedure of Proposition~\ref{prop:zero} --- the elimination on \eqref{eq:R0} and its bit bound ---
+is paper-level; the table's left-inverse entry covers the existence and degree bound of $S$ only.
 \item \emph{Paper-level proofs.} The Cauchy--Binet compression of the certificate, the coefficient-size estimates and the existential-real encoding.
 \item \emph{Exact rational arithmetic.} The identities on which the constructions rest are re-checked, both on randomly generated instances and on the constructed families; this excludes arithmetic slips but does not replace the proofs.
 \end{enumerate}

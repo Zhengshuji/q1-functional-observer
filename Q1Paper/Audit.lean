@@ -26,6 +26,8 @@ import Q1Paper.FPT
 import Q1Paper.HyperplaneDirection
 import Q1Paper.HyperplanePrescribed
 import Q1Paper.HyperplaneFibre
+import Q1Paper.TightDim
+import Q1Paper.BoundLower
 
 #print axioms Q1Paper.pairMap_apply
 #print axioms Q1Paper.ker_pairMap
@@ -56,6 +58,7 @@ import Q1Paper.HyperplaneFibre
 #print axioms Q1Paper.spoly_mul_pencil_eq_one
 #print axioms Q1Paper.coeff_mul_apply
 #print axioms Q1Paper.augment_mul_transpose
+#print axioms Q1Paper.exists_mulVec_eq_iff_rank_gram
 #print axioms Q1Paper.rank_vstack_add_rank_mul
 #print axioms Q1Paper.ker_compressed_iff
 #print axioms Q1Paper.mem_freePairSpace_iff
@@ -89,3 +92,7 @@ import Q1Paper.HyperplaneFibre
 #print axioms Q1Paper.mem_orthogonal_span_pair_iff
 #print axioms Q1Paper.Dv_eq_ker
 #print axioms Q1Paper.finrank_Dv
+
+#print axioms Q1Subspace.finrank_sup_pi_le
+#print axioms Q1Subspace.finrank_pi1_mono
+#print axioms Q1Subspace.finrank_add_one_le_of_spectral
