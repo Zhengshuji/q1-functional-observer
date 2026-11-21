@@ -30,6 +30,7 @@ import Q1Paper.HyperplanePrescribed
 import Q1Paper.HyperplaneFibre
 import Q1Paper.TightDim
 import Q1Paper.BoundLower
+import Q1Paper.Strata
 
 #print axioms Q1Paper.pairMap_apply
 #print axioms Q1Paper.ker_pairMap
@@ -132,3 +133,46 @@ import Q1Paper.BoundLower
 #print axioms Q1Paper.conditions_fromRows_zero
 #print axioms Q1Paper.spectralCondition_append_zero_rows
 #print axioms Q1Paper.hasConstantRank_append_zero_rows
+
+-- Q1Paper/Strata.lean : eigen versus non-eigen directions (Paper III, Proposition sec3:prop:strata)
+#print axioms Q1Paper.compressionPart
+#print axioms Q1Paper.normalComp
+#print axioms Q1Paper.compressionEnd
+#print axioms Q1Paper.compressionEigenspace
+#print axioms Q1Paper.eigenStratum
+#print axioms Q1Paper.nonEigenStratum
+#print axioms Q1Paper.directionSpan
+#print axioms Q1Paper.normalRestrict
+#print axioms Q1Paper.compressionPart_mem
+#print axioms Q1Paper.normalComp_mem
+#print axioms Q1Paper.compressionPart_add_normalComp
+#print axioms Q1Paper.normalComp_eq_zero_iff
+#print axioms Q1Paper.mem_compressionEigenspace_iff
+#print axioms Q1Paper.normalComp_eq_zero_of_mem_span_singleton
+#print axioms Q1Paper.mem_span_singleton_iff_normalComp_eq_zero
+#print axioms Q1Paper.mem_eigenStratum_iff
+#print axioms Q1Paper.mem_nonEigenStratum_iff
+#print axioms Q1Paper.eigenStratum_le
+#print axioms Q1Paper.mem_eigenStratum_iff_mem_span
+#print axioms Q1Paper.eigenStratum_smul_mem
+#print axioms Q1Paper.nonEigenStratum_smul_mem_iff
+#print axioms Q1Paper.eigenStratum_disjoint_nonEigenStratum
+#print axioms Q1Paper.mem_eigenStratum_or_nonEigenStratum
+#print axioms Q1Paper.nonEigenStratum_eq_sdiff
+#print axioms Q1Paper.exists_nonEigenStratum_of_eigenStratum_ne
+#print axioms Q1Paper.directionSpan_eq_span_singleton
+#print axioms Q1Paper.finrank_directionSpan_eigen
+#print axioms Q1Paper.linearIndependent_pair_of_normalComp_ne_zero
+#print axioms Q1Paper.finrank_directionSpan_nonEigen
+#print axioms Q1Paper.finrank_orthogonal_directionSpan
+#print axioms Q1Paper.finrank_orthogonal_directionSpan_eigen
+#print axioms Q1Paper.finrank_orthogonal_directionSpan_nonEigen
+#print axioms Q1Paper.normalRestrict_apply
+#print axioms Q1Paper.eigenStratum_eq_of_normalRestrict_eq_zero
+#print axioms Q1Paper.normalRestrict_eq_zero_iff_eigenStratum_eq_top
+#print axioms Q1Paper.nonEigenStratum_eq_empty_iff
+#print axioms Q1Paper.nonEigenStratum_eq_empty_iff_finrank_range
+#print axioms Q1Paper.eigenStratum_eq_bot_iff_injective
+#print axioms Q1Paper.finrank_range_normalRestrict_add_finrank_ker
+#print axioms Q1Paper.eigenStratum_eq_bot_iff_finrank_range
+#print axioms Q1Paper.exists_eigen_and_nonEigen_of_rank_between
