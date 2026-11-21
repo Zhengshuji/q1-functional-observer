@@ -11,6 +11,7 @@ import Q1Paper.G5GramRank
 import Q1Paper.Q1Compression
 import Q1Paper.Q1Subspace
 import Q1Paper.Monotone
+import Q1Paper.MonotoneBlocks
 import Q1Paper.Q1RowSpace
 import Q1Paper.Q1Projection
 import Q1Paper.Q1Pencil
@@ -96,3 +97,20 @@ import Q1Paper.BoundLower
 #print axioms Q1Subspace.finrank_sup_pi_le
 #print axioms Q1Subspace.finrank_pi1_mono
 #print axioms Q1Subspace.finrank_add_one_le_of_spectral
+
+#print axioms Q1Paper.fromRows_mul_eq
+#print axioms Q1Paper.fromRows_smul
+#print axioms Q1Paper.fromRows_sub
+#print axioms Q1Paper.fromRows_zero_mul
+#print axioms Q1Paper.rank_fromRows_zero_mul
+#print axioms Q1Paper.rank_fromRows_zero_mul_mul
+#print axioms Q1Paper.rowSpace_fromRows_zero
+#print axioms Q1Paper.rowSpace_zero_mul
+#print axioms Q1Paper.rowSpace_fromRows_zero_rows
+#print axioms Q1Paper.rank_fromRows_zero_rows
+#print axioms Q1Paper.algebraicCondition_fromRows_zero
+#print axioms Q1Paper.fromRows_zero_pencil
+#print axioms Q1Paper.spectralCondition_fromRows_zero
+#print axioms Q1Paper.conditions_fromRows_zero
+#print axioms Q1Paper.spectralCondition_append_zero_rows
+#print axioms Q1Paper.hasConstantRank_append_zero_rows

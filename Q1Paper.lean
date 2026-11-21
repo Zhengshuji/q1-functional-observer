@@ -5,6 +5,7 @@ import Q1Paper.Q1RankInclusion
 import Q1Paper.Q1RowSpace
 import Q1Paper.Q1Subspace
 import Q1Paper.Monotone
+import Q1Paper.MonotoneBlocks
 import Q1Paper.Q1Projection
 import Q1Paper.Q1Pencil
 import Q1Paper.Q1Step3
