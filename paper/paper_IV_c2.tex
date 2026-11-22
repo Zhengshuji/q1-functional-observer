@@ -695,13 +695,22 @@ and every element is one of:
 \item \textbf{(branch R)} $\operatorname{span}\{v_\alpha,v_\beta\}$ for two real eigenvalues
 $\alpha\ne\beta$ with eigenvectors $v_\alpha,v_\beta$;
 \item \textbf{(branch C)} the real two-plane attached to a complex-conjugate pair. Let
-$\mu=a+ib$, $b\ne0$, be an eigenvalue with eigenvector $z=u+iw$, $u,w$ real. Then
+$\mu=a+ib$, $b\ne0$, be an eigenvalue with eigenvector $z=u+iw$, $u,w$ real, and let $f\in\mathbb Q[x]$
+be the minimal polynomial of $\mu$ over $\mathbb Q$, of degree $d=\deg f\le k$. Then
 \[
 Mu=au-bw,\qquad Mw=bu+aw,
 \]
-so $M(D)\subseteq D$ for $D:=\operatorname{span}_{\mathbb R}\{u,w\}$. Equivalently,
-$D=\ker f(M)$, where $f\in\mathbb Q[x]$ is the irreducible quadratic factor of $\chi_M$ with roots
-$\mu$ and $\bar\mu$; in particular $D$ is defined over $\mathbb Q$.
+so $M(D)\subseteq D$ for $D:=\operatorname{span}_{\mathbb R}\{u,w\}$. The plane $D$ is defined over the
+real field $\mathbb Q(\mu+\bar\mu,\mu\bar\mu)\subseteq\mathbb Q(\mu,\bar\mu)$, of degree at most
+$d^2\le k^2$ over $\mathbb Q$; it is \emph{not} in general defined over $\mathbb Q$. The two statements
+$D=\ker f(M)$ and ``$D$ is defined over $\mathbb Q$'' both hold exactly when $d=2$, i.e.\ when the
+conjugate orbit of $\mu$ is $\{\mu,\bar\mu\}$. For $d>2$ the kernel $\ker f(M)$ is the span of the real
+forms of the eigenspaces of all the conjugates of $\mu$, and has dimension $d$, not $2$.%
+\footnote{The distinction is not vacuous. For $M$ the companion matrix of $x^4+1$ and
+$\mu=e^{i\pi/4}$ one has $d=4$, so $\chi_M=f$ is irreducible and
+$\ker f(M)=\ker(M^4+I)=\mathbb R^4$, whereas $D$ is two-dimensional; the Pl\"ucker coordinates of $D$
+are proportional to $(1,\sqrt2,1,1,\sqrt2,1)$, so $D$ is defined over $\mathbb Q(\sqrt2)$ and not over
+$\mathbb Q$.}
 \end{enumerate}
 The total number of planes is $\binom{k_{\mathbb R}}{2}+\#\{\text{conjugate pairs}\}\le k^2$, where
 $k_{\mathbb R}$ is the number of real eigenvalues.
@@ -718,15 +727,37 @@ squarefree $\chi_M$.
 For branch C the two identities are explicit. If $Mz=\mu z$ with $z=u+iw$ and $\mu=a+ib$, comparing real
 and imaginary parts gives $Mu=au-bw$ and $Mw=bu+aw$, hence $M(D)\subseteq D$ for
 $D=\operatorname{span}_{\mathbb R}\{u,w\}$. The vectors $u,w$ are independent over $\mathbb R$, since a
-real eigenvector of $M$ would have the real eigenvalue $a$. Let $f\in\mathbb Q[x]$ be the irreducible
-quadratic factor of $\chi_M$ with roots $\mu$ and $\bar\mu$; then $f(M)z=0$ and, $f$ having real
-coefficients, $f(M)\bar z=\overline{f(M)z}=0$, so
-$f(M)u=\tfrac12\bigl(f(M)z+f(M)\bar z\bigr)=0$ and
-$f(M)w=\tfrac1{2i}\bigl(f(M)z-f(M)\bar z\bigr)=0$, hence $D\subseteq\ker f(M)$. Conversely $\ker f(M)$ is
-the sum of the two one-dimensional complex eigenspaces belonging to $\mu$ and $\bar\mu$
-(squarefreeness of $\chi_M$ is used here: $f$ occurs in $\chi_M$ exactly once), so
-$\dim\ker f(M)=2=\dim D$ and $D=\ker f(M)$. As $f(M)$ is a rational matrix, $D$ is defined over
-$\mathbb Q$.
+real eigenvector of $M$ would have the real eigenvalue $a$.
+
+Let $f\in\mathbb Q[x]$ be the minimal polynomial of $\mu$ and $d=\deg f\le k$. Since $\chi_M$ is
+squarefree, $f$ occurs in $\chi_M$ exactly once, so the eigenspaces $E_\nu$ of the roots $\nu$ of $f$
+are one-dimensional and independent over $\mathbb C$, and
+\[
+\ker_{\mathbb C}f(M)=\bigoplus_{\nu:\,f(\nu)=0}E_\nu .
+\]
+As $f(M)$ is real, $\ker_{\mathbb R}f(M)=\ker_{\mathbb C}f(M)\cap\mathbb R^k$ has real dimension $d$; it
+is the direct sum of the planes
+$D_\nu=\operatorname{span}_{\mathbb R}\{\operatorname{Re}z_\nu,\operatorname{Im}z_\nu\}$ over the
+conjugate pairs among the roots of $f$ and of the real eigenlines $v_\nu$ over its real roots. Hence
+$D=D_\mu\subseteq\ker f(M)$, with equality exactly when $f$ has no root besides $\mu$ and $\bar\mu$,
+i.e.\ when $d=2$.
+
+For the field, choose $z$ with coordinates in $\mathbb Q(\mu)$, solving $(\mu I-M)z=0$ over
+$\mathbb Q(\mu)$, where the rank is $k-1$ because $\mu$ is a simple root of $\chi_M$; scaling $z$ by a
+non-zero complex number, in particular by an element of $\mathbb Q(\mu)$, does not change $D$. The polynomial
+$g(x):=x^2-(\mu+\bar\mu)x+\mu\bar\mu=(x-\mu)(x-\bar\mu)$ has coefficients in the real field
+$L:=\mathbb Q(\mu+\bar\mu,\mu\bar\mu)\subseteq\mathbb Q(\mu,\bar\mu)$ and the two simple roots
+$\mu,\bar\mu$, so $\ker_{\mathbb R}g(M)=D$: the complex kernel is $E_\mu\oplus E_{\bar\mu}$ and $D$ is its
+space of real points. As $g(M)$ is an $L$-matrix, Cramer's rule over $L$ gives a basis of $D$ in
+$L^k$, so $D$ is defined over $L$. Conversely, if $D$ is defined over a field $K$, then $M|_D$ is a
+$K$-rational $2\times2$ matrix in a $K$-basis of $D$, so its trace $\mu+\bar\mu$ and determinant
+$\mu\bar\mu$ lie in $K$; thus
+$L$ is the smallest field of definition of $D$. Finally $L\subseteq\mathbb Q(\mu,\bar\mu)$, because
+$\mu+\bar\mu$ and $\mu\bar\mu$ are polynomial expressions in $\mu$ and $\bar\mu$; hence
+$[L:\mathbb Q]\le[\mathbb Q(\mu,\bar\mu):\mathbb Q]\le d^2\le k^2$, the middle bound being the degree of a
+compositum of two extensions of degree $d$. Moreover
+$L=\mathbb Q$ exactly when $d=2$: if $d=2$ then $g\in\mathbb Q[x]$; conversely $L=\mathbb Q$ makes $\mu$
+a root of the quadratic $g\in\mathbb Q[x]$, whose roots are non-real, so $d=2$.
 
 The count is immediate.
 \end{proof}
@@ -757,8 +788,9 @@ Branch & Plane $D$ & Defined over & Number \\
 \midrule
 R & $\operatorname{span}\{v_\alpha,v_\beta\}$, two real eigenvalues $\alpha\ne\beta$
 & $\mathbb Q(\alpha,\beta)$, degree $\le k^2$ & $\binom{k_{\mathbb R}}{2}$ \\
-C & $\operatorname{span}\{u,w\}$ from $z=u+iw$ of $\mu=a+ib$, $b\ne0$; equivalently
-$\ker f(M)$, $f$ irreducible quadratic & $\mathbb Q$ & $\#\{\text{conjugate pairs}\}$ \\
+C & $\operatorname{span}\{u,w\}$ from $z=u+iw$ of $\mu=a+ib$, $b\ne0$; equal to
+$\ker f(M)$ only when $\deg f=2$ & $\mathbb Q(\mu+\bar\mu,\mu\bar\mu)\subseteq\mathbb Q(\mu,\bar\mu)$,
+degree $\le k^2$ ($=\mathbb Q$ exactly when $\deg f=2$) & $\#\{\text{conjugate pairs}\}$ \\
 \midrule
 Total & & & $\le k^2$ \\
 \bottomrule
@@ -848,8 +880,10 @@ $\Phi$ is the graph of $X$; on such a chart the dependence on $s$ is affine
 normalized by the eigenvector data of $D$ in branch~R of Theorem~\ref{thm:base}. A point $s\in S$ is
 \emph{admissible} when some maximal minor of the cleared pencil has $\lambda$-degree $\omega$ at $s$; since
 $\deg_\lambda\le\omega$ always, this asks that some maximal minor keep the largest $\lambda$-degree it can
-have. The coefficient field is $K=\mathbb Q$ in branch~C and $K=L_D$ in branch~R of
-Theorem~\ref{thm:base}; every parameter space below is an affine space, hence irreducible, so a chart has a
+have. The coefficient field is $K=L_D$, the field over which $D$ is defined in
+Theorem~\ref{thm:base}: $L_D=\mathbb Q(\alpha,\beta)$ in branch~R and
+$L_D=\mathbb Q(\mu+\bar\mu,\mu\bar\mu)$ in branch~C, of degree $d_D\le k^2$ in either branch; every
+parameter space below is an affine space, hence irreducible, so a chart has a
 single \emph{function field} $K(s)$, the field of rational functions in its parameters.
 
 Recall from \cite{companion3} that the generic-gcd criterion rests on two facts in this situation: at an
@@ -1010,7 +1044,7 @@ $t\ge w_0$; discard $D$ otherwise;
 each $j$ the standard affine charts of $\Gr(j,V_\varphi)$ cut out by the linear condition
 $\Phi_0\subseteq\Phi$ (Definition~\ref{defn:charts});
 \State for each nonempty chart of $\mathcal I_D$, clear denominators and compute the gcd of the
-$\omega\times\omega$ maximal minors over $K(s)[\lambda]$, $K=\mathbb Q$ or $K=L_D$; if it is a non-zero
+$\omega\times\omega$ maximal minors over $K(s)[\lambda]$, $K=L_D$ the field of definition of $D$; if it is a non-zero
 constant, return \emph{feasible};
 \State if every chart of $\mathcal I_D$ gives a non-constant gcd, return \emph{infeasible}.
 
@@ -1117,8 +1151,9 @@ bound neither the enumeration of the base nor the gcd test per chart, and no suc
 below.
 
 \emph{Field arithmetic.} In branch~R the coefficients lie in $L_D=\mathbb Q(\alpha,\beta)$, in branch~C in
-$\mathbb Q$. We use the standard exact representation of \cite{cohen93}: $L_D=\mathbb Q[t]/(F)$, with $F$
-the minimal polynomial of a primitive element and $d_D:=[L_D:\mathbb Q]\le k^2$, an element being given by
+$L_D=\mathbb Q(\mu+\bar\mu,\mu\bar\mu)$; in both branches $d_D:=[L_D:\mathbb Q]\le k^2$
+(Theorem~\ref{thm:base}). We use the standard exact representation of \cite{cohen93}: $L_D=\mathbb Q[t]/(F)$, with $F$
+the minimal polynomial of a primitive element, an element being given by
 its coordinate vector of length $d_D$ over $\mathbb Q$. In this representation addition costs $O(d_D)$
 coefficient operations, and multiplication and inversion cost $O(d_D^2)$ (schoolbook; $\widetilde O(d_D)$
 with fast polynomial arithmetic), each coefficient operation being integer arithmetic on numbers of bit
@@ -1137,8 +1172,9 @@ Assume simple spectrum over $\mathbb C$. Then:
 \begin{enumerate}[label=(\roman*),leftmargin=*,itemsep=1pt,topsep=2pt]
 \item the number of planes is $O(k^2)$, and they are enumerated in $\poly(n,\tau)$ bit operations, each
 plane costing polynomially many field operations on data of height $\poly(n,\tau)$;
-\item each plane is defined over a number field $L_D=\mathbb Q(\alpha,\beta)$ of degree
-$d_D:=[L_D:\mathbb Q]\le k^2$, represented as $\mathbb Q[t]/(F)$ with $h(F)=\poly(n,\tau)$; the
+\item each plane is defined over a number field $L_D$ of degree $d_D:=[L_D:\mathbb Q]\le k^2$
+(branch~R: $L_D=\mathbb Q(\alpha,\beta)$; branch~C: $L_D=\mathbb Q(\mu+\bar\mu,\mu\bar\mu)$),
+represented as $\mathbb Q[t]/(F)$ with $h(F)=\poly(n,\tau)$; the
 $\mathbb Q$-basis $1,t,\dots,t^{d_D-1}$ consists of elements of length $\poly(n,\tau)$, and addition,
 multiplication and inversion in $L_D$ cost $O(d_D)$, $O(d_D^2)$ and $O(d_D^2)$ coefficient operations
 respectively, each on integers of height $\poly(n,\tau)$;
@@ -1158,10 +1194,12 @@ roots have height bounded by the Mahler measure of these factors. Branch R uses 
 $[\mathbb Q(\alpha,\beta):\mathbb Q]\le d_id_j\le k^2$; a primitive element $\theta=\alpha+\kappa\beta$ with integral
 $\kappa\le d_id_j$ has a minimal polynomial $F$ of degree $d_D\le k^2$ and height $\poly(n,\tau)$ by the
 resultant bound of Step~$8'$; eigenvectors are obtained by Cramer's rule over
-$L_D$, with denominators $f_i'(\alpha)\ne0$ by simple spectrum over $\mathbb C$. Branch C uses
-$\ker f(M)$, which is
-$\mathbb Q$-defined, so the final objects live over $\mathbb Q$ even though the intermediate eigenvector
-data are computed in a complex embedding of $\mathbb Q[t]/(f)$. The kernel itself is computed from an
+$L_D$, with denominators $f_i'(\alpha)\ne0$ by simple spectrum over $\mathbb C$. Branch C works over
+$L_D=\mathbb Q(\mu+\bar\mu,\mu\bar\mu)\subseteq\mathbb Q(\mu,\bar\mu)$, of degree $d_D\le d^2\le k^2$
+(Theorem~\ref{thm:base}); its field data are the two algebraic numbers $\mu+\bar\mu$ and $\mu\bar\mu$,
+both of height $\poly(n,\tau)$ by Step~7, and Step~$8'$ supplies $F$ with $h(F)=\poly(n,\tau)$ from
+them, so the final objects live over $L_D$, not over $\mathbb Q$ in general. The kernel itself is
+computed from an
 integral model of $[C;CA]$ (Step~2), so that $N$ is a primitive integral matrix of full column rank $k$ and
 $P_{K_0}=N(N^{\mathsf T}N)^{-1}N^{\mathsf T}$ is the orthogonal projection onto $K_0$; orthogonal
 complements and kernels are again Cramer, the prescribed data $W_0$, $w_0$, $\Phi_0$ and the membership test of
@@ -1515,13 +1553,20 @@ h(v)\le (k-1)\bigl(h(M)+h(\alpha)\bigr)+O(k\log k).
 \]
 The denominators are nonzero because the eigenvalues are distinct.
 
-\emph{Step 8$'$ (the field $L_D=\mathbb Q(\alpha,\beta)$ and the cost of its arithmetic).} In branch~R
+\emph{Step 8$'$ (the field $L_D$ and the cost of its arithmetic).} In branch~R
 the field is generated by a primitive element $\theta=\alpha+\kappa\beta$ with integral $\kappa\le d_id_j\le k^2$,
 whose minimal polynomial $F$ may be taken to be a factor of
 $\operatorname{Res}_y\bigl(f_i(y),f_j(\theta-y)\bigr)$; the resultant is a determinant of a Sylvester
 matrix of order $d_i+d_j\le2k$ whose entries have height at most $h(f_i)+h(f_j)$, so Hadamard's bound
 gives it height $O\bigl(k\,(h(f_i)+h(f_j)+\log k)\bigr)$, and $F$ has no larger height by Mignotte's bound
-(Step~6). Hence $d_D=\deg F\le k^2$ and $h(F)=\poly(n,\tau)$. Elements of $L_D$ are coordinate vectors of
+(Step~6). Hence in branch~R $d_D=\deg F\le k^2$ and $h(F)=\poly(n,\tau)$. In branch~C the field is
+$L_D=\mathbb Q(\mu+\bar\mu,\mu\bar\mu)\subseteq\mathbb Q(\mu,\bar\mu)$ (Theorem~\ref{thm:base}); its two
+generators have height $\poly(n,\tau)$ by Step~7 and the standard inequalities for sums and products of
+algebraic numbers, and an algebraic number of degree at most $k$ and
+height $H$ has a minimal polynomial of height at most $k\,(H+1)+O(k)$, so the same primitive-element
+construction, applied to their two minimal polynomials, gives $F$ of degree $d_D\le d^2\le k^2$ and
+height $\poly(n,\tau)$. Thus $d_D\le k^2$ and $h(F)=\poly(n,\tau)$ in either branch.
+Elements of $L_D$ are coordinate vectors of
 length $d_D$ in the $\mathbb Q$-basis $1,\theta,\dots,\theta^{d_D-1}$; by Cauchy's bound
 $|\theta|\le1+\|F\|_\infty$, so the $i$-th basis element has length $(1+\|F\|_\infty)^{i}$, and a field
 element whose coordinates have height $H_0$ has length at most
