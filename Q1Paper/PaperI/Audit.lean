@@ -164,3 +164,4 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.PaperI.compressedGram
 #print axioms Q1Paper.PaperI.windowGram_eq_compressed
 #print axioms Q1Paper.PaperI.gramKernelEval_pencil_eq_coeff_sum
+#print axioms Q1Paper.PaperI.det_submatrix_perm

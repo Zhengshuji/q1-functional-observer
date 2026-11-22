@@ -53,6 +53,7 @@ import Q1Paper.PaperI.CauchyBinet
 import Q1Paper.PaperI.GramKernel
 import Q1Paper.PaperI.GramCoefficients
 import Q1Paper.PaperI.GramCompression
+import Q1Paper.PaperI.MinorFamilyBridge
 
 /-!
 ## What is imported here
