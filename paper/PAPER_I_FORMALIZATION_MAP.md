@@ -62,12 +62,19 @@
 | `FixedOrder`, `FPT` | 算法代数接口 | Theorems 1, 2 |
 | `PaperI/Interface` | (5a)/(5b)、压缩条件、DEC/MINDEC 的**定义** | 定义层 |
 | `PaperI/CompressionMatrix` | 矩阵级 Claim 2：`DEC_iff_compressed`、`rawAlgebraic_iff_compressed`、`rawSpectral_iff_compressed`、`rawAlgebraic_iff_rowSpace` | 定义层 + Claim 2(i)(iii) |
+| `PaperI/Gram` | Gram 证书：`e₀ ∈ row Z ⟺ ∃x, ZᵀZx = e₀`（任意有限行索引类型） | Claim 11（Gram 边） |
+| `PaperI/Claim11` | `windowOne`、Bézout/窗口等价、实系数无公共根 | Claim 11（Bézout/窗口边） |
+| `PaperI/MinorRank` | 可求值极大子式、秩 = 最大非零子式（含硬方向） | Claim 11（秩-子式桥） |
+| `PaperI/BasisExtraction` | 有限张成族抽基、满行秩 ⟹ 可逆列子矩阵 | Claim 11（支撑） |
+| `PaperI/SpectralMinor` | 铅笔 `λH − H_A`、`pencil_map_eval`、`spectral_iff_minors` | Claim 11（中间等价） |
+| `PaperI/Complexify` | 复化不改变秩（`rank_map_ofReal`） | Claim 11（域桥） |
+| `PaperI/Claim11Final` | **`claim11_iff_gram`**、次数界、实谱等价 | **Claim 11 完整** |
 
 ## 3. 公理审计
 
-- `Q1Paper/PaperI/Audit.lean` 对 41 条声明执行 `#print axioms`。
+- `Q1Paper/PaperI/Audit.lean` 对 **89 条**声明执行 `#print axioms`。
 - 本机结果：全部为 `[propext, Classical.choice, Quot.sound]`（部分为 `[propext, Quot.sound]`）。
-- CI 新增步骤：`lake env lean Q1Paper/PaperI/Audit.lean > paperI_audit.log` 后运行
+- CI 步骤：`lake env lean Q1Paper/PaperI/Audit.lean > paperI_audit.log` 后运行
   `scripts/check_paperI_axioms.py paperI_audit.log`，出现白名单外的公理或**没有任何审计行**都会失败。
 - `sorry`/`admit` 未使用；`PaperI.lean` 的依赖里不含项目自定义公理。
 
@@ -104,13 +111,45 @@
 
 ### 4.2 之后的顺序
 
-1. Claim 11 的完整 Gram 证书（`row Z = im Zᵀ`，`ker(ZᵀZ)=ker Z`）；
+1. ~~Claim 11 的完整 Gram 证书~~：已由 `claim11_iff_gram` 闭合（见 §4.3）；
 2. Claim 12（满列秩铅笔）与 Cauchy–Binet 压缩（Mathlib 无矩形 Cauchy–Binet，需自证）；
 3. Claim 13–15 的有理位长（清分母 + Hadamard + Bareiss）；
 4. Claim 16 五条链 + Proposition 4 算法；
 5. Theorems 1、2 的算法与复杂度；Theorem 5 的 `∃ℝ` 编码。
 
-## 5. 边界
+### 4.3 Claim 11：原文步骤 ↔ Lean 定理（已完整）
+
+原文链条 (2) ⟺ `e₀ᵀ ∈ row Z` ⟺ `∃x, ZᵀZx = e₀`，逐句对应：
+
+| 原文步骤 | Lean 定理 |
+|---|---|
+| `(2)`（复谱条件，`z ∈ ℂ`，`H, H_A` 实） | `spectral_real_iff_minors` |
+| 复谱条件 ⟺ 极大子式无公共复根（铅笔层） | `spectral_iff_minors` + `pencil_map_eval` + `maximalMinor_map` + `rank_map_ofReal` |
+| 无公共复根 ⟺ 有界 Bézout（Claim 9） | `mem_rowSpace_window_iff_no_common_complex_root`（方向 `⟸` 用 `exists_bezout_family_real`） |
+| 有界 Bézout ⟺ `e₀ ∈ row Z`（Claim 10） | `exists_bezout_iff_mem_rowSpace_window` |
+| `e₀ ∈ row Z ⟺ ∃x, ZᵀZx = e₀`（Gram） | `gram_certificate`（`row Z = range Zᵀ = range ZᵀZ`，用 `rank_transpose_mul_self`） |
+| 次数界 `deg f_{ρ,κ} ≤ ω` | `natDegree_maximalMinor_le` |
+| 秩 = 最大非零子式 | `exists_det_submatrix_ne_zero_of_rank`（+ `exists_injective_linearIndependent`, `exists_invertible_cols`） |
+| **最终定理** | **`claim11_iff_gram`** |
+
+> **Important distinction.** Claim 11 is formalised using the *full finite family* of
+> maximal minors (`minorFamily`, indexed by all pairs of injective row/column maps).
+> This establishes the **mathematical** Gram-certificate equivalence.  The subsequent
+> Cauchy–Binet-based compression of the Gram kernel (the algorithmic statement that the
+> certificate can be computed without enumerating all `C(q,ω)·C(k,ω)` minors) is a
+> **separate** result and is **not** implied by this formalisation.
+
+`Claim11Final.lean` 已冻结：后续轮次不再修改其中的核心定理，只在需要时追加新文件。
+
+## 5. 验证记录（可复现）
+
+- Claim 11 完成：commit `e28ee61`（`Paper I: Claim 11 complete`）；
+- 修复仓库与 WSL 不同步：commit `7101d1d`（同步 `SpectralMinor.lean` 的注入性版本）；
+- CI run `#45026225331` 全绿（lean / Paper I axiom audit / 三篇论文 / verify）；
+- 公理审计：89 条声明，允许集 `{propext, Classical.choice, Quot.sound}`；
+- 同步检查：`diff` 核对 WSL 工程与仓库的 11 个 Paper I 文件，全部一致。
+
+## 6. 边界
 
 - 本表不含 Paper II–IV 的定理；`MinOrder`、`Strata` 等模块即使被复用，也不计入 Paper I 完成度。
 - 复杂度部分依赖 Renegar 界；若不在 Lean 中证明该界，只能称"条件性复杂度形式化"，

@@ -14,6 +14,10 @@ jobs:
         with:
           auto-config: false
           build: true
+      - name: Paper I entry point
+        run: |
+          lake build Q1Paper.PaperI.MainTheorems
+          lake env lean PaperI.lean
       - name: Axiom audit
         run: lake env lean Q1Paper/Audit.lean
       - name: Paper I axiom audit
