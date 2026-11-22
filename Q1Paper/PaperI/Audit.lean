@@ -151,3 +151,9 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.PaperI.gramKernelEval
 #print axioms Q1Paper.PaperI.gramKernelEval_eq_double_sum
 #print axioms Q1Paper.PaperI.gramKernelEval_eq_zero_of_lt
+
+-- Section III-D: coefficient identity
+#print axioms Q1Paper.PaperI.eval_eq_sum_fin_coeff
+#print axioms Q1Paper.PaperI.minorCoeff
+#print axioms Q1Paper.PaperI.coeffGram
+#print axioms Q1Paper.PaperI.gramKernelEval_eq_coeff_sum
