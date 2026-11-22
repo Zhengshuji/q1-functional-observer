@@ -220,7 +220,7 @@ PaperI/GramKernel.lean，维数约定与论文一致：P : Matrix (Fin q) (Fin �
 
 一个只读子 agent 逐条核对 §III-D 与论文（未改文件）；确认维数未交换、CB 方向正确、`K` 定义、窗口索引、`2ω` 列数均一致。发现与处置：
 
-**D1（进行中；单子式符号关系已完成）**：`windowMinorFamily`（子集索引）与 Claim 11/12 用的 `minorFamily`（注入映射索引）不是同一个族。单子式符号关系已在 `maximalMinor_injective_eq_signed_image`（commit `86a7f09`）中证明：每个注入子式 = 两个置换符号之积 × 对应子集子式；尚缺系数关系、窗口行关系、行空间相等、Gram `(ω!)²` 比例、证书等价五步。原始诊断：对每个子集对，注入族里有 `(ω!)²` 个带符号重复，故 `ZᵀZ_Lean = (ω!)² · ZᵀZ_paper`、行空间相同。Claim 11/12 的等价在数学上不受影响（正因子/行空间不变），但“证书矩阵”与论文的 `Z_Q` 字面上不同，且 §III-D 压缩恒等式只对子集族成立。下一步：证桥接引理 `rowSpace (windowMatrix minorFamily) = rowSpace (windowMatrix windowMinorFamily)`（`windowSet` 相同 + 每个注入子式 = ± 对应子集子式）。
+**D1（已闭合，commit `2d29702`）**：`windowMinorFamily`（子集索引）与 Claim 11/12 用的 `minorFamily`（注入映射索引）不是同一个族。六步全部完成：`maximalMinor_injective_eq_signed_image`（符号）→ `maximalMinor_injective_coeff_eq`（系数）→ `windowRow_inj_eq_sign_mul`（窗口行）→ `gram_inj_eq_factorial_smul`（Gram `(ω!)²`）→ `gram_certificate_iff_subset`（证书等价）→ `rowSpan_windowInj_eq`（行空间相等）。原始诊断：对每个子集对，注入族里有 `(ω!)²` 个带符号重复，故 `ZᵀZ_Lean = (ω!)² · ZᵀZ_paper`、行空间相同。Claim 11/12 的等价在数学上不受影响（正因子/行空间不变），但“证书矩阵”与论文的 `Z_Q` 字面上不同，且 §III-D 压缩恒等式只对子集族成立。下一步：证桥接引理 `rowSpace (windowMatrix minorFamily) = rowSpace (windowMatrix windowMinorFamily)`（`windowSet` 相同 + 每个注入子式 = ± 对应子集子式）。
 
 **D2**：Claim 12 只形式化了复合形式（`rank ⟺ ∃x, ZᵀZx=e0`）；中间 `e0 ∈ rowZ` 由 `gram_certificate` 可得但未单独声明。可接受。
 

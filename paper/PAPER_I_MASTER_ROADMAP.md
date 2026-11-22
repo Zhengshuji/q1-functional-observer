@@ -81,7 +81,7 @@ States are kept separate: `Mathematically proved` (M) and `Lean formalized` (F);
 ## 6. Paper-to-Lean correspondence
 
 - Maintained in `PAPER_I_FORMALIZATION_MAP.md` (§4 per-claim, §7 audit findings).
-- Known deviation: D1 steps 2–6 (bridge incomplete); §III-D compression is proved for the subset family only.
+- ~~D1 bridge incomplete~~ (closed, commit `2d29702`): the injective-map-indexed and subset-indexed window matrices are now connected by five equivalence theorems (sign, coefficient, window row, Gram scaling, certificate) and the row-space equality.
 
 ## 7. Parallel workstreams
 
