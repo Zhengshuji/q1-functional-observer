@@ -60,9 +60,17 @@ States are kept separate: `Mathematisch proved` (M) and `Lean formalized` (F); n
 
 ## 9. Known risks and counterexamples
 
-- D1: the Lean certificate matrix is `(ω!)²` times the paper's `Z_Q`; the equivalences survive but the literal object differs until the bridge is proved.
-- Paper §III-D: `rem:algo` says `J ⊆ [k]` while the definition uses `J ⊆ [ℓ]` (mathematically equivalent because complement columns give zero determinants; wording to fix).
-- Hadamard inequality absent from Mathlib; Bareiss only a tactic.
+Full report: `PAPER_I_MATH_AUDIT.md`. Top items:
+
+1. **Eq. (1) is literally false** ("every feasible order satisfies `q ≤ n₀−p`"); the true statement is `q_min ≤ n₀−p`. Machine-verified counterexample (n = 2, k = 0). Needs a text repair.
+2. **Claim 19** (`app:zero`) uses `(HᵀH)⁻¹`, which requires `ω = k`; counterexample with `ω = 1 < k = 2`. The explicit constant chain `τ₀ = 230n⁴L` (and Prop 4's `n²³L²`) must be re-derived via `F H = H_A` (Cramer), not `HᵀH`.
+3. **§III-D index set**: `K` uses `J ⊆ [ℓ]` but `rem:algo` says `[k]`; mathematically equivalent, but the FPT cost claim depends on `[ℓ]`. One-word repair.
+4. **Theorem 2 step (v)** cites only Claims 2 and 10; it also needs Claim 9, Claim 11 and the §III-D(ii) coefficient identity.
+5. **Algorithm 1** lacks the `q < r₀ ⇒ infeasible` guard; counterexample with `r₀ = 2, q = 1` returns FEASIBLE. Theorem 1 must be restricted to `r₀ ≤ q ≤ n`.
+
+Also: Table 5 is stale (missing Claims 7, 10, 12; Claim 11 labelled "ingredient"); Claim 15(i) needs the "prescribed factorization" restriction; Claim 22 has rows/columns swapped; D1 (Lean certificate matrix `(ω!)²` times the paper's `Z_Q`) remains the top Lean-side gap.
+
+Lean side risks: Hadamard inequality absent from Mathlib (use `Matrix.det_le`); Bareiss is tactic-only (intermediate bounds are new mathematics).
 
 ## 10. Final acceptance criteria
 
