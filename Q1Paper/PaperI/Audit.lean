@@ -231,3 +231,7 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.PaperI.sylvester_two
 #print axioms Q1Paper.PaperI.bareiss_step_one_exact
 #print axioms Q1Paper.PaperI.bitLenInt_bMinor_le
+#print axioms Q1Paper.PaperI.bBorder
+#print axioms Q1Paper.PaperI.dj_block
+#print axioms Q1Paper.PaperI.desnanot_jacobi_minors
+#print axioms Q1Paper.PaperI.desnanot_jacobi_prefix
