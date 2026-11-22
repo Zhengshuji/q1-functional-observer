@@ -1,0 +1,64 @@
+/-
+Q1Paper/PaperI/MainTheorems.lean
+
+Paper I entry point: it imports exactly the modules that belong to Paper I
+(feasibility, compression, finite certificate, fixed-order and FPT upper
+bounds) and nothing from the companion papers (minimum order, hyperplane layer,
+c2 layer).
+
+The imported modules are the formalized material; the paper-level statements
+and their status are recorded in `paper/PAPER_I_FORMALIZATION_MAP.md`.  This
+file is an index, not a proof: the theorems live in the modules imported below,
+under the namespaces `Q1Paper`, `Q1Subspace` and `KappaObs`.
+-/
+
+import Q1Paper.Basic
+import Q1Paper.RankIdentity
+import Q1Paper.G4RankIdentity
+import Q1Paper.Compression
+import Q1Paper.Q1Compression
+import Q1Paper.Q1RankInclusion
+import Q1Paper.Q1RowSpace
+import Q1Paper.Q1Subspace
+import Q1Paper.KappaObs
+import Q1Paper.FreeRows
+import Q1Paper.Q1Projection
+import Q1Paper.Q1Pencil
+import Q1Paper.Q1Step3
+import Q1Paper.BoundLower
+import Q1Paper.Monotone
+import Q1Paper.MonotoneBlocks
+import Q1Paper.RankConsistency
+import Q1Paper.G5GramRank
+import Q1Paper.BezoutDeg
+import Q1Paper.BezoutReal
+import Q1Paper.SpectralCertificate
+import Q1Paper.Window
+import Q1Paper.G3Adjugate
+import Q1Paper.G3LeftInverse
+import Q1Paper.G3Coeff
+import Q1Paper.DegreeBounds
+import Q1Paper.FixedOrder
+import Q1Paper.FPT
+import Q1Paper.PaperI.Interface
+
+/-!
+## What is imported here
+
+* compression / rank identity: `Basic`, `RankIdentity`, `G4RankIdentity`,
+  `Compression`, `Q1Compression`;
+* row spaces and subspaces: `Q1RankInclusion`, `Q1RowSpace`, `Q1Subspace`,
+  `KappaObs`, `FreeRows`, `Q1Projection`, `Q1Pencil`, `Q1Step3`, `BoundLower`;
+* monotonicity: `Monotone`, `MonotoneBlocks`;
+* the certificate: `RankConsistency`, `G5GramRank`, `BezoutDeg`, `BezoutReal`,
+  `SpectralCertificate`, `Window`;
+* the zero-free-row algebra: `G3Adjugate`, `G3LeftInverse`, `G3Coeff`,
+  `DegreeBounds`;
+* the algorithms' algebraic interfaces: `FixedOrder`, `FPT`;
+* the statement layer: `PaperI.Interface`.
+
+## What is *not* imported
+
+`MinOrder`, `TightDim` (Paper II), `Strata`, `FullRank`, `HyperplaneAvoid`,
+`HyperplaneDirection`, `HyperplanePrescribed`, `HyperplaneFibre` (Paper III).
+-/
