@@ -235,3 +235,7 @@ PaperI/GramKernel.lean，维数约定与论文一致：P : Matrix (Fin q) (Fin �
 **D7（已修）**：对照表曾有陈旧陈述（Claim 12 标 paper_only、`windowMinorFamily` 标“与 Claim 11 同族”、审计条数 101）；本轮已改。
 
 **D8**：`gramKernelEval_eq_zero_of_lt`（`ℓ < ω`）为 Lean 侧边界引理，论文无对应；无害。
+
+**D10（Bareiss 设计复核，2026-11-23）**：论文 Claim 21 的 Bareiss 中间量界 `Mτ + (M/2)log₂M + 1` 依赖 **Hadamard 不等式**；仓库里只有 **Leibniz 界**（`abs_det_le_factorial_mul_pow`，给出 `nτ + bitLen(n!)`，其中 `bitLen(n!)` 约为 `n log₂ n`）。两者差常数因子 2，**复杂度结论不变**，但论文的显式常数不能从现有形式化推出。处置：附录改写成 `nτ + bitLen(n!)`（可检查的精确对象），注明 Hadamard 可锐化为 `(n/2)log₂n`；若坚持论文形式，须补 Hadamard 引理（Mathlib 无）。
+
+Bareiss 的其余结论（来自同一设计复核）：Bareiss 子式恒等式 = 带边 Desnanot–Jacobi（Sylvester）恒等式，是唯一实质数学缺口；仓库的 Cauchy–Binet 与 Mathlib 的 Schur 补引理都可支撑；无主元情形仅需「所有前主子式非零」；完全主元化只需 `±` 置换符号（已有 `det_submatrix_perm`）；秩亏情形建议只证「每个中间量是 ± 子式」，不形式化可执行的主元搜索。
