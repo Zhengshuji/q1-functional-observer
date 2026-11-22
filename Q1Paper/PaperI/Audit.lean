@@ -118,3 +118,10 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.PaperI.rank_neg_eq
 #print axioms Q1Paper.PaperI.rank_eq_of_compressedSpectral
 #print axioms Q1Paper.PaperI.rank_HA_eq_rank_H_of_rawSpectral
+-- Claim 11, real-to-complex bridge
+#print axioms Q1Paper.PaperI.map_submatrix_ofReal
+#print axioms Q1Paper.PaperI.det_map_ofReal
+#print axioms Q1Paper.PaperI.rank_map_ofReal_le
+#print axioms Q1Paper.PaperI.rank_le_map_ofReal
+#print axioms Q1Paper.PaperI.rank_map_ofReal
+
