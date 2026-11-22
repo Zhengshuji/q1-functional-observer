@@ -43,6 +43,7 @@ import Q1Paper.FPT
 import Q1Paper.PaperI.Interface
 import Q1Paper.PaperI.CompressionMatrix
 import Q1Paper.PaperI.Gram
+import Q1Paper.PaperI.Claim11
 
 /-!
 ## What is imported here

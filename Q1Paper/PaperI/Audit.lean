@@ -90,6 +90,14 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.PaperI.range_transpose_mul_self
 #print axioms Q1Paper.PaperI.mem_range_transpose_iff_exists_gram
 #print axioms Q1Paper.PaperI.gram_certificate
+
+-- Claim 11, the Bezout/window step
+#print axioms Q1Paper.PaperI.windowOne
+#print axioms Q1Paper.PaperI.windowOne_eq_toFn
+#print axioms Q1Paper.PaperI.exists_bezout_iff_mem_rowSpace_window
+#print axioms Q1Paper.PaperI.mem_rowSpace_window_of_no_common_complex_root
+#print axioms Q1Paper.PaperI.no_common_complex_root_of_mem_rowSpace_window
+#print axioms Q1Paper.PaperI.mem_rowSpace_window_iff_no_common_complex_root
 #print axioms Q1Paper.PaperI.exists_factor_of_rowSpace_le
 #print axioms Q1Paper.PaperI.exists_factor_of_rawAlgebraic
 #print axioms Q1Paper.PaperI.rank_neg_eq

@@ -30,7 +30,7 @@
 | Claim 8 秩一致性 | `exists_mulVec_eq_iff_rank_gram`, `exists_solution_iff_mem_range` | `G5GramRank.lean`, `RankConsistency.lean` | **partial** | 秩形式完整；缺初等对称多项式析取 `∨_t[e_t(Γ)>0 ∧ e_{t+1}(Γ)=0 ∧ e_{t+1}(Γ')=0]` |
 | Claim 9 Bézout 次数界 | `exists_bezout_family_real`（实系数，`deg<ω`） | `BezoutReal.lean` | **complete** | — |
 | Claim 10 窗口关系 | `windowMatrix`, `rowSpace_windowMatrix_eq_windowSet`, `mem_rowSpace_iff_exists_window`, `toFn_injOn_degree_lt_two_mul` | `Window.lean` | **complete** | 索引/边界已在文件内核对（`j<ω`, `t<2ω`, 零系数约定） |
-| Claim 11 Gram 证书 | `gram_certificate`, `range_transpose_mul_self`, `mem_range_transpose_iff_exists_gram`, `rowSpace_eq_range_transpose`（第二等价，完整）；`sum_sq_eq_zero_iff`（局部工具） | `PaperI/Gram.lean`, `SpectralCertificate.lean` | **partial（第二等价已闭）** | 缺第一等价 `(5b) ⟺ e_0∈row Z`：要用 Claim 9（Bézout）+ Claim 10（窗口）组装；这不需要 Cauchy–Binet |
+| Claim 11 Gram 证书 | `gram_certificate`, `range_transpose_mul_self`, `mem_range_transpose_iff_exists_gram`, `rowSpace_eq_range_transpose`（第二等价，完整）；`exists_bezout_iff_mem_rowSpace_window`, `mem_rowSpace_window_iff_no_common_complex_root`（Bézout/窗口等价，完整） | `PaperI/Gram.lean`, `PaperI/Claim11.lean` | **partial（两条支线已闭，只剩中间一环）** | 缺 `(5b) ⟺ 无公共复根`：这是"秩 = 最大非零子式"的矩阵-多项式桥，尚未形式化；不需要 Cauchy–Binet |
 | Claim 12 满列秩铅笔证书 | — | — | **paper_only** | 需 `X` 满列秩时把 Claim 11 用于 `(X,G)` |
 | Claim 13 有理基与位长 | — | — | **paper_only** | 需清分母 + Bareiss + Hadamard 的形式化 |
 | Claim 14 图表数据 | — | — | **paper_only** | 需 `V=T∩(S×S)` 的核表示（转置写法） |
