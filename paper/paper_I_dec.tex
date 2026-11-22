@@ -1602,9 +1602,13 @@ S_{2\omega-2}X&=0 .
 \end{claim}
 
 \begin{proof}
-The three equivalent forms (i)--(iii) are those of Claim~\ref{lem:compression}(iii) with $(H,H_A)$
-replaced by $(X,G)$ and $k$ by $\omega$, the gcd being taken in $\mathbb Q[\lambda]$ as in
-Section~\ref{sec:notation}.
+The three equivalent forms (i)--(iii) are elementary and do not need the hypotheses of
+Claim~\ref{lem:compression}: a pencil $\lambda X-G$ with $X$ of full column rank has rank $\omega$ at
+$\lambda$ exactly when not all its $\omega\times\omega$ minors vanish at $\lambda$ (they are the maximal
+minors of a $q\times\omega$ matrix with $q\ge\omega$), which is (ii); and over $\mathbb Q[\lambda]$ this
+is equivalent to the family not vanishing identically and having gcd a nonzero constant, which is (iii).
+The gcd argument of Claim~\ref{lem:compression}(iii) applies verbatim and uses no instance of
+\eqref{eq:5a}.
 
 \emph{(iii)$\Rightarrow$(iv).} For each $\omega$-element row set
 $I\subseteq[q]$, let $E_I\in\mathbb Q^{\omega\times q}$ be the row selection,
@@ -2143,8 +2147,8 @@ of $\Psi_{t,\omega}$ has bit length at most $78500n^9\mathcal L$.
 Bases of $\mathcal T$ and of $S$ have entries of bit length at most $112n^4\mathcal L$ and
 $76n^4\mathcal L$ by Claim~\ref{lem:rationalbasis} and Claim~\ref{app:compressed};
 $h(L_0M)\le20n^2\mathcal L$, so a basis of $W_0$ has entries of bit length at most
-$130n^4\mathcal L$, which bounds $E_0$. The matrix $[A_{\mathcal T};-A_{\mathcal V}]$ of
-Claim~\ref{clm:chartdata} has at most $3n$ rows, $2k\le2n$ columns and entries of bit length at most
+$130n^4\mathcal L$, which bounds $E_0$. The matrix $[A_{\mathcal T}^{\mathsf T};-A_{\mathcal V}^{\mathsf T}]$ of
+Claim~\ref{clm:chartdata} has at most $2k\le2n$ rows and $d_0+2\ell\le3n$ columns and entries of bit length at most
 $112n^4\mathcal L$, so a kernel basis has entries of bit length at most $2100n^6\mathcal L$, which
 bounds a basis of $\mathcal V$; row reduction of $[E_0;F_{\mathcal V}]$ then gives
 $h(E_Q)\le39000n^8\mathcal L$. The entries of $H(Y),G(Y)$ are affine in $Y$ with coefficients from
