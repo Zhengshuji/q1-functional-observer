@@ -45,6 +45,7 @@ import Q1Paper.PaperI.CompressionMatrix
 import Q1Paper.PaperI.Gram
 import Q1Paper.PaperI.Claim11
 import Q1Paper.PaperI.MinorRank
+import Q1Paper.PaperI.SpectralMinor
 
 /-!
 ## What is imported here

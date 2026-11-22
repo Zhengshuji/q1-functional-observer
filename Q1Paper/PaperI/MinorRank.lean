@@ -33,6 +33,7 @@ standard routes are
 import Mathlib.LinearAlgebra.Matrix.Rank
 import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 import Mathlib.Algebra.Polynomial.Eval.Defs
+import Q1Paper.PaperI.BasisExtraction
 
 namespace Q1Paper.PaperI
 
@@ -91,4 +92,46 @@ theorem exists_det_submatrix_ne_zero_of_rank_pos {m n : Type*} [Fintype m] [Fint
   refine ⟨fun _ => i, fun _ => j, ?_⟩
   simpa [Matrix.det_fin_one] using hij
 
+/-- **The hard direction of the rank/minors bridge.**  A matrix of rank ω
+has a nonzero ω × ω minor.  Proof: extract ω independent rows
+(exists_injective_linearIndependent), then ω independent columns of the
+resulting full-row-rank block (exists_invertible_cols). -/
+theorem exists_det_submatrix_ne_zero_of_rank {m n : ℕ} (M : Matrix (Fin m) (Fin n) K) {ω : ℕ}
+    (h : M.rank = ω) :
+    ∃ (ρ : Fin ω → Fin m) (κ : Fin ω → Fin n),
+      Function.Injective ρ ∧ Function.Injective κ ∧ (M.submatrix ρ κ).det ≠ 0 := by
+  classical
+  have hrow : Module.finrank K (Submodule.span K (Set.range M.row)) = ω := by
+    rw [← Matrix.rank_eq_finrank_span_row]
+    exact h
+  obtain ⟨ρ, hρ, hLI⟩ := exists_injective_linearIndependent (v := M.row) hrow
+  set W : Matrix (Fin ω) (Fin n) K := M.submatrix ρ id with hW
+  have hWrow : W.row = M.row ∘ ρ := by
+    funext i j
+    rfl
+  have hWrank : W.rank = ω := by
+    rw [Matrix.rank_eq_finrank_span_row, hWrow]
+    simpa using finrank_span_eq_card hLI
+  obtain ⟨κ, hκ, hdet⟩ := exists_invertible_cols W hWrank
+  refine ⟨ρ, κ, hρ, hκ, ?_⟩
+  have hsub : W.submatrix id κ = M.submatrix ρ κ := by
+    simp [hW]
+  rwa [hsub] at hdet
+
+/-- The rank/minors criterion in the form used by the pencil: when
+
+ank M ≤ ω, the rank is ω exactly when some ω × ω minor is nonzero. -/
+theorem rank_eq_iff_exists_det_submatrix_ne_zero {m n : ℕ}
+    (M : Matrix (Fin m) (Fin n) K) {ω : ℕ} (hle : M.rank ≤ ω) :
+    M.rank = ω ↔ ∃ (ρ : Fin ω → Fin m) (κ : Fin ω → Fin n),
+      (M.submatrix ρ κ).det ≠ 0 := by
+  constructor
+  · intro h
+    obtain ⟨ρ, κ, _, _, hdet⟩ := exists_det_submatrix_ne_zero_of_rank M h
+    exact ⟨ρ, κ, hdet⟩
+  · rintro ⟨ρ, κ, hdet⟩
+    have h1 : ω ≤ M.rank := rank_le_of_det_maximalMinor_ne_zero M ρ κ hdet
+    omega
+
 end Q1Paper.PaperI
+

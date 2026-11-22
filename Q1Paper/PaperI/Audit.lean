@@ -104,6 +104,15 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.PaperI.eval_maximalMinor
 #print axioms Q1Paper.PaperI.rank_le_of_det_maximalMinor_ne_zero
 #print axioms Q1Paper.PaperI.exists_det_submatrix_ne_zero_of_rank_pos
+#print axioms Q1Paper.PaperI.exists_injective_linearIndependent
+#print axioms Q1Paper.PaperI.exists_invertible_cols
+#print axioms Q1Paper.PaperI.exists_det_submatrix_ne_zero_of_rank
+#print axioms Q1Paper.PaperI.rank_eq_iff_exists_det_submatrix_ne_zero
+
+-- Claim 11, pencil level
+#print axioms Q1Paper.PaperI.pencil
+#print axioms Q1Paper.PaperI.pencil_map_eval
+#print axioms Q1Paper.PaperI.spectral_iff_minors
 #print axioms Q1Paper.PaperI.exists_factor_of_rowSpace_le
 #print axioms Q1Paper.PaperI.exists_factor_of_rawAlgebraic
 #print axioms Q1Paper.PaperI.rank_neg_eq
