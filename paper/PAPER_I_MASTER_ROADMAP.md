@@ -50,15 +50,23 @@ States are kept separate: `Mathematically proved` (M) and `Lean formalized` (F);
 
 ## 4. Open Lean formalizations
 
-- **D1 bridge**, in order:
+- **D1 bridge**. Structure revised after an external review (web ChatGPT, whose reading of the repo was
+  confirmed): prove the coefficient relation first, then a *generic fibre-sum lemma*, then the Gram
+  scaling, then the certificate equivalence; row-space equality is a separate structural result and is
+  **not** needed for the certificate equivalence.
   1. ~~single-minor sign relation~~ (`maximalMinor_injective_eq_signed_image`, done);
-  2. coefficient relation (sign times the coefficient);
-  3. window-row relation;
-  4. window row space equality (both inclusions);
-  5. Gram scaling `Z_injᵀZ_inj = (ω!)² · Z_subᵀZ_sub`;
-  6. Gram certificate equivalence `(∃x, G₁x=e₀) ↔ (∃y, G₂y=e₀)` for `G₁ = m • G₂`, `m ≠ 0`.
-  Note: the sign varies with the minor index, so the matrix identity must be derived from the per-row
-  sign relation plus the `(ω!)²` multiplicity, not assumed as a uniform scalar relation.
+  2. coefficient relation: each coefficient of `f_{ρ,κ}` is the sign times the coefficient of `f_{I,J}`;
+  3. generic fibre lemma: for finite `R, S`, a surjection `Φ : R → S` with every fibre of cardinality `m`,
+     a sign `ε : R → K` with `ε r ^ 2 = 1`, and `v : S → Fin n → K`, one has
+     `∑ r, (ε r • v (Φ r))ᵀ (ε r • v (Φ r)) = m • ∑ s, v sᵀ v s`
+     (sum by index with multiplicity, never by distinct vector values);
+  4. instantiate: `R` = injective pairs, `S` = subset pairs, `Φ` = images, `m = (ω!)²`,
+     `ε = sign σ · sign τ`, giving `Z_injᵀZ_inj = (ω!)² • Z_subᵀZ_sub`;
+  5. certificate equivalence: `G₁ = m • G₂`, `m ≠ 0` (characteristic 0: true over ℚ/ℝ/ℂ; in
+     characteristic `p ≤ ω` the factorial vanishes, so the hypothesis must be explicit);
+  6. row-space equality (`rowSpace Z_inj = rowSpace Z_sub`): needs both inclusions; forward from the
+     sign relation, backward from surjectivity of the image map. Zero rows, repeated rows and signs are
+     harmless.
 - §III-D end-to-end assembly at the pencil.
 - Claim 13: Bareiss intermediate/subminor relation (pivoting, zero pivots, rank deficiency), total bit complexity,
   and the input-length interface `bitLenMat A ≤ L_input`.
