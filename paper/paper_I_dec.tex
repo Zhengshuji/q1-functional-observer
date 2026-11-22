@@ -81,9 +81,10 @@ The results form one chain, and the paper follows it: compression, then a subspa
 certificate, then two algorithms. The two conditions are compressed to $O(q^2)$ variables
 independently of the state dimension, and the free rows are reduced to a subspace $W$ of a compressed
 row-pair space, in which they become a row-space inclusion and the constant rank of a pencil
-(Sections~\ref{sec:compression} and~\ref{sec:subspace}). The cost is governed by
-$\ell=\operatorname{rank}(AN)$, which does not involve $r$; we do not claim that $\ell$ is the only
-parameter that could control the cost, only that it is independent of $r$ (Section~\ref{sec:fpt}).
+(Sections~\ref{sec:compression} and~\ref{sec:subspace}). The parameter that governs the exponential factor is
+$\ell=\operatorname{rank}(AN)$, which does not involve $r$, while the polynomial factor still depends on
+the whole input length; we do not claim that $\ell$ is the only parameter that could control the cost,
+only that the exponential factor is independent of $r$ (Section~\ref{sec:fpt}).
 The spectral condition becomes a finite algebraic certificate, compressed by Cauchy--Binet to a matrix
 of size controlled by $\ell$, so that no maximal minor is enumerated and the fixed-order algorithm
 needs no chart enumeration; the fixed-parameter algorithm does enumerate charts, but at most
@@ -151,6 +152,14 @@ that
 These are the Fernando--Trinh--Jennings conditions, numbered (5a) and (5b) in
 \cite{fer10}. Condition~\eqref{eq:5a} is algebraic; \eqref{eq:5b} is spectral, and it is
 required at every $\lambda\in\mathbb C$, in particular at all finite eigenvalues of $A$.
+
+Three ranks are kept apart throughout. The \emph{generic rank}
+$\operatorname{rank}_{\mathbb C(\lambda)}P$ of a pencil is its rank over the field of rational
+functions; the \emph{pointwise rank} is $\operatorname{rank}P(\lambda_0)$ at one value $\lambda_0$;
+and the pencil has \emph{constant rank} $\omega$ when the pointwise rank equals the generic rank at
+every $\lambda\in\mathbb C$. A pencil with this property is called \emph{rank-constant}; by
+Claim~\ref{lem:compression}, condition \eqref{eq:5b} is the constant-rank condition on the compressed
+pencil $\lambda H-H_A$.
 The two conditions are used below in the rank forms \eqref{eq:5a} and \eqref{eq:5b} only; the
 equivalent forms in terms of maximal minors and their greatest common divisor are derived, not
 assumed, in Section~\ref{sec:compression}.
@@ -251,7 +260,7 @@ The compressions below rest on a single rank identity.
 The purpose of this identity is to move every rank in \eqref{eq:5a} and \eqref{eq:5b} across the common kernel; it is used in the proof of Claim~\ref{lem:compression} to rewrite both conditions in the compressed data.
 
 \begin{claim}[Rank identity]\label{lem:rankid}
-Let $P\in\mathbb C^{m\times n}$ and let $N_P\in\mathbb C^{n\times r}$ be a basis matrix for $\ker P$. Then, for every $M\in\mathbb C^{p\times n}$,
+Let $P\in\mathbb C^{m\times n}$ and let $N_P\in\mathbb C^{n\times r}$ be a matrix whose columns are a basis of $\ker P$. Then, for every $M\in\mathbb C^{p\times n}$, all ranks being computed over $\mathbb C$,
 \begin{equation}\label{eq:rankid}
 \operatorname{rank}\begin{bmatrix}P\\ M\end{bmatrix}
 =\operatorname{rank}P+\operatorname{rank}(MN_P).
@@ -262,7 +271,11 @@ Let $P\in\mathbb C^{m\times n}$ and let $N_P\in\mathbb C^{n\times r}$ be a basis
 Let $f(x)=xN_P$. Since $\operatorname{col}N_P=\ker P$, the kernel of $f$ is $\operatorname{row}P$,
 and $\operatorname{row}(MN_P)$ is the image of the restriction of $f$ to $\operatorname{row}M$, so
 rank--nullity gives $\operatorname{rank}[P;M]=\operatorname{rank}P+\operatorname{rank}(MN_P)$; this
-is the standard rank identity for a stacked matrix \cite[Ch.~0]{hj13}.
+is the standard rank identity for a stacked matrix \cite[Ch.~0]{hj13}. Equivalently, both sides equal
+$\dim(\operatorname{row}P+\operatorname{row}M)$, expanded as
+$\dim U+\dim V-\dim(U\cap V)$ with $U=\operatorname{row}P$ and $V=\operatorname{row}M$, since
+$\ker f=\operatorname{row}P$ gives
+$\operatorname{rank}(MN_P)=\dim\operatorname{row}M-\dim(\operatorname{row}M\cap\operatorname{row}P)$.
 \end{proof}
 
 The purpose of this step is to turn \eqref{eq:5a} and \eqref{eq:5b} into a row inclusion and into the constant rank of the pencil $P(\lambda)$; it is used in Section~\ref{sec:subspace} and Section~\ref{sec:certificate}, where the pencil, and not the original matrix, is what gets tested.
@@ -329,6 +342,13 @@ statement, and for $\omega=0$ the condition is vacuous.
 $\lambda$; at $\lambda=0$, where $P(0)=-H_A$,
 $\operatorname{rank}H_A=\operatorname{rank}P(0)=\operatorname{rank}H$. \qedhere
 \end{proof}
+
+The two ranks distinguished in Section~\ref{sec:conditions} both occur in the claim just proved. The identity
+$\operatorname{rank}_{\mathbb C(\lambda)}P(\lambda)=\omega$ is the \emph{generic} rank, whereas
+\eqref{eq:5b} asks the \emph{pointwise} rank to equal $\omega$ at every $\lambda\in\mathbb C$; the
+first does not imply the second, as $P(\lambda)=[\lambda;\lambda]$ (generic rank $1$, rank $0$ at
+$\lambda=0$) shows. What the generic rank supplies is that at least one $\omega\times\omega$ minor is a
+nonzero polynomial, so that ``no common complex root'' is a meaningful condition.
 
 \subsection{The space of attainable row pairs}\label{sec:free}
 
@@ -406,7 +426,9 @@ The purpose of this step is to pass from free blocks to subspaces; it is used in
 \begin{claim}[Sandwich and realizability]\label{lem:sandwich}
 For $L=[L_0;R]$ one has $W_0\subseteq W\subseteq\mathcal T$ and
 $\dim(W/W_0)\le r$. Conversely, every subspace $W$ with these three properties is realized by a
-free block $R$ with exactly $t=\dim(W/W_0)$ rows.
+free block $R$ whose first $t=\dim(W/W_0)$ rows are preimages of a basis of $W/W_0$ and whose
+remaining $q-r_0-t$ rows are zero; thus $W$ is realized with $t$ rows, the other row slots being padded
+with zeros.
 \end{claim}
 
 \begin{proof}
@@ -638,7 +660,7 @@ certificate at all. The proof achieves it by choosing the auxiliary combination 
 vectors that avoid finitely many hyperplanes, and by invoking the two-polynomial identity over
 $\mathbb R[\lambda]$.
 
-The purpose of this bound is to make the degree window of the certificate finite; it is used in Proposition~\ref{prop:gram} and in Claim~\ref{lem:zero}.
+The purpose of this bound is to make the degree window of the certificate finite; it is used in Claim~\ref{prop:gram} and in Claim~\ref{lem:zero}.
 
 \begin{claim}[B\'ezout degree bound]\label{lem:bezout}\label{sec:bezout}
 Let $\omega\ge1$, let $s\ge1$, and let $f_1,\ldots,f_s\in\mathbb R[\lambda]$ have
@@ -650,19 +672,24 @@ real polynomials $g_i$ with $\deg g_i<\omega$ such that
 \end{claim}
 
 \begin{proof}
-Choose $a\in\mathbb R^s$ with $g=\sum_i a_if_i\neq0$, possible because the $f_i$ have no common
-complex root, and let $\alpha_1,\dots,\alpha_m$ be the distinct roots of $g$. For $b\in\mathbb R^s$ put
+\emph{Constant cases first.} If some $f_j$ is a nonzero constant, take $g_j=1/f_j$ and $g_i=0$ for
+$i\neq j$; then $\sum_i g_if_i=1$ and $\deg g_i=0<\omega$, since $\omega\ge1$. Assume therefore that no
+$f_i$ is a nonzero constant. Choose $a\in\mathbb R^s$ with $g=\sum_i a_if_i\neq0$, possible because the
+$f_i$ have no common complex root. If $g$ is a nonzero constant, take $u=1/g$ and $v=0$: then
+$g_i=ua_i$ satisfies $\sum_i g_if_i=1$ with $\deg g_i=0<\omega$, and we are done. Assume henceforth
+that $g$ is nonconstant, and let $\alpha_1,\dots,\alpha_m$ be its distinct roots. For $b\in\mathbb R^s$ put
 $h=\sum_i b_if_i$ and write $h(\alpha_j)=\ell_j(b)+i\,m_j(b)$, with $\ell_j,m_j$ real linear forms.
 Some $f_i(\alpha_j)$ is nonzero, since otherwise $\alpha_j$ would be a common root, so $(\ell_j,m_j)$
 does not vanish identically and $V_j=\{b:h(\alpha_j)=0\}=\ker\ell_j\cap\ker m_j$ is a proper subspace
 of $\mathbb R^s$. A finite union of proper subspaces cannot cover $\mathbb R^s$, so some $b$ satisfies
-$h(\alpha_j)\neq0$ for every $j$; then $g$ and $h$ are coprime, and the two-polynomial B\'ezout
-identity with degree bounds \cite[Ch.~3]{vzgg13} gives $u,v$ with $ug+vh=1$, $\deg u<\deg h\le\omega$
+$h(\alpha_j)\neq0$ for every $j$; since $\{b:h\ \text{constant}\}$ is a proper subspace as well,
+$b$ can be chosen outside it too, so that $h$ is nonconstant; then $g$ and $h$ are coprime, and the
+two-polynomial B\'ezout identity with degree bounds \cite[Ch.~3]{vzgg13} gives $u,v$ with $ug+vh=1$, $\deg u<\deg h\le\omega$
 and $\deg v<\deg g\le\omega$. Expanding $g,h$ in the $f_i$ and setting $g_i=ua_i+vb_i$ gives
 $\sum_i g_if_i=1$ with $\deg g_i<\omega$.
 \end{proof}
 
-The purpose of this identity is to identify the row space of the window matrix with the attainable relations; it is used in Proposition~\ref{prop:gram} and in Section~\ref{sec:fpt}.
+The purpose of this identity is to identify the row space of the window matrix with the attainable relations; it is used in Claim~\ref{prop:gram} and in Section~\ref{sec:fpt}.
 
 \begin{claim}[Degree-windowed relations]\label{lem:window}
 Let $\omega\ge1$. Let $f_1,\dots,f_s\in\mathbb R[\lambda]$ have degree at most $\omega$,
@@ -718,7 +745,9 @@ in $f_i$; let $e_0=(1,0,\ldots,0)^{\mathsf T}\in\mathbb R^{2\omega}$. Then
 \end{claim}
 
 \begin{proof}
-By construction, $\operatorname{coef}(\lambda^jf_i)$ is row $(i,j)$ of $Z$, so
+All matrices in this claim are real, so $Z^{\mathsf T}Z$ is a Gram matrix over $\mathbb R$ and the step
+from $\operatorname{row}Z$ to $\ker Z=\ker(Z^{\mathsf T}Z)$ below is legitimate over $\mathbb R$. By
+construction, $\operatorname{coef}(\lambda^jf_i)$ is row $(i,j)$ of $Z$, so
 Claim~\ref{lem:window} identifies $\operatorname{row}Z$ with the coefficient vectors of the sums
 $\sum_i g_if_i$ with $\deg g_i<\omega$. With $e_0^{\mathsf T}=\operatorname{coef}(1)$, this gives
 $e_0^{\mathsf T}\in\operatorname{row}Z$ if and only if there are $g_i$ with $\deg g_i<\omega$ and
@@ -734,6 +763,52 @@ the last equality because $\ker Z=\ker(Z^{\mathsf T}Z)$; hence
 $e_0^{\mathsf T}\in\operatorname{row}Z$ if and only if
 $Z^{\mathsf T}Zx=e_0$ has a real solution.
 \end{proof}
+
+Both algorithms below test a reduced pencil rather than $P(\lambda)$ itself, and the passage from
+Claim~\ref{prop:gram} to that pencil is the following form of the certificate. In the fixed-order
+algorithm of Section~\ref{sec:fixedq} the pencil is $Q(\lambda)=\lambda X-G$ with $X$ of full column
+rank; in the fixed-parameter algorithm of Section~\ref{sec:fpt} it is the pencil attached to a chart.
+
+\begin{claim}[Gram certificate for a full-column-rank pencil]\label{clm:gramQ}
+Let $X,G\in\mathbb R^{q\times\omega}$ with $\operatorname{rank}X=\omega\ge1$, put
+$Q(\lambda)=\lambda X-G$, and let $Z_Q$ be the window matrix of Claim~\ref{lem:window} built from the
+$\omega\times\omega$ maximal minors of $Q$, so that $Z_Q$ is determined by $X$ and $G$ alone. Then
+\begin{equation*}
+\operatorname{rank}Q(\lambda)=\omega\ \ \forall\lambda\in\mathbb C
+\iff e_0^{\mathsf T}\in\operatorname{row}Z_Q ,
+\end{equation*}
+and, since $Z_Q$ is real,
+\begin{equation*}
+e_0^{\mathsf T}\in\operatorname{row}Z_Q
+\iff\exists x\in\mathbb R^{2\omega}:\ Z_Q^{\mathsf T}Z_Qx=e_0 .
+\end{equation*}
+\end{claim}
+
+\begin{proof}
+Since $X$ has full column rank there is $X_L\in\mathbb R^{\omega\times q}$ with $X_LX=I_\omega$; put
+$F=GX_L$, so that $G=FX$ and $Q(\lambda)=(\lambda I-F)X$. Claim~\ref{prop:gram} applies to the pair
+$(H,H_A)=(X,G)$, whose compressed order is $\omega=\operatorname{rank}X$ and whose condition
+\eqref{eq:5a} is $\operatorname{row}G\subseteq\operatorname{row}X$, satisfied because $G=FX$; its
+conclusion is exactly the displayed equivalence for the maximal minors of $Q$. Neither a maximal minor
+of $P$ nor the factor $B$ enters, so the certificate is read off $X$ and $G$.
+\end{proof}
+
+The first consequence is the interface used by the fixed-order algorithm: in $\Phi_{\omega,J}$ of
+\eqref{eq:phi} the certificate (v) may be taken to be $Z_Q^{\mathsf T}Z_Qx=e_0$, whose data are $X$ and
+$G$ and in which $B$ does not appear, the matrix $B$ being eliminated by the rank-consistency condition
+(ii). The second consequence relates the two certificates: with $P(\lambda)=Q(\lambda)B$,
+$B\in\mathbb R^{\omega\times k}$ of full row rank, $K_P$ the kernel of Section~\ref{sec:cb} and
+$K_Q(\lambda,\mu)=\det\bigl(Q(\lambda)^{\mathsf T}Q(\mu)\bigr)$, Cauchy--Binet gives
+\begin{align*}
+K_P(\lambda,\mu)
+&=\sum_{|J|=\omega}\det\bigl(B_{:,J}^{\mathsf T}Q(\lambda)^{\mathsf T}Q(\mu)B_{:,J}\bigr)\\
+&=\Bigl(\sum_{|J|=\omega}\det(B_{:,J})^2\Bigr)\det\bigl(Q(\lambda)^{\mathsf T}Q(\mu)\bigr)\\
+&=\det(BB^{\mathsf T})\,K_Q(\lambda,\mu),
+\end{align*}
+the column sets $J$ ranging over the $\omega$-subsets of the columns of $B$, and
+$\det(BB^{\mathsf T})>0$ because $B$ has full row rank. Hence $Z_P^{\mathsf T}Z_P$ and
+$Z_Q^{\mathsf T}Z_Q$ differ by a positive factor and define the same certificate; the algorithms use
+$Z_Q$, and the identity records that no generality is lost.
 
 \paragraph*{Cauchy--Binet compression}\label{sec:cb}
 Work in the coordinates of Remark~\ref{rem:YS}, in which the first $\ell$ vectors are a basis of
@@ -809,10 +884,20 @@ certificate: by the cost bound of item~\ref{item:cost}, the certificate
 matrix stays parameter-sized when $q$ is large and $k$ is bounded.
 \end{remark}
 
-The certificate is the object that both algorithms of Section~\ref{sec:algorithms} test, and its size
-is governed by $\ell$ rather than by the number of maximal minors.
+The certificate is the object the algorithms of Section~\ref{sec:algorithms} test. In the fixed-order
+case it is read off the reduced pencil of Claim~\ref{clm:gramQ}, and the only quantified vector is
+$x\in\mathbb R^{2\omega}$; in the fixed-parameter case its Cauchy--Binet-compressed form is governed by
+$\ell$ rather than by the number of maximal minors.
 
 \section{Algorithms and complexity}\label{sec:algorithms}
+
+The two algorithms below share the certificate of Section~\ref{sec:certificate} but parameterize
+different objects, and their certificates are different matrices. The fixed-order algorithm quantifies
+over a pivot factorization of the compressed block, and its certificate is the Gram matrix of the
+reduced pencil $\lambda X-G$ (Claim~\ref{clm:gramQ}). The fixed-parameter algorithm quantifies over
+Grassmann charts of the admissible row-pair space, and its certificate is the Gram matrix of the chart
+pencil $\lambda H(Y)-G(Y)$, whose size is controlled by $\ell$ through the Cauchy--Binet compression of
+Section~\ref{sec:cb}. The complexity counts below keep them apart.
 
 Four problems are treated in turn: $\mathrm{DEC}(q)$ at a fixed order (Section~\ref{sec:fixedq}), the same problem parameterized by $\ell$ (Section~\ref{sec:fpt}), the case of no free rows, which has an exact polynomial-time test (Section~\ref{sec:zero}), and the placement of the problem in the existential theory of the reals (Section~\ref{sec:existsr}).
 
@@ -839,7 +924,10 @@ $(X,G,x)$ of real matrices, and the branch is the system
 \text{(v)}\ \ Z^{\mathsf T}Zx=e_0,
 \end{cases}
 \end{equation}
-with $B$ and $Z$ as in Section~\ref{sec:certificate}. Items (i)--(iv) are equations and one strict
+where $B$ is the matrix of the pivot factorization, determined by $(X,J)$ through $B_{:,J}=I_\omega$,
+and $Z=Z_Q$ is the window matrix of the reduced pencil $Q(\lambda)=\lambda X-G$ of
+Claim~\ref{clm:gramQ}; the certificate (v) therefore involves $X$, $G$ and $x$ only, and not $B$. Items
+(i)--(iv) are equations and one strict
 inequality over the reals; (v) is the Gram form of the spectral condition, also polynomial. Asking
 whether $\Phi_{\omega,J}$ has a real solution is therefore a decision problem in the existential theory
 of the reals, and it is decided by the real-algebraic procedure of Section~\ref{sec:fpt}, whose cost
@@ -887,12 +975,13 @@ $H_A=GB$ from Claim~\ref{lem:compression}(ii). Then $X_iB=h_i^0$, $G_iB=g_i^0$ f
 $D[(X_iB)^{\mathsf T};(G_iB)^{\mathsf T}]=0$ for $i>r_0$, by the definition of $H$ and of $D$; the
 remaining three conditions of $\Phi_{\omega,J}$ are $e_\omega(X^{\mathsf T}X)>0$
 ($\operatorname{rank}X=\omega$), the rank-consistency condition of Claim~\ref{lem:rankcons}, and
-$Z^{\mathsf T}Zx=e_0$ for \eqref{eq:5b} by Proposition~\ref{prop:gram}. Conversely, if $\Phi_{\omega,J}$
+$Z^{\mathsf T}Zx=e_0$ for \eqref{eq:5b} by Claim~\ref{clm:gramQ}, the window matrix $Z=Z_Q$ being that
+of $\lambda X-G$. Conversely, if $\Phi_{\omega,J}$
 holds, Claim~\ref{lem:rankcons} gives $B$ with $B_{:,J}=I_\omega$, and $H=XB$, $H_A=GB$ reproduce the
 prescribed rows and place the others in $\mathcal T$, so that $H=LN$ and $H_A=LAN$ for $L=[L_0;R]$ with
 those rows; since $X$ has a left inverse $X_L$, $H_A=GB=(GX_L)XB$, which is \eqref{eq:5a} by
 Claim~\ref{lem:compression}(i), and $Z^{\mathsf T}Zx=e_0$ is \eqref{eq:5b} by
-Proposition~\ref{prop:gram}. Hence $\bigvee_{\omega,J}\Phi_{\omega,J}$ holds exactly when a feasible $L$
+Claim~\ref{clm:gramQ}. Hence $\bigvee_{\omega,J}\Phi_{\omega,J}$ holds exactly when a feasible $L$
 exists, which is the test performed by Algorithm~\ref{alg:fixed-q}.
 
 \emph{(ii) Count.} With $\omega\le k$ and $N_{\rm var}=2q\omega+2\omega$ real variables,
@@ -900,13 +989,23 @@ exists, which is the test performed by Algorithm~\ref{alg:fixed-q}.
 N &= 2q\omega+2\omega\le 2q^2+2q,\\
 s &= O(k)\cdot O(k)+O(k)=O(k^2),\\
 D &= \max\{O(k),\,2\omega+1\}=O(k)\le O(n),\\
-\beta &= \operatorname{poly}(n,\mathcal L),
+\beta &= \operatorname{poly}(n,\mathcal L).
 \end{align*}
-where the two factors of $s$ count the rank-consistency branches
-$t\le\min\{\text{rows},\text{cols}\}(M)$, at most $O(k)$ of them, and the
-$O(k)$ polynomials of degree $O(k)$ carried by each branch, while $2\omega+1$
-is the degree of the Gram and certificate constraints; the last line is the
-coefficient-size claim of Section~\ref{sec:fpt}. Renegar's Part II bound
+The variables are the entries of $X$, $G$ and $x$, so $N=2q\omega+2\omega$. The matrix $B$ is not a
+variable: its pivot columns are fixed by $B_{:,J}=I_\omega$, its remaining entries are eliminated by the
+rank-consistency condition, that is, by the existence of $b$ with $\mathcal M(X,G)b=c(X,G)$---a finite
+disjunction over the rank of that system (Claim~\ref{lem:rankcons})---and only the entries of $X$, $G$
+and $x$ are quantified. This is why the count is $O(q^2)$ and not $O(qk)$. The polynomials are the
+strict inequality $e_\omega(X^{\mathsf T}X)>0$; the rank-consistency disjunction, with at most $O(k)$
+branches $t\le\min\{\text{rows},\text{cols}\}(M)$ carrying $O(k)$ polynomials of degree $O(k)$ each;
+the $2r_0k$ prescribed-row equations; the $(q-r_0)(2k-d_0)$ equations placing the free row pairs in
+$\mathcal T$; and the $2\omega$ equations $Z_Q^{\mathsf T}Z_Qx=e_0$, whose coefficients are of degree
+$2\omega+1=O(k)$ in the entries of $X$, $G$ and $x$, each entry of $Z_Q^{\mathsf T}Z_Q$ being a sum of
+products of two minors of $\lambda X-G$ and hence of degree $2\omega$ in the entries of $X$ and $G$.
+Hence $s=O(k^2)$ and $D=O(k)$. A strict inequality is normalized as $f>0\iff\exists u: fu^2=1$, which
+adds one variable and one polynomial per inequality, $O(1)$ of them per branch, so the orders of $N$
+and $s$ are unchanged. The last line, $\beta=\operatorname{poly}(n,\mathcal L)$, is Claim~\ref{lem:coeff}(iv); explicitly
+$\beta\le240q\,n^5\mathcal L$ by Appendix~\ref{app:size}. Renegar's Part II bound
 $\beta(\log\beta)(\log\log\beta)(sD)^{O(N_{\rm var})}$ therefore gives, per chart,
 \begin{equation*}
 \beta(\log \beta)(\log\log \beta)(sD)^{O(N_{\rm var})}
@@ -933,7 +1032,7 @@ $\omega=0$ and $r=0$ are treated in Section~\ref{sec:deg}.
 
 
 
-Three representation details are worth recording.
+The normalizations used in the count, stated in full:
 
 \begin{enumerate}
 \item \emph{Strict inequalities.} A condition $f>0$ is written as
@@ -1008,12 +1107,16 @@ The charts of Algorithm~\ref{alg:fpt} are written with two fixed matrices. With 
 $\mathcal V$ as in the algorithm, put $s_0=\dim W_0$ and $m'=\dim\mathcal V-s_0$. Let
 $E_0\in\mathbb R^{s_0\times2k}$ be a matrix whose rows are a basis of $W_0$, and let
 $E_Q\in\mathbb R^{m'\times2k}$ be a matrix whose rows complete that basis to a basis of $\mathcal V$;
-both have rational entries and are computed once per instance. The point of the chart of
-$\mathrm{Gr}(t,m')$ indexed by $Y\in\mathbb R^{t\times(m'-t)}$ is the row space of
+both have rational entries and are computed once per instance. For $t\in\{0,\dots,m'\}$ and a pivot
+set $J\subseteq[m']$ with $|J|=t$, let $C_J(Y)\in\mathbb R^{t\times m'}$ be the matrix whose columns
+indexed by $J$ form $I_t$ and whose remaining columns are the entries of $Y\in\mathbb R^{t\times(m'-t)}$,
+taken in the order of the complement $[m']\setminus J$. The point of the chart $(t,J)$ of
+$\mathrm{Gr}(t,m')$ is the row space of
 \begin{equation*}
-Z_{\rm ch}(Y)=[E_0;\,[I_t\mid Y]E_Q]\in\mathbb R^{(s_0+t)\times2k},
+Z_{{\rm ch},J}(Y)=[E_0;\,C_J(Y)E_Q]\in\mathbb R^{(s_0+t)\times2k},
 \end{equation*}
-which contains $W_0$ by construction. In the coordinates of Remark~\ref{rem:YS}, in which every row
+which contains $W_0$ by construction; the charts $(t,J)$ with $|J|=t$ cover $\mathrm{Gr}(t,m')$, and for
+fixed $t$ there are $\binom{m'}{t}$ of them. In the coordinates of Remark~\ref{rem:YS}, in which every row
 of $H$ and $H_A$ lies in $S$ (Section~\ref{sec:US}), the two blocks of $\ell$ columns of this matrix
 are the matrices called $H(Y)$ and $G(Y)$ below: the \emph{complete} $H=LN$ and $H_A=LAN$, that is,
 including the $s_0$ rows contributed by $L_0$, so that \eqref{eq:5a} is tested on all rows of $H$ and
@@ -1043,9 +1146,9 @@ $\mathcal V\gets\mathcal T\cap(S\times S)$
 \EndIf
 \State $s_0\gets\dim W_0$;\quad $m'\gets\dim\mathcal V-s_0$
 \For{$t=0$ \textbf{to} $\min(r,2\ell)$}
-  \For{each chart of $\mathrm{Gr}(t,m')$ with chart coordinates $Y\in\mathbb R^{t\times(m'-t)}$}
+  \For{each $J\subseteq[m']$ with $|J|=t$, with chart coordinates $Y\in\mathbb R^{t\times(m'-t)}$}
     \State $H(Y),G(Y)\gets$ the two $(s_0+t)\times\ell$ blocks of the chart matrix
-             $Z_{\rm ch}(Y)=[E_0;\,[I_t\mid Y]E_Q]$; write $H,G$ for them
+             $Z_{{\rm ch},J}(Y)=[E_0;\,C_J(Y)E_Q]$; write $H,G$ for them
     \Statex \quad \Comment{$H=LN$ and $G=LAN$, including the $s_0$ rows of $L_0$}
     \For{$\omega=1$ \textbf{to} $\ell$}
       \State form $\Psi_{t,\omega}(Y,x)$ with
@@ -1123,8 +1226,13 @@ s=2\omega+O(1)\le2\ell+O(1),\qquad D=O(\ell),\\
 \end{gathered}
 \end{equation}
 where the discrete choices of $t$, of the chart and of $\omega$ are finite disjunctions rather
-than real variables, and $\beta$ is the coefficient bit length of Claim~\ref{lem:coeff}. The
-polynomials are those of Claim~\ref{lem:window}: $e_\omega(H(Y)H(Y)^{\mathsf T})>0$ and
+than real variables, and $\beta$ is the coefficient bit length of Claim~\ref{lem:coeff}(iv). The chart
+data $E_0,E_Q$ are rational of bit length $\operatorname{poly}(\mathcal L)$ by
+Claim~\ref{clm:chartdata}, the entries of $H(Y),G(Y)$ are affine in the chart coordinates with these
+coefficients, and each entry of $Z(Y)$ is a minor of $\lambda H(Y)-G(Y)$, of degree at most $\omega$ in
+$Y$ and $\lambda$; hence $\beta=\operatorname{poly}(\mathcal L)$ (explicitly $\beta\le8\times10^4n^9\mathcal L$ by
+Appendix~\ref{app:size}) and $D=O(\ell)$. The polynomials are
+those of Claim~\ref{lem:window}: $e_\omega(H(Y)H(Y)^{\mathsf T})>0$ and
 $e_{\omega+1}\bigl([H(Y);G(Y)][H(Y);G(Y)]^{\mathsf T}\bigr)=0$ encode \eqref{eq:5a} together with
 $\operatorname{rank}H(Y)=\omega$ (Claim~\ref{lem:compression}), and
 $Z(Y)^{\mathsf T}Z(Y)x=e_0$ encodes \eqref{eq:5b}. Substituting \eqref{eq:nvar} into \eqref{eq:rengar} gives, per
@@ -1142,7 +1250,8 @@ exponential. The total is \eqref{eq:fpt-l}; Table~\ref{tab:fptcount} collects th
 exact test of Section~\ref{sec:zero}, correct by Proposition~\ref{prop:zero}. If $q<q_0$ it returns
 \textsc{infeasible}, correct by the algebraic lower bound \eqref{eq:range}, which every feasible $L$
 satisfies. If $W_0=0$ it returns \textsc{feasible}, because then $W=0$ is admissible and is realized
-by the zero free block. Otherwise $r\ge1$, $q\ge q_0$ and $W_0\ne0$, and steps (i)--(v) show that the
+by the zero free block; this is an existence statement about one feasible design, not an assertion that
+every feasible design has $W=0$. Otherwise $r\ge1$, $q\ge q_0$ and $W_0\ne0$, and steps (i)--(v) show that the
 loop over $t$, over the charts and over $\omega$ accepts exactly when a feasible $W$ with
 $t=\dim(W/W_0)\le\min(r,2\ell)$ exists. If it does, the converse half of Claim~\ref{lem:sandwich}
 realizes $W$ by a free block with exactly $t$ rows, and Claim~\ref{lem:monotone}, applied
@@ -1186,8 +1295,8 @@ bit bound, and the data have bit length $\operatorname{poly}(\mathcal L)$.
 The estimates below are the ones the bound \eqref{eq:fpt-l} and the counting of
 Section~\ref{sec:fixedq} rely on. Each is stated with the mechanism that produces it and with its audit
 status: an entry marked \emph{Hadamard} rests on the Hadamard bound for a determinant of a matrix whose
-entry bit length is already known, so the dependence on $\mathcal L$ is polynomial but the elementary
-constant has not been re-derived here.
+entry bit length is already known; Appendix~\ref{app:size} derives all of them with explicit
+constants.
 
 \begin{table}[!t]
 \centering
@@ -1201,10 +1310,9 @@ stage concerned.}
 Object & Bit length & Mechanism \\
 \midrule
 $C$, $A$, $L_0$ & $\le\mathcal L$ & input \\
-kernel basis $N$ of $[C;CA]$ & $O\bigl(k(\tau+\log n)\bigr)\le\operatorname{poly}(\mathcal L)$ &
-Hadamard + Cramer \\
-$M=[N\ AN]$ & $O(\tau_M+\log n)$ & submultiplicativity \\
-$D$ with $\ker D=\operatorname{row}M$ & $O\bigl(d_0(\tau_M+\log k)\bigr)$ & Hadamard + Cramer \\
+kernel basis $N$ of $[C;CA]$ & $O(n^2\mathcal L)$ & Hadamard + Cramer, after clearing denominators \\
+$M=[N\ AN]$ & $O(n^2\mathcal L)$ & submultiplicativity \\
+$D$ with $\ker D=\operatorname{row}M$ & $O(n^4\mathcal L)$ & Hadamard + Cramer \\
 pivot block $X$ of $H=XB$ & $\operatorname{poly}(\mathcal L)$ & fraction-free elimination,
 entry growth $O(n)$ per step \\
 windows $Z$ of the minors of $\lambda X-G$ & $\operatorname{poly}(\mathcal L)$ & sum over
@@ -1233,34 +1341,85 @@ The purpose of this estimate is to bound the bit length of the objects the algor
 
 \begin{claim}[Rational bases and annihilators]\label{lem:rationalbasis}
 Let $M\in\mathbb Q^{m\times n}$ have entries of bit length at most $\tau$, let $r=\operatorname{rank}M$
-and put $\tau_M=2r(\tau+\log(r+1)+1)+1$. Then a basis $N$ of $\ker M$, a basis $R$ of
-$\operatorname{row}M$, and a matrix $D\in\mathbb Q^{(n-r)\times n}$ with
-$\ker D=\operatorname{row}M$ can be computed in $\operatorname{poly}(m,n,\tau)$ bit operations, and
-the entries of $N$, $R$ and $D$ have bit length at most $\tau_M$.
+and put
+\begin{equation*}
+\tau_M=2r\bigl((n+1)\tau+\log_2(r+1)+1\bigr)+1 .
+\end{equation*}
+Then a basis $N$ of $\ker M$, a basis $R$ of $\operatorname{row}M$, and a matrix
+$D\in\mathbb Q^{(n-r)\times n}$ with $\ker D=\operatorname{row}M$ can be computed in
+$\operatorname{poly}(m,n,\tau)$ bit operations, and the entries of $N$, $R$ and $D$ have bit length at
+most $\tau_M$.
 \end{claim}
 
 \begin{proof}
-Run fraction-free (Bareiss) Gaussian elimination on $M$ and keep the pivot rows and columns. Every
-entry of the resulting reduced row echelon form is a ratio of minors of $M$: by Cramer's rule the
-determinant in the numerator is an $s\times s$ minor with $s\le r$, and by Hadamard's inequality,
-for $s\ge1$,
+Hadamard's inequality applies to integer matrices, so the denominators are cleared first. For each row
+$i$ let $q_i$ be a common denominator of its $n$ entries; then $\operatorname{bits}q_i\le n\tau$, and
+multiplying row $i$ by $q_i$ gives an integer matrix $M'$ with entries of bit length at most
+$(n+1)\tau$. Row scaling leaves $\ker M$ and $\operatorname{row}M$ unchanged, so it suffices to work
+with $M'$.
+
+Run fraction-free (Bareiss) elimination on $M'$ and keep the pivot rows and columns. Every entry of the
+resulting reduced row echelon form is a ratio of minors of $M'$: by Cramer's rule the numerator is an
+$s\times s$ minor with $s\le r$, and by Hadamard's inequality, which gives
+$|\det M'_{I,J}|\le(\sqrt s\,2^{(n+1)\tau})^{s}$ for $s\ge1$,
 \begin{equation*}
-\operatorname{bits}\det M_{I,J}
-\le s\bigl(\tau+\tfrac12\log s\bigr)+1
-\le r\bigl(\tau+\tfrac12\log r\bigr)+1\le\tau_M .
+\begin{aligned}
+\operatorname{bits}\det M'_{I,J}
+&\le s(n+1)\tau+\tfrac{s}{2}\log_2 s+1\\
+&\le r(n+1)\tau+\tfrac{r}{2}\log_2 r+1\le\tfrac{\tau_M}{2}.
+\end{aligned}
 \end{equation*}
-Fraction-free elimination carries a single minor as common denominator at every stage, of size at
-most $r\times r$; the entries of $N$, $R$ and $D$ are therefore ratios of two $r\times r$ minors of
-$M$, of bit length at most $\tau_M$. The pivot columns give $R$ and the free columns give $N$ after
-back-substitution; put $D=N^{\mathsf T}$. The rows of $D$ are the columns of $N$, hence a basis of
-the right null space $\{y\in\mathbb Q^n:My=0\}$ of $M$, which is the orthogonal complement of
-$\operatorname{row}M$; thus $\ker D=\operatorname{row}M$, and the bit length of $D$ is that of $N$.
-The elimination uses
-$O(mnr)$ arithmetic operations on numbers of the displayed bit length, so the total is
-$\operatorname{poly}(m,n,\tau)$ bit operations.
+Fraction-free elimination carries a single minor as common denominator at every stage, of size at most
+$r\times r$; the entries of the reduced form, hence of $N$, $R$ and $D$, are ratios of two such minors,
+of bit length at most $\tau_M$. The pivot columns give $R$ and the free columns give $N$ after
+back-substitution; put $D=N^{\mathsf T}$. The rows of $D$ are the columns of $N$, hence a basis of the
+right null space of $M'$, which is the orthogonal complement of $\operatorname{row}M'$; thus
+$\ker D=\operatorname{row}M'=\operatorname{row}M$, and the bit length of $D$ is that of $N$.
+Elimination on an $m\times n$ matrix with entries of bit length $O(n\tau)$ uses $O(mnr)$ arithmetic
+operations on numbers of the displayed bit length, so the total is $\operatorname{poly}(m,n,\tau)$ bit
+operations.
 \end{proof}
 
 The purpose of this claim is to bound the coefficient sizes that enter Renegar's bound; it is used in the proofs of Theorem~\ref{thm:fixedq} and Theorem~\ref{thm:fpt}.
+
+The two algorithms also need the chart data of Section~\ref{sec:fpt} to have polynomial bit length; that
+is the content of the next claim, which is proved before the coefficient bounds so that the latter can
+refer to it.
+
+\begin{claim}[Rational chart data]\label{clm:chartdata}
+Let the input have bit length $\mathcal L\ge2$. Then rational bases of $N$, of
+$\mathcal T=\operatorname{row}M$, of $S=\operatorname{row}(AN)$, of
+$\mathcal V=\mathcal T\cap(S\times S)$ and of $W_0=\operatorname{row}(L_0M)$, and a rational matrix
+$E_Q$ whose rows complete a basis $E_0$ of $W_0$ to a basis of $\mathcal V$, can be computed in
+$\operatorname{poly}(\mathcal L)$ bit operations, and every entry of these matrices has bit length
+$\operatorname{poly}(\mathcal L)$.
+\end{claim}
+
+\begin{proof}
+Claim~\ref{lem:rationalbasis} applied to $[C;CA]$ after clearing denominators gives $N$, and applied
+to $M=[N\ AN]$ gives a basis of $\mathcal T$ together with $D$; the same claim applied to $AN$ gives a
+basis of $S$. All costs and bit lengths are $\operatorname{poly}(\mathcal L)$, because the entries of
+$N$ are ratios of minors of the input and the entries of $M=[N\ AN]$ are sums of products of those and
+of an input entry, hence also have bit length $\operatorname{poly}(\mathcal L)$.
+For $\mathcal V$: a vector $w$ lies in $\mathcal T\cap(S\times S)$ if and only if
+$w=uA_{\mathcal T}=vA_{\mathcal V}$ for a basis matrix $A_{\mathcal T}$ of $\mathcal T$ and a basis
+matrix $A_{\mathcal V}$ of $S\times S$. Put
+$\mathcal K=\ker\bigl[A_{\mathcal T}^{\mathsf T}\ {-}A_{\mathcal V}^{\mathsf T}\bigr]\subseteq\mathbb Q^{d_0+2\ell}$,
+computed by Claim~\ref{lem:rationalbasis}, and write its vectors as
+$(u^{\mathsf T},v^{\mathsf T})^{\mathsf T}$; then $uA_{\mathcal T}=vA_{\mathcal V}$. The map
+$(u,v)\mapsto uA_{\mathcal T}$ sends $\mathcal K$ onto $\mathcal V$: every $w\in\mathcal V$ has such a
+representation, and conversely $uA_{\mathcal T}=vA_{\mathcal V}$ lies in both row spaces. The images of a
+rational basis of $\mathcal K$ therefore form a rational generating set of $\mathcal V$, from which row
+reduction gives a rational basis. For $E_0$: $W_0=\operatorname{row}(L_0M)$ is the row space of the product of the input
+block $L_0$ and $M$, and Claim~\ref{lem:rationalbasis} applied to $L_0M$ gives a basis. For $E_Q$: put
+$[E_0;F_{\mathcal V}]$, with $F_{\mathcal V}$ a basis of $\mathcal V$, into row echelon form by
+fraction-free elimination; the rows that are not in $\operatorname{row}W_0$ complete $E_0$, and
+fraction-free elimination keeps the bit length $\operatorname{poly}(\mathcal L)$. All operations are
+polynomial in number and in bit length.
+\end{proof}
+
+The purpose of this claim is to bound the data of the charts of Section~\ref{sec:fpt}; it is used in
+the proof of Theorem~\ref{thm:fpt} and in Claim~\ref{lem:coeff}.
 
 \begin{claim}[Coefficient sizes]\label{lem:coeff}
 Let the input entries have bit length at most $\mathcal L$, and let
@@ -1272,25 +1431,30 @@ entries of bit length $\operatorname{poly}(n,\mathcal L)$;
 \emph{(ii)} every maximal minor $f_i$ of $P(\lambda)=\lambda H-H_A$ of the representative pair in
 (i), and every coefficient of $f_i$, has bit length $\operatorname{poly}(n,\mathcal L)$;
 \emph{(iii)} the entries of $Z^{\mathsf T}Z$ have bit length
-$\operatorname{poly}(n,\mathcal L)$.
+$\operatorname{poly}(n,\mathcal L)$;
+\emph{(iv)} each entry of $Z_Q$ is a polynomial of degree at most $\omega$ in the entries of $X$ and
+$G$, with coefficients in $\{0,\pm1\}$, and after clearing one common denominator per equation the
+system $\Phi_{\omega,J}$ of \eqref{eq:phi} has integer coefficients of bit length
+$\beta=\operatorname{poly}(n,\mathcal L)$, explicitly $\beta\le240q\,n^5\mathcal L$
+(Appendix~\ref{app:size}).
 \end{claim}
 
 \begin{proof}
-Each object bounded below is a ratio of minors of the integer input, or a short sum of products of two
-such minors, so the Hadamard estimate of Claim~\ref{lem:rationalbasis} bounds its entries.
+Each object bounded below is a ratio of minors of an integer matrix obtained from the input by clearing
+denominators row by row, or a short sum of products of two such ratios, so the Hadamard estimate of
+Claim~\ref{lem:rationalbasis} bounds its entries.
 
 \emph{(i)} Apply Claim~\ref{lem:rationalbasis} to $[C;CA]$, whose entries have bit length at most
-$\mathcal L$ and whose rank is $n-k$: the basis $N$ of $\ker[C;CA]$ has entries of bit length
-$O\bigl((n-k)(\mathcal L+\log n)\bigr)$. Applying the claim again to $[N\ AN]$, whose entries now
-have that bit length and whose rank is $d_0$, gives the matrix
-$D\in\mathbb Q^{(2k-d_0)\times2k}$ with $\ker D=\operatorname{row}[N\ AN]$, with entries of
-bit length $O\bigl(d_0((n-k)(\mathcal L+\log n)+\log(k+1))\bigr)=\operatorname{poly}(n,\mathcal L)$;
-the two eliminations cost $\operatorname{poly}(\mathcal L)$ bit operations.
+$3\mathcal L$ and whose rank is $n-k$: the basis $N$ of $\ker[C;CA]$ has entries of bit length
+$O(n^2\mathcal L)$. Applying the claim again to $[N\ AN]$, whose entries now have that bit length and
+whose rank is $d_0$, gives the matrix $D\in\mathbb Q^{(2k-d_0)\times2k}$ with
+$\ker D=\operatorname{row}[N\ AN]$, with entries of bit length $O(n^4\mathcal L)$; the two
+eliminations cost $\operatorname{poly}(\mathcal L)$ bit operations.
 The pivot block $X$, the block $G$ and the coordinate matrix $B$ are produced by the same
 elimination whenever the compressed pair is prescribed, in particular for $r=0$, where $H=L_0N$ and
 $H_A=L_0AN$: then $X$ is the pivot block of $H$, $B$ is the coefficient matrix with
 $B_{:,J}=I_\omega$, and $G=FX$ for the rational solution $F$ of $FH=H_A$, so all three are
-submatrices or ratios of minors of input-derived matrices. For $r\ge1$ the blocks
+submatrices or ratios of minors of an integer matrix obtained from the input by clearing denominators. For $r\ge1$ the blocks
 $X,G$ are the quantified variables of \eqref{eq:phi} and enter its constraints as indeterminates. No bound on
 the entries of $H=LN$ for an arbitrary feasible $L$ is asserted. The
 prescribed products are sums of $n$ products of an input entry with an entry of $N$, hence have bit
@@ -1315,14 +1479,24 @@ coefficients. Hence $(Z^{\mathsf T}Z)_{t,t'}$ is a sum of at most $\omega\cdot\#
 of bit length at most $2\operatorname{poly}(n,\mathcal L)$. A sum of $T$ terms of bit length $b$ has
 bit length $b+\log T$, and
 \begin{equation*}
-\log\bigl(\omega\cdot\#\{I\}\bigr)\le\omega+2\omega\log n=O(n),
+\log\bigl(\omega\cdot\#\{I\}\bigr)\le\log\omega+2\omega\log n=O(n\log n),
 \end{equation*}
 so
 \begin{equation*}
 \operatorname{bits}(Z^{\mathsf T}Z)_{ij}
-\le2\operatorname{poly}(n,\mathcal L)+O(n)
+\le2\operatorname{poly}(n,\mathcal L)+O(n\log n)
 =\operatorname{poly}(n,\mathcal L).
 \end{equation*}
+
+\emph{(iv)} A minor of $Q(\lambda)=\lambda X-G$ is the determinant of an $\omega\times\omega$
+submatrix whose entries are linear in the entries of $X$, $G$ and $\lambda$; the coefficient of
+$\lambda^a$ is a signed sum of products of $a$ entries of $X$ and $\omega-a$ entries of $G$, hence a
+polynomial of degree $\omega$ in these entries with coefficients $\pm1$. The remaining equations of
+\eqref{eq:phi} are built from the entries of $X$, $G$ and of $h^0$, $g^0$, $D$, and $e_\omega(X^{\mathsf
+T}X)$ has coefficients $\pm1$ in the entries of $X$; expanded in the variables, their coefficients are
+therefore $\pm1$ or entries of $h^0$, $g^0$, $D$, or products of at most two such entries. By (i) these
+data have bit length $\operatorname{poly}(n,\mathcal L)$, so after clearing one common denominator per
+equation all coefficients have bit length $\beta=\operatorname{poly}(n,\mathcal L)$.
 \end{proof}
 
 It remains to say why the per-chart bound already gives \eqref{eq:fpt-l}: the enumeration of
@@ -1370,8 +1544,8 @@ changing the spectrum would be invalid. We do not know whether one exists.
 By \eqref{eq:nvar}, $sD=O(\ell^2)$ and $N_{\rm var}\le\ell^2+2\ell$, so
 $f(\ell)=\exp\bigl(O(\ell^2\log(\ell+2))\bigr)$. The result is primarily structural: it
 identifies an invariant of the instance, independent of how many free rows are allowed, that
-governs the complexity bound, although the doubly exponential dependence on $\ell$ may limit
-practical applicability for large values.
+governs the complexity bound, although the factor $\exp\bigl(O(\ell^2\log(\ell+2))\bigr)$ may
+still limit practical applicability for large values of $\ell$.
 
 This is the parameterized bound; the remaining case, $r=0$, needs no search at all, and it is decided
 exactly in polynomial time next.
@@ -1379,9 +1553,9 @@ exactly in polynomial time next.
 \subsection{The zero-free-row case}\label{sec:zero}
 
 For $r=0$ only two conditions remain, and both are decidable without a
-parameter-dependent search. \eqref{eq:5a} is a constant-rank test on
+parameter-dependent search. \eqref{eq:5a} is a test for constant rank on
 $H=L_0N$, $H_A=L_0AN$ (Claim~\ref{lem:compression}(i)); \eqref{eq:5b} is the
-constancy of the rank of the degree-one pencil $\lambda X-G$. We first isolate
+constant rank of the degree-one pencil $\lambda X-G$. We first isolate
 the pencil statement.
 
 The purpose of this step is to decide the pencil without any parameter-dependent search; it is used in Proposition~\ref{prop:zero} and, through it, in Theorem~\ref{thm:fpt} for $r=0$.
@@ -1421,9 +1595,18 @@ $Q_I=E_IQ$ and $f_I=\det Q_I$. Then
 \operatorname{adj}(Q_I)E_IQ=f_II_\omega,\qquad
 \sum_Ig_If_I=1\ \text{ with }\ \deg g_I<\omega
 \end{equation*}
-by Claim~\ref{lem:bezout}. The coefficients of the $g_I$ solve a linear system with rational data,
-because the $f_I$ have rational coefficients; a rational linear system that is solvable over
-$\mathbb R$ is solvable over $\mathbb Q$, so the $g_I$ may be taken rational. The cofactors of $Q_I$
+by Claim~\ref{lem:bezout}. The coefficients of the $g_I$ solve a linear system $A\gamma=b$ with rational data $A,b$, because the
+$f_I$ have rational coefficients. Solvability over $\mathbb R$ means
+$\operatorname{rank}_{\mathbb R}A=\operatorname{rank}_{\mathbb R}[A\ b]$; ranks of rational matrices
+agree over $\mathbb Q$ and over $\mathbb R$, so
+$\operatorname{rank}_{\mathbb Q}A=\operatorname{rank}_{\mathbb Q}[A\ b]$, and the system has a
+rational solution $\gamma$. Hence the $g_I$ may be taken rational.
+
+This is the step at which the real B\'ezout certificate of Claim~\ref{lem:bezout} becomes an exact
+rational one: the multipliers are produced over $\mathbb R$, the system that defines them has rational
+data, so a rational solution exists; Proposition~\ref{prop:zero} then solves the rational system
+\eqref{eq:R0}, which is equivalent to the existence of a polynomial left inverse, and never works over
+the reals. The cofactors of $Q_I$
 are rational polynomials as well, so that
 \begin{equation*}
 S=\sum_Ig_I\operatorname{adj}(Q_I)E_I
@@ -1444,13 +1627,21 @@ the upper bound because $Q(\lambda_0)$ has $\omega$ columns.
 
 The size of \eqref{eq:R0} is fixed by $\deg S\le2\omega-2$: the unknowns are the entries of
 $2\omega-1$ matrices of size $\omega\times q$, so $N_{\rm var}=(2\omega-1)q\omega=O(q\omega^2)$,
-and the $2\omega$ matrix equations give $N_{\rm eq}=2\omega^3$ scalar equations. All coefficients
-are entries of $X$, $G$, or $0,\pm1$, so clearing denominators gives an integer system of size
-$M=O(\omega^3+q\omega^2)$ with entries of bit length $O(\mathcal L_0)$, where $\mathcal L_0$ is the
-input length of $(X,G)$. Exact fraction-free elimination costs $O(M^3)$ arithmetic operations on
-integers of $O(M(\mathcal L_0+\log M))$ bits by Hadamard's inequality, hence
-$\operatorname{poly}(q,\omega,\mathcal L_0)$ bit operations, and consistency of \eqref{eq:R0} is
-decided within that bound.
+and the $2\omega$ matrix equations give $N_{\rm eq}=2\omega^3$ scalar equations. All coefficients are entries of $X$, $G$, or
+$0,\pm1$, so clearing denominators gives an integer system whose matrices have
+$N_{\rm unk}=(2\omega-1)q\omega$ columns and at most $N_{\rm eq}=2\omega^3$ rows, with entries of bit
+length $O(\mathcal L_0)$, where $\mathcal L_0$ is the input length of $(X,G)$; let
+$M=\max\{N_{\rm unk},N_{\rm eq}\}=O(\omega^3+q\omega^2)$. Fraction-free (Bareiss) elimination on an
+$M_1\times M_2$ integer matrix of entry bit length $\tau$ performs $O(M_1M_2\min(M_1,M_2))$ arithmetic
+operations, and Bareiss elimination keeps every intermediate entry an exact integer whose absolute
+value is a minor of the original matrix, so by Hadamard's inequality these entries have bit length at
+most $M\tau+\tfrac{M}{2}\log M+1$ and each division is exact. With $M=O(\omega^3+q\omega^2)$ and
+$\tau=O(\mathcal L_0)$
+this is $\operatorname{poly}(q,\omega,\mathcal L_0)\subseteq\operatorname{poly}(n,\mathcal L)$ bit
+operations, and consistency of \eqref{eq:R0} is decided within that bound. The constants are those of
+Appendix~\ref{app:size}. For $\omega=0$ the degree
+bound $2\omega-2$ is negative and the system is not formed; that branch is the test $H_A=0$ of Step~2
+of Proposition~\ref{prop:zero}.
 
 \begin{remark}[Construction and algorithm]\label{rem:construction}
 The adjugate construction in (iii)$\Rightarrow$(iv) of Claim~\ref{lem:zero}
@@ -1560,8 +1751,9 @@ For every fixed $q$, $\mathrm{DEC}(q)\in\exists\mathbb R$. Consequently the thre
 
 \begin{proof}
 The construction below provides, for each $\omega=0,\dots,\min(q,k)$, an existential formula
-$\Phi_\omega$ whose size is counted there: $O(n^3)$ real variables and $O(n^3)$ equations of degree at
-most two, with no enumeration of column sets. The disjunction
+$\Phi_\omega$, and establishes three separate statements: (i) $\Phi_\omega$ has polynomial size,
+(ii) it is sound, and (iii) it is complete. The size is counted in the paragraph \emph{Size} of
+Section~\ref{sec:existsr}; no column set is enumerated. The disjunction
 \begin{equation}\label{eq:existsr-disj}
 \Phi=\bigvee_{\omega=0}^{\min(q,k)}\Phi_\omega
 \end{equation}
@@ -1629,6 +1821,8 @@ X_LX=I_\omega,\qquad BB_R=I_\omega,\\
 S(\lambda)(\lambda X-G)=I_\omega .
 \end{gathered}
 \end{equation*}
+For $\omega=0$ the sum over $j$ is empty: no block $S_j$ and no polynomial identity are introduced, and
+the branch is the one treated at the end of this subsection.
 The polynomial identity is linear in the coefficients $S_j$; comparing coefficients of $\lambda^j$ makes it the linear system \eqref{eq:R0}. The rank conditions $X_LX=I_\omega$ and $BB_R=I_\omega$ are polynomial equations, and $BB_R=I_\omega$ makes $B$ full row rank, hence, as in Section~\ref{sec:spectral}, $\operatorname{rank}P(\lambda)=\operatorname{rank}(\lambda X-G)=\omega$ for all $\lambda$. Also $H_A=GB=(GX_L)XB=FH$ with $F=GX_L$, so \eqref{eq:5a} holds.
 
 It remains to tie $(H,H_A)$ to the input. The rows of $H=LN$, $H_A=LAN$ satisfy, with $h_i^0=(L_0N)_i$ and $g_i^0=(L_0AN)_i$,
@@ -1640,9 +1834,21 @@ and, for the free rows, $(H_i,H_{A,i})\in\mathcal T=\operatorname{row}[N\ AN]$, 
 D\begin{bmatrix}(X_iB)^{\mathsf T}\\ (G_iB)^{\mathsf T}\end{bmatrix}=0
 \qquad(r_0<i\le q),\label{eq:B2}
 \end{equation}
-where $D$ is a rational matrix with $\ker D=\mathcal T$. Both are polynomial (in fact bilinear) equations. They are not optional: without \eqref{eq:B1}--\eqref{eq:B2} the encoding would accept arbitrary pairs $(H,H_A)$.
+where $D$ is a rational matrix with $\ker D=\mathcal T$. Both are polynomial (in fact bilinear) equations. They are not optional: without \eqref{eq:B1}--\eqref{eq:B2} the encoding would accept arbitrary pairs
+$(H,H_A)$. Both are imposed row by row: \eqref{eq:B1} reproduces each of the $r_0$ prescribed rows
+exactly, and \eqref{eq:B2} places the pair of each free row in $\mathcal T$; neither condition can be
+satisfied for one row by a combination of the other rows.
 
-The correctness splits into two independent statements.
+The construction splits into three independent statements.
+
+\paragraph*{Size}
+For each $\omega$ the encoding has
+\begin{equation*}
+O(q\omega+\omega k+q\omega+\omega q+k\omega+(2\omega-1)\omega q)=O(n^3)
+\end{equation*}
+real variables and polynomially many equations of degree at most two, with integer coefficients of bit
+length $\operatorname{poly}(\mathcal L)$ after clearing denominators; the disjunction
+\eqref{eq:existsr-disj} has at most $n+1$ branches.
 
 \paragraph*{Soundness}
 Suppose the system has a solution. Set $L$ with first $r_0$ rows $L_0$ and, for each $i>r_0$, a preimage $r_i$ with $(X_iB,G_iB)=r_i[N\ AN]$, which exists by \eqref{eq:B2}. Then $H=LN$, $H_A=LAN$ and $H_A=GB=(GX_L)XB=FH$ with $F=GX_L$, so \eqref{eq:5a} holds; and $\operatorname{rank}(\lambda H-H_A)=\operatorname{rank}(\lambda X-G)=\omega$ for all $\lambda$, which gives \eqref{eq:5b} and uses $BB_R=I_\omega$ (full row rank of $B$) together with $S(\lambda)(\lambda X-G)=I_\omega$.
@@ -1650,12 +1856,10 @@ Suppose the system has a solution. Set $L$ with first $r_0$ rows $L_0$ and, for 
 \paragraph*{Completeness}
 A feasible $L$ supplies $X,B,X_L,B_R$ from a rank factorization $H=XB$ with $B_{:,J}=I_\omega$, $G=FX$ with $H_A=FH$ (Claim~\ref{lem:compression}), and $S$ from the left-inverse construction above; then \eqref{eq:B1} and \eqref{eq:B2} hold by construction, and the remaining equations are identities.
 
-The $\omega=0$ case is the branch $H=H_A=0$, which \eqref{eq:B1} forces when $L_0N=0$ and rejects otherwise; it is a separate algebraic branch, not a degree-negative instance of \eqref{eq:R0}. The number of variables is
-\begin{equation*}
-O(q\omega+\omega k+q\omega+\omega q+k\omega+(2\omega-1)\omega q)
-=O(n^3),
-\end{equation*}
-the number of equations is polynomial, and the degree of the left inverse is $2\omega-2\le2n$. The disjunction \eqref{eq:existsr-disj} over $\omega$ has at most $n+1$ branches. Hence the encoding has polynomial size. This proves $\mathrm{DEC}(q)\in\exists\mathbb R$ for every fixed $q$, and hence $\mathrm{MINDEC}(Q)\in\exists\mathbb R$.
+The $\omega=0$ case is the branch $H=H_A=0$, which \eqref{eq:B1} forces when $L_0N=0$ and rejects
+otherwise; it is a separate algebraic branch, not a degree-negative instance of \eqref{eq:R0}. By the
+size count above the encoding has polynomial size, which proves $\mathrm{DEC}(q)\in\exists\mathbb R$
+for every fixed $q$, and hence $\mathrm{MINDEC}(Q)\in\exists\mathbb R$.
 
 That completes the algorithmic picture: four subsections, two bounds and one classification. What the
 paper does not claim, and the evidence behind each statement, is recorded in Section~\ref{sec:conclusions}.
@@ -1692,7 +1896,7 @@ Rank consistency (Claim~\ref{lem:rankcons}) & literal &
 B\'ezout with degree bound (Claim~\ref{lem:bezout}) & literal & \texttt{exists\_bezout\_family\_real} \\
 Rectangular left inverse (Claim~\ref{lem:zero}(iii)$\Rightarrow$(iv)) & abstract core &
 \texttt{exists\_leftInverse\_linear} \\
-Gram certificate, kernel identity (Proposition~\ref{prop:gram}) & ingredient &
+Gram certificate, kernel identity (Claim~\ref{prop:gram}) & ingredient &
 \texttt{sum\_sq\_eq\_zero\_iff} \\
 Coefficient system \eqref{eq:R0} $\Rightarrow$ left inverse & literal (one direction) &
 \texttt{spoly\_mul\_pencil\_eq\_one} \\
@@ -1710,7 +1914,10 @@ Encoding (Theorem~\ref{thm:existsr}) & paper-level & --- \\
 The two upper bounds are parameterized, and the parameter enters a different part of each: $q$
 governs the exponent of $\mathcal L^{O(q^2)}$, while $\ell=\operatorname{rank}(AN)$, which does not
 involve the number $r$ of free rows, governs the factor
-$\exp\bigl(O(\ell^2\log(\ell+2))\bigr)$ of Corollary~\ref{cor:time}. With no free rows the bound is
+$\exp\bigl(O(\ell^2\log(\ell+2))\bigr)$ of Corollary~\ref{cor:time}. In both bounds the polynomial
+factor is a polynomial in the length of the whole input, which includes the prescribed block, so
+neither statement is a claim of independence from the input size; what is independent of $r$ is the
+exponential factor. With no free rows the bound is
 $\operatorname{poly}(\mathcal L)$ (Section~\ref{sec:zero}). Membership in the existential theory of
 the reals holds for the prescribed-order problem and for its finite threshold version,
 $\mathrm{DEC}(q),\mathrm{MINDEC}(Q)\in\exists\mathbb R$ (Theorem~\ref{thm:existsr}). The same
@@ -1728,12 +1935,17 @@ classification --- and the paper claims none of them: the unrestricted complexit
 remains open. The alternatives concern $\mathrm{DEC}$; a polynomial-time algorithm for it would
 also settle the minimum-order question treated in the companion paper.
 
-Two items remain outside the verified core.
+Three items remain outside the verified core.
 \begin{enumerate}
-\item \textbf{The $r=0$ branch: resolved, with a residual audit.} For $r=0$ the two conditions reduce to a constant-rank test and to the constancy of the rank of the degree-one pencil $\lambda X-G$. Section~\ref{sec:zero} decides the latter by an exact, deterministic rational linear system of
-polynomial size, read off the degree bound $2\omega-2$; it returns an explicit witness. What remains
-is the line-by-line audit of the Hadamard and elimination constants in its bit bound.
-\item \textbf{Coefficient bounds.} The coefficient-size claim in Section~\ref{sec:fpt} is paper-level; its constants have not been independently audited.
+\item \textbf{The $r=0$ branch: resolved.} For $r=0$ the two conditions reduce to a test for constant rank on $H=L_0N$, $H_A=L_0AN$ and to the constant rank of the degree-one pencil $\lambda X-G$. Section~\ref{sec:zero} decides the latter by an exact, deterministic rational linear system of polynomial size, read off the degree bound $2\omega-2$, and returns an explicit witness. The Hadamard and elimination constants of its bit bound are derived in Appendix~\ref{app:size}; what remains is third-party review, not a missing derivation.
+\item \textbf{Coefficient bounds.} The coefficient-size claim in Section~\ref{sec:fpt} is paper-level; Appendix~\ref{app:size} derives it with explicit constants ($\beta\le240q\,n^5\mathcal L$ at fixed order and $\beta\le8\times10^4n^9\mathcal L$ on a chart), which have not been audited by a third party.
+\item \textbf{The complexity accounting is paper-level.} The counts of Theorem~\ref{thm:fixedq},
+Theorem~\ref{thm:fpt}, Corollary~\ref{cor:time} and Proposition~\ref{prop:zero} are not formalized:
+the artifact checks the algebraic identities, not the reductions and the counting. The chart-data
+estimate of Claim~\ref{clm:chartdata} and the coefficient estimate of Claim~\ref{lem:coeff} are
+paper-level, and the passage from the Gram identity of Claim~\ref{prop:gram} to the matrix certificate
+of Claim~\ref{clm:gramQ} is paper-level as well, the Lean evidence for the underlying step being the
+single entry recorded in Table~\ref{tab:evidence}.
 \end{enumerate}
 
 
@@ -1776,6 +1988,147 @@ short; the remaining cited facts are not formalized.
 
 
 
+
+
+\appendices
+
+\section{Explicit size bounds}\label{app:size}
+
+This appendix derives, with explicit constants, the coefficient bounds on which
+Sections~\ref{sec:fixedq} and~\ref{sec:fpt} and Table~\ref{tab:bitlen} rely, so that the audit announced
+in Section~\ref{sec:limits} can be checked line by line. Throughout, $h(X)$ is the largest bit length of
+an entry of a rational matrix $X$ (the larger of the bit lengths of numerator and denominator), $\tau$
+that of an entry of $(A,C,L_0)$, and $\mathcal L$ the input bit length; hence $\tau\le\mathcal L$ and
+$n,p,q,k,\omega,d_0\le n\le\mathcal L$. The claims are stated for $\mathcal L\ge4$; the finitely many
+smaller inputs are decided by the same algorithms at constant cost. The constants are deliberately
+coarse and are not optimized. Every application of Claim~\ref{lem:rationalbasis} below pays the factor
+$n$ of that claim, which comes from clearing the denominators of an $n$-column matrix row by row.
+
+\begin{claim}[Input data]\label{app:input}
+(i) $h(CA)\le3\mathcal L$ and $h([C;CA])\le3\mathcal L$.
+(ii) With $\rho=\operatorname{rank}[C;CA]\le n$, the entries of a basis $N$ of $\ker[C;CA]$, of a basis
+of $\operatorname{row}[C;CA]$, and of a matrix $D_0$ with $\ker D_0=\operatorname{row}[C;CA]$ have bit
+length at most $16n^2\mathcal L$.
+\end{claim}
+
+\begin{proof}
+(i) An entry of $CA$ is a sum of $n$ products of two input entries, so its bit length is at most
+$2\tau+\lceil\log_2 n\rceil\le3\mathcal L$, since $\tau\le\mathcal L$ and
+$\lceil\log_2 n\rceil\le n\le\mathcal L$. (ii) Claim~\ref{lem:rationalbasis} with $\tau\le3\mathcal L$,
+$n$ columns and $r=\rho$ gives
+$2\rho(3(n+1)\mathcal L+\log_2(\rho+1)+1)+1\le2n(3(n+1)\mathcal L+\mathcal L+1)+1\le16n^2\mathcal L$,
+the last step because $10n^2\mathcal L\ge8n\mathcal L+2n+1$.
+\end{proof}
+
+\begin{claim}[Compressed data]\label{app:compressed}
+$h(AN)\le18n^2\mathcal L$, $h(M)\le18n^2\mathcal L$, $h(D)\le112n^4\mathcal L$,
+$h(h^0)\le18n^2\mathcal L$ and $h(g^0)\le20n^2\mathcal L$.
+\end{claim}
+
+\begin{proof}
+An entry of $AN$ is a sum of $n$ products, so
+$h(AN)\le\tau+h(N)+\lceil\log_2 n\rceil\le\mathcal L+16n^2\mathcal L+\mathcal L\le18n^2\mathcal L$,
+and $h(M)\le18n^2\mathcal L$ because $M=[N\ AN]$ contains $N$. Claim~\ref{lem:rationalbasis} with
+$\tau=18n^2\mathcal L$, $2k\le2n$ columns and $r=d_0\le n$ gives
+\begin{equation*}
+\begin{aligned}
+h(D)&\le2n\bigl(18n^2\mathcal L(2n+1)+\mathcal L+1\bigr)+1\\
+&=72n^4\mathcal L+36n^3\mathcal L+2n\mathcal L+2n+1\le112n^4\mathcal L .
+\end{aligned}
+\end{equation*}
+The products $h^0=L_0N$ and $g^0=L_0AN$ add one input entry and $\lceil\log_2 n\rceil$ to $h(N)$ and
+$h(AN)$.
+\end{proof}
+
+\begin{claim}[Data of the zero-free-row case]\label{app:zero}
+For $r=0$: $h(X)\le18n^2\mathcal L$ and $h(G)\le230n^4\mathcal L$; every coefficient of a maximal
+minor of $\lambda X-G$ has bit length at most $232n^5\mathcal L$, and every entry of
+$Z^{\mathsf T}Z$ at most $470n^5\mathcal L$.
+\end{claim}
+
+\begin{proof}
+$X$ is a submatrix of $H=L_0N$, so $h(X)\le18n^2\mathcal L$. The matrix $H^{\mathsf T}H$ is $k\times k$
+with entries of bit length at most $2\cdot18n^2\mathcal L+\log_2 k\le38n^2\mathcal L$ and rank $\omega$;
+by Claim~\ref{lem:rationalbasis} its inverse has entries of bit length at most $160n^4\mathcal L$, so the
+left inverse $H_L=(H^{\mathsf T}H)^{-1}H^{\mathsf T}$ of $H$ has entries of bit length at most
+$180n^4\mathcal L$. Put $F=H_AH_L$ and $G=FX$; then $FH=H_A$ and $GB=FH=H_A$ for the pivot
+factorisation $H=XB$, and
+$h(G)\le20n^2\mathcal L+180n^4\mathcal L+18n^2\mathcal L+\log_2(kq)\le230n^4\mathcal L$. A coefficient
+of a maximal minor is a sum of products of $\omega$ entries of $X$ and $G$, so its bit length is at most
+$\omega(230n^4\mathcal L+\log_2\omega+1)\le232n^5\mathcal L$. An entry of $Z^{\mathsf T}Z$ is a sum of
+at most $\omega\cdot\#\{I\}$ products of two such coefficients, so its bit length is at most
+$2\cdot232n^5\mathcal L+\log_2(\omega\cdot\#\{I\})+1\le470n^5\mathcal L$, where
+$\log_2(\omega\cdot\#\{I\})\le\log_2\omega+2\omega\log_2 n\le3n\mathcal L$.
+\end{proof}
+
+\begin{claim}[System of the fixed-order algorithm]\label{app:phi}
+Every coefficient of every polynomial of $\Phi_{\omega,J}$ has bit length at most
+$240q\,n^5\mathcal L$.
+\end{claim}
+
+\begin{proof}
+The coefficients are $\pm1$, entries of $h^0$, $g^0$ or $D$, products of at most two such entries, or
+monomial coefficients of $Z_Q^{\mathsf T}Z_Q$; the latter are sums of at most $\omega\cdot\#\{I\}$
+signs, of bit length at most $3n\mathcal L$. The rank-consistency polynomials
+$e_t(MM^{\mathsf T})$ and $e_{t+1}(MM^{\mathsf T}+cc^{\mathsf T})$ of Claim~\ref{lem:rankcons} have
+degree at most $2t\le2qk$ in the variables, because $t\le\min\{\text{rows},\text{cols}\}(M)$ and
+$\text{cols}(M)\le\omega(k-\omega)\le qk$; a coefficient is a sum of products of at most $2t$ entries
+of $h^0$, $g^0$ or $D$, and the number of summands contributes at most
+$2t\log_2(2q\omega)\le4qn\mathcal L$ bits. With $h(D)\le112n^4\mathcal L$ and $t\le qn$ this gives at
+most $224q\,n^5\mathcal L+4qn\mathcal L\le240q\,n^5\mathcal L$, the other terms being smaller.
+\end{proof}
+
+\begin{claim}[System of the zero-free-row case]\label{app:r0}
+The system \eqref{eq:R0} has $N_{\rm unk}=(2\omega-1)q\omega\le2n^3$ unknowns and
+$N_{\rm eq}=2\omega^3\le2n^3$ equations, with entries of bit length at most $230n^4\mathcal L$. With
+$M=\max\{N_{\rm unk},N_{\rm eq}\}\le4n^3$ and $\tau_0=230n^4\mathcal L$, fraction-free elimination keeps
+integers of bit length at most $M\tau_0+\tfrac{M}{2}\log_2M+1\le930n^7\mathcal L$ and performs $O(M^3)$
+arithmetic operations, that is $O(n^{23}\mathcal L^2)$ bit operations.
+\end{claim}
+
+\begin{proof}
+The unknowns are the entries of $2\omega-1$ matrices of size $\omega\times q$, and the equations are
+the $2\omega$ matrix equations, each of $\omega^2$ scalar equations; their coefficients are entries of
+$X$, $G$ or $\pm1$, of bit length at most $230n^4\mathcal L$ by Claim~\ref{app:zero}. The estimate on
+the intermediate integers is the Bareiss--Hadamard argument of the proof of Claim~\ref{lem:zero}: every
+intermediate entry is a minor of the integer system, hence of bit length at most
+$M\tau_0+\tfrac{M}{2}\log_2M+1$. With $M\le4n^3$, $\tau_0\le230n^4\mathcal L$ and
+$\log_2M\le2+3\log_2 n\le5n$, this is at most $920n^7\mathcal L+10n^4+1\le930n^7\mathcal L$. The
+elimination performs $O(M^3)\le64n^9$ arithmetic operations on integers of at most
+$930n^7\mathcal L$ bits, hence $O(n^{23}\mathcal L^2)$ bit operations.
+\end{proof}
+
+\begin{claim}[Chart data]\label{app:chart}
+$h(E_0)\le130n^4\mathcal L$ and $h(E_Q)\le39000n^8\mathcal L$; every coefficient of every polynomial
+of $\Psi_{t,\omega}$ has bit length at most $78500n^9\mathcal L$.
+\end{claim}
+
+\begin{proof}
+Bases of $\mathcal T$ and of $S$ have entries of bit length at most $112n^4\mathcal L$ and
+$76n^4\mathcal L$ by Claim~\ref{lem:rationalbasis} and Claim~\ref{app:compressed};
+$h(L_0M)\le20n^2\mathcal L$, so a basis of $W_0$ has entries of bit length at most
+$130n^4\mathcal L$, which bounds $E_0$. The matrix $[A_{\mathcal T};-A_{\mathcal V}]$ of
+Claim~\ref{clm:chartdata} has at most $3n$ rows, $2k\le2n$ columns and entries of bit length at most
+$112n^4\mathcal L$, so a kernel basis has entries of bit length at most $2100n^6\mathcal L$, which
+bounds a basis of $\mathcal V$; row reduction of $[E_0;F_{\mathcal V}]$ then gives
+$h(E_Q)\le39000n^8\mathcal L$. The entries of $H(Y),G(Y)$ are affine in $Y$ with coefficients from
+$E_0$ and $E_Q$, so a coefficient of a maximal minor of $\lambda H(Y)-G(Y)$ is a sum of products of
+$\omega$ such coefficients, of bit length at most $39100n^9\mathcal L$, and a coefficient of
+$Z(Y)^{\mathsf T}Z(Y)$ is a sum of at most $\omega\cdot\#\{I\}$ products of two of them, of bit length
+at most $78500n^9\mathcal L$.
+\end{proof}
+
+\begin{claim}[Summary]\label{app:summary}
+The coefficient bit lengths entering \eqref{eq:rengar} satisfy $\beta\le240q\,n^5\mathcal L$ in
+Theorem~\ref{thm:fixedq} and $\beta\le78500n^9\mathcal L$ in Theorem~\ref{thm:fpt}, and the system of
+Proposition~\ref{prop:zero} has the size and the cost stated in Claim~\ref{app:r0}.
+\end{claim}
+
+Every step above is an instance of one of two elementary estimates: Hadamard's inequality for a
+determinant of an integer matrix with entries of known bit length, and the fact that a sum of $T$
+integers of bit length $b$ has bit length at most $b+\lceil\log_2 T\rceil$. Applied to the objects named
+in Table~\ref{tab:bitlen}, they give the bounds of the summary; no estimate in
+Sections~\ref{sec:fixedq}--\ref{sec:fpt} goes beyond them.
 
 \begin{thebibliography}{99}
 \bibitem{fer10} J. A. Fernando, H. Trinh, L. Jennings. Functional observability and the design of minimum order linear functional observers. \emph{IEEE Trans. Automat. Control} 55(5):1268--1273, 2010.
