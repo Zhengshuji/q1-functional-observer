@@ -211,3 +211,9 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.PaperI.pairSign
 #print axioms Q1Paper.PaperI.pairSign_sq
 #print axioms Q1Paper.PaperI.windowRow_inj_eq_sign_mul
+#print axioms Q1Paper.PaperI.windowInj
+#print axioms Q1Paper.PaperI.windowSub
+#print axioms Q1Paper.PaperI.sum_prod_snd
+#print axioms Q1Paper.PaperI.sum_snd_prod
+#print axioms Q1Paper.PaperI.gram_entry_inj_eq
+#print axioms Q1Paper.PaperI.gram_inj_eq_factorial_smul
