@@ -174,6 +174,18 @@ PaperI/GramKernel.lean，维数约定与论文一致：P : Matrix (Fin q) (Fin �
 
 下一步（§III-D 第 3 层）：系数恒等式 S_{a,b} = ∑_i c_{i,a}c_{i,b} 与 ZᵀZ 的逐项对应。
 
+### 4.6 §III-D：系数恒等式（已闭）
+
+`PaperI/GramCoefficients.lean`：
+
+- `eval_eq_sum_fin_coeff`：`natDegree p ≤ ω` 时 `p.eval x = ∑_{a : Fin (ω+1)} coeff p a · x^a`（固定次数窗口，避免零多项式的 `natDegree` 约定问题）；
+- `minorCoeff P ω a I J`：子式 `f_{I,J}` 的 `X^a` 系数；
+- `coeffGram P ω a b = ∑_I ∑_J c_{I,J,a} c_{I,J,b}`；
+- **`gramKernelEval_eq_coeff_sum`**：在 `deg f_{I,J} ≤ ω` 下，
+  `K(lam,mu) = ∑_{a,b : Fin (ω+1)} S_{a,b} lam^a mu^b`（先 `gramKernelEval_eq_double_sum`，再逐项展开系数、两次 `Finset.sum_comm` 换序、`Finset.sum_mul` 提出常数）。
+
+下一步（§III-D 最后一层）：窗口矩阵的逐项 `(ZᵀZ)_{t,t'} = ∑_j S_{t-j,t'-j}`，再用 `Matrix.ext` 得矩阵等式。
+
 ## 5. 验证记录（可复现）
 
 - Claim 11 完成：commit `e28ee61`（`Paper I: Claim 11 complete`）；
