@@ -145,3 +145,9 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms exteriorPower.sum_plucker_mul_plucker
 #print axioms Matrix.det_mul_eq_sum_plucker
 #print axioms Matrix.det_mul_eq_sum_det_submatrix
+
+-- Section III-D: Gram kernel
+#print axioms Q1Paper.PaperI.selectedCols
+#print axioms Q1Paper.PaperI.gramKernelEval
+#print axioms Q1Paper.PaperI.gramKernelEval_eq_double_sum
+#print axioms Q1Paper.PaperI.gramKernelEval_eq_zero_of_lt

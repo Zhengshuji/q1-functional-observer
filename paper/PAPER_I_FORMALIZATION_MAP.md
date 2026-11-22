@@ -69,10 +69,13 @@
 | `PaperI/SpectralMinor` | 铅笔 `λH − H_A`、`pencil_map_eval`、`spectral_iff_minors` | Claim 11（中间等价） |
 | `PaperI/Complexify` | 复化不改变秩（`rank_map_ofReal`） | Claim 11（域桥） |
 | `PaperI/Claim11Final` | **`claim11_iff_gram`**、次数界、实谱等价 | **Claim 11 完整** |
+| `PaperI/Claim12` | `claim12_iff_gram`、`exists_left_inverse_of_rank_eq` | **Claim 12 完整** |
+| `PaperI/CauchyBinet` | 方形 Cauchy–Binet（移植，Apache-2.0）：`Matrix.det_mul_eq_sum_det_submatrix` | §III-D 压缩的代数基础 |
+| `PaperI/GramKernel` | `selectedCols`、`gramKernelEval`、**`gramKernelEval_eq_double_sum`**、ω>ℓ 边界 | §III-D 第 1–2 层 |
 
 ## 3. 公理审计
 
-- `Q1Paper/PaperI/Audit.lean` 对 **89 条**声明执行 `#print axioms`。
+- `Q1Paper/PaperI/Audit.lean` 对 **101 条**声明执行 `#print axioms`。
 - 本机结果：全部为 `[propext, Classical.choice, Quot.sound]`（部分为 `[propext, Quot.sound]`）。
 - CI 步骤：`lake env lean Q1Paper/PaperI/Audit.lean > paperI_audit.log` 后运行
   `scripts/check_paperI_axioms.py paperI_audit.log`，出现白名单外的公理或**没有任何审计行**都会失败。
@@ -143,30 +146,40 @@
 
 ### 4.4 §III-D：方形 Cauchy–Binet（已移植）
 
-PaperI/CauchyBinet.lean 给出 §III-D 需要的方形 Cauchy–Binet：
+`PaperI/CauchyBinet.lean` 给出 §III-D 需要的方形 Cauchy–Binet：
 
-`
+```
 Matrix.det_mul_eq_sum_det_submatrix (A : Matrix (Fin m) ι R) (B : Matrix ι (Fin m) R) :
   (A * B).det = ∑ s : Set.powersetCard ι m,
     (A.submatrix id ((s : Finset ι).orderEmbOfFin …)).det *
     (B.submatrix ((s : Finset ι).orderEmbOfFin …) id).det
-`
+```
 
 - 来源：Ralf Stephan，
-wst/Subspace-Theorems，ArithmeticHeights/{Plucker,RowSpace,CauchyBinet}.lean，**Apache-2.0**；
-  本仓库的移植去掉 module/public/[expose]，只保留所需切片，文件头保留归属与许可证说明。
-- 上游 toolchain 为 4.35.0-rc3（与本项目 4.35.0 基本一致），移植只改了变量声明，证明未改。
+rwst/Subspace-Theorems，ArithmeticHeights/{Plucker,RowSpace,CauchyBinet}.lean，**Apache-2.0**；
+  本仓库的移植去掉 `module`/`public`/`[expose]`，只保留所需切片，文件头保留归属与许可证说明。
+- 上游 toolchain 为 `v4.35.0-rc3`（与本项目 4.35.0 基本一致），移植只改了变量声明，证明未改。
 - 主要声明：exteriorPower.plucker, exteriorPower.plucker_apply,
   Matrix.plucker_row_eq_det_submatrix, exteriorPower.sum_plucker_mul_plucker,
   Matrix.det_mul_eq_sum_plucker, Matrix.det_mul_eq_sum_det_submatrix。
-- 下一步：gramKernel、双重极大子式展开、系数恒等式 S_{a,b}=\sum_i c_{i,a}c_{i,b}。
+
+### 4.5 §III-D：gramKernel（第 1–2 层已闭）
+
+PaperI/GramKernel.lean，维数约定与论文一致：P : Matrix (Fin q) (Fin ℓ) K[X]，列子集 J : Set.powersetCard (Fin ℓ) ω，行子集 I : Set.powersetCard (Fin q) ω。
+
+- selectedCols P J：P 的第 J 列（q × ω，orderEmbOfFin 规范枚举）；
+- gramKernelEval ω P lam mu = ∑_J det (P(lam)_{:,J}ᵀ P(mu)_{:,J})（ω 显式参数，因为它不出现在 P 的类型里）；
+- **gramKernelEval_eq_double_sum**：K(lam,mu) = ∑_I ∑_J f_{I,J}(lam) f_{I,J}(mu)，对每个 J 调用移植的方形 Cauchy–Binet 再交换求和；
+- gramKernelEval_eq_zero_of_lt：ω > ℓ 时 K = 0（列子集索引类型为空）。
+
+下一步（§III-D 第 3 层）：系数恒等式 S_{a,b} = ∑_i c_{i,a}c_{i,b} 与 ZᵀZ 的逐项对应。
 
 ## 5. 验证记录（可复现）
 
 - Claim 11 完成：commit `e28ee61`（`Paper I: Claim 11 complete`）；
 - 修复仓库与 WSL 不同步：commit `7101d1d`（同步 `SpectralMinor.lean` 的注入性版本）；
 - CI run `#45026225331` 全绿（lean / Paper I axiom audit / 三篇论文 / verify）；
-- 公理审计：89 条声明，允许集 `{propext, Classical.choice, Quot.sound}`；
+- 公理审计：101 条声明，允许集 `{propext, Classical.choice, Quot.sound}`；
 - 同步检查：`diff` 核对 WSL 工程与仓库的 11 个 Paper I 文件，全部一致。
 
 ## 6. 边界
