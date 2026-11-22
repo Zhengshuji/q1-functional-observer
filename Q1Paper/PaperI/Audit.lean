@@ -223,3 +223,11 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.PaperI.preimagePair
 #print axioms Q1Paper.PaperI.imagePair_preimagePair
 #print axioms Q1Paper.PaperI.rowSpan_windowInj_eq
+#print axioms Q1Paper.PaperI.nat_size_prod_le
+#print axioms Q1Paper.PaperI.mat_den_size_le_sum
+#print axioms Q1Paper.PaperI.inputLen
+#print axioms Q1Paper.PaperI.bitLenMat_le_inputLen
+#print axioms Q1Paper.PaperI.bStepNum_zero_eq_minor2
+#print axioms Q1Paper.PaperI.sylvester_two
+#print axioms Q1Paper.PaperI.bareiss_step_one_exact
+#print axioms Q1Paper.PaperI.bitLenInt_bMinor_le

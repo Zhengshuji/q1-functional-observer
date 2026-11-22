@@ -62,6 +62,8 @@ import Q1Paper.PaperI.GramCert
 import Q1Paper.PaperI.RowSpanBridge
 import Q1Paper.PaperI.BitLen
 import Q1Paper.PaperI.BitLenAdd
+import Q1Paper.PaperI.InputLen
+import Q1Paper.PaperI.BareissBase
 
 /-!
 ## What is imported here
