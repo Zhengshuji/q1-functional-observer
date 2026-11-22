@@ -90,7 +90,7 @@ States are kept separate: `Mathematically proved` (M) and `Lean formalized` (F);
 | A. D1 bridge + §III-D assembly | main line | in progress (step 1 of 6 done) |
 | B. Paper corrections | paper agent / main line | **done** (commit `f6be7a4`) |
 | C. Claim 19: math re-derivation | math agent | **done** (report) |
-| C'. Claim 19: paper appendix rewrite | paper agent | pending |
+| C'. Claim 19: paper appendix rewrite | paper agent | **done** (commit `ca0305b`) |
 | D. Claim 13 bit length (`bitLenRat_add`, Leibniz) | Lean agent | **done** |
 | E. Bareiss intermediates | algorithm agent | to launch |
 | F. Roadmap / map / audit consistency | main line | continuous |

@@ -1975,7 +1975,7 @@ also settle the minimum-order question treated in the companion paper.
 
 Three items remain outside the verified core.
 \begin{enumerate}
-\item \textbf{The $r=0$ branch: resolved.} For $r=0$ the two conditions reduce to a test for constant rank on $H=L_0N$, $H_A=L_0AN$ and to the constant rank of the degree-one pencil $\lambda X-G$. Section~\ref{sec:zero} decides the latter by an exact, deterministic rational linear system of polynomial size, read off the degree bound $2\omega-2$, and returns an explicit witness. The Hadamard and elimination constants of its bit bound are derived in Appendix~\ref{app:size}: the left inverse of $H$ is obtained from Cramer's rule on an invertible $\omega\times\omega$ minor of $H$ (not from $H^{\mathsf T}H$, which is singular unless $\omega=k$), the resulting bounds are $h(G)\le20n^2\mathcal L$ and $O(n^{21}\mathcal L^2)$ bit operations, and what remains is third-party review, not a missing derivation.
+\item \textbf{The $r=0$ branch: algorithm resolved, appendix estimates revised.} For $r=0$ the two conditions reduce to a test for constant rank on $H=L_0N$, $H_A=L_0AN$ and to the constant rank of the degree-one pencil $\lambda X-G$. Section~\ref{sec:zero} decides the latter by an exact, deterministic rational linear system of polynomial size, read off the degree bound $2\omega-2$, and returns an explicit witness. The bit-length estimates of Appendix~\ref{app:size} have been revised: the row-coefficient matrix $F$ with $FH=H_A$ is now constructed by Cramer's rule on an invertible $\omega\times\omega$ minor of $H$ (not from $H^{\mathsf T}H$, which is singular unless $\omega=k$), and the resulting bounds are $h(G)\le20n^2\mathcal L$ and $O(n^{21}\mathcal L^2)$ bit operations. The core decidability argument of Proposition~\ref{prop:zero} is unaffected; the explicit estimates have not yet been reviewed independently.
 \item \textbf{Coefficient bounds.} The coefficient-size claim in Section~\ref{sec:fpt} is paper-level; Appendix~\ref{app:size} derives it with explicit constants ($\beta\le240q\,n^5\mathcal L$ at fixed order and $\beta\le8\times10^4n^9\mathcal L$ on a chart), which have not been audited by a third party.
 \item \textbf{The complexity accounting is paper-level.} The counts of Theorem~\ref{thm:fixedq},
 Theorem~\ref{thm:fpt}, Corollary~\ref{cor:time} and Proposition~\ref{prop:zero} are not formalized:
@@ -2081,8 +2081,9 @@ $h(AN)$.
 \end{proof}
 
 \begin{claim}[Data of the zero-free-row case]\label{app:zero}
-For $r=0$: $h(X)\le18n^2\mathcal L$ and $h(G)\le20n^2\mathcal L$; every coefficient of a maximal
-minor of $\lambda X-G$ has bit length at most $22n^3\mathcal L$, and every entry of
+For $r=0$ with $1\le\omega\le\min(q,k)$ (the case $\omega=0$ is step~2 of
+Proposition~\ref{prop:zero}): $h(X)\le18n^2\mathcal L$ and $h(G)\le20n^2\mathcal L$; every coefficient of
+a maximal minor of $\lambda X-G$ has bit length at most $22n^3\mathcal L$, and every entry of
 $Z^{\mathsf T}Z$ at most $47n^3\mathcal L$.
 \end{claim}
 
@@ -2091,22 +2092,29 @@ $X$ is a submatrix of $H=L_0N$, so $h(X)\le18n^2\mathcal L$. Since $\operatornam
 row and column sets $I\subseteq[q]$, $J\subseteq[k]$ with $|I|=|J|=\omega$ and $\det H_{I,J}\ne0$; these
 are the pivot rows and columns of the elimination of Section~\ref{sec:pivot}. Clearing one common
 denominator per row and applying Hadamard, $\det H_{I,J}$ has bit length at most
-$\omega(\omega+1)\,18n^2\mathcal L+\tfrac{\omega}{2}\log_2\omega+1\le37n^4\mathcal L$ (the same
-computation with the entries of $H_A$, of bit length at most $20n^2\mathcal L$, gives the bound
-$41n^4\mathcal L$ for the Cramer numerators below). Define $F\in\mathbb Q^{q\times q}$ by
+$\omega(\omega+1)\,18n^2\mathcal L+\tfrac{\omega}{2}\log_2\omega+1\le37n^4\mathcal L$; the same
+computation with the entries of $H_A$ (bit length at most $20n^2\mathcal L$) bounds the Cramer
+numerators below by $41n^4\mathcal L$. Define $F\in\mathbb Q^{q\times q}$ by
 \[
 F_{i,I_a}=\frac{\det H^{(i,a)}_{I,J}}{\det H_{I,J}}\qquad(1\le a\le\omega),\qquad F_{i,b}=0\quad(b\notin I),
 \]
 where $H^{(i,a)}_{I,J}$ is $H_{I,J}$ with its $a$-th \emph{row} replaced by
 $\bigl((H_A)_{i,j}\bigr)_{j\in J}$. Because $\operatorname{row}H_A\subseteq\operatorname{row}H
 =\operatorname{row}H_{I,:}$ (step~1 of Proposition~\ref{prop:zero}), Cramer's rule for the row-vector
-system $yH_{I,J}=h$ gives $FH=H_A$; the numerator replaces a row, not a column, since the system is a
-row-vector system. Hence $h(F)\le41n^4\mathcal L$. With the pivot factorization $H=XB$ ($X=H_{:,J}$,
-$B=H_{I,:}$) put $G=H_{A,J}$; then $G=FX$ and $GB=H_A$, so $(X,G)$ is the pair used by the algorithm,
-and $h(G)\le20n^2\mathcal L$. A coefficient of a maximal minor of $\lambda X-G$ is a signed sum of
+system $yH_{I,J}=h$ gives $FH=H_A$; the numerator replaces a row, not a column, because the system is a
+row-vector system. \emph{Height of $F$.} The numerator and denominator are determinants of integer
+matrices obtained from $H$ and $H_A$ by clearing one common denominator per row, so their bit lengths
+are at most $41n^4\mathcal L$ and $37n^4\mathcal L$; the common row denominators cancel in the quotient,
+and reducing a quotient of two integers of bit length $b_1,b_2$ cannot raise the bit length above
+$\max\{b_1,b_2\}$. Hence $h(F)\le41n^4\mathcal L$. \emph{The pair $(X,G)$.} Put $X=H_{:,J}$ and, for the
+pivot factorization, $B=H_{I,J}^{-1}H_{I,:}$ (so that $H=XB$; if the elimination normalizes the pivot
+block to $H_{I,J}=I_\omega$ this is simply $B=H_{I,:}$). Put $G=H_{A,J}$; then $G=FX$ and $GB=H_A$, so
+$(X,G)$ is the pair used by the algorithm, and $h(G)\le20n^2\mathcal L$. A coefficient of a maximal
+minor of $\lambda X-G$ is a signed sum of at most $\omega!\binom{\omega}{j}\le\omega!\,2^\omega$
 products of $\omega$ entries of $X$ and $G$, so its bit length is at most
-$\omega(20n^2\mathcal L+\log_2\omega+1)\le22n^3\mathcal L$. An entry of $Z^{\mathsf T}Z$ is a sum of
-at most $\omega\cdot\#\{I\}$ products of two such coefficients, so its bit length is at most
+$\omega(20n^2\mathcal L+\log_2\omega+1)+\omega+\log_2(\omega!)\le22n^3\mathcal L$, using
+$\log_2(\omega!)\le\omega\log_2\omega\le\omega n$. An entry of $Z^{\mathsf T}Z$ is a sum of at most
+$\omega\cdot\#\{I\}$ products of two such coefficients, so its bit length is at most
 $2\cdot22n^3\mathcal L+\log_2(\omega\cdot\#\{I\})+1\le47n^3\mathcal L$, where
 $\log_2(\omega\cdot\#\{I\})\le\log_2\omega+2\omega\log_2n\le3n\mathcal L$.
 \end{proof}
@@ -2133,8 +2141,8 @@ The system \eqref{eq:R0} has $N_{\rm unk}=(2\omega-1)q\omega\le2n^3$ unknowns an
 $N_{\rm eq}=2\omega^3\le2n^3$ equations. Clearing one common denominator per equation gives an integer
 system with entries of bit length at most $\tau_1\le61n^3\mathcal L$. With
 $M=\max\{N_{\rm unk},N_{\rm eq}\}\le2n^3$, fraction-free elimination keeps integers of bit length at
-most $M\tau_1+\tfrac{M}{2}\log_2M+1\le123n^6\mathcal L$ and performs $O(M^3)\le8n^9$ arithmetic
-operations, that is $O(n^{21}\mathcal L^2)$ bit operations.
+most $M\tau_1+\tfrac{M}{2}\log_2M+1\le123n^6\mathcal L$ and performs $O(M^3)$ arithmetic operations (at
+most $8n^9$), that is $O(n^{21}\mathcal L^2)$ bit operations.
 \end{claim}
 
 \begin{proof}
