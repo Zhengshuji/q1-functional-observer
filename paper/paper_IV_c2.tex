@@ -886,8 +886,8 @@ $L_D=\mathbb Q(\mu+\bar\mu,\mu\bar\mu)$ in branch~C, of degree $d_D\le k^2$ in e
 parameter space below is an affine space, hence irreducible, so a chart has a
 single \emph{function field} $K(s)$, the field of rational functions in its parameters.
 
-Recall from \cite{companion3} that the generic-gcd criterion rests on two facts in this situation: at an
-admissible point the degree of the generic $\lambda$-gcd bounds the degree of the specialised gcd from
+Recall from \cite{companion3} that the generic-gcd criterion rests on two facts in this situation: at every
+point of a chart the degree of the generic $\lambda$-gcd bounds the degree of the specialised gcd from
 below, and a constant generic gcd forces the chart to contain a real feasible point, because the real points
 are Zariski dense. Lemma~\ref{lem:genericgcd} states and proves both facts for the charts at hand;
 Claim~\ref{clm:admissible} first shows that every point of every chart is admissible, so no point ever has
@@ -929,72 +929,101 @@ would have to annihilate $\det H_{I,J}$, which is impossible.
 \end{proof}
 
 \begin{lem}[specialization and generic $\lambda$-gcd]\label{lem:genericgcd}
-Let $K\subseteq\mathbb R$ be a subfield, let $S\subseteq\mathbb R^N$ be a nonempty Zariski-open set, and let
-$M_1,\dots,M_r\in K[s,\lambda]$, $r\ge1$, be the maximal minors of a cleared pencil, polynomial in
-$s=(s_1,\dots,s_N)$ and in $\lambda$. Assume
+Let $M_1,\dots,M_r\in K[s,\lambda]$, $r\ge1$, be the maximal minors of a cleared pencil of a chart,
+polynomial in $s=(s_1,\dots,s_N)$ and in $\lambda$, and assume:
 \begin{enumerate}[label=\textbf{(H\arabic*)},leftmargin=*,itemsep=1pt,topsep=2pt]
-\item some $M_{i_0}$ has $\lambda$-degree exactly $d_0\ge0$, and its $\lambda$-leading coefficient is a
-unit of $K[s,1/\delta]$, hence non-vanishing on $S$; a non-zero constant of $K$ suffices, and that is
-the case of Claim~\ref{clm:admissible};
-\item $S$ is irreducible over $K$; this holds for the charts above, whose parameter space is an affine
-space, and it is what makes the function field below a single field.
+\item $K$ is a number field embedded in $\mathbb R$, so $K\subseteq\mathbb R$ is infinite and of
+characteristic $0$, and the coordinate ring $K[s]=K[s_1,\dots,s_N]$ is a unique factorisation domain with
+fraction field $K(s)$;
+\item the chart's real parameter space is a non-empty real affine space, written $\mathbb R^N$ after an
+affine change of coordinates, and the chart denominators do not vanish on it: the chart proper is the
+non-empty Zariski-open set $S=\{s\in\mathbb R^N:\ \delta(s)\neq0\}$ for some $0\neq\delta\in K[s]$;
+\item some $M_{i_0}$ has $\lambda$-degree exactly $d_0\ge0$, and its $\lambda$-leading coefficient is a unit
+of $K[s,1/\delta]$, hence non-vanishing on $S$; a non-zero constant of $K$ suffices, and that is the case
+of Claim~\ref{clm:admissible};
+\item the density used is that of the $K$-rational, equivalently real, points of a non-empty real affine
+space: a non-zero polynomial in $N$ variables over $K$ vanishes neither on all of $\mathbb R^N$ nor on all
+of $K^N$.
 \end{enumerate}
 Let $g\in K(s)[\lambda]$ be the monic gcd of $M_1,\dots,M_r$ over the function field $K(s)$, the field of
 rational functions in the chart parameters over the coefficient field $K$; call $g$ the \emph{generic
 $\lambda$-gcd} of the chart. Then:
 \begin{enumerate}[label=(\arabic*),leftmargin=*,itemsep=1pt,topsep=2pt]
 \item $g$ lies in $K[s,1/\delta][\lambda]$ and is monic in $\lambda$ (in $K[s][\lambda]$ when the leading
-coefficient in \textbf{(H1)} is a constant); its $\lambda$-degree is therefore the same at every point of
-$S$, namely $\deg_\lambda g$, and $g(s,\cdot)$ divides every $M_i(s,\cdot)$ in $K[\lambda]$;
+coefficient in \textbf{(H3)} is a constant); its $\lambda$-degree is therefore the same at every point of
+$S$, namely $\deg_\lambda g$, and $g(s,\cdot)$ divides every $M_i(s,\cdot)$ in $\mathbb R[\lambda]$ (in
+$K[\lambda]$ when $s$ is $K$-rational);
 \item if $\deg_\lambda g\ge1$, then
-$\deg_\lambda\gcd\bigl(M_1(s,\cdot),\dots,M_r(s,\cdot)\bigr)\ge\deg_\lambda g\ge1$ for every $s$, so no
-point of the chart, admissible or not, has a constant $\lambda$-gcd;
+$\deg_\lambda\gcd\bigl(M_1(s,\cdot),\dots,M_r(s,\cdot)\bigr)\ge\deg_\lambda g\ge1$ for every $s\in S$, so
+no point of the chart, admissible or not, has a constant $\lambda$-gcd;
 \item if $\deg_\lambda g=0$, the set of $s\in S$ whose specialised gcd is not constant is contained in a
 proper Zariski-closed subset of $S$; since the real points of a nonempty Zariski-open subset of
 $\mathbb R^N$ are Zariski dense, $S$ contains a real point at which the specialised gcd is $1$.
 \end{enumerate}
-Consequently, if every point of $S$ is admissible, the generic $\lambda$-gcd has positive degree if and only
-if every admissible specialisation has positive degree, and it has degree $0$ if and only if some real point
-of $S$ has constant specialised gcd.
+Consequently the generic $\lambda$-gcd has positive degree if and only if every point of $S$ has positive
+specialised degree, and it has degree $0$ if and only if some real point of $S$ has constant specialised
+gcd; when every point of $S$ is admissible, as on the charts of Claim~\ref{clm:admissible}, the same
+statements hold with ``admissible specialisation'' in place of ``point of $S$''.
 \end{lem}
 
 \begin{proof}
-(1) Assume first $d_0\ge1$ and fix $s_0\in S$. Let $R=K[s]_{(s_0)}$ be the local ring at $s_0$, with maximal
-ideal $\mathfrak m$ and fraction field $K(s)$, and write $\operatorname{ord}$ for the order with respect to
-$\mathfrak m$. By \textbf{(H1)} the $\lambda$-leading coefficient of $M_{i_0}$ is a unit of
-$K[s,1/\delta]\subseteq R$, hence a unit of $R$, so
-$M_{i_0}$ has $\lambda$-degree $d_0$ over $R$ as well. Write $g=\sum_{i=0}^{e}g_i\lambda^i$ with $g_e=1$
-and $M_{i_0}=g\,h$ with $h=\sum_{j=0}^{d_0-e}b_j\lambda^j\in K(s)[\lambda]$; then $b_{d_0-e}$, the
-$\lambda$-leading coefficient of $M_{i_0}$, is a unit of $R$. Suppose some $g_i\notin R$, and put
-$r=\max_i(-\operatorname{ord}g_i)>0$ and $q=\max_j(-\operatorname{ord}b_j)\ge0$. Let
-$G_0=\sum_{\operatorname{ord}g_i=-r}c_i\lambda^i$ and
-$H_0=\sum_{\operatorname{ord}b_j=-q}\beta_j\lambda^j$ be the associated leading forms, non-zero polynomials
-over the residue field $R/\mathfrak m$. The associated graded ring
-$\bigoplus_{n\ge0}\mathfrak m^n/\mathfrak m^{n+1}$ is a polynomial ring over that field, hence a domain, so
-the leading form of the product $M_{i_0}=g\,h$ is $G_0H_0$, of order $r+q\ge1$. But
-$M_{i_0}\in K[s][\lambda]$ has leading form $M_{i_0}(s_0,\lambda)$, of order $0$ and of $\lambda$-degree
-$d_0$ by \textbf{(H1)}. This contradiction shows $g_i\in R$ for every $i$; as $s_0\in S$ was
-arbitrary, $g\in\bigcap_{s_0\in S}K[s]_{(s_0)}[\lambda]=K[s,1/\delta][\lambda]$, where $\delta$ is the
-chart denominator. Division by the monic $g$ in $K[s,1/\delta][\lambda]$ yields
-$M_i=q_ig$ with $q_i\in K[s,1/\delta][\lambda]$, because the remainder has $\lambda$-degree $<e$ and
-vanishes in $K(s)[\lambda]$. Evaluating at $s\in S$, where $\delta(s)\neq0$, gives
-$g(s,\cdot)\mid M_i(s,\cdot)$ in $K[\lambda]$, and $\deg_\lambda g(s,\cdot)=e$ because $g$ is monic of
-degree $e$. If the leading coefficient in \textbf{(H1)} is a constant, no localisation is needed and
-$g\in K[s][\lambda]$. If $d_0=0$ then $M_{i_0}$
-is a non-zero constant, so $e=0$ and $g=1$, and the same conclusions are immediate.
+Throughout, $A$ denotes one of the two rings $K[s]$ and $K[s,1/\delta]$; both are unique factorisation
+domains with fraction field $K(s)$, and both contain the coefficients of all $M_i$. The proof needs no
+localisation at points of $S$ and no regularity of $g$ at real points: the membership
+$g\in K[s,1/\delta][\lambda]$ is deduced from a statement about monic divisors.
 
-(2) By (1), $g(s,\cdot)$ is a common divisor of the specialised minors, of degree $\deg_\lambda g$.
+\emph{Step 0 (monic divisors over a UFD).} Let $B$ be a unique factorisation domain with fraction field
+$F$, let $f\in B[\lambda]$ be monic, and let $h\in F[\lambda]$ be monic with $h\mid f$ in $F[\lambda]$. Then
+$h\in B[\lambda]$. Indeed, over an algebraic closure $\bar F$ write
+$f=\prod_{a=1}^{m}(\lambda-\alpha_a)$ and $h=\prod_{b=1}^{e}(\lambda-\beta_b)$; since $h\mid f$, every
+$\beta_b$ equals some $\alpha_a$. A root of the monic $f\in B[\lambda]$ satisfies a monic equation with
+coefficients in $B$, hence is integral over $B$, and the elements of $\bar F$ integral over $B$ form a
+subring of $\bar F$ \cite[Prop.~5.1]{am69}; the coefficients of $h$, being the elementary symmetric
+functions of the $\beta_b$, are therefore integral over $B$. They lie in $F$, and a unique factorisation
+domain is integrally closed in its fraction field: if $x=a/b$ with $a,b\in B$ coprime satisfies
+$x^n+c_{n-1}x^{n-1}+\dots+c_0=0$, then $b\mid a^n$, so $b$ is a unit. Hence $h\in B[\lambda]$: this is the
+standard ``monic divisor of a monic polynomial over a UFD'' statement, here obtained by the root-coefficient
+recursion (equivalently, by Gauss' lemma).
 
-(3) If $g=1$ there are $a_i\in K(s)[\lambda]$ with $\sum_i a_iM_i=1$. Clearing denominators gives
-$b_i\in K[s,\lambda]$ and $0\neq\Delta\in K[s]$ with $\sum_i b_iM_i=\Delta$. At a point $s$ with
-$\Delta(s)\neq0$ the polynomials $M_i(s,\cdot)$ have no common zero, so their gcd is $1$; the exceptional
-set is thus contained in $\{\Delta=0\}$, a proper Zariski-closed subset of the affine space, and
-$S\setminus\{\Delta=0\}$ is a nonempty Zariski-open subset of $S$. A non-zero polynomial in $N$ variables
-vanishes on no nonempty Euclidean-open subset of $\mathbb R^N$, so a proper Zariski-closed subset contains
-no nonempty open set, and its complement has real points. (The same argument with $K$ in place of
-$\mathbb R$ shows that $K$-rational points suffice whenever $K$ is infinite: a non-zero polynomial over $K$
-does not vanish on all of $K^N$. This is why the algorithm may compute over $K$ rather than over
-$\mathbb R$.) The last sentence of the lemma combines (2), (3) and the admissibility of every point.
+\emph{Step 1 (a monic reference minor).} By \textbf{(H3)} the minor $M_{i_0}$ has $\lambda$-degree $d_0$ and
+$\lambda$-leading coefficient $u\in K[s,1/\delta]^{\times}$. Put
+$\tilde M_0:=u^{-1}M_{i_0}\in K[s,1/\delta][\lambda]$; it is monic in $\lambda$ of degree $d_0$. If the
+leading coefficient in \textbf{(H3)} is a non-zero constant $c\in K^{\times}$, then
+$\tilde M_0=c^{-1}M_{i_0}\in K[s][\lambda]$. In the application $M_{i_0}=\delta^{e}m_{I,J}$ and
+$u=\delta^{e}\det H_{I,J}$ with $\det H_{I,J}\in K^{\times}$, so $\tilde M_0=m_{I,J}/\det H_{I,J}$
+(Claim~\ref{clm:admissible}, \eqref{eq:leadcoef}).
+
+\emph{Step 2 (the generic gcd has coefficients in the chart ring).} By definition of the gcd, $g$ divides
+$M_{i_0}$ in $K(s)[\lambda]$, hence divides the monic $\tilde M_0$ there. Step~0 with
+$B=K[s,1/\delta]$, $f=\tilde M_0$ and $h=g$ gives $g\in K[s,1/\delta][\lambda]$; in the constant case of
+Step~1 the same argument with $B=K[s]$ gives $g\in K[s][\lambda]$. (If $d_0=0$ then $\tilde M_0=1$ and
+$g=1$.)
+
+\emph{Step 3 (division).} For each $i$ we have $g\mid M_i$ in $K(s)[\lambda]$ by definition of the gcd, and
+$g$ is monic with coefficients in $A$ by Step~2. Division by a monic polynomial never divides by a non-unit,
+so the division algorithm runs inside $A[\lambda]$ and yields $M_i=g\,q_i$ with $q_i\in A[\lambda]$.
+
+\emph{Step 4 (specialisation).} Let $s\in S$. Since $\delta(s)\neq0$, evaluation at $s$ is a ring
+homomorphism $A\to\mathbb R$, with values in $K$ when $s$ is $K$-rational, so
+$M_i(s,\lambda)=g(s,\lambda)q_i(s,\lambda)$ in $\mathbb R[\lambda]$. The specialised
+polynomial $g(s,\lambda)$ is monic of degree $\deg_\lambda g$, because the leading coefficient $1$
+specialises to $1$; it is therefore a common divisor of the specialised minors of that degree, and
+$\deg_\lambda\gcd\bigl(M_1(s,\cdot),\dots,M_r(s,\cdot)\bigr)\ge\deg_\lambda g$. The bound thus holds at
+\emph{every} point of $S$: the generic degree is a lower bound for every specialisation.
+
+\emph{Step 5 (the degree-zero branch).} If $\deg_\lambda g=0$ then $g=1$, and the B\'ezout identity in
+$K(s)[\lambda]$ gives $a_i\in K(s)[\lambda]$ with $\sum_i a_iM_i=1$. Clearing denominators gives
+$b_i\in K[s,\lambda]$ and $0\neq\Delta\in K[s]$ with $\sum_i b_iM_i=\Delta$. At a point $s\in S$ with
+$\Delta(s)\neq0$ the specialised minors have no common zero, hence gcd $1$; the exceptional set
+$S\cap\{\Delta=0\}$ is therefore contained in the proper Zariski-closed set $\{\Delta=0\}$. By \textbf{(H4)}
+the polynomial $\delta\Delta\in K[s]$ is not identically zero and vanishes neither on all of
+$\mathbb R^N$ nor on all of $K^N$, so there is a point $s\in S$, rational over $K$ if desired, at which
+$\Delta(s)\neq0$ and the specialised gcd is $1$. This is also where \textbf{(H4)} enters: a non-zero
+polynomial vanishes on no non-empty Euclidean-open subset of $\mathbb R^N$, and $S$ contains one.
+
+Statement~(1) is Steps 2--4, statement~(2) is Step~4, and statement~(3) is Step~5. The closing sentence
+follows: if some point of $S$ has constant specialised gcd, Step~4 gives $\deg_\lambda g=0$, and if
+$\deg_\lambda g=0$ then Step~5 exhibits a point of $S$ with specialised gcd $1$.
 \end{proof}
 
 Admissibility being automatic, and the generic-gcd test being exact on every chart of $\mathcal I_D$ by
@@ -1066,10 +1095,15 @@ test of Algorithm~\ref{alg:decide} is exact, and the algorithm outputs exactly \
 \end{claim}
 
 \begin{proof}
-Claim~\ref{clm:admissible} supplies the first hypothesis of Lemma~\ref{lem:genericgcd} with $d_0=\omega$:
+Claim~\ref{clm:admissible} supplies \textbf{(H3)} of Lemma~\ref{lem:genericgcd} with $d_0=\omega$:
 after clearing, the $\lambda$-leading coefficient of $m_{I,J}$ is $\det H_{I,J}$ times the clearing factor,
-hence a unit of $K[s,1/\delta]$, and it is a non-zero constant for the uncleared pencil. It also makes
-every point of $S$ admissible, and the second hypothesis holds because $S$ is an affine space. Clause~(2) of the lemma is the
+hence a unit of $K[s,1/\delta]$, and it is a non-zero constant for the uncleared pencil; it also makes
+every point of $S$ admissible. Hypotheses \textbf{(H1)}, \textbf{(H2)} and \textbf{(H4)} of the lemma hold because a
+chart of $\mathcal I_D$ has as its parameter space the affine subspace of $\mathbb R^{j(\dim V_\varphi-j)}$
+cut out by the linear condition $\Phi_0\subseteq\Phi$ (Definition~\ref{defn:charts}), and $S$ is its
+non-empty Zariski-open chart proper, so a non-zero polynomial cannot vanish on all of $S$, which is
+\textbf{(H4)}.
+Clause~(2) of the lemma is the
 negative direction: a non-constant generic gcd makes every specialised gcd non-constant, so every pencil in
 the chart is singular at some $\lambda$. For the positive direction, clause~(3) of the lemma produces a real
 point $s\in S$ at which the specialised gcd is $1$; by Theorem~\ref{thm:reduction}(4) this gives
@@ -1653,6 +1687,8 @@ coefficients. \emph{Math. Ann.}, vol.~261, no.~4, pp.~515--534, 1982.
 Cambridge University Press, 2013 (subresultants, gcd degree bounds).
 \bibitem{emre80} E. Emre, M. L. J. Hautus. A polynomial characterization of $(A,B)$-invariant and
 reachability subspaces. \emph{SIAM J. Control Optim.}, vol.~18, no.~4, 1980.
+\bibitem{am69} M. F. Atiyah, I. G. Macdonald. \emph{Introduction to Commutative Algebra}.
+Reading, MA, USA: Addison-Wesley, 1969 (integral dependence, integral closure, Ch.~5).
 \end{thebibliography}
 
 \end{document}
