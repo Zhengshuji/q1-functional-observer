@@ -137,3 +137,11 @@ import Q1Paper.PaperI.MainTheorems
 -- Claim 12
 #print axioms Q1Paper.PaperI.exists_left_inverse_of_rank_eq
 #print axioms Q1Paper.PaperI.claim12_iff_gram
+
+-- Section III-D: square Cauchy-Binet (ported, Apache-2.0, Ralf Stephan)
+#print axioms exteriorPower.plucker
+#print axioms exteriorPower.plucker_apply
+#print axioms Matrix.plucker_row_eq_det_submatrix
+#print axioms exteriorPower.sum_plucker_mul_plucker
+#print axioms Matrix.det_mul_eq_sum_plucker
+#print axioms Matrix.det_mul_eq_sum_det_submatrix

@@ -49,6 +49,7 @@ import Q1Paper.PaperI.SpectralMinor
 import Q1Paper.PaperI.Complexify
 import Q1Paper.PaperI.Claim11Final
 import Q1Paper.PaperI.Claim12
+import Q1Paper.PaperI.CauchyBinet
 
 /-!
 ## What is imported here

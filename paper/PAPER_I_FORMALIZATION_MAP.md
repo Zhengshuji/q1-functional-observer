@@ -112,7 +112,7 @@
 ### 4.2 之后的顺序
 
 1. ~~Claim 11 的完整 Gram 证书~~：已由 `claim11_iff_gram` 闭合（见 §4.3）；
-2. ~~Claim 12~~：已完成（claim12_iff_gram）；下一步是 §III-D 的 Cauchy–Binet 压缩（Mathlib 无矩形 Cauchy–Binet，需自证）；
+2. ~~Claim 12~~、~~方形 Cauchy–Binet~~：已完成；下一步是 gramKernel 与系数恒等式（§III-D）；
 3. Claim 13–15 的有理位长（清分母 + Hadamard + Bareiss）；
 4. Claim 16 五条链 + Proposition 4 算法；
 5. Theorems 1、2 的算法与复杂度；Theorem 5 的 `∃ℝ` 编码。
@@ -140,6 +140,26 @@
 > **separate** result and is **not** implied by this formalisation.
 
 `Claim11Final.lean` 已冻结：后续轮次不再修改其中的核心定理，只在需要时追加新文件。
+
+### 4.4 §III-D：方形 Cauchy–Binet（已移植）
+
+PaperI/CauchyBinet.lean 给出 §III-D 需要的方形 Cauchy–Binet：
+
+`
+Matrix.det_mul_eq_sum_det_submatrix (A : Matrix (Fin m) ι R) (B : Matrix ι (Fin m) R) :
+  (A * B).det = ∑ s : Set.powersetCard ι m,
+    (A.submatrix id ((s : Finset ι).orderEmbOfFin …)).det *
+    (B.submatrix ((s : Finset ι).orderEmbOfFin …) id).det
+`
+
+- 来源：Ralf Stephan，
+wst/Subspace-Theorems，ArithmeticHeights/{Plucker,RowSpace,CauchyBinet}.lean，**Apache-2.0**；
+  本仓库的移植去掉 module/public/[expose]，只保留所需切片，文件头保留归属与许可证说明。
+- 上游 toolchain 为 4.35.0-rc3（与本项目 4.35.0 基本一致），移植只改了变量声明，证明未改。
+- 主要声明：exteriorPower.plucker, exteriorPower.plucker_apply,
+  Matrix.plucker_row_eq_det_submatrix, exteriorPower.sum_plucker_mul_plucker,
+  Matrix.det_mul_eq_sum_plucker, Matrix.det_mul_eq_sum_det_submatrix。
+- 下一步：gramKernel、双重极大子式展开、系数恒等式 S_{a,b}=\sum_i c_{i,a}c_{i,b}。
 
 ## 5. 验证记录（可复现）
 
