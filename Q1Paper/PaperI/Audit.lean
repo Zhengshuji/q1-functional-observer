@@ -235,3 +235,8 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.PaperI.dj_block
 #print axioms Q1Paper.PaperI.desnanot_jacobi_minors
 #print axioms Q1Paper.PaperI.desnanot_jacobi_prefix
+#print axioms Q1Paper.PaperI.BareissTableau.bord_dj
+#print axioms Q1Paper.PaperI.BareissTableau.bord_self
+#print axioms Q1Paper.PaperI.BareissTableau.tableau_eq_bord
+#print axioms Q1Paper.PaperI.BareissTableau.pivot_eq_delta
+#print axioms Q1Paper.PaperI.BareissTableau.last_entry_eq_det

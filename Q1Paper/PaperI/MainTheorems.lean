@@ -65,6 +65,7 @@ import Q1Paper.PaperI.BitLenAdd
 import Q1Paper.PaperI.InputLen
 import Q1Paper.PaperI.BareissBase
 import Q1Paper.PaperI.DesnanotJacobi
+import Q1Paper.PaperI.BareissTableau
 
 /-!
 ## What is imported here
