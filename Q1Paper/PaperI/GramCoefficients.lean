@@ -12,6 +12,7 @@ in the minor `f_i = maximalMinor P (rowEmb i.1) (colEmb i.2)`.
 -/
 
 import Q1Paper.PaperI.GramKernel
+import Q1Paper.PaperI.Claim11Final
 
 namespace Q1Paper.PaperI
 
@@ -92,4 +93,16 @@ theorem gramKernelEval_eq_coeff_sum {q ℓ : ℕ} (ω : ℕ) (P : Matrix (Fin q)
         rw [coeffGram]
         simp only [Finset.sum_mul]
 
+/-- **Coefficient identity for the pencil** λ H - H_A (the degree bound is
+supplied by 
+atDegree_maximalMinor_le). -/
+theorem gramKernelEval_pencil_eq_coeff_sum {K : Type*} [Field K] {q k : ℕ}
+    (H HA : Matrix (Fin q) (Fin k) K) {ω : ℕ} (hω : 1 ≤ ω) (lam mu : K) :
+    gramKernelEval ω (pencil H HA) lam mu =
+      ∑ a : Fin (ω + 1), ∑ b : Fin (ω + 1),
+        coeffGram (pencil H HA) ω (a : ℕ) (b : ℕ) * lam ^ (a : ℕ) * mu ^ (b : ℕ) :=
+  gramKernelEval_eq_coeff_sum ω (pencil H HA)
+    (fun I J => natDegree_maximalMinor_le H HA (rowEmb I) (colEmb J)) lam mu
+
 end Q1Paper.PaperI
+

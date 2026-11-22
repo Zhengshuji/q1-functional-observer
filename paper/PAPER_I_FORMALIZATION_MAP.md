@@ -31,7 +31,7 @@
 | Claim 9 Bézout 次数界 | `exists_bezout_family_real`（实系数，`deg<ω`） | `BezoutReal.lean` | **complete** | — |
 | Claim 10 窗口关系 | `windowMatrix`, `rowSpace_windowMatrix_eq_windowSet`, `mem_rowSpace_iff_exists_window`, `toFn_injOn_degree_lt_two_mul` | `Window.lean` | **complete** | 索引/边界已在文件内核对（`j<ω`, `t<2ω`, 零系数约定） |
 | Claim 11 Gram 证书 | `claim11_iff_gram`（最终定理：(5b) ⟺ ∃x, ZᵀZx=e₀）；`gram_certificate`（Gram）；`mem_rowSpace_window_iff_no_common_complex_root`（Bézout/窗口）；`spectral_real_iff_minors`, `spectral_iff_minors`（秩-子式/铅笔）；`exists_det_submatrix_ne_zero_of_rank`（秩=最大非零子式）；`rank_map_ofReal`（复化秩不变）；`natDegree_maximalMinor_le`（次数界）；`maximalMinor_map`（系数映射） | `PaperI/Gram.lean`, `PaperI/Claim11.lean`, `PaperI/MinorRank.lean`, `PaperI/BasisExtraction.lean`, `PaperI/SpectralMinor.lean`, `PaperI/Complexify.lean`, `PaperI/Claim11Final.lean` | **complete（含最终 Gram 证书定理）** | 说明：`claim11_iff_gram` 以 `H_A = F H`（Claim 2(ii)）与 `1 ≤ ω`、`rank H = ω` 为假设；这与论文 Claim 11 的假设一致 |
-| Claim 12 满列秩铅笔证书 | — | — | **paper_only** | 需 `X` 满列秩时把 Claim 11 用于 `(X,G)` |
+| Claim 12 满列秩铅笔证书 | `claim12_iff_gram`, `exists_left_inverse_of_rank_eq` | `PaperI/Claim12.lean` | **complete** | 与 Claim 11 相同：用的是注入映射族的 `Z`；与论文子集族 `Z_Q` 的桥接见 §6 的 D1 |
 | Claim 13 有理基与位长 | — | — | **paper_only** | 需清分母 + Bareiss + Hadamard 的形式化 |
 | Claim 14 图表数据 | — | — | **paper_only** | 需 `V=T∩(S×S)` 的核表示（转置写法） |
 | Claim 15 系数位长 | — | — | **paper_only** | 需显式常数链（附录 A） |
@@ -75,7 +75,7 @@
 
 ## 3. 公理审计
 
-- `Q1Paper/PaperI/Audit.lean` 对 **101 条**声明执行 `#print axioms`。
+- `Q1Paper/PaperI/Audit.lean` 对 **109 条**声明执行 `#print axioms`。
 - 本机结果：全部为 `[propext, Classical.choice, Quot.sound]`（部分为 `[propext, Quot.sound]`）。
 - CI 步骤：`lake env lean Q1Paper/PaperI/Audit.lean > paperI_audit.log` 后运行
   `scripts/check_paperI_axioms.py paperI_audit.log`，出现白名单外的公理或**没有任何审计行**都会失败。
@@ -190,7 +190,7 @@ PaperI/GramKernel.lean，维数约定与论文一致：P : Matrix (Fin q) (Fin �
 
 `PaperI/GramCompression.lean`：
 
-- `windowMinorFamily P ω`：把极大子式族按 `(行子集, 列子集)` 对索引（只是对 `maximalMinor` 的重索引，与 Claim 11 用的族一致）；
+- `windowMinorFamily P ω`：把极大子式族按 `(行子集, 列子集)` 对索引（**注意**：与 Claim 11/12 用的 `minorFamily`（注入映射索引）不是同一个索引族；两者关系见 §6 的 D1 —— 每个子式在注入族里出现 `(ω!)²` 次并带符号，行空间相同，但 `ZᵀZ` 相差正因子 `(ω!)²`；桥接引理尚未形式化）；
 - **`windowGram_entry`**：
   `(ZᵀZ)_{t,t'} = ∑_{j : Fin ω} if j ≤ t ∧ j ≤ t' then S_{t-j,t'-j} else 0`，
   其中 `Z = windowMatrix (windowMinorFamily P ω) ω`。
@@ -207,7 +207,7 @@ PaperI/GramKernel.lean，维数约定与论文一致：P : Matrix (Fin q) (Fin �
 - Claim 11 完成：commit `e28ee61`（`Paper I: Claim 11 complete`）；
 - 修复仓库与 WSL 不同步：commit `7101d1d`（同步 `SpectralMinor.lean` 的注入性版本）；
 - CI run `#45026225331` 全绿（lean / Paper I axiom audit / 三篇论文 / verify）；
-- 公理审计：101 条声明，允许集 `{propext, Classical.choice, Quot.sound}`；
+- 公理审计：109 条声明，允许集 `{propext, Classical.choice, Quot.sound}`；
 - 同步检查：`diff` 核对 WSL 工程与仓库的 11 个 Paper I 文件，全部一致。
 
 ## 6. 边界
@@ -215,3 +215,23 @@ PaperI/GramKernel.lean，维数约定与论文一致：P : Matrix (Fin q) (Fin �
 - 本表不含 Paper II–IV 的定理；`MinOrder`、`Strata` 等模块即使被复用，也不计入 Paper I 完成度。
 - 复杂度部分依赖 Renegar 界；若不在 Lean 中证明该界，只能称"条件性复杂度形式化"，
   不能称 Paper I 完整形式化。
+
+## 7. 审计发现（子 agent 复核）
+
+一个只读子 agent 逐条核对 §III-D 与论文（未改文件）；确认维数未交换、CB 方向正确、`K` 定义、窗口索引、`2ω` 列数均一致。发现与处置：
+
+**D1（最重要，未修）**：`windowMinorFamily`（子集索引）与 Claim 11/12 用的 `minorFamily`（注入映射索引）不是同一个族。对每个子集对，注入族里有 `(ω!)²` 个带符号重复，故 `ZᵀZ_Lean = (ω!)² · ZᵀZ_paper`、行空间相同。Claim 11/12 的等价在数学上不受影响（正因子/行空间不变），但“证书矩阵”与论文的 `Z_Q` 字面上不同，且 §III-D 压缩恒等式只对子集族成立。下一步：证桥接引理 `rowSpace (windowMatrix minorFamily) = rowSpace (windowMatrix windowMinorFamily)`（`windowSet` 相同 + 每个注入子式 = ± 对应子集子式）。
+
+**D2**：Claim 12 只形式化了复合形式（`rank ⟺ ∃x, ZᵀZx=e0`）；中间 `e0 ∈ rowZ` 由 `gram_certificate` 可得但未单独声明。可接受。
+
+**D3（部分已修）**：系数恒等式需显式次数界；本轮加 `gramKernelEval_pencil_eq_coeff_sum` 实例化到铅笔（用 `natDegree_maximalMinor_le`）。剩余：§III-D 未端到端组装；`K_P = det(BBᵀ)K_Q` 与共轭/公共根恒等式未形式化。
+
+**D4**：`windowMatrix` 用真实系数（不截断到 `ω`），与论文 `c_{i,a}=0 (a>ω)` 只在 `deg f_i ≤ ω` 下一致；该一致性目前是注释而非引理。需要时补 `windowMatrix_eq_of_natDegree_le`。
+
+**D5**：`[k] → [ℓ]` 零列约化未形式化（Lean 直接从 `q×ℓ` 出发）；记为论文级假设。
+
+**D6**：论文 `rem:algo` (i) 写 `J ⊆ [k]`，与定义 `J ⊆ [ℓ]` 不一致（碰补集的列集行列式为零，故数学等价）；下一轮论文修订改为 `[ℓ]`。
+
+**D7（已修）**：对照表曾有陈旧陈述（Claim 12 标 paper_only、`windowMinorFamily` 标“与 Claim 11 同族”、审计条数 101）；本轮已改。
+
+**D8**：`gramKernelEval_eq_zero_of_lt`（`ℓ < ω`）为 Lean 侧边界引理，论文无对应；无害。
