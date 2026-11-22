@@ -84,6 +84,12 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.PaperI.DECℂ
 #print axioms Q1Paper.PaperI.MINDECℂ
 #print axioms Q1Paper.PaperI.DEC_complex_iff_compressed
+
+-- Claim 11, the Gram step
+#print axioms Q1Paper.PaperI.rowSpace_eq_range_transpose
+#print axioms Q1Paper.PaperI.range_transpose_mul_self
+#print axioms Q1Paper.PaperI.mem_range_transpose_iff_exists_gram
+#print axioms Q1Paper.PaperI.gram_certificate
 #print axioms Q1Paper.PaperI.exists_factor_of_rowSpace_le
 #print axioms Q1Paper.PaperI.exists_factor_of_rawAlgebraic
 #print axioms Q1Paper.PaperI.rank_neg_eq

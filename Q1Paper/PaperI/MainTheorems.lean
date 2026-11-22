@@ -42,6 +42,7 @@ import Q1Paper.FixedOrder
 import Q1Paper.FPT
 import Q1Paper.PaperI.Interface
 import Q1Paper.PaperI.CompressionMatrix
+import Q1Paper.PaperI.Gram
 
 /-!
 ## What is imported here
