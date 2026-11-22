@@ -157,3 +157,7 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.PaperI.minorCoeff
 #print axioms Q1Paper.PaperI.coeffGram
 #print axioms Q1Paper.PaperI.gramKernelEval_eq_coeff_sum
+
+-- Section III-D: window Gram entry identity
+#print axioms Q1Paper.PaperI.windowMinorFamily
+#print axioms Q1Paper.PaperI.windowGram_entry

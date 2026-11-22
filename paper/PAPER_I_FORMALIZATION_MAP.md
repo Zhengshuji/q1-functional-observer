@@ -186,6 +186,19 @@ PaperI/GramKernel.lean，维数约定与论文一致：P : Matrix (Fin q) (Fin �
 
 下一步（§III-D 最后一层）：窗口矩阵的逐项 `(ZᵀZ)_{t,t'} = ∑_j S_{t-j,t'-j}`，再用 `Matrix.ext` 得矩阵等式。
 
+### 4.7 §III-D：窗口 Gram 逐项恒等式（已闭）
+
+`PaperI/GramCompression.lean`：
+
+- `windowMinorFamily P ω`：把极大子式族按 `(行子集, 列子集)` 对索引（只是对 `maximalMinor` 的重索引，与 Claim 11 用的族一致）；
+- **`windowGram_entry`**：
+  `(ZᵀZ)_{t,t'} = ∑_{j : Fin ω} if j ≤ t ∧ j ≤ t' then S_{t-j,t'-j} else 0`，
+  其中 `Z = windowMatrix (windowMinorFamily P ω) ω`。
+
+证明分三步（按评审建议拆分）：矩阵乘法展开 `(ZᵀZ)_{t,t'} = ∑_p Z p t · Z p t'`；`Fintype.sum_prod_type` + `Finset.sum_comm` 把 `∑_{p=(i,j)}` 拆成 `∑_j ∑_i`；对 `j ≤ t`、`j ≤ t'` 分支，两项的 `windowMatrix` 截断条件化简为系数，内层 `∑_i c c` 用 `Finset.sum_product'` 回到 `coeffGram`（`Fin` 减法只在条件成立时取，越界项为零，不用 `Fin` 的模减法）。
+
+下一步：用 `Matrix.ext` 把逐项等式提升为矩阵等式，再做 §III-D 端到端核验，然后进 Claim 13。
+
 ## 5. 验证记录（可复现）
 
 - Claim 11 完成：commit `e28ee61`（`Paper I: Claim 11 complete`）；

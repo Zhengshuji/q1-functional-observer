@@ -52,6 +52,7 @@ import Q1Paper.PaperI.Claim12
 import Q1Paper.PaperI.CauchyBinet
 import Q1Paper.PaperI.GramKernel
 import Q1Paper.PaperI.GramCoefficients
+import Q1Paper.PaperI.GramCompression
 
 /-!
 ## What is imported here
