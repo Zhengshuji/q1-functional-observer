@@ -240,3 +240,10 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.PaperI.BareissTableau.tableau_eq_bord
 #print axioms Q1Paper.PaperI.BareissTableau.pivot_eq_delta
 #print axioms Q1Paper.PaperI.BareissTableau.last_entry_eq_det
+#print axioms Q1Paper.PaperI.BareissAssemble.tab
+#print axioms Q1Paper.PaperI.BareissAssemble.tab_eq_bord
+#print axioms Q1Paper.PaperI.BareissAssemble.tab_pivot
+#print axioms Q1Paper.PaperI.BareissAssemble.tab_last
+#print axioms Q1Paper.PaperI.BareissAssemble.tab_entry_eq_bMinor
+#print axioms Q1Paper.PaperI.BareissAssemble.tab_entry_num_bitLen
+#print axioms Q1Paper.PaperI.BareissAssemble.tab_entry_bitLen_inputLen

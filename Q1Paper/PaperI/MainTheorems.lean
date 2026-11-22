@@ -66,6 +66,7 @@ import Q1Paper.PaperI.InputLen
 import Q1Paper.PaperI.BareissBase
 import Q1Paper.PaperI.DesnanotJacobi
 import Q1Paper.PaperI.BareissTableau
+import Q1Paper.PaperI.BareissAssemble
 
 /-!
 ## What is imported here
