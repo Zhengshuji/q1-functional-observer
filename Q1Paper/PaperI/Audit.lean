@@ -198,3 +198,8 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.PaperI.maximalMinor_injective_eq_signed_image
 #print axioms Q1Paper.PaperI.sum_comp_eq_card_smul_sum
 #print axioms Q1Paper.PaperI.sum_sign_mul_sq_eq_card_smul_sum
+#print axioms Q1Paper.PaperI.injective_of_imageFinset_eq
+#print axioms Q1Paper.PaperI.fibreEquiv
+#print axioms Q1Paper.PaperI.card_fibre_imageFinset
+#print axioms Q1Paper.PaperI.card_fibre_imageFin
+#print axioms Q1Paper.PaperI.card_fibre_pair
