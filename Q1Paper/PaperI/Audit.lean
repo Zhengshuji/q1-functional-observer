@@ -247,3 +247,11 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.PaperI.BareissAssemble.tab_entry_eq_bMinor
 #print axioms Q1Paper.PaperI.BareissAssemble.tab_entry_num_bitLen
 #print axioms Q1Paper.PaperI.BareissAssemble.tab_entry_bitLen_inputLen
+#print axioms Q1Paper.iv_implies_v
+#print axioms Q1Paper.v_implies_iv
+#print axioms Q1Paper.claim16_iv_iff_v
+#print axioms Q1Paper.v_implies_i
+#print axioms Q1Paper.claim16_iv_implies_i
+#print axioms Q1Paper.claim16_ii_implies_iv
+#print axioms Q1Paper.claim16_iii_implies_iv
+#print axioms Q1Paper.claim16_iii_implies_i
