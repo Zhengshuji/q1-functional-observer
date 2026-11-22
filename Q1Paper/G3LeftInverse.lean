@@ -64,6 +64,7 @@ theorem exists_leftInverse {Q : Matrix (Fin q) (Fin ω) K[X]}
     exists_bezout_family (f := fun e : Fin ω ↪ Fin q => minors Q e) hω hdeg hminor
   exact ⟨_, leftInverse_of_bezout (Q := Q) hbez⟩
 
+omit [IsAlgClosed K] in
 /-- Entries of the rectangular left inverse block have degree at most ω - 1. -/
 theorem natDegree_adjRowInverse_le {q ω : ℕ} (hω : 1 ≤ ω)
     (Q : Matrix (Fin q) (Fin ω) K[X]) (hlin : ∀ i j, (Q i j).natDegree ≤ 1)
