@@ -161,3 +161,5 @@ import Q1Paper.PaperI.MainTheorems
 -- Section III-D: window Gram entry identity
 #print axioms Q1Paper.PaperI.windowMinorFamily
 #print axioms Q1Paper.PaperI.windowGram_entry
+#print axioms Q1Paper.PaperI.compressedGram
+#print axioms Q1Paper.PaperI.windowGram_eq_compressed

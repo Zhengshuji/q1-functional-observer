@@ -197,7 +197,10 @@ PaperI/GramKernel.lean，维数约定与论文一致：P : Matrix (Fin q) (Fin �
 
 证明分三步（按评审建议拆分）：矩阵乘法展开 `(ZᵀZ)_{t,t'} = ∑_p Z p t · Z p t'`；`Fintype.sum_prod_type` + `Finset.sum_comm` 把 `∑_{p=(i,j)}` 拆成 `∑_j ∑_i`；对 `j ≤ t`、`j ≤ t'` 分支，两项的 `windowMatrix` 截断条件化简为系数，内层 `∑_i c c` 用 `Finset.sum_product'` 回到 `coeffGram`（`Fin` 减法只在条件成立时取，越界项为零，不用 `Fin` 的模减法）。
 
-下一步：用 `Matrix.ext` 把逐项等式提升为矩阵等式，再做 §III-D 端到端核验，然后进 Claim 13。
+- `compressedGram P ω`：压缩系数矩阵，`G_comp(t,t') = ∑_j (if j≤t 且 j≤t' 则 S_{t-j,t'-j} 否则 0)`；
+- **`windowGram_eq_compressed`**：`ZᵀZ = compressedGram P ω`（`Matrix.ext` + `windowGram_entry`）。
+
+§III-D 的代数链条到此闭环：极大子式族 → 双重展开 → 系数恒等式 → 窗口 Gram 矩阵等式。下一步：端到端核验，然后进 Claim 13。
 
 ## 5. 验证记录（可复现）
 

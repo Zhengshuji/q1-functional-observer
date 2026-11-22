@@ -62,4 +62,20 @@ theorem windowGram_entry {q ℓ : ℕ} (P : Matrix (Fin q) (Fin ℓ) K[X]) (ω :
   · rw [if_neg (by omega)]
     simp [Z, Q1Paper.windowMatrix, windowMinorFamily, h1]
 
+/-- The compressed coefficient matrix of the window Gram form. -/
+noncomputable def compressedGram {q ℓ : ℕ} (P : Matrix (Fin q) (Fin ℓ) K[X]) (ω : ℕ) :
+    Matrix (Fin (2 * ω)) (Fin (2 * ω)) K :=
+  fun t t' => ∑ j : Fin ω,
+    if (j : ℕ) ≤ (t : ℕ) ∧ (j : ℕ) ≤ (t' : ℕ) then
+      coeffGram P ω ((t : ℕ) - (j : ℕ)) ((t' : ℕ) - (j : ℕ)) else 0
+
+/-- **The window Gram matrix is the compressed coefficient matrix.** -/
+theorem windowGram_eq_compressed {q ℓ : ℕ} (P : Matrix (Fin q) (Fin ℓ) K[X]) (ω : ℕ) :
+    (Q1Paper.windowMatrix (windowMinorFamily P ω) ω)ᵀ *
+      Q1Paper.windowMatrix (windowMinorFamily P ω) ω = compressedGram P ω := by
+  ext t t'
+  rw [windowGram_entry]
+  rfl
+
 end Q1Paper.PaperI
+
