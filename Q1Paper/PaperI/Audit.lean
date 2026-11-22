@@ -98,6 +98,12 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.PaperI.mem_rowSpace_window_of_no_common_complex_root
 #print axioms Q1Paper.PaperI.no_common_complex_root_of_mem_rowSpace_window
 #print axioms Q1Paper.PaperI.mem_rowSpace_window_iff_no_common_complex_root
+
+-- Claim 11, rank/minors bridge (partial: evaluation and each easy direction)
+#print axioms Q1Paper.PaperI.maximalMinor
+#print axioms Q1Paper.PaperI.eval_maximalMinor
+#print axioms Q1Paper.PaperI.rank_le_of_det_maximalMinor_ne_zero
+#print axioms Q1Paper.PaperI.exists_det_submatrix_ne_zero_of_rank_pos
 #print axioms Q1Paper.PaperI.exists_factor_of_rowSpace_le
 #print axioms Q1Paper.PaperI.exists_factor_of_rawAlgebraic
 #print axioms Q1Paper.PaperI.rank_neg_eq
