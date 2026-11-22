@@ -29,7 +29,8 @@ open Matrix
 
 /-- The row space of `Z` is the range of the transposed multiplication map:
 the rows of `Z` are the columns of `Zᵀ`. -/
-theorem rowSpace_eq_range_transpose {s k : ℕ} (Z : Matrix (Fin s) (Fin k) ℝ) :
+theorem rowSpace_eq_range_transpose {m k : Type*} [Fintype m] [Fintype k] [DecidableEq m]
+    (Z : Matrix m k ℝ) :
     Q1Subspace.rowSpace Z = LinearMap.range (Matrix.transpose Z).mulVecLin := by
   rw [show Q1Subspace.rowSpace Z = Q1Subspace.rowSpan Z from rfl]
   rw [← Q1Subspace.range_eq_rowSpan]
@@ -40,7 +41,8 @@ theorem rowSpace_eq_range_transpose {s k : ℕ} (Z : Matrix (Fin s) (Fin k) ℝ)
 
 /-- `range (Zᵀ * Z) = range Zᵀ` for a real matrix: the Gram matrix has the
 same range as the transpose. -/
-theorem range_transpose_mul_self {s k : ℕ} (Z : Matrix (Fin s) (Fin k) ℝ) :
+theorem range_transpose_mul_self {m k : Type*} [Fintype m] [Fintype k] [DecidableEq m]
+    (Z : Matrix m k ℝ) :
     LinearMap.range ((Matrix.transpose Z * Z).mulVecLin) =
       LinearMap.range (Matrix.transpose Z).mulVecLin := by
   have hle : LinearMap.range ((Matrix.transpose Z * Z).mulVecLin) ≤
@@ -57,17 +59,18 @@ theorem range_transpose_mul_self {s k : ℕ} (Z : Matrix (Fin s) (Fin k) ℝ) :
 
 /-- The Gram certificate, vector form: `e0` lies in the range of `Zᵀ` exactly
 when `Zᵀ Z x = e0` is solvable. -/
-theorem mem_range_transpose_iff_exists_gram {s k : ℕ} (Z : Matrix (Fin s) (Fin k) ℝ)
-    (e0 : Fin k → ℝ) :
+theorem mem_range_transpose_iff_exists_gram {m k : Type*} [Fintype m] [Fintype k] [DecidableEq m]
+    (Z : Matrix m k ℝ) (e0 : k → ℝ) :
     e0 ∈ LinearMap.range (Matrix.transpose Z).mulVecLin ↔
-      ∃ x : Fin k → ℝ, (Matrix.transpose Z * Z) *ᵥ x = e0 := by
+      ∃ x : k → ℝ, (Matrix.transpose Z * Z) *ᵥ x = e0 := by
   rw [← range_transpose_mul_self Z]
   exact LinearMap.mem_range
 
 /-- The Gram certificate, row-space form (Claim 11, last equivalence). -/
-theorem gram_certificate {s k : ℕ} (Z : Matrix (Fin s) (Fin k) ℝ) (e0 : Fin k → ℝ) :
+theorem gram_certificate {m k : Type*} [Fintype m] [Fintype k] [DecidableEq m]
+    (Z : Matrix m k ℝ) (e0 : k → ℝ) :
     e0 ∈ Q1Subspace.rowSpace Z ↔
-      ∃ x : Fin k → ℝ, (Matrix.transpose Z * Z) *ᵥ x = e0 := by
+      ∃ x : k → ℝ, (Matrix.transpose Z * Z) *ᵥ x = e0 := by
   rw [rowSpace_eq_range_transpose, mem_range_transpose_iff_exists_gram]
 
 end Q1Paper.PaperI

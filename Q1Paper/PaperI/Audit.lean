@@ -124,4 +124,13 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.PaperI.rank_map_ofReal_le
 #print axioms Q1Paper.PaperI.rank_le_map_ofReal
 #print axioms Q1Paper.PaperI.rank_map_ofReal
+-- Claim 11, final assembly
+#print axioms Q1Paper.PaperI.maximalMinor_map
+#print axioms Q1Paper.PaperI.natDegree_det_le
+#print axioms Q1Paper.PaperI.pencil_natDegree_le
+#print axioms Q1Paper.PaperI.natDegree_maximalMinor_le
+#print axioms Q1Paper.PaperI.spectral_real_iff_minors
+#print axioms Q1Paper.PaperI.minorIndex
+#print axioms Q1Paper.PaperI.minorFamily
+#print axioms Q1Paper.PaperI.claim11_iff_gram
 
