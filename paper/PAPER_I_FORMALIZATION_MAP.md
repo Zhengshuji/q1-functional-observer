@@ -112,7 +112,7 @@
 ### 4.2 之后的顺序
 
 1. ~~Claim 11 的完整 Gram 证书~~：已由 `claim11_iff_gram` 闭合（见 §4.3）；
-2. Claim 12（满列秩铅笔）与 Cauchy–Binet 压缩（Mathlib 无矩形 Cauchy–Binet，需自证）；
+2. ~~Claim 12~~：已完成（claim12_iff_gram）；下一步是 §III-D 的 Cauchy–Binet 压缩（Mathlib 无矩形 Cauchy–Binet，需自证）；
 3. Claim 13–15 的有理位长（清分母 + Hadamard + Bareiss）；
 4. Claim 16 五条链 + Proposition 4 算法；
 5. Theorems 1、2 的算法与复杂度；Theorem 5 的 `∃ℝ` 编码。

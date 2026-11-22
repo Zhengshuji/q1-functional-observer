@@ -48,6 +48,7 @@ import Q1Paper.PaperI.MinorRank
 import Q1Paper.PaperI.SpectralMinor
 import Q1Paper.PaperI.Complexify
 import Q1Paper.PaperI.Claim11Final
+import Q1Paper.PaperI.Claim12
 
 /-!
 ## What is imported here

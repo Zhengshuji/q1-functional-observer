@@ -134,3 +134,6 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.PaperI.minorFamily
 #print axioms Q1Paper.PaperI.claim11_iff_gram
 
+-- Claim 12
+#print axioms Q1Paper.PaperI.exists_left_inverse_of_rank_eq
+#print axioms Q1Paper.PaperI.claim12_iff_gram
