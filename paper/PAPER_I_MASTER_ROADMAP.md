@@ -25,7 +25,7 @@ States are kept separate: `Mathematically proved` (M) and `Lean formalized` (F);
   `bitLenRat`, `bitLenMat`, cleared-entry identity `|A.num i j| = A.den * |A i j|`.
 - D1 image/permutation layer: `imageFin`, `imageEquiv`, `permOfInjective`, `rowEmb_permOfInjective` (this round).
 - Claim 19 Cramer re-derivation completed and verified (`PAPER_I_CLAIM19_CRAMER.md`); the paper appendix still needs the rewrite.
-- Axiom audit: 132 declarations, only `propext`, `Classical.choice`, `Quot.sound`.
+- Axiom audit: 140 declarations, only `propext`, `Classical.choice`, `Quot.sound`.
 
 ## 3. Open mathematical proofs
 

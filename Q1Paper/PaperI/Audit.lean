@@ -188,3 +188,11 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.PaperI.abs_det_le_factorial_mul_pow
 #print axioms Q1Paper.PaperI.bitLenInt_det_le
 #print axioms Q1Paper.PaperI.bitLenInt_det_num_le_bitLenMat
+#print axioms Q1Paper.PaperI.embOfFinset
+#print axioms Q1Paper.PaperI.imageFinset
+#print axioms Q1Paper.PaperI.imageFinset_card
+#print axioms Q1Paper.PaperI.imageEquivFinset
+#print axioms Q1Paper.PaperI.permOfImage
+#print axioms Q1Paper.PaperI.embOfFinset_permOfImage
+#print axioms Q1Paper.PaperI.det_submatrix_comp
+#print axioms Q1Paper.PaperI.maximalMinor_injective_eq_signed_image
