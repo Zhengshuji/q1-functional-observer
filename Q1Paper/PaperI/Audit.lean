@@ -208,3 +208,6 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.PaperI.maximalMinor_injective_eq_signed_subset
 #print axioms Q1Paper.PaperI.maximalMinor_injective_coeff_eq
 #print axioms Q1Paper.PaperI.maximalMinor_injective_coeff_eq_subset
+#print axioms Q1Paper.PaperI.pairSign
+#print axioms Q1Paper.PaperI.pairSign_sq
+#print axioms Q1Paper.PaperI.windowRow_inj_eq_sign_mul

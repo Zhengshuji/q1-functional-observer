@@ -206,6 +206,3 @@ theorem maximalMinor_injective_coeff_eq_subset {q ℓ : ℕ} (P : Matrix (Fin q)
   rw [maximalMinor_injective_coeff_eq P ρ hρ κ hκ a, rowEmb_imageFin, colEmb_imageFin]
 
 end Q1Paper.PaperI
-
-
-
