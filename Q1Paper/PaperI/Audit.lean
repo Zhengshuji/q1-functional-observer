@@ -203,3 +203,8 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.PaperI.card_fibre_imageFinset
 #print axioms Q1Paper.PaperI.card_fibre_imageFin
 #print axioms Q1Paper.PaperI.card_fibre_pair
+#print axioms Q1Paper.PaperI.rowEmb_imageFin
+#print axioms Q1Paper.PaperI.colEmb_imageFin
+#print axioms Q1Paper.PaperI.maximalMinor_injective_eq_signed_subset
+#print axioms Q1Paper.PaperI.maximalMinor_injective_coeff_eq
+#print axioms Q1Paper.PaperI.maximalMinor_injective_coeff_eq_subset

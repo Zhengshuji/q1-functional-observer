@@ -157,6 +157,55 @@ theorem maximalMinor_injective_eq_signed_image {q ℓ : ℕ}
   exact det_submatrix_comp P _ _ _ _ ρ κ
     (embOfFinset_permOfImage ρ hρ) (embOfFinset_permOfImage κ hκ)
 
+/-- Bridge: the Set.powersetCard embedding is the plain-Finset embedding. -/
+theorem rowEmb_imageFin {q ω : ℕ} (ρ : Fin ω → Fin q) (hρ : Function.Injective ρ) :
+    rowEmb (imageFin ρ hρ) = embOfFinset (imageFinset ρ) (imageFinset_card ρ hρ) := by
+  funext i
+  apply Fin.ext
+  simp [rowEmb, embOfFinset, imageFin, imageFinset]
+
+/-- Bridge for columns. -/
+theorem colEmb_imageFin {ℓ ω : ℕ} (κ : Fin ω → Fin ℓ) (hκ : Function.Injective κ) :
+    colEmb (imageFin κ hκ) = embOfFinset (imageFinset κ) (imageFinset_card κ hκ) := by
+  funext i
+  apply Fin.ext
+  simp [colEmb, embOfFinset, imageFin, imageFinset]
+
+/-- **Single-minor sign relation**, subset-indexed form. -/
+theorem maximalMinor_injective_eq_signed_subset {q ℓ : ℕ}
+    (P : Matrix (Fin q) (Fin ℓ) K[X]) {ω : ℕ}
+    (ρ : Fin ω → Fin q) (hρ : Function.Injective ρ)
+    (κ : Fin ω → Fin ℓ) (hκ : Function.Injective κ) :
+    maximalMinor P ρ κ =
+      (Equiv.Perm.sign (permOfImage ρ hρ) : K[X]) *
+        (Equiv.Perm.sign (permOfImage κ hκ) : K[X]) *
+        maximalMinor P (rowEmb (imageFin ρ hρ)) (colEmb (imageFin κ hκ)) := by
+  rw [maximalMinor_injective_eq_signed_image P ρ hρ κ hκ, rowEmb_imageFin, colEmb_imageFin]
+
+/-- **Coefficient form of the single-minor sign relation.** -/
+theorem maximalMinor_injective_coeff_eq {q ℓ : ℕ} (P : Matrix (Fin q) (Fin ℓ) K[X]) {ω : ℕ}
+    (ρ : Fin ω → Fin q) (hρ : Function.Injective ρ)
+    (κ : Fin ω → Fin ℓ) (hκ : Function.Injective κ) (a : ℕ) :
+    (maximalMinor P ρ κ).coeff a =
+      ((Equiv.Perm.sign (permOfImage ρ hρ) : ℤˣ) : K) *
+        ((Equiv.Perm.sign (permOfImage κ hκ) : ℤˣ) : K) *
+        (maximalMinor P (embOfFinset (imageFinset ρ) (imageFinset_card ρ hρ))
+          (embOfFinset (imageFinset κ) (imageFinset_card κ hκ))).coeff a := by
+  rw [maximalMinor_injective_eq_signed_image P ρ hρ κ hκ]
+  simp only [mul_assoc]
+  rw [Polynomial.coeff_intCast_mul, Polynomial.coeff_intCast_mul]
+
+/-- **Coefficient form**, subset-indexed. -/
+theorem maximalMinor_injective_coeff_eq_subset {q ℓ : ℕ} (P : Matrix (Fin q) (Fin ℓ) K[X]) {ω : ℕ}
+    (ρ : Fin ω → Fin q) (hρ : Function.Injective ρ)
+    (κ : Fin ω → Fin ℓ) (hκ : Function.Injective κ) (a : ℕ) :
+    (maximalMinor P ρ κ).coeff a =
+      ((Equiv.Perm.sign (permOfImage ρ hρ) : ℤˣ) : K) *
+        ((Equiv.Perm.sign (permOfImage κ hκ) : ℤˣ) : K) *
+        (maximalMinor P (rowEmb (imageFin ρ hρ)) (colEmb (imageFin κ hκ))).coeff a := by
+  rw [maximalMinor_injective_coeff_eq P ρ hρ κ hκ a, rowEmb_imageFin, colEmb_imageFin]
+
 end Q1Paper.PaperI
+
 
 
