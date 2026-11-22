@@ -39,15 +39,16 @@ with a Two-Dimensional Compressed Kernel}
 \begin{abstract}
 For a linear system $(A,C)$ and a prescribed observer row block $L_0$, feasibility of a functional
 observer of order $q$ is governed by two rank conditions on the pencil $\lambda H-H_A$, where
-$H=LN$, $H_A=LAN$ and $N$ spans the unobservable subspace $K_0=\ker[C;CA]$. The layer index of a design
+$H=\mathcal L N$, $H_A=\mathcal L AN$ and $N$ spans the unobservable subspace $K_0=\ker[C;CA]$. The layer index of a design
 is $c=k-\rank H$, $k=\dim K_0$; the case $c=1$ was settled in earlier work, where the admissible kernel
 directions are the real eigenvectors of the compression $M=\pi_{K_0}A|_{K_0}$.
 
 This paper treats $c=2$. Our main result is a \emph{reduction of the fibre variable}: for a fixed kernel
 direction $D$ the pencil depends on the fibre $W$ only through its image
-$\Phi(W)\subseteq D^\circ$, a subspace of $D^\circ$ of dimension at most $c=2$. Consequently the search
-over a Grassmannian of arbitrary dimension collapses to a search over subspaces of the image
-$\varphi(T_D)$, whose dimension is at most the codimension of $K_0$ (hence at most $2p$). We
+$\Phi(W)\subseteq D^\circ$; the pencil's whole row space lies in $D^\circ$, of dimension $\omega$, but
+$\Phi(W)$ itself lies in the image $\varphi(T_D)$, whose dimension is at most $n-k$ (at most twice the
+number of output rows). Consequently the search over a Grassmannian of arbitrary dimension collapses to
+a search over subspaces of $\varphi(T_D)$. We
 give the exact realizability conditions for a prescribed $\Phi$, the resulting reduced feasibility
 criterion, a classification of the invariant-plane base for simple spectrum --- with the real and the
 conjugate-complex branches treated separately --- a two-valued decision algorithm, and a
@@ -58,7 +59,7 @@ left open.
 \end{abstract}
 
 \begin{IEEEkeywords}
-Functional observers, minimum order, compressed pencil, invariant subspaces, Grassmannian bundles,
+Functional observers, minimum order, compressed pencil, invariant subspaces, Grassmann bundles,
 subresultants, bit complexity.
 \end{IEEEkeywords}
 
@@ -69,7 +70,7 @@ lists the contributions, and closes with the notation used throughout.
 
 \emph{Setting.} The pair $(A,C)$ is given, together with a prescribed row block $L_0$. A design of order
 $q$ is a row block $\mathcal L=[L_0;R]$ with $q$ rows; its row space $V$ has dimension $q$. Write
-$K_0=\ker[C;CA]$, $k=\dim K_0$, fix a basis $N$ of $K_0$, and put $H=LN$, $H_A=LAN$. The design is
+$K_0=\ker[C;CA]$, $k=\dim K_0$, fix a basis $N$ of $K_0$, and put $H=\mathcal L N$, $H_A=\mathcal L AN$. The design is
 \emph{feasible} when
 \begin{equation}\label{eq:5a}
 \row H_A\subseteq\row H,
@@ -81,7 +82,7 @@ with $\omega=\rank H$. Condition~\eqref{eq:5b} is equivalent to the vanishing of
 $\omega\times\omega$ maximal minors of the pencil (a standard polarity/resultant fact; see
 Section~\ref{sec:admissible} and \cite{vzgg13}).
 
-\emph{Prior work and the gap.} The existence question, the order spectrum and the minimum-order
+\emph{Prior work and what is new.} The existence question, the order spectrum and the minimum-order
 characterisation were settled in \cite{companion1}, \cite{companion2} (see also \cite{fer26a},
 \cite{fer26b}): for every order $q$ there is an exact criterion, and the feasible orders are monotone and
 saturate. The \emph{complexity} of the general decision problem remains open. In \cite{companion3} the
@@ -102,13 +103,14 @@ exact fibre in both problems, including the exactness condition $K_0\cap(D+AD)=D
 \emph{two independent} prescribed-row conditions in \textbf{S} --- one on the base
 ($P_{K_0}(V_0)\subseteq D^{\perp_{K_0}}$) and one on the fibre ($W_0\subseteq W$).
 \item \emph{Image-space reduction (Section~\ref{sec:reduction}).} The pencil's row space equals the row
-space of its $D$-part plus $\Phi(W)\subseteq D^\circ$, so the fibre acts only through a subspace of a
-$c$-dimensional space. We give the general proof, the exact realizability inequalities for a prescribed
-$\Phi$, and the reduced feasibility criterion.
+space of its $D$-part plus $\Phi(W)\subseteq D^\circ$; since the whole pencil lies in $D^\circ$ (of
+dimension $\omega$) while $\Phi(W)$ lies in $\varphi(T_D)$ (of dimension at most $n-k$), the fibre acts
+only through a subspace of the low-dimensional image $\varphi(T_D)$. We give the general proof, the exact
+realizability inequalities for a prescribed $\Phi$, and the reduced feasibility criterion.
 \item \emph{A two-valued algorithm at $c=2$ (Sections~\ref{sec:base}--\ref{sec:decision}).} For simple
 spectrum the invariant-plane base is finite, of $O(k^2)$ points, split into a real-real and a
 conjugate-complex branch. The image space has at most one projective-line component, and on an
-image-line chart every real point is admissible, so the generic-gcd criterion is sharp in both
+chart every real point is admissible, so the generic-gcd criterion is sharp in both
 directions and the algorithm decides exactly.
 \item \emph{Bit complexity (Section~\ref{sec:complexity}).} Under simple spectrum the decision runs in
 $\poly(n,\tau)$ bit operations, with arithmetic in number fields of degree at most $k^2$.
@@ -129,7 +131,7 @@ Appendix~\ref{app:height} holds the height-propagation chain used in the complex
 
 \emph{Notation.} $E=\mathbb R^n$ throughout, with the Euclidean inner product. $\pi_{K_0}$ is the
 orthogonal projection; $K_0^\perp$ its kernel; $D^\circ\subseteq K_0^*$ is the annihilator of $D$ when
-$D\le K_0$. $\Gr(d,X)$ is the Grassmannian of $d$-planes in $X$. All matrices are real; $p$ is the
+$D\le K_0$ (so $\dim D^\circ=k-\dim D=\omega$). $\Gr(d,X)$ is the Grassmannian of $d$-planes in $X$. All matrices are real; $p$ is the
 number of output rows and $\tau$ the maximum bit length of the entries of $A$ and $C$. For a subspace $X$
 we write $\dim X$ for its dimension.
 
@@ -149,7 +151,7 @@ For a design $\mathcal L$ with row space $V$ of dimension $q$, define
 
 \begin{claim}[layer identities]\label{clm:identities}
 \begin{enumerate}[label=(\arabic*),leftmargin=*,itemsep=1pt,topsep=2pt]
-\item {\raggedright $\omega=\rank(LN)=\dim\pi_{K_0}(V)=k-\dim(K_0\cap V^\perp)$;\par}
+\item {\raggedright $\omega=\rank(\mathcal L N)=\dim\pi_{K_0}(V)=k-\dim(K_0\cap V^\perp)$;\par}
 \item $q=\omega+t$ and $c-t=k-q$;
 \item $\dim(V\cap K_0^\perp)=q-\omega=t$, and $\dim(V\cap K_0)$ is a third quantity, in general
 different from both $c$ and $t$.
@@ -157,8 +159,9 @@ different from both $c$ and $t$.
 \end{claim}
 
 \begin{proof}
-For (1): $\ker(LN)=\{u:Lu=0\}\cap K_0$ as a subset of $K_0$, i.e. $K_0\cap\ker L=K_0\cap V^\perp$ (when
-$L$ has full row rank, $\ker L=V^\perp$); hence $\omega=k-\dim(K_0\cap V^\perp)$. On the other hand the
+For (1): $\ker(\mathcal L N)=\{u:\mathcal L u=0\}\cap K_0$ as a subset of $K_0$, i.e.
+$K_0\cap\ker\mathcal L=K_0\cap V^\perp$ (when $\mathcal L$ has full row rank, $\ker\mathcal L=V^\perp$);
+hence $\omega=k-\dim(K_0\cap V^\perp)$. On the other hand the
 restriction map $V\to K_0^*$, $v\mapsto\langle v,\cdot\rangle|_{K_0}$, has kernel $V\cap K_0^\perp$ and
 rank equal to the rank of its adjoint $\pi_{K_0}|_V$, so $\dim\pi_{K_0}(V)=q-\dim(V\cap K_0^\perp)$; and
 its adjoint's kernel is $K_0\cap V^\perp$, so $\dim\pi_{K_0}(V)=k-\dim(K_0\cap V^\perp)$. Both coincide
@@ -182,6 +185,9 @@ A design is \textbf{$K_0$-split} (problem \textbf{S}) when $\dim(V\cap K_0)=\ome
 $V=(V\cap K_0)\oplus(V\cap K_0^\perp)$. Designs satisfying \eqref{eq:5a}, \eqref{eq:5b} without this
 condition form the \textbf{unrestricted} problem \textbf{U}.
 \end{defn}
+
+For $c\ge0$ put $\mathcal I_c(M):=\{D\le K_0:\ \dim D=c,\ M(D)\subseteq D\}$; in the case $c=2$ we write
+$\mathcal I_2(M)=\mathcal I_c(M)$.
 
 \begin{claim}[invariant kernel under split]\label{clm:invariant}
 Let $\mathcal L$ be split and satisfy \eqref{eq:5a}, and put $D=\ker H=K_0\cap V^\perp$,
@@ -324,7 +330,7 @@ Conversely every admissible row space arises this way.
 \end{thm}
 
 \begin{proof}
-(i) $\ker(LN)=\{x\in K_0:x\perp V\}^\perp$ intersected with $K_0$; since $V$ is split, this equals
+(i) $V\cap K_0=\{x\in K_0:x\perp V\}^\perp$ intersected with $K_0$; since $V$ is split, this equals
 $K_0\cap V^\perp$'s orthocomplement in $K_0$, i.e. $D^{\perp_{K_0}}$. (ii) For $d\in D$, $\langle d,V\rangle=0$
 and $\langle Ad,V\rangle=0$; writing $Ad=Md+A_{21}d$ with $Md\in D$, $\langle Md,V\rangle=0$
 automatically, so $V\perp AD\iff W\subseteq(A_{21}D)^\perp$. Since $W\le K_0^\perp$, this is
@@ -362,6 +368,9 @@ $W_0\subseteq W\subseteq T_D$.
 
 \subsection{The reduction}\label{sec:reduction:a}
 
+Write $H_K,(H_A)_K$ for the rows carried by $D^{\perp_{K_0}}$, and put
+$P_D(\lambda):=\lambda H_K-(H_A)_K$, $R_\lambda:=\row P_D(\lambda)$.
+
 For $w\in K_0^\perp$ define $\varphi_w\in K_0^*$ by $\varphi_w(u)=\langle w,A_{21}u\rangle$, and
 \begin{equation}\label{eq:Phi}
 \Phi(W):=\{\varphi_w:\ w\in W\}\subseteq D^\circ .
@@ -376,7 +385,7 @@ For every $\lambda$,
 &\quad=\row\bigl(\lambda H_K-(H_A)_K\bigr)+\Phi(W),
 \end{aligned}
 \end{equation}
-where $H_K,(H_A)_K$ denote the rows carried by $D^{\perp_{K_0}}$. Consequently the pencil condition
+Consequently the pencil condition
 depends on $W$ only through $\Phi(W)$, and
 $\dim\Phi(W)\le\dim\varphi(T_D)\le\dim T_D=(n-k)-r(D)$. Moreover:
 \begin{enumerate}[label=\arabic*.,start=3,leftmargin=*,itemsep=1pt,topsep=2pt]
@@ -386,9 +395,8 @@ $\dim\Phi(W)\le\dim\varphi(T_D)\le\dim T_D=(n-k)-r(D)$. Moreover:
 \row\bigl(\lambda H-H_A\bigr)=D^\circ\quad\text{for all }\lambda,
 \]
 \[
-\text{i.e.}\qquad R_\lambda+\Phi(W)=D^\circ\quad\forall\lambda,
+\text{i.e.}\qquad R_\lambda+\Phi(W)=D^\circ\quad\forall\lambda.
 \]
-where $R_\lambda:=\row P_D(\lambda)$.
 \end{enumerate}
 \end{thm}
 
@@ -418,8 +426,8 @@ $D^\circ$.
 \begin{remark}[what the reduction says]\label{rem:whatreduction}
 The spectral condition does not see $W$, only $\Phi(W)$: if $\Phi(W_1)=\Phi(W_2)$ then the two designs
 have identical pencils up to row operations. The design space is therefore quotiented by the fibres of
-$\Phi$, and the relevant parameter lives in a space of dimension at most $c$. For $c=2$ this is decisive
-(Section~\ref{sec:decision}).
+$\Phi$, and the relevant parameter lives in the image $\varphi(T_D)$, a space of dimension at most $n-k$.
+For $c=2$ this is decisive (Section~\ref{sec:decision}).
 \end{remark}
 
 So the spectral condition is a condition on the image $\Phi(W)$ and not on $W$, and the fibre variable
@@ -457,7 +465,7 @@ of Part C quantifies over.
 \subsection{The reduced criterion}\label{sec:reduction:c}
 
 \begin{thm}\label{thm:reduced}
-Write $P_D(\lambda)=\lambda H_K-(H_A)_K$ and $r_D(\lambda)=\dim\row P_D(\lambda)$. Then
+Recall $P_D(\lambda)=\lambda H_K-(H_A)_K$ and $r_D(\lambda)=\dim R_\lambda$. Then
 \begin{align}
 &\exists W\ (W_0\subseteq W\subseteq T_D,\ \dim W=t)\ \text{satisfying \eqref{eq:5b}}\notag\\
 &\iff\ \exists\Phi\ \text{satisfying Theorem~\ref{thm:realize} such that}\notag\\
@@ -497,7 +505,7 @@ This section describes the base of invariant two-planes at $c=2$ for simple spec
 that the reduction of Section~\ref{sec:reduction} is verbatim for arbitrary $c$. Part A is the
 classification, Part B the general statement.
 
-Write $\mathcal I_2(M)=\{D\in\Gr(2,K_0):M(D)\subseteq D\}$.
+Write $\mathcal I_2(M)$ for $\mathcal I_c(M)$ with $c=2$ (Section~\ref{sec:layers}).
 
 \subsection{Simple spectrum: the invariant-plane base}\label{sec:base:a}
 
@@ -596,10 +604,10 @@ comes from the bound on $n-k$, not from the smallness of $c$ (Remark~\ref{rem:bo
 \section{Decision and its cost}\label{sec:decision}
 
 This section assembles the decision procedure at $c=2$: Part A shows that admissibility is automatic on
-an image-line chart, Part B states the algorithm, Part C proves it correct, and Part D bounds its bit
+an chart, Part B states the algorithm, Part C proves it correct, and Part D bounds its bit
 cost.
 
-\subsection{Admissibility is automatic on an image-line chart}\label{sec:admissible}
+\subsection{Admissibility is automatic on every chart}\label{sec:admissible}
 
 Recall from \cite{companion3} that a point of a chart is \emph{admissible} when some maximal minor of the
 cleared pencil keeps its generic $\lambda$-degree at that point; the specialization lemma then shows that
@@ -607,16 +615,16 @@ the generic gcd degree is a lower bound on every admissible point, and that the 
 constant forces the chart to contain a real feasible point whenever the real points are Zariski dense.
 
 \begin{claim}\label{clm:admissible}
-On every chart of a split design, $\rank H=\omega$ identically. In particular, on a chart parameterising
-an image line, $H$ does not depend on the parameter and every real point of the chart is admissible.
+On every chart of a split design, $\rank H=\omega$ identically. In particular $H$ is independent of all
+chart parameters, so the $\lambda$-leading coefficient of a suitable maximal minor is a non-zero constant
+and every real point of every chart is admissible.
 \end{claim}
 
 \begin{proof}
 The $W$-rows of $H$ vanish (Theorem~\ref{thm:reduction}, step 1) and the $D$-rows have rank
-$\dim D^{\perp_{K_0}}=k-c=\omega$; hence $\rank H=\omega$ for every choice of $W$. On an image-line chart
-the pencil differs from a fixed matrix only in the single row $-\varphi(s)$, whose $\lambda$-coefficient
-is zero, so there is a maximal minor whose $\lambda$-leading coefficient does not vanish and does not
-depend on $s$.
+$\dim D^{\perp_{K_0}}=k-c=\omega$; hence $\rank H=\omega$ for every choice of $W$. On any chart of
+$\Gr(j,V_\varphi)$ the rows of $H$ are parameter-free, and the $\lambda$-leading coefficient of the
+maximal minor built on those $\omega$ rows is a non-zero constant.
 \end{proof}
 
 Admissibility being automatic, the generic-gcd criterion of \cite{companion3} becomes an exact test rather
