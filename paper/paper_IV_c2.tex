@@ -125,7 +125,8 @@ subspace of $D^\circ$. Section~\ref{sec:layers} fixes the layer parameters and t
 Section~\ref{sec:fibres} computes the fixed-kernel fibres in the two problems.
 Section~\ref{sec:reduction} proves the image-space reduction and the reduced criterion.
 Section~\ref{sec:base} classifies the base at $c=2$ for simple spectrum and records the general $c$.
-Section~\ref{sec:decision} gives the algorithm, its correctness and its bit cost.
+Section~\ref{sec:decision} gives the algorithm, its correctness and its bit cost, and closes with a
+worked example (Section~\ref{sec:example}).
 Section~\ref{sec:conclusion} consolidates the limitations and the evidence.
 Appendix~\ref{app:height} holds the height-propagation chain used in the complexity bound.
 
@@ -510,8 +511,7 @@ Write $\mathcal I_2(M)$ for $\mathcal I_c(M)$ with $c=2$ (Section~\ref{sec:layer
 \subsection{Simple spectrum: the invariant-plane base}\label{sec:base:a}
 
 \begin{thm}[base, simple spectrum]\label{thm:base}
-Suppose $M$ has simple spectrum, i.e. its minimal polynomial over $\mathbb Q$ has pairwise distinct
-irreducible factors and no repeated roots. Then $\mathcal I_2(M)$ is finite, and every element is one of:
+Suppose $M$ has simple spectrum, i.e. all eigenvalues of $M$ over $\mathbb C$ are distinct, equivalently the characteristic polynomial of $M$ is squarefree. Then $\mathcal I_2(M)$ is finite, and every element is one of:
 \begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=1pt,topsep=2pt]
 \item \textbf{(branch R)} $\operatorname{span}\{v_\alpha,v_\beta\}$ for two real eigenvalues
 $\alpha\ne\beta$ with eigenvectors $v_\alpha,v_\beta$;
@@ -757,6 +757,104 @@ exponential. The present method therefore gives $\poly(n,\tau)$ only under fixed
 spectrum, and at best $n^{O(cn+p^2)}$ in general.
 \end{remark}
 
+\subsection{A worked example}\label{sec:example}
+
+This subsection carries one instance through the reduction and the certificate: the compressed data,
+the admissible kernel direction, the image space, the pencil, and the gcd certificate. All entries are
+exact integers, and the computation is the one behind the $c=2$ side of Theorem~\ref{thm:nonmono},
+with the intermediate matrices displayed.
+
+\emph{The instance.} $n=8$, $p=2$, and
+\begin{equation}\label{eq:exA}
+\begin{gathered}
+A=\begin{pmatrix}
+0 & 0 & 1 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 1 & 0 & 0 & 0 & 0\\
+1 & -2 & 1 & 0 & -1 & 1 & 1 & -1\\
+-1 & 2 & 1 & 0 & 2 & -2 & -1 & 2\\
+0 & 0 & 0 & 0 & 1 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 1 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & 2 & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 3
+\end{pmatrix},\\
+C=\begin{pmatrix}
+1&0&0&0&0&0&0&0\\ 0&1&0&0&0&0&0&0
+\end{pmatrix}.
+\end{gathered}
+\end{equation}
+Here $\rank[C;CA]=4$, so $k=4$, and
+\[
+K_0=\ker[C;CA]=\operatorname{span}\{e_5,e_6,e_7,e_8\},\qquad
+N=\begin{pmatrix}0_{4\times4}\\ I_4\end{pmatrix}.
+\]
+The compression is $M=\pi_{K_0}A|_{K_0}=\operatorname{diag}(1,1,2,3)$ and the coupling is
+\[
+A_{21}=\begin{pmatrix}
+0&0&0&0\\ 0&0&0&0\\ -1&1&1&-1\\ 2&-2&-1&2\\ 0&0&0&0\\ 0&0&0&0\\ 0&0&0&0\\ 0&0&0&0
+\end{pmatrix}.
+\]
+The coupling has rank two, but its restriction to the direction below has rank one.
+
+\emph{The direction.} In the coordinates of $K_0$ fixed by $N$, take
+$D=\operatorname{span}\{e_1+e_2,\,e_3\}\le K_0$. Then $M(e_1+e_2)=e_1+e_2$ and $Me_3=2e_3$, so
+$M(D)\subseteq D$ and $D\in\mathcal I_2(M)$ with $\dim D=c=2$. Since $L_0=0$ the prescribed-row
+conditions read $P_{K_0}(V_0)=0$ and $W_0=0$, which hold trivially, so $D\in\mathcal B_{\rm pres}$.
+
+\emph{The fibre.} Here $A_{21}D=\operatorname{span}\{(0,0,1,-1,0,0,0,0)^{\mathsf T}\}$, so
+\[
+r(D)=1,\qquad \dim T_D=(n-k)-r(D)=4-1=3.
+\]
+With $t=1$ (i.e.\ $q=\omega+t=2+1=3$) and
+$W=\operatorname{span}\{(0,0,1,1,0,0,0,0)^{\mathsf T}\}\subseteq T_D$ one computes
+\[
+\varphi_W=(1,-1,0,1)\in D^\circ,\qquad \Phi(W)=\operatorname{span}\{(1,-1,0,1)\},
+\]
+so $\dim\Phi(W)=1=\min(t,2p)$: the image parameter is a line, as in Definition~\ref{defn:charts}. The
+resulting design row space is
+\[
+\begin{aligned}
+V=D^{\perp_{K_0}}\oplus W
+&=\operatorname{span}\bigl\{(0,0,0,0,-1,1,0,0),\\
+&\qquad (0,0,0,0,0,0,0,1),\\
+&\qquad (0,0,1,1,0,0,0,0)\bigr\},
+\end{aligned}
+\]
+of dimension $q=3$; the design is $K_0$-split by construction.
+
+\emph{The pencil.} With these three vectors as the rows of $\mathcal L$,
+\[
+\begin{gathered}
+H=\mathcal L N=\begin{pmatrix}-1&1&0&0\\ 0&0&0&1\\ 0&0&0&0\end{pmatrix},\\
+H_A=\mathcal L AN=\begin{pmatrix}-1&1&0&0\\ 0&0&0&3\\ 1&-1&0&1\end{pmatrix}.
+\end{gathered}
+\]
+The invariants are $\omega=\rank H=2$, $\dim(K_0\cap V^\perp)=2=c$ (exact kernel), and
+$\row H_A\subseteq\row H$, i.e.\ \eqref{eq:5a} holds. The nonzero maximal $2\times2$ minors of
+$\lambda H-H_A$ are
+\[
+\begin{gathered}
+-(\lambda-3)(\lambda-1),\quad (\lambda-3)(\lambda-1),\quad \lambda-1,\\
+1-\lambda,\quad \lambda-3,\quad 3-\lambda .
+\end{gathered}
+\]
+
+\emph{The certificate.} The minors $\lambda-1$ and $\lambda-3$ are coprime, with Bézout identity
+\[
+\tfrac12\bigl((\lambda-1)-(\lambda-3)\bigr)=1 ,
+\]
+so the gcd of all maximal minors is $1$ and condition~\eqref{eq:5b} holds. This is a direct
+certificate for the displayed design; it does not require the algorithm. Indeed a feasible design of
+order $q=3$ with $c=2$ exists, whereas by Theorem~\ref{thm:nonmono} no feasible design of order $3$
+with $c=1$ does.
+
+\emph{Scope.} The eigenvalue $1$ of $M$ has a two-dimensional eigenspace, so $\mathcal I_2(M)$ is
+positive-dimensional (Remark~\ref{rem:nonsimple}) and the finite enumeration of
+Theorem~\ref{thm:base} does not apply. The proofs of Theorems~\ref{thm:correct} and
+\ref{thm:complexity} use simple spectrum in the sense of distinct eigenvalues; this instance
+therefore illustrates the reduction and the certificate format, not the algorithm's execution or
+those proofs. The distinction is worth recording, because it shows that feasibility itself is not
+confined to the distinct-eigenvalue case --- only the correctness and cost arguments are.
+
 \section{Discussion and conclusion}\label{sec:conclusion}
 
 This section collects what the paper does not claim and records the evidence behind what it does claim.
@@ -769,7 +867,8 @@ Part A consolidates the limitations, Part B the evidence.
 only reduced to a fibre description (Theorem~\ref{thm:ufibre}) and its invariant-kernel structure is
 lost.
 \item The decision algorithm and the complexity bound require simple spectrum; the non-simple case is
-left open.
+left open, and the worked example of Section~\ref{sec:example}, whose compression has a repeated
+eigenvalue, illustrates the certificate format rather than these two results.
 \item No uniformity in $c$ is claimed; the honest general bound is $n^{O(cn+p^2)}$.
 \item The general invariant-plane variety is used only through its defining equations; no rational
 parametrization is claimed.
@@ -791,34 +890,98 @@ writing, and nothing in those sections should be read as machine-verified.
 
 The evidence behind the concrete assertions is of two kinds. First, the proofs of
 Sections~\ref{sec:layers}--\ref{sec:decision} are paper-level and complete, with one exception:
-the height chain of Claim~\ref{clm:arith} is a sketch, made step by step in Appendix~\ref{app:height},
-and a fully explicit constant is not computed. Second, the two places where the paper asserts something
-about a specific system --- the instance of Theorem~\ref{thm:nonmono} and the classification of
-Table~\ref{tab:planes} --- rest on exact rational arithmetic, not on floating-point computation. In the
-proof of Theorem~\ref{thm:nonmono} the six maximal $2\times2$ minors are expanded over $\mathbb Q$ and
-their gcd is $1$ precisely because the displayed combination
-$\tfrac12\bigl((\lambda-1)-(\lambda-3)\bigr)$ is a rational combination of two of them, and on the
-$c=1$ side the gcd $(\lambda-1)(\lambda-2)(\lambda-3)$ is read off the displayed integer matrix $H$ for
-symbolic $s$; both computations involve no algebraic extension and no rounding, so they are reproducible
-in any exact arithmetic system. Table~\ref{tab:planes} is a classification rather than a computation: its
-two counts are the combinatorial expressions of Theorem~\ref{thm:base}, and its third column is the field
-statement of Claim~\ref{clm:arith}.
+the height chain of Claim~\ref{clm:arith} is a sketch in the body, made explicit step by step in
+Appendix~\ref{app:height}; the constants there are standard and deliberately not optimized, so no
+single numerical constant is claimed. Second, the three places where the paper asserts something
+about a specific system --- the instance of Theorem~\ref{thm:nonmono}, the worked example of
+Section~\ref{sec:example}, and the classification of Table~\ref{tab:planes} --- rest on exact
+rational arithmetic, not on floating-point computation. In the proof of Theorem~\ref{thm:nonmono}
+the nonzero maximal $2\times2$ minors are expanded over $\mathbb Q$ and their gcd is $1$ precisely
+because the displayed combination $\tfrac12\bigl((\lambda-1)-(\lambda-3)\bigr)$ is a rational
+combination of two of them, and on the $c=1$ side the gcd $(\lambda-1)(\lambda-2)(\lambda-3)$ is
+read off the displayed integer matrix $H$ for symbolic $s$; both computations involve no algebraic
+extension and no rounding. In the worked example of Section~\ref{sec:example} the data $A,C$ are
+integral, and $N$, $M$, $A_{21}$, the design basis, $H$, $H_A$, all $2\times2$ minors of the pencil
+and their gcd are computed over $\mathbb Q$; six minors are nonzero, the displayed Bézout identity
+is exact, and again no algebraic extension or rounding occurs, so the certificate is reproducible in
+any exact arithmetic system. Table~\ref{tab:planes} is a classification rather than a computation:
+its two counts are the combinatorial expressions of Theorem~\ref{thm:base}, and its third column is
+the field statement of Claim~\ref{clm:arith}.
 
 \appendices
 \small
 \section{Proof of the height propagation}\label{app:height}
 
-The chain is: entries of $A,C$ of bit length $\le\tau$ $\to$ entries of $M$ and $A_{21}$ (polynomial, by
-Cramer and by the inverse of the Gram matrix of $N$) $\to$ coefficients of the characteristic and minimal
-polynomials of $M$ (polynomial in $k$ and in the entry heights) $\to$ irreducible factors over
-$\mathbb Q$ (polynomial height, by Kronecker's bound) $\to$ roots $\alpha$ of these factors (height
-bounded by the Mahler measure, hence polynomial) $\to$ eigenvectors $v_\alpha=\ker(M-\alpha I)$ over
-$\mathbb Q(\alpha)$ (Cramer, denominators $f'(\alpha)\ne0$) $\to$ bases of $D$, $D^{\perp_{K_0}}$, $T_D$
-(kernels and orthogonal complements, again Cramer) $\to$ entries of $\varphi$, $\Phi_0$ and the pencil
-(polynomially many field operations) $\to$ subresultants and gcd (degree and height bounds as in
-\cite{vzgg13}). Each step multiplies the height by a factor that is polynomial in $n$ and in the degrees
-involved; the degree of the field is at most $k^2$. This yields the stated $\poly(n,\tau)$ bound. A
-fully explicit constant is not computed here.
+This appendix records the chain used in Claim~\ref{clm:arith} with the standard bounds made
+explicit. Throughout, $h(\cdot)$ is the maximum bit length of the entries of a matrix or of the
+coefficients of a polynomial.
+
+\emph{Step 0 (input).} $h(A),h(C)\le\tau$.
+
+\emph{Step 1 ($CA$ and $[C;CA]$).} Entrywise, $(CA)_{ij}$ is a sum of $n$ products, so
+$h(CA)\le 2\tau+\lceil\log_2 n\rceil$. Hadamard's bound gives, for every square submatrix $S$ of
+$[C;CA]$ of order $d$, $|\det S|\le(\sqrt{n}\,2^{2\tau+\log n})^{d}$, i.e.\
+$h(\det S)\le d\,(2\tau+\log n+\tfrac12\log n)$.
+
+\emph{Step 2 (kernel basis $N$).} A basis of $\ker[C;CA]$ can be chosen so that each entry is a
+cofactor of $[C;CA]$, hence of order at most $2p$; by Step 1,
+\[
+h(N)\le 2p\,(2\tau+\log n+\tfrac12\log n).
+\]
+
+\emph{Step 3 (Gram matrix and its inverse).} $G=N^{\mathsf T}N$ has entries that are sums of $n$
+products, so $h(G)\le 2h(N)+\log n$. Since $G$ is a positive definite integer matrix, $\det G\ge1$,
+and the entries of $G^{-1}$ are cofactors over $\det G$, so
+\[
+h(G^{-1})\le k\,(2h(N)+\log n+\tfrac12\log k).
+\]
+
+\emph{Step 4 (compression and coupling).} $M=(N^{\mathsf T}N)^{-1}N^{\mathsf T}AN$ and
+$A_{21}=P_{K_0^\perp}AN$ are obtained from $G^{-1}$, $N$ and $A$ by polynomially many ring
+operations, so
+\[
+h(M),\,h(A_{21})\le 4h(N)+2h(G^{-1})+\tau+O(\log n),
+\]
+which is $\poly(n,\tau)$.
+
+\emph{Step 5 (characteristic and minimal polynomial).} The coefficient of $t^{\,k-i}$ in $\chi_M$ is
+a sum of principal $i\times i$ minors, hence at most $\binom{k}{i}(\sqrt{k}\,2^{h(M)})^{i}$ in
+absolute value; so $h(\chi_M)\le k\,h(M)+O(k\log k)$. The minimal polynomial divides $\chi_M$.
+
+\emph{Step 6 (irreducible factors).} By Mignotte's bound, a divisor $f$ of a degree-$k$ integer
+polynomial $g$ satisfies $\|f\|_\infty\le\binom{k}{\lfloor k/2\rfloor}\|g\|_\infty$, so
+\[
+h(f)\le h(\chi_M)+k .
+\]
+
+\emph{Step 7 (roots).} Represent a root $\alpha$ of $f$ by the class of $t$ in
+$\mathbb Q[t]/(f)$; its height is bounded in terms of $h(f)$. Cauchy's bound gives
+$|\alpha|\le2\|f\|_\infty^{1/\deg f}$, and the logarithmic height satisfies
+$h(\alpha)\le h(f)+\log\deg f$.
+
+\emph{Step 8 (eigenvectors).} Solving $(M-\alpha I)v=0$ over $L=\mathbb Q(\alpha)$ by Cramer
+expresses each coordinate of $v$ as a quotient of two minors of order $k-1$ of $M-\alpha I$. Those
+minors are polynomials in $\alpha$ of degree at most $k-1$ whose coefficients involve $k!$ products
+of entries of $M$; hence
+\[
+h(v)\le (k-1)\bigl(h(M)+h(\alpha)\bigr)+O(k\log k).
+\]
+The denominators are nonzero because the eigenvalues are distinct.
+
+\emph{Step 9 (subspaces and the image map).} The bases of $D$, $D^{\perp_{K_0}}$ and $T_D$ are
+kernels and orthogonal complements of matrices with entries of the heights above, so they inherit an
+$O(k)$ factor. The functionals $\varphi$, the prescribed image $\Phi_0$ and the entries of the cleared
+pencil are obtained from these by polynomially many field operations, so their heights are again
+$\poly(n,\tau)$.
+
+\emph{Step 10 (gcd).} The maximal minors have $\lambda$-degree at most $\omega\le k$ and heights at
+most $H=\poly(n,\tau)$. Each subresultant is a determinant of order at most $2k$ whose entries are
+coefficients of the maximal minors, so Hadamard's bound gives bit length $O(k(H+\log k))$, which is
+$\poly(n,\tau)$; the same bound applies to the gcd (see \cite{vzgg13}).
+
+Combining Steps 0--10 yields Claim~\ref{clm:arith}. The constants above are not optimized: each step
+multiplies the height by a factor polynomial in $k$ and in the degree of the field, and the field
+degree is at most $k^2$; no attempt has been made to minimize the exponents.
 
 \normalsize
 
