@@ -177,3 +177,7 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.PaperI.bitLenMat
 #print axioms Q1Paper.PaperI.mat_abs_num_lt_two_pow_bitLenMat
 #print axioms Q1Paper.PaperI.mat_num_entries_bounded
+#print axioms Q1Paper.PaperI.imageFin
+#print axioms Q1Paper.PaperI.imageEquiv
+#print axioms Q1Paper.PaperI.permOfInjective
+#print axioms Q1Paper.PaperI.rowEmb_permOfInjective

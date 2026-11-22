@@ -23,7 +23,9 @@ States are kept separate: `Mathematically proved` (M) and `Lean formalized` (F);
   see `PAPER_I_MATH_AUDIT.md`.
 - Claim 13 bit-length base, 43 declarations (commit `80eac0a`): `bitLenInt`,
   `bitLenRat`, `bitLenMat`, cleared-entry identity `|A.num i j| = A.den * |A i j|`.
-- Axiom audit: 121 declarations, only `propext`, `Classical.choice`, `Quot.sound`.
+- D1 image/permutation layer: `imageFin`, `imageEquiv`, `permOfInjective`, `rowEmb_permOfInjective` (this round).
+- Claim 19 Cramer re-derivation completed and verified (`PAPER_I_CLAIM19_CRAMER.md`); the paper appendix still needs the rewrite.
+- Axiom audit: 125 declarations, only `propext`, `Classical.choice`, `Quot.sound`.
 
 ## 3. Open mathematical proofs
 
@@ -64,8 +66,8 @@ States are kept separate: `Mathematically proved` (M) and `Lean formalized` (F);
 |---|---|---|
 | A. D1 bridge + §III-D assembly | main line | in progress (`det_submatrix_perm` done) |
 | B. Paper corrections (Eq. (1), Algorithm 1, Theorem 1/2, §III-D [ℓ]) | paper agent / main line | in progress |
-| C. Claim 19 Cramer re-derivation | math agent | to launch |
-| D. Claim 13 bit length (`bitLenRat_add`, Leibniz) | Lean agent | to launch |
+| C. Claim 19 Cramer re-derivation | math agent | **done** (report); appendix rewrite pending |
+| D. Claim 13 bit length (`bitLenRat_add`, Leibniz) | Lean agent | in progress (subagent) |
 | E. Bareiss intermediates | algorithm agent | to launch |
 | F. Roadmap / map / audit consistency | main line | continuous |
 
