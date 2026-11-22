@@ -95,7 +95,9 @@ whole chart.
 \begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=1pt,topsep=2pt]
 \item \emph{Layer bookkeeping (Section~\ref{sec:layers}).} The layer index is $c=k-\omega$ and the
 ``ambient row excess'' is $t=q-\omega$; the identity $c-t=k-q$ shows that $c$ and $t$ move together when
-$q$ is fixed. A previous, ambiguous identification of $\omega$ with $\dim(V\cap K_0)$ is corrected. We
+$q$ is fixed. A previous, ambiguous identification of $\omega$ with $\dim(V\cap K_0)$ is corrected:
+$\omega=\rank H=k-\dim(K_0\cap V^\perp)$, while $\dim(V\cap K_0)=\omega$ holds only under the split
+condition. We
 separate the unrestricted problem \textbf{U} from the $K_0$-split problem \textbf{S} and show by a
 counterexample that the split hypothesis cannot be derived from \eqref{eq:5a}.
 \item \emph{The two fixed-kernel fibres (Section~\ref{sec:fibres}).} For fixed $D=\ker H$ we give the
@@ -131,10 +133,15 @@ Section~\ref{sec:conclusion} consolidates the limitations and the evidence.
 Appendix~\ref{app:height} holds the height-propagation chain used in the complexity bound.
 
 \emph{Notation.} $E=\mathbb R^n$ throughout, with the Euclidean inner product. $\pi_{K_0}$ is the
-orthogonal projection; $K_0^\perp$ its kernel; $D^\circ\subseteq K_0^*$ is the annihilator of $D$ when
-$D\le K_0$ (so $\dim D^\circ=k-\dim D=\omega$). $\Gr(d,X)$ is the Grassmannian of $d$-planes in $X$. All matrices are real; $p$ is the
-number of output rows and $\tau$ the maximum bit length of the entries of $A$ and $C$. For a subspace $X$
-we write $\dim X$ for its dimension.
+orthogonal projection, $K_0^\perp$ its kernel, and $K_0^*$ the dual space of $K_0$. For a subspace
+$J\le K_0$ we write
+\[
+J^\circ:=\{\varphi\in K_0^*:\ \varphi|_J=0\}\le K_0^*
+\]
+for its annihilator in $K_0^*$, so that $\dim J^\circ=k-\dim J$; the case used
+throughout is $J=D=\ker H$, for which $\dim D=c=k-\omega$ and hence $\dim D^\circ=k-c=\omega$. $\Gr(d,X)$ is the
+Grassmannian of $d$-planes in $X$. All matrices are real; $p$ is the number of output rows and $\tau$ the
+maximum bit length of the entries of $A$ and $C$. For a subspace $X$ we write $\dim X$ for its dimension.
 
 \section{The layer parameters}\label{sec:layers}
 
@@ -151,33 +158,45 @@ For a design $\mathcal L$ with row space $V$ of dimension $q$, define
 \end{equation}
 
 \begin{claim}[layer identities]\label{clm:identities}
+Let $D=\ker H=K_0\cap V^\perp$. Then
 \begin{enumerate}[label=(\arabic*),leftmargin=*,itemsep=1pt,topsep=2pt]
-\item {\raggedright $\omega=\rank(\mathcal L N)=\dim\pi_{K_0}(V)=k-\dim(K_0\cap V^\perp)$;\par}
-\item $q=\omega+t$ and $c-t=k-q$;
-\item $\dim(V\cap K_0^\perp)=q-\omega=t$, and $\dim(V\cap K_0)$ is a third quantity, in general
-different from both $c$ and $t$.
+\item {\raggedright $\omega=\rank H=\rank(\mathcal L N)=\dim\pi_{K_0}(V)
+=k-\dim(K_0\cap V^\perp)=k-\dim D$;\par}
+\item $c=k-\omega=\dim D$;
+\item $t=q-\omega=\dim(V\cap K_0^\perp)$, and $q=\omega+t$;
+\item in the split case $\dim(V\cap K_0)=\omega$, and then
+$V=(V\cap K_0)\oplus(V\cap K_0^\perp)$; in general $\dim(V\cap K_0)$ is a third quantity, not determined
+by $\omega$ and $t$ (Claim~\ref{clm:notnormal} below has $\dim(V\cap K_0)=1$ with $c=2$ and $t=3$);
+\item $\dim D^\circ=k-\dim D=k-c=\omega$.
 \end{enumerate}
+Moreover $c-t=k-q$.
 \end{claim}
 
 \begin{proof}
-For (1): $\ker(\mathcal L N)=\{u:\mathcal L u=0\}\cap K_0$ as a subset of $K_0$, i.e.
+For (1): $\ker(\mathcal L N)=\{u\in K_0:\mathcal L u=0\}$, i.e.\
 $K_0\cap\ker\mathcal L=K_0\cap V^\perp$ (when $\mathcal L$ has full row rank, $\ker\mathcal L=V^\perp$);
-hence $\omega=k-\dim(K_0\cap V^\perp)$. On the other hand the
-restriction map $V\to K_0^*$, $v\mapsto\langle v,\cdot\rangle|_{K_0}$, has kernel $V\cap K_0^\perp$ and
-rank equal to the rank of its adjoint $\pi_{K_0}|_V$, so $\dim\pi_{K_0}(V)=q-\dim(V\cap K_0^\perp)$; and
-its adjoint's kernel is $K_0\cap V^\perp$, so $\dim\pi_{K_0}(V)=k-\dim(K_0\cap V^\perp)$. Both coincide
-with $\omega$. Part (2) is the definition of $t$ and $c-t=(k-\omega)-(q-\omega)=k-q$. Part (3) is the
-first computation above.
+hence $\omega=\rank H=k-\dim(K_0\cap V^\perp)$. On the other hand, the restriction map
+$r:V\to K_0^*$, $v\mapsto\langle v,\cdot\rangle|_{K_0}$, has kernel $V\cap K_0^\perp$, so
+$\rank r=q-\dim(V\cap K_0^\perp)=\dim\pi_{K_0}(V)$. Its adjoint $r^*:K_0\to V^*$,
+$x\mapsto\langle x,\cdot\rangle|_V$, is the transpose of $\pi_{K_0}|_V$ and has kernel $K_0\cap V^\perp$;
+hence $\dim\pi_{K_0}(V)=\rank r=\rank r^*=k-\dim(K_0\cap V^\perp)$. All these
+quantities coincide. Part (2) is the definition of $c$ together with (1). Part (3) is the first
+computation above, and $q=\omega+t$ is the definition of $t$. Part (4) is the definition of the split
+condition (Definition~\ref{defn:split}); the verification of the counterexample's numbers is part of the
+proof of Claim~\ref{clm:notnormal}. Part (5) is $\dim D^\circ=k-\dim D=k-c=\omega$, and
+$c-t=(k-\omega)-(q-\omega)=k-q$.
 \end{proof}
 
 \begin{remark}\label{rem:hyp}
-In the hyperplane layer $q=k$, so $c=t$ and the three quantities of Claim~\ref{clm:identities} coincide;
-this is why the distinction was invisible in \cite{companion3}. For $q\ne k$ they differ, and the layer
-index must be defined as $c=k-\omega$.
+In the hyperplane layer $q=k$ one has $c=t=k-\omega$, so $c$ and $t$ coincide there; this is why the
+distinction between them was invisible in \cite{companion3}. It does not make $\omega$ coincide with
+either: $\omega=k-c$, and $\dim(V\cap K_0)=\omega$ holds only in the split case. For $q\ne k$ even $c$
+and $t$ differ, by $c-t=k-q$.
 \end{remark}
 
-The three quantities coincide in the hyperplane layer, where $q=k$; outside it $c\ne t$ by the identity
-$c-t=k-q$, and it is $c$, not $\dim(V\cap K_0)$, that indexes the layer.
+Thus $c$ and $t$ coincide only in the hyperplane layer $q=k$; outside it $c\ne t$ by $c-t=k-q$. The layer
+is indexed by $c=k-\omega$, not by $\dim(V\cap K_0)$, and $\dim D^\circ=\omega$ is a different quantity
+from both.
 
 \subsection{The split hypothesis}\label{sec:layers:b}
 
@@ -196,24 +215,72 @@ $M=\pi_{K_0}A|_{K_0}$. Then $M(D)\subseteq D$.
 \end{claim}
 
 \begin{proof}
-By \eqref{eq:5a}, $\ker H\subseteq\ker H_A$, i.e. $AD\perp V$. Let $\varphi_d(u)=\langle u,d\rangle$ and
+By \eqref{eq:5a}, $\ker H\subseteq\ker H_A$, i.e.\ $AD\perp V$. Let $\varphi_d(u)=\langle u,d\rangle$ and
 $\varphi_{Ad}(u)=\langle u,Ad\rangle$ for $u\in K_0$. Both vanish on $V\cap K_0$: the first because
-$D\subseteq V^\perp$, the second by $V\perp AD$. The annihilator of $V\cap K_0$ in $K_0^*$ has dimension
-$k-\dim(V\cap K_0)=c$, and the $\varphi_d$, $d\in D$, are $c$ independent elements of it; hence
-$\varphi_{Ad}\in\operatorname{span}\{\varphi_d\}$ and $\pi_{K_0}(Ad)\in D$.
+$D\subseteq V^\perp$, the second by $V\perp AD$. Since the design is split, the annihilator
+$(V\cap K_0)^\circ\subseteq K_0^*$ has dimension $k-\dim(V\cap K_0)=k-\omega=c$, and the $\varphi_d$,
+$d\in D$, are $c$ independent elements of it; hence $\varphi_{Ad}\in\operatorname{span}\{\varphi_d\}$ and
+$\pi_{K_0}(Ad)\in D$.
 \end{proof}
 
 \begin{claim}[the split hypothesis is not a normalisation]\label{clm:notnormal}
 There is a design satisfying \eqref{eq:5a}, with exact kernel and $c=2$, whose $D=\ker H$ is not
-$M$-invariant.
+$M$-invariant; the design is then not $K_0$-split.
 \end{claim}
 
 \begin{proof}[Construction]
-In $E=\mathbb{R}^8$ take $K_0=\operatorname{span}\{e_5,\dots,e_8\}$ and a compression
-$M=\operatorname{diag}(1,1,2,3)$, choose $D=\operatorname{span}\{e_1+e_2,\,e_3+e_4\}\le K_0$ (not
-$M$-invariant), put $U=D+AD$ and $V=U^\perp$. Then $\dim(D+AD)=3$, $K_0\cap(D+AD)=D$ (exactness),
-$q=\dim V=5$, $\dim(K_0\cap V^\perp)=2=c$, $AD\perp V$ so \eqref{eq:5a} holds, and yet
-$\dim(V\cap K_0)=1\ne\omega=2$, so the design is not split and $M(D)\not\subseteq D$.
+Let $e_1,\dots,e_8$ be the standard basis of $E=\mathbb R^8$ and put
+\[
+K_0:=\operatorname{span}\{e_5,\dots,e_8\},\qquad f_i:=e_{4+i}\quad(i=1,\dots,4),
+\]
+so that $f_1,\dots,f_4$ is a basis of $K_0$ and $e_1,\dots,e_4$ is a basis of $K_0^\perp$. All vectors of
+$K_0$ below are written in the $f$-basis. Let
+\[
+D:=\operatorname{span}\{f_1+f_2,\ f_3+f_4\}\le K_0,\qquad \dim D=2 .
+\]
+Fix the compression $M=\operatorname{diag}(1,1,2,3)$ in the $f$-basis and the coupling $A_{21}$ below,
+whose rows are indexed by $e_1,\dots,e_4$ and whose columns by $f_1,\dots,f_4$:
+\[
+A_{21}:=\begin{pmatrix}
+1&-1&0&0\\
+0&0&1&0\\
+0&0&0&0\\
+0&0&0&0
+\end{pmatrix},
+\]
+and define $A$ on the basis $(f_1,\dots,f_4,e_1,\dots,e_4)$ of $E$ by
+\begin{equation}\label{eq:notnormal-A}
+\begin{gathered}
+A=\begin{pmatrix} A_{11} & A_{12}\\ A_{21} & A_{22}\end{pmatrix}
+=\begin{pmatrix} M & 0\\ A_{21} & 0\end{pmatrix},\\
+Af_i=Mf_i+A_{21}f_i,\qquad Ae_j=0\quad(j=1,\dots,4).
+\end{gathered}
+\end{equation}
+Thus $A_{11}=M=\pi_{K_0}A|_{K_0}$ is the compression, $A_{21}=P_{K_0^\perp}A|_{K_0}$ the coupling to
+$K_0^\perp$, and $A_{12}=A_{22}=0$. For $d_1:=f_1+f_2$ and $d_2:=f_3+f_4$ one has
+\begin{gather*}
+Ad_1=d_1,\\
+Ad_2=Md_2+A_{21}d_2=2f_3+3f_4+e_2=2d_2+(f_4+e_2),
+\end{gather*}
+because $A_{21}d_1=0$ and $A_{21}d_2=e_2$. Hence
+\[
+U:=D+AD=\operatorname{span}\{d_1,\ d_2,\ f_4+e_2\},\qquad \dim U=3 ,
+\]
+the three vectors being independent because $f_4+e_2\notin K_0$ while $d_1,d_2\in K_0$. Every
+$\alpha d_1+\beta d_2+\gamma(f_4+e_2)\in K_0$ has $\gamma=0$, so
+\[
+K_0\cap U=K_0\cap(D+AD)=D .
+\]
+Put $V:=U^\perp$, so $q=\dim V=8-3=5$, and take $\mathcal L$ to be a matrix whose rows form a basis of
+$V$; for $L_0=0$ this is a design with row space $V$.
+Then $D=\ker H=K_0\cap V^\perp$, $\omega=\rank H=k-\dim D=2$, $c=k-\omega=2$ and $t=q-\omega=3$; the
+kernel is exact because $K_0\cap V^\perp=K_0\cap U=D$. Moreover $AD\subseteq U=V^\perp$, so
+$\ker H\subseteq\ker H_A$ and \eqref{eq:5a} holds. Finally
+\[
+V=U^\perp=\operatorname{span}\{e_1,\ e_3,\ e_4,\ e_6-e_5,\ e_8-e_7-e_2\},
+\]
+whence $V\cap K_0=\operatorname{span}\{e_6-e_5\}$ has dimension $1\ne\omega=2$: the design is not
+$K_0$-split. And $Md_2=2f_3+3f_4=2d_2+f_4\notin D$, so $M(D)\not\subseteq D$.
 \end{proof}
 
 The split hypothesis is therefore a genuine restriction on the layer rather than a normalisation;
@@ -308,36 +375,55 @@ $K_0\cap(D+AD)=D$ holds, and that condition is a property of $D$ alone.
 \subsection{The split problem \texorpdfstring{\textbf{S}}{S}}\label{sec:fibres:s}
 
 \begin{thm}[split fibre]\label{thm:splitfibre}
-Let $D\in\mathcal I_c(M)$ and assume the design is split. Put
+Let $D\in\mathcal I_c(M)$ with $\dim D=c$, and put
 \[
 T_D:=K_0^\perp\cap(A_{21}D)^\perp,\qquad W_0:=P_{K_0^\perp}(V_0),
 \]
 \[
-w_0=\dim W_0,\qquad r(D)=\rank(A_{21}|_D).
+w_0:=\dim W_0,\qquad r(D):=\rank(A_{21}|_D).
 \]
-If $P_{K_0}(V_0)\subseteq D^{\perp_{K_0}}$ and $W_0\subseteq T_D$, then the admissible row spaces are
+Assume the two prescribed-row conditions
+\begin{equation}\label{eq:splithyp}
+\textbf{(H1)}\quad P_{K_0}(V_0)\subseteq D^{\perp_{K_0}},
+\qquad
+\textbf{(H2)}\quad W_0\subseteq T_D .
+\end{equation}
+Then the row spaces of the $K_0$-split designs with kernel $D$, prescribed rows $V_0$, and satisfying
+\eqref{eq:5a} are exactly
 \[
 V=D^{\perp_{K_0}}\oplus W,\qquad W_0\subseteq W\subseteq T_D,\quad \dim W=t,
 \]
 and the fibre is
-\[
-\mathcal F_D^{\rm split}\cong\Gr\bigl(t-w_0,\ T_D/W_0\bigr),
-\]
-of dimension $(t-w_0)\bigl((n-k)-r(D)-t\bigr)$, non-empty if and only if
+\begin{equation}\label{eq:splitfibre}
+\begin{gathered}
+\mathcal F_D^{\rm split}\cong\Gr\bigl(t-w_0,\ T_D/W_0\bigr),\\
+\dim\mathcal F_D^{\rm split}=(t-w_0)\bigl((n-k)-r(D)-t\bigr),
+\end{gathered}
+\end{equation}
+which is non-empty if and only if
 \[
 w_0\le t\le (n-k)-r(D).
 \]
-Conversely every admissible row space arises this way.
 \end{thm}
 
 \begin{proof}
-(i) $V\cap K_0=\{x\in K_0:x\perp V\}^\perp$ intersected with $K_0$; since $V$ is split, this equals
-$K_0\cap V^\perp$'s orthocomplement in $K_0$, i.e. $D^{\perp_{K_0}}$. (ii) For $d\in D$, $\langle d,V\rangle=0$
-and $\langle Ad,V\rangle=0$; writing $Ad=Md+A_{21}d$ with $Md\in D$, $\langle Md,V\rangle=0$
-automatically, so $V\perp AD\iff W\subseteq(A_{21}D)^\perp$. Since $W\le K_0^\perp$, this is
-$W\subseteq T_D$. (iii) $V_0\subseteq V$ splits into $P_{K_0}(V_0)\subseteq D^{\perp_{K_0}}$ and
-$W_0\subseteq W$, and the former is a condition on $D$ alone. (iv) The free part of $W$ modulo $W_0$
-inside $T_D$ is a Grassmannian of the stated dimension.
+(i) For a split design, $\dim(V\cap K_0)=\omega=k-c$ by Claim~\ref{clm:identities}(4). Every
+$x\in V\cap K_0$ is orthogonal to $D\subseteq V^\perp$, and $\dim D^{\perp_{K_0}}=k-\dim D=k-c$; hence
+$V\cap K_0=D^{\perp_{K_0}}$, and $V=(V\cap K_0)\oplus W$ with $W:=V\cap K_0^\perp$. Then
+$K_0\cap V^\perp=D$: the inclusion $D\subseteq K_0\cap V^\perp$ holds because $D\perp D^{\perp_{K_0}}$ and
+$D\perp W$, and the reverse inclusion follows from
+$K_0\cap V^\perp\subseteq K_0\cap(D^{\perp_{K_0}})^\perp=D$.
+(ii) Recall that \eqref{eq:5a} is $\ker H\subseteq\ker H_A$, i.e.\ $AD\perp V$: indeed
+$\ker H_A=\{u\in K_0:Au\in V^\perp\}$. For $d\in D$, $\langle d,V\rangle=0$; writing $Ad=Md+A_{21}d$
+with $Md\in D\subseteq V^\perp$ and $A_{21}d\in K_0^\perp$, the relation $\langle Ad,V\rangle=0$ is
+equivalent to $W\perp A_{21}D$. Hence \eqref{eq:5a} holds if and only if $W\subseteq T_D$, i.e.\ if and
+only if the fibre parameter lies in $T_D$.
+(iii) $V_0\subseteq V$ splits into $P_{K_0}(V_0)\subseteq D^{\perp_{K_0}}$ and $W_0\subseteq W$, which are
+(H1) and the lower inclusion of the fibre.
+(iv) Since $A_{21}D\subseteq K_0^\perp$ and $\dim A_{21}D=r(D)$, its orthogonal complement inside
+$K_0^\perp$ has dimension $(n-k)-r(D)$; thus $\dim T_D=(n-k)-r(D)$, and $W/W_0$ is a free
+$(t-w_0)$-plane in $T_D/W_0$, a Grassmannian of dimension
+$(t-w_0)(\dim T_D-t)=(t-w_0)((n-k)-r(D)-t)$.
 \end{proof}
 
 \begin{remark}[the prescribed rows are two conditions]\label{rem:presrows}
@@ -369,25 +455,44 @@ $W_0\subseteq W\subseteq T_D$.
 
 \subsection{The reduction}\label{sec:reduction:a}
 
-Write $H_K,(H_A)_K$ for the rows carried by $D^{\perp_{K_0}}$, and put
+Write $H_K,(H_A)_K$ for the rows of $H,H_A$ carried by $D^{\perp_{K_0}}$, and put
 $P_D(\lambda):=\lambda H_K-(H_A)_K$, $R_\lambda:=\row P_D(\lambda)$.
 
-For $w\in K_0^\perp$ define $\varphi_w\in K_0^*$ by $\varphi_w(u)=\langle w,A_{21}u\rangle$, and
-\begin{equation}\label{eq:Phi}
-\Phi(W):=\{\varphi_w:\ w\in W\}\subseteq D^\circ .
+Let
+\begin{equation}\label{eq:iotaN}
+\iota_N:K_0^*\longrightarrow\mathbb R^{1\times k},\qquad \ell\longmapsto \ell N
 \end{equation}
-(The inclusion holds because $W\subseteq T_D$ means $W\perp A_{21}D$.)
+be the coordinate isomorphism induced by the basis $N$: the row vector $\ell N$ has entries
+$\ell(Ne_j)$, $j=1,\dots,k$, and $\iota_N$ is a linear isomorphism because $N$ has rank $k$. We identify
+$K_0^*$ with $\mathbb R^{1\times k}$ through $\iota_N$; from now on every row-space identity is understood
+after this identification, and a subspace of $K_0^*$ and its image under $\iota_N$ are written with the
+same symbol.
+
+For $v\in E$ let $h_v,h^A_v\in K_0^*$ be the restrictions to $K_0$ of $u\mapsto\langle v,u\rangle$ and
+$u\mapsto\langle v,Au\rangle$, and put $\Psi_\lambda(v):=\lambda h_v-h^A_v$. The $j$-th row of
+$\lambda H-H_A$ is $\iota_N(\Psi_\lambda(v_j))$, where $v_j$ is the $j$-th row of $\mathcal L$; hence
+$\row(\lambda H-H_A)=\iota_N(\Psi_\lambda(V))$.
+
+For $w\in K_0^\perp$ define $\varphi_w\in K_0^*$ by $\varphi_w(u)=\langle w,A_{21}u\rangle$, and let
+\[
+\varphi:K_0^\perp\longrightarrow K_0^*,\qquad \varphi(w):=\varphi_w
+\]
+be the induced linear map. For $W\le K_0^\perp$ put
+\begin{equation}\label{eq:Phi}
+\Phi(W):=\varphi(W)=\{\varphi_w:\ w\in W\}\le D^\circ .
+\end{equation}
+The inclusion is an inclusion of subspaces, and $\Phi(W)$ is the image of the linear map $\varphi$, not
+merely a set: $W\subseteq T_D$ means $W\perp A_{21}D$, hence $\varphi_w(d)=\langle w,A_{21}d\rangle=0$ for
+all $d\in D$, so $\varphi(W)\subseteq D^\circ$.
 
 \begin{thm}[image-space reduction]\label{thm:reduction}
 For every $\lambda$,
 \begin{equation}\label{eq:reduction}
-\begin{aligned}
-&\row\bigl(\lambda H-H_A\bigr)\\
-&\quad=\row\bigl(\lambda H_K-(H_A)_K\bigr)+\Phi(W),
-\end{aligned}
+\row\bigl(\lambda H-H_A\bigr)=R_\lambda+\Phi(W),
 \end{equation}
-Consequently the pencil condition
-depends on $W$ only through $\Phi(W)$, and
+the identity holding in $\mathbb R^{1\times k}$ under $\iota_N$; equivalently,
+$\Psi_\lambda(V)=\Psi_\lambda(D^{\perp_{K_0}})+\Phi(W)$ in $K_0^*$. Consequently the pencil condition
+depends on $W$ only through the subspace $\Phi(W)$, and
 $\dim\Phi(W)\le\dim\varphi(T_D)\le\dim T_D=(n-k)-r(D)$. Moreover:
 \begin{enumerate}[label=\arabic*.,start=3,leftmargin=*,itemsep=1pt,topsep=2pt]
 \item $\row(\lambda H-H_A)\subseteq D^\circ$ for every $\lambda$, and $\dim D^\circ=k-c=\omega$;
@@ -402,23 +507,20 @@ $\dim\Phi(W)\le\dim\varphi(T_D)\le\dim T_D=(n-k)-r(D)$. Moreover:
 \end{thm}
 
 \begin{proof}
-Regard the rows as functionals on $K_0$: for $v\in E$ put $h_v(x)=\langle v,x\rangle$ and
-$h^A_v(x)=\langle v,Ax\rangle$, and $\Psi_\lambda(v)=\lambda h_v-h^A_v$; the rows of $\lambda H-H_A$ are
-the $\Psi_\lambda(v)$ for $v$ ranging over a basis of $V$, transported to $\mathbb R^k$ by the basis $N$
-(this transport is the only place where the coordinate identification $K_0^*\simeq\mathbb R^k$ is used).
 \begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=1pt,topsep=2pt]
-\item For $w\in W\le K_0^\perp$: $h_w(x)=\langle w,x\rangle=0$ since $x\in K_0$, and
-$h^A_w(x)=\langle w,Ax\rangle=\langle w,Mx\rangle+\langle w,A_{21}x\rangle=0+\varphi_w(x)$; hence
+\item For $w\in W\le K_0^\perp$ and $u\in K_0$: $h_w(u)=\langle w,u\rangle=0$, and
+$h^A_w(u)=\langle w,Au\rangle=\langle w,Mu\rangle+\langle w,A_{21}u\rangle=0+\varphi_w(u)$; hence
 $\Psi_\lambda(w)=-\varphi_w$, independently of $\lambda$.
-\item For any linear $\Psi$ and any direct sum $V=P\oplus W$, $\Psi(V)=\Psi(P)+\Psi(W)$.
+\item For any linear $\Psi$ and any direct sum $V=P\oplus W$, $\Psi(V)=\Psi(P)+\Psi(W)$; here
+$P=D^{\perp_{K_0}}$.
 \end{enumerate}
-Combining, $\Psi_\lambda(V)=\Psi_\lambda(P)+\operatorname{span}\{\varphi_w\}$, and the sign is immaterial
-because a subspace equals its negative.
+Combining, $\Psi_\lambda(V)=\Psi_\lambda(P)+\Phi(W)$, and the sign is immaterial because a subspace
+equals its negative; applying the isomorphism $\iota_N$ gives \eqref{eq:reduction}.
 \begin{enumerate}[label=\arabic*.,start=3,leftmargin=*,itemsep=1pt,topsep=2pt]
 \item For $v\in P=D^{\perp_{K_0}}$ and $d\in D$: $\langle v,d\rangle=0$, and
 $\langle v,Ad\rangle=\langle v,Md\rangle+\langle v,A_{21}d\rangle=0+0$ because $Md\in D$ and
-$A_{21}d\in K_0^\perp$; hence every $\Psi_\lambda(v)$ annihilates $D$, i.e. lies in $D^\circ$. Since
-$\dim D^\circ=k-c=\omega$, the rank bound follows.
+$A_{21}d\in K_0^\perp$; hence every $\Psi_\lambda(v)$ annihilates $D$, i.e.\ lies in $D^\circ$, and
+$\Phi(W)\subseteq D^\circ$ by \eqref{eq:Phi}. Since $\dim D^\circ=k-c=\omega$, the rank bound follows.
 \item A subspace of the $\omega$-dimensional $D^\circ$ has dimension $\omega$ if and only if it is
 $D^\circ$.
 \end{enumerate}
@@ -437,9 +539,26 @@ $K_0$.
 
 \subsection{Exact realizability}\label{sec:reduction:b}
 
+\begin{lem}[subspaces with a prescribed image]\label{lem:prescribed}
+Let $f:X\to Y$ be linear, let $Z\le\operatorname{im}f$ and let $d\ge0$. There is a subspace $S\le X$
+with $f(S)=Z$ and $\dim S=d$ if and only if
+\begin{equation}\label{eq:prescribed}
+\dim Z\le d\le\dim\ker f+\dim Z .
+\end{equation}
+\end{lem}
+
+\begin{proof}
+If $f(S)=Z$ then $\dim Z=\dim S-\dim(S\cap\ker f)\le d$, and $S\le f^{-1}(Z)$ gives
+$d\le\dim f^{-1}(Z)=\dim\ker f+\dim Z$. Conversely assume \eqref{eq:prescribed}. Choose a complement
+$S_0$ of $\ker f$ in $f^{-1}(Z)$; then $f|_{S_0}:S_0\to Z$ is an isomorphism, so $\dim S_0=\dim Z$.
+Since $\dim f^{-1}(Z)=\dim\ker f+\dim Z\ge d$, extend $S_0$ inside $f^{-1}(Z)$ to a subspace $S$ of
+dimension $d$. Then $f(S)=f(S_0)=Z$.
+\end{proof}
+
 \begin{thm}[realizability of a prescribed image]\label{thm:realize}
-Let $\varphi=\varphi|_{T_D}:T_D\to D^\circ$, $\Phi_0=\varphi(W_0)$, and let
-$\bar\varphi:T_D/W_0\to D^\circ/\Phi_0$ be the induced map. A subspace $\Phi\le D^\circ$ is realised by
+Assume (H2) of \eqref{eq:splithyp}, so that $T_D/W_0$ is defined. Let $\Phi_0:=\varphi(W_0)$ and let
+$\bar\varphi:T_D/W_0\to D^\circ/\Phi_0$ be the map induced by
+$\varphi|_{T_D}$. A subspace $\Phi\le D^\circ$ is realised by
 some $W$ with $W_0\subseteq W\subseteq T_D$ and $\dim W=t$ if and only if
 \begin{equation}\label{eq:realize}
 \begin{aligned}
@@ -451,12 +570,13 @@ some $W$ with $W_0\subseteq W\subseteq T_D$ and $\dim W=t$ if and only if
 \end{thm}
 
 \begin{proof}
-Put $S=W/W_0\le T_D/W_0$; then $\dim S=t-w_0$ and $\bar\varphi(S)=\Phi/\Phi_0$. If such $S$ exists then
-$\Phi/\Phi_0\subseteq\bar\varphi(T_D/W_0)$ and
-$\dim(\Phi/\Phi_0)=\dim\bar\varphi(S)\le\dim S\le\dim\bar\varphi^{-1}(\Phi/\Phi_0)=\dim\ker\bar\varphi+
-\dim(\Phi/\Phi_0)$. Conversely choose $S_0\subseteq\bar\varphi^{-1}(\Phi/\Phi_0)$ with
-$\bar\varphi(S_0)=\Phi/\Phi_0$ and $\dim S_0=\dim(\Phi/\Phi_0)$, and extend it inside the same preimage to
-dimension $t-w_0$; the upper inequality makes this possible.
+Subspaces $W$ with $W_0\subseteq W\subseteq T_D$ correspond bijectively to subspaces
+$S=W/W_0\le T_D/W_0$, with $\dim S=\dim W-w_0$, and $\varphi(W)=\Phi$ if and only if
+$\bar\varphi(S)=\Phi/\Phi_0$ (which presupposes $\Phi_0\subseteq\Phi$). Apply
+Lemma~\ref{lem:prescribed} to $f=\bar\varphi$, $Z=\Phi/\Phi_0$ and $d=t-w_0$: an $S$ with
+$\bar\varphi(S)=Z$ and $\dim S=d$ exists if and only if $Z\le\operatorname{im}\bar\varphi$, i.e.\
+$\Phi\subseteq\varphi(T_D)$, and
+$\dim Z\le d\le\dim\ker\bar\varphi+\dim Z$, which is \eqref{eq:realize}.
 \end{proof}
 
 Every subspace of $D^\circ$ between $\Phi_0$ and $\varphi(T_D)$ whose dimension lies in the stated
@@ -582,9 +702,11 @@ the numerical value $2$ enters only in the list of possible image dimensions.
 \end{proof}
 
 \begin{remark}\label{rem:annihilator}
-Note that $\dim D^\circ=\omega$, not $c$: since $c=k-\omega$, the annihilator of a $c$-dimensional
-subspace of an $\omega+c$-dimensional space has dimension $\omega$. For $c=2$ and $k=4$ the two coincide,
-which is why the small cases are misleading; in general $D^\circ$ is large and only the image
+Note that $\dim D^\circ=\omega$, not $c$: since $c=k-\omega$, the annihilator of the $c$-dimensional
+subspace $D$ in the $k$-dimensional space $K_0^*$ has dimension $k-c=\omega$. The annihilator of
+$V\cap K_0$ is a different space: in the split case it has dimension $k-\dim(V\cap K_0)=c$, and it is
+$D^\circ$, not $(V\cap K_0)^\circ$, that contains the pencil. For $c=2$ and $k=4$ the two dimensions
+coincide, which is why the small cases are misleading; in general $D^\circ$ is large and only the image
 $\varphi(T_D)$ is small.
 \end{remark}
 
@@ -804,10 +926,10 @@ conditions read $P_{K_0}(V_0)=0$ and $W_0=0$, which hold trivially, so $D\in\mat
 \[
 r(D)=1,\qquad \dim T_D=(n-k)-r(D)=4-1=3.
 \]
-With $t=1$ (i.e.\ $q=\omega+t=2+1=3$) and
-$W=\operatorname{span}\{(0,0,1,1,0,0,0,0)^{\mathsf T}\}\subseteq T_D$ one computes
+With $t=1$ (i.e.\ $q=\omega+t=2+1=3$), $w:=(0,0,1,1,0,0,0,0)^{\mathsf T}$ and
+$W=\operatorname{span}\{w\}\subseteq T_D$, one computes
 \[
-\varphi_W=(1,-1,0,1)\in D^\circ,\qquad \Phi(W)=\operatorname{span}\{(1,-1,0,1)\},
+\varphi_w=(1,-1,0,1)\in D^\circ,\qquad \Phi(W)=\operatorname{span}\{(1,-1,0,1)\},
 \]
 so $\dim\Phi(W)=1=\min(t,2p)$: the image parameter is a line, as in Definition~\ref{defn:charts}. The
 resulting design row space is
