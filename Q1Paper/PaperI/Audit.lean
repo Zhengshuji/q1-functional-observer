@@ -165,3 +165,15 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.PaperI.windowGram_eq_compressed
 #print axioms Q1Paper.PaperI.gramKernelEval_pencil_eq_coeff_sum
 #print axioms Q1Paper.PaperI.det_submatrix_perm
+
+-- Claim 13: bit-length base
+#print axioms Q1Paper.PaperI.bitLenInt
+#print axioms Q1Paper.PaperI.bitLenInt_abs_lt
+#print axioms Q1Paper.PaperI.bitLenInt_mul
+#print axioms Q1Paper.PaperI.bitLenInt_add
+#print axioms Q1Paper.PaperI.bitLenRat
+#print axioms Q1Paper.PaperI.bitLenRat_abs_lt
+#print axioms Q1Paper.PaperI.bitLenRat_mul
+#print axioms Q1Paper.PaperI.bitLenMat
+#print axioms Q1Paper.PaperI.mat_abs_num_lt_two_pow_bitLenMat
+#print axioms Q1Paper.PaperI.mat_num_entries_bounded

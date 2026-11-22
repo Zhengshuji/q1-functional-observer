@@ -32,7 +32,7 @@
 | Claim 10 窗口关系 | `windowMatrix`, `rowSpace_windowMatrix_eq_windowSet`, `mem_rowSpace_iff_exists_window`, `toFn_injOn_degree_lt_two_mul` | `Window.lean` | **complete** | 索引/边界已在文件内核对（`j<ω`, `t<2ω`, 零系数约定） |
 | Claim 11 Gram 证书 | `claim11_iff_gram`（最终定理：(5b) ⟺ ∃x, ZᵀZx=e₀）；`gram_certificate`（Gram）；`mem_rowSpace_window_iff_no_common_complex_root`（Bézout/窗口）；`spectral_real_iff_minors`, `spectral_iff_minors`（秩-子式/铅笔）；`exists_det_submatrix_ne_zero_of_rank`（秩=最大非零子式）；`rank_map_ofReal`（复化秩不变）；`natDegree_maximalMinor_le`（次数界）；`maximalMinor_map`（系数映射） | `PaperI/Gram.lean`, `PaperI/Claim11.lean`, `PaperI/MinorRank.lean`, `PaperI/BasisExtraction.lean`, `PaperI/SpectralMinor.lean`, `PaperI/Complexify.lean`, `PaperI/Claim11Final.lean` | **complete（含最终 Gram 证书定理）** | 说明：`claim11_iff_gram` 以 `H_A = F H`（Claim 2(ii)）与 `1 ≤ ω`、`rank H = ω` 为假设；这与论文 Claim 11 的假设一致 |
 | Claim 12 满列秩铅笔证书 | `claim12_iff_gram`, `exists_left_inverse_of_rank_eq` | `PaperI/Claim12.lean` | **complete** | 与 Claim 11 相同：用的是注入映射族的 `Z`；与论文子集族 `Z_Q` 的桥接见 §6 的 D1 |
-| Claim 13 有理基与位长 | — | — | **paper_only** | 需清分母 + Bareiss + Hadamard 的形式化 |
+| Claim 13 有理基与位长 | `bitLenInt`, `bitLenRat`, `bitLenMat`, `mat_num_entries_bounded`（位长基础） | `PaperI/BitLen.lean` | **partial（位长基础完成）** | 剩：行列式界（Leibniz/`Matrix.det_le`）、Bareiss 中间量子式表示、总 bit complexity；`bitLenRat_add` 尚缺（见 §7 D9） |
 | Claim 14 图表数据 | — | — | **paper_only** | 需 `V=T∩(S×S)` 的核表示（转置写法） |
 | Claim 15 系数位长 | — | — | **paper_only** | 需显式常数链（附录 A） |
 | Claim 16 零自由行五条件 | `adjRowInverse_mul`, `exists_leftInverse`, `exists_leftInverse_linear`, `spoly_mul_pencil_eq_one`, `natDegree_det_le`, `natDegree_adjugate_le` | `G3Adjugate.lean`, `G3LeftInverse.lean`, `G3Coeff.lean`, `DegreeBounds.lean` | **partial** | 左逆存在与次数界已有；缺 (iii)⇒(iv) 的有理化、(iv)⇒(v) 的系数比较、(v)⇒(i) 的复点代入的完整五条链 |
@@ -75,7 +75,7 @@
 
 ## 3. 公理审计
 
-- `Q1Paper/PaperI/Audit.lean` 对 **109 条**声明执行 `#print axioms`。
+- `Q1Paper/PaperI/Audit.lean` 对 **121 条**声明执行 `#print axioms`。
 - 本机结果：全部为 `[propext, Classical.choice, Quot.sound]`（部分为 `[propext, Quot.sound]`）。
 - CI 步骤：`lake env lean Q1Paper/PaperI/Audit.lean > paperI_audit.log` 后运行
   `scripts/check_paperI_axioms.py paperI_audit.log`，出现白名单外的公理或**没有任何审计行**都会失败。
@@ -207,7 +207,7 @@ PaperI/GramKernel.lean，维数约定与论文一致：P : Matrix (Fin q) (Fin �
 - Claim 11 完成：commit `e28ee61`（`Paper I: Claim 11 complete`）；
 - 修复仓库与 WSL 不同步：commit `7101d1d`（同步 `SpectralMinor.lean` 的注入性版本）；
 - CI run `#45026225331` 全绿（lean / Paper I axiom audit / 三篇论文 / verify）；
-- 公理审计：109 条声明，允许集 `{propext, Classical.choice, Quot.sound}`；
+- 公理审计：121 条声明，允许集 `{propext, Classical.choice, Quot.sound}`；
 - 同步检查：`diff` 核对 WSL 工程与仓库的 11 个 Paper I 文件，全部一致。
 
 ## 6. 边界
