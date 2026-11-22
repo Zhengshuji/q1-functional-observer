@@ -46,13 +46,14 @@ theorem spectral_iff_minors {q k : ℕ} (H HA : Matrix (Fin q) (Fin k) K) {ω : 
     (hF : ∃ F : Matrix (Fin q) (Fin q) K, HA = F * H) :
     (∀ z : K, (z • H - HA).rank = ω) ↔
       ∀ z : K, ∃ (ρ : Fin ω → Fin q) (κ : Fin ω → Fin k),
-        (maximalMinor (pencil H HA) ρ κ).eval z ≠ 0 := by
+        Function.Injective ρ ∧ Function.Injective κ ∧
+          (maximalMinor (pencil H HA) ρ κ).eval z ≠ 0 := by
   constructor
   · intro h z
-    obtain ⟨ρ, κ, _, _, hdet⟩ := exists_det_submatrix_ne_zero_of_rank (z • H - HA) (h z)
-    exact ⟨ρ, κ, by rwa [eval_maximalMinor, pencil_map_eval]⟩
+    obtain ⟨ρ, κ, hρ, hκ, hdet⟩ := exists_det_submatrix_ne_zero_of_rank (z • H - HA) (h z)
+    exact ⟨ρ, κ, hρ, hκ, by rwa [eval_maximalMinor, pencil_map_eval]⟩
   · intro h z
-    obtain ⟨ρ, κ, hdet⟩ := h z
+    obtain ⟨ρ, κ, _, _, hdet⟩ := h z
     rw [eval_maximalMinor, pencil_map_eval] at hdet
     have hlow : ω ≤ (z • H - HA).rank := rank_le_of_det_maximalMinor_ne_zero _ ρ κ hdet
     obtain ⟨F, hF⟩ := hF
