@@ -51,8 +51,9 @@ number of output rows). Consequently the search over a Grassmannian of arbitrary
 a search over subspaces of $\varphi(T_D)$. We
 give the exact realizability conditions for a prescribed $\Phi$, the resulting reduced feasibility
 criterion, a classification of the invariant-plane base for simple spectrum --- with the real and the
-conjugate-complex branches treated separately --- a two-valued decision algorithm, and a
-$\mathrm{poly}(n,\tau)$ bit-complexity bound under simple spectrum. We also show that the layer index is
+conjugate-complex branches treated separately --- a two-valued decision algorithm, and, under simple
+spectrum and a fixed output dimension, a bit-complexity bound polynomial in $n$ and in the bit length
+$\tau$ of the whole input $(A,C,L_0)$. We also show that the layer index is
 \emph{not monotone} at fixed order: there are instances where the $c=2$ layer is feasible while the
 $c=1$ layer is not. All structural claims are stated for the split problem; the unrestricted problem is
 left open.
@@ -114,8 +115,11 @@ spectrum the invariant-plane base is finite, of $O(k^2)$ points, split into a re
 conjugate-complex branch. The image space has at most one projective-line component, and on an
 chart every real point is admissible, so the generic-gcd criterion is sharp in both
 directions and the algorithm decides exactly.
-\item \emph{Bit complexity (Section~\ref{sec:complexity}).} Under simple spectrum the decision runs in
-$\poly(n,\tau)$ bit operations, with arithmetic in number fields of degree at most $k^2$.
+\item \emph{Bit complexity (Section~\ref{sec:complexity}).} Under simple spectrum, and with the output
+dimension $p$ held fixed, the decision runs in $\poly(n,\tau)$ bit operations, with arithmetic in number
+fields of degree at most $k^2$. Here $\tau$ is the bit length of the whole input: the entries of $A$ and
+$C$ \emph{and} those of the prescribed block $L_0$, without which $V_0$, $W_0$, $\Phi_0$ and
+$\mathcal B_{\rm pres}$ are not even determined.
 \item \emph{A non-monotonicity example (Section~\ref{sec:layers:c}).} At one and the same order, the
 $c=2$ layer can be feasible while the $c=1$ layer is not. This rules out ``only small layers matter'' as
 a complexity strategy.
@@ -140,8 +144,17 @@ J^\circ:=\{\varphi\in K_0^*:\ \varphi|_J=0\}\le K_0^*
 \]
 for its annihilator in $K_0^*$, so that $\dim J^\circ=k-\dim J$; the case used
 throughout is $J=D=\ker H$, for which $\dim D=c=k-\omega$ and hence $\dim D^\circ=k-c=\omega$. $\Gr(d,X)$ is the
-Grassmannian of $d$-planes in $X$. All matrices are real; $p$ is the number of output rows and $\tau$ the
-maximum bit length of the entries of $A$ and $C$. For a subspace $X$ we write $\dim X$ for its dimension.
+Grassmannian of $d$-planes in $X$. All matrices are real; $p$ is the number of output rows and $q$ the
+order of the design, while $L_0$ is the prescribed block and $V_0=\row L_0$.
+
+\emph{Input length.} The input consists of the matrices $A$, $C$ and $L_0$, together with the order $q$ and the output
+dimension $p$. We write $\tau$ for the maximum bit length of an entry of $A$, of $C$ or of $L_0$, so that
+the input is encoded by $O(n^2)$ rational numbers of bit length at most $\tau$, i.e.\ by $O(n^2\tau)$ bits,
+and every complexity statement in this paper is a bound in $n$ and $\tau$ alone. The prescribed block is
+covered by $\tau$ on purpose: $V_0=\row L_0$ and the derived data $W_0=P_{K_0^\perp}(V_0)$,
+$w_0=\dim W_0$, $\Phi_0=\varphi(W_0)$, $t=q-\omega$ and the set $\mathcal B_{\rm pres}$ of \eqref{eq:bpres}
+all depend on $L_0$, so a bound in the bit length of $A$ and $C$ alone would not be a bound on the running
+time of the algorithm. For a subspace $X$ we write $\dim X$ for its dimension.
 
 \section{The layer parameters}\label{sec:layers}
 
@@ -698,7 +711,8 @@ Total & & & $\le k^2$ \\
 \end{table*}
 
 Under simple spectrum the base is therefore finite and explicit, which is what makes the enumeration of
-Section~\ref{sec:algorithm} terminate in polynomial time; Remark~\ref{rem:nonsimple} records what is not
+Section~\ref{sec:algorithm} terminate, and in time polynomial in the bit size of the input
+(Theorem~\ref{thm:complexity}); Remark~\ref{rem:nonsimple} records what is not
 claimed without simplicity.
 
 \subsection{The general \texorpdfstring{$c$}{c}}\label{sec:base:b}
@@ -1018,56 +1032,144 @@ computations, which is Part D.
 
 \subsection{Bit complexity}\label{sec:complexity}
 
-Let $\tau$ be the maximum bit length of the entries of $A$ and $C$.
+\emph{Input length.} We recall from the Notation that $\tau$ is the maximum bit length of an entry of $A$,
+$C$ or $L_0$, so that the input is encoded by $O(n^2\tau)$ bits and every estimate below is a function of
+$n$ and $\tau$ alone. The prescribed block is part of the input length and not an afterthought: the vectors
+of $V_0=\row L_0$ enter $W_0=P_{K_0^\perp}(V_0)$, $w_0=\dim W_0$, $\Phi_0=\varphi(W_0)$, the range
+$w_0\le t\le(n-k)-r(D)$ of the fibre parameter, and the membership test $D\perp P_{K_0}(V_0)$ that defines
+$\mathcal B_{\rm pres}$ in \eqref{eq:bpres}. A bound in the bit length of $A$ and $C$ alone would therefore
+bound neither the enumeration of the base nor the gcd test per chart, and no such bound is claimed anywhere
+below.
+
+\emph{Field arithmetic.} In branch~R the coefficients lie in $L_D=\mathbb Q(\alpha,\beta)$, in branch~C in
+$\mathbb Q$. We use the standard exact representation of \cite{cohen93}: $L_D=\mathbb Q[t]/(F)$, with $F$
+the minimal polynomial of a primitive element and $d_D:=[L_D:\mathbb Q]\le k^2$, an element being given by
+its coordinate vector of length $d_D$ over $\mathbb Q$. In this representation addition costs $O(d_D)$
+coefficient operations, and multiplication and inversion cost $O(d_D^2)$ (schoolbook; $\widetilde O(d_D)$
+with fast polynomial arithmetic), each coefficient operation being integer arithmetic on numbers of bit
+length $\poly(n,\tau)$. The cost therefore depends on three input-size parameters: the degree $d_D$, the
+height $h(F)$ of the defining polynomial, and the height of the coordinates; all three are $\poly(n,\tau)$
+by Appendix~\ref{app:height}, Steps~$8$--$8'$. A bound on $d_D$ alone --- such as $d_D\le k^2$ --- controls
+neither $h(F)$ nor the cost of one field operation, and by itself would give no polynomial time bound.
+
+\emph{One determinant bound.} All height propagation below rests on a single inequality, proved in
+Appendix~\ref{app:height}, Step~9: if $B$ is an $r\times r$ matrix whose entries have height at most $H$,
+then $h(\det B)\le rH+\tfrac{r}{2}\log_2 r+O(r)$; the same bound applies to the cofactors out of which
+kernels, orthogonal complements and subresultants are built.
 
 \begin{claim}[arithmetic of the enumeration]\label{clm:arith}
-Assume simple spectrum. Then the number of planes is $O(k^2)$, each plane is defined over a number field
-$L_D$ of degree at most $k^2$, and the field data and the bases of $D$, $D^{\perp_{K_0}}$, $T_D$,
-together with $\varphi$, $\Phi_0$ and the entries of the cleared pencil, have heights
+Assume simple spectrum. Then:
+\begin{enumerate}[label=(\roman*),leftmargin=*,itemsep=1pt,topsep=2pt]
+\item the number of planes is $O(k^2)$, and they are enumerated in $\poly(n,\tau)$ bit operations, each
+plane costing polynomially many field operations on data of height $\poly(n,\tau)$;
+\item each plane is defined over a number field $L_D=\mathbb Q(\alpha,\beta)$ of degree
+$d_D:=[L_D:\mathbb Q]\le k^2$, represented as $\mathbb Q[t]/(F)$ with $h(F)=\poly(n,\tau)$; the
+$\mathbb Q$-basis $1,t,\dots,t^{d_D-1}$ consists of elements of length $\poly(n,\tau)$, and addition,
+multiplication and inversion in $L_D$ cost $O(d_D)$, $O(d_D^2)$ and $O(d_D^2)$ coefficient operations
+respectively, each on integers of height $\poly(n,\tau)$;
+\item the field data and the bases of $D$, $D^{\perp_{K_0}}$, $T_D$, together with $V_0=\row L_0$,
+$W_0=P_{K_0^\perp}(V_0)$, $w_0$, $\varphi$, $\Phi_0$, the membership test defining $\mathcal B_{\rm pres}$ and the
+entries of the cleared pencil, are computed in $\poly(n,\tau)$ bit operations and have heights
 $\poly(n,\tau)$.
+\end{enumerate}
+Here $\tau$ is the bit length of the whole input $(A,C,L_0)$.
 \end{claim}
 
 \begin{proof}[Sketch]
-$M$ is rational, so its minimal polynomial has coefficients of polynomial bit length; its irreducible
-factors over $\mathbb Q$ then have polynomial height, and the roots have height bounded by the Mahler
-measure of these factors. Branch R uses $L_D=\mathbb Q(\alpha,\beta)$ with
-$[\mathbb Q(\alpha,\beta):\mathbb Q]\le d_id_j\le k^2$; eigenvectors are obtained by Cramer's rule over
+$M$ is rational, so its characteristic polynomial has coefficients of polynomial bit length; factoring it
+over $\mathbb Q$ is polynomial-time in the bit size of the input by the LLL-based algorithm of \cite{lll82}
+(see also \cite{cohen93}), and its irreducible factors have polynomial height by Mignotte's bound; the
+roots have height bounded by the Mahler measure of these factors. Branch R uses $L_D=\mathbb Q(\alpha,\beta)$ with
+$[\mathbb Q(\alpha,\beta):\mathbb Q]\le d_id_j\le k^2$; a primitive element $\theta=\alpha+\kappa\beta$ with integral
+$\kappa\le d_id_j$ has a minimal polynomial $F$ of degree $d_D\le k^2$ and height $\poly(n,\tau)$ by the
+resultant bound of Step~$8'$; eigenvectors are obtained by Cramer's rule over
 $L_D$, with denominators $f_i'(\alpha)\ne0$ by simplicity. Branch C uses $\ker f(M)$, which is
 $\mathbb Q$-defined, so the final objects live over $\mathbb Q$ even though the intermediate eigenvector
-data are computed in a complex embedding of $\mathbb Q[t]/(f)$. Orthogonal complements and kernels are
-again Cramer, and the pencil entries are obtained by polynomially many field operations.
+data are computed in a complex embedding of $\mathbb Q[t]/(f)$. The kernel itself is computed from an
+integral model of $[C;CA]$ (Step~2), so that $N$ is a primitive integral matrix of full column rank $k$ and
+$P_{K_0}=N(N^{\mathsf T}N)^{-1}N^{\mathsf T}$ is the orthogonal projection onto $K_0$; orthogonal
+complements and kernels are again Cramer, the prescribed data $W_0$, $w_0$, $\Phi_0$ and the membership test of
+$\mathcal B_{\rm pres}$ are computed from $L_0$ as in Step~$4'$, and the pencil entries are obtained by
+polynomially many field operations.
 \end{proof}
 
 The height propagation is checked step by step in Appendix~\ref{app:height}.
 
-\begin{claim}[degrees on an image chart]\label{clm:degrees}
+\begin{claim}[degrees and size on an image chart]\label{clm:degrees}
 On a chart of $\Gr(j,V_\varphi)$ at most $j$ rows of the pencil depend on the chart parameters, and each
 dependence is affine. Hence every maximal minor satisfies
 \[
-\deg_{\text{param}}\le j\le\min(t,\,2p),\qquad \deg_\lambda\le\omega\le k .
+\deg_{\text{param}}\le j\le\min(t,\,2p),\qquad \deg_\lambda\le\omega\le k ,
 \]
-In particular on a line chart ($j=1$) the parameter degree is at most one.
+and, after clearing the chart denominator, its coefficients have height at most $H=\poly(n,\tau)$, with
+$O((j+1)^{p^2})=\poly(n,\tau)$ coefficients per minor. The chart carries
+\[
+\nu:=\binom{q}{\omega}\binom{k}{\omega}
+=\binom{\omega+t}{t}\binom{k}{2}=O\bigl(k^{\,t+2}\bigr)\le O\bigl(k^{\,2p+2}\bigr)
+\]
+maximal minors, because $t\le\dim T_D=(n-k)-r(D)\le n-k\le2p$ on a nonempty chart. In particular on a
+line chart ($j=1$) the parameter degree is at most one, and once $p$ is fixed the chart carries
+polynomially many minors of bounded parameter degree.
 \end{claim}
 
 \begin{proof}
 A maximal minor is multilinear in the rows; exactly the $j$ rows corresponding to a basis of $\Phi$ vary,
-and they vary affinely in the chart coordinates.
+and they vary affinely in the chart coordinates, so the total parameter degree is at most $j$. The row and
+column index sets range over $\binom{q}{\omega}$ and, since $\omega=k-2$ at $c=2$, over $\binom{k}{2}$,
+which gives $\nu$; the bound $t\le2p$ is the non-emptiness condition $t\le\dim T_D$ of
+Theorem~\ref{thm:splitfibre} combined with $\dim T_D\le n-k\le2p$. Heights are those of
+Claim~\ref{clm:arith} and of Appendix~\ref{app:height}, Step~9.
 \end{proof}
 
 \begin{thm}[bit complexity]\label{thm:complexity}
-Assume (i) $c=2$, (ii) simple spectrum, (iii) the split condition, and (iv) \textbf{$p$ fixed}, so that
-$n-k=\rank[C;CA]\le2p$ is bounded. Then Algorithm~\ref{alg:decide} runs in $\poly(n,\tau)$ bit operations,
-with arithmetic in number fields of degree at most $k^2$.
+Assume (i) $c=2$, (ii) simple spectrum, (iii) the split condition, and (iv) \textbf{the output dimension
+$p$ is fixed}, so that $n-k=\rank[C;CA]\le2p$ is a constant. Then Algorithm~\ref{alg:decide} runs in
+$\poly(n,\tau)$ bit operations, where $\tau$ is the bit length of the whole input $(A,C,L_0)$
+(Notation and the beginning of this subsection), and all arithmetic takes place in number fields of degree
+at most $k^2$. The bound is coarse: the exponents are not optimized and the factor $\poly(n,\tau)$ hides
+constants that depend on the fixed number $p$.
 \end{thm}
 
 \begin{proof}
-There are $O(k^2)$ planes; for each, the realisable image spaces live in $V_\varphi=\varphi(T_D)$, whose
-dimension is at most $2p$ and hence bounded; so the number of charts and the number of parameters per
-chart are bounded independently of $k$ (at most $O(p^2)$ parameters, by Remark~\ref{rem:imagesize}). On
-such a chart the pencil has $\deg_\lambda\le\omega$ and heights $\poly(n,\tau)$, and the gcd of the
-maximal minors over $L_D(\text{chart})[\lambda]$ costs
-$\poly(\omega,p,[L_D:\mathbb Q],\text{heights})$ by the standard subresultant bound \cite{vzgg13}.
-Summing over the $O(k^2)$ planes gives $\poly(n,\tau)$.
+The cost has six factors, one per stage of the algorithm. Each is bounded separately and the product is the
+stated coarse bound; no attempt is made to exploit that the stages share data.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=1pt,topsep=2pt]
+\item \emph{The base.} By Theorem~\ref{thm:base} and Claim~\ref{clm:arith}(i) there are $O(k^2)$ planes,
+and their enumeration --- factorization of $\chi_M$ included --- costs $\poly(n,\tau)$ bit operations, so
+this factor is $O(k^2)$ planes at $\poly(n,\tau)$ each.
+\item \emph{The prescribed rows.} Membership in $\mathcal B_{\rm pres}$ and the data $W_0$, $w_0$,
+$\Phi_0$, $T_D$ are computed from $L_0$ once per plane, at cost $\poly(n,\tau)$ each
+(Claim~\ref{clm:arith}(iii) and Appendix~\ref{app:height}, Step~$4'$).
+\item \emph{The charts.} For each plane, $j$ ranges over at most $\min(t,2p)+1$ values, and the standard
+affine charts of $\Gr(j,V_\varphi)$ number at most $\sum_j\binom{\dim V_\varphi}{j}\le2^{2p}$; each chart
+carries $j(\dim V_\varphi-j)\le p^2$ parameters (Remark~\ref{rem:imagesize}). With $p$ fixed this is a
+constant number of charts of constant dimension.
+\item \emph{The minors.} By Claim~\ref{clm:degrees} a chart carries $\nu=O(k^{2p+2})$ maximal minors, each
+of $\lambda$-degree at most $\omega\le k$, of parameter degree at most $j\le2p$, with coefficient height at
+most $H=\poly(n,\tau)$ (Claim~\ref{clm:arith} and Appendix~\ref{app:height}, Step~9).
+\item \emph{The gcd chain.} The gcd of the minors over $K(s)[\lambda]$ is computed by the subresultant
+algorithm \cite{vzgg13}: two $\lambda$-polynomials of degree at most $\omega$ are reduced in $O(\omega^2)$
+ring operations, and every intermediate subresultant has bit length at most
+$\varrho=O(\omega(H+\log\omega))$ by the Hadamard bound of Appendix~\ref{app:height}, Step~10. Iterating
+over the $\nu$ minors therefore costs $O(\nu\omega^2)$ ring operations, each on integers of bit length
+$\varrho$, and each ring operation in a field coefficient costs a further factor $O(d_D^2)$ with
+$d_D=[L_D:\mathbb Q]\le k^2$ (\cite{cohen93}; Appendix~\ref{app:height}, Step~$8'$).
+\item \emph{Summation.} Multiplying the factors, the number of bit operations is at most
+\[
+\begin{gathered}
+\underbrace{O(k^2)}_{\text{planes}}\;
+\underbrace{\poly(n,\tau)}_{\text{per-plane data}}\;
+\underbrace{O(2^{2p}(p+1))}_{\text{charts}}\;
+\underbrace{O(k^{2p+2})}_{\text{minors}}\\[2pt]
+{}\times{}\;
+\underbrace{O(\omega^{2})}_{\text{gcd steps}}\;
+\underbrace{O(d_D^{2})}_{\text{field ops}}\;
+\underbrace{O(\varrho^{2})}_{\text{bits per ring op}} ,
+\end{gathered}
+\]
+which is $\poly(n,\tau)$ because $p$ is fixed; summing over the $O(k^2)$ planes is already included in the
+first factor.
+\end{enumerate}
 \end{proof}
 
 \begin{remark}[the two boundaries, and why $p$ must be fixed]\label{rem:boundaries}
@@ -1079,7 +1181,8 @@ smallness of $c$, that controls the fibre. Likewise, without simplicity of the s
 positive-dimensional (a Grassmannian of dimension $2(d_\lambda-2)=O(n)$) and the number of charts is no
 longer polynomial. With $c$ allowed to vary, the number of components is $\binom{k}{c}$, which is
 exponential. The present method therefore gives $\poly(n,\tau)$ only under fixed $p$ with simple
-spectrum, and at best $n^{O(cn+p^2)}$ in general.
+spectrum --- with $\tau$ the bit length of the whole input $(A,C,L_0)$, as in the Notation --- and at best
+$n^{O(cn+p^2)}$ in general.
 \end{remark}
 
 \subsection{A worked example}\label{sec:example}
@@ -1194,7 +1297,11 @@ lost.
 \item The decision algorithm and the complexity bound require simple spectrum; the non-simple case is
 left open, and the worked example of Section~\ref{sec:example}, whose compression has a repeated
 eigenvalue, illustrates the certificate format rather than these two results.
-\item No uniformity in $c$ is claimed; the honest general bound is $n^{O(cn+p^2)}$.
+\item No uniformity in $c$, and none in $p$, is claimed; the honest general bound is $n^{O(cn+p^2)}$. The
+polynomial bound of Theorem~\ref{thm:complexity} is $\poly(n,\tau)$ with the output dimension $p$ fixed and
+with $\tau$ the bit length of the whole input $(A,C,L_0)$; in particular it is \emph{not} a bound in the bit
+length of $A$ and $C$ alone, which would omit the data $V_0$, $W_0$, $\Phi_0$ and $\mathcal B_{\rm pres}$
+that the algorithm reads off $L_0$.
 \item The general invariant-plane variety is used only through its defining equations; no rational
 parametrization is claimed.
 \end{enumerate}
@@ -1217,7 +1324,11 @@ The evidence behind the concrete assertions is of two kinds. First, the proofs o
 Sections~\ref{sec:layers}--\ref{sec:decision} are paper-level and complete, with one exception:
 the height chain of Claim~\ref{clm:arith} is a sketch in the body, made explicit step by step in
 Appendix~\ref{app:height}; the constants there are standard and deliberately not optimized, so no
-single numerical constant is claimed. Second, the three places where the paper asserts something
+single numerical constant is claimed. Two constants are not pinned down at all, and are marked in the
+appendix as coarse bounds rather than asserted: the multiplicative constant of the subresultant chain
+(Step~10) and the exponent hidden in the factor $\poly(n,\tau)$ of the enumeration
+(Claim~\ref{clm:arith}). The bit length $\tau$ entering the bound is that of the whole input
+$(A,C,L_0)$, the prescribed block included. Second, the three places where the paper asserts something
 about a specific system --- the instance of Theorem~\ref{thm:nonmono}, the worked example of
 Section~\ref{sec:example}, and the classification of Table~\ref{tab:planes} --- rest on exact
 rational arithmetic, not on floating-point computation. In the proof of Theorem~\ref{thm:nonmono}
@@ -1239,26 +1350,37 @@ the field statement of Claim~\ref{clm:arith}.
 
 This appendix records the chain used in Claim~\ref{clm:arith} with the standard bounds made
 explicit. Throughout, $h(\cdot)$ is the maximum bit length of the entries of a matrix or of the
-coefficients of a polynomial.
+coefficients of a polynomial, and $\tau$ is the bit length of the whole input $(A,C,L_0)$ as in the
+Notation.
 
-\emph{Step 0 (input).} $h(A),h(C)\le\tau$.
+\emph{Step 0 (input).} $h(A),h(C),h(L_0)\le\tau$.
 
 \emph{Step 1 ($CA$ and $[C;CA]$).} Entrywise, $(CA)_{ij}$ is a sum of $n$ products, so
 $h(CA)\le 2\tau+\lceil\log_2 n\rceil$. Hadamard's bound gives, for every square submatrix $S$ of
 $[C;CA]$ of order $d$, $|\det S|\le(\sqrt{n}\,2^{2\tau+\log n})^{d}$, i.e.\
-$h(\det S)\le d\,(2\tau+\log n+\tfrac12\log n)$.
+$h(\det S)\le d\,(2\tau+\log n+\tfrac12\log n)$. Only $A$ and $C$ enter this step; the prescribed block
+enters in Step~$4'$.
 
-\emph{Step 2 (kernel basis $N$).} A basis of $\ker[C;CA]$ can be chosen so that each entry is a
-cofactor of $[C;CA]$, hence of order at most $2p$; by Step 1,
+\emph{Step 2 (integerisation and the kernel basis $N$).} A kernel does not change under multiplication by a
+non-zero scalar, so we first clear denominators: let $\Delta_0$ be a common denominator of the entries of
+$[C;CA]$, so that $\log_2\Delta_0\le(2p+n)\,(2\tau+\lceil\log_2 n\rceil)$ and
+$M_0:=\Delta_0[C;CA]$ is integral with $\ker M_0=\ker[C;CA]$. A basis $N$ of $\ker M_0$ can be chosen so
+that each entry is a cofactor of $M_0$, hence of order at most $2p$; dividing $N$ by the gcd of its entries
+(an integer of no larger height) makes $N$ primitive and changes no kernel. By Step~1 and the Hadamard
+bound for a cofactor of order $2p$,
 \[
-h(N)\le 2p\,(2\tau+\log n+\tfrac12\log n).
+h(N)\le 2p\,\bigl(h([C;CA])+h(\Delta_0)+\tfrac12\log_2(2p)\bigr)+O(p),
 \]
+which is $\poly(n,\tau)$. Since $N$ is a basis of $K_0$, it has full column rank $k$; hence
+$N^{\mathsf T}N$ is positive definite and invertible, and $P_{K_0}=N(N^{\mathsf T}N)^{-1}N^{\mathsf T}$ is
+the orthogonal projection onto $K_0$. This full-column-rank property is what the formula requires, and it
+is used in Steps~3--4; replacing $N$ by $NC$ with $C$ invertible leaves $P_{K_0}$ unchanged.
 
 \emph{Step 3 (Gram matrix and its inverse).} $G=N^{\mathsf T}N$ has entries that are sums of $n$
 products, so $h(G)\le 2h(N)+\log n$. Since $G$ is a positive definite integer matrix, $\det G\ge1$,
 and the entries of $G^{-1}$ are cofactors over $\det G$, so
 \[
-h(G^{-1})\le k\,(2h(N)+\log n+\tfrac12\log k).
+h(G^{-1})\le k\,(2h(N)+\log n+\tfrac12\log k)+O(k).
 \]
 
 \emph{Step 4 (compression and coupling).} $M=(N^{\mathsf T}N)^{-1}N^{\mathsf T}AN$ and
@@ -1268,6 +1390,19 @@ operations, so
 h(M),\,h(A_{21})\le 4h(N)+2h(G^{-1})+\tau+O(\log n),
 \]
 which is $\poly(n,\tau)$.
+
+\emph{Step 4$'$ (the prescribed block and the data derived from it).} The vectors of $V_0=\row L_0$ have
+entries of height at most $\tau$ by Step~0. The projection
+$W_0=P_{K_0^\perp}(V_0)$ is the row space of $L_0\bigl(I-N(N^{\mathsf T}N)^{-1}N^{\mathsf T}\bigr)$ and is obtained from $L_0$, $N$
+and $G^{-1}$ by $O(n^3)$ ring operations, so
+\[
+h(W_0)\le h(L_0)+2h(N)+2h(G^{-1})+O(\log n)=\poly(n,\tau),
+\]
+and the same bound holds for $w_0=\dim W_0$, for the matrix of $\varphi$ (which is $A_{21}$ read through
+the identification $\iota_N$ of \eqref{eq:iotaN}) and for $\Phi_0=\varphi(W_0)$. The condition
+$D\perp P_{K_0}(V_0)$ defining $\mathcal B_{\rm pres}$ \eqref{eq:bpres} is a rank test on a matrix whose
+entries are inner products of the rows of $L_0$ with those of $N$; it therefore adds no height beyond
+$h(L_0)+h(N)$ and costs $\poly(n,\tau)$ bit operations per plane.
 
 \emph{Step 5 (characteristic and minimal polynomial).} The coefficient of $t^{\,k-i}$ in $\chi_M$ is
 a sum of principal $i\times i$ minors, hence at most $\binom{k}{i}(\sqrt{k}\,2^{h(M)})^{i}$ in
@@ -1293,20 +1428,71 @@ h(v)\le (k-1)\bigl(h(M)+h(\alpha)\bigr)+O(k\log k).
 \]
 The denominators are nonzero because the eigenvalues are distinct.
 
-\emph{Step 9 (subspaces and the image map).} The bases of $D$, $D^{\perp_{K_0}}$ and $T_D$ are
-kernels and orthogonal complements of matrices with entries of the heights above, so they inherit an
-$O(k)$ factor. The functionals $\varphi$, the prescribed image $\Phi_0$ and the entries of the cleared
-pencil are obtained from these by polynomially many field operations, so their heights are again
-$\poly(n,\tau)$.
+\emph{Step 8$'$ (the field $L_D=\mathbb Q(\alpha,\beta)$ and the cost of its arithmetic).} In branch~R
+the field is generated by a primitive element $\theta=\alpha+\kappa\beta$ with integral $\kappa\le d_id_j\le k^2$,
+whose minimal polynomial $F$ may be taken to be a factor of
+$\operatorname{Res}_y\bigl(f_i(y),f_j(\theta-y)\bigr)$; the resultant is a determinant of a Sylvester
+matrix of order $d_i+d_j\le2k$ whose entries have height at most $h(f_i)+h(f_j)$, so Hadamard's bound
+gives it height $O\bigl(k\,(h(f_i)+h(f_j)+\log k)\bigr)$, and $F$ has no larger height by Mignotte's bound
+(Step~6). Hence $d_D=\deg F\le k^2$ and $h(F)=\poly(n,\tau)$. Elements of $L_D$ are coordinate vectors of
+length $d_D$ in the $\mathbb Q$-basis $1,\theta,\dots,\theta^{d_D-1}$; by Cauchy's bound
+$|\theta|\le1+\|F\|_\infty$, so the $i$-th basis element has length $(1+\|F\|_\infty)^{i}$, and a field
+element whose coordinates have height $H_0$ has length at most
+$d_D\,H_0\,(1+\|F\|_\infty)^{d_D}$, both $\poly(n,\tau)$. In this representation addition costs $O(d_D)$
+coefficient operations; multiplication is a product of two coordinate vectors followed by reduction
+modulo $F$, hence $O(d_D^2)$; inversion is an extended gcd in $\mathbb Q[t]/(F)$, also $O(d_D^2)$; each
+coefficient operation is integer arithmetic on numbers of bit length $\poly(n,\tau)$. This is the standard
+exact-arithmetic model of \cite{cohen93}, for which the input-size parameters of a field element are the
+degree $d_D$, the height $h(F)$ of the defining polynomial and the height of the coordinates. All three
+are $\poly(n,\tau)$ here, whereas the degree bound $d_D\le k^2$ alone controls none of the other two and
+would by itself give no polynomial time bound.
 
-\emph{Step 10 (gcd).} The maximal minors have $\lambda$-degree at most $\omega\le k$ and heights at
-most $H=\poly(n,\tau)$. Each subresultant is a determinant of order at most $2k$ whose entries are
-coefficients of the maximal minors, so Hadamard's bound gives bit length $O(k(H+\log k))$, which is
-$\poly(n,\tau)$; the same bound applies to the gcd (see \cite{vzgg13}).
+\emph{Step 9 (kernels, subspaces and the Hadamard bound).} If $B$ is an $r\times r$ matrix with entries of
+height at most $H$, Hadamard's inequality $|\det B|\le\prod_i\|b_i\|_2\le(\sqrt r\,2^{H})^{r}$ gives the
+bound
+\begin{equation}\label{eq:hadamard}
+h(\det B)\ \le\ r\,H+\tfrac{r}{2}\log_2 r+O(r)
+\end{equation}
+used throughout. A basis of a kernel $D=\ker H$ or of an orthogonal complement is obtained by Cramer's
+rule, so each of its entries is a quotient of two minors of order $r\le k$; the denominator is a non-zero
+integer, hence of absolute value at least $1$, and by \eqref{eq:hadamard} the entry has height at most
+$2\bigl(kH+\tfrac{k}{2}\log_2 k+O(k)\bigr)$. Consequently the bases of $D$, $D^{\perp_{K_0}}$, $T_D$ and
+$\ker\bar\varphi$ inherit a factor $O(k)$ from the height of the matrix they come from, the functionals
+$\varphi$, the prescribed image $\Phi_0$ and the entries of the cleared pencil are obtained from these by
+polynomially many field operations, and their heights are again $\poly(n,\tau)$; clearing the chart
+denominator $\delta$ multiplies them by at most $e\,h(\delta)=\poly(n,\tau)$, where $e\le\omega$ is the
+clearing exponent.
 
-Combining Steps 0--10 yields Claim~\ref{clm:arith}. The constants above are not optimized: each step
-multiplies the height by a factor polynomial in $k$ and in the degree of the field, and the field
-degree is at most $k^2$; no attempt has been made to minimize the exponents.
+\emph{Step 10 (the subresultant/gcd chain).} On a chart the maximal minors have $\lambda$-degree at most
+$\omega\le k$, parameter degree at most $j\le2p$ and coefficient height at most $H=\poly(n,\tau)$
+(Step~9). Since $p$ is fixed, a coefficient is a polynomial in the $p^2$ chart parameters with
+$O((j+1)^{p^2})$ coefficients, a constant number, and we charge one ring operation on such a polynomial as
+a single operation on integers of bit length $\varrho$. The gcd over $K(s)[\lambda]$ is computed by the
+subresultant algorithm \cite{vzgg13}: two $\lambda$-polynomials of degree at most $\omega$ are reduced in
+$O(\omega^2)$ ring operations, and every subresultant is a determinant of a Sylvester-type matrix of order
+at most $2\omega$ whose entries are coefficients of the two inputs, so by \eqref{eq:hadamard} its height is
+at most
+\[
+\varrho:=2\omega\,(H+\log_2\omega)+O(\omega),
+\]
+which is $\poly(n,\tau)$. The gcd divides a subresultant, so by Mignotte's bound (Step~6) its height exceeds that of the
+subresultant by at most $O(\omega)$.
+One gcd step therefore costs $O(\omega^2)$ ring operations on integers of bit length $\varrho$, i.e.\
+$O(\omega^2\varrho^2)$ bit operations, a ring operation in $L_D$ carrying the extra factor $O(d_D^2)$ of
+Step~$8'$. With the $\nu$ maximal minors of Claim~\ref{clm:degrees} the whole chain costs
+\[
+O\bigl(\nu\,\omega^2\,\varrho^2\,d_D^2\bigr)
+\]
+bit operations, and with $p$ fixed this is $\poly(n,\tau)$ because $\nu\le O(k^{2p+2})$.
+
+Combining Steps 0--10 (with the inserted Steps $4'$ and $8'$) yields Claim~\ref{clm:arith} and the bound of
+Theorem~\ref{thm:complexity}. No constant above is optimized and none is claimed to be sharp: each step
+multiplies the height by a factor polynomial in $k$ and in the field degree $d_D\le k^2$, and the
+additive term $\tfrac{r}{2}\log_2 r$ of \eqref{eq:hadamard} is kept as it stands. The two
+quantities that we do not attempt to pin down are the multiplicative constant of the subresultant chain of
+Step~10 and the exponent hidden in the factor $\poly(n,\tau)$ of the enumeration of
+Claim~\ref{clm:arith}; both reach the final bound only through the coarse product displayed in the proof of
+Theorem~\ref{thm:complexity}.
 
 \normalsize
 
@@ -1326,6 +1512,10 @@ Berlin, Germany: Springer, 1988.
 (degeneracy loci, Ch.~14).
 \bibitem{bpr06} S. Basu, R. Pollack, M.-F. Roy. \emph{Algorithms in Real Algebraic Geometry}, 2nd ed.
 Berlin, Germany: Springer, 2006.
+\bibitem{cohen93} H. Cohen. \emph{A Course in Computational Algebraic Number Theory}. Graduate Texts in
+Mathematics 138. Berlin, Germany: Springer, 1993 (exact arithmetic in number fields, resultants).
+\bibitem{lll82} A. K. Lenstra, H. W. Lenstra, Jr., L. Lovász. Factoring polynomials with rational
+coefficients. \emph{Math. Ann.}, vol.~261, no.~4, pp.~515--534, 1982.
 \bibitem{vzgg13} J. von zur Gathen, J. Gerhard. \emph{Modern Computer Algebra}, 3rd ed. Cambridge, U.K.:
 Cambridge University Press, 2013 (subresultants, gcd degree bounds).
 \bibitem{emre80} E. Emre, M. L. J. Hautus. A polynomial characterization of $(A,B)$-invariant and
