@@ -2141,7 +2141,7 @@ The system \eqref{eq:R0} has $N_{\rm unk}=(2\omega-1)q\omega\le2n^3$ unknowns an
 $N_{\rm eq}=2\omega^3\le2n^3$ equations. Clearing one common denominator per equation gives an integer
 system with entries of bit length at most $\tau_1\le61n^3\mathcal L$. With
 $M=\max\{N_{\rm unk},N_{\rm eq}\}\le2n^3$, fraction-free elimination keeps integers of bit length at
-most $M\tau_1+\tfrac{M}{2}\log_2M+1\le123n^6\mathcal L$ and performs $O(M^3)$ arithmetic operations (at
+most $M\tau_1+\operatorname{bitLen}(M!)+1\le123n^6\mathcal L$ and performs $O(M^3)$ arithmetic operations (at
 most $8n^9$), that is $O(n^{21}\mathcal L^2)$ bit operations.
 \end{claim}
 
@@ -2154,8 +2154,11 @@ clearing one common denominator per equation multiplies the entry bit length by 
 $\tau_1\le(2n+1)\,20n^2\mathcal L+\log_2(2n+1)\le61n^3\mathcal L$. The estimate on the intermediate
 integers is the Bareiss--Hadamard argument of the proof of Claim~\ref{lem:zero}: every intermediate
 entry is a minor of the integer system, hence of bit length at most
-$M\tau_1+\tfrac{M}{2}\log_2M+1$. With $M\le2n^3$, $\tau_1\le61n^3\mathcal L$ and
-$\log_2M\le2+3\log_2 n\le5n$, this is at most $122n^6\mathcal L+5n^4+1\le123n^6\mathcal L$. The
+$M\tau_1+\operatorname{bitLen}(M!)+1$, by the Leibniz bound on the determinant of an integer matrix
+(Hadamard's inequality would sharpen $\operatorname{bitLen}(M!)$ to $\tfrac{M}{2}\log_2M$, and the two
+differ only by a constant factor; both give $n\tau+O(n\log n)$). With $M\le2n^3$,
+$\tau_1\le61n^3\mathcal L$ and $\operatorname{bitLen}(M!)\le M\log_2M\le10n^4$, this is at most
+$122n^6\mathcal L+10n^4+1\le123n^6\mathcal L$. The
 elimination performs $O(M^3)\le8n^9$ arithmetic operations on integers of at most
 $123n^6\mathcal L$ bits, hence $O(n^{21}\mathcal L^2)$ bit operations. If the rational coefficients of
 \eqref{eq:R0} are treated directly as integers of bit length $\tau_0\le20n^2\mathcal L$ (the convention
