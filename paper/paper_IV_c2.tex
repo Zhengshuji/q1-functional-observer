@@ -579,9 +579,24 @@ $\Phi\subseteq\varphi(T_D)$, and
 $\dim Z\le d\le\dim\ker\bar\varphi+\dim Z$, which is \eqref{eq:realize}.
 \end{proof}
 
-Every subspace of $D^\circ$ between $\Phi_0$ and $\varphi(T_D)$ whose dimension lies in the stated
-interval is therefore realised, and no other subspace is; the two inequalities are what the enumeration
-of Part C quantifies over.
+Every subspace of $D^\circ$ between $\Phi_0$ and $\varphi(T_D)$ whose dimension lies in the stated interval
+is therefore realised, and no other subspace is. Since this set is what the decision procedure of
+Section~\ref{sec:decision} enumerates, we name it, writing $V_\varphi:=\varphi(T_D)$:
+\begin{equation}\label{eq:ID}
+\begin{gathered}
+\mathcal I_D:=\bigl\{\Phi\le V_\varphi:\ \Phi_0\subseteq\Phi,\\
+\dim\Phi-\dim\Phi_0\ \le\ t-w_0\\
+\le\ \dim\ker\bar\varphi+\dim\Phi-\dim\Phi_0\bigr\}.
+\end{gathered}
+\end{equation}
+with $\bar\varphi:T_D/W_0\to D^\circ/\Phi_0$ the map of Theorem~\ref{thm:realize}. By that theorem,
+$\Phi\in\mathcal I_D$ if and only if $\Phi=\Phi(W)$ for some $W$ with $W_0\subseteq W\subseteq T_D$ and
+$\dim W=t$; so $\mathcal I_D$ is exactly the set of images of the fibre, and it is over $\mathcal I_D$ that
+the quantifier of Theorem~\ref{thm:reduced} runs. The set \eqref{eq:ID} is \emph{not} the whole union
+$\bigcup_j\Gr(j,V_\varphi)$: the two dimension conditions confine $j=\dim\Phi$ to a finite range of values,
+and $\Phi_0\subseteq\Phi$ confines the position of $\Phi$ inside each Grassmannian.
+Section~\ref{sec:algorithm} describes how the algorithm enumerates $\mathcal I_D$ by finitely many charts.
+
 
 \subsection{The reduced criterion}\label{sec:reduction:c}
 
@@ -589,7 +604,7 @@ of Part C quantifies over.
 Recall $P_D(\lambda)=\lambda H_K-(H_A)_K$ and $r_D(\lambda)=\dim R_\lambda$. Then
 \begin{align}
 &\exists W\ (W_0\subseteq W\subseteq T_D,\ \dim W=t)\ \text{satisfying \eqref{eq:5b}}\notag\\
-&\iff\ \exists\Phi\ \text{satisfying Theorem~\ref{thm:realize} such that}\notag\\
+&\iff\ \exists\Phi\in\mathcal I_D\ \text{(the realisable set \eqref{eq:ID}) such that}\notag\\
 &\qquad\dim\bigl(\row P_D(\lambda)+\Phi\bigr)=\omega\quad\forall\lambda,
 \label{eq:reduced}
 \end{align}
@@ -608,7 +623,8 @@ Theorems~\ref{thm:reduction}--\ref{thm:reduced} reduce the fibre problem to a qu
 $D^\circ$. Two spaces matter and they must not be confused: $D^\circ$ has dimension $\omega$, which grows
 with $k$, while the image $\varphi(T_D)$ has dimension at most
 $\dim T_D=(n-k)-r(D)\le n-k\le 2p$, where $p$ is the number of output rows. So the effective parameter
-ranges over
+does not range over the whole union $\bigcup_j\Gr(j,\varphi(T_D))$ but over the realisable set
+$\mathcal I_D$ of \eqref{eq:ID}, which is contained in
 \[
 \bigcup_{j\le\min(t,\,2p)}\Gr\bigl(j,\ \varphi(T_D)\bigr),
 \]
@@ -692,7 +708,8 @@ Theorems~\ref{thm:ufibre}--\ref{thm:reduced} hold with $2$ replaced by $c$: the 
 $\mathcal B_{\rm pres}\subseteq\mathcal I_c(M)$, the fibre is $\Gr(t-w_0,T_D/W_0)$ with
 $T_D=K_0^\perp\cap(A_{21}D)^\perp$, the image space satisfies $\Phi(W)\subseteq D^\circ$ with
 $\dim D^\circ=k-c=\omega$, and the reduced criterion of Theorem~\ref{thm:reduced} is unchanged. The
-effective image parameter ranges over $\bigcup_{j\le\min(t,2p)}\Gr(j,\varphi(T_D))$, of dimension at most
+effective image parameter ranges over the realisable set $\mathcal I_D$ of \eqref{eq:ID}, which is
+contained in $\bigcup_{j\le\min(t,2p)}\Gr(j,\varphi(T_D))$ and has dimension at most
 $\lfloor\min(t,2p)^2/4\rfloor\le p^2$.
 \end{prop}
 
@@ -731,38 +748,163 @@ cost.
 
 \subsection{Admissibility is automatic on every chart}\label{sec:admissible}
 
-Recall from \cite{companion3} that a point of a chart is \emph{admissible} when some maximal minor of the
-cleared pencil keeps its generic $\lambda$-degree at that point; the specialization lemma then shows that
-the generic gcd degree is a lower bound on every admissible point, and that the generic gcd being a
-constant forces the chart to contain a real feasible point whenever the real points are Zariski dense.
+A \emph{chart} is a rational parametrization $s\mapsto\Phi(s)$ of a family of image spaces inside
+$\bigcup_j\Gr(j,V_\varphi)$, together with the pencil $(\lambda H-H_A)(s)$ that it induces. The parameter
+$s$ ranges over a nonempty Zariski-open set $S=\{s\in\mathbb R^N:\ \delta(s)\neq0\}$ of $\mathbb R^N$; the
+entries of $H$ and $H_A$ are rational functions of $s$ whose denominators divide $\delta$, and $\delta$ is
+the \emph{chart denominator}. Clearing denominators, i.e.\ passing to $\delta^{\,e}(\lambda H-H_A)$ with $e$
+large enough, multiplies every maximal minor by the same element $\delta^{\,e\omega}$ of the function field
+and therefore changes no gcd in $\lambda$. A chart is a \emph{standard affine chart} of $\Gr(j,V_\varphi)$
+when $s$ is the matrix $X$ of a linear map $U\to U'$ with $V_\varphi=U\oplus U'$ and $\dim U=j$, so that
+$\Phi$ is the graph of $X$; on such a chart the dependence on $s$ is affine
+(Claim~\ref{clm:degrees}), so $\delta=1$ there, and a denominator is needed only when the parametrization is
+normalized by the eigenvector data of $D$ in branch~R of Theorem~\ref{thm:base}. A point $s\in S$ is
+\emph{admissible} when some maximal minor of the cleared pencil has $\lambda$-degree $\omega$ at $s$; since
+$\deg_\lambda\le\omega$ always, this asks that some maximal minor keep the largest $\lambda$-degree it can
+have. The coefficient field is $K=\mathbb Q$ in branch~C and $K=L_D$ in branch~R of
+Theorem~\ref{thm:base}; every parameter space below is an affine space, hence irreducible, so a chart has a
+single \emph{function field} $K(s)$, the field of rational functions in its parameters.
 
-\begin{claim}\label{clm:admissible}
-On every chart of a split design, $\rank H=\omega$ identically. In particular $H$ is independent of all
-chart parameters, so the $\lambda$-leading coefficient of a suitable maximal minor is a non-zero constant
-and every real point of every chart is admissible.
+Recall from \cite{companion3} that the generic-gcd criterion rests on two facts in this situation: at an
+admissible point the degree of the generic $\lambda$-gcd bounds the degree of the specialised gcd from
+below, and a constant generic gcd forces the chart to contain a real feasible point, because the real points
+are Zariski dense. Lemma~\ref{lem:genericgcd} states and proves both facts for the charts at hand;
+Claim~\ref{clm:admissible} first shows that every point of every chart is admissible, so no point ever has
+to be excluded.
+
+\begin{claim}[fixed leading coefficient]\label{clm:admissible}
+On every chart of a split design, $H=\mathcal L N$ does not depend on the chart parameter: its $W$-rows
+vanish and its $D$-rows are the $\omega$ independent rows of $H_K$, so $\rank H=\omega$ identically.
+Let $I\subseteq\{1,\dots,q\}$ and $J\subseteq\{1,\dots,k\}$ be index sets with $|I|=|J|=\omega$ and
+$\det H_{I,J}\neq0$, and let
+\[
+m_{I,J}(\lambda,s):=\det\bigl((\lambda H-H_A(s))_{I,J}\bigr)
+\]
+be the corresponding maximal minor of the pencil. Then
+\begin{equation}\label{eq:leadcoef}
+[\lambda^{\omega}]\,m_{I,J}(\lambda,s)=\det H_{I,J}\neq0
+\qquad\text{for every }s,
+\end{equation}
+independently of the chart parameter $s$ and of the choice of the index sets. Hence
+$\deg_\lambda m_{I,J}(\cdot,s)=\omega$ at every point of
+every chart: no specialisation of the parameters can lower the $\lambda$-degree of this minor, some maximal
+minor keeps $\lambda$-degree $\omega$ everywhere, and every real point of every chart is admissible.
 \end{claim}
 
 \begin{proof}
-The $W$-rows of $H$ vanish (Theorem~\ref{thm:reduction}, step 1) and the $D$-rows have rank
-$\dim D^{\perp_{K_0}}=k-c=\omega$; hence $\rank H=\omega$ for every choice of $W$. On any chart of
-$\Gr(j,V_\varphi)$ the rows of $H$ are parameter-free, and the $\lambda$-leading coefficient of the
-maximal minor built on those $\omega$ rows is a non-zero constant.
+The $W$-rows of $H$ vanish (Theorem~\ref{thm:reduction}, step~1) and the $D$-rows have rank
+$\dim D^{\perp_{K_0}}=k-c=\omega$; the entries of $H$ are therefore constants, independent of $W$ and of the
+chart parameter, and $\rank H=\omega$ identically. Index sets with $\det H_{I,J}\neq0$ exist because
+$\rank H=\omega$. The submatrix of the pencil is $(\lambda H-H_A(s))_{I,J}=\lambda H_{I,J}-(H_A(s))_{I,J}$; by the Leibniz
+formula its determinant is the signed sum, over the permutations $\sigma$ of $\{1,\dots,\omega\}$, of the
+products $\prod_{a=1}^{\omega}\bigl(\lambda H_{I_a,J_{\sigma(a)}}-(H_A(s))_{I_a,J_{\sigma(a)}}\bigr)$. The
+coefficient of $\lambda^{\omega}$ arises only from choosing the first summand in each of the $\omega$
+factors; it is
+$\sum_{\sigma}\operatorname{sgn}(\sigma)\prod_{a=1}^{\omega}H_{I_a,J_{\sigma(a)}}=\det H_{I,J}$, a non-zero
+constant and in particular independent of $s$, while no entry of $H_A$ can contribute at degree $\omega$.
+Therefore
+$\deg_\lambda m_{I,J}(\cdot,s)=\omega$ for every $s$, and a specialisation $s_0$ that lowered this degree
+would have to annihilate $\det H_{I,J}$, which is impossible.
 \end{proof}
 
-Admissibility being automatic, the generic-gcd criterion of \cite{companion3} becomes an exact test rather
-than a generic one, and the algorithm can be stated in Part B without a certificate per point.
+\begin{lem}[specialization and generic $\lambda$-gcd]\label{lem:genericgcd}
+Let $K\subseteq\mathbb R$ be a subfield, let $S\subseteq\mathbb R^N$ be a nonempty Zariski-open set, and let
+$M_1,\dots,M_r\in K[s,\lambda]$, $r\ge1$, be the maximal minors of a cleared pencil, polynomial in
+$s=(s_1,\dots,s_N)$ and in $\lambda$. Assume
+\begin{enumerate}[label=\textbf{(H\arabic*)},leftmargin=*,itemsep=1pt,topsep=2pt]
+\item some $M_{i_0}$ has $\lambda$-degree exactly $d_0\ge0$, and its $\lambda$-leading coefficient is a
+unit of $K[s,1/\delta]$, hence non-vanishing on $S$; a non-zero constant of $K$ suffices, and that is
+the case of Claim~\ref{clm:admissible};
+\item $S$ is irreducible over $K$; this holds for the charts above, whose parameter space is an affine
+space, and it is what makes the function field below a single field.
+\end{enumerate}
+Let $g\in K(s)[\lambda]$ be the monic gcd of $M_1,\dots,M_r$ over the function field $K(s)$, the field of
+rational functions in the chart parameters over the coefficient field $K$; call $g$ the \emph{generic
+$\lambda$-gcd} of the chart. Then:
+\begin{enumerate}[label=(\arabic*),leftmargin=*,itemsep=1pt,topsep=2pt]
+\item $g$ lies in $K[s,1/\delta][\lambda]$ and is monic in $\lambda$ (in $K[s][\lambda]$ when the leading
+coefficient in \textbf{(H1)} is a constant); its $\lambda$-degree is therefore the same at every point of
+$S$, namely $\deg_\lambda g$, and $g(s,\cdot)$ divides every $M_i(s,\cdot)$ in $K[\lambda]$;
+\item if $\deg_\lambda g\ge1$, then
+$\deg_\lambda\gcd\bigl(M_1(s,\cdot),\dots,M_r(s,\cdot)\bigr)\ge\deg_\lambda g\ge1$ for every $s$, so no
+point of the chart, admissible or not, has a constant $\lambda$-gcd;
+\item if $\deg_\lambda g=0$, the set of $s\in S$ whose specialised gcd is not constant is contained in a
+proper Zariski-closed subset of $S$; since the real points of a nonempty Zariski-open subset of
+$\mathbb R^N$ are Zariski dense, $S$ contains a real point at which the specialised gcd is $1$.
+\end{enumerate}
+Consequently, if every point of $S$ is admissible, the generic $\lambda$-gcd has positive degree if and only
+if every admissible specialisation has positive degree, and it has degree $0$ if and only if some real point
+of $S$ has constant specialised gcd.
+\end{lem}
+
+\begin{proof}
+(1) Assume first $d_0\ge1$ and fix $s_0\in S$. Let $R=K[s]_{(s_0)}$ be the local ring at $s_0$, with maximal
+ideal $\mathfrak m$ and fraction field $K(s)$, and write $\operatorname{ord}$ for the order with respect to
+$\mathfrak m$. By \textbf{(H1)} the $\lambda$-leading coefficient of $M_{i_0}$ is a unit of
+$K[s,1/\delta]\subseteq R$, hence a unit of $R$, so
+$M_{i_0}$ has $\lambda$-degree $d_0$ over $R$ as well. Write $g=\sum_{i=0}^{e}g_i\lambda^i$ with $g_e=1$
+and $M_{i_0}=g\,h$ with $h=\sum_{j=0}^{d_0-e}b_j\lambda^j\in K(s)[\lambda]$; then $b_{d_0-e}$, the
+$\lambda$-leading coefficient of $M_{i_0}$, is a unit of $R$. Suppose some $g_i\notin R$, and put
+$r=\max_i(-\operatorname{ord}g_i)>0$ and $q=\max_j(-\operatorname{ord}b_j)\ge0$. Let
+$G_0=\sum_{\operatorname{ord}g_i=-r}c_i\lambda^i$ and
+$H_0=\sum_{\operatorname{ord}b_j=-q}\beta_j\lambda^j$ be the associated leading forms, non-zero polynomials
+over the residue field $R/\mathfrak m$. The associated graded ring
+$\bigoplus_{n\ge0}\mathfrak m^n/\mathfrak m^{n+1}$ is a polynomial ring over that field, hence a domain, so
+the leading form of the product $M_{i_0}=g\,h$ is $G_0H_0$, of order $r+q\ge1$. But
+$M_{i_0}\in K[s][\lambda]$ has leading form $M_{i_0}(s_0,\lambda)$, of order $0$ and of $\lambda$-degree
+$d_0$ by \textbf{(H1)}. This contradiction shows $g_i\in R$ for every $i$; as $s_0\in S$ was
+arbitrary, $g\in\bigcap_{s_0\in S}K[s]_{(s_0)}[\lambda]=K[s,1/\delta][\lambda]$, where $\delta$ is the
+chart denominator. Division by the monic $g$ in $K[s,1/\delta][\lambda]$ yields
+$M_i=q_ig$ with $q_i\in K[s,1/\delta][\lambda]$, because the remainder has $\lambda$-degree $<e$ and
+vanishes in $K(s)[\lambda]$. Evaluating at $s\in S$, where $\delta(s)\neq0$, gives
+$g(s,\cdot)\mid M_i(s,\cdot)$ in $K[\lambda]$, and $\deg_\lambda g(s,\cdot)=e$ because $g$ is monic of
+degree $e$. If the leading coefficient in \textbf{(H1)} is a constant, no localisation is needed and
+$g\in K[s][\lambda]$. If $d_0=0$ then $M_{i_0}$
+is a non-zero constant, so $e=0$ and $g=1$, and the same conclusions are immediate.
+
+(2) By (1), $g(s,\cdot)$ is a common divisor of the specialised minors, of degree $\deg_\lambda g$.
+
+(3) If $g=1$ there are $a_i\in K(s)[\lambda]$ with $\sum_i a_iM_i=1$. Clearing denominators gives
+$b_i\in K[s,\lambda]$ and $0\neq\Delta\in K[s]$ with $\sum_i b_iM_i=\Delta$. At a point $s$ with
+$\Delta(s)\neq0$ the polynomials $M_i(s,\cdot)$ have no common zero, so their gcd is $1$; the exceptional
+set is thus contained in $\{\Delta=0\}$, a proper Zariski-closed subset of the affine space, and
+$S\setminus\{\Delta=0\}$ is a nonempty Zariski-open subset of $S$. A non-zero polynomial in $N$ variables
+vanishes on no nonempty Euclidean-open subset of $\mathbb R^N$, so a proper Zariski-closed subset contains
+no nonempty open set, and its complement has real points. (The same argument with $K$ in place of
+$\mathbb R$ shows that $K$-rational points suffice whenever $K$ is infinite: a non-zero polynomial over $K$
+does not vanish on all of $K^N$. This is why the algorithm may compute over $K$ rather than over
+$\mathbb R$.) The last sentence of the lemma combines (2), (3) and the admissibility of every point.
+\end{proof}
+
+Admissibility being automatic, and the generic-gcd test being exact on every chart of $\mathcal I_D$ by
+Lemma~\ref{lem:genericgcd}, the algorithm can be stated in Part B without a certificate per point: a chart
+contributes a feasible point exactly when its generic gcd is constant.
 
 \subsection{The algorithm}\label{sec:algorithm}
 
 \begin{defn}[image charts]\label{defn:charts}
-Let $\Phi_0=\varphi(W_0)$ and $V_\varphi:=\varphi(T_D)$, of dimension $\le\min(n-k,2p)$. The realisable
-image spaces are the subspaces $\Phi\le V_\varphi$ with $\Phi_0\subseteq\Phi$, $\dim\Phi\le t$, satisfying
-the inequalities of Theorem~\ref{thm:realize}; they are charted by the standard affine charts of
-$\bigcup_{j}\Gr(j,V_\varphi)$, each of which carries $j(\dim V_\varphi-j)\le p^2$ parameters. Two
-degenerate cases deserve names: $\Phi=\{0\}$ (possible only if $\Phi_0=0$ and $t\ge0$ with the lower
-inequality satisfied) and $\Phi=D^\circ$ itself (possible only if $V_\varphi=D^\circ$, i.e. only in the
-boundary case $\dim T_D=\omega$). When $\dim\Phi_0\ge1$ the one-dimensional families disappear; the line
-case occurs only when $\Phi_0=0$ and $\dim V_\varphi\ge2$.
+Let $j=\dim\Phi$. Every $\Phi\in\mathcal I_D$ has
+\begin{equation}\label{eq:jrange}
+\begin{gathered}
+\max\bigl\{\dim\Phi_0,\ t-w_0+\dim\Phi_0-\dim\ker\bar\varphi\bigr\}\ \le\ j\\
+\le\ \min\bigl\{t-w_0+\dim\Phi_0,\ \dim V_\varphi\bigr\},
+\end{gathered}
+\end{equation}
+and conversely, for every integer $j$ in this range, the set
+$\{\Phi\in\Gr(j,V_\varphi):\ \Phi_0\subseteq\Phi\}$ is nonempty and is precisely the set of elements of
+$\mathcal I_D$ of dimension $j$. The algorithm enumerates $\mathcal I_D$ through a finite chart cover: for
+each $j$ in \eqref{eq:jrange} and each standard affine chart of $\Gr(j,V_\varphi)$ --- with parameters the
+entries of a linear map $X:U\to U'$, $\dim U=j$, $V_\varphi=U\oplus U'$, so that $\Phi$ is the graph of $X$
+--- the condition $\Phi_0\subseteq\Phi$ is a system of linear equations in $X$, so the realisable points of
+that chart form an affine subspace $S\subseteq\mathbb R^{j(\dim V_\varphi-j)}$, possibly empty. These $S$
+are the charts of Section~\ref{sec:admissible}; each carries at most $j(\dim V_\varphi-j)\le p^2$
+parameters. If $t<w_0$ then $\mathcal I_D=\emptyset$ and $D$ is discarded, in agreement with the
+non-emptiness condition of Theorem~\ref{thm:splitfibre}. The two endpoints of \eqref{eq:jrange} are part of
+the same rule and need no separate treatment: $j=0$ is the single chart $\Phi=\{0\}$, realisable exactly
+when $\Phi_0=0$ and the lower inequality of \eqref{eq:ID} holds, and $j=\dim V_\varphi$ is the single chart
+$\Phi=V_\varphi$, which coincides with $D^\circ$ only in the boundary case $\dim T_D=\omega$. When
+$\dim\Phi_0\ge1$ no one-dimensional family occurs; the line case occurs only for $\Phi_0=0$ and
+$\dim V_\varphi\ge2$.
 \end{defn}
 
 The enumeration is finite and explicit, so what remains is to say on which charts the answer is decided
@@ -775,39 +917,100 @@ and at what cost.
 \State compute $K_0$, $N$, $M$, $A_{21}$, $\omega$, $c$, $t$;
 \State enumerate $\mathcal I_2(M)$ by Theorem~\ref{thm:base}, keeping only
 $D\in\mathcal B_{\rm pres}$;
-\State for each $D$ compute $r(D)$, $T_D$, $W_0$, $\Phi_0$, and check $W_0\subseteq T_D$;
-\State enumerate the realisable image spaces $\Phi$ by Theorem~\ref{thm:realize} and
-Remark~\ref{rem:imagesize};
-\State for each image chart, clear denominators and compute the gcd of the
-$\omega\times\omega$ maximal minors over $\mathbb Q(s)[\lambda]$ (or over the field of definition of
-$D$); if it is constant, return \emph{feasible};
-\State if every chart gives a non-constant gcd, return \emph{infeasible}.
+\State for each $D$ compute $r(D)$, $T_D$, $W_0$, $\Phi_0$, and check $W_0\subseteq T_D$ and
+$t\ge w_0$; discard $D$ otherwise;
+\State enumerate the charts of $\mathcal I_D$: the finite range \eqref{eq:jrange} of $j=\dim\Phi$, and for
+each $j$ the standard affine charts of $\Gr(j,V_\varphi)$ cut out by the linear condition
+$\Phi_0\subseteq\Phi$ (Definition~\ref{defn:charts});
+\State for each nonempty chart of $\mathcal I_D$, clear denominators and compute the gcd of the
+$\omega\times\omega$ maximal minors over $K(s)[\lambda]$, $K=\mathbb Q$ or $K=L_D$; if it is a non-zero
+constant, return \emph{feasible};
+\State if every chart of $\mathcal I_D$ gives a non-constant gcd, return \emph{infeasible}.
+
 \end{algorithmic}
 \end{algorithm}
 
 \subsection{Correctness}\label{sec:correct}
 
 \begin{claim}[two-valued decision]\label{clm:twovalued}
-Under the hypotheses of Theorem~\ref{thm:correct} below, each real-admissible image chart satisfies both
-hypotheses of the generic-gcd criterion, hence
-\[
-\begin{aligned}
-&\text{the generic gcd on the chart is }1\\
-&\quad\iff\text{the chart contains a real feasible design}.
-\end{aligned}
-\]
-Therefore the algorithm outputs exactly \textbf{feasible} or \textbf{infeasible}.
+Assume $c=2$, simple spectrum, and the split condition, and let $S$ be a nonempty chart of
+$\mathcal I_D$ (Definition~\ref{defn:charts}). Then every point of $S$ is admissible
+(Claim~\ref{clm:admissible}), so Lemma~\ref{lem:genericgcd} applies, with $M_1,\dots,M_r$ the maximal
+minors of the cleared pencil in the chart parameter. Hence the generic $\lambda$-gcd of $S$ is a non-zero
+constant if and only if $S$ contains a real point $s$ whose image $\Phi(s)\in\mathcal I_D$ is realised by a
+feasible design, and if it is not a constant then no point of $S$ is feasible. Consequently the per-chart
+test of Algorithm~\ref{alg:decide} is exact, and the algorithm outputs exactly \textbf{feasible} or
+\textbf{infeasible}.
 \end{claim}
 
+\begin{proof}
+Claim~\ref{clm:admissible} supplies the first hypothesis of Lemma~\ref{lem:genericgcd} with $d_0=\omega$:
+after clearing, the $\lambda$-leading coefficient of $m_{I,J}$ is $\det H_{I,J}$ times the clearing factor,
+hence a unit of $K[s,1/\delta]$, and it is a non-zero constant for the uncleared pencil. It also makes
+every point of $S$ admissible, and the second hypothesis holds because $S$ is an affine space. Clause~(2) of the lemma is the
+negative direction: a non-constant generic gcd makes every specialised gcd non-constant, so every pencil in
+the chart is singular at some $\lambda$. For the positive direction, clause~(3) of the lemma produces a real
+point $s\in S$ at which the specialised gcd is $1$; by Theorem~\ref{thm:reduction}(4) this gives
+$\dim(R_\lambda+\Phi(s))=\omega$ for every $\lambda$, and by Theorem~\ref{thm:realize} the subspace
+$\Phi(s)\in\mathcal I_D$ is realised by some $W$, so the design $V=D^{\perp_{K_0}}\oplus W$ is feasible. The
+last sentence is the definition of the algorithm: it returns \emph{feasible} at the first chart whose generic
+gcd is constant, and \emph{infeasible} only when every chart fails.
+\end{proof}
+
 \begin{thm}[correctness]\label{thm:correct}
-Assume $c=2$, simple spectrum of $M$, and the split condition. Then Algorithm~\ref{alg:decide} terminates
-and its answer is correct.
+Assume $c=2$, simple spectrum of $M$, and the split condition. Then Algorithm~\ref{alg:decide} terminates,
+and it returns \emph{feasible} if and only if a feasible $K_0$-split design of order $q$ with prescribed rows
+$V_0$ exists.
 \end{thm}
 
 \begin{proof}
-Finite enumeration by Theorems~\ref{thm:base} and~\ref{thm:realize}; correctness on each chart by
-Claim~\ref{clm:twovalued} and Theorem~\ref{thm:reduced}; the chart cover is complete because every
-realisable $\Phi$ is one of the charts of Definition~\ref{defn:charts}.
+Write \textbf{Feas} for the assertion that a feasible $K_0$-split design of order $q$ with prescribed rows
+$V_0$ exists. We prove the three equivalences (a)--(c) below; composing them gives the theorem, and in each
+of them the support is named at the start.
+
+\emph{(a) \textbf{Feas} holds if and only if there are $D\in\mathcal B_{\rm pres}$ and a subspace $W$ with
+$W_0\subseteq W\subseteq T_D$, $\dim W=t$, and}
+\begin{equation}\label{eq:chainA}
+R_\lambda+\Phi(W)=D^\circ\quad\text{for all }\lambda .
+\end{equation}
+\emph{Support: Theorem~\ref{thm:splitfibre} (the fixed-kernel fibre) and Theorem~\ref{thm:reduction}
+(image-space reduction).} If $\mathcal L$ is a feasible split design and $D=\ker H$, then $D\in\mathcal I_c(M)$
+by Claim~\ref{clm:invariant}, and the condition $D\in\mathcal B_{\rm pres}$ is exactly (H1) of
+\eqref{eq:splithyp}; Theorem~\ref{thm:splitfibre} exhibits the row space of $\mathcal L$ as
+$V=D^{\perp_{K_0}}\oplus W$ with $W_0\subseteq W\subseteq T_D$ and $\dim W=t$. Conversely, given such $D$ and
+$W$, the row space $V=D^{\perp_{K_0}}\oplus W$ has dimension $(k-c)+t=\omega+t=q$, contains $V_0$ by (H1)
+and (H2), is split by construction, and satisfies \eqref{eq:5a} by Theorem~\ref{thm:splitfibre}. In both
+directions condition \eqref{eq:5b} is equivalent to \eqref{eq:chainA}: this is part~(4) of
+Theorem~\ref{thm:reduction}, whose row-space identity reads
+$\row(\lambda H-H_A)=R_\lambda+\Phi(W)$.
+
+\emph{(b) Condition (a) holds if and only if there are $D\in\mathcal B_{\rm pres}$ and $\Phi\in\mathcal I_D$
+with}
+\begin{equation}\label{eq:chainB}
+\dim\bigl(R_\lambda+\Phi\bigr)=\omega\quad\text{for all }\lambda .
+\end{equation}
+\emph{Support: Theorem~\ref{thm:realize} (realizability) and Theorem~\ref{thm:reduced} (the reduced
+criterion).} By Theorem~\ref{thm:realize}, a subspace $\Phi\le D^\circ$ equals $\Phi(W)$ for some $W$ with
+$W_0\subseteq W\subseteq T_D$ and $\dim W=t$ if and only if $\Phi\in\mathcal I_D$, so the quantifier
+$\exists W$ of (a) may be replaced by $\exists\Phi\in\mathcal I_D$; and since
+$R_\lambda+\Phi\subseteq D^\circ$ and $\dim D^\circ=k-c=\omega$, condition \eqref{eq:chainA} on the
+subspace $\Phi$ is exactly \eqref{eq:chainB}. This is the content of Theorem~\ref{thm:reduced}, whose second
+form \eqref{eq:reduced2} is not needed here.
+
+\emph{(c) Condition (b) holds if and only if Algorithm~\ref{alg:decide} returns \emph{feasible}.}
+\emph{Support: Claim~\ref{clm:admissible} (admissibility), Lemma~\ref{lem:genericgcd} (generic gcd) and
+Theorem~\ref{thm:base} (classification of the base).} By Theorem~\ref{thm:base} the set $\mathcal I_2(M)$ is
+finite and enumerated explicitly in step~2, so only finitely many $D$ are tried and
+$\mathcal B_{\rm pres}$ is recognised by the linear condition \eqref{eq:bpres}; by
+Definition~\ref{defn:charts} the set $\mathcal I_D$ is covered by finitely many charts and every
+$\Phi\in\mathcal I_D$ lies on one of them. Thus condition (b) is equivalent to the assertion that some chart
+$S$ of $\mathcal I_D$ contains a real point $s$ for which \eqref{eq:chainB} holds at $\Phi(s)$.
+On a chart $S$, condition \eqref{eq:chainB} at $\Phi(s)$ says that the maximal minors of the pencil at $s$
+have no common zero; every point of $S$ is admissible by Claim~\ref{clm:admissible}, so
+Lemma~\ref{lem:genericgcd} applies: the generic gcd of $S$ is a non-zero constant exactly when such a real
+point exists, and a non-constant generic gcd rules out every point of $S$. The gcd test of steps~5--6
+therefore returns \emph{feasible} exactly when (b) holds, and \emph{infeasible} exactly when it fails.
+Finitely many $D$ and finitely many charts per $D$ give termination.
 \end{proof}
 
 Correctness being established, the only question left is the cost of the enumeration and of the gcd
