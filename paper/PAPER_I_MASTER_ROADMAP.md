@@ -37,7 +37,7 @@ States are kept separate: `Mathematically proved` (M) and `Lean formalized` (F);
   plain-`Finset` layer `embOfFinset`, `imageFinset`, `imageFinset_card`, `imageEquivFinset`,
   `permOfImage`, `embOfFinset_permOfImage`; `det_submatrix_comp`; and
   `maximalMinor_injective_eq_signed_image`.
-- Axiom audit: **163 declarations**, only `propext`, `Classical.choice`, `Quot.sound`.
+- Axiom audit: **167 declarations**, only `propext`, `Classical.choice`, `Quot.sound`.
 
 ## 3. Open mathematical proofs
 
@@ -87,7 +87,7 @@ States are kept separate: `Mathematically proved` (M) and `Lean formalized` (F);
 
 | Stream | Owner | Status |
 |---|---|---|
-| A. D1 bridge + §III-D assembly | main line | in progress (step 1 of 6 done) |
+| A. D1 bridge + §III-D assembly | main line | **D1 complete** (all 6 steps) |
 | B. Paper corrections | paper agent / main line | **done** (commit `f6be7a4`) |
 | C. Claim 19: math re-derivation | math agent | **done** (report) |
 | C'. Claim 19: paper appendix rewrite | paper agent | **done** (commit `ca0305b`) |

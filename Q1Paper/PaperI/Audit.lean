@@ -219,3 +219,7 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.PaperI.gram_inj_eq_factorial_smul
 #print axioms Q1Paper.PaperI.gram_solvable_iff_smul
 #print axioms Q1Paper.PaperI.gram_certificate_iff_subset
+#print axioms Q1Paper.PaperI.rowSpan
+#print axioms Q1Paper.PaperI.preimagePair
+#print axioms Q1Paper.PaperI.imagePair_preimagePair
+#print axioms Q1Paper.PaperI.rowSpan_windowInj_eq
