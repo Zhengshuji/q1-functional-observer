@@ -21,7 +21,7 @@
 |---|---|---|---|---|
 | 定义 (5a)/(5b)、DEC、MINDEC | `Q1Paper.PaperI.rawAlgebraic`, `rawSpectral`, `compressedAlgebraic`, `compressedSpectral`, `DEC`, `MINDEC` | `PaperI/Interface.lean` | **complete（定义层）** | 定义与论文一致；等价性见下一行 |
 | Claim 1 秩恒等式 `rank[P;M]=rank P+rank(MN_P)` | `Q1Paper.rank_vstack_add_rank_mul`（矩阵版）、`rank_fromRows_add_map`（任意有限索引类型） | `G4RankIdentity.lean`, `PaperI/CompressionMatrix.lean` | **complete** | — |
-| Claim 2 压缩与铅笔判据 | `rawAlgebraic_iff_compressed`, `rawAlgebraic_iff_rowSpace`, `rawSpectral_iff_compressed`, `DEC_iff_compressed`, `exists_factor_of_rawAlgebraic`, `rank_HA_eq_rank_H_of_rawSpectral`（矩阵级）；`ker_compressed_iff`, `G_form_iff`（抽象） | `PaperI/CompressionMatrix.lean`, `Compression.lean`, `FixedOrder.lean` | **complete（固定域 K 上四条全闭）** | 域转移未做：论文输入在 `ℚ`、设计在 `ℝ`、`(5b)` 的 `λ` 在 `ℂ`；当前定理对任意域 `K` 成立，取 `K=ℂ` 时 `(5b)` 忠实但 `∃R` 允许复设计。要忠实于"实观测器"需要复化桥（见 §4.1） |
+| Claim 2 压缩与铅笔判据 | `rawAlgebraic_iff_compressed`, `rawAlgebraic_iff_rowSpace`, `rawSpectral_iff_compressed`, `DEC_iff_compressed`, `exists_factor_of_rawAlgebraic`, `rank_HA_eq_rank_H_of_rawSpectral`；**`DEC_complex_iff_compressed`（实设计 + 复秩）** | `PaperI/CompressionMatrix.lean`, `Compression.lean`, `FixedOrder.lean` | **complete（含域约定）** | 无（见 §4.1 关于 `ℂ` 上秩的说明） |
 | Claim 3 可达行对与 `κ_obs=rd_0` | `KappaObs.pairMap`, `finrank_ker_inf_add_finrank_range_pairMap`, `Q1Paper.freePairSpace`, `kappaObs_eq_mul_freePairSpace`, `finrank_domain_le_freePairSpace` | `KappaObs.lean`, `FreeRows.lean` | **partial** | 缺与具体矩阵 `M=[N AN]`、`d_0=rank[N AN]` 的连接，以及 `k≤d_0` |
 | Claim 4 沙包与可实现性 | `Q1Subspace.rowSpan_fromRows_left`, `mem_rowSpan_iff_exists_vecMul` | `Q1Subspace.lean` | **partial** | 缺"每个满足 `W_0⊆W⊆T`、`dim(W/W_0)≤r` 的 `W` 由 `t` 行实现"的完整逆向构造（商空间基 + 原像 + 补零） |
 | Claim 5 条件只依赖 `W` | `Q1Subspace.pi1`, `pi2`, `Q1Pencil.SpectralCondition`, `hasConstantRank_iff_rankIndependent` | `Q1Projection.lean`, `Q1Pencil.lean`, `Q1Step3.lean` | **partial** | 缺 `π_λ(W)` 的复化、与 `rank(λH−H_A)=ω` 的严格等价 |
@@ -96,11 +96,11 @@
 
 1. ~~Claim 2(ii) 的显式 `F`~~：已由 `exists_factor_of_rowSpace_le` / `exists_factor_of_rawAlgebraic` 给出；
 2. ~~Claim 2(iv) `rank H_A = rank H`~~：已由 `rank_eq_of_compressedSpectral`（`λ=0`）与 `rank_neg_eq` 给出；
-3. **域转移（真正的剩余项）**：论文的 `R` 是实的，而 `(5b)` 的 `λ` 取遍 `ℂ`。当前定理对任意域 `K` 成立：
-   在 `K=ℂ` 上 `(5b)` 忠实，但 `∃R` 会允许复设计；在 `K=ℝ` 上 `∃R` 忠实，但 `(5b)` 只量化实 `λ`（更弱）。
-   忠实的陈述需要：把实数据复化（`Matrix.map (algebraMap ℝ ℂ)`），证明复化不改变核与秩
-   （秩由最大非零子式决定，故在 `ℚ/ℝ/ℂ` 上相同），再把实 `R` 的复化代入接口。
-   这是下一轮的第一项。
+3. ~~域转移~~：**已按论文的约定解决**。`Interface.DECℂ` 把问题定义为"实设计 `R` + 在 `ℂ` 上算秩"：
+   实 `R` 经 `Matrix.map (algebraMap ℝ ℂ)` 进入 `ℂ`，条件在 `ℂ` 上求值；
+   `DEC_complex_iff_compressed` 用 `K = ℂ` 的接口定理，因此**不需要**"标量扩张下秩不变"的引理。
+   一点说明：`(5a)` 在 `ℂ` 上求值；对实矩阵而言，秩在 `ℝ` 与 `ℂ` 上相同（实子式在 `ℝ` 中非零 ⟺ 在 `ℂ` 中非零），
+   论文本身也把秩按 `ℂ` 计算，所以这是论文的约定而不是近似。
 
 ### 4.2 之后的顺序
 

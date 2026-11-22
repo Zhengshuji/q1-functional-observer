@@ -76,4 +76,23 @@ def MINDEC {p r0 n : ℕ}
     (L0 : Matrix (Fin r0) (Fin n) K) (Q : ℕ) : Prop :=
   ∃ r : ℕ, r0 + r ≤ Q ∧ DEC C A L0 r
 
+/-- The decision problem in the paper's field convention: the design `R` is real
+(only real observers are considered), while the ranks are computed over `ℂ`, as
+at every spectral point of the paper.  The input is mapped into `ℂ` once. -/
+def DECℂ {p r0 n : ℕ}
+    (C : Matrix (Fin p) (Fin n) ℝ) (A : Matrix (Fin n) (Fin n) ℝ)
+    (L0 : Matrix (Fin r0) (Fin n) ℝ) (r : ℕ) : Prop :=
+  ∃ R : Matrix (Fin r) (Fin n) ℝ,
+    let Cc : Matrix (Fin p) (Fin n) ℂ := C.map (algebraMap ℝ ℂ)
+    let Ac : Matrix (Fin n) (Fin n) ℂ := A.map (algebraMap ℝ ℂ)
+    let L : Matrix (Fin r0 ⊕ Fin r) (Fin n) ℂ :=
+      (Matrix.fromRows L0 R).map (algebraMap ℝ ℂ)
+    rawAlgebraic Cc (Cc * Ac) L (L * Ac) ∧ rawSpectral Cc (Cc * Ac) L (L * Ac)
+
+/-- `MINDECℂ(Q)`: the real-design version of the threshold problem. -/
+def MINDECℂ {p r0 n : ℕ}
+    (C : Matrix (Fin p) (Fin n) ℝ) (A : Matrix (Fin n) (Fin n) ℝ)
+    (L0 : Matrix (Fin r0) (Fin n) ℝ) (Q : ℕ) : Prop :=
+  ∃ r : ℕ, r0 + r ≤ Q ∧ DECℂ C A L0 r
+
 end Q1Paper.PaperI

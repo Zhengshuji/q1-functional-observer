@@ -327,4 +327,32 @@ theorem rank_HA_eq_rank_H_of_rawSpectral {p q n k : Type*}
     (LA * N).rank = (L * N).rank :=
   rank_eq_of_compressedSpectral (L * N) (LA * N) ((rawSpectral_iff_compressed C CA L LA N hN).mp h)
 
+/-- **The paper's decision problem (real design, complex ranks) in compressed
+form.**  This is the field transfer: the design `R` is real and the ranks are
+taken over `ℂ`, so no scalar-extension rank lemma is needed --- the interface
+theorem is applied with `K = ℂ` to the complexified design. -/
+theorem DEC_complex_iff_compressed {p r0 n k : ℕ}
+    (C : Matrix (Fin p) (Fin n) ℝ) (A : Matrix (Fin n) (Fin n) ℝ)
+    (L0 : Matrix (Fin r0) (Fin n) ℝ) (r : ℕ) (N : Matrix (Fin n) (Fin k) ℂ)
+    (hN : N.mulVecLin.range =
+      (Matrix.fromRows ((C.map (algebraMap ℝ ℂ)) * (A.map (algebraMap ℝ ℂ)))
+        (C.map (algebraMap ℝ ℂ))).mulVecLin.ker) :
+    DECℂ C A L0 r ↔ ∃ R : Matrix (Fin r) (Fin n) ℝ,
+      let Cc : Matrix (Fin p) (Fin n) ℂ := C.map (algebraMap ℝ ℂ)
+      let Ac : Matrix (Fin n) (Fin n) ℂ := A.map (algebraMap ℝ ℂ)
+      let L : Matrix (Fin r0 ⊕ Fin r) (Fin n) ℂ :=
+        (Matrix.fromRows L0 R).map (algebraMap ℝ ℂ)
+      compressedAlgebraic (L * N) (L * Ac * N) ∧
+        compressedSpectral (L * N) (L * Ac * N) := by
+  unfold DECℂ
+  constructor
+  · rintro ⟨R, h1, h2⟩
+    refine ⟨R, ?_, ?_⟩
+    · exact (rawAlgebraic_iff_compressed _ _ _ _ N hN).mp h1
+    · exact (rawSpectral_iff_compressed _ _ _ _ N hN).mp h2
+  · rintro ⟨R, h1, h2⟩
+    refine ⟨R, ?_, ?_⟩
+    · exact (rawAlgebraic_iff_compressed _ _ _ _ N hN).mpr h1
+    · exact (rawSpectral_iff_compressed _ _ _ _ N hN).mpr h2
+
 end Q1Paper.PaperI
