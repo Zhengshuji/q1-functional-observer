@@ -43,20 +43,22 @@ $H=\mathcal L N$, $H_A=\mathcal L AN$ and $N$ spans the unobservable subspace $K
 is $c=k-\rank H$, $k=\dim K_0$; the case $c=1$ was settled in earlier work, where the admissible kernel
 directions are the real eigenvectors of the compression $M=\pi_{K_0}A|_{K_0}$.
 
-This paper treats $c=2$. Our main result is a \emph{reduction of the fibre variable}: for a fixed kernel
-direction $D$ the pencil depends on the fibre $W$ only through its image
-$\Phi(W)\subseteq D^\circ$; the pencil's whole row space lies in $D^\circ$, of dimension $\omega$, but
-$\Phi(W)$ itself lies in the image $\varphi(T_D)$, whose dimension is at most $n-k$ (at most twice the
-number of output rows). Consequently the search over a Grassmannian of arbitrary dimension collapses to
-a search over subspaces of $\varphi(T_D)$. We
-give the exact realizability conditions for a prescribed $\Phi$, the resulting reduced feasibility
-criterion, a classification of the invariant-plane base for simple spectrum --- with the real and the
-conjugate-complex branches treated separately --- a two-valued decision algorithm, and, under simple
-spectrum and a fixed output dimension, a bit-complexity bound polynomial in $n$ and in the bit length
-$\tau$ of the whole input $(A,C,L_0)$. We also show that the layer index is
+This paper treats the case $c=2$ for the split problem. Our main result is a \emph{reduction of the fibre
+variable}: for a fixed kernel direction $D$ the pencil depends on the fibre $W$ only through its image
+$\Phi(W)=\varphi(W)\subseteq\varphi(T_D)\subseteq D^\circ$; the pencil's whole row space lies in
+$D^\circ$, of dimension $\omega$, but $\Phi(W)$ itself lies in the image $\varphi(T_D)$, whose dimension
+is at most $n-k$ (at most twice the number of output rows). Consequently the search over a Grassmannian
+of arbitrary dimension collapses to a search over subspaces of this low-dimensional image space. We give
+the exact realisability conditions for a prescribed $\Phi$, the resulting reduced feasibility criterion,
+and a classification of the invariant-plane base under simple spectrum over $\mathbb C$ --- with the real
+and the conjugate-complex branches treated separately --- which is the finite-enumeration tool that
+makes the reduction effective. This yields an exact yes/no decision algorithm: for the split problem,
+under simple spectrum over $\mathbb C$ and a fixed output dimension, it runs in bit complexity polynomial
+in $n$ and in the bit length $\tau$ of the whole input $(A,C,L_0)$. We also show that the layer index is
 \emph{not monotone} at fixed order: there are instances where the $c=2$ layer is feasible while the
-$c=1$ layer is not. All structural claims are stated for the split problem; the unrestricted problem is
-left open.
+$c=1$ layer is not. All structural claims are stated for the split problem; the unrestricted problem,
+and the split problem at $c=2$ without simple spectrum over $\mathbb C$ or without a fixed output
+dimension, are left open.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -83,6 +85,13 @@ with $\omega=\rank H$. Condition~\eqref{eq:5b} is equivalent to the vanishing of
 $\omega\times\omega$ maximal minors of the pencil (a standard polarity/resultant fact; see
 Section~\ref{sec:admissible} and \cite{vzgg13}).
 
+\emph{Reading the title.} The phrase \emph{two-dimensional compressed kernel} in the title names the layer
+index and nothing else: it means that the compressed pencil $\lambda H-H_A$ has kernel deficiency
+$c=k-\omega=2$, i.e.\ $\rank H=\omega=k-2$ and $\dim\ker H=c=2$. It does not mean that the compression
+$M=\pi_{K_0}A|_{K_0}$ has a two-dimensional kernel: $M$ may be invertible, and $\dim\ker M$ is unrelated
+to $c$. The kernel direction $D=\ker H$ over which the paper quantifies is the $c$-plane of the layer,
+and $c=2$ is the case in which that direction is a plane.
+
 \emph{Prior work and what is new.} The existence question, the order spectrum and the minimum-order
 characterisation were settled in \cite{companion1}, \cite{companion2} (see also \cite{fer26a},
 \cite{fer26b}): for every order $q$ there is an exact criterion, and the feasible orders are monotone and
@@ -92,7 +101,10 @@ compression $M=\pi_{K_0}A|_{K_0}$, restricted by a prescribed-row orthogonality 
 family is a finite union of relative Grassmann bundles; and one function-field gcd per chart decides the
 whole chart.
 
-\emph{Contributions.} This paper treats $c=2$. The contributions are:
+\emph{Contributions.} This paper treats $c=2$. The headline is the image-space reduction stated below as
+the third contribution: it is what collapses the search, and it is proved for every $c$. The
+invariant-plane classification is the finite-enumeration tool that makes the reduction effective at
+$c=2$. The contributions are:
 \begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=1pt,topsep=2pt]
 \item \emph{Layer bookkeeping (Section~\ref{sec:layers}).} The layer index is $c=k-\omega$ and the
 ``ambient row excess'' is $t=q-\omega$; the identity $c-t=k-q$ shows that $c$ and $t$ move together when
@@ -105,32 +117,38 @@ counterexample that the split hypothesis cannot be derived from \eqref{eq:5a}.
 exact fibre in both problems, including the exactness condition $K_0\cap(D+AD)=D$ in \textbf{U}, and the
 \emph{two independent} prescribed-row conditions in \textbf{S} --- one on the base
 ($P_{K_0}(V_0)\subseteq D^{\perp_{K_0}}$) and one on the fibre ($W_0\subseteq W$).
-\item \emph{Image-space reduction (Section~\ref{sec:reduction}).} The pencil's row space equals the row
-space of its $D$-part plus $\Phi(W)\subseteq D^\circ$; since the whole pencil lies in $D^\circ$ (of
-dimension $\omega$) while $\Phi(W)$ lies in $\varphi(T_D)$ (of dimension at most $n-k$), the fibre acts
-only through a subspace of the low-dimensional image $\varphi(T_D)$. We give the general proof, the exact
-realizability inequalities for a prescribed $\Phi$, and the reduced feasibility criterion.
-\item \emph{A two-valued algorithm at $c=2$ (Sections~\ref{sec:base}--\ref{sec:decision}).} For simple
-spectrum the invariant-plane base is finite, of $O(k^2)$ points, split into a real-real and a
-conjugate-complex branch. The image space has at most one projective-line component, and on an
-chart every real point is admissible, so the generic-gcd criterion is sharp in both
-directions and the algorithm decides exactly.
-\item \emph{Bit complexity (Section~\ref{sec:complexity}).} Under simple spectrum, and with the output
-dimension $p$ held fixed, the decision runs in $\poly(n,\tau)$ bit operations, with arithmetic in number
-fields of degree at most $k^2$. Here $\tau$ is the bit length of the whole input: the entries of $A$ and
-$C$ \emph{and} those of the prescribed block $L_0$, without which $V_0$, $W_0$, $\Phi_0$ and
-$\mathcal B_{\rm pres}$ are not even determined.
+\item \emph{The headline: image-space reduction (Section~\ref{sec:reduction}).} The fibre acts only
+through the image $\Phi(W)=\varphi(W)\subseteq\varphi(T_D)\subseteq D^\circ$: the whole pencil lies in
+$D^\circ$, of dimension $\omega$, while $\varphi(T_D)$ has dimension at most $n-k\le 2p$, so the search
+over a Grassmannian of arbitrary dimension collapses to a search over subspaces of this low-dimensional
+image space. The reduction uses no property of $c$; $c=2$ enters only when the base is enumerated. We give
+the general proof, the exact realisability inequalities for a prescribed $\Phi$, and the reduced
+feasibility criterion.
+\item \emph{The finite-enumeration tool at $c=2$ (Sections~\ref{sec:base}--\ref{sec:decision}).} The
+reduction turns the fibre into a subspace of $\varphi(T_D)$; making it effective needs the base to be
+finite, and that is what simple spectrum over $\mathbb C$ supplies. The set $\mathcal I_2(M)$ is then
+finite, of $O(k^2)$ points, split into a real-real and a conjugate-complex branch, and it is enumerated
+explicitly. The image space has at most one projective-line component, and on a chart every real point is
+admissible, so the generic-gcd criterion is sharp in both directions and the algorithm is an exact yes/no
+decision procedure.
+\item \emph{Bit complexity (Section~\ref{sec:complexity}).} For the split problem, under simple spectrum
+over $\mathbb C$ and with the output dimension $p$ held fixed, the exact yes/no decision runs in
+$\poly(n,\tau)$ bit operations, with arithmetic in number fields of degree at most $k^2$. Here $\tau$ is
+the bit length of the whole input: the entries of $A$ and $C$ \emph{and} those of the prescribed block
+$L_0$, without which $V_0$, $W_0$, $\Phi_0$ and $\mathcal B_{\rm pres}$ are not even determined.
 \item \emph{A non-monotonicity example (Section~\ref{sec:layers:c}).} At one and the same order, the
 $c=2$ layer can be feasible while the $c=1$ layer is not. This rules out ``only small layers matter'' as
 a complexity strategy.
 \end{enumerate}
 
-\emph{Approach and structure.} The approach is uniform: a statement about the fibre $W$ is first pushed
-to its image $\Phi(W)$, and the resulting condition is then read on finitely many charts, one per
-subspace of $D^\circ$. Section~\ref{sec:layers} fixes the layer parameters and the split hypothesis.
+\emph{Approach and structure.} The approach is uniform, and its organising principle is the image-space
+reduction: a statement about the fibre $W$ is first pushed to its image $\Phi(W)$, and the resulting
+condition is then read on finitely many charts, one per subspace of $D^\circ$. Section~\ref{sec:layers}
+fixes the layer parameters and the split hypothesis.
 Section~\ref{sec:fibres} computes the fixed-kernel fibres in the two problems.
 Section~\ref{sec:reduction} proves the image-space reduction and the reduced criterion.
-Section~\ref{sec:base} classifies the base at $c=2$ for simple spectrum and records the general $c$.
+Section~\ref{sec:base} classifies the base at $c=2$ under simple spectrum over $\mathbb C$ and separates
+the structural layer that is valid for every $c$.
 Section~\ref{sec:decision} gives the algorithm, its correctness and its bit cost, and closes with a
 worked example (Section~\ref{sec:example}).
 Section~\ref{sec:conclusion} consolidates the limitations and the evidence.
@@ -459,9 +477,12 @@ Section~\ref{sec:reduction} compresses further.
 
 \section{Image-space reduction}\label{sec:reduction}
 
-This section proves that, for a split design with $M(D)\subseteq D$, the pencil sees the fibre $W$ only
-through its image $\Phi(W)\subseteq D^\circ$. Part A proves the reduction, Part B gives the exact
-realisability conditions for a prescribed image, and Part C states the resulting criterion.
+This section proves the reduction on which the rest of the paper rests: for a split design with
+$M(D)\subseteq D$, the pencil sees the fibre $W$ only through its image
+$\Phi(W)\subseteq\varphi(T_D)\subseteq D^\circ$. Part A proves the reduction, Part B gives the exact
+realisability conditions for a prescribed image, and Part C states the resulting criterion. Nothing in
+the section uses $c=2$; the reader interested only in the general statement may read it together with
+Proposition~\ref{prop:general}.
 
 Fix $D\in\mathcal B_{\rm pres}$ and a split design $V=D^{\perp_{K_0}}\oplus W$ with
 $W_0\subseteq W\subseteq T_D$.
@@ -550,7 +571,7 @@ So the spectral condition is a condition on the image $\Phi(W)$ and not on $W$, 
 has been replaced by a subspace of $\varphi(T_D)$, a space whose dimension is at most the codimension of
 $K_0$.
 
-\subsection{Exact realizability}\label{sec:reduction:b}
+\subsection{Exact realisability}\label{sec:reduction:b}
 
 \begin{lem}[subspaces with a prescribed image]\label{lem:prescribed}
 Let $f:X\to Y$ be linear, let $Z\le\operatorname{im}f$ and let $d\ge0$. There is a subspace $S\le X$
@@ -568,7 +589,7 @@ Since $\dim f^{-1}(Z)=\dim\ker f+\dim Z\ge d$, extend $S_0$ inside $f^{-1}(Z)$ t
 dimension $d$. Then $f(S)=f(S_0)=Z$.
 \end{proof}
 
-\begin{thm}[realizability of a prescribed image]\label{thm:realize}
+\begin{thm}[realisability of a prescribed image]\label{thm:realize}
 Assume (H2) of \eqref{eq:splithyp}, so that $T_D/W_0$ is defined. Let $\Phi_0:=\varphi(W_0)$ and let
 $\bar\varphi:T_D/W_0\to D^\circ/\Phi_0$ be the map induced by
 $\varphi|_{T_D}$. A subspace $\Phi\le D^\circ$ is realised by
@@ -651,49 +672,83 @@ never exceed the codimension of $K_0$.
 
 \section{The base at \texorpdfstring{$c=2$}{c=2}}\label{sec:base}
 
-This section describes the base of invariant two-planes at $c=2$ for simple spectrum, and then records
-that the reduction of Section~\ref{sec:reduction} is verbatim for arbitrary $c$. Part A is the
-classification, Part B the general statement.
+This section describes the base of invariant two-planes at $c=2$ under simple spectrum over $\mathbb C$,
+and then separates the part of the construction that is valid for every $c$ from the parts that are not.
+Part A is the classification, Part B the structural layer.
 
 Write $\mathcal I_2(M)$ for $\mathcal I_c(M)$ with $c=2$ (Section~\ref{sec:layers}).
 
-\subsection{Simple spectrum: the invariant-plane base}\label{sec:base:a}
+\emph{Simple spectrum over $\mathbb C$.} Throughout the paper the hypothesis means that the eigenvalues
+of $M$ \emph{in $\mathbb C$} are pairwise distinct, equivalently that $\chi_M$ is squarefree. It is not
+the weaker and different condition that the \emph{real} eigenvalues are distinct: a real matrix with
+$\chi_M(x)=(x^2+1)(x^2+2)$, for instance the companion matrix of that polynomial, has simple spectrum over
+$\mathbb C$ although it has no real eigenvalue at all. What the enumeration below uses is squarefreeness,
+i.e.\ the factorization of $\chi_M$ into distinct irreducible factors over $\mathbb Q$.
 
-\begin{thm}[base, simple spectrum]\label{thm:base}
-Suppose $M$ has simple spectrum, i.e. all eigenvalues of $M$ over $\mathbb C$ are distinct, equivalently the characteristic polynomial of $M$ is squarefree. Then $\mathcal I_2(M)$ is finite, and every element is one of:
+\subsection{Simple spectrum over \texorpdfstring{$\mathbb C$}{C}: the invariant-plane base}\label{sec:base:a}
+
+\begin{thm}[base, simple spectrum over $\mathbb C$]\label{thm:base}
+Assume (i) $c=2$ and (ii) $M$ has simple spectrum over $\mathbb C$, i.e.\ its eigenvalues in
+$\mathbb C$ are pairwise distinct, equivalently $\chi_M$ is squarefree. Then $\mathcal I_2(M)$ is finite,
+and every element is one of:
 \begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=1pt,topsep=2pt]
 \item \textbf{(branch R)} $\operatorname{span}\{v_\alpha,v_\beta\}$ for two real eigenvalues
 $\alpha\ne\beta$ with eigenvectors $v_\alpha,v_\beta$;
-\item \textbf{(branch C)} the real two-plane attached to a complex-conjugate pair: for a real
-eigenvector decomposition $z=u+iw$ of an eigenvalue $\mu=a+ib$ with $b\ne0$, the plane
-$\operatorname{span}\{u,w\}$, equivalently $\ker f(M)$ where $f$ is the irreducible quadratic factor.
+\item \textbf{(branch C)} the real two-plane attached to a complex-conjugate pair. Let
+$\mu=a+ib$, $b\ne0$, be an eigenvalue with eigenvector $z=u+iw$, $u,w$ real. Then
+\[
+Mu=au-bw,\qquad Mw=bu+aw,
+\]
+so $M(D)\subseteq D$ for $D:=\operatorname{span}_{\mathbb R}\{u,w\}$. Equivalently,
+$D=\ker f(M)$, where $f\in\mathbb Q[x]$ is the irreducible quadratic factor of $\chi_M$ with roots
+$\mu$ and $\bar\mu$; in particular $D$ is defined over $\mathbb Q$.
 \end{enumerate}
 The total number of planes is $\binom{k_{\mathbb R}}{2}+\#\{\text{conjugate pairs}\}\le k^2$, where
 $k_{\mathbb R}$ is the number of real eigenvalues.
 \end{thm}
 
 \begin{proof}
-For a simple spectrum $M$ is diagonalisable over $\mathbb C$ and each complex eigenspace is a line. An
-invariant real two-plane either contains two real eigenvectors (branch R), or is spanned by the real and
-imaginary parts of a complex eigenvector (branch C), or is $\mathbb R^2$ for a two-dimensional $M$ with a
-non-real pair, which is the case $k=2$ of branch C. Nothing else is invariant, because the restriction of
-$M$ to $D$ has a characteristic polynomial of degree two dividing the minimal polynomial. The count is
-immediate.
+For simple spectrum over $\mathbb C$, $M$ is diagonalisable over $\mathbb C$ and each complex eigenspace
+is a line. An invariant real two-plane either contains two real eigenvectors (branch R), or is spanned by
+the real and imaginary parts of a complex eigenvector (branch C), or is $\mathbb R^2$ for a
+two-dimensional $M$ with a non-real pair, which is the case $k=2$ of branch C. Nothing else is invariant,
+because the restriction of $M$ to $D$ has a characteristic polynomial of degree two dividing the
+squarefree $\chi_M$.
+
+For branch C the two identities are explicit. If $Mz=\mu z$ with $z=u+iw$ and $\mu=a+ib$, comparing real
+and imaginary parts gives $Mu=au-bw$ and $Mw=bu+aw$, hence $M(D)\subseteq D$ for
+$D=\operatorname{span}_{\mathbb R}\{u,w\}$. The vectors $u,w$ are independent over $\mathbb R$, since a
+real eigenvector of $M$ would have the real eigenvalue $a$. Let $f\in\mathbb Q[x]$ be the irreducible
+quadratic factor of $\chi_M$ with roots $\mu$ and $\bar\mu$; then $f(M)z=0$ and, $f$ having real
+coefficients, $f(M)\bar z=\overline{f(M)z}=0$, so
+$f(M)u=\tfrac12\bigl(f(M)z+f(M)\bar z\bigr)=0$ and
+$f(M)w=\tfrac1{2i}\bigl(f(M)z-f(M)\bar z\bigr)=0$, hence $D\subseteq\ker f(M)$. Conversely $\ker f(M)$ is
+the sum of the two one-dimensional complex eigenspaces belonging to $\mu$ and $\bar\mu$
+(squarefreeness of $\chi_M$ is used here: $f$ occurs in $\chi_M$ exactly once), so
+$\dim\ker f(M)=2=\dim D$ and $D=\ker f(M)$. As $f(M)$ is a rational matrix, $D$ is defined over
+$\mathbb Q$.
+
+The count is immediate.
 \end{proof}
 
 \begin{remark}[what is \emph{not} claimed]\label{rem:nonsimple}
-For non-simple spectra $\mathcal I_2(M)$ can be positive-dimensional (the families $\Gr(2,K_\lambda)$
-inside a repeated eigenspace, and products $\mathbb P(K_\lambda)\times\mathbb P(K_\mu)$), and the planes
-attached to a repeated irreducible quadratic form a $\mathbb{CP}^{g-1}$-family of real dimension
-$2(g-1)$, $g$ the geometric multiplicity. We make \textbf{no} claim of a rational parametrisation of the
-general invariant-plane variety; the simple-spectrum statement above is what the algorithm uses.
+With repeated eigenvalues $\mathcal I_2(M)$ \emph{may} be positive-dimensional, and when it is, the
+dimension and the geometry of the family are governed by the Jordan structure of $M$, not by the multiset
+of eigenvalues alone. For instance, an eigenspace $K_\lambda$ of dimension at least three contributes the
+family $\Gr(2,K_\lambda)$; two eigenspaces $K_\lambda,K_\mu$ of dimension at least two contribute
+$\mathbb P(K_\lambda)\times\mathbb P(K_\mu)$; and a repeated irreducible quadratic factor of multiplicity
+$g$ contributes at least the $M$-stable complex lines in $\ker f(M)$, a $\mathbb{CP}^{g-1}$-family of
+real dimension $2(g-1)$. Positive dimension is not automatic, however: a repeated eigenvalue carried by a
+single Jordan block contributes only the members of its invariant flag, hence finitely many planes. We
+make \textbf{no} claim of a rational parametrisation of the general invariant-plane variety; the
+simple-spectrum-over-$\mathbb C$ statement above is what the algorithm uses.
 \end{remark}
 
 \begin{table*}[!t]
 \centering
-\caption{The invariant-plane classification of Theorem~\ref{thm:base} at $c=2$ under simple spectrum:
-the two branches, the field over which each plane is defined (Claim~\ref{clm:arith}), and the number of
-planes. Here $k_{\mathbb R}$ is the number of real eigenvalues of $M$ and $k=\dim K_0$.}
+\caption{The invariant-plane classification of Theorem~\ref{thm:base} at $c=2$ under simple spectrum over
+$\mathbb C$: the two branches, the field over which each plane is defined (Claim~\ref{clm:arith}), and
+the number of planes. Here $k_{\mathbb R}$ is the number of real eigenvalues of $M$ and $k=\dim K_0$.}
 \label{tab:planes}
 \small
 \begin{tabular}{@{}l>{\raggedright\arraybackslash}p{0.44\textwidth}>{\raggedright\arraybackslash}p{0.24\textwidth}l@{}}
@@ -710,26 +765,43 @@ Total & & & $\le k^2$ \\
 \end{tabular}
 \end{table*}
 
-Under simple spectrum the base is therefore finite and explicit, which is what makes the enumeration of
-Section~\ref{sec:algorithm} terminate, and in time polynomial in the bit size of the input
-(Theorem~\ref{thm:complexity}); Remark~\ref{rem:nonsimple} records what is not
-claimed without simplicity.
+Under simple spectrum over $\mathbb C$ the base is therefore finite and explicit, which is what makes the
+enumeration of Section~\ref{sec:algorithm} terminate, and --- with the output dimension fixed ---
+polynomial in the bit size of the input (Theorem~\ref{thm:complexity}); Remark~\ref{rem:nonsimple}
+records what is not claimed without it.
 
 \subsection{The general \texorpdfstring{$c$}{c}}\label{sec:base:b}
 
-\begin{prop}[verbatim generalisation]\label{prop:general}
-Theorems~\ref{thm:ufibre}--\ref{thm:reduced} hold with $2$ replaced by $c$: the base is
-$\mathcal B_{\rm pres}\subseteq\mathcal I_c(M)$, the fibre is $\Gr(t-w_0,T_D/W_0)$ with
-$T_D=K_0^\perp\cap(A_{21}D)^\perp$, the image space satisfies $\Phi(W)\subseteq D^\circ$ with
-$\dim D^\circ=k-c=\omega$, and the reduced criterion of Theorem~\ref{thm:reduced} is unchanged. The
-effective image parameter ranges over the realisable set $\mathcal I_D$ of \eqref{eq:ID}, which is
-contained in $\bigcup_{j\le\min(t,2p)}\Gr(j,\varphi(T_D))$ and has dimension at most
+\begin{prop}[the structural layer at general $c$]\label{prop:general}
+The following statements hold for every $c\ge0$ (the case $c=2$ is the one used in
+Section~\ref{sec:decision}):
+\begin{enumerate}[label=(\roman*),leftmargin=*,itemsep=1pt,topsep=2pt]
+\item the fixed-kernel fibre descriptions of Theorems~\ref{thm:ufibre} and~\ref{thm:splitfibre}: the base
+is $\mathcal B_{\rm pres}\subseteq\mathcal I_c(M)$, the fibre is $\Gr(t-w_0,T_D/W_0)$ with
+$T_D=K_0^\perp\cap(A_{21}D)^\perp$;
+\item the image-space reduction of Theorem~\ref{thm:reduction}:
+$\row(\lambda H-H_A)=R_\lambda+\Phi(W)$ with $\Phi(W)\subseteq D^\circ$ and $\dim D^\circ=k-c=\omega$;
+\item the realisability criterion of Lemma~\ref{lem:prescribed} and Theorem~\ref{thm:realize}, and the
+reduced criterion of Theorem~\ref{thm:reduced}, unchanged; the effective image parameter ranges over the
+realisable set $\mathcal I_D$ of \eqref{eq:ID}, which is contained in
+$\bigcup_{j\le\min(t,2p)}\Gr(j,\varphi(T_D))$ and has dimension at most
 $\lfloor\min(t,2p)^2/4\rfloor\le p^2$.
+\end{enumerate}
+Two further statements are \emph{not} covered by the proposition. First, the finite enumeration of the
+base is a $c=2$ statement: Theorem~\ref{thm:base} enumerates $\mathcal I_2(M)$ under simple spectrum over
+$\mathbb C$, whereas for $c\ge3$ the base $\mathcal I_c(M)$ is known only through its defining equations
+(Remark~\ref{rem:open}). Second, the correctness and the polynomial-time bound are simple-spectrum-only:
+Theorem~\ref{thm:correct} and Theorem~\ref{thm:complexity} are statements about the algorithm, they
+consume the enumeration of Theorem~\ref{thm:base}, and they are \emph{not} generalised here.
 \end{prop}
 
 \begin{proof}
-The proofs of Theorems~\ref{thm:reduction}--\ref{thm:reduced} use only $\dim D=c$ and $M(D)\subseteq D$;
-the numerical value $2$ enters only in the list of possible image dimensions.
+The proofs of Theorems~\ref{thm:ufibre}--\ref{thm:reduced} use only $\dim D=c$ and, where a base is
+involved, $M(D)\subseteq D$; the numerical value of the layer index enters nowhere in them. What $c=2$
+buys is the finiteness of $\mathcal I_2(M)$ under simple spectrum over $\mathbb C$
+(Theorem~\ref{thm:base}), and that finiteness is an input to the algorithm, not a consequence of
+clauses (i)--(iii). Theorems~\ref{thm:correct} and~\ref{thm:complexity} therefore inherit both the $c=2$
+restriction and the simple-spectrum hypothesis, and the proposition asserts nothing about them.
 \end{proof}
 
 \begin{remark}\label{rem:annihilator}
@@ -751,8 +823,9 @@ $c=k-\dim U$. We do not know the answer to either.
 \end{remark}
 
 The reduction of Section~\ref{sec:reduction} therefore does not use $c=2$; what $c=2$ buys is a finite
-base (Theorem~\ref{thm:base}), while the smallness of the image parameter in Section~\ref{sec:decision}
-comes from the bound on $n-k$, not from the smallness of $c$ (Remark~\ref{rem:boundaries}).
+base (Theorem~\ref{thm:base}, under simple spectrum over $\mathbb C$), while the smallness of the image
+parameter in Section~\ref{sec:decision} comes from the bound on $n-k$, not from the smallness of $c$
+(Remark~\ref{rem:boundaries}).
 
 \section{Decision and its cost}\label{sec:decision}
 
@@ -925,7 +998,7 @@ The enumeration is finite and explicit, so what remains is to say on which chart
 and at what cost.
 
 \begin{algorithm}[H]
-\caption{Decision at $c=2$, split, simple spectrum.}
+\caption{Decision at $c=2$, split, simple spectrum over $\mathbb C$.}
 \label{alg:decide}
 \begin{algorithmic}[1]
 \State compute $K_0$, $N$, $M$, $A_{21}$, $\omega$, $c$, $t$;
@@ -946,8 +1019,9 @@ constant, return \emph{feasible};
 
 \subsection{Correctness}\label{sec:correct}
 
-\begin{claim}[two-valued decision]\label{clm:twovalued}
-Assume $c=2$, simple spectrum, and the split condition, and let $S$ be a nonempty chart of
+\begin{claim}[exact yes/no decision]\label{clm:twovalued}
+Assume (i) $c=2$, (ii) simple spectrum over $\mathbb C$, and (iii) the split condition, and let $S$ be a
+nonempty chart of
 $\mathcal I_D$ (Definition~\ref{defn:charts}). Then every point of $S$ is admissible
 (Claim~\ref{clm:admissible}), so Lemma~\ref{lem:genericgcd} applies, with $M_1,\dots,M_r$ the maximal
 minors of the cleared pencil in the chart parameter. Hence the generic $\lambda$-gcd of $S$ is a non-zero
@@ -972,7 +1046,8 @@ gcd is constant, and \emph{infeasible} only when every chart fails.
 \end{proof}
 
 \begin{thm}[correctness]\label{thm:correct}
-Assume $c=2$, simple spectrum of $M$, and the split condition. Then Algorithm~\ref{alg:decide} terminates,
+Assume (i) $c=2$, (ii) simple spectrum over $\mathbb C$ of $M$, and (iii) the split condition. Then
+Algorithm~\ref{alg:decide} terminates,
 and it returns \emph{feasible} if and only if a feasible $K_0$-split design of order $q$ with prescribed rows
 $V_0$ exists.
 \end{thm}
@@ -1003,7 +1078,7 @@ with}
 \begin{equation}\label{eq:chainB}
 \dim\bigl(R_\lambda+\Phi\bigr)=\omega\quad\text{for all }\lambda .
 \end{equation}
-\emph{Support: Theorem~\ref{thm:realize} (realizability) and Theorem~\ref{thm:reduced} (the reduced
+\emph{Support: Theorem~\ref{thm:realize} (realisability) and Theorem~\ref{thm:reduced} (the reduced
 criterion).} By Theorem~\ref{thm:realize}, a subspace $\Phi\le D^\circ$ equals $\Phi(W)$ for some $W$ with
 $W_0\subseteq W\subseteq T_D$ and $\dim W=t$ if and only if $\Phi\in\mathcal I_D$, so the quantifier
 $\exists W$ of (a) may be replaced by $\exists\Phi\in\mathcal I_D$; and since
@@ -1058,7 +1133,7 @@ then $h(\det B)\le rH+\tfrac{r}{2}\log_2 r+O(r)$; the same bound applies to the 
 kernels, orthogonal complements and subresultants are built.
 
 \begin{claim}[arithmetic of the enumeration]\label{clm:arith}
-Assume simple spectrum. Then:
+Assume simple spectrum over $\mathbb C$. Then:
 \begin{enumerate}[label=(\roman*),leftmargin=*,itemsep=1pt,topsep=2pt]
 \item the number of planes is $O(k^2)$, and they are enumerated in $\poly(n,\tau)$ bit operations, each
 plane costing polynomially many field operations on data of height $\poly(n,\tau)$;
@@ -1083,7 +1158,8 @@ roots have height bounded by the Mahler measure of these factors. Branch R uses 
 $[\mathbb Q(\alpha,\beta):\mathbb Q]\le d_id_j\le k^2$; a primitive element $\theta=\alpha+\kappa\beta$ with integral
 $\kappa\le d_id_j$ has a minimal polynomial $F$ of degree $d_D\le k^2$ and height $\poly(n,\tau)$ by the
 resultant bound of Step~$8'$; eigenvectors are obtained by Cramer's rule over
-$L_D$, with denominators $f_i'(\alpha)\ne0$ by simplicity. Branch C uses $\ker f(M)$, which is
+$L_D$, with denominators $f_i'(\alpha)\ne0$ by simple spectrum over $\mathbb C$. Branch C uses
+$\ker f(M)$, which is
 $\mathbb Q$-defined, so the final objects live over $\mathbb Q$ even though the intermediate eigenvector
 data are computed in a complex embedding of $\mathbb Q[t]/(f)$. The kernel itself is computed from an
 integral model of $[C;CA]$ (Step~2), so that $N$ is a primitive integral matrix of full column rank $k$ and
@@ -1122,8 +1198,9 @@ Claim~\ref{clm:arith} and of Appendix~\ref{app:height}, Step~9.
 \end{proof}
 
 \begin{thm}[bit complexity]\label{thm:complexity}
-Assume (i) $c=2$, (ii) simple spectrum, (iii) the split condition, and (iv) \textbf{the output dimension
-$p$ is fixed}, so that $n-k=\rank[C;CA]\le2p$ is a constant. Then Algorithm~\ref{alg:decide} runs in
+Assume (i) $c=2$, (ii) simple spectrum over $\mathbb C$, (iii) the split condition, and (iv) \textbf{the
+output dimension $p$ is fixed}, so that $n-k=\rank[C;CA]\le2p$ is a constant. Then
+Algorithm~\ref{alg:decide} runs in
 $\poly(n,\tau)$ bit operations, where $\tau$ is the bit length of the whole input $(A,C,L_0)$
 (Notation and the beginning of this subsection), and all arithmetic takes place in number fields of degree
 at most $k^2$. The bound is coarse: the exponents are not optimized and the factor $\poly(n,\tau)$ hides
@@ -1177,12 +1254,12 @@ Hypothesis (iv) of Theorem~\ref{thm:complexity} is not cosmetic. Without a bound
 $n-k=\rank[C;CA]$ the space $V_\varphi=\varphi(T_D)$ grows with $k$, the fibre parameter has up to
 $p^2$-many free parameters, and the chartwise gcd is no longer a polynomial-time primitive. Note also
 that $c=2$ alone gives $\omega=k-2$, so $D^\circ$ is \emph{large}: it is the bound on $n-k$, not the
-smallness of $c$, that controls the fibre. Likewise, without simplicity of the spectrum the base is
+smallness of $c$, that controls the fibre. Likewise, without simple spectrum over $\mathbb C$ the base is
 positive-dimensional (a Grassmannian of dimension $2(d_\lambda-2)=O(n)$) and the number of charts is no
 longer polynomial. With $c$ allowed to vary, the number of components is $\binom{k}{c}$, which is
-exponential. The present method therefore gives $\poly(n,\tau)$ only under fixed $p$ with simple
-spectrum --- with $\tau$ the bit length of the whole input $(A,C,L_0)$, as in the Notation --- and at best
-$n^{O(cn+p^2)}$ in general.
+exponential. The present method therefore gives $\poly(n,\tau)$ only for the split problem, under fixed
+$p$ and simple spectrum over $\mathbb C$ --- with $\tau$ the bit length of the whole input $(A,C,L_0)$, as
+in the Notation --- and at best $n^{O(cn+p^2)}$ in general.
 \end{remark}
 
 \subsection{A worked example}\label{sec:example}
@@ -1278,10 +1355,10 @@ with $c=1$ does.
 \emph{Scope.} The eigenvalue $1$ of $M$ has a two-dimensional eigenspace, so $\mathcal I_2(M)$ is
 positive-dimensional (Remark~\ref{rem:nonsimple}) and the finite enumeration of
 Theorem~\ref{thm:base} does not apply. The proofs of Theorems~\ref{thm:correct} and
-\ref{thm:complexity} use simple spectrum in the sense of distinct eigenvalues; this instance
-therefore illustrates the reduction and the certificate format, not the algorithm's execution or
-those proofs. The distinction is worth recording, because it shows that feasibility itself is not
-confined to the distinct-eigenvalue case --- only the correctness and cost arguments are.
+\ref{thm:complexity} use simple spectrum over $\mathbb C$, i.e.\ distinct eigenvalues in $\mathbb C$;
+this instance therefore illustrates the reduction and the certificate format, not the algorithm's
+execution or those proofs. The distinction is worth recording, because it shows that feasibility itself is
+not confined to the simple-spectrum case --- only the correctness and cost arguments are.
 
 \section{Discussion and conclusion}\label{sec:conclusion}
 
@@ -1294,9 +1371,9 @@ Part A consolidates the limitations, Part B the evidence.
 \item All structural results are for the split problem \textbf{S}; the unrestricted problem \textbf{U} is
 only reduced to a fibre description (Theorem~\ref{thm:ufibre}) and its invariant-kernel structure is
 lost.
-\item The decision algorithm and the complexity bound require simple spectrum; the non-simple case is
-left open, and the worked example of Section~\ref{sec:example}, whose compression has a repeated
-eigenvalue, illustrates the certificate format rather than these two results.
+\item The decision algorithm and the complexity bound require simple spectrum over $\mathbb C$; the
+non-simple case is left open, and the worked example of Section~\ref{sec:example}, whose compression has
+a repeated eigenvalue, illustrates the certificate format rather than these two results.
 \item No uniformity in $c$, and none in $p$, is claimed; the honest general bound is $n^{O(cn+p^2)}$. The
 polynomial bound of Theorem~\ref{thm:complexity} is $\poly(n,\tau)$ with the output dimension $p$ fixed and
 with $\tau$ the bit length of the whole input $(A,C,L_0)$; in particular it is \emph{not} a bound in the bit
@@ -1305,6 +1382,16 @@ that the algorithm reads off $L_0$.
 \item The general invariant-plane variety is used only through its defining equations; no rational
 parametrization is claimed.
 \end{enumerate}
+
+\emph{The promise, precisely.} What the paper establishes is this: for the $K_0$-split problem at $c=2$,
+if $M$ has simple spectrum over $\mathbb C$ and the output dimension $p$ is fixed, then the exact yes/no
+decision algorithm of Section~\ref{sec:decision} terminates and runs in $\poly(n,\tau)$ bit operations,
+with $\tau$ the bit length of the whole input $(A,C,L_0)$ (Theorems~\ref{thm:correct}
+and~\ref{thm:complexity}). Each hypothesis is used: the split condition is what makes $D$ an invariant
+plane (Claim~\ref{clm:invariant}), simple spectrum over $\mathbb C$ is what makes the base finite
+(Theorem~\ref{thm:base}), and a fixed $p$ is what keeps the dimension of the image parameter bounded
+(Remark~\ref{rem:boundaries}). No claim is made for the unrestricted problem at $c=2$, nor for the split
+problem at $c=2$ when the spectrum is not simple over $\mathbb C$, nor for $c\ge3$.
 
 The disclaimers inside the body are part of the same statement and are not weakened here:
 Remark~\ref{rem:nonsimple} is the disclaimer attached to the classification of
@@ -1498,10 +1585,11 @@ Theorem~\ref{thm:complexity}.
 
 \begin{thebibliography}{99}
 \bibitem{companion1} Deciding functional observer feasibility: compression, certificates, and
-parameterized algorithms. Companion manuscript, 2026.
+parameterized algorithms. Companion manuscript (preprint), 2026.
 \bibitem{companion2} Minimum order and minimum-order construction for functional observers. Companion
-manuscript, 2026.
-\bibitem{companion3} Functional-observer feasibility in the hyperplane layer. Companion manuscript, 2026.
+manuscript (preprint), 2026.
+\bibitem{companion3} Functional-observer feasibility in the hyperplane layer. Companion manuscript
+(preprint), 2026.
 \bibitem{fer26a} A. Fernando. \emph{Functional observer design: existence and order spectrum}.
 arXiv:2609.33615, 2026 (preprint).
 \bibitem{fer26b} A. Fernando. \emph{Functional observers: a chartwise characterisation}. arXiv:2609.37992,
