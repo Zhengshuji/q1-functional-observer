@@ -37,7 +37,19 @@ States are kept separate: `Mathematically proved` (M) and `Lean formalized` (F);
   plain-`Finset` layer `embOfFinset`, `imageFinset`, `imageFinset_card`, `imageEquivFinset`,
   `permOfImage`, `embOfFinset_permOfImage`; `det_submatrix_comp`; and
   `maximalMinor_injective_eq_signed_image`.
-- Axiom audit: **167 declarations**, only `propext`, `Classical.choice`, `Quot.sound`.
+- **D1 bridge complete** (commits `86a7f09` … `2d29702`): six steps, from the
+  single-minor sign relation through the coefficient relation, the window row,
+  the Gram scaling `(ω!)²`, the certificate equivalence, to the row-space
+  equality; map entry D1 closed.
+- **Claim 13 layer** (commits `2756ead`, `842ed52`, `9afc183`, `7f0f5f1`,
+  `b5c6d14`, `82e1c38`): `bitLenRat_add`, the Leibniz determinant bound, the
+  input-length interface `bitLenMat A ≤ inputLen A`, the bordered
+  Desnanot–Jacobi identity (block / tuple / prefix forms), the Bareiss tableau
+  defined by recursion with `tab_eq_bord`, `tab_pivot`, `tab_last`, and the
+  bit-length corollaries `tab_entry_num_bitLen`,
+  `tab_entry_bitLen_inputLen`.  The appendix constant of Claim 21 was corrected
+  from `M tau + (M/2) log2 M` to `M tau + bitLen(M!)` (audit D10).
+- Axiom audit: **191 declarations**, only `propext`, `Classical.choice`, `Quot.sound`.
 
 ## 3. Open mathematical proofs
 
