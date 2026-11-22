@@ -25,7 +25,7 @@ States are kept separate: `Mathematically proved` (M) and `Lean formalized` (F);
   `bitLenRat`, `bitLenMat`, cleared-entry identity `|A.num i j| = A.den * |A i j|`.
 - D1 image/permutation layer: `imageFin`, `imageEquiv`, `permOfInjective`, `rowEmb_permOfInjective` (this round).
 - Claim 19 Cramer re-derivation completed and verified (`PAPER_I_CLAIM19_CRAMER.md`); the paper appendix still needs the rewrite.
-- Axiom audit: 125 declarations, only `propext`, `Classical.choice`, `Quot.sound`.
+- Axiom audit: 132 declarations, only `propext`, `Classical.choice`, `Quot.sound`.
 
 ## 3. Open mathematical proofs
 
@@ -43,8 +43,7 @@ States are kept separate: `Mathematically proved` (M) and `Lean formalized` (F);
   → `windowSet_minorFamily_eq` → `rowSpace_windowMatrix_eq`
   → `windowGram_injective_eq_factorial_smul` → `exists_gram_certificate_iff`.
 - §III-D end-to-end assembly at the pencil.
-- Claim 13: `bitLenRat_add`, Leibniz determinant bound, Bareiss intermediate/subminor relation,
-  total bit complexity.
+- Claim 13: `bitLenRat_add` and the Leibniz determinant bound are done (`PaperI/BitLenAdd`); Bareiss intermediate/subminor relation and total bit complexity remain.
 
 ## 5. Complexity and bit-length
 

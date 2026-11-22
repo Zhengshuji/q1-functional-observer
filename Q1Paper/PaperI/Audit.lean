@@ -181,3 +181,10 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.PaperI.imageEquiv
 #print axioms Q1Paper.PaperI.permOfInjective
 #print axioms Q1Paper.PaperI.rowEmb_permOfInjective
+#print axioms Q1Paper.PaperI.bitLenInt_natCast
+#print axioms Q1Paper.PaperI.rat_add_num_natAbs_le
+#print axioms Q1Paper.PaperI.rat_add_den_le
+#print axioms Q1Paper.PaperI.bitLenRat_add
+#print axioms Q1Paper.PaperI.abs_det_le_factorial_mul_pow
+#print axioms Q1Paper.PaperI.bitLenInt_det_le
+#print axioms Q1Paper.PaperI.bitLenInt_det_num_le_bitLenMat
