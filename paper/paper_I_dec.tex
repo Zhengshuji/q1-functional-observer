@@ -1975,7 +1975,7 @@ also settle the minimum-order question treated in the companion paper.
 
 Three items remain outside the verified core.
 \begin{enumerate}
-\item \textbf{The $r=0$ branch: algorithm resolved, constants under revision.} For $r=0$ the two conditions reduce to a test for constant rank on $H=L_0N$, $H_A=L_0AN$ and to the constant rank of the degree-one pencil $\lambda X-G$. Section~\ref{sec:zero} decides the latter by an exact, deterministic rational linear system of polynomial size, read off the degree bound $2\omega-2$, and returns an explicit witness. The Hadamard and elimination constants of its bit bound are derived in Appendix~\ref{app:size}, but the derivation of $\tau_0$ in Claim~\ref{app:zero} uses $(H^{\mathsf T}H)^{-1}$, which only exists when $\omega=k$; the constants must be re-derived from $FH=H_A$ by Cramer's rule, and until then Proposition~\ref{prop:zero}'s explicit bound is provisional.
+\item \textbf{The $r=0$ branch: resolved.} For $r=0$ the two conditions reduce to a test for constant rank on $H=L_0N$, $H_A=L_0AN$ and to the constant rank of the degree-one pencil $\lambda X-G$. Section~\ref{sec:zero} decides the latter by an exact, deterministic rational linear system of polynomial size, read off the degree bound $2\omega-2$, and returns an explicit witness. The Hadamard and elimination constants of its bit bound are derived in Appendix~\ref{app:size}: the left inverse of $H$ is obtained from Cramer's rule on an invertible $\omega\times\omega$ minor of $H$ (not from $H^{\mathsf T}H$, which is singular unless $\omega=k$), the resulting bounds are $h(G)\le20n^2\mathcal L$ and $O(n^{21}\mathcal L^2)$ bit operations, and what remains is third-party review, not a missing derivation.
 \item \textbf{Coefficient bounds.} The coefficient-size claim in Section~\ref{sec:fpt} is paper-level; Appendix~\ref{app:size} derives it with explicit constants ($\beta\le240q\,n^5\mathcal L$ at fixed order and $\beta\le8\times10^4n^9\mathcal L$ on a chart), which have not been audited by a third party.
 \item \textbf{The complexity accounting is paper-level.} The counts of Theorem~\ref{thm:fixedq},
 Theorem~\ref{thm:fpt}, Corollary~\ref{cor:time} and Proposition~\ref{prop:zero} are not formalized:
@@ -2081,24 +2081,34 @@ $h(AN)$.
 \end{proof}
 
 \begin{claim}[Data of the zero-free-row case]\label{app:zero}
-For $r=0$: $h(X)\le18n^2\mathcal L$ and $h(G)\le230n^4\mathcal L$; every coefficient of a maximal
-minor of $\lambda X-G$ has bit length at most $232n^5\mathcal L$, and every entry of
-$Z^{\mathsf T}Z$ at most $470n^5\mathcal L$.
+For $r=0$: $h(X)\le18n^2\mathcal L$ and $h(G)\le20n^2\mathcal L$; every coefficient of a maximal
+minor of $\lambda X-G$ has bit length at most $22n^3\mathcal L$, and every entry of
+$Z^{\mathsf T}Z$ at most $47n^3\mathcal L$.
 \end{claim}
 
 \begin{proof}
-$X$ is a submatrix of $H=L_0N$, so $h(X)\le18n^2\mathcal L$. The matrix $H^{\mathsf T}H$ is $k\times k$
-with entries of bit length at most $2\cdot18n^2\mathcal L+\log_2 k\le38n^2\mathcal L$ and rank $\omega$;
-by Claim~\ref{lem:rationalbasis} its inverse has entries of bit length at most $160n^4\mathcal L$, so the
-left inverse $H_L=(H^{\mathsf T}H)^{-1}H^{\mathsf T}$ of $H$ has entries of bit length at most
-$180n^4\mathcal L$. Put $F=H_AH_L$ and $G=FX$; then $FH=H_A$ and $GB=FH=H_A$ for the pivot
-factorisation $H=XB$, and
-$h(G)\le20n^2\mathcal L+180n^4\mathcal L+18n^2\mathcal L+\log_2(kq)\le230n^4\mathcal L$. A coefficient
-of a maximal minor is a sum of products of $\omega$ entries of $X$ and $G$, so its bit length is at most
-$\omega(230n^4\mathcal L+\log_2\omega+1)\le232n^5\mathcal L$. An entry of $Z^{\mathsf T}Z$ is a sum of
+$X$ is a submatrix of $H=L_0N$, so $h(X)\le18n^2\mathcal L$. Since $\operatorname{rank}H=\omega$, choose
+row and column sets $I\subseteq[q]$, $J\subseteq[k]$ with $|I|=|J|=\omega$ and $\det H_{I,J}\ne0$; these
+are the pivot rows and columns of the elimination of Section~\ref{sec:pivot}. Clearing one common
+denominator per row and applying Hadamard, $\det H_{I,J}$ has bit length at most
+$\omega(\omega+1)\,18n^2\mathcal L+\tfrac{\omega}{2}\log_2\omega+1\le37n^4\mathcal L$ (the same
+computation with the entries of $H_A$, of bit length at most $20n^2\mathcal L$, gives the bound
+$41n^4\mathcal L$ for the Cramer numerators below). Define $F\in\mathbb Q^{q\times q}$ by
+\[
+F_{i,I_a}=\frac{\det H^{(i,a)}_{I,J}}{\det H_{I,J}}\qquad(1\le a\le\omega),\qquad F_{i,b}=0\quad(b\notin I),
+\]
+where $H^{(i,a)}_{I,J}$ is $H_{I,J}$ with its $a$-th \emph{row} replaced by
+$\bigl((H_A)_{i,j}\bigr)_{j\in J}$. Because $\operatorname{row}H_A\subseteq\operatorname{row}H
+=\operatorname{row}H_{I,:}$ (step~1 of Proposition~\ref{prop:zero}), Cramer's rule for the row-vector
+system $yH_{I,J}=h$ gives $FH=H_A$; the numerator replaces a row, not a column, since the system is a
+row-vector system. Hence $h(F)\le41n^4\mathcal L$. With the pivot factorization $H=XB$ ($X=H_{:,J}$,
+$B=H_{I,:}$) put $G=H_{A,J}$; then $G=FX$ and $GB=H_A$, so $(X,G)$ is the pair used by the algorithm,
+and $h(G)\le20n^2\mathcal L$. A coefficient of a maximal minor of $\lambda X-G$ is a signed sum of
+products of $\omega$ entries of $X$ and $G$, so its bit length is at most
+$\omega(20n^2\mathcal L+\log_2\omega+1)\le22n^3\mathcal L$. An entry of $Z^{\mathsf T}Z$ is a sum of
 at most $\omega\cdot\#\{I\}$ products of two such coefficients, so its bit length is at most
-$2\cdot232n^5\mathcal L+\log_2(\omega\cdot\#\{I\})+1\le470n^5\mathcal L$, where
-$\log_2(\omega\cdot\#\{I\})\le\log_2\omega+2\omega\log_2 n\le3n\mathcal L$.
+$2\cdot22n^3\mathcal L+\log_2(\omega\cdot\#\{I\})+1\le47n^3\mathcal L$, where
+$\log_2(\omega\cdot\#\{I\})\le\log_2\omega+2\omega\log_2n\le3n\mathcal L$.
 \end{proof}
 
 \begin{claim}[System of the fixed-order algorithm]\label{app:phi}
@@ -2120,22 +2130,29 @@ most $224q\,n^5\mathcal L+4qn\mathcal L\le240q\,n^5\mathcal L$, the other terms 
 
 \begin{claim}[System of the zero-free-row case]\label{app:r0}
 The system \eqref{eq:R0} has $N_{\rm unk}=(2\omega-1)q\omega\le2n^3$ unknowns and
-$N_{\rm eq}=2\omega^3\le2n^3$ equations, with entries of bit length at most $230n^4\mathcal L$. With
-$M=\max\{N_{\rm unk},N_{\rm eq}\}\le4n^3$ and $\tau_0=230n^4\mathcal L$, fraction-free elimination keeps
-integers of bit length at most $M\tau_0+\tfrac{M}{2}\log_2M+1\le930n^7\mathcal L$ and performs $O(M^3)$
-arithmetic operations, that is $O(n^{23}\mathcal L^2)$ bit operations.
+$N_{\rm eq}=2\omega^3\le2n^3$ equations. Clearing one common denominator per equation gives an integer
+system with entries of bit length at most $\tau_1\le61n^3\mathcal L$. With
+$M=\max\{N_{\rm unk},N_{\rm eq}\}\le2n^3$, fraction-free elimination keeps integers of bit length at
+most $M\tau_1+\tfrac{M}{2}\log_2M+1\le123n^6\mathcal L$ and performs $O(M^3)\le8n^9$ arithmetic
+operations, that is $O(n^{21}\mathcal L^2)$ bit operations.
 \end{claim}
 
 \begin{proof}
 The unknowns are the entries of $2\omega-1$ matrices of size $\omega\times q$, and the equations are
 the $2\omega$ matrix equations, each of $\omega^2$ scalar equations; their coefficients are entries of
-$X$, $G$ or $\pm1$, of bit length at most $230n^4\mathcal L$ by Claim~\ref{app:zero}. The estimate on
-the intermediate integers is the Bareiss--Hadamard argument of the proof of Claim~\ref{lem:zero}: every
-intermediate entry is a minor of the integer system, hence of bit length at most
-$M\tau_0+\tfrac{M}{2}\log_2M+1$. With $M\le4n^3$, $\tau_0\le230n^4\mathcal L$ and
-$\log_2M\le2+3\log_2 n\le5n$, this is at most $920n^7\mathcal L+10n^4+1\le930n^7\mathcal L$. The
-elimination performs $O(M^3)\le64n^9$ arithmetic operations on integers of at most
-$930n^7\mathcal L$ bits, hence $O(n^{23}\mathcal L^2)$ bit operations.
+$X$, $G$ or $\pm1$, of bit length at most $20n^2\mathcal L$ by Claim~\ref{app:zero}. Each scalar
+equation involves at most $2q\le2n$ coefficients (only two adjacent blocks $S_{j-1},S_j$ occur), so
+clearing one common denominator per equation multiplies the entry bit length by at most $2n+1$:
+$\tau_1\le(2n+1)\,20n^2\mathcal L+\log_2(2n+1)\le61n^3\mathcal L$. The estimate on the intermediate
+integers is the Bareiss--Hadamard argument of the proof of Claim~\ref{lem:zero}: every intermediate
+entry is a minor of the integer system, hence of bit length at most
+$M\tau_1+\tfrac{M}{2}\log_2M+1$. With $M\le2n^3$, $\tau_1\le61n^3\mathcal L$ and
+$\log_2M\le2+3\log_2 n\le5n$, this is at most $122n^6\mathcal L+5n^4+1\le123n^6\mathcal L$. The
+elimination performs $O(M^3)\le8n^9$ arithmetic operations on integers of at most
+$123n^6\mathcal L$ bits, hence $O(n^{21}\mathcal L^2)$ bit operations. If the rational coefficients of
+\eqref{eq:R0} are treated directly as integers of bit length $\tau_0\le20n^2\mathcal L$ (the convention
+of the main text), the same computation gives $O(n^{19}\mathcal L^2)$ instead; both bounds are
+polynomial, and the exponent in the main theorem is the one obtained here.
 \end{proof}
 
 \begin{claim}[Chart data]\label{app:chart}
