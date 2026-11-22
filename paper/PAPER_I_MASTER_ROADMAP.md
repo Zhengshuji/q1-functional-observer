@@ -37,7 +37,7 @@ States are kept separate: `Mathematically proved` (M) and `Lean formalized` (F);
   plain-`Finset` layer `embOfFinset`, `imageFinset`, `imageFinset_card`, `imageEquivFinset`,
   `permOfImage`, `embOfFinset_permOfImage`; `det_submatrix_comp`; and
   `maximalMinor_injective_eq_signed_image`.
-- Axiom audit: **161 declarations**, only `propext`, `Classical.choice`, `Quot.sound`.
+- Axiom audit: **163 declarations**, only `propext`, `Classical.choice`, `Quot.sound`.
 
 ## 3. Open mathematical proofs
 

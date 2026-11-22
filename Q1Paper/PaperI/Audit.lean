@@ -217,3 +217,5 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.PaperI.sum_snd_prod
 #print axioms Q1Paper.PaperI.gram_entry_inj_eq
 #print axioms Q1Paper.PaperI.gram_inj_eq_factorial_smul
+#print axioms Q1Paper.PaperI.gram_solvable_iff_smul
+#print axioms Q1Paper.PaperI.gram_certificate_iff_subset
