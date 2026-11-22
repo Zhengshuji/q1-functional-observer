@@ -41,6 +41,7 @@ import Q1Paper.DegreeBounds
 import Q1Paper.FixedOrder
 import Q1Paper.FPT
 import Q1Paper.PaperI.Interface
+import Q1Paper.PaperI.CompressionMatrix
 
 /-!
 ## What is imported here
@@ -55,7 +56,10 @@ import Q1Paper.PaperI.Interface
 * the zero-free-row algebra: `G3Adjugate`, `G3LeftInverse`, `G3Coeff`,
   `DegreeBounds`;
 * the algorithms' algebraic interfaces: `FixedOrder`, `FPT`;
-* the statement layer: `PaperI.Interface`.
+* the statement layer: `PaperI.Interface`;
+* the matrix-level Claim 2: `PaperI.CompressionMatrix`
+  (`rawAlgebraic_iff_compressed`, `rawSpectral_iff_compressed`,
+  `rawAlgebraic_iff_rowSpace`, `DEC_iff_compressed`).
 
 ## What is *not* imported
 

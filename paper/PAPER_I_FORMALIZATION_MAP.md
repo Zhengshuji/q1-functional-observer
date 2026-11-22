@@ -19,9 +19,9 @@
 
 | 论文条目（PDF 编号） | Lean 声明 | 文件 | 状态 | 差距 |
 |---|---|---|---|---|
-| 定义 (5a)/(5b)、DEC、MINDEC | `Q1Paper.PaperI.rawAlgebraic`, `rawSpectral`, `compressedAlgebraic`, `compressedSpectral`, `DEC`, `MINDEC` | `PaperI/Interface.lean` | **partial** | 只有定义层；与压缩条件的等价尚未证明 |
-| Claim 1 秩恒等式 `rank[P;M]=rank P+rank(MN_P)` | `Q1Paper.rank_vstack_add_rank_mul`（矩阵版）、`rank_fromRows_add_map` | `G4RankIdentity.lean` | **complete** | — |
-| Claim 2 压缩与铅笔判据 | `Q1Paper.ker_compressed_iff`（核包含，抽象）、`Q1Paper.G_form_iff`（`H_A=FH`） | `Compression.lean`, `FixedOrder.lean` | **partial** | 缺矩阵级四条等价（行包含、`H_A=FH`、复化铅笔常秩、`rank H_A=rank H`）及与原始 (5a)/(5b) 的桥 |
+| 定义 (5a)/(5b)、DEC、MINDEC | `Q1Paper.PaperI.rawAlgebraic`, `rawSpectral`, `compressedAlgebraic`, `compressedSpectral`, `DEC`, `MINDEC` | `PaperI/Interface.lean` | **complete（定义层）** | 定义与论文一致；等价性见下一行 |
+| Claim 1 秩恒等式 `rank[P;M]=rank P+rank(MN_P)` | `Q1Paper.rank_vstack_add_rank_mul`（矩阵版）、`rank_fromRows_add_map`（任意有限索引类型） | `G4RankIdentity.lean`, `PaperI/CompressionMatrix.lean` | **complete** | — |
+| Claim 2 压缩与铅笔判据 | `rawAlgebraic_iff_compressed`, `rawAlgebraic_iff_rowSpace`, `rawSpectral_iff_compressed`, `DEC_iff_compressed`（矩阵级）；`ker_compressed_iff`, `G_form_iff`（抽象） | `PaperI/CompressionMatrix.lean`, `Compression.lean`, `FixedOrder.lean` | **partial（(i)、(iii) 已闭；DEC 接口已闭）** | (ii) `H_A=FH` 的显式 `F` 与 (iv) `rank H_A=rank H` 未单独形式化（都是 (i)+(5b) 在 `λ=0` 的一行推论）；域转移 `ℚ→ℝ→ℂ` 未做 |
 | Claim 3 可达行对与 `κ_obs=rd_0` | `KappaObs.pairMap`, `finrank_ker_inf_add_finrank_range_pairMap`, `Q1Paper.freePairSpace`, `kappaObs_eq_mul_freePairSpace`, `finrank_domain_le_freePairSpace` | `KappaObs.lean`, `FreeRows.lean` | **partial** | 缺与具体矩阵 `M=[N AN]`、`d_0=rank[N AN]` 的连接，以及 `k≤d_0` |
 | Claim 4 沙包与可实现性 | `Q1Subspace.rowSpan_fromRows_left`, `mem_rowSpan_iff_exists_vecMul` | `Q1Subspace.lean` | **partial** | 缺"每个满足 `W_0⊆W⊆T`、`dim(W/W_0)≤r` 的 `W` 由 `t` 行实现"的完整逆向构造（商空间基 + 原像 + 补零） |
 | Claim 5 条件只依赖 `W` | `Q1Subspace.pi1`, `pi2`, `Q1Pencil.SpectralCondition`, `hasConstantRank_iff_rankIndependent` | `Q1Projection.lean`, `Q1Pencil.lean`, `Q1Step3.lean` | **partial** | 缺 `π_λ(W)` 的复化、与 `rank(λH−H_A)=ω` 的严格等价 |
@@ -61,6 +61,7 @@
 | `G3Adjugate`, `G3LeftInverse`, `G3Coeff`, `DegreeBounds` | 伴随、左逆、系数方程、次数界 | Claim 16 |
 | `FixedOrder`, `FPT` | 算法代数接口 | Theorems 1, 2 |
 | `PaperI/Interface` | (5a)/(5b)、压缩条件、DEC/MINDEC 的**定义** | 定义层 |
+| `PaperI/CompressionMatrix` | 矩阵级 Claim 2：`DEC_iff_compressed`、`rawAlgebraic_iff_compressed`、`rawSpectral_iff_compressed`、`rawAlgebraic_iff_rowSpace` | 定义层 + Claim 2(i)(iii) |
 
 ## 3. 公理审计
 
@@ -72,25 +73,28 @@
 
 ## 4. 下一轮必须补的证明（按依赖顺序）
 
-### 4.1 交付物 3：`DEC ⟺ 压缩条件`
+### 4.1 交付物 3：`DEC ⟺ 压缩条件`（已闭合）
 
-`PaperI/Interface.lean` 只给出定义。要闭合 Claim 2 的矩阵版，还缺四个引理：
+`PaperI/CompressionMatrix.lean` 给出（任意域 `K`，`N` 是 `ker [CA; C]` 的基矩阵）：
 
-1. **`rowSpace_mul`**：`rowSpace (X * N) = (rowSpace X).map (vecMulLinear N)`。
-   行空间在右乘 `N` 下的像。
-2. **`ker_eq_dualAnnihilator_rowSpace`**：`(rowSpace M)ᗮ = ker M`。
-   这是行空间与核的对偶桥（行空间是 `(n→K)` 的对偶里的子空间，需要**求值配对**，
-   不能用点积硬套；Mathlib 的 `Submodule.dualAnnihilator` + `Module.Dual.evalEquiv` 是入口）。
-3. **`rowSpace_sum`**：`rowSpace [A;B] = rowSpace A ⊔ rowSpace B`（`Q1RowSpace.rowSpace_fromRows` 已有）。
-4. **`factor_through`**：若 `range N₁ ≤ range N`，则 `∃ W, N₁ = N * W`（用 `N` 在像上的单射取原像）。
+- `rank_fromRows_comm`：`rank [A; B] = rank [B; A]`；
+- `rank_fromRows_add_map`：秩恒等式在任意有限索引类型上的版本；
+- `rank_vstack_add_rank_mul'`、`rank_fromRows_eq_rank_add_mul`：`rank [P; M] = rank P + rank (M N)`；
+- `ker_fromRows_eq_map`：`ker [L; P] = N (ker (L N))`；
+- `map_ker_eq`：`Submodule.map` 的复合；
+- `rawAlgebraic_iff_compressed`：`(5a) ⟺ rank [H_A; H] = rank H`；
+- `rawAlgebraic_iff_rowSpace`：`(5a) ⟺ row H_A ⊆ row H`；
+- `rawSpectral_iff_compressed`：`(5b) ⟺ ∀λ, rank (λH−H_A) = order H`；
+- `DEC_iff_compressed`：`DEC ⟺ ∃ R，压缩块满足两条压缩条件`。
 
-组装后：
-- `interface_algebraic`：`rawAlgebraic C CA L LA ↔ compressedAlgebraic (L*N) (LA*N)`，假设 `range N = ker [CA;C]`；
-- `interface_spectral`：`rawSpectral ... ↔ compressedSpectral (L*N) (LA*N)`。
+证明只用秩恒等式与核-压缩恒等式，**不需要对偶/点积**（原先估计的
+`ker = dualAnnihilator(rowSpace)` 被绕开了）。
 
-另需**域转移**：论文输入在 `ℚ`、设计在 `ℝ`、谱条件在 `ℂ`。Lean 里先在一般域 `K` 证，
-再用 `Matrix.rank` 在标量扩张下的不变性把 `ℚ→ℝ→ℂ` 接起来（Mathlib 有 `Matrix.rank_map`
-一类的引理需要核对）。
+剩余（都不影响 DEC 接口）：
+
+1. Claim 2(ii) 的显式 `F`（`H_A = F H`）与 (iv)（`rank H_A = rank H`），
+   由 `rawAlgebraic_iff_rowSpace` + `rank_fromRows_eq_rank_iff` + `λ=0` 直接得到；
+2. 域转移 `ℚ → ℝ → ℂ`（`Matrix.rank` 在标量扩张下的不变性）。
 
 ### 4.2 之后的顺序
 

@@ -69,3 +69,15 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.PaperI.compressedSpectral
 #print axioms Q1Paper.PaperI.DEC
 #print axioms Q1Paper.PaperI.MINDEC
+
+-- Claim 2 at the matrix level: raw <=> compressed
+#print axioms Q1Paper.PaperI.rank_fromRows_comm
+#print axioms Q1Paper.PaperI.rank_fromRows_add_map
+#print axioms Q1Paper.PaperI.rank_vstack_add_rank_mul'
+#print axioms Q1Paper.PaperI.rank_fromRows_eq_rank_add_mul
+#print axioms Q1Paper.PaperI.ker_fromRows_eq_map
+#print axioms Q1Paper.PaperI.map_ker_eq
+#print axioms Q1Paper.PaperI.rawAlgebraic_iff_compressed
+#print axioms Q1Paper.PaperI.rawAlgebraic_iff_rowSpace
+#print axioms Q1Paper.PaperI.rawSpectral_iff_compressed
+#print axioms Q1Paper.PaperI.DEC_iff_compressed
