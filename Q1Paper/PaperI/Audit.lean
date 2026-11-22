@@ -81,3 +81,8 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.PaperI.rawAlgebraic_iff_rowSpace
 #print axioms Q1Paper.PaperI.rawSpectral_iff_compressed
 #print axioms Q1Paper.PaperI.DEC_iff_compressed
+#print axioms Q1Paper.PaperI.exists_factor_of_rowSpace_le
+#print axioms Q1Paper.PaperI.exists_factor_of_rawAlgebraic
+#print axioms Q1Paper.PaperI.rank_neg_eq
+#print axioms Q1Paper.PaperI.rank_eq_of_compressedSpectral
+#print axioms Q1Paper.PaperI.rank_HA_eq_rank_H_of_rawSpectral

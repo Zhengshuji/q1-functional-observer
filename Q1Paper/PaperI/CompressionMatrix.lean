@@ -18,6 +18,7 @@ step and is not part of this file.
 
 import Q1Paper.G4RankIdentity
 import Q1Paper.Q1RowSpace
+import Q1Paper.Q1Subspace
 import Q1Paper.PaperI.Interface
 
 namespace Q1Paper.PaperI
@@ -273,5 +274,57 @@ theorem DEC_iff_compressed {p r0 n k : ℕ}
         (Matrix.fromRows L0 R * A) N hN).mpr h1
     · exact (rawSpectral_iff_compressed C (C * A) (Matrix.fromRows L0 R)
         (Matrix.fromRows L0 R * A) N hN).mpr h2
+
+/-- Any matrix whose row space is contained in that of `H` is `F * H`. -/
+theorem exists_factor_of_rowSpace_le {q k : Type*} [Fintype q] [Fintype k] [DecidableEq q]
+    (H HA : Matrix q k K) (h : Q1Subspace.rowSpace HA ≤ Q1Subspace.rowSpace H) :
+    ∃ F : Matrix q q K, HA = F * H := by
+  have hex : ∀ i : q, ∃ u : q → K, Matrix.vecMul u H = HA i := by
+    intro i
+    have hi : HA i ∈ Q1Subspace.rowSpan H := h (Submodule.subset_span ⟨i, rfl⟩)
+    rw [← Q1Subspace.range_eq_rowSpan] at hi
+    obtain ⟨u, hu⟩ := hi
+    exact ⟨u, hu⟩
+  choose u hu using hex
+  let F : Matrix q q K := fun i j => u i j
+  refine ⟨F, ?_⟩
+  ext i j
+  rw [Matrix.mul_apply]
+  exact (congrFun (hu i) j).symm
+
+/-- Claim 2(ii): the compressed block `H_A` is a row combination of `H`. -/
+theorem exists_factor_of_rawAlgebraic {p q n k : Type*}
+    [Fintype p] [Fintype q] [Fintype n] [Fintype k] [DecidableEq q]
+    (C CA : Matrix p n K) (L LA : Matrix q n K) (N : Matrix n k K)
+    (hN : N.mulVecLin.range = (Matrix.fromRows CA C).mulVecLin.ker)
+    (h : rawAlgebraic C CA L LA) :
+    ∃ F : Matrix q q K, LA * N = F * (L * N) := by
+  have hrow := (rawAlgebraic_iff_rowSpace C CA L LA N hN).mp h
+  exact exists_factor_of_rowSpace_le (L * N) (LA * N) hrow
+
+/-- Negating a matrix does not change its rank. -/
+theorem rank_neg_eq {q k : Type*} [Fintype q] [Fintype k] (M : Matrix q k K) :
+    (-M).rank = M.rank := by
+  have h : (-M) = (-1 : K) • M := by simp
+  rw [h, Matrix.rank_smul_of_mem_nonZeroDivisors M
+    ((mem_nonZeroDivisors_iff_ne_zero).mpr (by norm_num))]
+
+/-- Claim 2(iv): a constant-rank pencil has `rank H_A = rank H` (value at `λ = 0`). -/
+theorem rank_eq_of_compressedSpectral {q k : Type*} [Fintype q] [Fintype k]
+    (H HA : Matrix q k K) (h : compressedSpectral H HA) : HA.rank = H.rank := by
+  have h0 := h 0
+  have hneg : (0 : K) • H - HA = -HA := by simp
+  rw [hneg] at h0
+  rw [← rank_neg_eq HA]
+  exact h0
+
+/-- Claim 2(iv) at the level of the paper's statement. -/
+theorem rank_HA_eq_rank_H_of_rawSpectral {p q n k : Type*}
+    [Fintype p] [Fintype q] [Fintype n] [Fintype k]
+    (C CA : Matrix p n K) (L LA : Matrix q n K) (N : Matrix n k K)
+    (hN : N.mulVecLin.range = (Matrix.fromRows CA C).mulVecLin.ker)
+    (h : rawSpectral C CA L LA) :
+    (LA * N).rank = (L * N).rank :=
+  rank_eq_of_compressedSpectral (L * N) (LA * N) ((rawSpectral_iff_compressed C CA L LA N hN).mp h)
 
 end Q1Paper.PaperI
