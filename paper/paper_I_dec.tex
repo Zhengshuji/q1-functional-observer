@@ -228,16 +228,16 @@ $\pi_1,\pi_2,\pi_\lambda$ & projections of $\mathbb R^{2k}$ \\
 Two published bounds confine the orders that have to be examined. Let $q_0$ be the algebraic
 lower bound of \cite{fer26a,fer26b}: the smallest order at which \eqref{eq:5a} can be satisfied,
 computed from the functional observability indices by a greedy rank recursion, hence in polynomial
-time. Every feasible order satisfies
+time. Every feasible order satisfies $q\ge q_0$, and the \emph{minimal} feasible order satisfies
 \begin{equation}\label{eq:range}
-q_0\le q\le n_0-p,\qquad n_0=\operatorname{rank}\bigl[C;CA;\dots;CA^{n-1}\bigr],
+q_0\le q_{\min}\le n_0-p,\qquad n_0=\operatorname{rank}\bigl[C;CA;\dots;CA^{n-1}\bigr],
 \end{equation}
-see \cite{fer26a,fer26b}; for an observable pair $n_0=n$. The upper end is not merely a bound in the
-row-slot model: by Claim~\ref{lem:monotone} the predicate is monotone in $q$, so every order at or
-above $n_0-p$ is feasible as soon as that one is, and no information is lost by stopping there. In
-terms of the quotient dimension the range \eqref{eq:range} reads
-$q_0-r_0\le t\le n_0-p-r_0$, and Claim~\ref{lem:struct} adds the independent bound
-$t=\dim(W/W_0)\le\dim W\le2\ell$.
+see \cite{fer26a,fer26b}; for an observable pair $n_0=n$. The upper bound is not a bound on every
+feasible order: by Claim~\ref{lem:monotone} the predicate is monotone in $q$, so once some order at
+or below $n_0-p$ is feasible, every larger order is feasible too, and to compute $q_{\min}$ it
+suffices to test the orders up to $n_0-p$. In terms of the quotient dimension the range
+\eqref{eq:range} reads $q_0-r_0\le t_{\min}\le n_0-p-r_0$, and Claim~\ref{lem:struct} adds the
+independent bound $t=\dim(W/W_0)\le\dim W\le2\ell$.
 
 \section{The reduction and the certificate}\label{sec:reduction}\label{sec:compressed}\label{sec:dimension}
 
@@ -870,8 +870,11 @@ evaluating $K$ at complex points.
 
 \begin{remark}[Algorithmic reading]\label{rem:algo}
 The compression is computed in four steps:
-(i) for each column set $J\subseteq[k]$, $|J|=\omega$, form the
-$\omega\times\omega$ pencil $P(\lambda)_{:,J}^{\mathsf T}P(\mu)_{:,J}$;
+(i) for each column set $J\subseteq[\ell]$, $|J|=\omega$, form the
+$\omega\times\omega$ pencil $P(\lambda)_{:,J}^{\mathsf T}P(\mu)_{:,J}$
+(the column sets meeting the complement of the $\ell$ non-zero columns give a zero
+determinant, so summing over $[\ell]$ gives the same kernel as summing over $[k]$,
+at the cost of $C(\ell,\omega)\le 2^\ell$ terms);
 (ii) compute its bivariate coefficients, of degree at most $\omega$ in
 each variable;
 (iii) sum the coefficients over $J$;
@@ -940,6 +943,10 @@ proof of Theorem~\ref{thm:fixedq} counts. Nothing is enumerated except the discr
 \begin{algorithmic}[1]
 \Require $A,C,L_0,q$; \quad $r_0\gets\operatorname{rows}(L_0)$; \quad $r\gets q-r_0$
 \Ensure \textsc{feasible} or \textsc{infeasible}
+\If{$q<r_0$}
+  \State \Return \textsc{infeasible}
+  \Statex \Comment{$\mathcal L=[L_0;R]$ has at least $r_0$ rows}
+\EndIf
 \State $N\gets$ basis of $\ker[C;CA]$
 \State $h^0\gets L_0N$;\quad $g^0\gets L_0AN$
 \State $D\gets$ basis of $\bigl(\operatorname{row}[N\ AN]\bigr)^{\perp}$
@@ -962,8 +969,11 @@ proof of Theorem~\ref{thm:fixedq} counts. Nothing is enumerated except the discr
 \end{algorithm}
 
 \begin{thm}\label{thm:fixedq}
-For every fixed $q\ge1$, $\mathrm{DEC}$ is decidable in deterministic polynomial time: with
-$r=q-r_0$, Algorithm~\ref{alg:fixed-q} runs in $\mathcal L^{O(q^2)}$ bit operations.
+For every fixed order $q$ with $r_0\le q\le n$, $\mathrm{DEC}_q$ is decidable in deterministic
+polynomial time: with $r=q-r_0$, Algorithm~\ref{alg:fixed-q} runs in $\mathcal L^{O(q^2)}$ bit
+operations. Thus $\mathrm{DEC}_q\in\mathsf P$ for every fixed $q$, with the polynomial degree
+depending on $q$ (in particular the running time is $q$-fold exponential only through the degree
+$O(q^2)$, i.e.\ $\mathrm{DEC}$ is XP in $q$, not FPT).
 \end{thm}
 
 \begin{proof}
@@ -1204,8 +1214,16 @@ algorithm enumerates.
 
 \emph{(v) The formula characterizes the two conditions.} Within a chart, $\Psi_{t,\omega}$ is
 satisfiable exactly when the blocks $(H(Y),G(Y))$ of the chart matrix $Z_{\rm ch}(Y)$ satisfy
-\eqref{eq:5a} with $\operatorname{rank}H(Y)=\omega$ and \eqref{eq:5b}, by
-Claim~\ref{lem:compression} and Claim~\ref{lem:window}.
+\eqref{eq:5a} with $\operatorname{rank}H(Y)=\omega$ and \eqref{eq:5b}. The chain is:
+\eqref{eq:5b} holds iff the maximal minors of the pencil have no common complex root
+(Claim~\ref{lem:compression}); by the degree bound of Claim~\ref{lem:bezout} this is equivalent to
+the existence of multipliers $g_i$ with $\deg g_i<\omega$ and $\sum_i g_i f_i=1$, which by
+Claim~\ref{lem:window} is equivalent to $e_0^{\mathsf T}\in\operatorname{row}Z_{\rm ch}(Y)$; by
+Claim~\ref{prop:gram} this is in turn equivalent to the Gram system
+$Z_{\rm ch}(Y)^{\mathsf T}Z_{\rm ch}(Y)x=e_0$, and by the coefficient identity of
+Section~\ref{sec:cb} the matrix $Z_{\rm ch}(Y)^{\mathsf T}Z_{\rm ch}(Y)$ is recovered from the
+coefficients of $K(\lambda,\mu)$ through the shift identity, so the test never enumerates the
+maximal minors themselves.
 
 Fix $t$. By Claim~\ref{lem:struct} and Remark~\ref{rem:YS} a feasible $W$ of quotient dimension
 $t$ is a point of the Grassmannian $\mathrm{Gr}(t,m')$ with $m'\le2\ell-s_0$, written in the chart
@@ -1870,7 +1888,11 @@ paper does not claim, and the evidence behind each statement, is recorded in Sec
 statement of the paper. \emph{Abstract core}: the Lean statement is a linear-map, submodule or
 general-field version of it, and the passage to the paper's matrices and coefficients is
 paper-level. \emph{Ingredient}: one step of the proof, not the statement. Statements not listed
-are paper-level throughout.}
+are paper-level throughout. $^{\dagger}$~The Lean family of maximal minors is indexed by
+\emph{injective maps} rather than by subsets; each subset pair then occurs $(\omega!)^2$ times with
+the signs of the two reorderings, so the Lean Gram matrix is $(\omega!)^2$ times the subset-indexed
+one and the two matrices have the same row space. The row-space version of the bridge is not yet
+formalised, so the equivalence is proved for the injective-map matrix.}
 \label{tab:evidence}
 \footnotesize
 \begin{tabular}{@{}lll@{}}
@@ -1894,10 +1916,22 @@ Structural bound, lower half (Claim~\ref{lem:struct}) & literal &
 Rank consistency (Claim~\ref{lem:rankcons}) & literal &
 \texttt{exists\_mulVec\_eq\_iff\_rank\_gram} \\
 B\'ezout with degree bound (Claim~\ref{lem:bezout}) & literal & \texttt{exists\_bezout\_family\_real} \\
+Window relations (Claim~\ref{lem:window}) & literal &
+\texttt{rowSpace\_windowMatrix\_eq\_windowSet},
+\texttt{mem\_rowSpace\_iff\_exists\_window} \\
+Gram certificate (Claim~\ref{prop:gram}), kernel identity & ingredient &
+\texttt{sum\_sq\_eq\_zero\_iff} \\
+Gram certificate (Claim~\ref{prop:gram}), full equivalence & abstract core$^{\dagger}$ &
+\texttt{claim11\_iff\_gram} \\
+Reduced-pencil certificate (Claim~\ref{clm:gramQ}) & abstract core$^{\dagger}$ &
+\texttt{claim12\_iff\_gram} \\
+Cauchy--Binet compression (Section~\ref{sec:cb}) & literal &
+\texttt{Matrix.det\_mul\_eq\_sum\_det\_submatrix},
+\texttt{gramKernelEval\_eq\_double\_sum},
+\texttt{gramKernelEval\_eq\_coeff\_sum},
+\texttt{windowGram\_entry}, \texttt{windowGram\_eq\_compressed} \\
 Rectangular left inverse (Claim~\ref{lem:zero}(iii)$\Rightarrow$(iv)) & abstract core &
 \texttt{exists\_leftInverse\_linear} \\
-Gram certificate, kernel identity (Claim~\ref{prop:gram}) & ingredient &
-\texttt{sum\_sq\_eq\_zero\_iff} \\
 Coefficient system \eqref{eq:R0} $\Rightarrow$ left inverse & literal (one direction) &
 \texttt{spoly\_mul\_pencil\_eq\_one} \\
 Matrix-product coefficients & literal & \texttt{coeff\_mul\_apply} \\
@@ -1937,15 +1971,17 @@ also settle the minimum-order question treated in the companion paper.
 
 Three items remain outside the verified core.
 \begin{enumerate}
-\item \textbf{The $r=0$ branch: resolved.} For $r=0$ the two conditions reduce to a test for constant rank on $H=L_0N$, $H_A=L_0AN$ and to the constant rank of the degree-one pencil $\lambda X-G$. Section~\ref{sec:zero} decides the latter by an exact, deterministic rational linear system of polynomial size, read off the degree bound $2\omega-2$, and returns an explicit witness. The Hadamard and elimination constants of its bit bound are derived in Appendix~\ref{app:size}; what remains is third-party review, not a missing derivation.
+\item \textbf{The $r=0$ branch: algorithm resolved, constants under revision.} For $r=0$ the two conditions reduce to a test for constant rank on $H=L_0N$, $H_A=L_0AN$ and to the constant rank of the degree-one pencil $\lambda X-G$. Section~\ref{sec:zero} decides the latter by an exact, deterministic rational linear system of polynomial size, read off the degree bound $2\omega-2$, and returns an explicit witness. The Hadamard and elimination constants of its bit bound are derived in Appendix~\ref{app:size}, but the derivation of $\tau_0$ in Claim~\ref{app:zero} uses $(H^{\mathsf T}H)^{-1}$, which only exists when $\omega=k$; the constants must be re-derived from $FH=H_A$ by Cramer's rule, and until then Proposition~\ref{prop:zero}'s explicit bound is provisional.
 \item \textbf{Coefficient bounds.} The coefficient-size claim in Section~\ref{sec:fpt} is paper-level; Appendix~\ref{app:size} derives it with explicit constants ($\beta\le240q\,n^5\mathcal L$ at fixed order and $\beta\le8\times10^4n^9\mathcal L$ on a chart), which have not been audited by a third party.
 \item \textbf{The complexity accounting is paper-level.} The counts of Theorem~\ref{thm:fixedq},
 Theorem~\ref{thm:fpt}, Corollary~\ref{cor:time} and Proposition~\ref{prop:zero} are not formalized:
 the artifact checks the algebraic identities, not the reductions and the counting. The chart-data
 estimate of Claim~\ref{clm:chartdata} and the coefficient estimate of Claim~\ref{lem:coeff} are
-paper-level, and the passage from the Gram identity of Claim~\ref{prop:gram} to the matrix certificate
-of Claim~\ref{clm:gramQ} is paper-level as well, the Lean evidence for the underlying step being the
-single entry recorded in Table~\ref{tab:evidence}.
+paper-level. The Gram identity of Claim~\ref{prop:gram} and the matrix certificate of
+Claim~\ref{clm:gramQ} are formalized for the injective-map family
+(\texttt{claim11\_iff\_gram}, \texttt{claim12\_iff\_gram}); what remains paper-level is the
+row-space bridge to the subset-indexed matrix used in the paper (Table~\ref{tab:evidence},
+$^{\dagger}$).
 \end{enumerate}
 
 
