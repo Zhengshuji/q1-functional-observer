@@ -32,7 +32,7 @@
 | Claim 10 窗口关系 | `windowMatrix`, `rowSpace_windowMatrix_eq_windowSet`, `mem_rowSpace_iff_exists_window`, `toFn_injOn_degree_lt_two_mul` | `Window.lean` | **complete** | 索引/边界已在文件内核对（`j<ω`, `t<2ω`, 零系数约定） |
 | Claim 11 Gram 证书 | `claim11_iff_gram`（最终定理：(5b) ⟺ ∃x, ZᵀZx=e₀）；`gram_certificate`（Gram）；`mem_rowSpace_window_iff_no_common_complex_root`（Bézout/窗口）；`spectral_real_iff_minors`, `spectral_iff_minors`（秩-子式/铅笔）；`exists_det_submatrix_ne_zero_of_rank`（秩=最大非零子式）；`rank_map_ofReal`（复化秩不变）；`natDegree_maximalMinor_le`（次数界）；`maximalMinor_map`（系数映射） | `PaperI/Gram.lean`, `PaperI/Claim11.lean`, `PaperI/MinorRank.lean`, `PaperI/BasisExtraction.lean`, `PaperI/SpectralMinor.lean`, `PaperI/Complexify.lean`, `PaperI/Claim11Final.lean` | **complete（含最终 Gram 证书定理）** | 说明：`claim11_iff_gram` 以 `H_A = F H`（Claim 2(ii)）与 `1 ≤ ω`、`rank H = ω` 为假设；这与论文 Claim 11 的假设一致 |
 | Claim 12 满列秩铅笔证书 | `claim12_iff_gram`, `exists_left_inverse_of_rank_eq` | `PaperI/Claim12.lean` | **complete** | 与 Claim 11 相同：用的是注入映射族的 `Z`；与论文子集族 `Z_Q` 的桥接见 §6 的 D1 |
-| Claim 13 有理基与位长 | `bitLenInt`, `bitLenRat`, `bitLenMat`, `mat_num_entries_bounded`（位长基础） | `PaperI/BitLen.lean` | **partial（位长基础完成）** | 剩：行列式界（Leibniz/`Matrix.det_le`）、Bareiss 中间量子式表示、总 bit complexity；`bitLenRat_add` 尚缺（见 §7 D9） |
+| Claim 13 有理基与位长 | `bitLenInt`, `bitLenRat`, `bitLenMat`, `mat_num_entries_bounded`；`bitLenRat_add`, `abs_det_le_factorial_mul_pow`, `bitLenInt_det_le`, `bitLenInt_det_num_le_bitLenMat` | `PaperI/BitLen.lean`, `PaperI/BitLenAdd.lean` | **partial（位长基础 + 加法界 + Leibniz 界完成）** | 剩：Bareiss 中间量子式表示、总 bit complexity、输入长度接口 `bitLenMat ≤ L_input` |
 | Claim 14 图表数据 | — | — | **paper_only** | 需 `V=T∩(S×S)` 的核表示（转置写法） |
 | Claim 15 系数位长 | — | — | **paper_only** | 需显式常数链（附录 A） |
 | Claim 16 零自由行五条件 | `adjRowInverse_mul`, `exists_leftInverse`, `exists_leftInverse_linear`, `spoly_mul_pencil_eq_one`, `natDegree_det_le`, `natDegree_adjugate_le` | `G3Adjugate.lean`, `G3LeftInverse.lean`, `G3Coeff.lean`, `DegreeBounds.lean` | **partial** | 左逆存在与次数界已有；缺 (iii)⇒(iv) 的有理化、(iv)⇒(v) 的系数比较、(v)⇒(i) 的复点代入的完整五条链 |
@@ -220,7 +220,7 @@ PaperI/GramKernel.lean，维数约定与论文一致：P : Matrix (Fin q) (Fin �
 
 一个只读子 agent 逐条核对 §III-D 与论文（未改文件）；确认维数未交换、CB 方向正确、`K` 定义、窗口索引、`2ω` 列数均一致。发现与处置：
 
-**D1（最重要，未修）**：`windowMinorFamily`（子集索引）与 Claim 11/12 用的 `minorFamily`（注入映射索引）不是同一个族。对每个子集对，注入族里有 `(ω!)²` 个带符号重复，故 `ZᵀZ_Lean = (ω!)² · ZᵀZ_paper`、行空间相同。Claim 11/12 的等价在数学上不受影响（正因子/行空间不变），但“证书矩阵”与论文的 `Z_Q` 字面上不同，且 §III-D 压缩恒等式只对子集族成立。下一步：证桥接引理 `rowSpace (windowMatrix minorFamily) = rowSpace (windowMatrix windowMinorFamily)`（`windowSet` 相同 + 每个注入子式 = ± 对应子集子式）。
+**D1（进行中；单子式符号关系已完成）**：`windowMinorFamily`（子集索引）与 Claim 11/12 用的 `minorFamily`（注入映射索引）不是同一个族。单子式符号关系已在 `maximalMinor_injective_eq_signed_image`（commit `86a7f09`）中证明：每个注入子式 = 两个置换符号之积 × 对应子集子式；尚缺系数关系、窗口行关系、行空间相等、Gram `(ω!)²` 比例、证书等价五步。原始诊断：对每个子集对，注入族里有 `(ω!)²` 个带符号重复，故 `ZᵀZ_Lean = (ω!)² · ZᵀZ_paper`、行空间相同。Claim 11/12 的等价在数学上不受影响（正因子/行空间不变），但“证书矩阵”与论文的 `Z_Q` 字面上不同，且 §III-D 压缩恒等式只对子集族成立。下一步：证桥接引理 `rowSpace (windowMatrix minorFamily) = rowSpace (windowMatrix windowMinorFamily)`（`windowSet` 相同 + 每个注入子式 = ± 对应子集子式）。
 
 **D2**：Claim 12 只形式化了复合形式（`rank ⟺ ∃x, ZᵀZx=e0`）；中间 `e0 ∈ rowZ` 由 `gram_certificate` 可得但未单独声明。可接受。
 
