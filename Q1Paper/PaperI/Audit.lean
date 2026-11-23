@@ -344,3 +344,10 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms exists_rat_solution_of_exists_real_solution_arb
 #print axioms exists_mulVec_rat_solution_of_exists_mulVec_real_solution
 #print axioms rank_map_ratReal_arb
+#print axioms Q1Paper.exists_basis_matrix_of_submodule
+#print axioms Q1Paper.exists_kernel_basis_matrix
+#print axioms Q1Paper.exists_kernel_basis_matrix_of_finrank
+#print axioms Q1Paper.exists_rat_bounded_bezout_of_real_bounded_bezout
+#print axioms Q1Paper.exists_rat_bounded_bezout_of_no_common_root
+#print axioms Q1Paper.claim16_iii_implies_iv_of_gcd_isConst
+#print axioms Q1Paper.claim16_ii_implies_iv_rat

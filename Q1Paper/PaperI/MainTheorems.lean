@@ -82,6 +82,8 @@ import Q1Paper.PaperI.SolveCriterion
 import Q1Paper.PaperI.Hadamard
 import Q1Paper.PaperI.CostBareiss
 import Q1Paper.PaperI.RatDescent
+import Q1Paper.PaperI.KernelBasis
+import Q1Paper.PaperI.BezoutBounded
 
 /-!
 ## What is imported here
