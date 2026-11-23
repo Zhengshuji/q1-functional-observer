@@ -255,3 +255,10 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.claim16_ii_implies_iv
 #print axioms Q1Paper.claim16_iii_implies_iv
 #print axioms Q1Paper.claim16_iii_implies_i
+#print axioms Q1Paper.Thm5.encodes
+#print axioms Q1Paper.Thm5.DEC_of_encodes
+#print axioms Q1Paper.Thm5.v_implies_i_self
+#print axioms Q1Paper.Thm5.v_implies_i_real
+#print axioms Q1Paper.Thm5.no_common_root_of_spectral
+#print axioms Q1Paper.Thm5.exists_coeff_left_inverse_real
+#print axioms Q1Paper.Thm5.coeff_iff_spectral

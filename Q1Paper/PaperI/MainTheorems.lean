@@ -68,6 +68,7 @@ import Q1Paper.PaperI.DesnanotJacobi
 import Q1Paper.PaperI.BareissTableau
 import Q1Paper.PaperI.BareissAssemble
 import Q1Paper.PaperI.Claim16
+import Q1Paper.PaperI.Theorem5
 
 /-!
 ## What is imported here
