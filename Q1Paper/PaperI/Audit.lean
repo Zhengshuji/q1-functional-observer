@@ -402,3 +402,8 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.PaperI.ComplexityCounts.bareiss_total_bit_cost_le_quadratic_one_million_false
 #print axioms Q1Paper.theorem1_conditional
 #print axioms Q1Paper.theorem1_conditional_beta_zero
+#print axioms Q1Paper.theorem1_conditional_strong
+#print axioms Q1Paper.theorem1_bound_strong
+#print axioms Q1Paper.renegarSpecStrong_inhabited
+#print axioms Q1Paper.theorem1_conditional_strong_instance
+#print axioms Q1Paper.instance_not_beta_zero
