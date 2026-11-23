@@ -1771,6 +1771,14 @@ This subsection places the decision problem at a prescribed order in the existen
 For every fixed $q$, $\mathrm{DEC}(q)\in\exists\mathbb R$. Consequently the threshold problem $\mathrm{MINDEC}(Q)$ is in $\exists\mathbb R$ for every $Q$.
 \end{thm}
 
+\noindent\emph{Convention.} Throughout this section the spectral condition $(5b)$ is quantified over
+$\lambda\in\mathbb C$, not over $\lambda\in\mathbb R$; the two are not equivalent (\emph{e.g.}\ the
+pencil $\lambda^2+1$ has no real root while $\operatorname{rank}(i\cdot1-A)=1$ for the rotation
+$A=\begin{smallmatrix}0&-1\\1&0\end{smallmatrix}$), and the encoding below forces full rank at every
+\emph{complex} $\lambda$. Accordingly the Lean development states the equivalence of
+Theorem~\ref{thm:existsr} against the complexified version $\mathrm{DEC}_{\mathbb C}$ of the decision
+problem, not against its real-$\lambda$ reading.
+
 \begin{proof}
 The construction below provides, for each $\omega=0,\dots,\min(q,k)$, an existential formula
 $\Phi_\omega$, and establishes three separate statements: (i) $\Phi_\omega$ has polynomial size,
@@ -2160,7 +2168,12 @@ differ only by a constant factor; both give $n\tau+O(n\log n)$). With $M\le2n^3$
 $\tau_1\le61n^3\mathcal L$ and $\operatorname{bitLen}(M!)\le M\log_2M\le10n^4$, this is at most
 $122n^6\mathcal L+10n^4+1\le123n^6\mathcal L$. The
 elimination performs $O(M^3)\le8n^9$ arithmetic operations on integers of at most
-$123n^6\mathcal L$ bits, hence $O(n^{21}\mathcal L^2)$ bit operations. If the rational coefficients of
+$123n^6\mathcal L$ bits, hence $O(n^{21}\mathcal L^2)$ bit operations. Here every arithmetic operation
+is charged $O(B^2)$ for operands of $B$ bits, which is the correct charge because the elimination is
+fraction-free: each intermediate entry of the tableau is an integer, \emph{i.e.}\ its denominator is
+$1$, so the divisions are exact integer divisions rather than rational divisions followed by a gcd
+normalisation (charging the latter would give $O(n^{27}\mathcal L^4)$, a different and weaker bound).
+If the rational coefficients of
 \eqref{eq:R0} are treated directly as integers of bit length $\tau_0\le20n^2\mathcal L$ (the convention
 of the main text), the same computation gives $O(n^{19}\mathcal L^2)$ instead; both bounds are
 polynomial, and the exponent in the main theorem is the one obtained here.
