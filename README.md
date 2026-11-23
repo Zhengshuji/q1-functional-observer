@@ -1,84 +1,93 @@
-# Parameterized algorithms for functional observer feasibility — artifact
+# Functional observer feasibility — artifact
 
-This repository contains the Lean formalization, the exact verification scripts and the
-LaTeX source of the paper
+This repository is the artifact for the paper
 
 > **Parameterized algorithms for functional observer feasibility**
-> (anonymous submission; the author block is empty by design).
+
+It contains the Lean 4 formalization, the exact rational verification scripts, and the
+LaTeX sources of the four papers in the series.
 
 The paper studies the decision complexity of minimum-order functional observer design:
-given $(A,C,L_0)$ and a prescribed order $q$, decide whether an observer $L=[L_0;R]$ of
-order $q$ exists. It proves two parameterized upper bounds (fixed $q$; fixed effective
-dimension $\kappa_{\rm obs}=r\,\mathrm{rank}[N\ AN]$), closes the zero-free-row case with
-a finite rational linear system, and records membership in $\exists\mathbb R$.
+given $(A,C,L_0)$ and a prescribed order $q$, decide whether an observer
+$L=[L_0;R]$ of order $q$ exists. It proves two parameterized upper bounds (fixed $q$;
+fixed effective dimension $\kappa_{\rm obs}=r\,\mathrm{rank}[N\ AN]$), closes the
+zero-free-row case with a finite rational linear system, and records membership in
+$\exists\mathbb R$.
 
 ## Layout
 
 ```
-lean-toolchain, lakefile.toml, Q1Paper.lean   # Lean project (Mathlib pinned to v4.35.0)
-Q1Paper/                                      # the Lean sources
-  Basic.lean  Compression.lean  FreeRows.lean  RankConsistency.lean
-  SpectralCertificate.lean  FixedOrder.lean  FPT.lean  Audit.lean  Legacy/
-scripts/check.sh                              # lake build + Audit.lean + axiom audit
-verification/                                 # exact rational checks (Python + sympy)
-paper/                                        # LaTeX source and compiled PDF
-  paper_I_dec.tex                 # decision complexity (Paper I)
-  paper_II_minorder.tex           # minimum order (Paper II)
-  hyperplane_layer.tex            # the hyperplane layer (Paper III)
+paper/          the papers: .tex and .pdf only
+                paper_I_dec            decision complexity (Paper I)
+                paper_II_minorder      minimum order (Paper II)
+                paper_III_hyperplane   the hyperplane layer (Paper III)
+                paper_IV_c2            the c2 layer (Paper IV)
+docs/           audit trail and handoff documents
+                PAPER_I_FORMALIZATION_MAP.md   per-claim formalization status (the map)
+                PAPER_I_MASTER_ROADMAP.md      the plan and its progress
+                PAPER_I_MATH_AUDIT.md          independent audit, with counterexamples
+                PAPER_I_CLAIM19_CRAMER.md      the Cramer re-derivation of Claim 19
+                PAPER_I_REUSE_AUDIT.md         theorem-level reuse audit of external Lean code
+                LEAN_MAP.md, REPLY_from_paper_agent.md
+Q1Paper/        Lean sources
+                Q1Paper/            the project layer (row spaces, projections, rank identities)
+                Q1Paper/PaperI/     the Paper I modules (40 files), plus Audit.lean
+                AGENTS.md           handoff notes (environment, pitfalls, API index)
+scripts/        check.sh, check_paperI_axioms.py, promote_paperI.py
+verification/   exact rational checks; see verification/README.md for the index
+.github/        CI: a Lean job, a paper job, a verification job
 ```
 
 ## Build
 
-Lean (requires `elan`; Mathlib is fetched on the first build):
+Lean (`elan` required; Mathlib is pinned by `lake-manifest.json`):
 
 ```text
 lake exe cache get
 lake build
-lake env lean Q1Paper/Audit.lean     # axiom audit: only propext, Classical.choice, Quot.sound
+lake build Q1Paper.PaperI.MainTheorems     # the Paper I entry point
+lake env lean PaperI.lean
+lake env lean Q1Paper/PaperI/Audit.lean    # per-declaration axiom audit
 bash scripts/check.sh
 ```
 
-Paper (requires TeX Live):
+Papers (`pdflatex`, two passes, or `latexmk -pdf`):
 
 ```text
 cd paper && pdflatex paper_I_dec.tex && pdflatex paper_I_dec.tex
-cd paper && pdflatex paper_II_minorder.tex && pdflatex paper_II_minorder.tex
-cd paper && pdflatex hyperplane_layer.tex && pdflatex hyperplane_layer.tex
 ```
 
-## What is verified, and how
+## What is kernel-checked
 
-| Component | Evidence |
-|---|---|
-| Compression criterion `ker_compressed_iff` | Lean (`Compression.lean`) |
-| Free-pair space, $k\le d_0\le\kappa_{\rm obs}$ | Lean (`FreeRows.lean`) |
-| Rank-consistency (subspace form) | Lean (`RankConsistency.lean`) |
-| Bézout for two polynomials, left inverse $\Rightarrow$ injective | Lean (`SpectralCertificate.lean`, `FPT.lean`) |
-| Bézout degree bound for $s$ polynomials | paper proof (Appendix A) |
-| Cauchy–Binet Gram-compression | paper proof + exact checks (`c317`) |
-| $r=0$ linear system (R0) | paper proof + exact checks (`c318`) |
-| Coefficient bit-size bounds | paper proof |
-| $\exists\mathbb R$ encoding | paper proof + witness check (`c319`) |
-| Hyperplane layer: direction theorem (admissible kernel direction $=$ eigenvector of the compression) | Lean (`HyperplaneDirection.lean`) |
-| Hyperplane layer: prescribed-row orthogonality and independence of $\delta$ | Lean (`HyperplanePrescribed.lean`) |
+`Q1Paper/PaperI/Audit.lean` prints the axioms of 275 declarations; the accepted set is
+exactly `propext`, `Classical.choice`, `Quot.sound` (checked by
+`scripts/check_paperI_axioms.py`, which fails on anything else, including `sorryAx`).
+There is no `sorry`, no `admit` and no custom axiom in the tree.
 
-The Python scripts are **finite exact checks, not proofs**; each prints the instance data
-it checks and asserts the basic invariants first. Run them from `verification/`:
+Covered by kernel-checked theorems: the compression and rank identities (Claims 1-2); the
+row-pair, sandwich, W-condition, structural, monotonicity and rank-consistency statements
+(Claims 3-8) bridged to the paper's wording; the Bezout/window chain, the Gram certificate
+and the full-column-rank pencil (Claims 9-12), including the square Cauchy-Binet expansion
+and the bridge between the injective-map and subset-indexed minor families; rational bases
+and annihilators with the paper's explicit constant (Claim 13); the intersection
+$V=\mathcal T\cap(S\times S)$ as the image of the equalizer (Claim 14); the arithmetic
+skeleton of the coefficient bound (Claim 15(iv)) and the zero-free-row five-condition chain
+with the gcd formulation (Claim 16); the rank factorization with explicit left and right
+inverses; the existential-real encoding of Theorem 5 in both directions (with the paper's
+complex-$\lambda$ form of (5b)); Hadamard's inequality with the sharp integer bound on
+$\operatorname{bitLen}\det$ (used by Claim 21); and the Bareiss tableau identity with its
+bit-length corollaries.
 
-```text
-python c312_fixed_q_factor.py
-python c317_cauchy_binet_random.py
-python c318_r0_linear_system.py
-python c319_encoding_and_rowspace.py
-```
+**Not formalized, and explicitly marked paper-level in `docs/`:** the algorithmic and
+complexity assertions — that the objects are *computed within a stated number of bit
+operations* (Claims 13-15, Theorems 1-2, Proposition 4, Corollaries 3 and 6). The Lean
+statements are the mathematical specifications together with the explicit bit-length
+bounds; the cost model being built for the rest lives in `Q1Paper/PaperI/CostCore.lean`.
+`docs/PAPER_I_FORMALIZATION_MAP.md` records, per claim, what is proved and what is
+restricted.
 
-## License
+## Status labels
 
-Code (Lean sources, scripts): MIT — see `LICENSE`.
-Paper (LaTeX source and PDF): CC BY 4.0.
-
-## Status
-
-Work in progress: the Mathlib pin is fixed by `lean-toolchain`; a `lake-manifest.json`
-will be committed once the project is built with the public dependency graph. The paper
-is under revision; see the repository history.
+`[Lean]` = kernel-checked; `[Lean-conditional]` = kernel-checked under explicitly listed
+hypotheses; `[Paper proof]` = a mathematical argument or a complexity claim that is not
+formalized.
