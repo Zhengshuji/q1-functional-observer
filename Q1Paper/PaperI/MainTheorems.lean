@@ -106,6 +106,7 @@ import Q1Paper.PaperI.GramRows
 import Q1Paper.PaperI.CompressedGram
 import Q1Paper.PaperI.DecR0Iface
 import Q1Paper.PaperI.DenOne
+import Q1Paper.PaperI.FinReindex
 
 /-!
 ## What is imported here

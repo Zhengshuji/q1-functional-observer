@@ -451,3 +451,7 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.PaperI.windowGram_den_eq_one
 #print axioms Q1Paper.PaperI.windowGram_entry_bitLen_le_of_int
 #print axioms Q1Paper.PaperI.poly_coeff_int_den_eq_one
+#print axioms Q1Paper.finSumFinZero_apply_inl
+#print axioms Q1Paper.rank_reindex_finSumFinZero
+#print axioms Q1Paper.rank_reindex_finSumFinZero_fin
+#print axioms Q1Paper.exists_fullColumn_block
