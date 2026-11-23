@@ -92,6 +92,7 @@ import Q1Paper.PaperI.BezoutBounded
 import Q1Paper.PaperI.ChartCount
 import Q1Paper.PaperI.TauMConst
 import Q1Paper.PaperI.ColsConcat
+import Q1Paper.PaperI.TotalCost
 
 /-!
 ## What is imported here
