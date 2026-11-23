@@ -348,10 +348,5 @@ theorem matrix_map_comp_fst_K0_eq_inf {a b d : ℕ}
 
 /-! ### 6. Axiom footprint (evidence that nothing is assumed) -/
 
-#print axioms map_comp_fst_K0_eq_inf
-#print axioms span_image_basis_eq_inf
-#print axioms linearIndependent_image_basis_iff
-#print axioms ker_restrictFst_eq_bot_iff
-#print axioms matrix_map_comp_fst_K0_eq_inf
 
 end Q1Paper.PaperI.Claim14
