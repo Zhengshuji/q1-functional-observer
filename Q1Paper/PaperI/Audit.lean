@@ -280,3 +280,8 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.Claim15iv.gramEntry_bitLen_le_47
 #print axioms Q1Paper.Claim15iv.coefficient_bitLen_le_240
 #print axioms Q1Paper.Claim15iv.coefficient_of_minor_gram_le_240
+#print axioms Q1Paper.PaperI.Claim14.map_comp_fst_K0_eq_inf
+#print axioms Q1Paper.PaperI.Claim14.span_image_basis_eq_inf
+#print axioms Q1Paper.PaperI.Claim14.linearIndependent_image_basis_iff
+#print axioms Q1Paper.PaperI.Claim14.ker_restrictFst_eq_bot_iff
+#print axioms Q1Paper.PaperI.Claim14.matrix_map_comp_fst_K0_eq_inf
