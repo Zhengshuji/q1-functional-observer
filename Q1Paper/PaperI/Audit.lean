@@ -426,3 +426,8 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.fptChartSpecInstance_cost_pos
 #print axioms Q1Paper.theorem2_fpt_conditional_instance
 #print axioms Q1Paper.fptChartCount_le_four_pow
+#print axioms Q1Paper.prop4_r0_iff_spectral
+#print axioms Q1Paper.decR0_correct
+#print axioms Q1Paper.prop4_compressed
+#print axioms Q1Paper.decR0_iff_compressedSpectral
+#print axioms Q1Paper.rank_map_ratComplex

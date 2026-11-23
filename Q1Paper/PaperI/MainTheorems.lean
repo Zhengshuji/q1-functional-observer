@@ -100,6 +100,7 @@ import Q1Paper.PaperI.RenegarParams
 import Q1Paper.PaperI.FptCore
 import Q1Paper.PaperI.Claim4Converse
 import Q1Paper.PaperI.FptSpec
+import Q1Paper.PaperI.Prop4
 
 /-!
 ## What is imported here
