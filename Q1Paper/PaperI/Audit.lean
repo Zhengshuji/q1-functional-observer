@@ -262,3 +262,7 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.Thm5.no_common_root_of_spectral
 #print axioms Q1Paper.Thm5.exists_coeff_left_inverse_real
 #print axioms Q1Paper.Thm5.coeff_iff_spectral
+#print axioms Q1Paper.PaperI.RankFactorization.exists_factor_through_cols
+#print axioms Q1Paper.PaperI.RankFactorization.exists_rank_factorization_of_rank
+#print axioms Q1Paper.PaperI.RankFactorization.exists_rank_factorization
+#print axioms Q1Paper.PaperI.RankFactorization.exists_rank_factorization_arb
