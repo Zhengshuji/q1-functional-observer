@@ -412,3 +412,8 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.theorem1_conditional_params_instance
 #print axioms Q1Paper.chartSpec_empty
 #print axioms Q1Paper.theorem1_bound_params_fixedDeg
+#print axioms Q1Paper.sum_choose_eq_two_pow
+#print axioms Q1Paper.chart_count_le_four_pow
+#print axioms Q1Paper.fpt_chart_count_le
+#print axioms Q1Paper.fpt_ell_le_kappa_of_fields
+#print axioms Q1Paper.fpt_ell_sq_le_kappa_sq_of_fields
