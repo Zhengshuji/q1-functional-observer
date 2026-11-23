@@ -86,3 +86,13 @@ Scripts kept at `/tmp/audit/01…24_*.sh` with outputs `/tmp/audit/*_out.txt`; t
 - **Paper I claim numbering** (C14 ↔ gap 8, C16 ↔ gap 7) is taken from the brief; the files confirm C14 uses the finrank formulas (`Claim14.lean:113/:132`) and C16 the gcd route (`C16Gcd.lean`), but I did not read the paper itself.
 - `MatDecompFormal` / `lean-computational-mathematics` were not built (toolchain mismatch); their `sorry` counts are textual greps, and MatDecompFormal's “0 sorry” is corroborated only by its README plus my grep.
 - The scratch file `Q1Paper/ScratchReuseAudit.lean` **was created** (the one file the brief allows). It contains only `#check`s, is imported by nothing, and compiles with exit 0. No existing file was modified.
+
+## §6 Progress against this audit
+
+| Gap | Verdict | Status |
+|---|---|---|
+| 5 (solvability criterion) | write ourselves (~30 lines) | **done** — `PaperI/SolveCriterion.lean` (commit `6158559`): `exists_mulVec_eq_iff_mem_rowSpace`, `exists_mulVec_eq_iff_rank_fromRows`, `rank_fromRows_eq_rank_iff_mem`, `not_exists_mulVec_iff_rank_lt`, proved by reusing `rank_fromRows_eq_rank_iff` and `rank_fromRows_comm`.  Note: the literal `fromRows A b` is ill-typed (column indices differ); the criterion is stated for the column augmentation, transposed. |
+| 6 (Hadamard) | port lemma | **in progress** — `ScratchHadamard.lean`; the port is being finished (the earlier attempt was interrupted mid-fix). |
+| 1 / 2 / 4 (computable rank, nullspace, RREF existence) | reuse after type conversion | **deferred** — requires either a Mathlib bump to `6b7abb3c` or a ~400-line hand port; recorded, not attempted. |
+| 3 / 7 / 8 / 9 | reuse directly | no action needed (Mathlib already provides them; Claim 14 and Claim 16 already consume them). |
+| 10 (Smith/PLU/QR/Jordan) | not needed | confirmed by grep over all PaperI files. |
