@@ -82,3 +82,30 @@ adds the audit lines, builds, runs the axiom check and prints the count. Then co
 Subagents must not drive the browser (one tab, shared with the main agent). If a design question
 is unclear, put the precise question in the report; the main agent relays it to ChatGPT and
 relaunches with the answer embedded. Do not block on the browser.
+
+## 7. What Mathlib already has (do not re-prove these)
+
+Verified in the pinned checkout (Mathlib rev `f0b4c81`, toolchain `v4.35.0`) — see
+`paper/PAPER_I_REUSE_AUDIT.md` for the full table:
+
+- Echelon / RREF: `Matrix.IsRowEchelon`, `Matrix.IsReducedRowEchelon`, `Matrix.IsPivotedBy`,
+  `Matrix.IsPivotedBy.rank_eq` (`A.rank = #{i | l i ≠ ⊤}`), `Echelon.Decomposition.rank_eq`,
+  `Matrix.IsRowEchelon.det_eq` — in `Mathlib/LinearAlgebra/Matrix/Echelon/`.
+- gcd / coprimality: `EuclideanDomain.gcd_isUnit_iff` (`IsUnit (gcd x y) ↔ IsCoprime x y`),
+  `Finset.gcd_eq_sum_mul`, `Polynomial.gcd_map`. **`Polynomial.isCoprime_iff_*` does NOT exist**;
+  phrase coprimality as `IsUnit (gcd f g)`.
+- Dimensions: `Submodule.finrank_sup_add_finrank_inf_eq` (sup first), `Submodule.finrank_map_le`,
+  `LinearEquiv.finrank_map_eq`, `Submodule.finrank_mono`. No `finrank_comap` — derive it.
+- Rank: `Matrix.rank_submatrix_le`, `Matrix.rank_reindex`, `Matrix.rank_of_det_ne_zero`,
+  `Matrix.rank_eq_finrank_span_row`, `Matrix.rank_eq_finrank_span_cols`,
+  `Matrix.mulVec_surjective_iff_rank_eq_card`.
+- Determinants: Leibniz `Matrix.det_apply`, entrywise `Matrix.det_le`. **Hadamard is absent** from
+  Mathlib; the sharp form lives in `hex-matrix-theory` as `Matrix.norm_det_le_prod_norm_column`
+  (port candidate, 106 lines, no `sorry`).
+- Not present in Mathlib: a computable rank, a nullspace basis, RREF existence (only the
+  predicates), matrix Smith/PLU/QR/Jordan forms. `hex-row-reduce` + `hex-row-reduce-theory` have
+  them, but pin a different Mathlib rev (`6b7abb3c` vs ours `f0b4c81`), so adopting them means a
+  Mathlib bump or a hand port.
+
+The project's own `Q1Subspace.rowSpace` / `mem_rowSpan_iff_exists_vecMul` / `rank_fromRows_eq_rank_iff`
+already fill the row-space gap; use those before reaching for an external package.
