@@ -435,3 +435,8 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.ScratchGramRows.gramEntry_bitLen_le_of_rows_log
 #print axioms Q1Paper.ScratchGramRows.gramEntry_bitLen_le_of_rows_sharp
 #print axioms Q1Paper.ScratchGramRows.bitLenInt_sum_mul_le_rows
+#print axioms Q1Paper.PaperI.compressedGram_entry_bitLen_le
+#print axioms Q1Paper.PaperI.windowGram_entry_bitLen_le
+#print axioms Q1Paper.PaperI.windowGram_eq_compressedGramOf
+#print axioms Q1Paper.PaperI.compressedGram_entry_eq_intCast
+#print axioms Q1Paper.PaperI.bitLenInt_sum_le_card_size

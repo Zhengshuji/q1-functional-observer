@@ -59,7 +59,7 @@ cd paper && pdflatex paper_I_dec.tex && pdflatex paper_I_dec.tex
 
 ## What is kernel-checked
 
-`Q1Paper/PaperI/Audit.lean` prints the axioms of 368 declarations; the accepted set is
+`Q1Paper/PaperI/Audit.lean` prints the axioms of 373 declarations; the accepted set is
 exactly `propext`, `Classical.choice`, `Quot.sound` (checked by
 `scripts/check_paperI_axioms.py`, which fails on anything else, including `sorryAx`).
 There is no `sorry`, no `admit` and no custom axiom in the tree.
