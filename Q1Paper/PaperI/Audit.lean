@@ -353,3 +353,8 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.claim16_ii_implies_iv_rat
 #print axioms Q1Paper.Thm5.DECℂ_iff_exists_compressed_auto
 #print axioms Q1Paper.Thm5.DECℂ_iff_exists_encodes_auto
+#print axioms Q1Paper.PaperI.Chart14.exists_chart_bases
+#print axioms Q1Paper.PaperI.Chart14.inf_eq_map_K0
+#print axioms Q1Paper.PaperI.Chart14.exists_inf_basis_matrix
+#print axioms Q1Paper.PaperI.Chart14.exists_chart_completion
+#print axioms Q1Paper.PaperI.Chart14.image_basis_not_basis
