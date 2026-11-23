@@ -30,7 +30,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        root: [paper_I_dec, paper_II_minorder, hyperplane_layer]
+        root: [paper_I_dec, paper_II_minorder, paper_III_hyperplane]
     steps:
       - uses: actions/checkout@v4
       - name: Compile ${{ matrix.root }}

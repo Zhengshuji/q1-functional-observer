@@ -410,7 +410,7 @@ so that $W_0=\operatorname{row}(L_0M)\subseteq W\subseteq\mathcal T=\operatornam
 Let
 \begin{equation}\label{eq:ell}
 \begin{gathered}
-d=\dim\mathcal T,\qquad s_0=\dim W_0,\qquad m=d-s_0,\\
+d_0=\dim\mathcal T,\qquad s_0=\dim W_0,\qquad m=d_0-s_0,\\
 \ell=\operatorname{rank}(AN)\le k,\qquad S=\operatorname{row}(AN)\subseteq\mathbb R^k ,
 \end{gathered}
 \end{equation}
@@ -545,14 +545,14 @@ H=XB,\qquad B\in\mathbb R^{\omega\times k},\qquad B_{:,J_p}=I_\omega .
 \end{equation*}
 If $H_A=FH$, put $G=FX\in\mathbb R^{q\times\omega}$.
 Then
-\begin{equation*}
+\begin{equation}
 H_A=GB,\qquad P(\lambda)=(\lambda X-G)B .
-\end{equation*}
+\end{equation}
 Conversely, if $H_A=GB$ and $X_LX=I_\omega$, where $X_L$ denotes a left
 inverse of $X$, then $F=GX_L$ satisfies
-\begin{equation*}
+\begin{equation}
 FH=GX_LXB=GB=H_A .
-\end{equation*}
+\end{equation}
 
 \paragraph*{Parametric linear system}\label{sec:param}
 Let $D$ be a rational matrix with $\ker D=\mathcal T$. For any fixed row index 
@@ -561,18 +561,18 @@ $i$, the parameter matrix $B$ is subject to the target constraints
 X_iB=h_i^0\in\mathbb R^{1\times k},\qquad G_iB=g_i^0\in\mathbb R^{1\times k},
 \end{equation*}
 as well as the structural constraint
-\begin{equation*}
+\begin{equation}
 D\begin{bmatrix}(X_iB)^{\mathsf T}\\ (G_iB)^{\mathsf T}\end{bmatrix}=0.
-\end{equation*}
+\end{equation}
 which ensures that the generated row pairs belong to the attainable subspace $\mathcal T$.
 
 Given the pivot factorization condition $B_{:,J_p}=I_\omega$, the known entries of 
 $B$ can be eliminated. Let $b$ denote the vectorization of the remaining unknown entries of $B$. The above constraints then reduce to a standard linear system:
 
 
-\begin{equation*}
+\begin{equation}
 \mathcal M(X,G)\,b=c(X,G).
-\end{equation*}
+\end{equation}
 
 Table~\ref{tab:certdim} records the sizes of the objects that enter the certificate; the last row is
 the reason the certificate is governed by $\omega$ rather than by the number of maximal minors.
@@ -604,16 +604,16 @@ For real matrices $M,c$,
 \exists b:\ Mb=c
 \end{equation*}
 if and only if
-\begin{equation*}
+\begin{equation}
 \operatorname{rank}(MM^{\mathsf T})
 =\operatorname{rank}(MM^{\mathsf T}+cc^{\mathsf T}).
-\end{equation*}
+\end{equation}
 Equivalently, with $\Gamma=MM^{\mathsf T}$ and
 $\Gamma'=MM^{\mathsf T}+cc^{\mathsf T}$,
-\begin{equation*}
+\begin{equation}
 \bigvee_{t=0}^{d_1}
 \left[e_t(\Gamma)>0\wedge e_{t+1}(\Gamma)=0\wedge e_{t+1}(\Gamma')=0\right],
-\end{equation*}
+\end{equation}
 where $d_1=\min(\text{rows},\text{cols})$ of $M$, and $e_j$ is the
 $j$-th elementary symmetric polynomial of the eigenvalues, with the convention $e_j=0$ whenever $j$
 exceeds the size of the matrix.
@@ -624,8 +624,8 @@ By the rank criterion for linear systems \cite[Ch.~0]{hj13}, $Mb=c$ has a soluti
 $\operatorname{rank}[M\ c]=\operatorname{rank}M$. Since
 \begin{equation*}
 \begin{gathered}
-\operatorname{im}[M\ c]=\operatorname{im}M+\operatorname{span}\{c\},\qquad
-\operatorname{im}(MM^{\mathsf T})=\operatorname{im}M,\\
+\operatorname{im}[M\ c]=\operatorname{im}M+\operatorname{span}\{c\}=\operatorname{im}M,\\
+\operatorname{im}(MM^{\mathsf T})=\operatorname{im}M,\qquad
 \operatorname{im}(MM^{\mathsf T}+cc^{\mathsf T})=\operatorname{im}[M\ c],
 \end{gathered}
 \end{equation*}
@@ -633,7 +633,7 @@ the two rank equalities of the statement describe the same condition. For a posi
 $\Gamma$ the elementary symmetric functions of its eigenvalues satisfy
 $e_j(\Gamma)>0\iff\operatorname{rank}\Gamma\ge j$ \cite[Ch.~4]{hj13}, so the displayed disjunction
 holds exactly when $t=\operatorname{rank}(MM^{\mathsf T})$, and
-$e_{t+1}(\Gamma')=0$ together with $\Gamma'\succeq\Gamma$ forces
+$e_{t+1}(\Gamma')=0$ together with $\Gamma'\succeq\Gamma\succeq0$ forces
 $\operatorname{rank}(MM^{\mathsf T}+cc^{\mathsf T})=t$.
 \end{proof}
 
@@ -645,9 +645,9 @@ Since $B$ has full row rank,
 =\operatorname{rank}(\lambda X-G).
 \end{equation*}
 Thus \eqref{eq:5b} is equivalent to
-\begin{equation*}
+\begin{equation}
 \operatorname{rank}(\lambda X-G)=\omega,\qquad\forall\lambda\in\mathbb C .
-\end{equation*}
+\end{equation}
 
 \paragraph*{The spectral certificate}\label{sec:spectrum}
 
@@ -666,9 +666,9 @@ The purpose of this bound is to make the degree window of the certificate finite
 Let $\omega\ge1$, let $s\ge1$, and let $f_1,\ldots,f_s\in\mathbb R[\lambda]$ have
 degree at most $\omega$ and no common complex root. Then there exist
 real polynomials $g_i$ with $\deg g_i<\omega$ such that
-\begin{equation*}
+\begin{equation}
 \sum_i g_i f_i=1 .
-\end{equation*}
+\end{equation}
 \end{claim}
 
 \begin{proof}
@@ -700,13 +700,13 @@ $Z_{(i,j),t}=c_{i,t-j}$. For a polynomial $p$ of degree at most
 $2\omega-1$, let $\operatorname{coef}(p)\in\mathbb R^{2\omega}$ be its
 coefficient vector in the basis $1,\lambda,\dots,\lambda^{2\omega-1}$.
 Then
-\begin{equation*}
+\begin{equation}
 \operatorname{row}Z=
 \Bigl\{
 \operatorname{coef}\Bigl(\textstyle\sum_i g_if_i\Bigr)
 :\ \deg g_i<\omega
 \Bigr\}.
-\end{equation*}
+\end{equation}
 \end{claim}
 
 \begin{proof}
@@ -737,11 +737,11 @@ $P(\lambda)=(\lambda I-F)H$ by Claim~\ref{lem:compression}(ii). Let $f_i$ be the
 $P(\lambda)$, and let $Z$ be the window
 matrix of Claim~\ref{lem:window} built from them, with $c_{i,a}$ the coefficient of $\lambda^a$
 in $f_i$; let $e_0=(1,0,\ldots,0)^{\mathsf T}\in\mathbb R^{2\omega}$. Then
-\begin{equation*}
+\begin{equation}
 \eqref{eq:5b}
 \iff e_0^{\mathsf T}\in\operatorname{row}Z
 \iff\exists x\in\mathbb R^{2\omega}:\ Z^{\mathsf T}Zx=e_0 .
-\end{equation*}
+\end{equation}
 \end{claim}
 
 \begin{proof}
@@ -773,15 +773,15 @@ rank; in the fixed-parameter algorithm of Section~\ref{sec:fpt} it is the pencil
 Let $X,G\in\mathbb R^{q\times\omega}$ with $\operatorname{rank}X=\omega\ge1$, put
 $Q(\lambda)=\lambda X-G$, and let $Z_Q$ be the window matrix of Claim~\ref{lem:window} built from the
 $\omega\times\omega$ maximal minors of $Q$, so that $Z_Q$ is determined by $X$ and $G$ alone. Then
-\begin{equation*}
+\begin{equation}
 \operatorname{rank}Q(\lambda)=\omega\ \ \forall\lambda\in\mathbb C
 \iff e_0^{\mathsf T}\in\operatorname{row}Z_Q ,
-\end{equation*}
+\end{equation}
 and, since $Z_Q$ is real,
-\begin{equation*}
+\begin{equation}
 e_0^{\mathsf T}\in\operatorname{row}Z_Q
 \iff\exists x\in\mathbb R^{2\omega}:\ Z_Q^{\mathsf T}Z_Qx=e_0 .
-\end{equation*}
+\end{equation}
 \end{claim}
 
 \begin{proof}
