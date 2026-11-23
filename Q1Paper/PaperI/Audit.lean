@@ -328,3 +328,8 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Subspace.rank_fromRows_eq_rank_iff_mem
 #print axioms Q1Subspace.not_exists_mulVec_iff_rank_lt
 #print axioms Q1Subspace.rank_le_rank_fromRows_right
+#print axioms Matrix.norm_det_le_prod_norm_column
+#print axioms Matrix.det_natAbs_le_of_entry_bound
+#print axioms Matrix.bitLenInt_det_le_hadamard
+#print axioms Matrix.bitLenInt_det_le_n_mul
+#print axioms Matrix.bitLenInt_det_le_n_mul_size_succ

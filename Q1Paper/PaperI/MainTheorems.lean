@@ -79,6 +79,7 @@ import Q1Paper.PaperI.T5Complete
 import Q1Paper.PaperI.T5DecC
 import Q1Paper.PaperI.CostCore
 import Q1Paper.PaperI.SolveCriterion
+import Q1Paper.PaperI.Hadamard
 
 /-!
 ## What is imported here
