@@ -163,3 +163,35 @@ Warnings to keep in mind: (a) row-space equality and the Gram identity are indep
 may be used as a premise for the other (already respected: `RowSpanBridge` and `GramInj` are separate);
 (b) the image of a basis under a linear map spanning the target space is not automatically a basis;
 (c) `[Paper proof]` must never be silently upgraded to `[Lean]`.
+
+## 12. Status after the four closing items (2026-11-23)
+
+Integrated (all kernel-checked, no `sorry`, audit 233 declarations, CI green):
+
+- `PaperI/RationalBasis.lean` — **Claim 13** (`lem:rationalbasis`) with the paper's exact constant
+  `tauM`; kernel basis, row-space basis and annihilator, all entries bounded (commit `7c27898`).
+- `PaperI/Claim14.lean` — **Claim 14** core: the intersection `V = T cap (S x S)` as the image of the
+  equalizer `(u,v) |-> psi u - phi v`, plus the "generating set vs basis" criterion and the dependency
+  removal via the first isomorphism theorem (commit `f0a28ff`).
+- `PaperI/Claim15iv.lean` — **Claim 15(iv)** arithmetic skeleton: the chain
+  `X -> Z -> S -> beta` with the constants 22/47/240 pinned hypothesis-free (commit `26231ea`).
+- `PaperI/RankFactorization.lean` — rank factorization with explicit left/right inverses (commit `baaa7f4`).
+- `PaperI/T5Complete.lean` — **Theorem 5** completeness and the two directions combined; stated with
+  the paper's complex-lambda (5b), with the real-lambda counterexample recorded (commit `bd96554`).
+
+Acceptance table (from the external review):
+
+| item | status |
+|---|---|
+| Claims 1/2/9/10/11/12 | done |
+| §III-D compression + D1 bridge | done |
+| Claim 13 Bareiss / bit length / rank factorization | done |
+| Claim 13 rational basis existence + explicit bound | **done** |
+| Theorem 5 completeness | **done** (complex-lambda form) |
+| Claim 14 intersection (kernel-image + basis interface) | **done** |
+| Claim 15(iv) intermediate bounds => beta | **done** (skeleton) |
+| Three-state labelling | done (map + this roadmap) |
+
+Still paper-level by decision (route A): the "computed in polynomially many bit operations" clause of
+Claims 13/14/15, the `D`-form of (B2), the `omega = 0` branch of the encoding, and the literal gcd
+formulation of Claim 16(iii).  The paper's Claim 19 appendix still awaits independent review.

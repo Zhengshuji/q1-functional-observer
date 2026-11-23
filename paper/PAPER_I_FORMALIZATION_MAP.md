@@ -239,3 +239,7 @@ PaperI/GramKernel.lean，维数约定与论文一致：P : Matrix (Fin q) (Fin �
 **D10（Bareiss 设计复核，2026-11-23）**：论文 Claim 21 的 Bareiss 中间量界 `Mτ + (M/2)log₂M + 1` 依赖 **Hadamard 不等式**；仓库里只有 **Leibniz 界**（`abs_det_le_factorial_mul_pow`，给出 `nτ + bitLen(n!)`，其中 `bitLen(n!)` 约为 `n log₂ n`）。两者差常数因子 2，**复杂度结论不变**，但论文的显式常数不能从现有形式化推出。处置：附录改写成 `nτ + bitLen(n!)`（可检查的精确对象），注明 Hadamard 可锐化为 `(n/2)log₂n`；若坚持论文形式，须补 Hadamard 引理（Mathlib 无）。
 
 Bareiss 的其余结论（来自同一设计复核）：Bareiss 子式恒等式 = 带边 Desnanot–Jacobi（Sylvester）恒等式，是唯一实质数学缺口；仓库的 Cauchy–Binet 与 Mathlib 的 Schur 补引理都可支撑；无主元情形仅需「所有前主子式非零」；完全主元化只需 `±` 置换符号（已有 `det_submatrix_perm`）；秩亏情形建议只证「每个中间量是 ± 子式」，不形式化可执行的主元搜索。
+
+**D11（Claim 15(iv) 算术骨架复核，2026-11-23）**：附录里极大子式系数的 `22n³L` 是**绑定在 `X` 块的 `18n²L` 上**的；若子式含 `G` 块（界 `20n²L`），同一 Leibniz 论证给出的是 **`24n³L`**（`Claim15iv.minorBound_24_of_twenty`）。对最终 `n²¹L²` 无影响，但论文的显示常数应注明这一点。
+
+**D12（Theorem 5 完备性复核，2026-11-23）**：Lean 的 `PaperI.DEC` 对 `λ : K`（实）量化，而论文的 (5b) 是**复 λ**。两者**严格不等价**：旋转铅笔 `λ²+1` 在实 λ 上无根，但 `rank(i−A)=1`，故 `encodes` 的 S-块（强制每个复 z 满秩）在该例下无实解。因此完备性方向**不能从 `DEC` 推出**，`T5Complete.lean` 用复 λ 假设（论文约定）陈述；从 `DECℂ` 出发只差一条标准复化事实（实 `N` 是复化后 `ker[C_ℂA_ℂ; C_ℂ]` 的复基）。
