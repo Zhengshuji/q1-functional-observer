@@ -419,3 +419,10 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.fpt_ell_sq_le_kappa_sq_of_fields
 #print axioms Q1Paper.claim4_converse
 #print axioms Q1Paper.claim4_converse_zero
+#print axioms Q1Paper.theorem2_fpt_conditional
+#print axioms Q1Paper.theorem2_fpt_conditional_unconditional
+#print axioms Q1Paper.theorem2_fpt_bound
+#print axioms Q1Paper.fptChartSpec_inhabited
+#print axioms Q1Paper.fptChartSpecInstance_cost_pos
+#print axioms Q1Paper.theorem2_fpt_conditional_instance
+#print axioms Q1Paper.fptChartCount_le_four_pow
