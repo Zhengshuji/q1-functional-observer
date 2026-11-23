@@ -358,3 +358,10 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.PaperI.Chart14.exists_inf_basis_matrix
 #print axioms Q1Paper.PaperI.Chart14.exists_chart_completion
 #print axioms Q1Paper.PaperI.Chart14.image_basis_not_basis
+#print axioms Q1Paper.PaperI.ComplexityCounts.bareiss_update_count_le_cube
+#print axioms Q1Paper.PaperI.ComplexityCounts.bareiss_field_op_count_le
+#print axioms Q1Paper.PaperI.ComplexityCounts.bareissUpdateCount_eq_div
+#print axioms Q1Paper.PaperI.ComplexityCounts.factorial_bitlen_le
+#print axioms Q1Paper.PaperI.ComplexityCounts.bareiss_entry_den_eq_one
+#print axioms Q1Paper.PaperI.ComplexityCounts.bareiss_entry_bitLenRat_le_tauM
+#print axioms Q1Paper.PaperI.ComplexityCounts.bareiss_steps_cost_le
