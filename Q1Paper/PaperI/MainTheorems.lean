@@ -80,6 +80,8 @@ import Q1Paper.PaperI.T5DecC
 import Q1Paper.PaperI.CostCore
 import Q1Paper.PaperI.SolveCriterion
 import Q1Paper.PaperI.Hadamard
+import Q1Paper.PaperI.CostBareiss
+import Q1Paper.PaperI.RatDescent
 
 /-!
 ## What is imported here

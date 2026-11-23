@@ -333,3 +333,14 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Matrix.bitLenInt_det_le_hadamard
 #print axioms Matrix.bitLenInt_det_le_n_mul
 #print axioms Matrix.bitLenInt_det_le_n_mul_size_succ
+#print axioms Q1Complexity.BareissCost.bstep2Prog_value_eq_det
+#print axioms Q1Complexity.BareissCost.bstep2Prog_alg
+#print axioms Q1Complexity.BareissCost.bstep2Prog_bit
+#print axioms Q1Complexity.BareissCost.bstep2Prog_bit_le
+#print axioms Q1Complexity.BareissCost.batchProg_bit_eq_sum
+#print axioms Q1Complexity.BareissCost.batchProg_alg
+#print axioms Q1Complexity.BareissCost.batchProg_bit_le_uniform
+#print axioms exists_rat_solution_of_exists_real_solution
+#print axioms exists_rat_solution_of_exists_real_solution_arb
+#print axioms exists_mulVec_rat_solution_of_exists_mulVec_real_solution
+#print axioms rank_map_ratReal_arb
