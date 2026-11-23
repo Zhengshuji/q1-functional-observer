@@ -266,3 +266,8 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.PaperI.RankFactorization.exists_rank_factorization_of_rank
 #print axioms Q1Paper.PaperI.RankFactorization.exists_rank_factorization
 #print axioms Q1Paper.PaperI.RankFactorization.exists_rank_factorization_arb
+#print axioms Q1Paper.PaperI.tauM
+#print axioms Q1Paper.PaperI.exists_kernel_basis_bounded
+#print axioms Q1Paper.PaperI.exists_row_basis_bounded
+#print axioms Q1Paper.PaperI.exists_annihilator_bounded
+#print axioms Q1Paper.PaperI.exists_rational_bases_bounded

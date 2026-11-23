@@ -70,6 +70,7 @@ import Q1Paper.PaperI.BareissAssemble
 import Q1Paper.PaperI.Claim16
 import Q1Paper.PaperI.Theorem5
 import Q1Paper.PaperI.RankFactorization
+import Q1Paper.PaperI.RationalBasis
 
 /-!
 ## What is imported here
