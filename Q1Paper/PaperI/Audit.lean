@@ -372,3 +372,9 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.PaperI.bitLenMat_map_intCast
 #print axioms Q1Paper.PaperI.bitLenMat_chain_le
 #print axioms Q1Paper.PaperI.bitLenMat_chain_inputLen_le
+#print axioms Q1Paper.Claim15.bitLenMat_L0_mul_N
+#print axioms Q1Paper.Claim15.bitLenMat_L0_mul_N_of_entries
+#print axioms Q1Paper.Claim15.bitLenMat_L0_mul_A_mul_N
+#print axioms Q1Paper.Claim15.bitLenMat_L0_mul_A_mul_N_of_entries
+#print axioms Q1Paper.Claim15.bitLenMat_mul_of_entries
+#print axioms Q1Paper.Claim15.inputLen_le_of_entry_bound
