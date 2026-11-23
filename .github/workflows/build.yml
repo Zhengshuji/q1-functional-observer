@@ -57,6 +57,6 @@ jobs:
         env:
           PYTHONPATH: "."
         run: |
-          python c317_cauchy_binet_random.py
-          python c318_r0_linear_system.py
-          python c319_encoding_and_rowspace.py
+          python ci/c317_cauchy_binet_random.py
+          python ci/c318_r0_linear_system.py
+          python ci/c319_encoding_and_rowspace.py
