@@ -90,6 +90,7 @@ import Q1Paper.PaperI.Claim14Basis
 import Q1Paper.PaperI.KernelBasis
 import Q1Paper.PaperI.BezoutBounded
 import Q1Paper.PaperI.ChartCount
+import Q1Paper.PaperI.TauMConst
 
 /-!
 ## What is imported here

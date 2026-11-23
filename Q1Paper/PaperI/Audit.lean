@@ -382,3 +382,5 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.chart_count_le_pow
 #print axioms Q1Paper.exp_compose
 #print axioms Q1Paper.beta_le_L_pow
+#print axioms Q1Paper.PaperI.tauM_le_of_bounds
+#print axioms Q1Paper.PaperI.tauM_le_paper_constant
