@@ -307,3 +307,11 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.claim6_struct
 #print axioms Q1Paper.claim7_DEC_succ
 #print axioms Q1Paper.claim8_rank_consistency
+#print axioms Q1Paper.Thm5.rank_map_ofReal_arb
+#print axioms Q1Paper.Thm5.range_map_ofReal_of_ker
+#print axioms Q1Paper.Thm5.DECℂ_iff_exists_compressed
+#print axioms Q1Paper.Thm5.DECℂ_iff_exists_encodes
+#print axioms Q1Paper.Thm5.encodesD_iff_encodes
+#print axioms Q1Paper.Thm5.encodes_of_rank_zero
+#print axioms Q1Paper.Thm5.encodes_of_rank_zero_compressed
+#print axioms Q1Paper.Thm5.exists_compressed_zero_of_encodes_zero
