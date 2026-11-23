@@ -195,3 +195,43 @@ Acceptance table (from the external review):
 Still paper-level by decision (route A): the "computed in polynomially many bit operations" clause of
 Claims 13/14/15, the `D`-form of (B2), the `omega = 0` branch of the encoding, and the literal gcd
 formulation of Claim 16(iii).  The paper's Claim 19 appendix still awaits independent review.
+
+## 13. Full-coverage goal (2026-11-23): three rounds
+
+Objective upgraded from route A ("math spec + bit bounds") to covering the whole paper: mathematical
+correctness, executable algorithms, and complexity bounds with explicitly declared external assumptions.
+
+### Round 1 -- math coverage closure (`PaperIComplete.lean`)
+
+- Claims 3-8 bridged from the abstract-core project lemmas (`Q1Subspace`, `Q1Projection`, `BoundLower`,
+  `Monotone`, `G5GramRank`) to the paper's statements and into the Paper I audit.
+- Theorem 5 restated with `DECℂ` (not the real `DEC`), the D-form of (B2), and the `omega = 0` branch.
+- Claim 16 literal gcd form over `Q[lambda]` and its link to the no-common-root condition.
+- Claim 19/21 constant chains as independent arithmetic specs.
+- Acceptance: every body claim/theorem has a Lean statement (or an explicit conditional interface),
+  no real-DEC posing as complex-DEC, CI green, audit list updated.
+
+### Round 2 -- cost model and Theorem 1 (`Q1Complexity/Core.lean` + `Theorem1.lean`)
+
+- `Cost`, `Q1Prog`, sequential/branch/loop cost semantics, bit costs of the rational primitives.
+- One real algorithm executed through the semantics; domain-operation count derived from the semantics;
+  bit cost derived from the integer primitives.
+- Proposition 4 (r = 0) and Theorem 1's `L^{O(q^2)}` statement; Theorem 1 must not depend on unproved
+  cost fields.
+
+### Round 3 -- Theorem 2 and FPT (`Theorem2FPT.lean`)
+
+- Chart enumeration and its count, semialgebraic instance-size bounds, `RenegarBoundSpec` as an explicit
+  structure, the conditional FPT theorem, Corollary 6, and the correspondence of Corollary 3 with
+  Theorem 1.
+- The Renegar dependency is passed explicitly and recorded; no external complexity bound is labelled
+  unconditional `[Lean]`.
+
+### Design decisions
+
+1. One DSL is not required for every algorithm: keep algorithm-specific implementations and route them
+   through a uniform cost interface (`CostedResult`) to the complexity theorems.
+2. External assumptions are registered in a structure (e.g. `ExternalComplexityAssumptions`) so the
+   dependency of the final theorem is visible and auditable.
+3. Every algorithm has three separate interfaces: `algorithm`, `algorithm_correct`, `algorithm_cost`
+   (the last may be conditional); the three are audited separately.
