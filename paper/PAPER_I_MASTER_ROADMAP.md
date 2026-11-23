@@ -134,3 +134,32 @@ Lean-side: Hadamard absent (use `Matrix.det_le`); Bareiss is tactic-only; `det_s
 - Each paper claim carries an explicit status in the map, with any deviation described.
 - Bit-complexity claims backed by explicit lemmas.
 - Roadmap, map and audit agree on the same commit.
+
+## 11. Claims 13–15: formalization route (decided 2026-11-23, after external review)
+
+The paper's Claims 13 (`lem:rationalbasis`), 14 (`clm:chartdata`) and 15 (`lem:coeff`) are stated as
+"computed in poly(bit) operations, with entries of bit length <= ...".  Mathlib has no complexity theory,
+and a cost model would be a project of its own.  Decision (route A, recommended by the external review):
+
+- Formalize the **mathematical specification**: existence of the objects plus the **explicit bit-length
+  bound** (each entry a ratio of minors of the cleared matrix, bounded by Leibniz).
+- Leave the **"poly bit operations"** clause as a paper-level statement, labelled explicitly.
+- Three-state labelling to be used from now on:
+  `[Lean]` = statement and bound kernel-checked; `[Lean-conditional]` = formalized under explicit
+  hypotheses; `[Paper proof]` = complexity/algorithmic claim, not formalized.
+- Never derive "X is computable in poly bit operations" from "there exists X with bitLen X <= B".
+
+Ordering (by value/cost, then by strategic value):
+
+1. Claim 15(iv) `beta <= 240 q n^5 L`: pure `Nat` counting, layered inequality chain
+   (first the intermediate bounds, then `omega`/`nlinarith`) — cheapest self-contained result.
+2. Claim 14 `clm:chartdata`: `Submodule.map` for `V = T cap (S x S)` via the kernel of
+   `[A_T^T; -A_V^T]`; the image of a kernel basis is only a **generating set**, so a linear-dependence
+   removal step is required before calling it a basis.
+3. Claim 13 `lem:rationalbasis`: kernel basis, row-space basis, annihilator with the explicit
+   `tau_M` bound — most work, most reusable.
+
+Warnings to keep in mind: (a) row-space equality and the Gram identity are independent results, neither
+may be used as a premise for the other (already respected: `RowSpanBridge` and `GramInj` are separate);
+(b) the image of a basis under a linear map spanning the target space is not automatically a basis;
+(c) `[Paper proof]` must never be silently upgraded to `[Lean]`.
