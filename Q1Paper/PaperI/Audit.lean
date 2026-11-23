@@ -365,3 +365,10 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.PaperI.ComplexityCounts.bareiss_entry_den_eq_one
 #print axioms Q1Paper.PaperI.ComplexityCounts.bareiss_entry_bitLenRat_le_tauM
 #print axioms Q1Paper.PaperI.ComplexityCounts.bareiss_steps_cost_le
+#print axioms Q1Paper.PaperI.bitLenMat_mul_le
+#print axioms Q1Paper.PaperI.bitLenMatAny_fromRows_le
+#print axioms Q1Paper.PaperI.bitLenMat_submatrix_le
+#print axioms Q1Paper.PaperI.bitLenMat_transpose_le
+#print axioms Q1Paper.PaperI.bitLenMat_map_intCast
+#print axioms Q1Paper.PaperI.bitLenMat_chain_le
+#print axioms Q1Paper.PaperI.bitLenMat_chain_inputLen_le

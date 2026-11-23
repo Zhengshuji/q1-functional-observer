@@ -83,6 +83,7 @@ import Q1Paper.PaperI.SolveCriterion
 import Q1Paper.PaperI.Hadamard
 import Q1Paper.PaperI.CostBareiss
 import Q1Paper.PaperI.ComplexityCounts
+import Q1Paper.PaperI.BitLenMatMul
 import Q1Paper.PaperI.RatDescent
 import Q1Paper.PaperI.Claim14Basis
 import Q1Paper.PaperI.KernelBasis
