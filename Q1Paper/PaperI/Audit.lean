@@ -301,3 +301,9 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.exists_sum_mul_eq_one_of_gcd_isConst
 #print axioms Q1Paper.exists_leftInverse_pencil_of_gcd_isConst
 #print axioms Q1Paper.claim16_iii_implies_i_of_gcd_isConst
+#print axioms Q1Paper.claim3_attainable
+#print axioms Q1Paper.claim4_sandwich
+#print axioms Q1Paper.claim5_conditions_depend_on_W
+#print axioms Q1Paper.claim6_struct
+#print axioms Q1Paper.claim7_DEC_succ
+#print axioms Q1Paper.claim8_rank_consistency
