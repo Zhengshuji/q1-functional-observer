@@ -33,14 +33,14 @@
 | Claim 11 Gram 证书 | `claim11_iff_gram`（最终定理：(5b) ⟺ ∃x, ZᵀZx=e₀）；`gram_certificate`（Gram）；`mem_rowSpace_window_iff_no_common_complex_root`（Bézout/窗口）；`spectral_real_iff_minors`, `spectral_iff_minors`（秩-子式/铅笔）；`exists_det_submatrix_ne_zero_of_rank`（秩=最大非零子式）；`rank_map_ofReal`（复化秩不变）；`natDegree_maximalMinor_le`（次数界）；`maximalMinor_map`（系数映射） | `PaperI/Gram.lean`, `PaperI/Claim11.lean`, `PaperI/MinorRank.lean`, `PaperI/BasisExtraction.lean`, `PaperI/SpectralMinor.lean`, `PaperI/Complexify.lean`, `PaperI/Claim11Final.lean` | **complete（含最终 Gram 证书定理）** | 说明：`claim11_iff_gram` 以 `H_A = F H`（Claim 2(ii)）与 `1 ≤ ω`、`rank H = ω` 为假设；这与论文 Claim 11 的假设一致 |
 | Claim 12 满列秩铅笔证书 | `claim12_iff_gram`, `exists_left_inverse_of_rank_eq` | `PaperI/Claim12.lean` | **complete** | 与 Claim 11 相同：用的是注入映射族的 `Z`；与论文子集族 `Z_Q` 的桥接见 §6 的 D1 |
 | Claim 13 有理基与位长 | `bitLenInt`, `bitLenRat`, `bitLenMat`, `mat_num_entries_bounded`；`bitLenRat_add`, `abs_det_le_factorial_mul_pow`, `bitLenInt_det_le`, `bitLenInt_det_num_le_bitLenMat` | `PaperI/BitLen.lean`, `PaperI/BitLenAdd.lean` | **partial（位长基础 + 加法界 + Leibniz 界完成）** | 剩：Bareiss 中间量子式表示、总 bit complexity、输入长度接口 `bitLenMat ≤ L_input` |
-| Claim 14 图表数据 | — | — | **paper_only** | 需 `V=T∩(S×S)` 的核表示（转置写法） |
-| Claim 15 系数位长 | — | — | **paper_only** | 需显式常数链（附录 A） |
+| Claim 14 图表数据 | `Claim14.map_comp_fst_K0_eq_inf`, `Claim14.span_image_basis_eq_inf`, `Claim14.linearIndependent_image_basis_iff`, `Claim14.quotientEquivInf`, `Claim14.matrix_map_comp_fst_K0_eq_inf` | `PaperI/Claim14.lean` | **partial（交空间核心完成）** | 已完成 V = T∩(S×S) 的等化子像表示、基判据、依赖剔除；缺 N/T/S/W₀ 的基与 E_Q 的组装，以及「poly(L) 位运算」从句 |
+| Claim 15 系数位长 | `Claim15iv.bMinor_bitLen_le_22`, `Claim15iv.gramEntry_bitLen_le_47`, `Claim15iv.coefficient_bitLen_le_240`, `Claim15iv.coefficient_of_minor_gram_le_240`, `Claim15iv.minorBound_24_of_twenty` | `PaperI/Claim15iv.lean` | **partial（算术骨架完成）** | 已把 22/47/240 的常数链假设无关地钉住；缺 (i)(ii)(iii) 在真实对象上的实例化（依赖秩分解与位长传播的组装）；D11：含 G 块的子式应为 24n³L |
 | Claim 16 零自由行五条件 | `adjRowInverse_mul`, `exists_leftInverse`, `exists_leftInverse_linear`, `spoly_mul_pencil_eq_one`, `natDegree_det_le`, `natDegree_adjugate_le` | `G3Adjugate.lean`, `G3LeftInverse.lean`, `G3Coeff.lean`, `DegreeBounds.lean` | **partial** | 左逆存在与次数界已有；缺 (iii)⇒(iv) 的有理化、(iv)⇒(v) 的系数比较、(v)⇒(i) 的复点代入的完整五条链 |
 | Proposition 4（`r=0` 算法） | — | — | **paper_only** | 需把 Claim 16 的五条链组装成算法并证明正确性与位复杂度 |
 | Theorem 1（固定阶） | `G_form_iff` 只是代数接口 | `FixedOrder.lean` | **paper_only** | 需算法定义、终止性、soundness/completeness、复杂度 |
 | Theorem 2（FPT） | — | `FPT.lean`（仅参数维数代数引理） | **paper_only** | 需图表枚举、覆盖性、变量计数、正确性、参数界 |
 | Corollary 3（算术界） | — | — | **paper_only** | 由 Theorem 2 导出 |
-| Theorem 5（`∃ℝ`） | — | — | **paper_only** | 需多项式公式语法、`Φ_ω` 构造、双向正确性、规模界 |
+| Theorem 5（`∃ℝ`） | `Thm5.encodes`, `Thm5.DEC_of_encodes`, `Thm5.coeff_iff_spectral`, `Thm5.exists_encodes_iff`, `Thm5.exists_coeff_left_inverse_arb` | `PaperI/Theorem5.lean`, `PaperI/T5Complete.lean` | **partial（双向等价完成，复 λ 形式）** | 可靠性 + 完备性 + `encodes ⟺ ∃R, (5a)∧复λ(5b)`；缺 (B2) 的 D-形式、ω=0 分支、以及从 `DECℂ` 出发的打包（D12：实 λ 反例 λ²+1） |
 | Corollary 6（时间界） | — | — | **paper_only** | 由 Theorem 1/2 导出 |
 
 ## 2. 模块清单（Paper I 依赖闭包）
