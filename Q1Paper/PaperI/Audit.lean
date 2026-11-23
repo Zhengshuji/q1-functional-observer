@@ -417,3 +417,5 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.fpt_chart_count_le
 #print axioms Q1Paper.fpt_ell_le_kappa_of_fields
 #print axioms Q1Paper.fpt_ell_sq_le_kappa_sq_of_fields
+#print axioms Q1Paper.claim4_converse
+#print axioms Q1Paper.claim4_converse_zero
