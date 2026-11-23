@@ -455,3 +455,7 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.rank_reindex_finSumFinZero
 #print axioms Q1Paper.rank_reindex_finSumFinZero_fin
 #print axioms Q1Paper.exists_fullColumn_block
+#print axioms Q1Paper.ScratchClaim8Ej.elemSymm_pos_iff_rank_ge
+#print axioms Q1Paper.ScratchClaim8Ej.elemSymm_pos_iff_rank_ge_finset
+#print axioms Q1Paper.ScratchClaim8Ej.exists_gramBlock_ne_zero_of_le_rank
+#print axioms Q1Paper.ScratchClaim8Ej.det_mul_transpose_self_eq_sum_sq
