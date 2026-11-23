@@ -395,3 +395,8 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.PaperI.ComplexityCounts.bareiss_total_bit_cost_le
 #print axioms Q1Paper.PaperI.ComplexityCounts.bareiss_total_bit_cost_le_tauM
 #print axioms Q1Paper.PaperI.ComplexityCounts.bareiss_total_bit_cost_le_n21_L2_false
+#print axioms Q1Paper.PaperI.ComplexityCounts.exactDivCost_le_add_envelope
+#print axioms Q1Paper.PaperI.ComplexityCounts.exactDivCost_le_quadratic
+#print axioms Q1Paper.PaperI.ComplexityCounts.bareiss_total_bit_cost_le_quadratic
+#print axioms Q1Paper.PaperI.ComplexityCounts.bareiss_total_bit_cost_le_n21_L2
+#print axioms Q1Paper.PaperI.ComplexityCounts.bareiss_total_bit_cost_le_quadratic_one_million_false

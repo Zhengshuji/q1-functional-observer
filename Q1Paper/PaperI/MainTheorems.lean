@@ -93,6 +93,7 @@ import Q1Paper.PaperI.ChartCount
 import Q1Paper.PaperI.TauMConst
 import Q1Paper.PaperI.ColsConcat
 import Q1Paper.PaperI.TotalCost
+import Q1Paper.PaperI.ExactDiv
 
 /-!
 ## What is imported here
