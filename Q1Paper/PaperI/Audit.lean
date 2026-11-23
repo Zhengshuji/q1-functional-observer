@@ -271,3 +271,12 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.PaperI.exists_row_basis_bounded
 #print axioms Q1Paper.PaperI.exists_annihilator_bounded
 #print axioms Q1Paper.PaperI.exists_rational_bases_bounded
+#print axioms Q1Paper.Claim15iv.bitLenInt_mul_le
+#print axioms Q1Paper.Claim15iv.minorBound_22
+#print axioms Q1Paper.Claim15iv.minorBound_24_of_twenty
+#print axioms Q1Paper.Claim15iv.gramBound_47
+#print axioms Q1Paper.Claim15iv.coeffBound_240
+#print axioms Q1Paper.Claim15iv.bMinor_bitLen_le_22
+#print axioms Q1Paper.Claim15iv.gramEntry_bitLen_le_47
+#print axioms Q1Paper.Claim15iv.coefficient_bitLen_le_240
+#print axioms Q1Paper.Claim15iv.coefficient_of_minor_gram_le_240

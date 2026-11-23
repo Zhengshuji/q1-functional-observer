@@ -71,6 +71,7 @@ import Q1Paper.PaperI.Claim16
 import Q1Paper.PaperI.Theorem5
 import Q1Paper.PaperI.RankFactorization
 import Q1Paper.PaperI.RationalBasis
+import Q1Paper.PaperI.Claim15iv
 
 /-!
 ## What is imported here
