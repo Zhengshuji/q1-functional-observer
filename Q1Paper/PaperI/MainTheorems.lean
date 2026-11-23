@@ -77,6 +77,7 @@ import Q1Paper.PaperI.Claim15iv
 import Q1Paper.PaperI.Claim14
 import Q1Paper.PaperI.T5Complete
 import Q1Paper.PaperI.T5DecC
+import Q1Paper.PaperI.T5Auto
 import Q1Paper.PaperI.CostCore
 import Q1Paper.PaperI.SolveCriterion
 import Q1Paper.PaperI.Hadamard

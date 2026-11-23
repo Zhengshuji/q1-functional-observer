@@ -75,7 +75,7 @@
 
 ## 3. 公理审计
 
-- `Q1Paper/PaperI/Audit.lean` 对 **293 条**声明执行 `#print axioms`。
+- `Q1Paper/PaperI/Audit.lean` 对 **295 条**声明执行 `#print axioms`。
 - 本机结果：全部为 `[propext, Classical.choice, Quot.sound]`（部分为 `[propext, Quot.sound]`）。
 - CI 步骤：`lake env lean Q1Paper/PaperI/Audit.lean > paperI_audit.log` 后运行
   `scripts/check_paperI_axioms.py paperI_audit.log`，出现白名单外的公理或**没有任何审计行**都会失败。
@@ -207,7 +207,7 @@ PaperI/GramKernel.lean，维数约定与论文一致：P : Matrix (Fin q) (Fin �
 - Claim 11 完成：commit `e28ee61`（`Paper I: Claim 11 complete`）；
 - 修复仓库与 WSL 不同步：commit `7101d1d`（同步 `SpectralMinor.lean` 的注入性版本）；
 - CI run `#45026225331` 全绿（lean / Paper I axiom audit / 三篇论文 / verify）；
-- 公理审计：293 条声明，允许集 `{propext, Classical.choice, Quot.sound}`；
+- 公理审计：295 条声明，允许集 `{propext, Classical.choice, Quot.sound}`；
 - 同步检查：`diff` 核对 WSL 工程与仓库的 11 个 Paper I 文件，全部一致。
 
 ## 6. 边界

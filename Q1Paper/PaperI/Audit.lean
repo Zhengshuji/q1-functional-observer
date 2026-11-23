@@ -351,3 +351,5 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.exists_rat_bounded_bezout_of_no_common_root
 #print axioms Q1Paper.claim16_iii_implies_iv_of_gcd_isConst
 #print axioms Q1Paper.claim16_ii_implies_iv_rat
+#print axioms Q1Paper.Thm5.DECℂ_iff_exists_compressed_auto
+#print axioms Q1Paper.Thm5.DECℂ_iff_exists_encodes_auto
