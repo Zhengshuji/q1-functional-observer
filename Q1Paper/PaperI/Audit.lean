@@ -459,3 +459,7 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.ScratchClaim8Ej.elemSymm_pos_iff_rank_ge_finset
 #print axioms Q1Paper.ScratchClaim8Ej.exists_gramBlock_ne_zero_of_le_rank
 #print axioms Q1Paper.ScratchClaim8Ej.det_mul_transpose_self_eq_sum_sq
+#print axioms Q1Paper.ScratchClaim8Wire.exists_rank_disjunct
+#print axioms Q1Paper.ScratchClaim8Wire.rank_eq_of_elemSymm_pattern
+#print axioms Q1Paper.ScratchClaim8Wire.rank_eq_of_gram_eq
+#print axioms Q1Paper.ScratchClaim8Wire.exists_rank_disjunct_pair
