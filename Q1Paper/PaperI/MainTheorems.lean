@@ -89,6 +89,7 @@ import Q1Paper.PaperI.RatDescent
 import Q1Paper.PaperI.Claim14Basis
 import Q1Paper.PaperI.KernelBasis
 import Q1Paper.PaperI.BezoutBounded
+import Q1Paper.PaperI.ChartCount
 
 /-!
 ## What is imported here
