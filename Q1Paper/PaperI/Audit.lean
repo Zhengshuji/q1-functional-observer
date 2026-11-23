@@ -291,3 +291,13 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.Thm5.exists_compressed_complex_of_encodes
 #print axioms Q1Paper.Thm5.exists_encodes_iff
 #print axioms Q1Paper.Thm5.exists_coeff_left_inverse_arb
+#print axioms Q1Paper.pencilMinors
+#print axioms Q1Paper.FamilyGcdIsConst
+#print axioms Q1Paper.NoCommonComplexRoot
+#print axioms Q1Paper.gcd_isConst_iff_no_common_complex_root
+#print axioms Q1Paper.pencilMinors_gcd_isConst_iff_no_common_complex_root
+#print axioms Q1Paper.rank_eq_iff_no_common_complex_root
+#print axioms Q1Paper.claim16_i_iff_iii
+#print axioms Q1Paper.exists_sum_mul_eq_one_of_gcd_isConst
+#print axioms Q1Paper.exists_leftInverse_pencil_of_gcd_isConst
+#print axioms Q1Paper.claim16_iii_implies_i_of_gcd_isConst
