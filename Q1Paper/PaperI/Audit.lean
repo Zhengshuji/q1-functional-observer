@@ -323,3 +323,8 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Complexity.run_bit_le_sum
 #print axioms Q1Complexity.evalPrimitive_cost
 #print axioms Q1Complexity.sumProg_cost_two
+#print axioms Q1Subspace.exists_mulVec_eq_iff_mem_rowSpace
+#print axioms Q1Subspace.exists_mulVec_eq_iff_rank_fromRows
+#print axioms Q1Subspace.rank_fromRows_eq_rank_iff_mem
+#print axioms Q1Subspace.not_exists_mulVec_iff_rank_lt
+#print axioms Q1Subspace.rank_le_rank_fromRows_right
