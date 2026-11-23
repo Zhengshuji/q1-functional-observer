@@ -94,6 +94,7 @@ import Q1Paper.PaperI.TauMConst
 import Q1Paper.PaperI.ColsConcat
 import Q1Paper.PaperI.TotalCost
 import Q1Paper.PaperI.ExactDiv
+import Q1Paper.PaperI.Thm1Cond
 
 /-!
 ## What is imported here

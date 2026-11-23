@@ -400,3 +400,5 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.PaperI.ComplexityCounts.bareiss_total_bit_cost_le_quadratic
 #print axioms Q1Paper.PaperI.ComplexityCounts.bareiss_total_bit_cost_le_n21_L2
 #print axioms Q1Paper.PaperI.ComplexityCounts.bareiss_total_bit_cost_le_quadratic_one_million_false
+#print axioms Q1Paper.theorem1_conditional
+#print axioms Q1Paper.theorem1_conditional_beta_zero
