@@ -315,3 +315,11 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.Thm5.encodes_of_rank_zero
 #print axioms Q1Paper.Thm5.encodes_of_rank_zero_compressed
 #print axioms Q1Paper.Thm5.exists_compressed_zero_of_encodes_zero
+#print axioms Q1Complexity.ratBitCost_le_fieldOpBitCost
+#print axioms Q1Complexity.fieldOpBitCost_not_lower_bound
+#print axioms Q1Complexity.run_bind
+#print axioms Q1Complexity.run_forFin_bit_eq_sum
+#print axioms Q1Complexity.run_alg_eq_primitiveCount
+#print axioms Q1Complexity.run_bit_le_sum
+#print axioms Q1Complexity.evalPrimitive_cost
+#print axioms Q1Complexity.sumProg_cost_two
