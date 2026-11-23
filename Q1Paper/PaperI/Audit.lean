@@ -285,3 +285,9 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.PaperI.Claim14.linearIndependent_image_basis_iff
 #print axioms Q1Paper.PaperI.Claim14.ker_restrictFst_eq_bot_iff
 #print axioms Q1Paper.PaperI.Claim14.matrix_map_comp_fst_K0_eq_inf
+#print axioms Q1Paper.Thm5.exists_encodes_of_blocks
+#print axioms Q1Paper.Thm5.exists_encodes_of_compressed
+#print axioms Q1Paper.Thm5.exists_encodes_of_exists_compressed
+#print axioms Q1Paper.Thm5.exists_compressed_complex_of_encodes
+#print axioms Q1Paper.Thm5.exists_encodes_iff
+#print axioms Q1Paper.Thm5.exists_coeff_left_inverse_arb
