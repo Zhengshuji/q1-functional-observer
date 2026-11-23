@@ -101,6 +101,7 @@ import Q1Paper.PaperI.FptCore
 import Q1Paper.PaperI.Claim4Converse
 import Q1Paper.PaperI.FptSpec
 import Q1Paper.PaperI.Prop4
+import Q1Paper.PaperI.GramRows
 
 /-!
 ## What is imported here

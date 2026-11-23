@@ -431,3 +431,7 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.prop4_compressed
 #print axioms Q1Paper.decR0_iff_compressedSpectral
 #print axioms Q1Paper.rank_map_ratComplex
+#print axioms Q1Paper.ScratchGramRows.gramEntry_bitLen_le_of_rows
+#print axioms Q1Paper.ScratchGramRows.gramEntry_bitLen_le_of_rows_log
+#print axioms Q1Paper.ScratchGramRows.gramEntry_bitLen_le_of_rows_sharp
+#print axioms Q1Paper.ScratchGramRows.bitLenInt_sum_mul_le_rows
