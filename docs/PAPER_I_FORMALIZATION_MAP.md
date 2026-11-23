@@ -243,3 +243,19 @@ Bareiss 的其余结论（来自同一设计复核）：Bareiss 子式恒等式 
 **D11（Claim 15(iv) 算术骨架复核，2026-11-23）**：附录里极大子式系数的 `22n³L` 是**绑定在 `X` 块的 `18n²L` 上**的；若子式含 `G` 块（界 `20n²L`），同一 Leibniz 论证给出的是 **`24n³L`**（`Claim15iv.minorBound_24_of_twenty`）。对最终 `n²¹L²` 无影响，但论文的显示常数应注明这一点。
 
 **D12（Theorem 5 完备性复核，2026-11-23）**：Lean 的 `PaperI.DEC` 对 `λ : K`（实）量化，而论文的 (5b) 是**复 λ**。两者**严格不等价**：旋转铅笔 `λ²+1` 在实 λ 上无根，但 `rank(i−A)=1`，故 `encodes` 的 S-块（强制每个复 z 满秩）在该例下无实解。因此完备性方向**不能从 `DEC` 推出**，`T5Complete.lean` 用复 λ 假设（论文约定）陈述；从 `DECℂ` 出发只差一条标准复化事实（实 `N` 是复化后 `ker[C_ℂA_ℂ; C_ℂ]` 的复基）。
+
+## 5. 缺口台账（2026-11-23，审计 312 条）
+
+| # | 缺口 | 状态 | Lean 证据 | 剩余 |
+|---|---|---|---|---|
+| 1 | Theorem 5 的 `hNk`（核基存在） | **已闭合** | `KernelBasis.exists_kernel_basis_matrix_of_finrank`、`T5Auto.DECℂ_iff_exists_encodes_auto` | 无 |
+| 2 | Claim 16 的 ℚ 有界 Bézout | **已闭合** | `RatDescent.exists_rat_solution_of_exists_real_solution`、`BezoutBounded.claim16_iii_implies_iv_of_gcd_isConst` | 无 |
+| 3 | Claim 14 的基组装 | **已闭合** | `Claim14Basis.exists_chart_bases`、`inf_eq_map_K0`、`exists_chart_completion` | 统一 `ℒ` 界（阻塞已解除：`BitLenMatMul`） |
+| 4 | Claim 15 (i)(ii)(iii) | 进行中 | `ComplexityCounts.bareiss_entry_bitLenRat_le_tauM`、`BitLenMatMul.bitLenMat_chain_inputLen_le` | 在真实对象上组装单一 `B(ℒ)` |
+| 5 | Claims 3–8 局部桥 | 部分 | `Claims38` 六条桥接 | Claim 4 完整逆（值得做）；Claim 8 初等对称析取需 PSD 谱定理（建议标 `[Lean-conditional]`）；Claim 3/5 的对象识别（可跳过） |
+| 6 | 复杂度层 | 部分 | `CostCore`、`CostBareiss`、`ComplexityCounts`（`4k³`、`den=1`、`tauM`）、`BitLenMatMul` | Renegar 结构体 + chart 计数 + 条件化 Theorem 1/2 |
+| 7 | Claim 19/21 常数链 | 待组装 | `Hadamard.bitLenInt_det_le_hadamard`、`ComplexityCounts`、`BitLenMatMul` | 总位复杂度陈述（`n³` 次运算 × 位长界） |
+
+### 关于"无 sorry 不等于无缺口"
+
+`hNk`（第 1 行）曾长期作为**前提**存在于 Theorem 5 的陈述里：定理本身无 `sorry`，但"存在这样的核基"没有被证明。现在它已被 `KernelBasis` 构造出来，Theorem 5 才真正无假设。对照表里凡标 `[Lean-conditional]` 的条目，都应视为"该存在性尚未兑现"。
