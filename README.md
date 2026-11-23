@@ -59,32 +59,35 @@ cd paper && pdflatex paper_I_dec.tex && pdflatex paper_I_dec.tex
 
 ## What is kernel-checked
 
-`Q1Paper/PaperI/Audit.lean` prints the axioms of 275 declarations; the accepted set is
+`Q1Paper/PaperI/Audit.lean` prints the axioms of 352 declarations; the accepted set is
 exactly `propext`, `Classical.choice`, `Quot.sound` (checked by
 `scripts/check_paperI_axioms.py`, which fails on anything else, including `sorryAx`).
 There is no `sorry`, no `admit` and no custom axiom in the tree.
 
 Covered by kernel-checked theorems: the compression and rank identities (Claims 1-2); the
 row-pair, sandwich, W-condition, structural, monotonicity and rank-consistency statements
-(Claims 3-8) bridged to the paper's wording; the Bezout/window chain, the Gram certificate
-and the full-column-rank pencil (Claims 9-12), including the square Cauchy-Binet expansion
-and the bridge between the injective-map and subset-indexed minor families; rational bases
-and annihilators with the paper's explicit constant (Claim 13); the intersection
-$V=\mathcal T\cap(S\times S)$ as the image of the equalizer (Claim 14); the arithmetic
-skeleton of the coefficient bound (Claim 15(iv)) and the zero-free-row five-condition chain
-with the gcd formulation (Claim 16); the rank factorization with explicit left and right
-inverses; the existential-real encoding of Theorem 5 in both directions (with the paper's
-complex-$\lambda$ form of (5b)); Hadamard's inequality with the sharp integer bound on
-$\operatorname{bitLen}\det$ (used by Claim 21); and the Bareiss tableau identity with its
-bit-length corollaries.
+(Claims 3-8), including the *converse* of the sandwich (`claim4_converse`: every subspace of
+the sandwich of dimension at most dim W0 + r is realised by some R); the Bezout/window chain,
+the Gram certificate and the full-column-rank pencil (Claims 9-12), including the square
+Cauchy-Binet expansion and the bridge between the injective-map and subset-indexed minor
+families; rational bases and annihilators with the paper's explicit constant (Claim 13); the
+intersection V = T cap (S x S) as the image of the equalizer, the chart bases and E_Q (Claim 14);
+a bounded rational Bezout certificate that closes the (i) <=> (ii) <=> (iii) => (iv) chain with
+the degree bound (Claim 16); the rank factorization with explicit left and right inverses; the
+existential-real encoding of Theorem 5 in both directions with NO abstract hypothesis (the
+kernel basis is constructed); and the complexity layer: the Bareiss tableau identity, the exact
+integer division cost, the total bit cost O(n^15 L^2) (with the paper's O(n^21 L^2) as a
+corollary), the chart count, and a *biting* conditional form of Theorem 1.
 
 **Not formalized, and explicitly marked paper-level in `docs/`:** the algorithmic and
-complexity assertions — that the objects are *computed within a stated number of bit
-operations* (Claims 13-15, Theorems 1-2, Proposition 4, Corollaries 3 and 6). The Lean
-statements are the mathematical specifications together with the explicit bit-length
-bounds; the cost model being built for the rest lives in `Q1Paper/PaperI/CostCore.lean`.
-`docs/PAPER_I_FORMALIZATION_MAP.md` records, per claim, what is proved and what is
-restricted.
+complexity assertions *as unconditional statements* -- that the objects are computed within a
+stated number of bit operations (Claims 13-15, Theorems 1-2, Proposition 4, Corollaries 3 and 6).
+The Lean statements are the mathematical specifications together with the explicit bit-length
+and cost bounds; Theorem 1 is a *conditional* theorem whose only external input is an explicitly
+declared real-algebraic backend (`ChartSpecFixedDeg`, whose non-emptiness is proved). The FPT
+bound of Theorem 2 has its Renegar-free core (the dimension relations and the Grassmannian chart
+count `sum_t C(m',t) = 2^m' <= 4^ell`) formalised; the remaining layers are in progress.
+`docs/PAPER_I_FORMALIZATION_MAP.md` is the single source of truth for per-claim status.
 
 ## Status labels
 

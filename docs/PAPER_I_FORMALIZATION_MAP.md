@@ -259,3 +259,20 @@ Bareiss 的其余结论（来自同一设计复核）：Bareiss 子式恒等式 
 ### 关于"无 sorry 不等于无缺口"
 
 `hNk`（第 1 行）曾长期作为**前提**存在于 Theorem 5 的陈述里：定理本身无 `sorry`，但"存在这样的核基"没有被证明。现在它已被 `KernelBasis` 构造出来，Theorem 5 才真正无假设。对照表里凡标 `[Lean-conditional]` 的条目，都应视为"该存在性尚未兑现"。
+
+### 关于 Claim 21 的指数：`TotalCost` 与 `ExactDiv` 的关系（2026-11-23）
+
+按时间顺序读这两个文件会误判，这里统一说明：
+
+1. `TotalCost.lean` 先证明了：在**现有**代价模型下（`fieldOpBitCost .div B B = 2B + 64(B+1)^4`，
+   即把有理数除法按"清分母相乘再约分"计费，四次），总成本是 `O(n²⁷L⁴)`，并**机器检查地证伪**了
+   `20 000 000·n²¹L²` 这个形状（反例 `n=3, L=2`，超出 4.4×10⁶ 倍）。
+2. `ExactDiv.lean` 随后指出这是**建模问题而非数学问题**：Bareiss 的表项分母恒为 1
+   （`bareiss_entry_den_eq_one`），所以它的除法是**精确整数除法**，应按二次计费；
+   引入 `exactDivCost B = 2B + 64(2B+1)²`（并证明它**等于** add/sub 的包络）后得到
+   `O(n¹⁵L²)`，论文的 `O(n²¹L²)` 成为它的推论。
+3. 因此**当前状态**是：`n²¹L²` **已证**（`bareiss_total_bit_cost_le_n21_L2`），并且还有更紧的
+   `n¹⁵L²`（`bareiss_total_bit_cost_le_quadratic`）。`TotalCost.lean` 的价值是记录"用错模型会得到什么、
+   以及为什么那个更弱的界其实不成立"，不是 Claim 21 的最终结论。
+
+论文需要补一句：Bareiss 的除法是精确整数除法（分母为 1），因此每次运算按二次位成本计。

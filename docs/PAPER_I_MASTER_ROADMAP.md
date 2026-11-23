@@ -1,3 +1,11 @@
+# Paper I master roadmap
+
+> **STATUS DISCLAIMER (2026-11-23).** This file is the *plan and its history*; it is not kept in
+> lockstep with the code.  The **single source of truth for per-claim status is
+> `docs/PAPER_I_FORMALIZATION_MAP.md`** (currently 352 audited declarations, CI green).
+> Sections below that still say "D1 pending", quote 140/167 declarations, or describe Claims
+> 13-16 as paper-only are historical records of earlier rounds, not the current state.
+
 # Paper I Master Roadmap
 
 > 只管理任务与状态，不重复数学证明。逐项对照见 `PAPER_I_FORMALIZATION_MAP.md`；数学审计见 `PAPER_I_MATH_AUDIT.md`；Claim 19 重推见 `PAPER_I_CLAIM19_CRAMER.md`。
