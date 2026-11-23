@@ -384,3 +384,9 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.beta_le_L_pow
 #print axioms Q1Paper.PaperI.tauM_le_of_bounds
 #print axioms Q1Paper.PaperI.tauM_le_paper_constant
+#print axioms Q1Paper.PaperI.bitLenMatAny_fromCols_le
+#print axioms Q1Paper.PaperI.bitLenMat_fromCols_le
+#print axioms Q1Paper.PaperI.bitLenMatAny_matrixFromCols_le
+#print axioms Q1Paper.PaperI.bitLenMatAny_fromCols_mul_le
+#print axioms Q1Paper.PaperI.bitLenMatAny_pairMatrix_le
+#print axioms Q1Paper.PaperI.bitLenMatAny_pairMatrix_le'

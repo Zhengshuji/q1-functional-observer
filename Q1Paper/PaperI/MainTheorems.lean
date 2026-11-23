@@ -91,6 +91,7 @@ import Q1Paper.PaperI.KernelBasis
 import Q1Paper.PaperI.BezoutBounded
 import Q1Paper.PaperI.ChartCount
 import Q1Paper.PaperI.TauMConst
+import Q1Paper.PaperI.ColsConcat
 
 /-!
 ## What is imported here
