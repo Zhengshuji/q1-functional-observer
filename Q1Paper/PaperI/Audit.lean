@@ -407,3 +407,8 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.renegarSpecStrong_inhabited
 #print axioms Q1Paper.theorem1_conditional_strong_instance
 #print axioms Q1Paper.instance_not_beta_zero
+#print axioms Q1Paper.theorem1_conditional_params_fixedDeg
+#print axioms Q1Paper.chartSpecFixedDeg_inhabited
+#print axioms Q1Paper.theorem1_conditional_params_instance
+#print axioms Q1Paper.chartSpec_empty
+#print axioms Q1Paper.theorem1_bound_params_fixedDeg

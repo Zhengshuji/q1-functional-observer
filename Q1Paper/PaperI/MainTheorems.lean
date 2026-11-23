@@ -96,6 +96,7 @@ import Q1Paper.PaperI.TotalCost
 import Q1Paper.PaperI.ExactDiv
 import Q1Paper.PaperI.Thm1Cond
 import Q1Paper.PaperI.Thm1Bite
+import Q1Paper.PaperI.RenegarParams
 
 /-!
 ## What is imported here
