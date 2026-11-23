@@ -74,6 +74,7 @@ import Q1Paper.PaperI.Theorem5
 import Q1Paper.PaperI.RankFactorization
 import Q1Paper.PaperI.RationalBasis
 import Q1Paper.PaperI.Claim15iv
+import Q1Paper.PaperI.MinorCoeff
 import Q1Paper.PaperI.Claim15
 import Q1Paper.PaperI.Claim14
 import Q1Paper.PaperI.T5Complete
@@ -103,6 +104,8 @@ import Q1Paper.PaperI.FptSpec
 import Q1Paper.PaperI.Prop4
 import Q1Paper.PaperI.GramRows
 import Q1Paper.PaperI.CompressedGram
+import Q1Paper.PaperI.DecR0Iface
+import Q1Paper.PaperI.DenOne
 
 /-!
 ## What is imported here

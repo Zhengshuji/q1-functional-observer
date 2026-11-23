@@ -440,3 +440,14 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.PaperI.windowGram_eq_compressedGramOf
 #print axioms Q1Paper.PaperI.compressedGram_entry_eq_intCast
 #print axioms Q1Paper.PaperI.bitLenInt_sum_le_card_size
+#print axioms Q1Paper.MinorCoeff.pencilMinor_coeff_bitLen_le
+#print axioms Q1Paper.MinorCoeff.pencilMinor_coeff_bitLen_le_one
+#print axioms Q1Paper.MinorCoeff.pencilMinors_coeff_bitLen_le
+#print axioms Q1Paper.MinorCoeff.pencilMinor_coeff_bitLen_le_22
+#print axioms Q1Paper.spectral_decidable_of_solver
+#print axioms Q1Paper.R0Solver_nonempty
+#print axioms Q1Paper.PaperI.coeffGram_den_eq_one
+#print axioms Q1Paper.PaperI.coeffGram_eq_intCoeffGram
+#print axioms Q1Paper.PaperI.windowGram_den_eq_one
+#print axioms Q1Paper.PaperI.windowGram_entry_bitLen_le_of_int
+#print axioms Q1Paper.PaperI.poly_coeff_int_den_eq_one
