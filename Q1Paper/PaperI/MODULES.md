@@ -14,7 +14,7 @@ The four entry points and their separate jobs:
 
 ## `Q1Paper/PaperI/` — Paper I modules (`namespace Q1Paper.PaperI.*`)
 
-76 files, 801 theorems, 164 definitions/structures.
+77 files, 802 theorems, 164 definitions/structures.
 
 | file | thm | def | first declarations | header summary |
 |---|---:|---:|---|---|
@@ -62,6 +62,7 @@ The four entry points and their separate jobs:
 | `FinReindex.lean` | 5 | 1 | `finSumFinZero`, `finSumFinZero_apply_inl`, `finSumFinZero_symm_apply`, `rank_reindex_finSumFinZero`, … | Two independent "last mile" tools for the `r = 0` case of the `DEC` statements. |
 | `FptCore.lean` | 9 | 1 | `FptDimensions`, `fpt_omega_le_two_ell`, `fpt_m`, `fpt_ell_le_kappa`, … | The Renegar-free core of the FPT theorem (Paper I). |
 | `FptSpec.lean` | 21 | 6 | `RenegarBackend`, `one_le_constCost`, `constRenegarBackend`, `fptBackendInhabited`, … | The FPT analogue of `PaperI/RenegarParams.lean`, with the fixed-degree lesson applied.** |
+| `FromRowsMap.lean` | 1 | 0 | `fromRows_map` |  |
 | `Gram.lean` | 4 | 0 | `rowSpace_eq_range_transpose`, `range_transpose_mul_self`, `mem_range_transpose_iff_exists_gram`, `gram_certificate` | The Gram step of Paper I, Claim 11: for a real matrix `Z` and a vector `e0`, |
 | `GramCert.lean` | 2 | 0 | `gram_solvable_iff_smul`, `gram_certificate_iff_subset` | D1 step 5: certificate equivalence.  If two Gram matrices differ by a nonzero |
 | `GramCoefficients.lean` | 3 | 2 | `eval_eq_sum_fin_coeff`, `minorCoeff`, `coeffGram`, `gramKernelEval_eq_coeff_sum`, … | Section III-D, layer 3: the coefficient identity.  For a polynomial matrix |
@@ -97,7 +98,7 @@ The four entry points and their separate jobs:
 
 ## `Q1Paper/` — Root modules (`namespace Q1Paper.*`)
 
-30 files, 142 theorems, 37 definitions/structures.
+31 files, 143 theorems, 37 definitions/structures.
 
 | file | thm | def | first declarations | header summary |
 |---|---:|---:|---|---|
@@ -129,6 +130,7 @@ The four entry points and their separate jobs:
 | `Q1Subspace.lean` | 5 | 1 | `rowSpan`, `rowSpan_le_range`, `range_le_rowSpan`, `range_eq_rowSpan`, … |  |
 | `RankConsistency.lean` | 3 | 0 | `exists_solution_iff_mem_range`, `exists_solution_iff_span_le_range`, `exists_solution_iff_range_eq_sup_span` | Lemma C, structural core: consistency of a linear system is membership of |
 | `RankIdentity.lean` | 2 | 2 | `restrictToKer`, `range_restrictToKer`, `kerRestrictEquiv`, `finrank_range_prod` | The compression identity of the paper, abstract form: |
+| `ScratchFromRowsMap.lean` | 1 | 0 | `fromRows_map` |  |
 | `SpectralCertificate.lean` | 2 | 0 | `bezout_of_gcd_eq_one`, `sum_sq_eq_zero_iff` | Lemma D, first algebraic ingredient: the two-polynomial Bezout identity |
 | `Window.lean` | 11 | 3 | `windowMatrix`, `windowMatrix_apply`, `windowMatrix_row`, `natDegree_X_pow_mul_le`, … | Paper I, Claim 10 (`lem:window`, "degree-windowed relations"). |
 

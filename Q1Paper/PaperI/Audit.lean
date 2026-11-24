@@ -481,3 +481,4 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.ScratchChartComplete.rowSpace_le_of_phiPoint
 #print axioms Q1Paper.ScratchChartComplete.factor_of_phiPoint
 #print axioms Q1Paper.ScratchChartComplete.feasible_of_phiPoint
+#print axioms Q1Paper.ScratchFromRowsMap.fromRows_map
