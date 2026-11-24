@@ -113,6 +113,7 @@ import Q1Paper.PaperI.Claim8Literal
 import Q1Paper.PaperI.ChartComplete
 import Q1Paper.PaperI.FromRowsMap
 import Q1Paper.PaperI.ChartComplex
+import Q1Paper.PaperI.Reindex
 
 /-!
 ## What is imported here
