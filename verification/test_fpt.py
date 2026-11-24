@@ -35,12 +35,26 @@ E1 = [[Fr(1), Fr(0), Fr(0)]]
 E2 = [[Fr(0), Fr(1), Fr(0)]]
 E3 = [[Fr(0), Fr(0), Fr(1)]]
 
+A_SHIFT4 = [[Fr(int(i + 1 == j)) for j in range(4)] for i in range(4)]
+
 INSTANCES = [
     ("shift, C=e1, L0=[-1,-1,-1], q=2", A_SHIFT, E1, [[Fr(-1), Fr(-1), Fr(-1)]], 2),
     ("shift, C=e1, L0=e1, q=2", A_SHIFT, E1, E1, 2),
     ("zero A, C=e1, L0=e2, q=2", A_ZERO, E1, E2, 2),
     ("shift, C=e3, L0=e1, q=2", A_SHIFT, E3, E1, 2),
     ("shift, C=e1, L0=e2, q=2", A_SHIFT, E1, E2, 2),
+    # n = 4 and r = 2 (q = 3 with |L0| = 1)
+    ("n=4 shift, C=e1, L0=e1, q=2", A_SHIFT4, [[Fr(1), Fr(0), Fr(0), Fr(0)]],
+     [[Fr(1), Fr(0), Fr(0), Fr(0)]], 2),
+    ("n=4 shift, C=e1, L0=e1, q=3 (r=2)", A_SHIFT4, [[Fr(1), Fr(0), Fr(0), Fr(0)]],
+     [[Fr(1), Fr(0), Fr(0), Fr(0)]], 3),
+    ("n=4 shift, C=e1, L0=[-1,-1,-1,-1], q=2", A_SHIFT4,
+     [[Fr(1), Fr(0), Fr(0), Fr(0)]], [[Fr(-1), Fr(-1), Fr(-1), Fr(-1)]], 2),
+    ("n=4 shift, C=e4, L0=e1, q=2", A_SHIFT4,
+     [[Fr(0), Fr(0), Fr(0), Fr(1)]], [[Fr(1), Fr(0), Fr(0), Fr(0)]], 2),
+    # a two-row measurement
+    ("shift, C=[e1;e2], L0=e1, q=2", A_SHIFT,
+     [[Fr(1), Fr(0), Fr(0)], [Fr(0), Fr(1), Fr(0)]], E1, 2),
 ]
 
 

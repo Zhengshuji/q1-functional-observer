@@ -131,8 +131,13 @@ class FptData:
             self.s0 = len(self.W0)
             self.mprime = len(self.V) - self.s0
         else:
+            # k = 0: the common kernel is trivial, so N has no columns, W0 = 0 and the paper's
+            # W0 = 0 shortcut applies (R = 0).  w0_in_v must still exist (Round 15: a trivial
+            # kernel made decide_fpt crash on a missing attribute).
             self.M = self.T = self.S = self.W0 = self.SxS = self.V = []
+            self.W0rows = []
             self.s0 = self.mprime = 0
+            self.w0_in_v = True
 
     # --- invariants, asserted before any verdict is drawn
     def check(self):
