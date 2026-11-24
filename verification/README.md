@@ -50,3 +50,29 @@ Run a script from this directory: `python ci/cNNN_<topic>.py` (the CI scripts im
 
 `ci/c319`'s fourth check (a negative control on an external example) needs data that is not
 bundled in this repository; it is skipped here and runs in the research repository.
+
+## Entry point: checking a candidate observer
+
+`verify_candidate.py` is the reusable checker for the paper's two conditions.  Given `A`, `C`
+and a candidate `L = [L0; R]` it decides, in exact rational arithmetic,
+
+* (5a) `rank[LA; L; CA; C] = rank[L; CA; C]`,
+* (5b) the gcd of the `r0`-order minors of `[λL - LA; CA; C]` is a nonzero constant,
+
+prints the shapes and the rank of `[L; CA; C]` first (asserted, so a malformed input trips an
+assertion rather than yielding a confident wrong answer), and returns `DEC = (5a) and (5b)`.
+
+```
+python verify_candidate.py                  # one feasible and one infeasible example
+python verify_candidate.py instance.json    # {"A": .., "C": .., "L0": .., "R": .., "expect": true}
+```
+
+It calls `cond_5a_orig` / `cond_5b_orig` from `audit_independent.py` (the independent
+implementation with its own Fraction linear algebra and exact polynomial gcd), so the thin CLI
+and the research script cannot silently disagree.
+
+**What is *not* here**: a single end-to-end script that runs the whole decision algorithm
+(chart enumeration, the per-chart system (R0), and a solver).  The pieces are `c318` (the
+`r = 0` system and its gcd test), `c320`-`c324` (the subspace reduction) and `c319` (the
+encoding); `audit_independent.py` additionally implements the decision side
+(`N = ker[C; CA]`, `A' = (NᵀN)⁻¹NᵀAN`, `R0 = AN - NA'`, the invariant closure `V`, `α0`).
