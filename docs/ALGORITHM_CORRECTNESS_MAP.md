@@ -13,6 +13,12 @@ Last updated: 2026-11-24, after the axiom audit reached 418 declarations.
 | **A** | *Parameterization completeness*: every feasible free block is covered by the enumeration over `t` | **proved at the level of `W`** | `Claim4Converse.claim4_converse`: for every `W` with `row(L₀M) ≤ W ≤ row M` and `dim(W/W₀) ≤ r` there is an `R` with exactly `r` rows and `row([L₀;R] M) = W`. The converse of `claim4_sandwich`. |
 | **B** | *Chart coverage*: every relevant subspace lies in some Grassmann chart | **proved** | `Claim14Basis.exists_chart_bases` (the `E₀`, `E_Q` data) and `exists_chart_completion` (every `t`-dimensional subspace of `V/W₀` has a chart), with the chart count in `FptCore.fpt_chart_count_le`. |
 | **C** | *Certificate correctness*: the algebraic constraints are equivalent to the original conditions | **proved in both directions** | `ChartComplete.PhiPoint` packages the five items of `eq:phi`; `phiPoint_of_conditions` produces one from the two row-space conditions (forward), and `feasible_of_phiPoint` gives the paper's `(5a)` and `(5b)` back from one (backward). Supporting: `row_LA_mul_le_row_L_mul`, `exists_chart_factorization`, `exists_L_pinned`, `raw_of_compressed`, `factor_of_phiPoint`. Item (ii) is carried by the row inclusion, which `claim8_rank_consistency` identifies with the rank-consistency system. |
+
+**Soundness at the level of `DEC` is now a theorem**: `PaperI/Soundness.lean`'s `dec_of_phiPoint`
+takes a chart point for the compressed data of `[L₀; R]` and concludes `DEC C A L0 r`.  The bridge is
+`rawAlgebraic_submatrix` / `rawSpectral_submatrix` (a row bijection preserves both raw conditions)
+plus `submatrix_mul_right`.  Completeness remains out of reach for this `DEC`, for the reason in the
+next section — not for want of a lemma.
 | **D** | *Backend correctness*: the real-algebraic decision procedure is correct | **not proved, and not attempted** | `RenegarBackend` is a structure carrying a cost bound; it has no correctness field. This is the honest boundary: Renegar's algorithm is cited, not formalised. |
 | **E** | *Edge cases*: `q < r₀`, `ω = 0`, `r = 0` | **proved** | `q < r₀` is a one-line bound; `ω = 0` is Proposition 4 step 2 (and `decide_r0` decides it by the original conditions); `r = 0` is `prop4_r0_iff_spectral`. |
 | **F** | *Complexity* | **partly proved** | Claim 19/21 bit-cost chain (`ExactDiv`, `ComplexityCounts`) is kernel-checked; Theorems 1 and 2 are *conditional* on `ChartSpecFixedDeg` / `FptChartSpec` (inhabited, exponents explicit). |
