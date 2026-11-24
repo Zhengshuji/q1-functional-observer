@@ -115,6 +115,7 @@ import Q1Paper.PaperI.FromRowsMap
 import Q1Paper.PaperI.ChartComplex
 import Q1Paper.PaperI.Reindex
 import Q1Paper.PaperI.Reindex2
+import Q1Paper.PaperI.Soundness
 
 /-!
 ## What is imported here

@@ -485,3 +485,4 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.ScratchChartComplex.complex_spectral_implies_real
 #print axioms Q1Paper.ScratchReindex.rawAlgebraic_submatrix
 #print axioms Q1Paper.ScratchReindex2.rawSpectral_submatrix
+#print axioms Q1Paper.ScratchSoundness.dec_of_phiPoint

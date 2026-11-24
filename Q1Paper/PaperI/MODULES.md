@@ -14,7 +14,7 @@ The four entry points and their separate jobs:
 
 ## `Q1Paper/PaperI/` — Paper I modules (`namespace Q1Paper.PaperI.*`)
 
-80 files, 806 theorems, 167 definitions/structures.
+81 files, 808 theorems, 167 definitions/structures.
 
 | file | thm | def | first declarations | header summary |
 |---|---:|---:|---|---|
@@ -88,6 +88,7 @@ The four entry points and their separate jobs:
 | `RenegarParams.lean` | 14 | 6 | `ChartParams`, `renegarCost`, `ChartSpec`, `one_le_pow_six`, … | Theorem 1 with the parameters of every chart made explicit.** |
 | `RowSpanBridge.lean` | 2 | 2 | `rowSpan`, `preimagePair`, `imagePair_preimagePair`, `rowSpan_windowInj_eq` | D1 step 6: the two window matrices have the same row space.  This closes the |
 | `SolveCriterion.lean` | 6 | 0 | `rank_le_rank_fromRows_right`, `vecMul_transpose_eq_mulVec`, `exists_mulVec_eq_iff_mem_rowSpace`, `exists_mulVec_eq_iff_rank_fromRows`, … |  |
+| `Soundness.lean` | 2 | 0 | `submatrix_mul_right`, `dec_of_phiPoint` |  |
 | `SpectralMinor.lean` | 2 | 1 | `pencil`, `pencil_map_eval`, `spectral_iff_minors` | The pencil-level rank/minors equivalence behind Claim 11: |
 | `T5Auto.lean` | 2 | 0 | `DECℂ_iff_exists_compressed_auto`, `DECℂ_iff_exists_encodes_auto` | Theorem 5 of Paper I with no abstract hypothesis.** |
 | `T5Complete.lean` | 9 | 0 | `rank_mul_rightInverse_field`, `rank_of_leftInverse_field`, `eq_zero_of_rank_eq_zero`, `exists_coeff_left_inverse_arb`, … | Theorem 5 of Paper I, completeness direction**: the converse of |
