@@ -1,5 +1,19 @@
 import Q1Paper.PaperI.MinorFamilyBridge
 
+/-!
+Q1Paper/PaperI/FibreSum.lean
+
+Fibre grouping: if every fibre of a surjection `Φ : R → S` has the same cardinality `m`, then a sum
+over `R` is `m` times the corresponding sum over `S`:
+`∑ r, h (Φ r) = m • ∑ s, h s`.
+
+This is the counting step behind the minor-index bridge.  The two index families in the paper are the
+**injective** tuples (an ordered choice of `ω` rows and `ω` columns) and the **subsets** (an unordered
+choice); each subset is hit by exactly `ω!` tuples, so a sum over the injective family is `ω!` times a
+sum over subsets — and for the pair of families the factor is `(ω!)²`.  Stating that as a fibre-count
+identity keeps the arithmetic of the bridge out of the algebraic statements that use it.
+-/
+
 open Matrix Polynomial
 
 namespace Q1Paper.PaperI

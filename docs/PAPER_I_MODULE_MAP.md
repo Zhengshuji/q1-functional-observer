@@ -74,7 +74,7 @@ docstring so a reader can see the author's stated purpose.
 | `Q1Paper/PaperI/DesnanotJacobi.lean` | 19 | 4 | — | `k = 0, 1` instances `sylvester_two`, `sylvester_three` only). |
 | `Q1Paper/PaperI/ExactDiv.lean` | 11 | 5 | Claim 19, Claim 21 | integer; `tab_entry_den_eq_one_of_le_one` covers the hypothesis-free steps `k <= 1`). |
 | `Q1Paper/PaperI/FibreCard.lean` | 11 | 5 | — | injective index maps into a sum over `ω`-element subsets (Claim 11/12, §III-D). |
-| `Q1Paper/PaperI/FibreSum.lean` | 2 | 2 | — | **(no module docstring)** |
+| `Q1Paper/PaperI/FibreSum.lean` | 2 | 2 | — | `∑ r, h (Φ r) = m • ∑ s, h s`. |
 | `Q1Paper/PaperI/FinReindex.lean` | 6 | 4 | — | Two independent "last mile" tools for the `r = 0` case of the `DEC` statements. |
 | `Q1Paper/PaperI/FptCore.lean` | 10 | 5 | — | The Renegar-free core of the FPT theorem (Paper I). |
 | `Q1Paper/PaperI/FptSpec.lean` | 18 | 7 | Theorem 2 | unsatisfiable: `chartSpec_empty`).  This file assembles the FPT analogue. |
