@@ -28,7 +28,7 @@ docs/           audit trail and handoff documents
                 LEAN_MAP.md, REPLY_from_paper_agent.md
 Q1Paper/        Lean sources
                 Q1Paper/            the project layer (row spaces, projections, rank identities)
-                Q1Paper/PaperI/     the Paper I modules (40 files), plus Audit.lean
+                Q1Paper/PaperI/     the Paper I modules (86 files), plus Audit.lean
                 AGENTS.md           handoff notes (environment, pitfalls, API index)
 scripts/        check.sh, check_paperI_axioms.py, promote_paperI.py
 verification/   exact rational checks; see verification/README.md for the index
@@ -88,7 +88,13 @@ and cost bounds; Theorem 1 is a *conditional* theorem whose only external input 
 declared real-algebraic backend (`ChartSpecFixedDeg`, whose non-emptiness is proved). The FPT
 bound of Theorem 2 has its Renegar-free core (the dimension relations and the Grassmannian chart
 count `sum_t C(m',t) = 2^m' <= 4^ell`) formalised; the remaining layers are in progress.
-`docs/PAPER_I_FORMALIZATION_MAP.md` is the single source of truth for per-claim status.
+Per-claim status lives in `docs/PAPER_I_PROOF_MAP.md` (generated from `CLAIMS.md`, with the defining
+file and line for every item), and the mathematical narrative in
+`docs/PAPER_I_MATHEMATICAL_GUIDE.md`.  `docs/PAPER_I_FORMALIZATION_MAP.md` is a **development log**,
+kept for provenance — it records gaps that were later closed, so it must not be read as the current
+status.
+
+Start at `docs/START_HERE.md`.
 
 ## Status labels
 
