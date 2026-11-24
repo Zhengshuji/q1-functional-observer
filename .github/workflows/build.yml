@@ -18,8 +18,7 @@ jobs:
         run: |
           lake build Q1Paper.PaperI.MainTheorems
           lake env lean PaperI.lean
-      - name: Axiom audit
-        run: lake env lean Q1Paper/Audit.lean
+
       - name: Paper I axiom audit
         run: |
           lake env lean Q1Paper/PaperI/Audit.lean > paperI_audit.log
@@ -32,21 +31,17 @@ jobs:
 
   paper:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        root: [paper_I_dec, paper_II_minorder, paper_III_hyperplane]
     steps:
       - uses: actions/checkout@v4
-      - name: Compile ${{ matrix.root }}
+      - name: Compile paper_I_dec
         uses: xu-cheng/latex-action@v3
         with:
           working_directory: paper
-          root_file: ${{ matrix.root }}.tex
+          root_file: paper_I_dec.tex
       - uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.root }}
-          path: paper/${{ matrix.root }}.pdf
+          name: paper_I_dec
+          path: paper/paper_I_dec.pdf
 
   verify:
     runs-on: ubuntu-latest

@@ -17,11 +17,8 @@ $\exists\mathbb R$.
 ## Layout
 
 ```
-paper/          the papers: .tex and .pdf only
+paper/          the paper: .tex and .pdf only
                 paper_I_dec            decision complexity (Paper I)
-                paper_II_minorder      minimum order (Paper II)
-                paper_III_hyperplane   the hyperplane layer (Paper III)
-                paper_IV_c2            the c2 layer (Paper IV)
 docs/           audit trail and handoff documents
                 PAPER_I_FORMALIZATION_MAP.md   per-claim formalization status (the map)
                 PAPER_I_MASTER_ROADMAP.md      the plan and its progress
@@ -94,6 +91,32 @@ count `sum_t C(m',t) = 2^m' <= 4^ell`) formalised; the remaining layers are in p
 `[Lean]` = kernel-checked; `[Lean-conditional]` = kernel-checked under explicitly listed
 hypotheses; `[Paper proof]` = a mathematical argument or a complexity claim that is not
 formalized.
+
+## Scope and limitations
+
+**What the Lean artifact establishes.** It kernel-checks the formalised statements covering
+Claims 1–16, Theorem 5, the `r = 0` reduction of Proposition 4, and the bit-complexity results of
+Claims 19 and 21. The axiom audit reports **416** checked declarations, all depending only on
+`propext`, `Classical.choice` and `Quot.sound`. It also verifies **conditional** complexity bounds
+for Theorems 1 and 2, relative to an abstract chart-cost specification whose instances are proved
+inhabited and whose exponents are explicit.
+
+**What it does not establish.** It does **not** formalise
+
+1. the equivalence between the `r > 0` chart systems and the original feasibility problem, i.e.
+   the correctness of Algorithm 1 / Algorithm 2 (this is proved in the paper, on paper);
+2. Renegar's real-algebraic feasibility procedure, which enters the paper as a cited result with
+   an explicit cost;
+3. an executable rank/feasibility solver (the repository has an interface plus a non-emptiness
+   proof, not a computable implementation).
+
+The Python programs under `verification/` implement Algorithm 1, Algorithm 2's control flow and
+the `r = 0` branch; they agree with each other on 10 instances and are cross-checked with exact
+arithmetic. That is **experimental evidence, not a proof of algorithmic correctness**.
+
+So the honest claim is: *the Lean artifact machine-checks the core mathematical statements of
+Paper I and a conditional complexity analysis* — not *all of Paper I's theorems and the full
+algorithms*.
 
 ## Where each paper item is proved
 
