@@ -120,6 +120,7 @@ import Q1Paper.PaperI.DecComplex
 import Q1Paper.PaperI.KernelLift
 import Q1Paper.PaperI.ComplexSoundness
 import Q1Paper.PaperI.Completeness
+import Q1Paper.PaperI.CompletenessB
 
 /-!
 ## What is imported here
