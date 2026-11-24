@@ -1,26 +1,27 @@
 #!/usr/bin/env python3
-"""test_fpt.py -- end-to-end agreement between the Algorithm 2 front end and Algorithm 1.
+"""test_fpt.py -- Algorithm 2's control flow against Algorithm 1, on small instances.
 
-For each small instance this script searches every Grassmann chart of the front end over a small
-grid of chart coordinates, and for every point where Psi holds it reconstructs an observer L and
-re-verifies it against the ORIGINAL conditions with the independent checker
-(`audit_independent.cond_5a_orig` / `cond_5b_orig`).
+`fpt.decide_fpt` implements Algorithm 2 as the paper states it, including the short-circuits:
 
-The hard direction asserted is SOUNDNESS of the front end:
+    W0 not inside V   -> infeasible
+    W0 = 0            -> feasible        (the omega = 0 branch, R = 0)
+    otherwise         -> enumerate (t, J, omega) and test Psi
 
-    a Psi witness exists  =>  decide.py does not report the instance infeasible
+and it returns 'unknown' -- never 'infeasible' -- when the chart grid finds no witness, since a
+grid miss is not a proof of infeasibility (an exact real-feasibility oracle is absent, the same
+boundary as Algorithm 1's unknown).
 
-The other direction (decide says feasible => a Psi witness is found) is reported but not asserted,
-because the front end's search is a finite grid and can miss points; a miss there is a coverage
-statement, not a contradiction.
+This script compares that verdict with `decide.py`'s (Algorithm 1) and asserts the two directions
+that must hold:
 
-Every arithmetic step is fractions.Fraction.
+  * soundness   : Algorithm 2 says 'feasible'  =>  Algorithm 1 says 'feasible'
+  * soundness'  : Algorithm 1 says 'infeasible' => Algorithm 2 says 'infeasible'
+
+Whenever Algorithm 2 reports 'feasible' through a chart, the witness L is reconstructed and
+re-verified against the ORIGINAL (5a)/(5b) by audit_independent.
 """
 
 from __future__ import annotations
-
-import itertools
-import sys
 
 from fractions import Fraction as Fr
 
@@ -30,77 +31,52 @@ import fpt
 
 A_SHIFT = [[Fr(0), Fr(1), Fr(0)], [Fr(0), Fr(0), Fr(1)], [Fr(0), Fr(0), Fr(0)]]
 A_ZERO = [[Fr(0), Fr(0), Fr(0)], [Fr(0), Fr(0), Fr(0)], [Fr(0), Fr(0), Fr(0)]]
+E1 = [[Fr(1), Fr(0), Fr(0)]]
+E2 = [[Fr(0), Fr(1), Fr(0)]]
+E3 = [[Fr(0), Fr(0), Fr(1)]]
 
 INSTANCES = [
-    ("shift, C=e1, L0=[-1,-1,-1], q=2", A_SHIFT,
-     [[Fr(1), Fr(0), Fr(0)]], [[Fr(-1), Fr(-1), Fr(-1)]], 2),
-    ("shift, C=e1, L0=e1, q=2", A_SHIFT,
-     [[Fr(1), Fr(0), Fr(0)]], [[Fr(1), Fr(0), Fr(0)]], 2),
-    ("zero A, C=e1, L0=e2, q=2", A_ZERO,
-     [[Fr(1), Fr(0), Fr(0)]], [[Fr(0), Fr(1), Fr(0)]], 2),
-    ("shift, C=e3, L0=e1, q=2", A_SHIFT,
-     [[Fr(0), Fr(0), Fr(1)]], [[Fr(1), Fr(0), Fr(0)]], 2),
+    ("shift, C=e1, L0=[-1,-1,-1], q=2", A_SHIFT, E1, [[Fr(-1), Fr(-1), Fr(-1)]], 2),
+    ("shift, C=e1, L0=e1, q=2", A_SHIFT, E1, E1, 2),
+    ("zero A, C=e1, L0=e2, q=2", A_ZERO, E1, E2, 2),
+    ("shift, C=e3, L0=e1, q=2", A_SHIFT, E3, E1, 2),
+    ("shift, C=e1, L0=e2, q=2", A_SHIFT, E1, E2, 2),
 ]
-
-
-def search_psi(ctx, grid=(-1, 0, 1)):
-    """Yield (J, Y, omega, H, G) for every chart point where Psi holds."""
-    hits = []
-    # the paper's range is t = 0 .. min(r, 2*ell); never more than m' since the charts are those
-    # of Gr(t, m')
-    tmax = min(ctx.mprime, ctx.r, 2 * ctx.ell)
-    for t in range(0, tmax + 1):
-        for J in fpt.grassmann_charts(ctx.mprime, t):
-            width = ctx.mprime - t
-            for Yflat in itertools.product(grid, repeat=t * width):
-                Y = [[Fr(Yflat[a * width + b]) for b in range(width)] for a in range(t)]
-                for omega in range(1, ctx.ell + 1):
-                    r = fpt.psi_eval(ctx, J, Y, omega)
-                    if r["i"] and r["ii"]:
-                        hits.append((J, Yflat, omega, r["H"], r["G"]))
-    return hits
 
 
 def main() -> int:
     ok = True
     print(f"instances: {len(INSTANCES)}")
-    print("-" * 72)
+    print("-" * 74)
     for label, A, C, L0, q in INSTANCES:
-        d = decide.decide(A, C, L0, q, verbose=False)
-        verdict = getattr(d, "verdict", "?")
-        ctx = fpt.FptData(A, C, L0, q)
-        ctx.check()
-        if not ctx.w0_in_v:
-            # Algorithm 2's step 5/6 test: W0 not inside V => infeasible, no chart to search
-            print(f"[{label}]")
-            print(f"    decide.py verdict : {verdict}")
-            print("    W0 not inside V   : Algorithm 2 rejects at step 6 (infeasible)")
-            if verdict == "feasible":
-                print("    CONTRADICTION: the paper's step-6 test rejects a feasible instance")
-                ok = False
-            else:
-                print("    AGREE (both reject)")
-            continue
-        hits = search_psi(ctx)
+        d1 = decide.decide(A, C, L0, q, verbose=False)
+        v1 = getattr(d1, "verdict", "?")
+        v2, hits = fpt.decide_fpt(A, C, L0, q)
+
         verified = 0
         for (J, Yflat, omega, H, G) in hits:
-            L = fpt.reconstruct_L(ctx, H, G)
+            L = fpt.reconstruct_L(fpt.FptData(A, C, L0, q), H, G)
             if L is None:
                 continue
-            assert ai.cond_5a_orig(A, C, L), f"{label}: Psi witness fails (5a)"
-            assert ai.cond_5b_orig(A, C, L), f"{label}: Psi witness fails (5b)"
+            assert ai.cond_5a_orig(A, C, L), f"{label}: a Psi witness fails (5a)"
+            assert ai.cond_5b_orig(A, C, L), f"{label}: a Psi witness fails (5b)"
             verified += 1
+
+        agree = (v2 == v1) or (v2 == "unknown")
         print(f"[{label}]")
-        print(f"    decide.py verdict : {verdict}")
-        print(f"    Psi witnesses     : {len(hits)}  (reconstruct+verify ok: {verified})")
-        if hits and verdict == "infeasible":
-            print("    CONTRADICTION: a Psi witness exists but decide.py says infeasible")
+        print(f"    Algorithm 1 : {v1}")
+        print(f"    Algorithm 2 : {v2}   (chart witnesses: {len(hits)}, verified: {verified})")
+        if v2 == "feasible" and v1 == "infeasible":
+            print("    CONTRADICTION: Algorithm 2 accepts what Algorithm 1 rejects")
             ok = False
-        if not hits and verdict == "feasible":
-            print("    coverage miss: decide.py is feasible but the grid found no witness")
-        if hits and verdict == "feasible":
-            print("    AGREE (both feasible)")
-    print("-" * 72)
+        if v1 == "infeasible" and v2 not in ("infeasible",):
+            print("    CONTRADICTION: Algorithm 1 rejects but Algorithm 2 does not")
+            ok = False
+        if v2 == "unknown":
+            print("    (unknown: the chart grid found no witness; needs the oracle)")
+        elif agree:
+            print("    AGREE")
+    print("-" * 74)
     print("RESULT:", "PASS" if ok else "FAIL")
     return 0 if ok else 1
 

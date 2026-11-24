@@ -342,6 +342,47 @@ def reconstruct_L(ctx, H, G):
     return [[payload[idx(i, j)] for j in range(n)] for i in range(q)]
 
 
+def decide_fpt(A, C, L0, q, grid=(-1, 0, 1), verbose=False):
+    """Algorithm 2's control flow, with the paper's exact short-circuits.
+
+    Returns (verdict, hits) where verdict is 'feasible' | 'infeasible' | 'unknown' and hits are
+    the chart points where Psi held.  The paper's steps:
+
+      r = 0                       -> the exact test of Proposition 4 (delegated)
+      W0 not inside V             -> infeasible          (step 5/6 test)
+      W0 = 0                      -> feasible            (the omega = 0 branch, R = 0 works)
+      otherwise                   -> enumerate (t, J, omega) and test Psi
+
+    Step 5's `W0 = 0` shortcut is essential: without it a feasible instance with `s0 = 0` is
+    reported as having no chart witness (found in Round 14 on `A` = shift, `C = e1^T`, `L0 = e1^T`).
+    """
+    ctx = FptData(A, C, L0, q)
+    ctx.check()
+    if ctx.r == 0:
+        import decide_r0 as d0
+        d = d0.decide_r0(A, C, L0)
+        return ("feasible" if d.feasible else "infeasible"), []
+    if not ctx.w0_in_v:
+        return "infeasible", []
+    if all(v == 0 for row in ctx.W0 for v in row):
+        return "feasible", []          # W0 = 0: R = 0 realises W = 0
+    hits = []
+    tmax = min(ctx.mprime, ctx.r, 2 * ctx.ell)
+    for t in range(0, tmax + 1):
+        for J in grassmann_charts(ctx.mprime, t):
+            width = ctx.mprime - t
+            for Yflat in itertools.product(grid, repeat=t * width):
+                Y = [[Fr(Yflat[a * width + b]) for b in range(width)] for a in range(t)]
+                for omega in range(1, ctx.ell + 1):
+                    r = psi_eval(ctx, J, Y, omega)
+                    if r["i"] and r["ii"]:
+                        hits.append((J, Yflat, omega, r["H"], r["G"]))
+                        if verbose:
+                            print(f"[fpt] chart t={t} J={J} Y={Yflat} omega={omega}: SAT")
+                        return "feasible", hits
+    return "unknown", hits              # no oracle: absence of a grid witness is not infeasible
+
+
 def demo():
     ok = True
     # A = the shift, C = e1^T, L0 = e1^T, q = 2  (an r = 1 instance)
