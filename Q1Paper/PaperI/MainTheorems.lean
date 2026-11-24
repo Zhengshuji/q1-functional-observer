@@ -112,6 +112,7 @@ import Q1Paper.PaperI.Claim8Wire
 import Q1Paper.PaperI.Claim8Literal
 import Q1Paper.PaperI.ChartComplete
 import Q1Paper.PaperI.FromRowsMap
+import Q1Paper.PaperI.ChartComplex
 
 /-!
 ## What is imported here

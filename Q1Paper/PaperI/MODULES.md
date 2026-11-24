@@ -14,7 +14,7 @@ The four entry points and their separate jobs:
 
 ## `Q1Paper/PaperI/` — Paper I modules (`namespace Q1Paper.PaperI.*`)
 
-77 files, 802 theorems, 164 definitions/structures.
+78 files, 804 theorems, 166 definitions/structures.
 
 | file | thm | def | first declarations | header summary |
 |---|---:|---:|---|---|
@@ -30,6 +30,7 @@ The four entry points and their separate jobs:
 | `C16Gcd.lean` | 16 | 3 | `pencilMinors`, `FamilyGcdIsConst`, `NoCommonComplexRoot`, `exists_ne_zero_of_gcd_isConst`, … | Claim 16 (`lem:zero`) of Paper I, part (iii), in its **gcd form**, and its link to the |
 | `CauchyBinet.lean` | 12 | 1 | `plucker`, `plucker_apply`, `_root_`, `pairingDual_map_toDual_basis`, … | Port of the square Cauchy-Binet identity. |
 | `ChartComplete.lean` | 11 | 1 | `row_LA_mul_le_row_L_mul`, `exists_chart_factorization`, `exists_phi_point`, `rowSpace_le_of_chart_factorization`, … |  |
+| `ChartComplex.lean` | 2 | 2 | `RowIdx`, `rank_map_ofReal_sum`, `spectralComplex`, `complex_spectral_implies_real` |  |
 | `ChartCount.lean` | 5 | 0 | `le_two_pow`, `chart_count_le`, `chart_count_le_pow`, `exp_compose`, … | Chart-count arithmetic for Theorem 1.** |
 | `Claim11.lean` | 5 | 1 | `windowOne`, `windowOne_eq_toFn`, `exists_bezout_iff_mem_rowSpace_window`, `mem_rowSpace_window_of_no_common_complex_root`, … | Claim 11 of Paper I, the Bézout/window half.  For `f : ι → K[X]` of degree at |
 | `Claim11Final.lean` | 6 | 2 | `maximalMinor_map`, `natDegree_det_le`, `pencil_natDegree_le`, `natDegree_maximalMinor_le`, … | The final assembly of Claim 11: |
