@@ -34,17 +34,18 @@ and `PhiHolds` is the five items of `eq:phi`.
 
 Given a feasible `L`, with `N` a basis of `ker[C; CA]`, `H = L N`, `H_A = L A N`, `ω = rank H`:
 
-1. **`row(H_A) ≤ row(H)`.**  `(5a)` says `row(LA) ≤ row[L;CA;C]`; right-multiplying by `N` gives
-   `row(H_A) ≤ row(H) + row(CAN) + row(CN)`, and `CN = CAN = 0` because `N` spans `ker[C;CA]`.
-   *(This is the small lemma to formalise first — it is what lets one `B` serve both `H = X B` and
-   `H_A = G B`.)*
-2. **Rank factorization.**  `RankFactorization.exists_rank_factorization_of_rank` gives `X` (`q×ω`,
-   `rank X = ω`) and `B` (`ω×k`) with `X B = H` and `rank B = ω`.
-3. **`G`.**  From step 1 and `rank B = ω = rank H` one gets `row(H_A) ≤ row B`, so there is `G`
-   with `G B = H_A`.  This is Φ's items (iii)/(iv) after the pivot normalization.
-4. **`x`.**  `(5b)` plus `claim11_iff_gram` give `x` with `ZᵀZ x = e₀` (Φ item (v)).
-5. Φ item (i) is `rank X = ω`, and item (ii) is the rank-consistency system, both discharged by
-   `claim8_rank_consistency` applied to the rows of `H_A`.
+1. **`row(H_A) ≤ row(H)`.** ✅ **proved**: `ChartComplete.row_LA_mul_le_row_L_mul`.  `(5a)` says
+   `row(LA) ≤ row[L;CA;C]`; right-multiplying by `N` gives `row(H_A) ≤ row(H) + row(CAN) + row(CN)`,
+   and `CN = CAN = 0` because `N` spans `ker[C;CA]`.
+2. **Rank factorization.** ✅ available: `RankFactorization.exists_rank_factorization_of_rank`
+   gives `X` (`q×ω`, `rank X = ω`) and `B` (`ω×k`) with `X B = H` and a left inverse of `X`.
+3. **`G`.** ✅ **proved**: `ChartComplete.exists_chart_factorization` combines steps 1–2 —
+   `row(H_A) ≤ row(H)` gives `H_A = F H = F (X B) = (F X) B`, so one `B` serves both
+   factorizations.  This is Φ's items (iii)/(iv) after the pivot normalization.
+4. **`x`.** `(5b)` plus `claim11_iff_gram` give `x` with `ZᵀZ x = e₀` (Φ item (v)).  *Not yet
+   assembled.*
+5. Φ item (i) is `rank X = ω` (step 2), and item (ii) is the rank-consistency system, discharged
+   by `claim8_rank_consistency` applied to the rows of `H_A`.  *Not yet assembled.*
 
 ### Proof plan, backward direction (`Φ-point → Feasible L`)
 
