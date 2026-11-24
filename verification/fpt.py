@@ -396,9 +396,18 @@ def demo():
           f"{aligned} witnesses out of {tried} points tried")
     if aligned == 0:
         print("[fpt] OPEN: no witness on this instance although decide.py finds it feasible.")
-        print("[fpt]       The chart lift Z_ch = [E0; C_J(Y) E_Q] uses an ARBITRARY complement")
-        print("[fpt]       E_Q, but Psi's truth depends on the actual pair rows, not only on")
-        print("[fpt]       their span, so the chart needs the paper's canonical section.")
+        print("[fpt]       DIAGNOSIS (Round 4).  The chart (t, J) of Gr(t, m') is an OPEN cell:")
+        print("[fpt]       E_Q completes E_0 to a BASIS of V, so the t extra rows are independent")
+        print("[fpt]       of W_0.  But item (i) demands rank[H;G] = omega while Zch has s0 + t")
+        print("[fpt]       rows; at t = 1, omega = 1 the two rows must be PROPORTIONAL, which")
+        print("[fpt]       contradicts the independence that defines the chart.  The feasible L")
+        print("[fpt]       therefore has its free row DEPENDENT on W_0: it lies on the BOUNDARY of")
+        print("[fpt]       the chart, not in it.  Psi is invariant under scaling a row, but not")
+        print("[fpt]       under moving a row into W_0.")
+        print("[fpt]       Consequence: covering every feasible L needs either charts for the")
+        print("[fpt]       boundary strata (extra rows inside W_0) or a formulation that does not")
+        print("[fpt]       quotient by W_0.  Until that is settled the Algorithm 2 front end must")
+        print("[fpt]       NOT be read as reproducing Algorithm 1's verdicts.")
     ok &= True
     print("RESULT:", "PASS" if ok else "FAIL")
     return 0 if ok else 1
