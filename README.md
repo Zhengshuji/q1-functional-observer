@@ -56,7 +56,7 @@ cd paper && pdflatex paper_I_dec.tex && pdflatex paper_I_dec.tex
 
 ## What is kernel-checked
 
-`Q1Paper/PaperI/Audit.lean` prints the axioms of 425 declarations; the accepted set is
+`Q1Paper/PaperI/Audit.lean` prints the axioms of 427 declarations; the accepted set is
 exactly `propext`, `Classical.choice`, `Quot.sound` (checked by
 `scripts/check_paperI_axioms.py`, which fails on anything else, including `sorryAx`).
 There is no `sorry`, no `admit` and no custom axiom in the tree.
@@ -100,7 +100,7 @@ formalized.
 
 **What the Lean artifact establishes.** It kernel-checks the formalised statements covering
 Claims 1–16, Theorem 5, the `r = 0` reduction of Proposition 4, and the bit-complexity results of
-Claims 19 and 21. The axiom audit reports **425** checked declarations, all depending only on
+Claims 19 and 21. The axiom audit reports **427** checked declarations, all depending only on
 `propext`, `Classical.choice` and `Quot.sound`. It also verifies **conditional** complexity bounds
 for Theorems 1 and 2, relative to an abstract chart-cost specification whose instances are proved
 inhabited and whose exponents are explicit. One detail worth recording: the FPT specification's

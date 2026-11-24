@@ -204,4 +204,57 @@ theorem exists_L_pinned {r0 q' n k : ℕ}
   obtain ⟨L', h1, h2⟩ := exists_L_of_pairs N AN H' HA' h
   exact ⟨L', by rw [Matrix.fromRows_mul, h1], by rw [Matrix.fromRows_mul, h2]⟩
 
+/-! ## The bidirectional assembly: `PhiPoint`
+
+`eq:phi` has five items.  Items (i), (iii), (iv), (v) are `rank X = ω`, `X B = H`, `G B = H_A`
+and `Zᵀ Z x = e₀`; item (ii) is the rank-consistency system, which `claim8_rank_consistency`
+identifies (per row of `H_A`, on `Hᵀ`) with the row inclusion `row(H_A) ≤ row(H)`.
+
+Packaging them in a structure makes the two directions explicit: the forward direction produces a
+`PhiPoint` from the two row-space conditions, the backward direction consumes one to get the
+compressed `(5a)` back. -/
+
+/-- A point of `eq:phi` at the compressed level. -/
+structure PhiPoint {q k : ℕ} (H HA : Matrix (Fin q) (Fin k) ℝ) (ω : ℕ) where
+  /-- item (iii): the left factor -/
+  X : Matrix (Fin q) (Fin ω) ℝ
+  /-- item (iii): the common right factor -/
+  B : Matrix (Fin ω) (Fin k) ℝ
+  /-- item (iv): the factor of `H_A` -/
+  G : Matrix (Fin q) (Fin ω) ℝ
+  /-- the left inverse of `X`, which is what makes the chart point sound -/
+  XL : Matrix (Fin ω) (Fin q) ℝ
+  /-- item (v): the Gram certificate -/
+  x : Fin (2 * ω) → ℝ
+  /-- item (i) -/
+  rankX : X.rank = ω
+  /-- item (iii) -/
+  hH : X * B = H
+  /-- item (iv) -/
+  hHA : G * B = HA
+  /-- the left inverse of `X` -/
+  hXL : XL * X = 1
+  /-- item (v) -/
+  gram : (Matrix.transpose (windowMatrix (@minorFamily q k ω H HA) ω) *
+      windowMatrix (@minorFamily q k ω H HA) ω).mulVec x = windowOne (K := ℝ) ω
+
+/-- **Forward direction.**  The two row-space conditions produce a `PhiPoint`: items (i), (iii),
+(iv) and (v) come from `exists_phi_point`, and item (ii) is the row inclusion itself. -/
+theorem phiPoint_of_conditions {q k ω : ℕ} (H HA : Matrix (Fin q) (Fin k) ℝ)
+    (hω : 1 ≤ ω) (hωr : H.rank = ω)
+    (h5a : Q1Subspace.rowSpace HA ≤ Q1Subspace.rowSpace H)
+    (h5b : ∀ z : ℂ, (z • H.map (algebraMap ℝ ℂ) - HA.map (algebraMap ℝ ℂ)).rank = ω) :
+    Nonempty (PhiPoint H HA ω) := by
+  obtain ⟨X, B, G, XL, hH, hHA, hXL, hXrank⟩ := exists_chart_factorization H HA hωr h5a
+  obtain ⟨F, hF⟩ := exists_factor_of_rowSpace_le H HA h5a
+  obtain ⟨x, hx⟩ :=
+    (Q1Paper.PaperI.claim11_iff_gram (q := q) (k := k) (ω := ω) H HA hω hωr ⟨F, hF⟩).mp h5b
+  exact ⟨{ X := X, B := B, G := G, XL := XL, x := x, rankX := hXrank, hH := hH, hHA := hHA,
+           hXL := hXL, gram := hx }⟩
+
+/-- **Backward direction.**  Any `PhiPoint` gives the compressed `(5a)` back. -/
+theorem rowSpace_le_of_phiPoint {q k ω : ℕ} {H HA : Matrix (Fin q) (Fin k) ℝ}
+    (P : PhiPoint H HA ω) : Q1Subspace.rowSpace HA ≤ Q1Subspace.rowSpace H :=
+  rowSpace_le_of_chart_factorization H HA P.X P.B P.G P.XL P.hH P.hHA P.hXL
+
 end Q1Paper.ScratchChartComplete
