@@ -489,3 +489,4 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.ScratchDecComplex.dec_of_complexDEC
 #print axioms Q1Paper.ScratchKernelLift.range_mulVecLin_eq_ker_map_complex
 #print axioms Q1Paper.ScratchComplexSoundness.decComplex_of_phiPoint
+#print axioms Q1Paper.ScratchCompleteness.compressed_of_spectralComplexRaw

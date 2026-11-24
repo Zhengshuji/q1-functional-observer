@@ -75,7 +75,7 @@
 
 ## 3. 公理审计
 
-- `Q1Paper/PaperI/Audit.lean` 对 **437 条**声明执行 `#print axioms`。
+- `Q1Paper/PaperI/Audit.lean` 对 **438 条**声明执行 `#print axioms`。
 - 本机结果：全部为 `[propext, Classical.choice, Quot.sound]`（部分为 `[propext, Quot.sound]`）。
 - CI 步骤：`lake env lean Q1Paper/PaperI/Audit.lean > paperI_audit.log` 后运行
   `scripts/check_paperI_axioms.py paperI_audit.log`，出现白名单外的公理或**没有任何审计行**都会失败。
@@ -207,7 +207,7 @@ PaperI/GramKernel.lean，维数约定与论文一致：P : Matrix (Fin q) (Fin �
 - Claim 11 完成：commit `e28ee61`（`Paper I: Claim 11 complete`）；
 - 修复仓库与 WSL 不同步：commit `7101d1d`（同步 `SpectralMinor.lean` 的注入性版本）；
 - CI run `#45026225331` 全绿（lean / Paper I axiom audit / 三篇论文 / verify）；
-- 公理审计：437 条声明，允许集 `{propext, Classical.choice, Quot.sound}`；
+- 公理审计：438 条声明，允许集 `{propext, Classical.choice, Quot.sound}`；
 - 同步检查：`diff` 核对 WSL 工程与仓库的 11 个 Paper I 文件，全部一致。
 
 ## 6. 边界
@@ -244,7 +244,7 @@ Bareiss 的其余结论（来自同一设计复核）：Bareiss 子式恒等式 
 
 **D12（Theorem 5 完备性复核，2026-11-23）**：Lean 的 `PaperI.DEC` 对 `λ : K`（实）量化，而论文的 (5b) 是**复 λ**。两者**严格不等价**：旋转铅笔 `λ²+1` 在实 λ 上无根，但 `rank(i−A)=1`，故 `encodes` 的 S-块（强制每个复 z 满秩）在该例下无实解。因此完备性方向**不能从 `DEC` 推出**，`T5Complete.lean` 用复 λ 假设（论文约定）陈述；从 `DECℂ` 出发只差一条标准复化事实（实 `N` 是复化后 `ker[C_ℂA_ℂ; C_ℂ]` 的复基）。
 
-## 5. 缺口台账（2026-11-24，审计 437 条）
+## 5. 缺口台账（2026-11-24，审计 438 条）
 
 | # | 缺口 | 状态 | Lean 证据 | 剩余 |
 |---|---|---|---|---|
