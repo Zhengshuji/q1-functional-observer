@@ -264,8 +264,15 @@ def decide_r0(A, C, L0, cross_check=True):
     """
     comp = compress_r0(A, C, L0)
     if comp is None:
-        # omega = 0: no compressed pencil to test; the paper's step 2 covers this case.
-        return Decision(False, False, False, note="omega = 0 (handled as a separate case in the paper)")
+        # omega = 0 (or a trivial common kernel): the compressed pencil degenerates, but the
+        # ORIGINAL conditions are still well defined, so decide them directly with the
+        # independent checker instead of reporting False.  (Round 17: this branch used to
+        # return False, which was a known gap -- the paper treats omega = 0 as feasible when
+        # H = H_A = 0, and here L = L0 with no free rows.)
+        ok5a = ai.cond_5a_orig(A, C, L0)
+        ok5b = ai.cond_5b_orig(A, C, L0)
+        return Decision(ok5a and ok5b, ok5a, ok5b,
+                        note="omega = 0: decided by the original (5a)/(5b) on L = L0")
     X, G, om, cond5a = comp
     M, b = build_system(X, G, om)
     kind, payload = solve_exact(M, b)

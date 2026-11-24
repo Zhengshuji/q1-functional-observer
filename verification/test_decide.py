@@ -140,10 +140,12 @@ def test_r0_branch():
     dec = D.decide(A, C, L0, 1, verbose=False)
     ref = dec0.decide_r0(A, C, L0)
     print(f"    degenerate omega = 0, H = H_A = 0: decide={dec.verdict}, "
-          f"decide_r0 feasible={ref.feasible} (known gap of decide_r0)")
+          f"decide_r0 feasible={ref.feasible} (must agree: the paper's omega = 0 case)")
     assert dec.verdict == "feasible"
     check_witness(A, C, dec.L, "r=0, omega=0")
-    assert ref.feasible is False, "decide_r0 changed behaviour; update this test"
+    # Round 17: decide_r0 used to answer False here (a known gap); it now decides the degenerate
+    # case with the original (5a)/(5b), so it must agree with decide.py.
+    assert ref.feasible is True, "decide_r0 must accept the omega = 0 case when H = H_A = 0"
     return True
 
 
