@@ -137,11 +137,20 @@ class FptData:
     # --- invariants, asserted before any verdict is drawn
     def check(self):
         if self.k:
-            assert ai.rank(self.M) == self.k + self.ell, "rank[N AN] != k + ell"
+            # M = [N AN] is n x 2k, so its rank is at most min(n, 2k) -- NOT k + ell in general
+            # (Round 11: the equality k + ell held on the earlier instances by accident and
+            # crashed on A = the shift with C = e3^T, where rank M = 3 while k + ell = 4).
+            assert ai.rank(self.M) <= min(self.n, 2 * self.k), "rank[N AN] exceeds min(n, 2k)"
             assert len(self.T) == ai.rank(self.M), "T is not a basis of row[N AN]"
             assert len(self.S) == self.ell, "S is not a basis of row(AN)"
-            assert all(in_rowspace(w, self.V) for w in self.W0), "W0 is not inside V = T cap (S x S)"
-            assert self.mprime >= 0, "m' = dim V - s0 is negative"
+            # NOTE: W0 <= V is the paper's TEST of step 5/6, not an invariant: when it fails the
+            # algorithm returns infeasible.  Exposed as a flag instead of asserted (Round 11: an
+            # assert here crashed on a genuinely infeasible instance).
+            self.w0_in_v = all(in_rowspace(w, self.V) for w in self.W0)
+            # the paper notes that the step-6 test is exactly what makes m' nonnegative, so the
+            # nonnegativity is asserted only once that test has passed
+            if self.w0_in_v:
+                assert self.mprime >= 0, "m' = dim V - s0 is negative although W0 <= V"
         return True
 
     def describe(self):
