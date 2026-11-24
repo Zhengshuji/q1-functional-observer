@@ -114,6 +114,7 @@ import Q1Paper.PaperI.ChartComplete
 import Q1Paper.PaperI.FromRowsMap
 import Q1Paper.PaperI.ChartComplex
 import Q1Paper.PaperI.Reindex
+import Q1Paper.PaperI.Reindex2
 
 /-!
 ## What is imported here

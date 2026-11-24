@@ -14,7 +14,7 @@ The four entry points and their separate jobs:
 
 ## `Q1Paper/PaperI/` — Paper I modules (`namespace Q1Paper.PaperI.*`)
 
-79 files, 805 theorems, 167 definitions/structures.
+80 files, 806 theorems, 167 definitions/structures.
 
 | file | thm | def | first declarations | header summary |
 |---|---:|---:|---|---|
@@ -84,6 +84,7 @@ The four entry points and their separate jobs:
 | `RatDescent.lean` | 9 | 0 | `map_submatrix_ratReal`, `det_map_ratReal`, `rank_map_ratReal_le`, `rank_le_map_ratReal`, … | A rational linear system solvable over `ℝ` is solvable over `ℚ`.** |
 | `RationalBasis.lean` | 18 | 2 | `bitLenRat_div_int_le`, `bitLenInt_factorial_le_rat`, `bitLenInt_det_submatrix_le`, `bitLenRat_le_bitLenMat`, … | Scratch module for Claim 13 (`lem:rationalbasis`) of Paper I: rational bases and |
 | `Reindex.lean` | 1 | 1 | `blockEquiv`, `rawAlgebraic_submatrix` |  |
+| `Reindex2.lean` | 1 | 0 | `rawSpectral_submatrix` |  |
 | `RenegarParams.lean` | 14 | 6 | `ChartParams`, `renegarCost`, `ChartSpec`, `one_le_pow_six`, … | Theorem 1 with the parameters of every chart made explicit.** |
 | `RowSpanBridge.lean` | 2 | 2 | `rowSpan`, `preimagePair`, `imagePair_preimagePair`, `rowSpan_windowInj_eq` | D1 step 6: the two window matrices have the same row space.  This closes the |
 | `SolveCriterion.lean` | 6 | 0 | `rank_le_rank_fromRows_right`, `vecMul_transpose_eq_mulVec`, `exists_mulVec_eq_iff_mem_rowSpace`, `exists_mulVec_eq_iff_rank_fromRows`, … |  |
