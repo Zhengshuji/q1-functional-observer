@@ -76,3 +76,39 @@ and the research script cannot silently disagree.
 `r = 0` system and its gcd test), `c320`-`c324` (the subspace reduction) and `c319` (the
 encoding); `audit_independent.py` additionally implements the decision side
 (`N = ker[C; CA]`, `A' = (NᵀN)⁻¹NᵀAN`, `R0 = AN - NA'`, the invariant closure `V`, `α0`).
+
+## The r = 0 decision procedure (an algorithm, not a check)
+
+`decide_r0.py` is the one script here that is an **`[algorithm implementation]`** rather than an
+`[exact verification]`: it takes an instance, runs the paper's reduction, and returns a verdict.
+
+```
+python decide_r0.py --demo          # one feasible and one infeasible instance
+python decide_r0.py instance.json   # {"A": .., "C": .., "L0": ..}
+```
+
+What it does: N = ker[C; CA], H = L0 N, H_A = L0 A N, omega = rank H, then the two conditions
+
+* `(5a)` `rank[H; H_A] = omega`,
+* `(5b)` the pencil `lam X - G` keeps rank omega at every complex lambda,
+
+and it decides `(5b)` through the finite rational system (R0) (unknowns `S_0 .. S_d`,
+`d = 2 omega - 2`) rather than through the gcd of minors.
+
+**Certificates in both directions** -- this is the difference from a check script:
+* YES returns the actual solution `S_0 .. S_d`, which is substituted back into every equation;
+* NO returns a **Farkas certificate** `y` with `y^T M = 0` and `y^T b != 0`, verified directly.
+  Absence of a solution is never reported on the strength of the solver not having found one.
+
+**Independent cross-check**: the (R0) verdict is compared against the gcd-of-maximal-minors test,
+which is a separate code path (the polynomial arithmetic of `audit_independent.py`).  A
+disagreement is an assertion failure, not a warning.
+
+Everything is `fractions.Fraction`; no float takes part in any decision, and `unknown` is never
+turned into `False`.
+
+**Boundary (important).** This is the `r = 0` branch only.  The full DEC algorithm also needs the
+`r > 0` branch: chart enumeration, the per-chart polynomial system, and a real-algebraic
+feasibility oracle.  None of that is implemented here, and the module does not pretend
+otherwise.  The witness is in the compressed form the paper itself uses (the `S` family);
+reconstructing an actual observer matrix `L` from it is a further step.
