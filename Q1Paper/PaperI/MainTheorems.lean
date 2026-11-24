@@ -117,6 +117,7 @@ import Q1Paper.PaperI.Reindex
 import Q1Paper.PaperI.Reindex2
 import Q1Paper.PaperI.Soundness
 import Q1Paper.PaperI.DecComplex
+import Q1Paper.PaperI.KernelLift
 
 /-!
 ## What is imported here

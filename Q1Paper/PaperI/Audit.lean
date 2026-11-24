@@ -487,3 +487,4 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.ScratchReindex2.rawSpectral_submatrix
 #print axioms Q1Paper.ScratchSoundness.dec_of_phiPoint
 #print axioms Q1Paper.ScratchDecComplex.dec_of_complexDEC
+#print axioms Q1Paper.ScratchKernelLift.range_mulVecLin_eq_ker_map_complex

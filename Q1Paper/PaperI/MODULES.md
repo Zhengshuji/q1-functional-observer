@@ -14,7 +14,7 @@ The four entry points and their separate jobs:
 
 ## `Q1Paper/PaperI/` — Paper I modules (`namespace Q1Paper.PaperI.*`)
 
-82 files, 811 theorems, 169 definitions/structures.
+83 files, 813 theorems, 169 definitions/structures.
 
 | file | thm | def | first declarations | header summary |
 |---|---:|---:|---|---|
@@ -76,6 +76,7 @@ The four entry points and their separate jobs:
 | `InputLen.lean` | 5 | 1 | `nat_size_prod_le`, `mat_den_size_le_sum`, `inputLen`, `mat_den_le_den_mul_prod_erase`, … | Scratch module: the input bit-length bound `bitLenMat A ≤ inputLen A` for a |
 | `Interface.lean` | 0 | 10 | `rawAlgebraic`, `rawSpectral`, `compressedAlgebraic`, `compressedSpectral`, … | Formal statement layer of Paper I (Sections II-III). |
 | `KernelBasis.lean` | 3 | 0 | `exists_basis_matrix_of_submodule`, `exists_kernel_basis_matrix`, `exists_kernel_basis_matrix_of_finrank` | A basis matrix for a submodule / kernel, over an arbitrary field.** |
+| `KernelLift.lean` | 2 | 0 | `mul_eq_zero_of_range_le_ker`, `range_mulVecLin_eq_ker_map_complex` |  |
 | `MainTheorems.lean` | 0 | 0 |  | Paper I entry point: it imports exactly the modules that belong to Paper I |
 | `MinorCoeff.lean` | 17 | 2 | `pencilZ`, `pencilMinorZ`, `abs_lt_two_pow_of_bitLenInt_le_mc`, `bitLenInt_le_of_abs_lt`, … | Claim 15 (ii) of Paper I: the bit length of the COEFFICIENTS of the maximal minors |
 | `MinorFamilyBridge.lean` | 11 | 7 | `det_submatrix_perm`, `imageFin`, `imageEquiv`, `permOfInjective`, … | D1 bridge between the two index families of maximal minors: |
