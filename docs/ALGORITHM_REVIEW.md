@@ -47,7 +47,12 @@ at lines 127–160.
 * `R3` fixed-`λ₀` refutation on the whole affine family `F`, by an exact polynomial identity test
   (`_MPoly` determinants, not sampling); `F ⊇` chart, so refuting `F` refutes the chart.
 * `bounds` (`ω > min(q,k)`): unreachable, the loop stops at `min(q,k)`; defensive only.
-* `D1`: **body still not read**.
+* `D1` (`_forced_W_analysis`, line 800): applies when `ω + 1 = dim T` and `dim T ≠ 0`.  Claim 6
+  gives `dim W ≥ ω+1` and `W ⊆ T` gives `dim W ≤ dim T`, so `W = T` is the **only** candidate; the
+  chart is then decided by evaluating (5a)/(5b) on `T`, with no search and no `unknown`.  Sound,
+  and complete for that family.  The helper `_rank_deficient_at` tests whether **every** maximal
+  minor of `λ₀H − H_A` vanishes **identically**, via `_MPoly` — an exact identity test, not
+  sampling; this is what `R3`/`R4` rest on.
 
 **Conclusion (Round 4).**  A wrong `feasible` is caught by `verify_feasible`'s independent
 asserts, so the silent-risk direction is `infeasible`.  All six refutations were checked to be
