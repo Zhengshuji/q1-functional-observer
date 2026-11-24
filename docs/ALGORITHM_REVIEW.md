@@ -115,3 +115,44 @@ swept instances, 42 feasible, 66 infeasible, 5 `unknown`; over the charts, 286 o
 The repository ships a decision procedure whose most dangerous failure mode is a *silent*
 `infeasible` (a missed chart).  Recording exactly which parts have been read is the only way a
 later reader can tell "reviewed" from "shipped".
+
+## Algorithm 2 (alg:fpt): what is implemented, and an open discrepancy
+
+`verification/fpt.py` builds the objects of Algorithm 2 in exact rational arithmetic and asserts
+their invariants: `N = ker[C;CA]`, `M = [N AN]`, `S = row(AN)`, `ell = rank(AN)`, `T = row[N AN]`,
+`W0 = row(L0 M)`, `V = T cap (S x S)`, `s0`, `m'`, the Grassmann charts (counted, `2^{m'}`), the
+chart matrix `Z_ch = [E0; C_J(Y) E_Q]` and its blocks `H(Y), G(Y)`.  `verification/cb_gram.py`
+builds the Cauchy-Binet compression `K(lambda, mu)` and checks it against the direct enumeration
+of the maximal minors, and checks that `Z^T Z x = e0` is solvable exactly when the pencil has no
+common root.
+
+### The open discrepancy
+
+Take `A` = the shift, `C = e1^T`, `L0 = [-1,-1,-1]`, `q = 2`.  The instance is **feasible**: the
+witness `L = [[-1,-1,-1],[0,0,1]]` satisfies the true `(5a)` and `(5b)`, verified independently by
+`audit_independent.cond_5a_orig` / `cond_5b_orig`.  For that witness, `N = e3` (`k = 1`) and
+
+    H = L e3 = [-1, 1]^T,     H_A = L A e3 = [-1, 0]^T     (both 2 x 1)
+
+Now compare the two conditions:
+
+| condition | value | holds? |
+|---|---|---|
+| `row(H_A) <= row(H)`, the compressed form of `(5a)` (here `CAN = 0`) | `k = 1`, so `row(H) = R^1` contains `row(H_A)` | yes |
+| `col(H_A) <= col(H)`, which is what Claim 8 gives | `span{(-1,1)}` does not contain `span{(-1,0)}` | no |
+
+The Lean statement of Claim 8 (`Q1Paper/PaperI/Claims38.lean:421`) is the authority for the
+reading: `(exists b, M b = c) <-> (M M^T rank = (M M^T + c c^T) rank and (augment M c) rank = M
+rank)`, i.e. `c` is a **column** combination of `M`'s columns.  Applying it per row of
+`H B = H_A` therefore gives a **column** condition, while the paper's `(5a)` is a **row**
+condition.
+
+So Algorithm 2's item (i), as literally read, is **strictly stronger** than `(5a)` and rejects a
+feasible instance.  This is not a coding slip in the front end: the front end reproduces the
+chart as written.  Three readings remain possible and none is decided here: (a) Algorithm 2 has a
+gap; (b) the paper's `H` is meant transposed, which would swap rows and columns; (c) in the
+paper's setting `(5a)` is equivalent to the column condition, which needs `H` square or `B`
+invertible -- false for the witness, where `H` is `2 x 1`.
+
+**Consequence.** Until (a)/(b)/(c) is settled, the Algorithm 2 front end must not be presented as
+reproducing Algorithm 1's verdicts, and the repository must not claim Algorithm 2 is implemented.
