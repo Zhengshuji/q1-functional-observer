@@ -98,6 +98,22 @@ formalized.
 
 ## Scope and limitations
 
+**The specification is the complex-λ one.** Paper I's condition (5b) quantifies over the complex
+numbers, and the Lean artifact now states that specification explicitly as
+`Q1Paper/PaperI/DecComplex.lean`'s `complexDEC`, with both directions of the chart equivalence proved
+against it:
+
+| direction | declaration |
+|---|---|
+| chart point ⇒ `complexDEC` (soundness) | `ComplexSoundness.decComplex_of_phiPoint` |
+| `complexDEC` ⇒ chart point (completeness, `ω ≥ 1`) | `CompletenessB.phiPoint_of_complexDEC` |
+
+The older `DEC` in `Interface.lean` quantifies `(5b)` over the base field, i.e. over the **real**
+numbers; it is kept as an **auxiliary** definition only, linked by
+`DecComplex.dec_of_complexDEC : complexDEC → DEC` (the only direction that holds — a pencil can keep
+full rank at every real λ and drop at a complex one). Read `DEC` in the older module names with that
+caveat in mind.
+
 **What the Lean artifact establishes.** It kernel-checks the formalised statements covering
 Claims 1–16, Theorem 5, the `r = 0` reduction of Proposition 4, and the bit-complexity results of
 Claims 19 and 21. The axiom audit reports **439** checked declarations, all depending only on

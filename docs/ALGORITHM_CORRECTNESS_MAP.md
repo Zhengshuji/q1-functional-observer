@@ -185,4 +185,20 @@ inclusion plus a inrank equality via
 ank_map_ofReal_any and the kernel rank formula.  It is the
 next discrete task.  An attempted file for it was **deleted, not committed**, because it contained a
 sorry; the tree has none.
+## Specification decision (settled)
 
+The specification is the **complex-λ** one, `PaperI/DecComplex.lean`'s `complexDEC`, and the two
+directions of the chart equivalence are both kernel-checked against it:
+
+    ComplexSoundness.decComplex_of_phiPoint : chart point  ->  complexDEC      (soundness)
+    CompletenessB.phiPoint_of_complexDEC    : complexDEC (omega >= 1) -> chart point (completeness)
+
+The older real-λ `DEC` is an auxiliary definition, linked only by
+`DecComplex.dec_of_complexDEC : complexDEC -> DEC`.  That direction is the one that holds; the
+converse is false (a pencil can keep full rank at every real lambda and drop at a complex one), which
+is why completeness is stated against `complexDEC` and not against `DEC`.
+
+Boundary still open: `omega = 0`.  `PhiPoint`'s Gram certificate comes from `claim11_iff_gram`, which
+requires `omega >= 1`, so the completeness theorem carries `1 <= omega` as a hypothesis.  The
+zero-rank branch is a separate case in the paper (Proposition 4 step 2 / `decide_r0`) and is not
+covered by that theorem.
