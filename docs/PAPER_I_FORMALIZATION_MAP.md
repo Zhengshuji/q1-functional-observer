@@ -244,17 +244,19 @@ Bareiss 的其余结论（来自同一设计复核）：Bareiss 子式恒等式 
 
 **D12（Theorem 5 完备性复核，2026-11-23）**：Lean 的 `PaperI.DEC` 对 `λ : K`（实）量化，而论文的 (5b) 是**复 λ**。两者**严格不等价**：旋转铅笔 `λ²+1` 在实 λ 上无根，但 `rank(i−A)=1`，故 `encodes` 的 S-块（强制每个复 z 满秩）在该例下无实解。因此完备性方向**不能从 `DEC` 推出**，`T5Complete.lean` 用复 λ 假设（论文约定）陈述；从 `DECℂ` 出发只差一条标准复化事实（实 `N` 是复化后 `ker[C_ℂA_ℂ; C_ℂ]` 的复基）。
 
-## 5. 缺口台账（2026-11-23，审计 312 条）
+## 5. 缺口台账（2026-11-24，审计 407 条）
 
 | # | 缺口 | 状态 | Lean 证据 | 剩余 |
 |---|---|---|---|---|
 | 1 | Theorem 5 的 `hNk`（核基存在） | **已闭合** | `KernelBasis.exists_kernel_basis_matrix_of_finrank`、`T5Auto.DECℂ_iff_exists_encodes_auto` | 无 |
 | 2 | Claim 16 的 ℚ 有界 Bézout | **已闭合** | `RatDescent.exists_rat_solution_of_exists_real_solution`、`BezoutBounded.claim16_iii_implies_iv_of_gcd_isConst` | 无 |
-| 3 | Claim 14 的基组装 | **已闭合** | `Claim14Basis.exists_chart_bases`、`inf_eq_map_K0`、`exists_chart_completion` | 统一 `ℒ` 界（阻塞已解除：`BitLenMatMul`） |
-| 4 | Claim 15 (i)(ii)(iii) | 进行中 | `ComplexityCounts.bareiss_entry_bitLenRat_le_tauM`、`BitLenMatMul.bitLenMat_chain_inputLen_le` | 在真实对象上组装单一 `B(ℒ)` |
-| 5 | Claims 3–8 局部桥 | 部分 | `Claims38` 六条桥接 | Claim 4 完整逆（值得做）；Claim 8 初等对称析取需 PSD 谱定理（建议标 `[Lean-conditional]`）；Claim 3/5 的对象识别（可跳过） |
-| 6 | 复杂度层 | 部分 | `CostCore`、`CostBareiss`、`ComplexityCounts`（`4k³`、`den=1`、`tauM`）、`BitLenMatMul` | Renegar 结构体 + chart 计数 + 条件化 Theorem 1/2 |
-| 7 | Claim 19/21 常数链 | 待组装 | `Hadamard.bitLenInt_det_le_hadamard`、`ComplexityCounts`、`BitLenMatMul` | 总位复杂度陈述（`n³` 次运算 × 位长界） |
+| 3 | Claim 14 的基组装 | **已闭合** | `Claim14Basis.exists_chart_bases`、`inf_eq_map_K0`、`exists_chart_completion` | 无（统一 `ℒ` 界由 `BitLenMatMul` 提供） |
+| 4 | Claim 15 (i)–(iv) | **已闭合** | `Claim15`（h⁰/g⁰/H）、`MinorCoeff`（系数，含 `C(ω,d)` 项）、`CompressedGram`（`b+ω.size` 锐界，绕开 `sω` 矩阵）、`DenOne`（`den=1` 由整数性推出）、`Claim15iv`（常数链） | (ii) 的分级常数精化（可选，见下） |
+| 5 | Claims 3–8 | **已闭合** | `Claims38`（六条桥接）、`Claim4Converse`（**完整逆**）、`Claim8Ej`（`e_j>0 ⟺ rank≥j`，**绕开谱定理**）、`Claim8Wire`（析取） | Claim 8 的字面形式（`Γ'=MMᵀ+ccᵀ`，列索引 `Fin n ⊕ Fin 1`）——进行中 |
+| 6 | 复杂度层 | **已闭合（条件化）** | `CostCore`/`CostBareiss`/`ComplexityCounts`/`TotalCost`/`ExactDiv`/`ChartCount`/`TauMConst`；`ChartSpecFixedDeg`（Theorem 1）、`FptChartSpec`（Theorem 2），两者均证**非空**且指数显式 | 仅 Renegar 本身（外部，`[Lean-conditional]`） |
+| 7 | Claim 19/21 常数链 | **已闭合** | `Hadamard.bitLenInt_det_le_hadamard`、`ExactDiv.bareiss_total_bit_cost_le_quadratic`（`n¹⁵L²`）与 `_n21_L2`（论文的 `n²¹L²`，推论） | 无 |
+| — | `r=0` 进 `DEC` 的最后一公里 | **已闭合** | `FinReindex.finSumFinZero`、`rank_reindex_finSumFinZero`、`exists_fullColumn_block` | 无 |
+| — | 可执行算法 | **外部（显式登记）** | `DecR0Iface.R0Solver`（接口 + 条件可判定 + 非空性） | 一个可计算秩/有理求解器（Mathlib 无；`hex-row-reduce` 钉不同 rev） |
 
 ### 关于"无 sorry 不等于无缺口"
 
