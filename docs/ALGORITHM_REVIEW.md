@@ -1,5 +1,10 @@
 # Algorithm 1: implementation review
 
+> **Historical record.** This file documents a stage of the work and is kept for provenance.
+> Gaps it describes may have been closed since; do not read it as the current status.
+> Current status and the reading entry point: [START_HERE.md](START_HERE.md).
+
+
 Scope: `verification/decide.py` against `paper/paper_I_dec.tex` (Algorithm 1, lines 940–969,
 and the inner system `eq:phi`).  This file records what has actually been checked **and what
 has not**; it is not a certificate that the implementation is correct.

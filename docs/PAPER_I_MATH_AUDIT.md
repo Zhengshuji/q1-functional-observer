@@ -1,5 +1,10 @@
 # Paper I 数学审计（独立复核，2026-11-22）
 
+> **Historical record.** This file documents a stage of the work and is kept for provenance.
+> Gaps it describes may have been closed since; do not read it as the current status.
+> Current status and the reading entry point: [START_HERE.md](START_HERE.md).
+
+
 > 只读审计，不改 Lean、不改正文。状态定义：PROVED = 陈述与证明自洽（仅措辞问题）；PAPER-ONLY = 看起来正确但只有论文层面/依赖外部未形式化成分；NEEDS REPAIR = 按现状有缺陷但可局部修复；SUSPECT = 按现状很可能为假。
 
 ## 1. 主要发现（按严重度）

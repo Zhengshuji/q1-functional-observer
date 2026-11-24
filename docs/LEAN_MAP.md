@@ -1,5 +1,10 @@
 # Paper → Lean coverage map and gap list
 
+> **Historical record.** This file documents a stage of the work and is kept for provenance.
+> Gaps it describes may have been closed since; do not read it as the current status.
+> Current status and the reading entry point: [START_HERE.md](START_HERE.md).
+
+
 ## Project
 
 - WSL source: `/home/zsj/WorkSpace/lean4/Q1Paper`

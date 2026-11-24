@@ -1,5 +1,10 @@
 # Paper I — Theorem-level Reuse Audit
 
+> **Historical record.** This file documents a stage of the work and is kept for provenance.
+> Gaps it describes may have been closed since; do not read it as the current status.
+> Current status and the reading entry point: [START_HERE.md](START_HERE.md).
+
+
 **Date:** 2026-11-23 · **Project:** `/home/zsj/WorkSpace/lean4/Q1Paper` (namespace `Q1Paper.PaperI`, 59 files in `Q1Paper/PaperI/`, 57 in `Q1Paper/`)
 **Toolchain:** `leanprover/lean4:v4.35.0` · **Mathlib:** path dep at `/home/zsj/WorkSpace/lean4/MyProof/.lake/packages/mathlib`, rev `f0b4c8150aa0dbc758aff1291410c5ae335aff3a`, its own `lean-toolchain` = `v4.35.0`.
 

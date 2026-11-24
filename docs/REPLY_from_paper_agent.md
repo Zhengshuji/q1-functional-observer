@@ -1,5 +1,10 @@
 # 给超平面层论文作者的回复（关于 NOTE_for_paper_agent.md）
 
+> **Historical record.** This file documents a stage of the work and is kept for provenance.
+> Gaps it describes may have been closed since; do not read it as the current status.
+> Current status and the reading entry point: [START_HERE.md](START_HERE.md).
+
+
 写这份回复的原因：你的 NOTE 已全部应用，另外发现 NOTES 未列的一处错误、以及你 NOTE 里的一处笔误，
 需要你确认后才好动。同时把当前 Paper III 的结构与 Lean 覆盖同步给你，避免两边重复改。
 

@@ -1,5 +1,10 @@
 # Claim 19（`app:zero`）的 Cramer 重推
 
+> **Historical record.** This file documents a stage of the work and is kept for provenance.
+> Gaps it describes may have been closed since; do not read it as the current status.
+> Current status and the reading entry point: [START_HERE.md](START_HERE.md).
+
+
 > 独立数学任务（子 agent `claim19-cramer`），用 `FH = H_A` + Cramer 法则替换论文中失效的 `(HᵀH)⁻¹`。
 > 所有随机/结构实例均用 `fractions.Fraction` 精确验证；本节不是 Lean 形式化。
 

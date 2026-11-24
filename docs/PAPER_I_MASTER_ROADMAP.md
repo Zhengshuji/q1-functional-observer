@@ -1,5 +1,10 @@
 # Paper I master roadmap
 
+> **Historical record.** This file documents a stage of the work and is kept for provenance.
+> Gaps it describes may have been closed since; do not read it as the current status.
+> Current status and the reading entry point: [START_HERE.md](START_HERE.md).
+
+
 > **STATUS DISCLAIMER (2026-11-23).** This file is the *plan and its history*; it is not kept in
 > lockstep with the code.  The **single source of truth for per-claim status is
 > `docs/PAPER_I_FORMALIZATION_MAP.md`** (currently 352 audited declarations, CI green).

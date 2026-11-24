@@ -19,13 +19,19 @@ $\exists\mathbb R$.
 ```
 paper/          the paper: .tex and .pdf only
                 paper_I_dec            decision complexity (Paper I)
-docs/           audit trail and handoff documents
-                PAPER_I_FORMALIZATION_MAP.md   per-claim formalization status (the map)
+docs/           the reading entry point, then the historical record
+                START_HERE.md                  **start here** — what this repo is, how to verify it
+                PAPER_I_MATHEMATICAL_GUIDE.md  the mathematics, for a reader who does not know Lean
+                PAPER_I_PROOF_MAP.md           paper item -> Lean declaration -> file:line (generated)
+                PAPER_I_MODULE_MAP.md          every Lean module -> decls, paper items, purpose (generated)
+                ALGORITHM_CORRECTNESS_MAP.md   what is and is not proved about the algorithms
+                --- historical, tagged as such, kept for provenance ---
+                PAPER_I_FORMALIZATION_MAP.md   development log of the formalisation
                 PAPER_I_MASTER_ROADMAP.md      the plan and its progress
                 PAPER_I_MATH_AUDIT.md          independent audit, with counterexamples
                 PAPER_I_CLAIM19_CRAMER.md      the Cramer re-derivation of Claim 19
                 PAPER_I_REUSE_AUDIT.md         theorem-level reuse audit of external Lean code
-                LEAN_MAP.md, REPLY_from_paper_agent.md
+                ALGORITHM_REVIEW.md, LEAN_MAP.md, REPLY_from_paper_agent.md
 Q1Paper/        Lean sources
                 Q1Paper/            the project layer (row spaces, projections, rank identities)
                 Q1Paper/PaperI/     the Paper I modules (86 files), plus Audit.lean

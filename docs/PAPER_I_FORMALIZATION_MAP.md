@@ -1,5 +1,10 @@
 # Paper I 形式化对照表（2026-11-22）
 
+> **Historical record.** This file documents a stage of the work and is kept for provenance.
+> Gaps it describes may have been closed since; do not read it as the current status.
+> Current status and the reading entry point: [START_HERE.md](START_HERE.md).
+
+
 > 基线：论文 `paper/current/paper_I_dec.tex`（commit `1c19b9f`，18 页）；Lean 仓库 `Q1Paper/`（`main`）。
 > 本表只覆盖 **Paper I**；Paper II–IV 的模块（`MinOrder`、`TightDim`、`Strata`、`FullRank`、`Hyperplane*`）
 > 不计入本表，也不进入 `PaperI.lean` 的依赖闭包。
