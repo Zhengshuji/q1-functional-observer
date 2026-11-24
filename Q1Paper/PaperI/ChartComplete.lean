@@ -257,4 +257,15 @@ theorem rowSpace_le_of_phiPoint {q k ω : ℕ} {H HA : Matrix (Fin q) (Fin k) �
     (P : PhiPoint H HA ω) : Q1Subspace.rowSpace HA ≤ Q1Subspace.rowSpace H :=
   rowSpace_le_of_chart_factorization H HA P.X P.B P.G P.XL P.hH P.hHA P.hXL
 
+/-- A `PhiPoint` exhibits `H_A = F * H` — the factor `claim11_iff_gram` asks for. -/
+theorem factor_of_phiPoint {q k ω : ℕ} {H HA : Matrix (Fin q) (Fin k) ℝ}
+    (P : PhiPoint H HA ω) : ∃ F : Matrix (Fin q) (Fin q) ℝ, HA = F * H := by
+  have h1 : (P.G * P.XL) * (P.X * P.B) = P.G * P.B := by
+    rw [← Matrix.mul_assoc (P.G * P.XL) P.X P.B, Matrix.mul_assoc P.G P.XL P.X, P.hXL,
+      Matrix.mul_one]
+  refine ⟨P.G * P.XL, ?_⟩
+  calc HA = P.G * P.B := P.hHA.symm
+    _ = (P.G * P.XL) * (P.X * P.B) := h1.symm
+    _ = (P.G * P.XL) * H := by rw [P.hH]
+
 end Q1Paper.ScratchChartComplete

@@ -479,3 +479,4 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.ScratchChartComplete.exists_L_pinned
 #print axioms Q1Paper.ScratchChartComplete.phiPoint_of_conditions
 #print axioms Q1Paper.ScratchChartComplete.rowSpace_le_of_phiPoint
+#print axioms Q1Paper.ScratchChartComplete.factor_of_phiPoint
