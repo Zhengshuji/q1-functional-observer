@@ -190,4 +190,18 @@ theorem exists_L_of_pairs {q n k : ℕ}
     rw [Matrix.mul_apply]
     exact congrFun (hu i).2 l
 
+/-- **Chart completeness, backward step 3 with the prescribed rows.**  The paper's observer is
+`L = [L₀; R]`: its first `r₀` rows are fixed to `L₀`.  Building `L` as `fromRows L0 L'` makes that
+structural rather than a side condition, and the two matrix equations split by block. -/
+theorem exists_L_pinned {r0 q' n k : ℕ}
+    (N AN : Matrix (Fin n) (Fin k) K) (L0 : Matrix (Fin r0) (Fin n) K)
+    (H' HA' : Matrix (Fin q') (Fin k) K)
+    (h : ∀ i : Fin q', ∃ u : Fin n → K,
+        Matrix.vecMul u N = H' i ∧ Matrix.vecMul u AN = HA' i) :
+    ∃ L' : Matrix (Fin q') (Fin n) K,
+      Matrix.fromRows L0 L' * N = Matrix.fromRows (L0 * N) H' ∧
+      Matrix.fromRows L0 L' * AN = Matrix.fromRows (L0 * AN) HA' := by
+  obtain ⟨L', h1, h2⟩ := exists_L_of_pairs N AN H' HA' h
+  exact ⟨L', by rw [Matrix.fromRows_mul, h1], by rw [Matrix.fromRows_mul, h2]⟩
+
 end Q1Paper.ScratchChartComplete
