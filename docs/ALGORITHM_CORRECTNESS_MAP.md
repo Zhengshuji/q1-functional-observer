@@ -69,3 +69,48 @@ The current state gives:
 So the honest statement is: **the algorithms are not yet verified, and the single missing theorem
 is the equivalence in C.**  Everything else the review lists is already in the development or is
 explicitly declared out of scope.
+
+## The two obstacles to the `DEC`-level theorem (found while attempting it)
+
+Prop C is now proved **at the level of the compressed pair** (`PhiPoint`, both directions).  Lifting
+it to `DEC C A L0 r` runs into two concrete obstacles, and they are of different kinds.
+
+### (1) A reindexing obligation (technical)
+
+`DEC C A L0 r` is `∃ R, let L := fromRows L0 R, rawAlgebraic … ∧ rawSpectral …`, and Mathlib's
+`fromRows` gives `L` the row type `Fin r0 ⊕ Fin r`.  `PhiPoint`, however, is indexed by `Fin q`,
+because its `gram` field uses `minorFamily`, which needs `Fin` indices for the window matrix.
+
+So the lift needs a transfer lemma: for a bijection `e : Fin q' ≃ Fin q`,
+
+    rawAlgebraic C CA (L.submatrix e.symm id) (LA.submatrix e.symm id) ↔ rawAlgebraic C CA L LA
+
+and the same for `rawSpectral`, applied with `e := finSumFinEquiv`.  Rank is invariant under
+reindexing, so this is plumbing rather than mathematics — but it is not free, because `rawAlgebraic`
+is a rank of a *four-block* stack, so the bijection has to be assembled blockwise.
+
+### (2) A real-vs-complex mismatch (substantive)
+
+This one is not plumbing.  In `Interface.lean`,
+
+    rawSpectral C CA L LA := ∀ lam : K, rank [lam • L - LA; CA; C] = rank [L; CA; C]
+
+quantifies over the **base field**, while `claim11_iff_gram` states (5b) over **ℂ** (the paper's
+convention, cf. the complex-λ remark in `paper_I_dec.tex`).  The implication that holds is
+
+    complex everywhere  ⟹  real everywhere
+
+and that is exactly what `feasible_of_phiPoint` uses (specialise `z = ↑λ`, then `rank_map_ofReal`).
+The converse is **false** — a pencil can keep full rank at every real λ and drop at a complex one —
+so for the **real-λ** `DEC` there is no completeness direction at all.
+
+Consequence for the review's acceptance table: the paper's Theorem 1 is about the *complex* `DEC`,
+while the Lean definition called `DEC` is the *real* one.  They are different propositions.  The
+honest options are
+
+* state completeness for a complex-λ `DEC` (a new definition, e.g. `DECℂ`, whose spectral condition
+  quantifies over `ℂ` after complexification), and keep the real `DEC` only for soundness; or
+* leave the real `DEC` as a weaker variant and say so.
+
+Neither is done yet, and the choice is the reviewer's to make because it changes what "Algorithm 1
+is verified" means.
