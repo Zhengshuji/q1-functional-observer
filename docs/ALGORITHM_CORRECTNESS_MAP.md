@@ -152,3 +152,37 @@ cases) did not line up with the
 type.  It is a small lemma, but it is the gate for everything at the DECℂ level, so it is the
 first thing to do next.
 
+## Update: the complex-lambda specification now exists (PaperI/DecComplex.lean)
+
+    complexDEC C A L0 r := exists R, let L := fromRows L0 R,
+                             rawAlgebraic C (C*A) L (L*A) and spectralComplexRaw C (C*A) L (L*A)
+
+with spectralComplexRaw the generic 
+awSpectral on complexified matrices, indexed by **types**.
+Proved alongside it: 
+ank_map_ofReal_any (complexification preserves rank for any finite index
+types) and dec_of_complexDEC : complexDEC -> DEC — the only direction that holds.
+
+The five failed attempts at this definition had one root cause, worth recording because the error
+message pointed elsewhere: it flagged L * A inside the **second** conjunct, and the cause was that
+
+awSpectral_C had been declared with {p q n : Nat}, i.e. Fin q indices.  DEC's free block has
+row type Fin r0 (+) Fin r, which is not Fin q for any q; 
+awAlgebraic is polymorphic in its
+index **types**, so the first conjunct accepted the term and the second could not.
+
+## What remains: PhiPoint -> complexDEC
+
+dec_of_phiPoint gives the real-lambda soundness.  The complex one needs the lift of the *compressed*
+complex condition to the raw stack over C, i.e. 
+awSpectral_iff_compressed at K = C.  Its
+hypothesis is that the complexified kernel basis spans the complex kernel:
+
+    (N.map f).mulVecLin.range = ker (fromRows ((C*A).map f) (C.map f))
+
+Discharging that from N.mulVecLin.range = ker (fromRows (C*A) C) is dimension theory over C — an
+inclusion plus a inrank equality via 
+ank_map_ofReal_any and the kernel rank formula.  It is the
+next discrete task.  An attempted file for it was **deleted, not committed**, because it contained a
+sorry; the tree has none.
+
