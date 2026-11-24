@@ -1,0 +1,216 @@
+import Q1Paper.Basic
+import Q1Paper.RankIdentity
+import Q1Paper.HyperplaneAvoid
+import Q1Paper.BezoutDeg
+import Q1Paper.BezoutReal
+import Q1Paper.G2Assembly
+import Q1Paper.G3Adjugate
+import Q1Paper.G3LeftInverse
+import Q1Paper.DegreeBounds
+import Q1Paper.G3Coeff
+import Q1Paper.G5GramRank
+import Q1Paper.Q1Compression
+import Q1Paper.Q1Subspace
+import Q1Paper.Monotone
+import Q1Paper.MonotoneBlocks
+import Q1Paper.Q1RowSpace
+import Q1Paper.Q1Projection
+import Q1Paper.Q1Pencil
+import Q1Paper.Q1Step3
+import Q1Paper.G4RankIdentity
+import Q1Paper.KappaObs
+import Q1Paper.Compression
+import Q1Paper.FreeRows
+import Q1Paper.RankConsistency
+import Q1Paper.SpectralCertificate
+import Q1Paper.FixedOrder
+import Q1Paper.FPT
+import Q1Paper.HyperplaneDirection
+import Q1Paper.HyperplanePrescribed
+import Q1Paper.HyperplaneFibre
+import Q1Paper.TightDim
+import Q1Paper.BoundLower
+import Q1Paper.Strata
+import Q1Paper.MinOrder
+import Q1Paper.FullRank
+import Q1Paper.Window
+
+#print axioms Q1Paper.pairMap_apply
+#print axioms Q1Paper.ker_pairMap
+#print axioms Q1Paper.finrank_range_pairMap
+#print axioms Q1Paper.finrank_range_pairMap_common
+#print axioms Q1Paper.G_form_iff
+#print axioms Q1Paper.injective_of_leftInverse
+#print axioms Q1Paper.finrank_le_of_leftInverse
+#print axioms Q1Paper.kappaObs_zero
+#print axioms Q1Paper.freePairDim_le_kappaObs
+#print axioms Q1Paper.finrank_range_prod
+#print axioms Q1Paper.exists_forall_apply_ne_zero
+#print axioms Q1Paper.exists_ne_zero_with_finite_roots
+#print axioms Q1Paper.isCoprime_of_no_common_root
+#print axioms Q1Paper.exists_bezout_deg_lt
+#print axioms Q1Paper.exists_bezout_family
+
+-- Q1Paper/BezoutReal.lean : real-coefficient Bezout (Claim 9 of Paper I)
+#print axioms Q1Paper.complexify_injective
+#print axioms Q1Paper.complexify_ne_zero
+#print axioms Q1Paper.eval_complexify_ofReal
+#print axioms Q1Paper.exists_complex_root_of_natDegree_pos
+#print axioms Q1Paper.isCoprime_of_no_common_complex_root
+#print axioms Q1Paper.exists_bezout_of_no_common_complex_root
+#print axioms Q1Paper.combC_apply
+#print axioms Q1Paper.combC_single
+#print axioms Q1Paper.reComb_apply
+#print axioms Q1Paper.imComb_apply
+#print axioms Q1Paper.reComb_single
+#print axioms Q1Paper.imComb_single
+#print axioms Q1Paper.eval_complexify_sum
+#print axioms Q1Paper.exists_avoid_complex_roots
+#print axioms Q1Paper.exists_bezout_family_real
+#print axioms Q1Paper.adjRowInverse_mul
+#print axioms Q1Paper.exists_leftInverse
+#print axioms Q1Paper.natDegree_intCast_le
+#print axioms Q1Paper.natDegree_det_le
+#print axioms Q1Paper.natDegree_det_le_sum
+#print axioms Q1Paper.sum_ite_eq_zero_one
+#print axioms Q1Paper.natDegree_adjugate_le
+#print axioms Q1Paper.natDegree_adjRowInverse_le
+#print axioms Q1Paper.exists_leftInverse_linear
+#print axioms Q1Paper.spoly_mul_pencil
+#print axioms Q1Paper.spoly_mul_pencil_zero
+#print axioms Q1Paper.spoly_mul_pencil_eq_one
+#print axioms Q1Paper.coeff_mul_apply
+#print axioms Q1Paper.augment_mul_transpose
+#print axioms Q1Paper.exists_mulVec_eq_iff_rank_gram
+#print axioms Q1Paper.rank_vstack_add_rank_mul
+#print axioms Q1Paper.ker_compressed_iff
+#print axioms Q1Paper.mem_freePairSpace_iff
+#print axioms Q1Paper.finrank_domain_le_freePairSpace
+#print axioms Q1Paper.finrank_freePairSpace_add_ker
+#print axioms Q1Paper.kappaObs_eq_mul_freePairSpace
+#print axioms Q1Paper.exists_solution_iff_mem_range
+#print axioms Q1Paper.exists_solution_iff_span_le_range
+#print axioms Q1Paper.exists_solution_iff_range_eq_sup_span
+#print axioms Q1Paper.bezout_of_gcd_eq_one
+#print axioms Q1Paper.sum_sq_eq_zero_iff
+#print axioms Q1Subspace.range_eq_rowSpan
+#print axioms Q1Subspace.mem_rowSpan_iff_exists_vecMul
+#print axioms Q1Subspace.rowSpan_fromRows_left
+#print axioms Q1Subspace.rank_fromRows_eq_rank_iff
+#print axioms Q1Subspace.pi1_eq_pi2_of_le_of_finrank_eq
+#print axioms Q1Subspace.hasConstantRank_iff_rankIndependent
+#print axioms Q1Subspace.rowSpace_eq
+#print axioms KappaObs.kappaObs_eq_row_count
+#print axioms Q1Subspace.finrank_le_pi1_add_pi2
+#print axioms Q1Subspace.finrank_le_two_mul_of_pi1_eq_pi2
+#print axioms Q1Paper.rank_fromRows_zero
+#print axioms Q1Paper.rowSpan_fromRows_zero
+
+#print axioms Q1Paper.compression_eq_of_proportional
+#print axioms Q1Paper.proportional_of_compression
+#print axioms Q1Paper.direction_iff
+#print axioms Q1Paper.le_orthogonal_span_pair
+#print axioms Q1Paper.inf_inf_orthogonal_eq
+
+#print axioms Q1Paper.mem_orthogonal_span_pair_iff
+#print axioms Q1Paper.Dv_eq_ker
+#print axioms Q1Paper.finrank_Dv
+
+#print axioms Q1Subspace.finrank_sup_pi_le
+#print axioms Q1Subspace.finrank_pi1_mono
+#print axioms Q1Subspace.finrank_add_one_le_of_spectral
+
+#print axioms Q1Paper.fromRows_mul_eq
+#print axioms Q1Paper.fromRows_smul
+#print axioms Q1Paper.fromRows_sub
+#print axioms Q1Paper.fromRows_zero_mul
+#print axioms Q1Paper.rank_fromRows_zero_mul
+#print axioms Q1Paper.rank_fromRows_zero_mul_mul
+#print axioms Q1Paper.rowSpace_fromRows_zero
+#print axioms Q1Paper.rowSpace_zero_mul
+#print axioms Q1Paper.rowSpace_fromRows_zero_rows
+#print axioms Q1Paper.rank_fromRows_zero_rows
+#print axioms Q1Paper.algebraicCondition_fromRows_zero
+#print axioms Q1Paper.fromRows_zero_pencil
+#print axioms Q1Paper.spectralCondition_fromRows_zero
+#print axioms Q1Paper.conditions_fromRows_zero
+#print axioms Q1Paper.spectralCondition_append_zero_rows
+#print axioms Q1Paper.hasConstantRank_append_zero_rows
+
+-- Q1Paper/Strata.lean : eigen versus non-eigen directions (Paper III, Proposition sec3:prop:strata)
+#print axioms Q1Paper.compressionPart
+#print axioms Q1Paper.normalComp
+#print axioms Q1Paper.compressionEnd
+#print axioms Q1Paper.compressionEigenspace
+#print axioms Q1Paper.eigenStratum
+#print axioms Q1Paper.nonEigenStratum
+#print axioms Q1Paper.directionSpan
+#print axioms Q1Paper.normalRestrict
+#print axioms Q1Paper.compressionPart_mem
+#print axioms Q1Paper.normalComp_mem
+#print axioms Q1Paper.compressionPart_add_normalComp
+#print axioms Q1Paper.normalComp_eq_zero_iff
+#print axioms Q1Paper.mem_compressionEigenspace_iff
+#print axioms Q1Paper.normalComp_eq_zero_of_mem_span_singleton
+#print axioms Q1Paper.mem_span_singleton_iff_normalComp_eq_zero
+#print axioms Q1Paper.mem_eigenStratum_iff
+#print axioms Q1Paper.mem_nonEigenStratum_iff
+#print axioms Q1Paper.eigenStratum_le
+#print axioms Q1Paper.mem_eigenStratum_iff_mem_span
+#print axioms Q1Paper.eigenStratum_smul_mem
+#print axioms Q1Paper.nonEigenStratum_smul_mem_iff
+#print axioms Q1Paper.eigenStratum_disjoint_nonEigenStratum
+#print axioms Q1Paper.mem_eigenStratum_or_nonEigenStratum
+#print axioms Q1Paper.nonEigenStratum_eq_sdiff
+#print axioms Q1Paper.exists_nonEigenStratum_of_eigenStratum_ne
+#print axioms Q1Paper.directionSpan_eq_span_singleton
+#print axioms Q1Paper.finrank_directionSpan_eigen
+#print axioms Q1Paper.linearIndependent_pair_of_normalComp_ne_zero
+#print axioms Q1Paper.finrank_directionSpan_nonEigen
+#print axioms Q1Paper.finrank_orthogonal_directionSpan
+#print axioms Q1Paper.finrank_orthogonal_directionSpan_eigen
+#print axioms Q1Paper.finrank_orthogonal_directionSpan_nonEigen
+#print axioms Q1Paper.normalRestrict_apply
+#print axioms Q1Paper.eigenStratum_eq_of_normalRestrict_eq_zero
+#print axioms Q1Paper.normalRestrict_eq_zero_iff_eigenStratum_eq_top
+#print axioms Q1Paper.nonEigenStratum_eq_empty_iff
+#print axioms Q1Paper.nonEigenStratum_eq_empty_iff_finrank_range
+#print axioms Q1Paper.eigenStratum_eq_bot_iff_injective
+#print axioms Q1Paper.finrank_range_normalRestrict_add_finrank_ker
+#print axioms Q1Paper.eigenStratum_eq_bot_iff_finrank_range
+#print axioms Q1Paper.exists_eigen_and_nonEigen_of_rank_between
+
+-- Q1Paper/MinOrder.lean : Paper II, the dimension count behind t_min ≤ 2 ℓ
+#print axioms Q1Subspace.finrank_quotient_eq_finrank_sub
+#print axioms Q1Subspace.t_eq_finrank_sub
+#print axioms Q1Subspace.finrank_le_two_mul_of_pi2_le_pi1
+#print axioms Q1Subspace.finrank_le_two_mul_of_pi1_eq_pi2'
+#print axioms Q1Subspace.finrank_le_two_mul_ell
+#print axioms Q1Subspace.t_le_two_mul
+#print axioms Q1Subspace.exists_mem_t_le_two_mul
+#print axioms Q1Subspace.finrank_quotient_le_two_mul
+#print axioms Q1Subspace.t_le_two_mul_of_pi1_eq_pi2
+
+-- Q1Paper/FullRank.lean : Paper III, Claim sec4:lem:fullrank (full-rank leading coefficient)
+#print axioms Q1Paper.specialized_common_factor
+#print axioms Q1Paper.exists_eval_ne_zero
+#print axioms Q1Paper.C_mul_dvd_iff
+#print axioms Q1Paper.exists_primitive_common_dvd
+#print axioms Q1Paper.exists_common_factor_of_gcd
+
+-- Q1Paper/Window.lean : Paper I, Claim 10 (`lem:window`, degree-windowed relations)
+#print axioms Q1Paper.toFn_apply
+#print axioms Q1Paper.windowMatrix
+#print axioms Q1Paper.windowMatrix_apply
+#print axioms Q1Paper.windowMatrix_row
+#print axioms Q1Paper.natDegree_X_pow_mul_le
+#print axioms Q1Paper.rowSpace_windowMatrix_eq_span_shift
+#print axioms Q1Paper.windowSet
+#print axioms Q1Paper.windowSubmodule
+#print axioms Q1Paper.toFn_sum_mem_rowSpace
+#print axioms Q1Paper.exists_vecMul_windowMatrix
+#print axioms Q1Paper.row_mem_windowSet
+#print axioms Q1Paper.rowSpace_windowMatrix_eq_windowSet
+#print axioms Q1Paper.mem_rowSpace_iff_exists_window
+#print axioms Q1Paper.toFn_injective_of_natDegree_lt
+#print axioms Q1Paper.toFn_injOn_degree_lt_two_mul

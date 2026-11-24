@@ -96,10 +96,11 @@ The four entry points and their separate jobs:
 
 ## `Q1Paper/` — Root modules (`namespace Q1Paper.*`)
 
-30 files, 142 theorems, 37 definitions/structures.
+38 files, 198 theorems, 48 definitions/structures.
 
 | file | thm | def | first declarations | header summary |
 |---|---:|---:|---|---|
+| `Audit.lean` | 0 | 0 |  |  |
 | `Basic.lean` | 4 | 2 | `pairMap`, `pairMap_apply`, `ker_pairMap`, `finrank_range_pairMap`, … | Abstract linear-algebra core for the paper. |
 | `BezoutDeg.lean` | 4 | 0 | `exists_ne_zero_linearCombination`, `exists_ne_zero_with_finite_roots`, `isCoprime_of_no_common_root`, `exists_bezout_deg_lt` | Towards the degree-bounded Bezout lemma of the paper. |
 | `BezoutReal.lean` | 15 | 4 | `complexify`, `complexify_injective`, `complexify_ne_zero`, `eval_complexify_ofReal`, … | The real-coefficient Bézout lemma of Paper I (Claim 9, labels `lem:bezout`, `sec:bezout`). |
@@ -109,6 +110,7 @@ The four entry points and their separate jobs:
 | `FPT.lean` | 4 | 0 | `injective_of_leftInverse`, `finrank_le_of_leftInverse`, `kappaObs_zero`, `freePairDim_le_kappaObs` | Lemma F, first algebraic ingredients: the r = 0 left-inverse branch |
 | `FixedOrder.lean` | 1 | 0 | `G_form_iff` | Lemma C, algebraic core of the G = F X substitution: |
 | `FreeRows.lean` | 4 | 1 | `freePairSpace`, `mem_freePairSpace_iff`, `finrank_freePairSpace_add_ker`, `kappaObs_eq_mul_freePairSpace`, … | Lemma B, algebraic core: the space of free compressed row pairs is the |
+| `FullRank.lean` | 5 | 0 | `specialized_common_factor`, `exists_eval_ne_zero`, `C_mul_dvd_iff`, `exists_primitive_common_dvd`, … | Paper item: Claim `sec4:lem:fullrank` of `paper/current/paper_III_hyperplane.tex` |
 | `G2Assembly.lean` | 3 | 1 | `evalComb`, `evalComb_ne_zero`, `natDegree_sum_C_mul_le`, `exists_bezout_family` | The degree-bounded Bezout lemma for a family of polynomials (Lemma 4 of the paper), |
 | `G3Adjugate.lean` | 2 | 2 | `rowSel`, `rowSel_mul`, `adjRowInverse`, `adjRowInverse_mul` | The rectangular left inverse of the paper: for a `q × ω` matrix `Q` over a commutative |
 | `G3Coeff.lean` | 6 | 2 | `pencil`, `spoly`, `pencil_apply`, `spoly_mul_pencil`, … | The coefficient encoding of the polynomial left inverse (G3c, Lemma 6 (iv) ⟺ (v)). |
@@ -116,7 +118,11 @@ The four entry points and their separate jobs:
 | `G4RankIdentity.lean` | 3 | 1 | `sumArrowEquivProd`, `rank_fromRows_add_map`, `mulVecLin_range_eq_ker`, `rank_vstack_add_rank_mul` | Item 1 of the expert reply: the matrix-level rank identity |
 | `G5GramRank.lean` | 7 | 2 | `colMatrix`, `augment`, `colMatrix_mul_transpose`, `augment_mul_transpose`, … | Item 2 of the expert reply, first half: the augmented matrix `D = [M  c]` satisfies |
 | `HyperplaneAvoid.lean` | 2 | 0 | `exists_apply_ne_zero`, `exists_forall_apply_ne_zero` | The linear-algebra primitive behind the degree-bounded Bezout lemma of the paper: |
+| `HyperplaneDirection.lean` | 3 | 1 | `innerLeft`, `compression_eq_of_proportional`, `proportional_of_compression`, `direction_iff` | The direction theorem of the hyperplane-layer paper (Theorem 3). |
+| `HyperplaneFibre.lean` | 3 | 0 | `mem_orthogonal_span_pair_iff`, `Dv_eq_ker`, `finrank_Dv` | The fibre of the hyperplane-layer paper at a fixed direction (Lemma 2, numerical part). |
+| `HyperplanePrescribed.lean` | 2 | 0 | `le_orthogonal_span_pair`, `inf_inf_orthogonal_eq` | The prescribed-row lemmas of the hyperplane-layer paper (Lemma 4). |
 | `KappaObs.lean` | 9 | 2 | `pairMap`, `pairMap_apply`, `ker_pairMap`, `finrank_ker_add_finrank_range`, … | KappaObs.lean — abstract linear-algebra core of the "effective observer |
+| `MinOrder.lean` | 9 | 2 | `submoduleOfLe`, `t`, `finrank_quotient_eq_finrank_sub`, `t_eq_finrank_sub`, … | Paper II, Proposition 1: the dimension count behind the minimum-order bound |
 | `Monotone.lean` | 2 | 0 | `rowSpan_fromRows_zero`, `rank_fromRows_zero` | The rank-theoretic ingredient of the monotonicity of DEC in the order: appending |
 | `MonotoneBlocks.lean` | 16 | 0 | `fromRows_mul_eq`, `fromRows_smul`, `fromRows_sub`, `fromRows_zero_mul`, … | Monotonicity of the feasible order (Paper II, Claim 5 / `lem:monotone`): |
 | `Q1Compression.lean` | 2 | 2 | `restrictToKer`, `range_restrictToKer`, `kerRestrictEquiv`, `finrank_range_prod` |  |
@@ -129,5 +135,7 @@ The four entry points and their separate jobs:
 | `RankConsistency.lean` | 3 | 0 | `exists_solution_iff_mem_range`, `exists_solution_iff_span_le_range`, `exists_solution_iff_range_eq_sup_span` | Lemma C, structural core: consistency of a linear system is membership of |
 | `RankIdentity.lean` | 2 | 2 | `restrictToKer`, `range_restrictToKer`, `kerRestrictEquiv`, `finrank_range_prod` | The compression identity of the paper, abstract form: |
 | `SpectralCertificate.lean` | 2 | 0 | `bezout_of_gcd_eq_one`, `sum_sq_eq_zero_iff` | Lemma D, first algebraic ingredient: the two-polynomial Bezout identity |
+| `Strata.lean` | 32 | 8 | `compressionPart`, `normalComp`, `compressionEnd`, `compressionPart_mem`, … | Paper item: Proposition 5 of `paper/current/paper_III_hyperplane.tex`, labels `sec3:prop:strata`, |
+| `TightDim.lean` | 2 | 0 | `finrank_sup_pi_le`, `finrank_pi1_mono` |  |
 | `Window.lean` | 11 | 3 | `windowMatrix`, `windowMatrix_apply`, `windowMatrix_row`, `natDegree_X_pow_mul_le`, … | Paper I, Claim 10 (`lem:window`, "degree-windowed relations"). |
 
