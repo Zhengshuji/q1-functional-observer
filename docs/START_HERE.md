@@ -89,10 +89,13 @@ The formalisation is not a machine-checked copy of the paper, and the difference
 
 1. This file.
 2. `docs/PAPER_I_PROOF_MAP.md` — the paper item ↔ declaration ↔ file table, and the boundaries.
-3. `docs/ALGORITHM_CORRECTNESS_MAP.md` — what is and is not proved *about the algorithms*, as opposed
+3. `docs/PAPER_I_MODULE_MAP.md` — every Lean module with its declaration count, which paper items it
+   hosts, and the module's own stated purpose.  Use it when you have a file name and want to know why
+   it exists; use the proof map when you have a paper item and want the declaration.
+4. `docs/ALGORITHM_CORRECTNESS_MAP.md` — what is and is not proved *about the algorithms*, as opposed
    to about the mathematics.
-4. `Q1Paper/PaperI/CLAIMS.md` — the machine-maintained claim list (the proof map is built from it).
-5. The paper itself.
+5. `Q1Paper/PaperI/CLAIMS.md` — the machine-maintained claim list (both maps are built from it).
+6. The paper itself.
 
 Development history, including retracted claims and the reasons, is in
 `docs/PAPER_I_FORMALIZATION_MAP.md`.  That file is a log, not a status report — read it for provenance,
