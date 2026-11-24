@@ -276,7 +276,9 @@ def psi_eval(ctx, J, Y, omega):
         # contributes nothing at this omega
         return {"H": H, "G": G, "e_omega": Fr(0), "e_next": Fr(0), "i": False,
                 "ii": False, "x": None}
-    HG = [list(H[i]) + list(G[i]) for i in range(len(H))]
+    # [H; G] is VERTICAL stacking (the paper writes [P; M] with a semicolon for that, cf.
+    # Claim 1); so e_{omega+1}([H;G][H;G]^T) = 0 means rank of the stacked matrix <= omega.
+    HG = [list(h) for h in H] + [list(g) for g in G]
     e_omega = principal_minors_sum(H, omega)
     e_next = principal_minors_sum(HG, omega + 1)
     i_ok = (e_omega > 0) and (e_next == 0)
@@ -356,7 +358,7 @@ def demo():
                 for omega in range(1, ctx.ell + 1):
                     Y = [[Fr(a - b) for b in range(ctx.mprime - t)] for a in range(t)]
                     r = psi_eval(ctx, J, Y, omega)
-                    HG = [list(r["H"][i]) + list(r["G"][i]) for i in range(len(r["H"]))]
+                    HG = list(r["H"]) + list(r["G"])   # vertical, as the paper's [H;G]
                     expect = (ai.rank(r["H"]) == omega) and (ai.rank(HG) == omega)
                     assert r["i"] == expect, (
                         f"item (i) at t={t}, J={J}, omega={omega}: "
