@@ -114,3 +114,35 @@ honest options are
 
 Neither is done yet, and the choice is the reviewer's to make because it changes what "Algorithm 1
 is verified" means.
+
+### What the complex-λ DEC would look like, and the one lemma it needs
+
+
+awSpectral is polymorphic in the base field: 
+awSpectral {p q n} (C CA : Matrix p n K)
+(L LA : Matrix q n K) := forall lam : K, rank [lam L - LA; CA; C] = rank [L; CA; C].  So the
+complex condition for real data is simply 
+awSpectral at K = ℂ applied to the complexified
+matrices, and
+
+    DECℂ C A L0 r := exists R, let L := fromRows L0 R,
+                       rawAlgebraic C (C*A) L (L*A) and rawSpectralℂ C (C*A) L (L*A)
+
+with 
+awSpectralℂ C CA L LA := rawSpectral (C.map f) (CA.map f) (L.map f) (LA.map f),  the
+algebra map to ℂ.
+
+Two of the three lemmas needed for DECℂ => DEC are routine:
+
+* the scalar commutation (lam • L - LA).map f = (f lam) • L.map f - LA.map f (one ext/simp);
+* 
+ank ((M : Matrix _ _ R).map f) = M.rank (
+ank_map_ofReal, already in the tree).
+
+The third is the one that blocked the attempt: **(fromRows A B).map f = fromRows (A.map f)
+(B.map f)** for romRows into a Fin m1 ⊕ Fin m2 row type.  It is a case split on the Sum
+index, and my first two attempts (Fin.addCases, then a nested 
+cases) did not line up with the
+type.  It is a small lemma, but it is the gate for everything at the DECℂ level, so it is the
+first thing to do next.
+
