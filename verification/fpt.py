@@ -234,6 +234,58 @@ def check_elem_symm(n_instances=25, seed=7):
     return checked
 
 
+def extend_basis(B, extra):
+    """Extend the rows of B by vectors of `extra` until the span stops growing."""
+    out = [list(b) for b in B]
+    r = ai.rank(out) if out else 0
+    for v in extra:
+        cand = out + [list(v)]
+        rr = ai.rank(cand)
+        if rr > r:
+            out, r = cand, rr
+    return out
+
+
+def chart_blocks(ctx, J, Y):
+    """H(Y), G(Y): the two (s0+t) x ell blocks of Z_ch,J(Y) = [E0; C_J(Y) E_Q].
+
+    E0 is the basis of W0 and E_Q a complement of W0 inside V = T cap (S x S); C_J(Y) is the
+    t x m' chart matrix [I_t | Y] read in the J coordinates.
+    """
+    k = ctx.k
+    ext = extend_basis(ctx.W0, ctx.V)
+    assert len(ext) == len(ctx.V), "W0 is not inside V"
+    EQ = ext[ctx.s0:]
+    assert len(EQ) == ctx.mprime, f"the complement has dimension {len(EQ)}, not m'={ctx.mprime}"
+    C = chart_matrix(J, Y, ctx.mprime)
+    extra = [[sum(C[a][b] * EQ[b][c] for b in range(ctx.mprime)) for c in range(2 * k)]
+             for a in range(len(J))]
+    Zch = [list(w) for w in ctx.W0] + extra
+    H = [row[:k] for row in Zch]
+    G = [row[k:] for row in Zch]
+    return H, G
+
+
+def psi_eval(ctx, J, Y, omega):
+    """Evaluate Psi_{t,omega} at a chart point: items (i) and (ii) of Algorithm 2."""
+    import cb_gram as cb
+
+    H, G = chart_blocks(ctx, J, Y)
+    if not H or not H[0] or omega > len(H):
+        # no rows, or fewer rows than omega: e_omega(H H^T) = 0, so item (i) fails and the chart
+        # contributes nothing at this omega
+        return {"H": H, "G": G, "e_omega": Fr(0), "e_next": Fr(0), "i": False,
+                "ii": False, "x": None}
+    HG = [list(H[i]) + list(G[i]) for i in range(len(H))]
+    e_omega = principal_minors_sum(H, omega)
+    e_next = principal_minors_sum(HG, omega + 1)
+    i_ok = (e_omega > 0) and (e_next == 0)
+    gram = cb.gram_from_K(cb.K_cauchy_binet(H, G, omega), omega)
+    x = cb.gram_certificate(gram)
+    return {"H": H, "G": G, "e_omega": e_omega, "e_next": e_next,
+            "i": i_ok, "ii": x is not None, "x": x}
+
+
 def demo():
     ok = True
     # A = the shift, C = e1^T, L0 = e1^T, q = 2  (an r = 1 instance)
@@ -255,6 +307,24 @@ def demo():
     print("[fpt] chart points verified: rank [I_t | Y] = t for every t")
     n = check_elem_symm()
     print(f"[fpt] e_omega(M M^T) > 0 <=> rank M >= omega: {n} (M, omega) pairs agree")
+
+    # --- Psi_{t,omega}: item (i) must be equivalent to "rank H = omega and rank[H;G] = omega"
+    if ctx.mprime >= 1 and ctx.ell >= 1:
+        checked = 0
+        for t in range(0, min(ctx.mprime, 2) + 1):
+            for J in grassmann_charts(ctx.mprime, t)[:2]:
+                for omega in range(1, ctx.ell + 1):
+                    Y = [[Fr(a - b) for b in range(ctx.mprime - t)] for a in range(t)]
+                    r = psi_eval(ctx, J, Y, omega)
+                    HG = [list(r["H"][i]) + list(r["G"][i]) for i in range(len(r["H"]))]
+                    expect = (ai.rank(r["H"]) == omega) and (ai.rank(HG) == omega)
+                    assert r["i"] == expect, (
+                        f"item (i) at t={t}, J={J}, omega={omega}: "
+                        f"e_omega={r['e_omega']}, e_next={r['e_next']}, "
+                        f"rank H={ai.rank(r['H'])}, rank[H;G]={ai.rank(HG)}")
+                    checked += 1
+        print(f"[fpt] Psi item (i) == (rank H = omega and rank[H;G] = omega): {checked} chart points")
+    ok &= True
     print("RESULT:", "PASS" if ok else "FAIL")
     return 0 if ok else 1
 
