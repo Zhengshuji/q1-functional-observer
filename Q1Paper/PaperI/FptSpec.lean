@@ -16,10 +16,28 @@ where it occurs):
 * §1 `RenegarBackend` keeps correctness and cost apart: the only content is a
   polynomial cost bound
   `Cost vars polys deg β ≤ C0 * (β+1)^k0 * (polys (deg+1) + 1)^(k0 (vars+1))`,
-  valid at **fixed degree** (`deg ≤ 2`, the charts are linear/quadratic in `Y`).
-  Without `deg ≤ 2` the bound is false (`PaperI/RenegarParams.lean`'s
-  `chartSpec_empty` counterexample), so the hypothesis is kept.  A backend is
-  exhibited (`fptBackendInhabited`).
+  valid at **fixed degree** (`deg ≤ 2`).  Without a fixed degree the bound is false
+  (`PaperI/RenegarParams.lean`'s `chartSpec_empty` counterexample), so the hypothesis
+  is kept.  A backend is exhibited (`fptBackendInhabited`).
+
+  **CAVEAT (raised by an external review, 2026-11-24).**  The fixed degree used here is
+  `2`, and an earlier version of this comment justified that with "the charts are
+  linear/quadratic in `Y`".  That justification is **wrong for the paper's actual system**:
+  `H(Y)` and `G(Y)` are affine in `Y`, but `e_omega(H Hᵀ) > 0` and
+  `e_{omega+1}([H;G][H;G]ᵀ) = 0` are sums of `omega`- and `(omega+1)`-fold minors of a
+  quadratic Gram, hence have degree `2 omega` and `2(omega+1)` in `Y`, and the window
+  certificate `Z(Y)ᵀ Z(Y) x = e₀` likewise grows with `omega`.  So the degree is `O(omega)
+  = O(ell)`, not `2`.
+
+  Consequence, stated precisely: the theorem below is **true** but its hypothesis is
+  **stronger** than what the paper's chart system satisfies, so it does not by itself
+  machine-check Theorem 2 as stated.  The paper's conclusion nevertheless survives at
+  `deg = O(ell)`: with `base = polys (deg+1) + 1 = O(ell^3)` and exponent
+  `k0 (vars+1) = O(ell^2)`, the cost is `exp(O(ell^2 log ell))`, still FPT in `ell`.  What
+  is missing is the Lean instance of the cost bound at `deg = O(ell)` (or a quadratic
+  reformulation of `Psi` by auxiliary variables, with the four properties that would
+  require: feasibility equivalence, bounded auxiliary count, bounded constraint count,
+  and coefficient bit lengths).
 
 * §2 `FptChartSpec`: the chart count is **not a field**.  It is the definition
   `fptChartCount dims = 2 ^ dims.m'`, and `2 ^ m' ≤ 4 ^ ℓ` is *proved* from the
@@ -74,7 +92,8 @@ separate fields, and neither implies the other.**
 `Cost vars polys deg β` is the bit cost of deciding a chart with `vars`
 variables, `polys` polynomial constraints of degree `deg` and coefficient bit
 length `β`.  The field `cost_bound` is *only* a polynomial upper bound on that
-cost, at **fixed degree** (`deg ≤ 2`: the charts are linear/quadratic in `Y`).
+cost, at **fixed degree** (`deg ≤ 2`: see the CAVEAT above -- the paper's `Psi` has degree
+`O(omega)`, so this hypothesis is stronger than the paper needs).
 
 Keeping `deg ≤ 2` is essential: with the degree free, `Cost β β β β` may be
 `β * (β+1)^β`, which no fixed polynomial in `β+1` dominates — that is exactly
@@ -178,7 +197,7 @@ structure FptChartSpec where
   beta : ℕ
   /-- the total cost of the algorithm -/
   totalCost : ℕ
-  /-- the chart is linear/quadratic in `Y` -/
+  /-- the degree bound: see the CAVEAT above -- this is STRONGER than the paper needs -/
   params_deg_le_two : (params 0 0).deg ≤ 2
   /-- the chart's variable count is bounded by `(ℓ+1)^2` (FPT content) -/
   params_vars_le : (params 0 0).vars ≤ (dims.ell + 1) ^ 2
