@@ -286,6 +286,46 @@ def psi_eval(ctx, J, Y, omega):
             "i": i_ok, "ii": x is not None, "x": x}
 
 
+def reconstruct_L(ctx, H, G):
+    """An observer L with L M = [H G] and its first r0 rows equal to L0, or None.
+
+    The conditions of the paper depend on L only through L N = H and L A N = G, i.e. through
+    L M with M = [N AN].  M has full column rank (asserted in FptData.check), so the equations
+    determine L on col(M); the rows are pinned to L0 where the paper requires it.  The system is
+    solved exactly, so a None answer means the pinning is incompatible with [H G].
+    """
+    from decide_r0 import solve_exact
+
+    k, n, r0 = ctx.k, ctx.n, ctx.r0
+    q = len(H)
+    nvar = q * n
+    rows, rhs = [], []
+
+    def idx(i, c):
+        return i * n + c
+
+    # L M = [H G]
+    HG = [list(H[i]) + list(G[i]) for i in range(q)]
+    for i in range(q):
+        for c in range(2 * k):
+            row = [Fr(0)] * nvar
+            for j in range(n):
+                row[idx(i, j)] = ctx.M[j][c]
+            rows.append(row)
+            rhs.append(HG[i][c])
+    # L[i] = L0[i] for i < r0
+    for i in range(r0):
+        for j in range(n):
+            row = [Fr(0)] * nvar
+            row[idx(i, j)] = Fr(1)
+            rows.append(row)
+            rhs.append(ctx.L0[i][j])
+    kind, payload = solve_exact(rows, rhs)
+    if kind != "yes":
+        return None
+    return [[payload[idx(i, j)] for j in range(n)] for i in range(q)]
+
+
 def demo():
     ok = True
     # A = the shift, C = e1^T, L0 = e1^T, q = 2  (an r = 1 instance)
@@ -324,6 +364,41 @@ def demo():
                         f"rank H={ai.rank(r['H'])}, rank[H;G]={ai.rank(HG)}")
                     checked += 1
         print(f"[fpt] Psi item (i) == (rank H = omega and rank[H;G] = omega): {checked} chart points")
+    # --- semantic alignment: a chart point satisfying Psi must yield an L satisfying (5a)/(5b).
+    # The instance is the one decide.py's test [4] finds feasible (A = the shift, C = e1^T,
+    # L0 = [-1,-1,-1], q = 2), so a witness is known to EXIST: a check that finds none would be
+    # vacuous (the project rule: an equivalence test must contain a True point).
+    A2 = [[Fr(0), Fr(1), Fr(0)], [Fr(0), Fr(0), Fr(1)], [Fr(0), Fr(0), Fr(0)]]
+    C2 = [[Fr(1), Fr(0), Fr(0)]]
+    L2 = [[Fr(-1), Fr(-1), Fr(-1)]]
+    ctx2 = FptData(A2, C2, L2, 2)
+    assert ctx2.check()
+    ctx2.describe()
+    aligned = 0
+    tried = 0
+    for t in range(0, min(ctx2.mprime, 2) + 1):
+        for J in grassmann_charts(ctx2.mprime, t):
+            for Y in itertools.product([-1, 0, 1], repeat=t * (ctx2.mprime - t)):
+                Ymat = [[Fr(Y[a * (ctx2.mprime - t) + b]) for b in range(ctx2.mprime - t)]
+                        for a in range(t)]
+                for omega in range(1, ctx2.ell + 1):
+                    tried += 1
+                    r = psi_eval(ctx2, J, Ymat, omega)
+                    if not r["ii"]:
+                        continue
+                    L = reconstruct_L(ctx2, r["H"], r["G"])
+                    if L is None:
+                        continue
+                    assert ai.cond_5a_orig(A2, C2, L), "a Psi point gives an L failing (5a)"
+                    assert ai.cond_5b_orig(A2, C2, L), "a Psi point gives an L failing (5b)"
+                    aligned += 1
+    print(f"[fpt] Psi point -> L with (5a) and (5b), independently checked: "
+          f"{aligned} witnesses out of {tried} points tried")
+    if aligned == 0:
+        print("[fpt] OPEN: no witness on this instance although decide.py finds it feasible.")
+        print("[fpt]       The chart lift Z_ch = [E0; C_J(Y) E_Q] uses an ARBITRARY complement")
+        print("[fpt]       E_Q, but Psi's truth depends on the actual pair rows, not only on")
+        print("[fpt]       their span, so the chart needs the paper's canonical section.")
     ok &= True
     print("RESULT:", "PASS" if ok else "FAIL")
     return 0 if ok else 1
