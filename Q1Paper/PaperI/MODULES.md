@@ -97,7 +97,7 @@ The four entry points and their separate jobs:
 
 ## `Q1Paper/` — Root modules (`namespace Q1Paper.*`)
 
-31 files, 143 theorems, 37 definitions/structures.
+30 files, 142 theorems, 37 definitions/structures.
 
 | file | thm | def | first declarations | header summary |
 |---|---:|---:|---|---|
@@ -129,7 +129,6 @@ The four entry points and their separate jobs:
 | `Q1Subspace.lean` | 5 | 1 | `rowSpan`, `rowSpan_le_range`, `range_le_rowSpan`, `range_eq_rowSpan`, … |  |
 | `RankConsistency.lean` | 3 | 0 | `exists_solution_iff_mem_range`, `exists_solution_iff_span_le_range`, `exists_solution_iff_range_eq_sup_span` | Lemma C, structural core: consistency of a linear system is membership of |
 | `RankIdentity.lean` | 2 | 2 | `restrictToKer`, `range_restrictToKer`, `kerRestrictEquiv`, `finrank_range_prod` | The compression identity of the paper, abstract form: |
-| `ScratchChartComplete.lean` | 1 | 0 | `row_LA_mul_le_row_L_mul` |  |
 | `SpectralCertificate.lean` | 2 | 0 | `bezout_of_gcd_eq_one`, `sum_sq_eq_zero_iff` | Lemma D, first algebraic ingredient: the two-polynomial Bezout identity |
 | `Window.lean` | 11 | 3 | `windowMatrix`, `windowMatrix_apply`, `windowMatrix_row`, `natDegree_X_pow_mul_le`, … | Paper I, Claim 10 (`lem:window`, "degree-windowed relations"). |
 
