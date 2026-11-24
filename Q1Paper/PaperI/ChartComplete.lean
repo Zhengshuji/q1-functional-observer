@@ -120,4 +120,30 @@ theorem exists_phi_point {q k ω : ℕ} (H HA : Matrix (Fin q) (Fin k) ℝ)
   obtain ⟨x, hx⟩ := (claim11_iff_gram (q := q) (k := k) (ω := ω) H HA hω hωr ⟨F, hF⟩).mp h5b
   exact ⟨X, B, G, x, hXrank, hXB, hGB, hx⟩
 
+/-! ## The backward direction, step 1
+
+Given a chart point `H = X B`, `H_A = G B` with `X_L X = 1`, the row inclusion
+`row(H_A) ≤ row(H)` — the hypothesis of step 1 in the forward direction — comes back for free.
+This is what makes the chart system *sound*: every point satisfying items (iii)/(iv) of `eq:phi`
+satisfies the compressed `(5a)`. -/
+
+/-- **Backward step: the chart point satisfies the compressed `(5a)`.**  If `H = X * B`,
+`H_A = G * B` and `X_L * X = 1`, then `row(H_A) ≤ row(H)`.  Indeed
+`H_A = G B = G (X_L X) B = (G X_L) (X B) = (G X_L) H`, and a product's row space is contained in
+that of its right factor. -/
+theorem rowSpace_le_of_chart_factorization {m k ω : ℕ}
+    (H HA : Matrix (Fin m) (Fin k) K) (X : Matrix (Fin m) (Fin ω) K)
+    (B : Matrix (Fin ω) (Fin k) K) (G : Matrix (Fin m) (Fin ω) K)
+    (XL : Matrix (Fin ω) (Fin m) K)
+    (hH : X * B = H) (hHA : G * B = HA) (hXL : XL * X = 1) :
+    Q1Subspace.rowSpace HA ≤ Q1Subspace.rowSpace H := by
+  have h1 : (G * XL) * (X * B) = G * B := by
+    rw [← Matrix.mul_assoc (G * XL) X B, Matrix.mul_assoc G XL X, hXL, Matrix.mul_one]
+  have h : HA = (G * XL) * H := by
+    calc HA = G * B := hHA.symm
+      _ = (G * XL) * (X * B) := h1.symm
+      _ = (G * XL) * H := by rw [hH]
+  rw [h]
+  exact rowSpace_mul_le _ _
+
 end Q1Paper.ScratchChartComplete
