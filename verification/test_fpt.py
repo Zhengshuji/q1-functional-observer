@@ -46,7 +46,10 @@ INSTANCES = [
 def search_psi(ctx, grid=(-1, 0, 1)):
     """Yield (J, Y, omega, H, G) for every chart point where Psi holds."""
     hits = []
-    for t in range(0, min(ctx.mprime, 2) + 1):
+    # the paper's range is t = 0 .. min(r, 2*ell); never more than m' since the charts are those
+    # of Gr(t, m')
+    tmax = min(ctx.mprime, ctx.r, 2 * ctx.ell)
+    for t in range(0, tmax + 1):
         for J in fpt.grassmann_charts(ctx.mprime, t):
             width = ctx.mprime - t
             for Yflat in itertools.product(grid, repeat=t * width):
