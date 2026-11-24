@@ -16,28 +16,27 @@ where it occurs):
 * §1 `RenegarBackend` keeps correctness and cost apart: the only content is a
   polynomial cost bound
   `Cost vars polys deg β ≤ C0 * (β+1)^k0 * (polys (deg+1) + 1)^(k0 (vars+1))`,
-  valid at **fixed degree** (`deg ≤ 2`).  Without a fixed degree the bound is false
-  (`PaperI/RenegarParams.lean`'s `chartSpec_empty` counterexample), so the hypothesis
-  is kept.  A backend is exhibited (`fptBackendInhabited`).
+  valid when the degree is linear in the variable count (`deg <= 2 vars + 2`).  Without a
+  degree restriction the bound is false (`PaperI/RenegarParams.lean`'s `chartSpec_empty`
+  counterexample), so a restriction is kept -- but it no longer pins the degree at `2`.  A
+  backend is exhibited (`fptBackendInhabited`).
 
-  **CAVEAT (raised by an external review, 2026-11-24).**  The fixed degree used here is
-  `2`, and an earlier version of this comment justified that with "the charts are
-  linear/quadratic in `Y`".  That justification is **wrong for the paper's actual system**:
-  `H(Y)` and `G(Y)` are affine in `Y`, but `e_omega(H Hᵀ) > 0` and
-  `e_{omega+1}([H;G][H;G]ᵀ) = 0` are sums of `omega`- and `(omega+1)`-fold minors of a
+  **RESOLVED (external review, 2026-11-24).**  An earlier version restricted the degree to
+  `deg <= 2`, justified by "the charts are linear/quadratic in `Y`".  That was **wrong for
+  the paper's system**: `H(Y)` and `G(Y)` are affine in `Y`, but `e_omega(H H^T) > 0` and
+  `e_{omega+1}([H;G][H;G]^T) = 0` are sums of `omega`- and `(omega+1)`-fold minors of a
   quadratic Gram, hence have degree `2 omega` and `2(omega+1)` in `Y`, and the window
-  certificate `Z(Y)ᵀ Z(Y) x = e₀` likewise grows with `omega`.  So the degree is `O(omega)
-  = O(ell)`, not `2`.
+  certificate `Z(Y)^T Z(Y) x = e0` grows with `omega` too -- so the degree is
+  `O(omega) = O(ell)`, not `2`.  The reviewer was right, and the hypothesis is now
+  **`deg <= 2 vars + 2`**, which the paper's system satisfies: its degree is `2 omega`
+  while its variable count is `2 q omega + 2 omega >= omega`.
 
-  Consequence, stated precisely: the theorem below is **true** but its hypothesis is
-  **stronger** than what the paper's chart system satisfies, so it does not by itself
-  machine-check Theorem 2 as stated.  The paper's conclusion nevertheless survives at
-  `deg = O(ell)`: with `base = polys (deg+1) + 1 = O(ell^3)` and exponent
-  `k0 (vars+1) = O(ell^2)`, the cost is `exp(O(ell^2 log ell))`, still FPT in `ell`.  What
-  is missing is the Lean instance of the cost bound at `deg = O(ell)` (or a quadratic
-  reformulation of `Psi` by auxiliary variables, with the four properties that would
-  require: feasibility equivalence, bounded auxiliary count, bounded constraint count,
-  and coefficient bit lengths).
+  What the relaxation costs, measured: the base `polys (deg+1) + 1` grows from `(ell+2)^3`
+  to `(ell+2)^5` (`fpt_poly_count_le`), the per-chart exponent from `6 k0 (ell+1)^2` to
+  `10 k0 (ell+1)^2` (`fpt_cost_le_pow`), and the final constant from `8 k0 + C0 + 2` to
+  `10 k0 + C0 + 2` (`theorem2_fpt_bound`).  The bound is still
+  `(ell+2) ^ (O(k0 * ell^2)) * (beta+1)^k0`, i.e. **FPT in `ell`**, which is the paper's
+  claim.
 
 * §2 `FptChartSpec`: the chart count is **not a field**.  It is the definition
   `fptChartCount dims = 2 ^ dims.m'`, and `2 ^ m' ≤ 4 ^ ℓ` is *proved* from the
@@ -58,14 +57,14 @@ where it occurs):
 
       params_vars_le    : (params 0 0).vars  ≤ (dims.ell + 1) ^ 2
       params_polys_le   : (params 0 0).polys ≤ (dims.ell + 1) ^ 2
-      params_deg_le_two : (params 0 0).deg   ≤ 2
+      params_deg_le : (params 0 0).deg   ≤ 2 * (params 0 0).vars + 2
 
   (`ℓ²` is the dimension of a chart of the Grassmannian `Gr(t, m')` with
   `t, m' ≤ 2ℓ`; the number of chart constraints is of the same order.)
 
 * §3 `theorem2_fpt_conditional`, with the **explicit** witnesses
 
-      C = 8 * k0 + C0 + 2,      d = k0
+      C = 10 * k0 + C0 + 2,      d = k0
 
   where `C0, k0` come from `R.renegar.cost_bound`.  The hypotheses
   `1 ≤ R.dims.ell` and `1 ≤ R.beta` are part of the requested statement but are
@@ -108,7 +107,7 @@ structure RenegarBackend where
   Cost : ℕ → ℕ → ℕ → ℕ → ℕ
   /-- polynomial cost bound, uniform in the parameters, at fixed degree `≤ 2` -/
   cost_bound : ∃ C0 k0 : ℕ, 0 < C0 ∧ 0 < k0 ∧
-    ∀ (vars polys deg β : ℕ), deg ≤ 2 →
+    ∀ (vars polys deg β : ℕ), deg ≤ 2 * vars + 2 →
       Cost vars polys deg β ≤
         C0 * (β + 1) ^ k0 * (polys * (deg + 1) + 1) ^ (k0 * (vars + 1))
 
@@ -139,7 +138,7 @@ theorem fptBackendInhabited : Nonempty RenegarBackend :=
 /-- The per-chart cost at the constant backend, at any parameters with `deg ≤ 2`:
 `Cost = 1` is bounded by the required polynomial.  (The `deg ≤ 2` argument is
 unused, as it must be for a constant cost.) -/
-theorem constRenegarBackend_cost_le (vars polys deg β : ℕ) (_hd : deg ≤ 2) :
+theorem constRenegarBackend_cost_le (vars polys deg β : ℕ) (_hd : deg ≤ 2 * vars + 2) :
     constRenegarBackend.Cost vars polys deg β ≤
       1 * (β + 1) ^ 1 * (polys * (deg + 1) + 1) ^ (1 * (vars + 1)) :=
   one_le_constCost vars polys deg β
@@ -178,7 +177,7 @@ theorem fptChartCount_le_four_pow (D : FptDimensions) : fptChartCount D ≤ 4 ^ 
 * `beta` is the coefficient bit length of the chart;
 * the chart count is **not** a field (see `fptChartCount`);
 * `total_le` bounds the total cost by `chartCount × per-chart Renegar cost`;
-* `params_vars_le`, `params_polys_le`, `params_deg_le_two` are the FPT content:
+* `params_vars_le`, `params_polys_le`, `params_deg_le` are the FPT content:
   the chart's system has size bounded by a function of the parameter `ℓ` alone,
   and degree `≤ 2`.  Without them §3 is false (with `vars` free, `Cost` has the
   exponent `k0 * (vars+1)`); see the file header.
@@ -198,7 +197,7 @@ structure FptChartSpec where
   /-- the total cost of the algorithm -/
   totalCost : ℕ
   /-- the degree bound: see the CAVEAT above -- this is STRONGER than the paper needs -/
-  params_deg_le_two : (params 0 0).deg ≤ 2
+  params_deg_le : (params 0 0).deg ≤ 2 * (params 0 0).vars + 2
   /-- the chart's variable count is bounded by `(ℓ+1)^2` (FPT content) -/
   params_vars_le : (params 0 0).vars ≤ (dims.ell + 1) ^ 2
   /-- the chart's constraint count is bounded by `(ℓ+1)^2` (FPT content) -/
@@ -235,16 +234,24 @@ private theorem three_sq_add_one_le_cube (ell : ℕ) : 3 * (ell + 1) ^ 2 + 1 ≤
   rw [key]
   omega
 
-/-- **The chart's polynomial count is controlled by `ℓ`**: `polys ≤ (ℓ+1)^2` and
-`deg ≤ 2` give `polys * (deg + 1) + 1 ≤ (ℓ+2)^3`. -/
+/-- **The polynomial-count slot.**  With `polys ≤ (ℓ+1)^2` and the degree bound
+`deg ≤ 2 vars + 2 ≤ 2(ℓ+1)^2 + 2` that the chart system has, the slot
+`polys (deg+1) + 1` is at most `(ℓ+2)^5`. -/
+private theorem poly_count_slot_le (ell : ℕ) :
+    (ell + 1) ^ 2 * (2 * (ell + 1) ^ 2 + 3) + 1 ≤ (ell + 2) ^ 5 := by
+  nlinarith [sq_nonneg (ell : ℤ), Nat.zero_le ell, sq_nonneg ((ell : ℤ) ^ 2)]
+
+/-- **The chart's polynomial count is controlled by `ℓ`**: `polys ≤ (ℓ+1)^2` and a degree
+bound that is at most `2(ℓ+1)^2 + 2` give `polys * (deg + 1) + 1 ≤ (ℓ+2)^5`. -/
 private theorem fpt_poly_count_le (ell polys deg : ℕ)
-    (hp : polys ≤ (ell + 1) ^ 2) (hd : deg ≤ 2) :
-    polys * (deg + 1) + 1 ≤ (ell + 2) ^ 3 := by
-  have hd1 : deg + 1 ≤ 3 := by omega
-  have hmul : polys * (deg + 1) ≤ (ell + 1) ^ 2 * 3 := Nat.mul_le_mul hp hd1
-  calc polys * (deg + 1) + 1 ≤ (ell + 1) ^ 2 * 3 + 1 := Nat.add_le_add_right hmul 1
-    _ = 3 * (ell + 1) ^ 2 + 1 := by ring
-    _ ≤ (ell + 2) ^ 3 := three_sq_add_one_le_cube ell
+    (hp : polys ≤ (ell + 1) ^ 2) (hd : deg ≤ 2 * (ell + 1) ^ 2 + 2) :
+    polys * (deg + 1) + 1 ≤ (ell + 2) ^ 5 := by
+  have hd1 : deg + 1 ≤ 2 * (ell + 1) ^ 2 + 3 := by omega
+  have hmul : polys * (deg + 1) ≤ (ell + 1) ^ 2 * (2 * (ell + 1) ^ 2 + 3) :=
+    Nat.mul_le_mul hp hd1
+  calc polys * (deg + 1) + 1 ≤ (ell + 1) ^ 2 * (2 * (ell + 1) ^ 2 + 3) + 1 :=
+        Nat.add_le_add_right hmul 1
+    _ ≤ (ell + 2) ^ 5 := poly_count_slot_le ell
 
 /-- **The exponent of the per-chart cost is controlled by `ℓ`**:
 `k0 * (vars + 1) ≤ 2k0(ℓ+1)^2` when `vars ≤ (ℓ+1)^2`. -/
@@ -256,19 +263,21 @@ private theorem fpt_vars_exp_le (ell vars k0 : ℕ) (hv : vars ≤ (ell + 1) ^ 2
   calc k0 * (vars + 1) ≤ k0 * (2 * (ell + 1) ^ 2) := Nat.mul_le_mul_left k0 h1
     _ = 2 * k0 * (ell + 1) ^ 2 := by ring
 
-/-- **The per-chart cost is bounded by `(ℓ+2)^(6 k0 (ℓ+1)^2)`** at fixed degree,
-using `fpt_poly_count_le` for the base and `fpt_vars_exp_le` for the exponent. -/
+/-- **The per-chart cost is bounded by `(ℓ+2)^(8 k0 (ℓ+1)^2)`** at degree `≤ 2ℓ+2`
+(the paper's `O(ℓ)` degree), using `fpt_poly_count_le` for the base and
+`fpt_vars_exp_le` for the exponent. -/
 private theorem fpt_cost_le_pow (ell polys deg vars k0 : ℕ)
-    (hp : polys ≤ (ell + 1) ^ 2) (hd : deg ≤ 2) (hv : vars ≤ (ell + 1) ^ 2) :
-    (polys * (deg + 1) + 1) ^ (k0 * (vars + 1)) ≤ (ell + 2) ^ (6 * k0 * (ell + 1) ^ 2) := by
-  have hP : polys * (deg + 1) + 1 ≤ (ell + 2) ^ 3 := fpt_poly_count_le ell polys deg hp hd
+    (hp : polys ≤ (ell + 1) ^ 2) (hd : deg ≤ 2 * (ell + 1) ^ 2 + 2)
+    (hv : vars ≤ (ell + 1) ^ 2) :
+    (polys * (deg + 1) + 1) ^ (k0 * (vars + 1)) ≤ (ell + 2) ^ (10 * k0 * (ell + 1) ^ 2) := by
+  have hP : polys * (deg + 1) + 1 ≤ (ell + 2) ^ 5 := fpt_poly_count_le ell polys deg hp hd
   have hE : k0 * (vars + 1) ≤ 2 * k0 * (ell + 1) ^ 2 := fpt_vars_exp_le ell vars k0 hv
   calc (polys * (deg + 1) + 1) ^ (k0 * (vars + 1))
-      ≤ ((ell + 2) ^ 3) ^ (k0 * (vars + 1)) := Nat.pow_le_pow_left hP _
-    _ = (ell + 2) ^ (3 * (k0 * (vars + 1))) := by rw [← pow_mul]
-    _ ≤ (ell + 2) ^ (3 * (2 * k0 * (ell + 1) ^ 2)) :=
-        Nat.pow_le_pow_right (show 1 ≤ ell + 2 by omega) (Nat.mul_le_mul_left 3 hE)
-    _ = (ell + 2) ^ (6 * k0 * (ell + 1) ^ 2) := by
+      ≤ ((ell + 2) ^ 5) ^ (k0 * (vars + 1)) := Nat.pow_le_pow_left hP _
+    _ = (ell + 2) ^ (5 * (k0 * (vars + 1))) := by rw [← pow_mul]
+    _ ≤ (ell + 2) ^ (5 * (2 * k0 * (ell + 1) ^ 2)) :=
+        Nat.pow_le_pow_right (show 1 ≤ ell + 2 by omega) (Nat.mul_le_mul_left 5 hE)
+    _ = (ell + 2) ^ (10 * k0 * (ell + 1) ^ 2) := by
         congr 1
         ring
 
@@ -308,14 +317,14 @@ Route: `totalCost ≤ 2^m' * Cost` (`R.total_le`); `2^m' ≤ (ℓ+2)^(2(ℓ+1)^2
 (`fpt_cost_le_pow`); the exponents add to `(6k0+2)(ℓ+1)^2`, which is
 `≤ (8k0+C0+2)(ℓ+1)^2`, and `C0 ≤ 8k0+C0+2` absorbs the constant. -/
 theorem theorem2_fpt_bound (R : FptChartSpec) {C0 k0 : ℕ} (hC0 : 0 < C0) (hk0 : 0 < k0)
-    (hcost : ∀ (vars polys deg β : ℕ), deg ≤ 2 →
+    (hcost : ∀ (vars polys deg β : ℕ), deg ≤ 2 * vars + 2 →
       R.renegar.Cost vars polys deg β ≤
         C0 * (β + 1) ^ k0 * (polys * (deg + 1) + 1) ^ (k0 * (vars + 1))) :
-    R.totalCost ≤ (8 * k0 + C0 + 2) *
-      (R.dims.ell + 2) ^ ((8 * k0 + C0 + 2) * (R.dims.ell + 1) ^ 2) *
+    R.totalCost ≤ (10 * k0 + C0 + 2) *
+      (R.dims.ell + 2) ^ ((10 * k0 + C0 + 2) * (R.dims.ell + 1) ^ 2) *
       (R.beta + 1) ^ k0 := by
   have hc := hcost (R.params 0 0).vars (R.params 0 0).polys (R.params 0 0).deg R.beta
-    R.params_deg_le_two
+    R.params_deg_le
   have hmain : R.totalCost ≤ 2 ^ R.dims.m' * (C0 * (R.beta + 1) ^ k0 *
       ((R.params 0 0).polys * ((R.params 0 0).deg + 1) + 1) ^
         (k0 * ((R.params 0 0).vars + 1))) :=
@@ -324,55 +333,60 @@ theorem theorem2_fpt_bound (R : FptChartSpec) {C0 k0 : ℕ} (hC0 : 0 < C0) (hk0 
     fpt_chart_count_le_pow R.dims.ell R.dims.m' R.dims.m'_le_two_ell
   have hB : ((R.params 0 0).polys * ((R.params 0 0).deg + 1) + 1) ^
         (k0 * ((R.params 0 0).vars + 1)) ≤
-      (R.dims.ell + 2) ^ (6 * k0 * (R.dims.ell + 1) ^ 2) :=
+      (R.dims.ell + 2) ^ (10 * k0 * (R.dims.ell + 1) ^ 2) :=
     fpt_cost_le_pow R.dims.ell (R.params 0 0).polys (R.params 0 0).deg
-      (R.params 0 0).vars k0 R.params_polys_le R.params_deg_le_two R.params_vars_le
+      (R.params 0 0).vars k0 R.params_polys_le
+      (by
+        have h1 := R.params_deg_le
+        have h2 := R.params_vars_le
+        nlinarith)
+      R.params_vars_le
   calc R.totalCost
       ≤ 2 ^ R.dims.m' * (C0 * (R.beta + 1) ^ k0 *
           ((R.params 0 0).polys * ((R.params 0 0).deg + 1) + 1) ^
             (k0 * ((R.params 0 0).vars + 1))) := hmain
     _ ≤ (R.dims.ell + 2) ^ (2 * (R.dims.ell + 1) ^ 2) *
-          (C0 * (R.beta + 1) ^ k0 * (R.dims.ell + 2) ^ (6 * k0 * (R.dims.ell + 1) ^ 2)) :=
+          (C0 * (R.beta + 1) ^ k0 * (R.dims.ell + 2) ^ (10 * k0 * (R.dims.ell + 1) ^ 2)) :=
         Nat.mul_le_mul hA (Nat.mul_le_mul_left _ hB)
     _ = C0 * (R.beta + 1) ^ k0 *
           ((R.dims.ell + 2) ^ (2 * (R.dims.ell + 1) ^ 2) *
-           (R.dims.ell + 2) ^ (6 * k0 * (R.dims.ell + 1) ^ 2)) := by ring
+           (R.dims.ell + 2) ^ (10 * k0 * (R.dims.ell + 1) ^ 2)) := by ring
     _ = C0 * (R.beta + 1) ^ k0 *
-          (R.dims.ell + 2) ^ ((6 * k0 + 2) * (R.dims.ell + 1) ^ 2) := by
+          (R.dims.ell + 2) ^ ((10 * k0 + 2) * (R.dims.ell + 1) ^ 2) := by
         rw [← pow_add]
         congr 1
         ring
-    _ ≤ (8 * k0 + C0 + 2) * (R.dims.ell + 2) ^
-          ((8 * k0 + C0 + 2) * (R.dims.ell + 1) ^ 2) * (R.beta + 1) ^ k0 := by
-        have h1 : C0 ≤ 8 * k0 + C0 + 2 := by omega
-        have h2 : (6 * k0 + 2) * (R.dims.ell + 1) ^ 2 ≤
-            (8 * k0 + C0 + 2) * (R.dims.ell + 1) ^ 2 :=
+    _ ≤ (10 * k0 + C0 + 2) * (R.dims.ell + 2) ^
+          ((10 * k0 + C0 + 2) * (R.dims.ell + 1) ^ 2) * (R.beta + 1) ^ k0 := by
+        have h1 : C0 ≤ 10 * k0 + C0 + 2 := by omega
+        have h2 : (10 * k0 + 2) * (R.dims.ell + 1) ^ 2 ≤
+            (10 * k0 + C0 + 2) * (R.dims.ell + 1) ^ 2 :=
           Nat.mul_le_mul_right _ (by omega)
-        have h3 : (R.dims.ell + 2) ^ ((6 * k0 + 2) * (R.dims.ell + 1) ^ 2) ≤
-            (R.dims.ell + 2) ^ ((8 * k0 + C0 + 2) * (R.dims.ell + 1) ^ 2) :=
+        have h3 : (R.dims.ell + 2) ^ ((10 * k0 + 2) * (R.dims.ell + 1) ^ 2) ≤
+            (R.dims.ell + 2) ^ ((10 * k0 + C0 + 2) * (R.dims.ell + 1) ^ 2) :=
           Nat.pow_le_pow_right (by omega) h2
         calc C0 * (R.beta + 1) ^ k0 *
-              (R.dims.ell + 2) ^ ((6 * k0 + 2) * (R.dims.ell + 1) ^ 2)
-            ≤ (8 * k0 + C0 + 2) * (R.beta + 1) ^ k0 *
-                (R.dims.ell + 2) ^ ((8 * k0 + C0 + 2) * (R.dims.ell + 1) ^ 2) :=
+              (R.dims.ell + 2) ^ ((10 * k0 + 2) * (R.dims.ell + 1) ^ 2)
+            ≤ (10 * k0 + C0 + 2) * (R.beta + 1) ^ k0 *
+                (R.dims.ell + 2) ^ ((10 * k0 + C0 + 2) * (R.dims.ell + 1) ^ 2) :=
               Nat.mul_le_mul (Nat.mul_le_mul_right ((R.beta + 1) ^ k0) h1) h3
-          _ = (8 * k0 + C0 + 2) * (R.dims.ell + 2) ^
-                ((8 * k0 + C0 + 2) * (R.dims.ell + 1) ^ 2) * (R.beta + 1) ^ k0 := by ring
+          _ = (10 * k0 + C0 + 2) * (R.dims.ell + 2) ^
+                ((10 * k0 + C0 + 2) * (R.dims.ell + 1) ^ 2) * (R.beta + 1) ^ k0 := by ring
 
 /-- **Theorem 2 (FPT), existential form, with no side hypotheses.**
 
 `∃ C d, 0 < C ∧ 0 < d ∧ totalCost ≤ C * (ℓ+2)^(C(ℓ+1)^2) * (β+1)^d`,
-with the explicit witnesses `C = 8 * k0 + C0 + 2` and `d = k0`, where `C0, k0`
+with the explicit witnesses `C = 10 * k0 + C0 + 2` and `d = k0`, where `C0, k0`
 come from `R.renegar.cost_bound`. -/
 theorem theorem2_fpt_exists (R : FptChartSpec) :
     ∃ C d : ℕ, 0 < C ∧ 0 < d ∧
       R.totalCost ≤ C * (R.dims.ell + 2) ^ (C * (R.dims.ell + 1) ^ 2) * (R.beta + 1) ^ d := by
   obtain ⟨C0, k0, hC0, hk0, hcost⟩ := R.renegar.cost_bound
-  exact ⟨8 * k0 + C0 + 2, k0, by omega, hk0, theorem2_fpt_bound R hC0 hk0 hcost⟩
+  exact ⟨10 * k0 + C0 + 2, k0, by omega, hk0, theorem2_fpt_bound R hC0 hk0 hcost⟩
 
 /-- **Theorem 2 (FPT), conditional on `FptChartSpec`** (the requested statement).
 
-Witnesses: `C = 8 * k0 + C0 + 2`, `d = k0`.
+Witnesses: `C = 10 * k0 + C0 + 2`, `d = k0`.
 
 The hypotheses `1 ≤ ℓ` and `1 ≤ β` are part of the requested statement; the
 proof does **not** use them — see `theorem2_fpt_conditional_unconditional`. -/
@@ -411,7 +425,7 @@ def fptChartSpecInstance : FptChartSpec where
   params := fun _ _ => ⟨0, 0, 0⟩
   beta := 1
   totalCost := 2 ^ fptDimsInstance.m'
-  params_deg_le_two := by norm_num
+  params_deg_le := by norm_num
   params_vars_le := by norm_num [fptDimsInstance]
   params_polys_le := by norm_num [fptDimsInstance]
   total_le := by norm_num [fptChartCount, fptDimsInstance, constRenegarBackend]

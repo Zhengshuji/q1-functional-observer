@@ -14,7 +14,7 @@ The four entry points and their separate jobs:
 
 ## `Q1Paper/PaperI/` — Paper I modules (`namespace Q1Paper.PaperI.*`)
 
-75 files, 789 theorems, 163 definitions/structures.
+75 files, 790 theorems, 163 definitions/structures.
 
 | file | thm | def | first declarations | header summary |
 |---|---:|---:|---|---|
@@ -60,7 +60,7 @@ The four entry points and their separate jobs:
 | `FibreSum.lean` | 2 | 0 | `sum_comp_eq_card_smul_sum`, `sum_sign_mul_sq_eq_card_smul_sum` |  |
 | `FinReindex.lean` | 5 | 1 | `finSumFinZero`, `finSumFinZero_apply_inl`, `finSumFinZero_symm_apply`, `rank_reindex_finSumFinZero`, … | Two independent "last mile" tools for the `r = 0` case of the `DEC` statements. |
 | `FptCore.lean` | 9 | 1 | `FptDimensions`, `fpt_omega_le_two_ell`, `fpt_m`, `fpt_ell_le_kappa`, … | The Renegar-free core of the FPT theorem (Paper I). |
-| `FptSpec.lean` | 20 | 6 | `RenegarBackend`, `one_le_constCost`, `constRenegarBackend`, `fptBackendInhabited`, … | The FPT analogue of `PaperI/RenegarParams.lean`, with the fixed-degree lesson applied.** |
+| `FptSpec.lean` | 21 | 6 | `RenegarBackend`, `one_le_constCost`, `constRenegarBackend`, `fptBackendInhabited`, … | The FPT analogue of `PaperI/RenegarParams.lean`, with the fixed-degree lesson applied.** |
 | `Gram.lean` | 4 | 0 | `rowSpace_eq_range_transpose`, `range_transpose_mul_self`, `mem_range_transpose_iff_exists_gram`, `gram_certificate` | The Gram step of Paper I, Claim 11: for a real matrix `Z` and a vector `e0`, |
 | `GramCert.lean` | 2 | 0 | `gram_solvable_iff_smul`, `gram_certificate_iff_subset` | D1 step 5: certificate equivalence.  If two Gram matrices differ by a nonzero |
 | `GramCoefficients.lean` | 3 | 2 | `eval_eq_sum_fin_coeff`, `minorCoeff`, `coeffGram`, `gramKernelEval_eq_coeff_sum`, … | Section III-D, layer 3: the coefficient identity.  For a polynomial matrix |

@@ -103,7 +103,10 @@ Claims 1–16, Theorem 5, the `r = 0` reduction of Proposition 4, and the bit-co
 Claims 19 and 21. The axiom audit reports **418** checked declarations, all depending only on
 `propext`, `Classical.choice` and `Quot.sound`. It also verifies **conditional** complexity bounds
 for Theorems 1 and 2, relative to an abstract chart-cost specification whose instances are proved
-inhabited and whose exponents are explicit.
+inhabited and whose exponents are explicit. One detail worth recording: the FPT specification's
+degree hypothesis is `deg ≤ 2·vars + 2`, which the paper's chart system satisfies (its degree is
+`2ω` and its variable count is `2qω + 2ω ≥ ω`); relaxing it from the earlier `deg ≤ 2` cost a
+factor `(ℓ+2)²` in the base and moved the constant from `8k₀+C₀+2` to `10k₀+C₀+2`, still FPT.
 
 **What it does not establish.** It does **not** formalise
 
