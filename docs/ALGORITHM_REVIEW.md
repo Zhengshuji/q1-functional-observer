@@ -182,14 +182,21 @@ four instances and asserts the **soundness** direction only -- a `Psi` witness e
 coverage statement, not a contradiction.  Every `Psi` witness is reconstructed into an `L` and
 re-verified against the original `(5a)`/`(5b)` by `audit_independent`.
 
-Result at Round 12: **4/4 AGREE**.
+Result at **Round 16: 10/10 AGREE** (the earlier 4/4 was a smaller sample; the Round-13 range fix
+and the Round-14 short-circuit fix then made the comparison honest).
 
-| instance | decide.py | Algorithm 2 front end | agreement |
-|---|---|---|---|
-| shift, `C = e1`, `L0 = [-1,-1,-1]`, `q = 2` | feasible | 1 `Psi` witness, reconstructed and re-verified | agree |
-| shift, `C = e1`, `L0 = e1`, `q = 2` | feasible | 1 `Psi` witness (reconstruction returns None, see below) | agree |
-| `A = 0`, `C = e1`, `L0 = e2`, `q = 2` | infeasible | rejected by the step-6 test `W0 <= V` | agree |
-| shift, `C = e3`, `L0 = e1`, `q = 2` | infeasible | rejected by the step-6 test | agree |
+| # | instance | decide.py | Algorithm 2 | agreement |
+|---|---|---|---|---|
+| 1 | shift, `C = e1`, `L0 = [-1,-1,-1]`, `q = 2` | feasible | chart witness, reconstructed and re-verified | agree |
+| 2 | shift, `C = e1`, `L0 = e1`, `q = 2` | feasible | `W0 = 0` shortcut | agree |
+| 3 | `A = 0`, `C = e1`, `L0 = e2`, `q = 2` | infeasible | step-6 test | agree |
+| 4 | shift, `C = e3`, `L0 = e1`, `q = 2` | infeasible | step-6 test | agree |
+| 5 | shift, `C = e1`, `L0 = e2`, `q = 2` | feasible | chart witness, re-verified | agree |
+| 6 | `n = 4` shift, `C = e1`, `L0 = e1`, `q = 2` | feasible | `W0 = 0` shortcut | agree |
+| 7 | `n = 4` shift, `C = e1`, `L0 = e1`, `q = 3` (`r = 2`) | feasible | `W0 = 0` shortcut | agree |
+| 8 | `n = 4` shift, `C = e1`, `L0 = [-1,-1,-1,-1]`, `q = 2` | infeasible | step-6 test | agree |
+| 9 | `n = 4` shift, `C = e4`, `L0 = e1`, `q = 2` | infeasible | step-6 test | agree |
+| 10 | shift, `C = [e1; e2]`, `L0 = e1`, `q = 2` (`k = 0`) | feasible | `W0 = 0` shortcut | agree |
 
 ### Known limitations (not bugs, stated so they are not overclaimed)
 
@@ -200,7 +207,18 @@ Result at Round 12: **4/4 AGREE**.
 2. **The chart search is a grid.**  `Y` runs over `{-1, 0, 1}` only, so "no witness" is never
    turned into "infeasible".  A complete implementation needs an exact real-feasibility oracle for
    `Psi`; that is the same boundary as Algorithm 1's `unknown`.
-3. **`t` is capped at 2** in the test's chart enumeration (the paper allows `min(r, 2*ell)`).
+3. **The chart grid is `{-1, 0, 1}`** and `t` runs to `min(m', r, 2 ell)` as the paper prescribes.
+   "No grid witness" is never turned into "infeasible": `decide_fpt` returns `unknown`, which is
+   the same boundary as Algorithm 1's `unknown`.
+
+### What "complete" does and does not mean here
+
+`fpt.decide_fpt` implements the paper's control flow -- the `r = 0` delegation, the `W0 <= V`
+test, the `W0 = 0` shortcut, and the `(t, J, omega)` loop over `Psi` -- and it agrees with
+Algorithm 1 on all ten instances tried.  It is **not** a decision procedure: the chart grid is
+finite and there is no real-feasibility oracle, so an instance whose witness is not on the grid is
+reported `unknown`.  Closing that requires a real-algebraic feasibility oracle, which is a
+research-grade component and is not claimed.
 
 With these caveats the front end is consistent with Algorithm 1 on every instance tried, and it
 reproduces Algorithm 1's witness exactly on the first one.
