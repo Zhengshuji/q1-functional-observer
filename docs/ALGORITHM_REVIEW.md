@@ -154,5 +154,23 @@ gap; (b) the paper's `H` is meant transposed, which would swap rows and columns;
 paper's setting `(5a)` is equivalent to the column condition, which needs `H` square or `B`
 invertible -- false for the witness, where `H` is `2 x 1`.
 
-**Consequence.** Until (a)/(b)/(c) is settled, the Algorithm 2 front end must not be presented as
-reproducing Algorithm 1's verdicts, and the repository must not claim Algorithm 2 is implemented.
+**RETRACTED (Round 10).** The discrepancy above was **my own two implementation bugs**, not a gap
+in the paper.  Both were found by running the front end against the witness:
+
+1. `[H;G]` is **vertical** stacking -- the paper writes `[P;M]` with a semicolon for that (cf.
+   Claim 1).  I had concatenated the rows pairwise, i.e. horizontally, which turns
+   `e_{omega+1}([H;G][H;G]^T) = 0` into a statement about the pair-space rank instead of the
+   stacked-column rank.
+2. `E_0` must be the **actual rows `L0 M`**, not a normalised basis of their span.  A normalised
+   basis differs by a scalar, so pinning `L[0..r0] = L0` became inconsistent with `L M = [H G]`
+   and `reconstruct_L` returned `None` for every chart point.
+
+After both fixes the front end **reproduces Algorithm 1's witness exactly**:
+`L = [[-1,-1,-1],[0,0,1]]` from the chart point `t=1, J=(0,)`, with `(5a)` and `(5b)` re-verified
+independently.  So Algorithm 2's item (i) is *not* stronger than `(5a)`, the row/column question
+above was a red herring, and the earlier conclusion ("must not be presented as reproducing
+Algorithm 1's verdicts") is **withdrawn**.
+
+**Lesson.**  A discrepancy between a paper and an implementation should be attributed to the
+implementation until both readings of the paper's own notation have been checked; here the
+semicolon in `[H;G]` was decisive and the `E_0` normalisation was a second, independent slip.

@@ -121,6 +121,11 @@ class FptData:
             self.T = _rowbasis([[self.M[i][j] for j in range(2 * self.k)] for i in range(self.n)])
             self.S = _rowbasis([[self.AN[i][j] for j in range(self.k)] for i in range(self.n)])
             self.W0 = _rowbasis(ai.mul(L0, self.M))
+            # E0 must be the ACTUAL rows L0 M, not a normalised basis of their span: the chart
+            # matrix's first s0 rows have to reproduce L0's rows so that reconstruct_L can pin
+            # L[0..r0] = L0.  (A normalised basis differs by a scalar, which made the pinning
+            # inconsistent -- found by debug_recon.py.)
+            self.W0rows = ai.mul(L0, self.M)
             self.SxS = pair_space_basis(self.S, self.k)
             self.V = intersect_rowspaces(self.T, self.SxS, 2 * self.k)
             self.s0 = len(self.W0)
@@ -260,7 +265,7 @@ def chart_blocks(ctx, J, Y):
     C = chart_matrix(J, Y, ctx.mprime)
     extra = [[sum(C[a][b] * EQ[b][c] for b in range(ctx.mprime)) for c in range(2 * k)]
              for a in range(len(J))]
-    Zch = [list(w) for w in ctx.W0] + extra
+    Zch = [list(w) for w in (ctx.W0rows if len(ctx.W0rows) == ctx.s0 else ctx.W0)] + extra
     H = [row[:k] for row in Zch]
     G = [row[k:] for row in Zch]
     return H, G
