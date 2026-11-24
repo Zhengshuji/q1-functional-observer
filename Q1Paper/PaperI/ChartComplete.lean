@@ -2,6 +2,8 @@ import Q1Paper.Q1RowSpace
 import Q1Paper.PaperI.Claims38
 import Q1Paper.PaperI.CompressionMatrix
 import Q1Paper.PaperI.RankFactorization
+import Q1Paper.Window
+import Q1Paper.PaperI.Claim11Final
 
 /-!
 # Chart completeness, step 1
@@ -86,5 +88,36 @@ theorem exists_chart_factorization {m k ω : ℕ} (H HA : Matrix (Fin m) (Fin k)
     have h2 : X.rank ≤ ω := by
       simpa using Matrix.rank_le_width (A := X)
     omega
+
+/-! ## Steps 4–5: the whole `eq:phi` point, from the two row-space conditions
+
+`claim11_iff_gram` supplies step 4 (`(5b)` gives the Gram certificate `x`), so with steps 1–3 done
+the five items of `eq:phi` can be produced in one go.  The statement below is the forward direction
+of the equivalence, at the level of the compressed pair `(H, H_A)`; tying `H = L N`,
+`H_A = L A N` to a feasible `L` is the remaining step. -/
+
+/-- **Chart completeness, steps 4–5.**  If `rank H = ω ≥ 1`, `row(H_A) ≤ row(H)` and the pencil
+`λH − H_A` has rank `ω` at every complex `λ`, then there are `X`, `B`, `G` and `x` with
+
+  `rank X = ω`,  `X * B = H`,  `G * B = H_A`,  `Zᵀ Z x = e₀`,
+
+where `Z` is the window matrix of the maximal minors of `λH − H_A`.  These are items (i), (iii),
+(iv) and (v) of `eq:phi`; item (ii) is the rank-consistency system, carried by
+`claim8_rank_consistency`. -/
+theorem exists_phi_point {q k ω : ℕ} (H HA : Matrix (Fin q) (Fin k) ℝ)
+    (hω : 1 ≤ ω) (hωr : H.rank = ω)
+    (h5a : Q1Subspace.rowSpace HA ≤ Q1Subspace.rowSpace H)
+    (h5b : ∀ z : ℂ, (z • H.map (algebraMap ℝ ℂ) - HA.map (algebraMap ℝ ℂ)).rank = ω) :
+    ∃ (X : Matrix (Fin q) (Fin ω) ℝ) (B : Matrix (Fin ω) (Fin k) ℝ)
+      (G : Matrix (Fin q) (Fin ω) ℝ) (x : Fin (2 * ω) → ℝ),
+      X.rank = ω ∧ X * B = H ∧ G * B = HA ∧
+      Matrix.mulVec
+        (Matrix.transpose (windowMatrix (@minorFamily q k ω H HA) ω) *
+          windowMatrix (@minorFamily q k ω H HA) ω) x =
+        windowOne (K := ℝ) ω := by
+  obtain ⟨F, hF⟩ := exists_factor_of_rowSpace_le H HA h5a
+  obtain ⟨X, B, G, XL, hXB, hGB, hXL, hXrank⟩ := exists_chart_factorization H HA hωr h5a
+  obtain ⟨x, hx⟩ := (claim11_iff_gram (q := q) (k := k) (ω := ω) H HA hω hωr ⟨F, hF⟩).mp h5b
+  exact ⟨X, B, G, x, hXrank, hXB, hGB, hx⟩
 
 end Q1Paper.ScratchChartComplete
