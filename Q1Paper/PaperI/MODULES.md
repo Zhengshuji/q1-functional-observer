@@ -14,7 +14,7 @@ The four entry points and their separate jobs:
 
 ## `Q1Paper/PaperI/` — Paper I modules (`namespace Q1Paper.PaperI.*`)
 
-75 files, 787 theorems, 163 definitions/structures.
+75 files, 789 theorems, 163 definitions/structures.
 
 | file | thm | def | first declarations | header summary |
 |---|---:|---:|---|---|
@@ -36,7 +36,7 @@ The four entry points and their separate jobs:
 | `Claim14.lean` | 15 | 6 | `diffMap`, `diffMap_apply`, `K0`, `mem_K0_iff`, … | Core of Claim 14 of Paper I: the intersection `V = T ∩ S` as the image of the |
 | `Claim14Basis.lean` | 21 | 4 | `exists_basis_matrix_of_submodule_fintype`, `rowSpace_transpose_eq_range`, `exists_rowBasis_of_submodule`, `rowSpace_mul_le`, … | Chart data of Claim 14 (`clm:chartdata`) of Paper I, assembled from the pieces |
 | `Claim15.lean` | 14 | 0 | `bitLenRat_le_bitLenMat`, `cols_le_inputLen`, `rows_le_inputLen`, `inputLen_le_of_entry_bound`, … | Claim 15 of Paper I, **first milestone**: the three *composed* objects, with a |
-| `Claim15iv.lean` | 25 | 0 | `bitLenInt_mul_le`, `bitLenInt_add_le`, `bitLenInt_sub_le`, `abs_lt_two_pow_of_bitLenInt_le`, … | Claim 15(iv) of the paper: the **arithmetic skeleton** of the bit-length bound |
+| `Claim15iv.lean` | 27 | 0 | `bitLenInt_mul_le`, `bitLenInt_add_le`, `bitLenInt_sub_le`, `abs_lt_two_pow_of_bitLenInt_le`, … | Claim 15(iv) of the paper: the **arithmetic skeleton** of the bit-length bound |
 | `Claim16.lean` | 22 | 1 | `coeffM`, `coeffM_add`, `coeffM_sub`, `coeffM_smul_X_succ`, … | Claim 16 of the paper (`lem:zero`, the "zero-free-row" case). |
 | `Claim4Converse.lean` | 2 | 0 | `claim4_converse`, `claim4_converse_zero` | The **converse** of Claim 4 (`lem:sandwich`) of Paper I. |
 | `Claim8Ej.lean` | 18 | 5 | `rowBlock`, `gramBlock`, `elemSymm`, `det_mul_transpose_self_eq_sum_sq`, … | The algebraic core of Claim 8's disjunction, with no spectral theorem.** |

@@ -56,7 +56,7 @@ cd paper && pdflatex paper_I_dec.tex && pdflatex paper_I_dec.tex
 
 ## What is kernel-checked
 
-`Q1Paper/PaperI/Audit.lean` prints the axioms of 416 declarations; the accepted set is
+`Q1Paper/PaperI/Audit.lean` prints the axioms of 418 declarations; the accepted set is
 exactly `propext`, `Classical.choice`, `Quot.sound` (checked by
 `scripts/check_paperI_axioms.py`, which fails on anything else, including `sorryAx`).
 There is no `sorry`, no `admit` and no custom axiom in the tree.
@@ -66,8 +66,12 @@ row-pair, sandwich, W-condition, structural, monotonicity and rank-consistency s
 (Claims 3-8), including the *converse* of the sandwich (`claim4_converse`: every subspace of
 the sandwich of dimension at most dim W0 + r is realised by some R); the Bezout/window chain,
 the Gram certificate and the full-column-rank pencil (Claims 9-12), including the square
-Cauchy-Binet expansion and the bridge between the injective-map and subset-indexed minor
-families; rational bases and annihilators with the paper's explicit constant (Claim 13); the
+Cauchy-Binet expansion, and the *ingredients* of the bridge between the injective-map and the
+subset-indexed minor families — the fibre count `card_fibre_imageFin` and the sign relation
+`windowRow_inj_eq_sign_mul`; the aggregation step that would identify the two families' Gram
+matrices is not a single Lean theorem (the paper's proof carries it, and the paper's evidence
+table says the same); rational bases and annihilators with the paper's explicit constant
+(Claim 13); the
 intersection V = T cap (S x S) as the image of the equalizer, the chart bases and E_Q (Claim 14);
 a bounded rational Bezout certificate that closes the (i) <=> (ii) <=> (iii) => (iv) chain with
 the degree bound (Claim 16); the rank factorization with explicit left and right inverses; the
@@ -96,7 +100,7 @@ formalized.
 
 **What the Lean artifact establishes.** It kernel-checks the formalised statements covering
 Claims 1–16, Theorem 5, the `r = 0` reduction of Proposition 4, and the bit-complexity results of
-Claims 19 and 21. The axiom audit reports **416** checked declarations, all depending only on
+Claims 19 and 21. The axiom audit reports **418** checked declarations, all depending only on
 `propext`, `Classical.choice` and `Quot.sound`. It also verifies **conditional** complexity bounds
 for Theorems 1 and 2, relative to an abstract chart-cost specification whose instances are proved
 inhabited and whose exponents are explicit.

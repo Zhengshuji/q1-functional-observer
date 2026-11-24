@@ -194,6 +194,23 @@ theorem minorBound_22 {n L ω : ℕ} (hω : ω ≤ n) (hn : 1 ≤ n) (hL : n ≤
   have h2 : n * n + 1 ≤ 4 * n ^ 3 * L := factorialSlot_le hn hL
   nlinarith
 
+/-- **The `20 → 22` step, i.e. the paper's own arithmetic.**  A `ω × ω` minor whose
+entries have bit length at most `20 n²L` (the `G`-block bound) is still at most
+`22 n³L`, because the `bitLenInt ω!` slot only needs `2 n³L` here: `20 n³L` for the
+`ω` entries plus `2 n³L` for the factorial.  This is the step used in the proof of
+Claim~\ref{app:zero}; `minorBound_24_of_twenty` below is the *looser* `4 n³L` slot
+that the earlier formalisation had, which is why the chain appeared to need `24`. -/
+theorem minorBound_22_of_twenty {n L ω : ℕ} (hω : ω ≤ n) (hn : 1 ≤ n) (hL : n ≤ L) :
+    ω * (20 * n ^ 2 * L) + (n * n + 1) ≤ 22 * n ^ 3 * L := by
+  have h1 : ω * (20 * n ^ 2 * L) ≤ 20 * (n ^ 3 * L) := by
+    calc ω * (20 * n ^ 2 * L) ≤ n * (20 * n ^ 2 * L) := Nat.mul_le_mul_right _ hω
+      _ = 20 * (n ^ 3 * L) := by ring
+  have hL1 : 1 ≤ L := le_trans hn hL
+  have hn2 : n * n ≤ n ^ 3 := by nlinarith
+  have hLm : n ^ 3 ≤ n ^ 3 * L := by nlinarith
+  have h3 : n * n + 1 ≤ 2 * (n ^ 3 * L) := by nlinarith
+  nlinarith
+
 /-- **The same step with the `G`-block constant `20`.**  This is *not* used in
 the chain; it records that the `20 n²L` entry bound alone gives `24 n³L`, not
 `22 n³L`.  Hence the constant `22` of `hZ` belongs to the `18`-bit `X` block. -/
@@ -283,6 +300,29 @@ theorem bMinor_bitLen_le_22 {N n L ω : ℕ} (M : Matrix (Fin N) (Fin N) ℤ)
         _ ≤ n * n := Nat.mul_le_mul_right n hω
     nlinarith
   have hnum := minorBound_22 hω hn hL
+  nlinarith
+
+/-- **Link `X, G → Z` (maximal minors), with the `G`-block bound.**  A maximal minor of
+`λX − G` has entries drawn from BOTH blocks, so the relevant entry bound is
+`max(18, 20) n²L = 20 n²L`; then every `ω × ω` minor still has bit length at most
+`22 n³L`, which is the constant the paper uses in Claim~\ref{app:zero}. -/
+theorem bMinor_bitLen_le_22_of_twenty {N n L ω : ℕ} (M : Matrix (Fin N) (Fin N) ℤ)
+    (r c : Fin ω → Fin N) (hω : ω ≤ n) (hn : 1 ≤ n) (hL : n ≤ L)
+    (hM : ∀ i j, bitLenInt (M i j) ≤ 20 * n ^ 2 * L) :
+    bitLenInt (bMinor M r c) ≤ 22 * n ^ 3 * L := by
+  have hb : ∀ i j, |M i j| < (2 : ℤ) ^ (20 * n ^ 2 * L) :=
+    fun i j => abs_lt_two_pow_of_bitLenInt_le (hM i j)
+  have hminor := bitLenInt_bMinor_le M r c hb
+  have hsize : ω.size ≤ n := by
+    calc ω.size ≤ n.size := Nat.size_le_size hω
+      _ ≤ n := nat_size_le_self n
+  have hfac : bitLenInt (ω.factorial : ℤ) ≤ n * n + 1 := by
+    have h1 := bitLenInt_factorial_le ω
+    have h2 : ω * ω.size ≤ n * n := by
+      calc ω * ω.size ≤ ω * n := Nat.mul_le_mul_left _ hsize
+        _ ≤ n * n := Nat.mul_le_mul_right n hω
+    nlinarith
+  have hnum := minorBound_22_of_twenty hω hn hL
   nlinarith
 
 /-- **Link `Z → S` (Gram entries).**  If every entry of the `2ω × 2ω` integer
