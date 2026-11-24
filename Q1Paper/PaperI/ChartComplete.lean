@@ -167,4 +167,27 @@ theorem raw_of_compressed {p q n k : Type*} [Fintype p] [Fintype q] [Fintype n] 
   ⟨(Q1Paper.PaperI.rawAlgebraic_iff_rowSpace C (C * A) L (L * A) N hN).mpr h5a,
     (Q1Paper.PaperI.rawSpectral_iff_compressed C (C * A) L (L * A) N hN).mpr h5b⟩
 
+/-! ## The backward direction, step 3: producing `L` from a chart point
+
+`L` is built row by row: the `i`-th row `u_i` must satisfy `u_i N = H_i` and `u_i (A N) = H_A,i`.
+Such a `u_i` exists exactly when the pair `(H_i, H_A,i)` lies in the image of
+`u ↦ (u N, u A N)`, which is the row space of the pair matrix `[N  A N]` — precisely the
+defining property of the chart's `T`. -/
+
+/-- **Chart completeness, backward step 3.**  If every pair `(H i, H_A i)` is of the form
+`(u N, u (A N))`, then there is a single `L` with `L * N = H` and `L * (A * N) = H_A`. -/
+theorem exists_L_of_pairs {q n k : ℕ}
+    (N AN : Matrix (Fin n) (Fin k) K) (H HA : Matrix (Fin q) (Fin k) K)
+    (h : ∀ i : Fin q, ∃ u : Fin n → K,
+        Matrix.vecMul u N = H i ∧ Matrix.vecMul u AN = HA i) :
+    ∃ L : Matrix (Fin q) (Fin n) K, L * N = H ∧ L * AN = HA := by
+  choose u hu using h
+  refine ⟨Matrix.of (fun i j => u i j), ?_, ?_⟩
+  · ext i l
+    rw [Matrix.mul_apply]
+    exact congrFun (hu i).1 l
+  · ext i l
+    rw [Matrix.mul_apply]
+    exact congrFun (hu i).2 l
+
 end Q1Paper.ScratchChartComplete

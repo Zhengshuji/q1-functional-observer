@@ -475,3 +475,4 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.ScratchChartComplete.exists_phi_point
 #print axioms Q1Paper.ScratchChartComplete.rowSpace_le_of_chart_factorization
 #print axioms Q1Paper.ScratchChartComplete.raw_of_compressed
+#print axioms Q1Paper.ScratchChartComplete.exists_L_of_pairs
