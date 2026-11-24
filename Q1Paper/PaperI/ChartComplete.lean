@@ -268,4 +268,33 @@ theorem factor_of_phiPoint {q k ω : ℕ} {H HA : Matrix (Fin q) (Fin k) ℝ}
     _ = (P.G * P.XL) * (P.X * P.B) := h1.symm
     _ = (P.G * P.XL) * H := by rw [P.hH]
 
+/-- **The backward direction's final step.**  If `ω = rank (L N)` and a `PhiPoint` is given for the
+compressed data of `L`, then `L` satisfies the paper's `(5a)` and `(5b)`.
+
+The one subtlety: `claim11_iff_gram` states (5b) over the **complex** numbers (the paper's
+condition, cf. the complex-λ convention), while `compressedSpectral` quantifies over the base field.
+The implication goes the easy way — specialise `z = ↑λ` and use that complexification preserves the
+rank (`rank_map_ofReal`). -/
+theorem feasible_of_phiPoint {p q n k ω : ℕ}
+    (C : Matrix (Fin p) (Fin n) ℝ) (A : Matrix (Fin n) (Fin n) ℝ)
+    (L : Matrix (Fin q) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℝ)
+    (hN : N.mulVecLin.range = (Matrix.fromRows (C * A) C).mulVecLin.ker)
+    (hω : 1 ≤ ω) (hHr : (L * N).rank = ω) (P : PhiPoint (L * N) (L * A * N) ω) :
+    rawAlgebraic C (C * A) L (L * A) ∧ rawSpectral C (C * A) L (L * A) := by
+  have h5a : Q1Subspace.rowSpace (L * A * N) ≤ Q1Subspace.rowSpace (L * N) :=
+    rowSpace_le_of_phiPoint P
+  have h5b : compressedSpectral (L * N) (L * A * N) := by
+    intro lam
+    have hg := (Q1Paper.PaperI.claim11_iff_gram (q := q) (k := k) (ω := ω)
+      (L * N) (L * A * N) hω hHr (factor_of_phiPoint P)).mpr ⟨P.x, P.gram⟩
+    have hspec := hg (algebraMap ℝ ℂ lam)
+    have key : (lam • (L * N) - L * A * N).map (algebraMap ℝ ℂ) =
+        algebraMap ℝ ℂ lam • (L * N).map (algebraMap ℝ ℂ) -
+          (L * A * N).map (algebraMap ℝ ℂ) := by
+      ext i j
+      simp [Matrix.map_apply, Matrix.sub_apply, Matrix.smul_apply, map_sub, map_mul]
+    rw [← key, rank_map_ofReal] at hspec
+    rw [hspec, hHr]
+  exact raw_of_compressed C A L N hN h5a h5b
+
 end Q1Paper.ScratchChartComplete
