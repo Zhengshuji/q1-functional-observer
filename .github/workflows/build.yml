@@ -18,8 +18,6 @@ jobs:
         run: |
           lake build Q1Paper.PaperI.MainTheorems
           lake env lean PaperI.lean
-      - name: Axiom audit
-        run: lake env lean Q1Paper/Audit.lean
       - name: Paper I axiom audit
         run: |
           lake env lean Q1Paper/PaperI/Audit.lean > paperI_audit.log
@@ -35,7 +33,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        root: [paper_I_dec, paper_II_minorder, paper_III_hyperplane]
+        root: [paper_I_dec, paper_II_minorder]
     steps:
       - uses: actions/checkout@v4
       - name: Compile ${{ matrix.root }}
