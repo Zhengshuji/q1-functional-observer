@@ -174,3 +174,33 @@ Algorithm 1's verdicts") is **withdrawn**.
 **Lesson.**  A discrepancy between a paper and an implementation should be attributed to the
 implementation until both readings of the paper's own notation have been checked; here the
 semicolon in `[H;G]` was decisive and the `E_0` normalisation was a second, independent slip.
+## Algorithm 2: current state (Round 12)
+
+`verification/test_fpt.py` compares the Algorithm 2 front end with `decide.py` (Algorithm 1) on
+four instances and asserts the **soundness** direction only -- a `Psi` witness exists implies
+`decide.py` does not say infeasible -- because the front end searches a finite grid and a miss is a
+coverage statement, not a contradiction.  Every `Psi` witness is reconstructed into an `L` and
+re-verified against the original `(5a)`/`(5b)` by `audit_independent`.
+
+Result at Round 12: **4/4 AGREE**.
+
+| instance | decide.py | Algorithm 2 front end | agreement |
+|---|---|---|---|
+| shift, `C = e1`, `L0 = [-1,-1,-1]`, `q = 2` | feasible | 1 `Psi` witness, reconstructed and re-verified | agree |
+| shift, `C = e1`, `L0 = e1`, `q = 2` | feasible | 1 `Psi` witness (reconstruction returns None, see below) | agree |
+| `A = 0`, `C = e1`, `L0 = e2`, `q = 2` | infeasible | rejected by the step-6 test `W0 <= V` | agree |
+| shift, `C = e3`, `L0 = e1`, `q = 2` | infeasible | rejected by the step-6 test | agree |
+
+### Known limitations (not bugs, stated so they are not overclaimed)
+
+1. **Reconstruction can fail on a chart point.**  On the second instance a `Psi` witness exists
+   but `reconstruct_L` returns `None`: pinning `L[0..r0] = L0` is not satisfiable at that chart
+   point.  Both algorithms say feasible, so this is not a contradiction; the reconstruction needs
+   more freedom (or a different representative of the `E0` rows).
+2. **The chart search is a grid.**  `Y` runs over `{-1, 0, 1}` only, so "no witness" is never
+   turned into "infeasible".  A complete implementation needs an exact real-feasibility oracle for
+   `Psi`; that is the same boundary as Algorithm 1's `unknown`.
+3. **`t` is capped at 2** in the test's chart enumeration (the paper allows `min(r, 2*ell)`).
+
+With these caveats the front end is consistent with Algorithm 1 on every instance tried, and it
+reproduces Algorithm 1's witness exactly on the first one.
