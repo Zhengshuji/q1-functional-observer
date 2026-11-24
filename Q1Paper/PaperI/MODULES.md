@@ -14,7 +14,7 @@ The four entry points and their separate jobs:
 
 ## `Q1Paper/PaperI/` — Paper I modules (`namespace Q1Paper.PaperI.*`)
 
-76 files, 794 theorems, 163 definitions/structures.
+76 files, 795 theorems, 163 definitions/structures.
 
 | file | thm | def | first declarations | header summary |
 |---|---:|---:|---|---|
@@ -29,7 +29,7 @@ The four entry points and their separate jobs:
 | `BitLenMatMul.lean` | 31 | 1 | `bitLenMatAny`, `bitLenMatAny_eq_bitLenMat`, `mat_den_size_le_bitLenMatAny`, `mat_bitLenInt_num_le_bitLenMatAny`, … | Scratch module: **submultiplicativity (and additivity) of `bitLenMat`**, the missing |
 | `C16Gcd.lean` | 16 | 3 | `pencilMinors`, `FamilyGcdIsConst`, `NoCommonComplexRoot`, `exists_ne_zero_of_gcd_isConst`, … | Claim 16 (`lem:zero`) of Paper I, part (iii), in its **gcd form**, and its link to the |
 | `CauchyBinet.lean` | 12 | 1 | `plucker`, `plucker_apply`, `_root_`, `pairingDual_map_toDual_basis`, … | Port of the square Cauchy-Binet identity. |
-| `ChartComplete.lean` | 4 | 0 | `row_LA_mul_le_row_L_mul`, `exists_chart_factorization`, `exists_phi_point`, `rowSpace_le_of_chart_factorization` |  |
+| `ChartComplete.lean` | 5 | 0 | `row_LA_mul_le_row_L_mul`, `exists_chart_factorization`, `exists_phi_point`, `rowSpace_le_of_chart_factorization`, … |  |
 | `ChartCount.lean` | 5 | 0 | `le_two_pow`, `chart_count_le`, `chart_count_le_pow`, `exp_compose`, … | Chart-count arithmetic for Theorem 1.** |
 | `Claim11.lean` | 5 | 1 | `windowOne`, `windowOne_eq_toFn`, `exists_bezout_iff_mem_rowSpace_window`, `mem_rowSpace_window_of_no_common_complex_root`, … | Claim 11 of Paper I, the Bézout/window half.  For `f : ι → K[X]` of degree at |
 | `Claim11Final.lean` | 6 | 2 | `maximalMinor_map`, `natDegree_det_le`, `pencil_natDegree_le`, `natDegree_maximalMinor_le`, … | The final assembly of Claim 11: |

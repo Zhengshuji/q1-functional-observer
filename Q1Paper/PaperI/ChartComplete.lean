@@ -146,4 +146,25 @@ theorem rowSpace_le_of_chart_factorization {m k ω : ℕ}
   rw [h]
   exact rowSpace_mul_le _ _
 
+/-! ## The backward direction, step 2: compressed conditions imply the original ones
+
+Both bridges in `CompressionMatrix` are **biconditional**:
+`rawAlgebraic_iff_rowSpace` and `rawSpectral_iff_compressed`.  So for any `L` whose compressed
+data are `H = L N` and `H_A = L A N`, the two compressed conditions give the paper's `(5a)` and
+`(5b)`.  This isolates the only remaining step of the backward direction: producing such an `L`
+from a chart point. -/
+
+/-- **Compressed conditions imply the original ones.**  With `N` spanning `ker[C; CA]`, the
+compressed `(5a)` (a row-space inclusion) and the compressed `(5b)` (constant pencil rank) give
+`rawAlgebraic` and `rawSpectral` for `L`, i.e. the paper's `(5a)` and `(5b)`. -/
+theorem raw_of_compressed {p q n k : Type*} [Fintype p] [Fintype q] [Fintype n] [Fintype k]
+    (C : Matrix p n K) (A : Matrix n n K)
+    (L : Matrix q n K) (N : Matrix n k K)
+    (hN : N.mulVecLin.range = (Matrix.fromRows (C * A) C).mulVecLin.ker)
+    (h5a : Q1Subspace.rowSpace (L * A * N) ≤ Q1Subspace.rowSpace (L * N))
+    (h5b : compressedSpectral (L * N) (L * A * N)) :
+    rawAlgebraic C (C * A) L (L * A) ∧ rawSpectral C (C * A) L (L * A) :=
+  ⟨(Q1Paper.PaperI.rawAlgebraic_iff_rowSpace C (C * A) L (L * A) N hN).mpr h5a,
+    (Q1Paper.PaperI.rawSpectral_iff_compressed C (C * A) L (L * A) N hN).mpr h5b⟩
+
 end Q1Paper.ScratchChartComplete
