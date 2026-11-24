@@ -1092,11 +1092,17 @@ def reconstruct_L(ctx, point, J):
 
 
 def verify_feasible(ctx, L, tag):
-    """Re-verify L against (5a)/(5b) with the *independent* implementation."""
+    """Re-verify L against (5a)/(5b) with the *independent* implementation.
+
+    Explicit raises, not asserts: `python -O` strips asserts, and this check is the only thing
+    standing between a `feasible` verdict and a wrong one.  (Raised by an external review.)
+    """
     ok5a = ai.cond_5a_orig(ctx.A, ctx.C, L)
     ok5b = ai.cond_5b_orig(ctx.A, ctx.C, L)
-    assert ok5a, f"{tag}: the returned L fails (5a) -- implementation bug"
-    assert ok5b, f"{tag}: the returned L fails (5b) -- implementation bug"
+    if not ok5a:
+        raise AssertionError(f"{tag}: the returned L fails (5a) -- implementation bug")
+    if not ok5b:
+        raise AssertionError(f"{tag}: the returned L fails (5b) -- implementation bug")
     return ok5a and ok5b
 
 

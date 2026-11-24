@@ -40,8 +40,10 @@ at lines 127–160.
 * `R2` `ω > ℓ = rank(AN)`: sound, and the argument is worth recording — (5b) **at `λ = 0`**
   gives `rank H_A = ω`, while `H_A = L A N` gives `rank H_A ≤ ℓ`.  The `∀λ` hypothesis is used
   at one specific point.
-* `R5` `ω = q`: `X` is `ω×ω` and invertible, so `λX − G = X(λI − GX⁻¹)`, and the square matrix
-  `GX⁻¹` has a complex eigenvalue `λ₀` where the rank drops.  Sound.
+* `R5` `ω = q`: `X` is `ω×ω` and invertible, so `λX − G = X(λI − X⁻¹G)`, and the square matrix
+  `X⁻¹G` has a complex eigenvalue `λ₀` where the rank drops.  Sound.  (An earlier version of
+  this note wrote `X(λI − GX⁻¹)`, which is `λX − XGX⁻¹`, not `λX − G`; the conclusion is
+  unchanged but the factorization was wrong.  Found by an external review.)
 * `R6` `ω+1 > dim T` or `> dim W₀ + r`: Claim 6 gives `dim W ≥ ω+1`, while `W ⊆ T` and
   `dim(W/W₀) ≤ r` give `dim W ≤ dim T` and `dim W ≤ dim W₀ + r`.  Sound.
 * `R3` fixed-`λ₀` refutation on the whole affine family `F`, by an exact polynomial identity test
