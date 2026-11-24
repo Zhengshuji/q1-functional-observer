@@ -168,6 +168,51 @@ def compare(H, G, omega, label):
     return same
 
 
+def gram_certificate(G):
+    """Solve G x = e_0 exactly; return x, or None when there is no solution."""
+    from decide_r0 import solve_exact
+
+    n = len(G)
+    e0 = [Fr(1)] + [Fr(0)] * (n - 1)
+    kind, payload = solve_exact([row[:] for row in G], e0)
+    return payload if kind == "yes" else None
+
+
+def pencil_has_common_root(H, G, omega):
+    """True iff the maximal minors of lam H - G share a common complex root.
+
+    Independent of the Gram: the gcd of the maximal-minor polynomials is a nonzero constant iff
+    there is no common root.
+    """
+    q, ell = len(H), len(H[0])
+    polys = []
+    for rows in itertools.combinations(range(q), omega):
+        for cols in itertools.combinations(range(ell), omega):
+            c = minor_coeffs(H, G, rows, cols)
+            if c:
+                polys.append(c)
+    if not polys:
+        return False
+    g = polys[0]
+    for p in polys[1:]:
+        g = ai.pgcd(g, p)
+        if ai.pconst_nonzero(g):
+            return False
+    return not ai.pconst_nonzero(g)
+
+
+def check_certificate_iff(H, G, omega, label):
+    """(ii) of Algorithm 2: Z^T Z x = e_0 is solvable  <=>  the pencil has no common root."""
+    gram = gram_from_K(K_cauchy_binet(H, G, omega), omega)
+    x = gram_certificate(gram)
+    solvable = x is not None
+    no_common_root = not pencil_has_common_root(H, G, omega)
+    if solvable != no_common_root:
+        print(f"  [{label}] omega={omega}: cert solvable={solvable} but "
+              f"no-common-root={no_common_root}")
+    return solvable == no_common_root
+
+
 def demo():
     cases = [
         ([[Fr(1), Fr(0)], [Fr(0), Fr(1)], [Fr(1), Fr(1)]],
@@ -180,6 +225,9 @@ def demo():
         good = compare(H, G, omega, label)
         print(f"[{label}] omega={omega}: K-compression {'==' if good else '!='} direct minors")
         ok &= good
+        cert = check_certificate_iff(H, G, omega, label)
+        print(f"[{label}] omega={omega}: Z^T Z x = e0 solvable <=> no common root: {cert}")
+        ok &= cert
     print("RESULT:", "PASS" if ok else "MISMATCH (reported, not hidden)")
     return 0 if ok else 1
 
