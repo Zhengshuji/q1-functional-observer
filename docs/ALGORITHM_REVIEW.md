@@ -71,11 +71,31 @@ practice unreachable, because `k = 0` makes `h0 = g0 = 0` and step 4 has already
 
 ## What was NOT checked
 
-* `eq:phi` item (v) and the Gram window construction (`gram_window`, `gram_certificate`);
-* `chart_linear_system` against Claim 8's `Mb = c`;
-* the body of `D1`;
-* `_search_omega`'s completeness (that it explores enough of the chart to justify "no witness");
-* the 1292-line file as a whole.
+* `_search_omega`'s completeness (whether it explores enough of the chart to justify "no
+  witness").  This does not affect soundness: an incomplete search produces `unknown`, never
+  `infeasible`.
+* the 1292-line file as a whole, line by line: the review is targeted at the parts that can
+  change a verdict (the five items of `eq:phi`, the refutations, the enumeration).
+
+## Round 9: `eq:phi` (v), and the cross-checks
+
+`evaluate_phi` closes with
+
+```
+x = gram_certificate(X, G)                        # build Z^T Z x = e0 exactly
+assert x is not None                              # (v) solvable
+assert cond5b_pencil(X, G, omega)                  # cross-check A: the compressed pencil
+assert pencil_constant_rank(H, H_A, omega)         # cross-check B: the actual (H, H_A)
+```
+
+so the chart point is checked three ways, and just before it the reconstructed `B` is asserted
+to generate `H` for every row (`"(ii) the reconstructed B does not generate H"`).  All of these
+are asserts: a wrong construction crashes the run instead of producing a wrong verdict.
+
+`chart_linear_system` was read against `eq:phi` (ii): unknowns are the non-pivot entries of `B`,
+the pivots are pinned to `B[t][J[t]] = 1` and `B[t][J[t']] = 0` (the chart normalisation of
+`sec:param`), the equations are (iii) for `i ≤ r0` (`2k` per row) and (iv) for `i > r0`
+(`2k − d0`).  This matches the paper item by item.
 
 ## Known limitation of the implementation itself
 
