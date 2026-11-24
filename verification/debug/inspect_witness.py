@@ -1,3 +1,9 @@
+import os
+import sys
+
+# these scripts live in verification/debug/ but import the modules one level up
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from fractions import Fraction as Fr
 
 import audit_independent as ai
