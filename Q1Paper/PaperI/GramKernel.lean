@@ -1,4 +1,8 @@
-/-
+
+import Q1Paper.PaperI.CauchyBinet
+import Q1Paper.PaperI.MinorRank
+
+/-!
 Q1Paper/PaperI/GramKernel.lean
 
 Section III-D, layers 1-2:
@@ -15,8 +19,6 @@ by applying the ported square Cauchy–Binet (`Matrix.det_mul_eq_sum_det_submatr
 to each fixed column set `J`.
 -/
 
-import Q1Paper.PaperI.CauchyBinet
-import Q1Paper.PaperI.MinorRank
 
 namespace Q1Paper.PaperI
 

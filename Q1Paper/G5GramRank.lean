@@ -1,4 +1,10 @@
-/-
+
+import Mathlib.Data.Matrix.ColumnRowPartitioned
+import Mathlib.Data.Real.Basic
+import Mathlib.LinearAlgebra.Matrix.Rank
+import Q1Paper.RankConsistency
+
+/-!
 Q1Paper/G5GramRank.lean
 
 Item 2 of the expert reply, first half: the augmented matrix `D = [M  c]` satisfies
@@ -6,10 +12,6 @@ Item 2 of the expert reply, first half: the augmented matrix `D = [M  c]` satisf
 criterion to the augmented-matrix rank test of the second half.
 -/
 
-import Mathlib.Data.Matrix.ColumnRowPartitioned
-import Mathlib.Data.Real.Basic
-import Mathlib.LinearAlgebra.Matrix.Rank
-import Q1Paper.RankConsistency
 
 open Matrix
 

@@ -10,111 +10,111 @@ docstring so a reader can see the author's stated purpose.
 
 | module | decls | audited | paper items | stated purpose |
 |---|---|---|---|---|
-| `Q1Paper/Basic.lean` | 6 | 2 | — | **(no module docstring)** |
-| `Q1Paper/BezoutDeg.lean` | 4 | 0 | — | **(no module docstring)** |
-| `Q1Paper/BezoutReal.lean` | 19 | 2 | Claim 9 | **(no module docstring)** |
+| `Q1Paper/Basic.lean` | 6 | 2 | — | Abstract linear-algebra core for the paper. |
+| `Q1Paper/BezoutDeg.lean` | 4 | 0 | — | Towards the degree-bounded Bezout lemma of the paper. |
+| `Q1Paper/BezoutReal.lean` | 19 | 2 | Claim 9 | The real-coefficient Bézout lemma of Paper I (Claim 9, labels `lem:bezout`, `sec:bezout`). |
 | `Q1Paper/BoundLower.lean` | 5 | 1 | — | second projection is contained in its first (`pi2 W ≤ pi1 W`, the paper's algebraic condition). |
-| `Q1Paper/Compression.lean` | 4 | 1 | — | **(no module docstring)** |
-| `Q1Paper/DegreeBounds.lean` | 6 | 2 | — | **(no module docstring)** |
-| `Q1Paper/FPT.lean` | 4 | 0 | — | **(no module docstring)** |
-| `Q1Paper/FixedOrder.lean` | 1 | 1 | — | **(no module docstring)** |
-| `Q1Paper/FreeRows.lean` | 5 | 3 | — | **(no module docstring)** |
-| `Q1Paper/G2Assembly.lean` | 4 | 1 | — | **(no module docstring)** |
-| `Q1Paper/G3Adjugate.lean` | 4 | 0 | — | **(no module docstring)** |
-| `Q1Paper/G3Coeff.lean` | 8 | 2 | — | **(no module docstring)** |
-| `Q1Paper/G3LeftInverse.lean` | 5 | 2 | — | **(no module docstring)** |
-| `Q1Paper/G4RankIdentity.lean` | 4 | 2 | Claim 1 | **(no module docstring)** |
-| `Q1Paper/G5GramRank.lean` | 9 | 1 | — | **(no module docstring)** |
-| `Q1Paper/HyperplaneAvoid.lean` | 2 | 0 | — | **(no module docstring)** |
-| `Q1Paper/KappaObs.lean` | 11 | 2 | — | states invisible to both `N` and `AN`. |
-| `Q1Paper/Monotone.lean` | 2 | 1 | — | **(no module docstring)** |
-| `Q1Paper/MonotoneBlocks.lean` | 16 | 2 | — | `fromRows A₁ A₂ * X = fromRows (A₁ * X) (A₂ * X)`. |
-| `Q1Paper/PaperI/Audit.lean` | 0 | 0 | — | **(no module docstring)** |
-| `Q1Paper/PaperI/BareissAssemble.lean` | 25 | 7 | — | previous stage.  Out-of-range `l` yields the junk value `1`, which is never used. |
-| `Q1Paper/PaperI/BareissBase.lean` | 20 | 4 | — | `c`: the determinant of the corresponding submatrix. |
-| `Q1Paper/PaperI/BareissTableau.lean` | 21 | 5 | — | `{0, …, n-1}`.  It is junk (`0`) outside the range `k ≤ n`, which is never used below. |
-| `Q1Paper/PaperI/BasisExtraction.lean` | 2 | 2 | — | **(no module docstring)** |
-| `Q1Paper/PaperI/BezoutBounded.lean` | 14 | 4 | Claim 16 (iii)=>(iv) | `∑ i, g i * f i` is the linear expression `∑ i ∑ k, c i k * [k ≤ d] * (f i).coeff (d - k)`. |
-| `Q1Paper/PaperI/BitLen.lean` | 42 | 10 | — | `(Int.natAbs z).size`. |
-| `Q1Paper/PaperI/BitLenAdd.lean` | 8 | 7 | — | `gcd (q₁.num * q₂.den + q₂.num * q₁.den) (q₁.den * q₂.den)`. |
-| `Q1Paper/PaperI/BitLenMatMul.lean` | 32 | 7 | — | *definitionally* the same function, so nothing is lost. |
-| `Q1Paper/PaperI/C16Gcd.lean` | 19 | 10 | Claim 16 (i)-(iii) | `claim16_iii_implies_iv`). |
-| `Q1Paper/PaperI/CauchyBinet.lean` | 11 | 6 | — | **(no module docstring)** |
+| `Q1Paper/Compression.lean` | 4 | 1 | — | kernel-inclusion criterion on the invisible subspace K0. |
+| `Q1Paper/DegreeBounds.lean` | 6 | 2 | — | Degree estimates for determinants and adjugates over `K[X]` (G3b). |
+| `Q1Paper/FPT.lean` | 4 | 0 | — | (an injective pencil) and the zero-free-row parameter count. |
+| `Q1Paper/FixedOrder.lean` | 1 | 1 | — | H_A = G B for some unconstrained G. |
+| `Q1Paper/FreeRows.lean` | 5 | 3 | — | range of the pair map, and its dimension is the rank of [N; AN]. |
+| `Q1Paper/G2Assembly.lean` | 4 | 1 | — | * `isCoprime_of_no_common_root` and `exists_bezout_deg_lt` (BezoutDeg). |
+| `Q1Paper/G3Adjugate.lean` | 4 | 0 | — | where `E_I` is the row-selection matrix.  Then `S_I * Q = f_I • 1`. |
+| `Q1Paper/G3Coeff.lean` | 8 | 2 | — | The coefficient encoding of the polynomial left inverse (G3c, Lemma 6 (iv) ⟺ (v)). |
+| `Q1Paper/G3LeftInverse.lean` | 5 | 2 | — | `Σ g_e f_e = 1` give `S = Σ g_e • S_e` with `S * Q = 1`. |
+| `Q1Paper/G4RankIdentity.lean` | 4 | 2 | Claim 1 | identity `finrank_range_prod`. |
+| `Q1Paper/G5GramRank.lean` | 9 | 1 | — | criterion to the augmented-matrix rank test of the second half. |
+| `Q1Paper/HyperplaneAvoid.lean` | 2 | 0 | — | roots of a first nonzero combination `F = Σ aᵢ fᵢ`. |
+| `Q1Paper/KappaObs.lean` | 11 | 2 | — | kappa_obs = r * rank[N, AN]. |
+| `Q1Paper/Monotone.lean` | 2 | 1 | — | a row of zeros to a matrix leaves both its row space and its rank unchanged. |
+| `Q1Paper/MonotoneBlocks.lean` | 16 | 2 | — | the bookkeeping that carries the two design conditions through `Matrix.fromRows`. |
+| `Q1Paper/PaperI/Audit.lean` | 0 | 0 | — | that the Paper I map records as formalized, the axioms its proof depends on. |
+| `Q1Paper/PaperI/BareissAssemble.lean` | 25 | 7 | — | is a conditional statement about an abstract `T`.  This file closes that mechanical gap. |
+| `Q1Paper/PaperI/BareissBase.lean` | 20 | 4 | — | layer (design-report companion). |
+| `Q1Paper/PaperI/BareissTableau.lean` | 21 | 5 | — | **The Bareiss tableau consists of bordered minors** — the Desnanot–Jacobi induction. |
+| `Q1Paper/PaperI/BasisExtraction.lean` | 2 | 2 | — | maximality forces it to span the same space, so its cardinality is `ω`. |
+| `Q1Paper/PaperI/BezoutBounded.lean` | 14 | 4 | Claim 16 (iii)=>(iv) | of that system into a rational one. |
+| `Q1Paper/PaperI/BitLen.lean` | 42 | 10 | — | Bit-length foundation for Claim 13. |
+| `Q1Paper/PaperI/BitLenAdd.lean` | 8 | 7 | — | `mat_abs_num_lt_two_pow_bitLenMat`. |
+| `Q1Paper/PaperI/BitLenMatMul.lean` | 32 | 7 | — | composition lemma for the single-parameter bit bounds of Paper I. |
+| `Q1Paper/PaperI/C16Gcd.lean` | 19 | 10 | Claim 16 (i)-(iii) | "no common complex root" form (ii). |
+| `Q1Paper/PaperI/CauchyBinet.lean` | 11 | 6 | — | Port of the square Cauchy-Binet identity. |
 | `Q1Paper/PaperI/ChartComplete.lean` | 12 | 11 | — | file proves the first and most specific one. |
 | `Q1Paper/PaperI/ChartComplex.lean` | 4 | 1 | — | stack, and use that complexification preserves the rank. |
-| `Q1Paper/PaperI/ChartCount.lean` | 4 | 4 | — | **(no module docstring)** |
-| `Q1Paper/PaperI/Claim11.lean` | 6 | 6 | — | **(no module docstring)** |
-| `Q1Paper/PaperI/Claim11Final.lean` | 8 | 8 | Claim 11 | matrix of the maximal minors. |
-| `Q1Paper/PaperI/Claim12.lean` | 2 | 2 | Claim 12 | **(no module docstring)** |
-| `Q1Paper/PaperI/Claim14.lean` | 21 | 5 | — | of `psi` and `phi` (the kernel of the row-stacked matrix `[A_Tᵀ \| -A_Vᵀ]`). |
-| `Q1Paper/PaperI/Claim14Basis.lean` | 25 | 5 | Claim 14 | the same (the `Module.finBasis` of `W` written as the columns of the matrix). |
-| `Q1Paper/PaperI/Claim15.lean` | 14 | 6 | — | and the double sum has `m * n` terms of size at most `t`. |
-| `Q1Paper/PaperI/Claim15iv.lean` | 27 | 11 | — | most `b1`, resp. `b2`, bits, then `x * y` has at most `b1 + b2` bits. |
-| `Q1Paper/PaperI/Claim16.lean` | 23 | 9 | — | `S * Xm` (with `Xm` seen in `K[X]`) is the `k`-th coefficient matrix of `S` times `Xm`. |
-| `Q1Paper/PaperI/Claim4Converse.lean` | 2 | 2 | Claim 4 (converse) | **(no module docstring)** |
-| `Q1Paper/PaperI/Claim8Ej.lean` | 23 | 4 | — | (this is `M_S` for `S` the row set). |
-| `Q1Paper/PaperI/Claim8Literal.lean` | 13 | 5 | Claim 8 (disjunction) | an enumeration of the columns. |
-| `Q1Paper/PaperI/Claim8Wire.lean` | 9 | 4 | — | everything below only refers to the Gram matrix `M * Mᵀ`. |
-| `Q1Paper/PaperI/Claims.lean` | 0 | 0 | — | **(no module docstring)** |
-| `Q1Paper/PaperI/Claims38.lean` | 26 | 7 | Claim 3, Claim 4 (forward), Claim 5, Claim 6, Claim 7, Claim 8 (rank form) | `Q1Subspace.rowSpan` (used by `Monotone`/`Q1Subspace`) have the same body. |
-| `Q1Paper/PaperI/ClaimsCheck.lean` | 0 | 0 | — | **(no module docstring)** |
-| `Q1Paper/PaperI/ColsConcat.lean` | 10 | 6 | — | bitLenMat B`: transpose (bit length unchanged), `fromRows` (additive), transpose back. |
+| `Q1Paper/PaperI/ChartCount.lean` | 4 | 4 | — | `C * (L + 1) ^ (d * (q + 1) ^ 2)`. |
+| `Q1Paper/PaperI/Claim11.lean` | 6 | 6 | — | root") to obtain the equivalence with the pointwise no-common-root condition. |
+| `Q1Paper/PaperI/Claim11Final.lean` | 8 | 8 | Claim 11 | * `claim11_iff_gram`: `(5b)` is equivalent to solvability of `Zᵀ Z x = e₀`. |
+| `Q1Paper/PaperI/Claim12.lean` | 2 | 2 | Claim 12 | Claim 12 of Paper I: the Gram certificate for a full-column-rank pencil. |
+| `Q1Paper/PaperI/Claim14.lean` | 21 | 5 | — | kernel of a stacked (difference) map, and the resulting generating set. |
+| `Q1Paper/PaperI/Claim14Basis.lean` | 25 | 5 | Claim 14 | with the explicit bound `bitLenRat <= tauM M tau`. |
+| `Q1Paper/PaperI/Claim15.lean` | 14 | 6 | — | single explicit polynomial bound in terms of `inputLen`. |
+| `Q1Paper/PaperI/Claim15iv.lean` | 27 | 11 | — | for the coefficients of the cleared system `Phi_{omega,J}`. |
+| `Q1Paper/PaperI/Claim16.lean` | 23 | 9 | — | Claim 16 of the paper (`lem:zero`, the "zero-free-row" case). |
+| `Q1Paper/PaperI/Claim4Converse.lean` | 2 | 2 | Claim 4 (converse) | The **converse** of Claim 4 (`lem:sandwich`) of Paper I. |
+| `Q1Paper/PaperI/Claim8Ej.lean` | 23 | 4 | — | `elemSymm M j = ∑_{\|S\| = j} det (Γ_{S,S})`,   `Γ_{S,S} = M_S * M_Sᵀ`. |
+| `Q1Paper/PaperI/Claim8Literal.lean` | 13 | 5 | Claim 8 (disjunction) | `elemSymm_eq_zero_iff_rank_lt  :  elemSymm M j = 0 ↔ M.rank < j`. |
+| `Q1Paper/PaperI/Claim8Wire.lean` | 9 | 4 | — | (`PaperI/Claims38.lean`). |
+| `Q1Paper/PaperI/Claims.lean` | 0 | 0 | — | verifies that every name below still resolves, so the map cannot rot silently. |
+| `Q1Paper/PaperI/Claims38.lean` | 26 | 7 | Claim 3, Claim 4 (forward), Claim 5, Claim 6, Claim 7, Claim 8 (rank form) | `lem:struct`, `lem:monotone`, `lem:rankcons`). |
+| `Q1Paper/PaperI/ClaimsCheck.lean` | 0 | 0 | — | fail to elaborate, which is what keeps `Claims.lean` and `CLAIMS.md` from rotting. |
+| `Q1Paper/PaperI/ColsConcat.lean` | 10 | 6 | — | **Column concatenation** `[A \| B]` and its bit-length bound. |
 | `Q1Paper/PaperI/Completeness.lean` | 1 | 1 | — | `rawSpectral_iff_compressed` at `K = ℂ`.  This file provides that step. |
 | `Q1Paper/PaperI/CompletenessB.lean` | 1 | 1 | — | conditions, the reindexed compressed pair carries a chart point. |
 | `Q1Paper/PaperI/ComplexSoundness.lean` | 2 | 1 | — | bijection (below), which is what lets the chart's reindexed block speak about `fromRows L0 R`. |
-| `Q1Paper/PaperI/Complexify.lean` | 5 | 5 | — | **(no module docstring)** |
-| `Q1Paper/PaperI/ComplexityCounts.lean` | 26 | 7 | — | after the substitution `j = n-1-l` the counts read `k², (k-1)², …, 1`. |
-| `Q1Paper/PaperI/CompressedGram.lean` | 12 | 5 | Claim 15 (Gram entries) | **(no module docstring)** |
-| `Q1Paper/PaperI/CompressionMatrix.lean` | 17 | 16 | Claim 2 | free block `R` makes the compressed pair satisfy the two compressed conditions. |
-| `Q1Paper/PaperI/CostBareiss.lean` | 35 | 7 | — | lets `simp` normalise composed costs. |
-| `Q1Paper/PaperI/CostCore.lean` | 74 | 8 | — | `run` from the values the program manipulates. |
+| `Q1Paper/PaperI/Complexify.lean` | 5 | 5 | — | (and conversely, since `algebraMap ℝ ℂ` is injective). |
+| `Q1Paper/PaperI/ComplexityCounts.lean` | 26 | 7 | — | Modules 1 and 2 of the complexity layer, plus the denominator bound of module 3. |
+| `Q1Paper/PaperI/CompressedGram.lean` | 12 | 5 | Claim 15 (Gram entries) | the matrix product of `Q1Paper.windowMatrix`). |
+| `Q1Paper/PaperI/CompressionMatrix.lean` | 17 | 16 | Claim 2 | the compressed conditions on `H = L N` and `H_A = L A N`. |
+| `Q1Paper/PaperI/CostBareiss.lean` | 35 | 7 | — | (`bareiss_two_two` is the integer version; `Matrix.det_fin_two` is the expansion). |
+| `Q1Paper/PaperI/CostCore.lean` | 74 | 8 | — | *derived from the actual data* rather than supplied by the caller. |
 | `Q1Paper/PaperI/DecComplex.lean` | 5 | 1 | — | characterises the complex condition, so completeness has no chance for the real one. |
-| `Q1Paper/PaperI/DecR0Iface.lean` | 3 | 2 | — | `S_{2ω-2} X = 0` — is solvable.  The field `correct` bundles soundness and completeness. |
-| `Q1Paper/PaperI/DenOne.lean` | 20 | 5 | — | bridge used for every coefficient below. |
-| `Q1Paper/PaperI/DesnanotJacobi.lean` | 19 | 4 | — | and the column `v`: this is `det A(I ∪ {u}, J ∪ {v})` in the notation of the identity. |
-| `Q1Paper/PaperI/ExactDiv.lean` | 11 | 5 | Claim 19, Claim 21 | `fieldOpBitCost .div`, which charges a general rational division; see the file header. |
-| `Q1Paper/PaperI/FibreCard.lean` | 11 | 5 | — | image inside `I` (with `I.card = ω`) already has `ω` elements is injective. |
+| `Q1Paper/PaperI/DecR0Iface.lean` | 3 | 2 | — | particular algorithm. |
+| `Q1Paper/PaperI/DenOne.lean` | 20 | 5 | — | * `hS : ∀ a b, bitLenInt ((coeffGram P ω a b).num) ≤ b` — magnitude bound. |
+| `Q1Paper/PaperI/DesnanotJacobi.lean` | 19 | 4 | — | `k = 0, 1` instances `sylvester_two`, `sylvester_three` only). |
+| `Q1Paper/PaperI/ExactDiv.lean` | 11 | 5 | Claim 19, Claim 21 | integer; `tab_entry_den_eq_one_of_le_one` covers the hypothesis-free steps `k <= 1`). |
+| `Q1Paper/PaperI/FibreCard.lean` | 11 | 5 | — | injective index maps into a sum over `ω`-element subsets (Claim 11/12, §III-D). |
 | `Q1Paper/PaperI/FibreSum.lean` | 2 | 2 | — | **(no module docstring)** |
-| `Q1Paper/PaperI/FinReindex.lean` | 6 | 4 | — | statements to the case `r = 0`. |
-| `Q1Paper/PaperI/FptCore.lean` | 10 | 5 | — | theorems: nothing in this file proves them. |
-| `Q1Paper/PaperI/FptSpec.lean` | 18 | 7 | Theorem 2 | `O(omega)`, so this hypothesis is stronger than the paper needs). |
+| `Q1Paper/PaperI/FinReindex.lean` | 6 | 4 | — | Two independent "last mile" tools for the `r = 0` case of the `DEC` statements. |
+| `Q1Paper/PaperI/FptCore.lean` | 10 | 5 | — | The Renegar-free core of the FPT theorem (Paper I). |
+| `Q1Paper/PaperI/FptSpec.lean` | 18 | 7 | Theorem 2 | unsatisfiable: `chartSpec_empty`).  This file assembles the FPT analogue. |
 | `Q1Paper/PaperI/FromRowsMap.lean` | 1 | 1 | — | a `Sum`, not a `Fin`. |
-| `Q1Paper/PaperI/Gram.lean` | 4 | 4 | — | **(no module docstring)** |
-| `Q1Paper/PaperI/GramCert.lean` | 2 | 2 | — | **(no module docstring)** |
-| `Q1Paper/PaperI/GramCoefficients.lean` | 5 | 5 | — | **(no module docstring)** |
-| `Q1Paper/PaperI/GramCompression.lean` | 4 | 4 | — | **(no module docstring)** |
-| `Q1Paper/PaperI/GramInj.lean` | 6 | 6 | — | **(no module docstring)** |
-| `Q1Paper/PaperI/GramKernel.lean` | 7 | 4 | — | **(no module docstring)** |
-| `Q1Paper/PaperI/GramRows.lean` | 4 | 4 | — | the cost of the `m` summands is `log₂ m`, not `m`. |
-| `Q1Paper/PaperI/Hadamard.lean` | 7 | 5 | — | `‖A.det‖ ≤ ∏ j, √(∑ i, ‖A i j‖ ^ 2)`. |
-| `Q1Paper/PaperI/InputLen.lean` | 6 | 4 | — | product is at most the sum of the bit sizes of the factors. |
-| `Q1Paper/PaperI/Interface.lean` | 10 | 8 | — | **(no module docstring)** |
-| `Q1Paper/PaperI/KernelBasis.lean` | 3 | 3 | — | **(no module docstring)** |
+| `Q1Paper/PaperI/Gram.lean` | 4 | 4 | — | `e0 ∈ row Z  ↔  ∃ x, (Zᵀ * Z) *ᵥ x = e0`. |
+| `Q1Paper/PaperI/GramCert.lean` | 2 | 2 | — | between the injective-indexed and subset-indexed families. |
+| `Q1Paper/PaperI/GramCoefficients.lean` | 5 | 5 | — | in the minor `f_i = maximalMinor P (rowEmb i.1) (colEmb i.2)`. |
+| `Q1Paper/PaperI/GramCompression.lean` | 4 | 4 | — | `(Zᵀ Z)_{t,t'} = ∑_{j : Fin ω} (if j ≤ t and j ≤ t' then S_{t-j, t'-j} else 0)`. |
+| `Q1Paper/PaperI/GramInj.lean` | 6 | 6 | — | times the Gram matrix of the subset-indexed one. |
+| `Q1Paper/PaperI/GramKernel.lean` | 7 | 4 | — | *column* set, `I` a *row* set). |
+| `Q1Paper/PaperI/GramRows.lean` | 4 | 4 | — | The Gram entry of a **non-square** window matrix. |
+| `Q1Paper/PaperI/Hadamard.lean` | 7 | 5 | — | constant `bitLenInt (n!)` by the sharp Hadamard constant in Claim 21. |
+| `Q1Paper/PaperI/InputLen.lean` | 6 | 4 | — | rational matrix, together with the two ingredients it needs. |
+| `Q1Paper/PaperI/Interface.lean` | 10 | 8 | — | Formal statement layer of Paper I (Sections II-III). |
+| `Q1Paper/PaperI/KernelBasis.lean` | 3 | 3 | — | `(hNk : N.rank = k)`. |
 | `Q1Paper/PaperI/KernelLift.lean` | 2 | 1 | — | kernel.  Over `ℝ` that is a hypothesis (`hN`); over `ℂ` it is a theorem, and this file proves it. |
-| `Q1Paper/PaperI/MainTheorems.lean` | 0 | 0 | — | `rawAlgebraic_iff_rowSpace`, `DEC_iff_compressed`). |
-| `Q1Paper/PaperI/MinorCoeff.lean` | 19 | 4 | Claim 15 (coefficients) | §7 identifies its image in `ℚ[λ]` with `Q1Paper.pencilMinors`. |
-| `Q1Paper/PaperI/MinorFamilyBridge.lean` | 18 | 18 | — | **(no module docstring)** |
-| `Q1Paper/PaperI/MinorRank.lean` | 6 | 6 | — | **(no module docstring)** |
-| `Q1Paper/PaperI/Prop4.lean` | 9 | 5 | Proposition 4 | the pencil `λX − G` has rank `ω` at every complex parameter. |
-| `Q1Paper/PaperI/RankFactorization.lean` | 7 | 4 | — | multiplying on the right selects the columns `κ`. |
-| `Q1Paper/PaperI/RatDescent.lean` | 9 | 4 | — | index types), obtained from the `Fin`-indexed form by reindexing. |
-| `Q1Paper/PaperI/RationalBasis.lean` | 20 | 5 | Claim 13 | is bounded by the maximum of the bit lengths of `a` and `b`. |
+| `Q1Paper/PaperI/MainTheorems.lean` | 0 | 0 | — | under the namespaces `Q1Paper`, `Q1Subspace` and `KappaObs`. |
+| `Q1Paper/PaperI/MinorCoeff.lean` | 19 | 4 | Claim 15 (coefficients) | pencil, which is where `bitLenInt` lives, and §7 transfers the result back. |
+| `Q1Paper/PaperI/MinorFamilyBridge.lean` | 18 | 18 | — | `Set.powersetCard (Fin q) ω × Set.powersetCard (Fin k) ω`. |
+| `Q1Paper/PaperI/MinorRank.lean` | 6 | 6 | — | (`rank M ≥ 1` gives a nonzero entry, i.e. a nonzero `1 × 1` minor). |
+| `Q1Paper/PaperI/Prop4.lean` | 9 | 5 | Proposition 4 | (R0) decides feasibility. |
+| `Q1Paper/PaperI/RankFactorization.lean` | 7 | 4 | — | with `X * B = H`, `XL * X = 1`, `B * BR = 1`. |
+| `Q1Paper/PaperI/RatDescent.lean` | 9 | 4 | — | This is the general linear-algebra fact needed by Claim 16 of the paper. |
+| `Q1Paper/PaperI/RationalBasis.lean` | 20 | 5 | Claim 13 | annihilators with an explicit bit-length bound. |
 | `Q1Paper/PaperI/Reindex.lean` | 2 | 1 | — | Gram field needs `minorFamily`, which wants `Fin` indices. |
 | `Q1Paper/PaperI/Reindex2.lean` | 1 | 1 | — | scalar multiplication and the subtraction. |
-| `Q1Paper/PaperI/RenegarParams.lean` | 17 | 5 | Theorem 1 | and `deg` are all bounded by `beta q L L` (the worst case `n = L`). |
-| `Q1Paper/PaperI/RowSpanBridge.lean` | 4 | 4 | — | **(no module docstring)** |
+| `Q1Paper/PaperI/RenegarParams.lean` | 17 | 5 | Theorem 1 | never occur, so "the Renegar cost of the chart" is not a function of the chart. |
+| `Q1Paper/PaperI/RowSpanBridge.lean` | 4 | 4 | — | subset-indexed family (Section III-D). |
 | `Q1Paper/PaperI/SolveCriterion.lean` | 6 | 5 | — | (`Q1Paper/Q1RowSpace.lean`), i.e. `rank [A; B] = rank B ↔ rowSpace A ≤ rowSpace B`. |
 | `Q1Paper/PaperI/Soundness.lean` | 2 | 1 | — | certificate, which characterises the complex-λ condition — complex implies real). |
-| `Q1Paper/PaperI/SpectralMinor.lean` | 3 | 3 | — | **(no module docstring)** |
-| `Q1Paper/PaperI/T5Auto.lean` | 2 | 2 | Theorem 5 | **(no module docstring)** |
-| `Q1Paper/PaperI/T5Complete.lean` | 9 | 6 | — | satisfy (5a) and (5b) *with the ranks taken at complex parameters*. |
-| `Q1Paper/PaperI/T5DecC.lean` | 16 | 8 | — | obtained by reindexing with `Fintype.equivFin` and `Matrix.rank_reindex`. |
-| `Q1Paper/PaperI/TauMConst.lean` | 2 | 2 | — | **(no module docstring)** |
-| `Q1Paper/PaperI/Theorem5.lean` | 31 | 7 | — | predicate on real matrices. |
-| `Q1Paper/PaperI/Thm1Bite.lean` | 7 | 5 | — | **(no module docstring)** |
-| `Q1Paper/PaperI/Thm1Cond.lean` | 3 | 2 | — | **(no module docstring)** |
-| `Q1Paper/PaperI/TotalCost.lean` | 9 | 5 | — | `2 * B + 64 * (B + 1) ^ 4` (since `B * B + B + B + 1 = (B + 1) ^ 2`). |
-| `Q1Paper/PaperI/WindowSign.lean` | 3 | 3 | — | **(no module docstring)** |
+| `Q1Paper/PaperI/SpectralMinor.lean` | 3 | 3 | — | `(∀ z, rank (z • H - H_A) = ω)  ↔  ∀ z, some ω × ω minor of the pencil is nonzero`. |
+| `Q1Paper/PaperI/T5Auto.lean` | 2 | 2 | Theorem 5 | `(hNk : N.rank = k)`. |
+| `Q1Paper/PaperI/T5Complete.lean` | 9 | 6 | — | (`Q1Paper/PaperI/Theorem5.lean`). |
+| `Q1Paper/PaperI/T5DecC.lean` | 16 | 8 | — | complex basis matrix of `ker [C_ℂ A_ℂ; C_ℂ]`", a rank/dimension count. |
+| `Q1Paper/PaperI/TauMConst.lean` | 2 | 2 | — | The paper constant for the Claim 13 bit bound `tauM`. |
+| `Q1Paper/PaperI/Theorem5.lean` | 31 | 7 | — | theory of the reals. |
+| `Q1Paper/PaperI/Thm1Bite.lean` | 7 | 5 | — | so the stated bound no longer reflects the coefficient bit length at all. |
+| `Q1Paper/PaperI/Thm1Cond.lean` | 3 | 2 | — | (`PaperI/InputLen.lean`), and the chart-count arithmetic (`PaperI/ChartCount.lean`). |
+| `Q1Paper/PaperI/TotalCost.lean` | 9 | 5 | — | (under `3 <= n`, `2 <= L`, `B <= 123 * n ^ 6 * L`). |
+| `Q1Paper/PaperI/WindowSign.lean` | 3 | 3 | — | Q1Paper/PaperI/WindowSign.lean |
 | `Q1Paper/Q1Compression.lean` | 4 | 0 | — | is a basis matrix of `ker J`. |
 | `Q1Paper/Q1Pencil.lean` | 8 | 1 | — | pencil here is `z • H - H_A` with `H_A` an independent matrix. |
 | `Q1Paper/Q1Projection.lean` | 8 | 2 | — | zero gives `dim (pi2 W) = dim (pi1 W)`. |
@@ -122,10 +122,10 @@ docstring so a reader can see the author's stated purpose.
 | `Q1Paper/Q1RowSpace.lean` | 5 | 1 | — | * `rank_fromRows_eq_rank_iff` : `rank [A; B] = rank B ↔ rowSpace A ≤ rowSpace B`. |
 | `Q1Paper/Q1Step3.lean` | 4 | 1 | — | inclusion gives equality. |
 | `Q1Paper/Q1Subspace.lean` | 6 | 3 | — | `M` 是压缩行对矩阵；一行 `u` 经过 `M` 给出压缩行对 `u M`。本文件证明： |
-| `Q1Paper/RankConsistency.lean` | 3 | 1 | — | **(no module docstring)** |
-| `Q1Paper/RankIdentity.lean` | 4 | 0 | — | **(no module docstring)** |
+| `Q1Paper/RankConsistency.lean` | 3 | 1 | — | the paper (and checked by c311); this file isolates the subspace form. |
+| `Q1Paper/RankIdentity.lean` | 4 | 0 | — | the identity through which every compression step of the paper passes. |
 | `Q1Paper/ScratchFromRowsMap.lean` | 1 | 1 | — | a `Sum`, not a `Fin`. |
-| `Q1Paper/SpectralCertificate.lean` | 2 | 1 | — | **(no module docstring)** |
-| `Q1Paper/Window.lean` | 14 | 4 | Claim 10 | coefficient of `λ^i` in `p`.  This is the paper's `coef` (for `N = 2ω`). |
+| `Q1Paper/SpectralCertificate.lean` | 2 | 1 | — | underlying the bounded-degree certificate. |
+| `Q1Paper/Window.lean` | 14 | 4 | Claim 10 | Paper I, Claim 10 (`lem:window`, "degree-windowed relations"). |
 
 <!-- END GENERATED -->

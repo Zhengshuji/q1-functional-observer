@@ -1,4 +1,7 @@
-/-
+
+import Q1Paper.PaperI.GramInj
+
+/-!
 Q1Paper/PaperI/RowSpanBridge.lean
 
 D1 step 6: the two window matrices have the same row space.  This closes the
@@ -6,7 +9,6 @@ bridge between the injective-map-indexed minor family (Claim 11/12) and the
 subset-indexed family (Section III-D).
 -/
 
-import Q1Paper.PaperI.GramInj
 
 open Matrix Polynomial
 

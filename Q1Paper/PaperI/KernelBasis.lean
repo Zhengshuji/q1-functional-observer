@@ -1,4 +1,6 @@
-/-
+import Mathlib
+
+/-!
 Q1Paper/PaperI/KernelBasis.lean
 
 **A basis matrix for a submodule / kernel, over an arbitrary field.**
@@ -30,7 +32,7 @@ Route: take the `Module.finBasis` of `W`, use its vectors as the columns of `N`
 double inclusion; the reverse inclusion is `Basis.sum_repr`.  The rank statement is
 the definition `Matrix.rank A = finrank R (range A.mulVecLin)`.
 -/
-import Mathlib
+
 
 open Module
 

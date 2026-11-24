@@ -1,4 +1,11 @@
-/-
+
+import Q1Paper.PaperI.Claim15iv
+import Q1Paper.PaperI.BitLenMatMul
+import Q1Paper.PaperI.InputLen
+import Q1Paper.PaperI.ComplexityCounts
+import Q1Paper.PaperI.Claim14Basis
+
+/-!
 Q1Paper/PaperI/Claim15.lean
 
 Claim 15 of Paper I, **first milestone**: the three *composed* objects, with a
@@ -27,11 +34,6 @@ So `N` is fed into the composition through that conversion; see
 No `sorry`, no `admit`, no new axioms.
 -/
 
-import Q1Paper.PaperI.Claim15iv
-import Q1Paper.PaperI.BitLenMatMul
-import Q1Paper.PaperI.InputLen
-import Q1Paper.PaperI.ComplexityCounts
-import Q1Paper.PaperI.Claim14Basis
 
 open Matrix
 open scoped BigOperators

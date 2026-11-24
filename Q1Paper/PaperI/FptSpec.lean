@@ -1,4 +1,8 @@
-/-
+
+import Q1Paper.PaperI.FptCore
+import Q1Paper.PaperI.RenegarParams
+
+/-!
 Q1Paper/PaperI/FptSpec.lean
 
 **The FPT analogue of `PaperI/RenegarParams.lean`, with the fixed-degree lesson applied.**
@@ -78,8 +82,6 @@ No `sorry`, no `admit`, no new axioms.  Check with
 `lake env lean Q1Paper/PaperI/FptSpec.lean`.
 -/
 
-import Q1Paper.PaperI.FptCore
-import Q1Paper.PaperI.RenegarParams
 
 namespace Q1Paper
 

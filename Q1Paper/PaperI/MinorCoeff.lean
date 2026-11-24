@@ -1,4 +1,8 @@
-/-
+
+import Q1Paper.PaperI.C16Gcd
+import Q1Paper.PaperI.Claim15iv
+
+/-!
 Q1Paper/PaperI/MinorCoeff.lean
 
 **Claim 15 (ii) of Paper I: the bit length of the COEFFICIENTS of the maximal minors
@@ -58,8 +62,6 @@ Check with
   `lake env lean Q1Paper/PaperI/MinorCoeff.lean`
 -/
 
-import Q1Paper.PaperI.C16Gcd
-import Q1Paper.PaperI.Claim15iv
 
 open Matrix Polynomial
 

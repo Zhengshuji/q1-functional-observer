@@ -1,4 +1,9 @@
-/-
+
+import Q1Paper.PaperI.MinorFamilyBridge
+import Q1Paper.PaperI.MinorRank
+import Q1Paper.PaperI.BasisExtraction
+
+/-!
 Q1Paper/PaperI/Claim8Ej.lean
 
 **The algebraic core of Claim 8's disjunction, with no spectral theorem.**
@@ -40,9 +45,6 @@ No `sorry`, no `admit`, no new axioms.  Check with
   lake env lean Q1Paper/PaperI/Claim8Ej.lean
 -/
 
-import Q1Paper.PaperI.MinorFamilyBridge
-import Q1Paper.PaperI.MinorRank
-import Q1Paper.PaperI.BasisExtraction
 
 open Matrix
 open Q1Paper.PaperI

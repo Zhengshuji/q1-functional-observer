@@ -1,4 +1,11 @@
-/-
+
+import Q1Paper.PaperI.SpectralMinor
+import Q1Paper.PaperI.Complexify
+import Q1Paper.PaperI.Claim11
+import Mathlib.Algebra.Polynomial.BigOperators
+import Mathlib.Algebra.Polynomial.Degree.Operations
+
+/-!
 Q1Paper/PaperI/Claim11Final.lean
 
 The final assembly of Claim 11:
@@ -12,11 +19,6 @@ The final assembly of Claim 11:
 * `claim11_iff_gram`: `(5b)` is equivalent to solvability of `Zᵀ Z x = e₀`.
 -/
 
-import Q1Paper.PaperI.SpectralMinor
-import Q1Paper.PaperI.Complexify
-import Q1Paper.PaperI.Claim11
-import Mathlib.Algebra.Polynomial.BigOperators
-import Mathlib.Algebra.Polynomial.Degree.Operations
 
 namespace Q1Paper.PaperI
 

@@ -1,4 +1,8 @@
-/-
+
+import Q1Paper.PaperI.Claim11Final
+import Mathlib.LinearAlgebra.Basis.VectorSpace
+
+/-!
 Q1Paper/PaperI/Claim12.lean
 
 Claim 12 of Paper I: the Gram certificate for a full-column-rank pencil.
@@ -12,8 +16,6 @@ The proof is the instantiation of Claim 11 (`claim11_iff_gram`) at
 (`exists_left_inverse_of_rank_eq`), and `G = (G X_L) X` supplies the factor `F`.
 -/
 
-import Q1Paper.PaperI.Claim11Final
-import Mathlib.LinearAlgebra.Basis.VectorSpace
 
 namespace Q1Paper.PaperI
 

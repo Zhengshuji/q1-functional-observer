@@ -1,4 +1,7 @@
-/-
+import Q1Paper.PaperI.MinorRank
+import Q1Paper.G3Adjugate
+
+/-!
 Q1Paper/PaperI/RankFactorization.lean
 
 **Rank factorisation with explicit one-sided inverses.**
@@ -38,8 +41,7 @@ The same statement for an arbitrary finite row type is obtained by reindexing
 
 Fully proved: no placeholders and no new axioms, over an arbitrary field.
 -/
-import Q1Paper.PaperI.MinorRank
-import Q1Paper.G3Adjugate
+
 
 namespace Q1Paper.PaperI.RankFactorization
 

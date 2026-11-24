@@ -1,4 +1,7 @@
-/-
+
+import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+
+/-!
 Q1Paper/FixedOrder.lean
 
 Lemma C, algebraic core of the G = F X substitution:
@@ -6,7 +9,6 @@ if X has a left inverse, then H_A = F (X B) for some F iff
 H_A = G B for some unconstrained G.
 -/
 
-import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 
 open Module LinearMap
 

@@ -1,4 +1,7 @@
-/-
+
+import Mathlib
+
+/-!
 Q1Paper/PaperI/BitLen.lean
 
 Bit-length foundation for Claim 13.
@@ -21,7 +24,6 @@ Self-contained: a single `import Mathlib`, no `sorry`, no new axioms.  Check wit
 `lake env lean Q1Paper/PaperI/BitLen.lean`.
 -/
 
-import Mathlib
 
 open Matrix
 

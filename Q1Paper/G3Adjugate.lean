@@ -1,4 +1,7 @@
-/-
+
+import Mathlib.LinearAlgebra.Matrix.Adjugate
+
+/-!
 Q1Paper/G3Adjugate.lean
 
 The rectangular left inverse of the paper: for a `q × ω` matrix `Q` over a commutative
@@ -13,7 +16,6 @@ Bezout coefficients `g_I` (see `G2Assembly`) gives a polynomial left inverse
 `S = Σ g_I S_I` with `S * Q = 1` and `deg S ≤ 2ω - 2`.
 -/
 
-import Mathlib.LinearAlgebra.Matrix.Adjugate
 
 open Matrix
 

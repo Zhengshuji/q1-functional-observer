@@ -1,4 +1,10 @@
-/-
+
+import Q1Paper.PaperI.Claim16
+import Q1Paper.PaperI.MinorRank
+import Mathlib.RingTheory.PrincipalIdealDomain
+import Mathlib.Algebra.GCDMonoid.Finset
+
+/-!
 Q1Paper/PaperI/C16Gcd.lean
 
 Claim 16 (`lem:zero`) of Paper I, part (iii), in its **gcd form**, and its link to the
@@ -69,10 +75,6 @@ Because of this, (iii) ⟹ (iv) with the bound `deg S ≤ 2ω−2` is *not* obta
 the unbounded left inverse and its consequence (i) are.
 -/
 
-import Q1Paper.PaperI.Claim16
-import Q1Paper.PaperI.MinorRank
-import Mathlib.RingTheory.PrincipalIdealDomain
-import Mathlib.Algebra.GCDMonoid.Finset
 
 open Matrix Polynomial
 open scoped BigOperators

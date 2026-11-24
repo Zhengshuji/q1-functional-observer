@@ -1,4 +1,7 @@
-/-
+
+import Q1Paper.PaperI.FibreCard
+
+/-!
 Q1Paper/PaperI/WindowSign.lean
 
 Window-row sign relation for the D1 bridge: an injective-indexed row of the
@@ -6,7 +9,6 @@ window matrix is the sign of the two reorderings times the corresponding
 subset-indexed row.
 -/
 
-import Q1Paper.PaperI.FibreCard
 
 open Matrix Polynomial
 

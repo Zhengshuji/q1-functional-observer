@@ -1,12 +1,14 @@
-/-
+
+import Q1Paper.Basic
+import Q1Paper.KappaObs
+
+/-!
 Q1Paper/FreeRows.lean
 
 Lemma B, algebraic core: the space of free compressed row pairs is the
 range of the pair map, and its dimension is the rank of [N; AN].
 -/
 
-import Q1Paper.Basic
-import Q1Paper.KappaObs
 
 set_option linter.unusedSectionVars false
 

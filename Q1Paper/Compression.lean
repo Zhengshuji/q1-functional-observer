@@ -1,11 +1,13 @@
-/-
+
+import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+
+/-!
 Q1Paper/Compression.lean
 
 Lemma A, algebraic core: the compressed pair (H, H_A) and the
 kernel-inclusion criterion on the invisible subspace K0.
 -/
 
-import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 
 open Module LinearMap
 

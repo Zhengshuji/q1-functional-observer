@@ -1,4 +1,7 @@
-/-
+
+import Q1Paper.PaperI.Claim8Ej
+
+/-!
 Q1Paper/PaperI/Claim8Wire.lean
 
 **Claim 8 (rank consistency): the disjunctive form.**  This file wires the paper's
@@ -42,7 +45,6 @@ No `sorry`, no `admit`, no new axioms.  Check with
   lake env lean Q1Paper/PaperI/Claim8Wire.lean
 -/
 
-import Q1Paper.PaperI.Claim8Ej
 
 open Matrix
 

@@ -1,4 +1,8 @@
-/-
+
+import Q1Paper.PaperI.BezoutBounded
+import Q1Paper.PaperI.Interface
+
+/-!
 Q1Paper/PaperI/Prop4.lean
 
 Proposition 4 of Paper I, case `r = 0` (no free rows): the decision problem reduces to the
@@ -43,8 +47,6 @@ Contents:
 No `sorry`, no `admit`, no new axioms.
 -/
 
-import Q1Paper.PaperI.BezoutBounded
-import Q1Paper.PaperI.Interface
 
 open Matrix Polynomial
 open scoped BigOperators

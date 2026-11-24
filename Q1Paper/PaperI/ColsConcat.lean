@@ -1,4 +1,7 @@
-/-
+import Q1Paper.PaperI.BitLenMatMul
+import Mathlib.Data.Matrix.ColumnRowPartitioned
+
+/-!
 Q1Paper/PaperI/ColsConcat.lean
 
 **Column concatenation** `[A | B]` and its bit-length bound.
@@ -41,8 +44,7 @@ form of that hypothesis is `bitLenMat N ≤ t` itself.
 
 Check with `lake env lean Q1Paper/PaperI/ColsConcat.lean`.
 -/
-import Q1Paper.PaperI.BitLenMatMul
-import Mathlib.Data.Matrix.ColumnRowPartitioned
+
 
 open Matrix
 

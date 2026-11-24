@@ -1,4 +1,8 @@
-/-
+
+import Q1Paper.PaperI.MinorRank
+import Mathlib.Algebra.Polynomial.Eval.Defs
+
+/-!
 Q1Paper/PaperI/SpectralMinor.lean
 
 The pencil-level rank/minors equivalence behind Claim 11:
@@ -16,8 +20,6 @@ the latter combined with the rank bound `rank (z • H - H_A) ≤ rank H = ω` t
 comes from `H_A = F * H` (Claim 2(ii)).
 -/
 
-import Q1Paper.PaperI.MinorRank
-import Mathlib.Algebra.Polynomial.Eval.Defs
 
 namespace Q1Paper.PaperI
 

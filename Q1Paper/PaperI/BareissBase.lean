@@ -1,4 +1,7 @@
-/-
+
+import Q1Paper.PaperI.BitLenAdd
+
+/-!
 Q1Paper/PaperI/BareissBase.lean
 
 Scratch file for Claim 13 / Claim 21: the *Bareiss fraction-free elimination*
@@ -38,7 +41,6 @@ No `sorry`, no new axioms.  Check with
   lake env lean Q1Paper/PaperI/BareissBase.lean
 -/
 
-import Q1Paper.PaperI.BitLenAdd
 
 open Matrix
 

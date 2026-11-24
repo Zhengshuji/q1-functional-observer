@@ -1,4 +1,7 @@
-/-
+
+import Q1Paper.PaperI.GramInj
+
+/-!
 Q1Paper/PaperI/GramCert.lean
 
 D1 step 5: certificate equivalence.  If two Gram matrices differ by a nonzero
@@ -7,7 +10,6 @@ matrices, whose Gram matrices differ by (ω!)², this transfers the certificate
 between the injective-indexed and subset-indexed families.
 -/
 
-import Q1Paper.PaperI.GramInj
 
 open Matrix Polynomial
 

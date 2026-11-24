@@ -1,4 +1,7 @@
-/-
+
+import Q1Paper.PaperI.Prop4
+
+/-!
 Q1Paper/PaperI/DecR0Iface.lean
 
 An **interface** for the `r = 0` decision problem (R0) of Proposition 4, kept separate from any
@@ -36,7 +39,6 @@ same type); `R0Solver_nonempty`, whose type is the proposition `Nonempty _`, sta
 No `sorry`, no `admit`, no new axioms.
 -/
 
-import Q1Paper.PaperI.Prop4
 
 open Matrix
 open scoped BigOperators

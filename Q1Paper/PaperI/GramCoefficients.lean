@@ -1,4 +1,8 @@
-/-
+
+import Q1Paper.PaperI.GramKernel
+import Q1Paper.PaperI.Claim11Final
+
+/-!
 Q1Paper/PaperI/GramCoefficients.lean
 
 Section III-D, layer 3: the coefficient identity.  For a polynomial matrix
@@ -11,8 +15,6 @@ where `S_{a,b} = ∑_i c_{i,a} c_{i,b}` and `c_{i,a}` is the coefficient of `X^a
 in the minor `f_i = maximalMinor P (rowEmb i.1) (colEmb i.2)`.
 -/
 
-import Q1Paper.PaperI.GramKernel
-import Q1Paper.PaperI.Claim11Final
 
 namespace Q1Paper.PaperI
 

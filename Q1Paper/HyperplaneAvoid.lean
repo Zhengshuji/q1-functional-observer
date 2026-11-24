@@ -1,4 +1,7 @@
-/-
+
+import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+
+/-!
 Q1Paper/HyperplaneAvoid.lean
 
 The linear-algebra primitive behind the degree-bounded Bezout lemma of the paper:
@@ -11,7 +14,6 @@ This is the step that allows a second linear combination `G = Σ bᵢ fᵢ` to a
 roots of a first nonzero combination `F = Σ aᵢ fᵢ`.
 -/
 
-import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 
 open Module LinearMap
 

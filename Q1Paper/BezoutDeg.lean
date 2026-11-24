@@ -1,4 +1,8 @@
-/-
+
+import Mathlib.Algebra.Polynomial.Roots
+import Mathlib.FieldTheory.IsAlgClosed.Basic
+
+/-!
 Q1Paper/BezoutDeg.lean
 
 Towards the degree-bounded Bezout lemma of the paper.
@@ -16,8 +20,6 @@ gives one for 1.  The degree bounds come from reducing the first multiplier modu
 second polynomial.
 -/
 
-import Mathlib.Algebra.Polynomial.Roots
-import Mathlib.FieldTheory.IsAlgClosed.Basic
 
 open Polynomial
 

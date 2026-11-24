@@ -1,12 +1,14 @@
-/-
+
+import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+import Mathlib.LinearAlgebra.Prod
+
+/-!
 Q1Paper/Basic.lean
 
 Abstract linear-algebra core for the paper.
 The file is intentionally independent of the old MyProof project.
 -/
 
-import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
-import Mathlib.LinearAlgebra.Prod
 
 set_option linter.unusedSectionVars false
 

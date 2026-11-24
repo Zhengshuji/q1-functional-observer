@@ -1,4 +1,9 @@
-/-
+
+import Q1Paper.PaperI.BareissTableau
+import Q1Paper.PaperI.BareissBase
+import Q1Paper.PaperI.InputLen
+
+/-!
 Q1Paper/PaperI/BareissAssemble.lean
 
 **Assembling the Bareiss tableau, and its bit-length corollary.**
@@ -42,9 +47,6 @@ No `sorry`, no `admit`, no new axioms.  Check with
   `lake env lean Q1Paper/PaperI/BareissAssemble.lean`
 -/
 
-import Q1Paper.PaperI.BareissTableau
-import Q1Paper.PaperI.BareissBase
-import Q1Paper.PaperI.InputLen
 
 open Matrix
 open Q1Paper.PaperI.BareissTableau

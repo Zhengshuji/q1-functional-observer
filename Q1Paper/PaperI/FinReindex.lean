@@ -1,4 +1,6 @@
-/-
+import Q1Paper.PaperI.RankFactorization
+
+/-!
 Q1Paper/PaperI/FinReindex.lean
 
 Two independent "last mile" tools for the `r = 0` case of the `DEC` statements.
@@ -39,7 +41,7 @@ already returns such `X, B` together with one-sided inverses
 inverses via `Matrix.rank_mul_le_left` / `Matrix.rank_mul_le_right` and the
 bounds `Matrix.rank_le_width` / `Matrix.rank_le_height`.
 -/
-import Q1Paper.PaperI.RankFactorization
+
 
 open Matrix
 

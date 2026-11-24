@@ -1,11 +1,13 @@
-/-
+
+import Mathlib
+
+/-!
 Q1Paper/SpectralCertificate.lean
 
 Lemma D, first algebraic ingredient: the two-polynomial Bezout identity
 underlying the bounded-degree certificate.
 -/
 
-import Mathlib
 
 open Polynomial
 

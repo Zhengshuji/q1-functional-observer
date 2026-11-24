@@ -1,4 +1,10 @@
-/-
+
+import Q1Paper.G3Coeff
+import Q1Paper.G3LeftInverse
+import Q1Paper.BezoutReal
+import Mathlib.LinearAlgebra.Matrix.Rank
+
+/-!
 Q1Paper/PaperI/Claim16.lean
 
 Claim 16 of the paper (`lem:zero`, the "zero-free-row" case).
@@ -42,10 +48,6 @@ formalised here.  Over an algebraically closed field the gap is closed by
 `claim16_ii_implies_iv`.
 -/
 
-import Q1Paper.G3Coeff
-import Q1Paper.G3LeftInverse
-import Q1Paper.BezoutReal
-import Mathlib.LinearAlgebra.Matrix.Rank
 
 open Matrix Polynomial
 open scoped BigOperators

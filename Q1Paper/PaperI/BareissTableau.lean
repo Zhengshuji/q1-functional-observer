@@ -1,4 +1,7 @@
-/-
+
+import Q1Paper.PaperI.DesnanotJacobi
+
+/-!
 Q1Paper/PaperI/BareissTableau.lean
 
 **The Bareiss tableau consists of bordered minors** — the Desnanot–Jacobi induction.
@@ -51,7 +54,6 @@ No `sorry`, no `admit`, no new axioms.  Check with
   `lake env lean Q1Paper/PaperI/BareissTableau.lean`
 -/
 
-import Q1Paper.PaperI.DesnanotJacobi
 
 open Matrix
 

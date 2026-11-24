@@ -1,4 +1,7 @@
-/-
+
+import Q1Paper.G3LeftInverse
+
+/-!
 Q1Paper/G3Coeff.lean
 
 The coefficient encoding of the polynomial left inverse (G3c, Lemma 6 (iv) ⟺ (v)).
@@ -11,7 +14,6 @@ polynomial matrix `S(λ) = Σ_{j≤d} S_j λ^j` as `spoly S`.  The coefficient s
 and the content of Lemma 6 is that `spoly S * pencil Xm Gm = 1` is equivalent to it.
 -/
 
-import Q1Paper.G3LeftInverse
 
 open Matrix Polynomial
 open scoped BigOperators

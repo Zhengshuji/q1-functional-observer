@@ -1,4 +1,8 @@
-/-
+
+import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+import Mathlib.LinearAlgebra.Prod
+
+/-!
   KappaObs.lean — abstract linear-algebra core of the "effective observer
   dimension" formula
 
@@ -38,8 +42,6 @@
   still spelled `FiniteDimensional K E`.
 -/
 
-import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
-import Mathlib.LinearAlgebra.Prod
 
 set_option linter.unusedSectionVars false
 

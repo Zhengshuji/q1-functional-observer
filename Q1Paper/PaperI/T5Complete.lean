@@ -1,4 +1,9 @@
-/-
+
+import Q1Paper.PaperI.Theorem5
+import Q1Paper.PaperI.RankFactorization
+import Q1Paper.PaperI.CompressionMatrix
+
+/-!
 Q1Paper/PaperI/T5Complete.lean
 
 **Theorem 5 of Paper I, completeness direction**: the converse of
@@ -86,9 +91,6 @@ for; with a real `N` and the complexified spectral condition, the statements
 below apply verbatim.
 -/
 
-import Q1Paper.PaperI.Theorem5
-import Q1Paper.PaperI.RankFactorization
-import Q1Paper.PaperI.CompressionMatrix
 
 namespace Q1Paper
 

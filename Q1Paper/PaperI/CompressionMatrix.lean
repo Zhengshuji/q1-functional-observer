@@ -1,4 +1,10 @@
-/-
+
+import Q1Paper.G4RankIdentity
+import Q1Paper.Q1RowSpace
+import Q1Paper.Q1Subspace
+import Q1Paper.PaperI.Interface
+
+/-!
 Q1Paper/PaperI/CompressionMatrix.lean
 
 Matrix-level Claim 2 of Paper I: for `N` a basis matrix of `ker [CA; C]`, the
@@ -16,10 +22,6 @@ is arbitrary; the transfer `Q -> R -> C` of the paper's input is a separate
 step and is not part of this file.
 -/
 
-import Q1Paper.G4RankIdentity
-import Q1Paper.Q1RowSpace
-import Q1Paper.Q1Subspace
-import Q1Paper.PaperI.Interface
 
 namespace Q1Paper.PaperI
 

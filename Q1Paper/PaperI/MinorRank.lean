@@ -1,4 +1,10 @@
-/-
+
+import Mathlib.LinearAlgebra.Matrix.Rank
+import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+import Mathlib.Algebra.Polynomial.Eval.Defs
+import Q1Paper.PaperI.BasisExtraction
+
+/-!
 Q1Paper/PaperI/MinorRank.lean
 
 The rank/minors bridge needed by Claim 11 (and by Claim 2(iii)): for a matrix
@@ -30,10 +36,6 @@ standard routes are
   formalizations exist; see the survey in the project notes).
 -/
 
-import Mathlib.LinearAlgebra.Matrix.Rank
-import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
-import Mathlib.Algebra.Polynomial.Eval.Defs
-import Q1Paper.PaperI.BasisExtraction
 
 namespace Q1Paper.PaperI
 

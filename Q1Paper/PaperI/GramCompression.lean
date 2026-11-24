@@ -1,4 +1,8 @@
-/-
+
+import Q1Paper.PaperI.GramCoefficients
+import Q1Paper.Window
+
+/-!
 Q1Paper/PaperI/GramCompression.lean
 
 Section III-D, last layer: the Gram matrix of the window matrix is the
@@ -9,8 +13,6 @@ column subsets and `Z` the window matrix of Claim 10, the `(t,t')` entry of
   `(Zᵀ Z)_{t,t'} = ∑_{j : Fin ω} (if j ≤ t and j ≤ t' then S_{t-j, t'-j} else 0)`.
 -/
 
-import Q1Paper.PaperI.GramCoefficients
-import Q1Paper.Window
 
 namespace Q1Paper.PaperI
 

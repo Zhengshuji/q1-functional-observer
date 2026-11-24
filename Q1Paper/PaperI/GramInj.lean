@@ -1,4 +1,7 @@
-/-
+
+import Q1Paper.PaperI.WindowSign
+
+/-!
 Q1Paper/PaperI/GramInj.lean
 
 D1 step 4: the Gram matrix of the injective-indexed window matrix is (ω!)²
@@ -12,7 +15,6 @@ times the Gram matrix of the subset-indexed one.
 * gram_inj_eq_factorial_smul: the matrix identity by Matrix.ext.
 -/
 
-import Q1Paper.PaperI.WindowSign
 
 open Matrix Polynomial
 

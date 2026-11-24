@@ -1,4 +1,8 @@
-/-
+
+import Q1Paper.PaperI.Claim8Wire
+import Q1Paper.G5GramRank
+
+/-!
 Q1Paper/PaperI/Claim8Literal.lean
 
 **Claim 8 in the paper's literal form: the disjunction for `Γ' = M Mᵀ + c cᵀ`.**
@@ -68,8 +72,6 @@ No `sorry`, no `admit`, no new axioms.  Check with
   lake env lean Q1Paper/PaperI/Claim8Literal.lean
 -/
 
-import Q1Paper.PaperI.Claim8Wire
-import Q1Paper.G5GramRank
 
 open Matrix
 

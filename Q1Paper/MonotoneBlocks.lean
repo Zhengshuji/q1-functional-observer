@@ -1,4 +1,10 @@
-/-
+
+import Mathlib
+import Q1Paper.Monotone
+import Q1Paper.Q1RowSpace
+import Q1Paper.Q1Pencil
+
+/-!
 Q1Paper/MonotoneBlocks.lean
 
 Monotonicity of the feasible order (Paper II, Claim 5 / `lem:monotone`):
@@ -52,10 +58,6 @@ inventing one is out of scope.  What is proved is the mathematical content of it
 proof — the invariance of the two conditions — uniformly in `L` and in `D`.
 -/
 
-import Mathlib
-import Q1Paper.Monotone
-import Q1Paper.Q1RowSpace
-import Q1Paper.Q1Pencil
 
 open Matrix
 

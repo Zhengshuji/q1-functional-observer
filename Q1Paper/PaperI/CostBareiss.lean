@@ -1,4 +1,8 @@
-/-
+
+import Q1Paper.PaperI.CostCore
+import Q1Paper.PaperI.BareissBase
+
+/-!
 Q1Paper/PaperI/CostBareiss.lean
 
 **Binding the cost model (`Q1Complexity`, `PaperI/CostCore.lean`) to the Bareiss
@@ -58,8 +62,6 @@ No `sorry`, no `admit`, no new axioms.  Check with
   `lake env lean Q1Paper/PaperI/CostBareiss.lean`
 -/
 
-import Q1Paper.PaperI.CostCore
-import Q1Paper.PaperI.BareissBase
 
 open Q1Paper.PaperI
 

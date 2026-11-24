@@ -1,4 +1,7 @@
-/-
+
+import Mathlib
+
+/-!
 Q1Paper/PaperI/FptCore.lean
 
 The Renegar-free core of the FPT theorem (Paper I).
@@ -25,7 +28,6 @@ per line (a shared `n p k ... : ℕ` line is rejected with
 exactly those of the paper's list.
 -/
 
-import Mathlib
 
 namespace Q1Paper
 

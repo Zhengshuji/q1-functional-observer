@@ -1,4 +1,9 @@
-/-
+
+import Mathlib.LinearAlgebra.Matrix.Rank
+import Q1Paper.Q1RowSpace
+import Q1Paper.Q1Subspace
+
+/-!
 Q1Paper/PaperI/Gram.lean
 
 The Gram step of Paper I, Claim 11: for a real matrix `Z` and a vector `e0`,
@@ -19,9 +24,6 @@ The *first* equivalence of Claim 11, `(5b) ↔ e0 ∈ row Z`, is the Bezout/wind
 composition and is not part of this file.
 -/
 
-import Mathlib.LinearAlgebra.Matrix.Rank
-import Q1Paper.Q1RowSpace
-import Q1Paper.Q1Subspace
 
 namespace Q1Paper.PaperI
 

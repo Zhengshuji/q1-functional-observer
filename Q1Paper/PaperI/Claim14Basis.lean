@@ -1,4 +1,9 @@
-/-
+
+import Q1Paper.PaperI.RationalBasis
+import Q1Paper.PaperI.Claim14
+import Q1Paper.PaperI.KernelBasis
+
+/-!
 Q1Paper/PaperI/Claim14Basis.lean
 
 Chart data of Claim 14 (`clm:chartdata`) of Paper I, assembled from the pieces
@@ -67,9 +72,6 @@ the axiom footprint of the headline theorems is printed at the end and is
     `V = T ∩ (S × S)`.
 -/
 
-import Q1Paper.PaperI.RationalBasis
-import Q1Paper.PaperI.Claim14
-import Q1Paper.PaperI.KernelBasis
 
 namespace Q1Paper.PaperI.Chart14
 

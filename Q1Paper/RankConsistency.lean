@@ -1,4 +1,7 @@
-/-
+
+import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+
+/-!
 Q1Paper/RankConsistency.lean
 
 Lemma C, structural core: consistency of a linear system is membership of
@@ -7,7 +10,6 @@ side is contained in the range.  The Gram/rank formulation is recorded in
 the paper (and checked by c311); this file isolates the subspace form.
 -/
 
-import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 
 open Module LinearMap
 

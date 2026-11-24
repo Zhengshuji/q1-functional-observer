@@ -1,4 +1,10 @@
-/-
+
+import Mathlib.LinearAlgebra.ExteriorPower.Basis
+import Mathlib.LinearAlgebra.ExteriorPower.Pairing
+import Mathlib.LinearAlgebra.Dual.Basis
+import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+
+/-!
 Port of the square Cauchy-Binet identity.
 
 Source: Ralf Stephan, rwst/Subspace-Theorems, files
@@ -13,10 +19,6 @@ det (A * B) = sum over s : Set.powersetCard iota m of
    det (A.submatrix id (orderEmbOfFin s)) * det (B.submatrix (orderEmbOfFin s) id).
 -/
 
-import Mathlib.LinearAlgebra.ExteriorPower.Basis
-import Mathlib.LinearAlgebra.ExteriorPower.Pairing
-import Mathlib.LinearAlgebra.Dual.Basis
-import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 
 namespace exteriorPower
 

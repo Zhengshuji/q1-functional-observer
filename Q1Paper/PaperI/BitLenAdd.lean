@@ -1,4 +1,7 @@
-/-
+
+import Q1Paper.PaperI.BitLen
+
+/-!
 Q1Paper/PaperI/BitLenAdd.lean
 
 Second bit-length module for Claim 13.  It extends `Q1Paper.PaperI.BitLen` by
@@ -25,7 +28,6 @@ Self-contained: a single `import Q1Paper.PaperI.BitLen`, no `sorry`, no new
 axioms.  Check with `lake env lean Q1Paper/PaperI/BitLenAdd.lean`.
 -/
 
-import Q1Paper.PaperI.BitLen
 
 open Matrix
 

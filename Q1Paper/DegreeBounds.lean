@@ -1,4 +1,7 @@
-/-
+
+import Mathlib.LinearAlgebra.Matrix.Adjugate
+
+/-!
 Q1Paper/DegreeBounds.lean
 
 Degree estimates for determinants and adjugates over `K[X]` (G3b).
@@ -11,7 +14,6 @@ Degree estimates for determinants and adjugates over `K[X]` (G3b).
   a unit vector).
 -/
 
-import Mathlib.LinearAlgebra.Matrix.Adjugate
 
 open Matrix Polynomial
 open scoped BigOperators

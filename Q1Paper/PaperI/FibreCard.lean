@@ -1,4 +1,7 @@
-/-
+
+import Q1Paper.PaperI.FibreSum
+
+/-!
 Q1Paper/PaperI/FibreCard.lean
 
 Fibre cardinalities of the "image of an injection" map, used to turn a sum over
@@ -12,7 +15,6 @@ Contents:
 * `imagePair`, `card_fibre_pair`: the pair version, fibre cardinality `ω! * ω!`.
 -/
 
-import Q1Paper.PaperI.FibreSum
 
 namespace Q1Paper.PaperI
 

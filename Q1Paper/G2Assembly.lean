@@ -1,4 +1,8 @@
-/-
+
+import Q1Paper.BezoutDeg
+import Q1Paper.HyperplaneAvoid
+
+/-!
 Q1Paper/G2Assembly.lean
 
 The degree-bounded Bezout lemma for a family of polynomials (Lemma 4 of the paper),
@@ -12,8 +16,6 @@ Over an algebraically closed field, a finite family with no common root and degr
 most `ω ≥ 1` has a Bezout relation with all multipliers of `natDegree < ω`.
 -/
 
-import Q1Paper.BezoutDeg
-import Q1Paper.HyperplaneAvoid
 
 open Polynomial
 

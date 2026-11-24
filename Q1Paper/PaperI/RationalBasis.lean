@@ -1,4 +1,9 @@
-/-
+
+import Q1Paper.PaperI.InputLen
+import Q1Paper.PaperI.MinorRank
+import Q1Paper.PaperI.Claim12
+
+/-!
 Q1Paper/PaperI/RationalBasis.lean
 
 Scratch module for Claim 13 (`lem:rationalbasis`) of Paper I: rational bases and
@@ -39,9 +44,6 @@ No `sorry`, no `admit`, no new axioms (only `propext`, `Classical.choice`,
 `Quot.sound`).
 -/
 
-import Q1Paper.PaperI.InputLen
-import Q1Paper.PaperI.MinorRank
-import Q1Paper.PaperI.Claim12
 
 open Matrix
 

@@ -1,4 +1,8 @@
-/-
+
+import Q1Paper.PaperI.MinorRank
+import Mathlib.Analysis.Complex.Polynomial.Basic
+
+/-!
 Q1Paper/PaperI/Complexify.lean
 
 The real-to-complex bridge needed to connect the paper's real data with the
@@ -12,8 +16,6 @@ complex spectral condition:
   (and conversely, since `algebraMap ℝ ℂ` is injective).
 -/
 
-import Q1Paper.PaperI.MinorRank
-import Mathlib.Analysis.Complex.Polynomial.Basic
 
 namespace Q1Paper.PaperI
 

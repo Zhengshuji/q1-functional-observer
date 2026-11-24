@@ -1,4 +1,8 @@
-/-
+
+import Q1Paper.PaperI.GramCompression
+import Q1Paper.PaperI.Claim15iv
+
+/-!
 Q1Paper/PaperI/CompressedGram.lean
 
 **Bit-length bound for the entries of the compressed Gram matrix, transferred to
@@ -56,8 +60,6 @@ new axioms.  Check with
   `lake env lean Q1Paper/PaperI/CompressedGram.lean`.
 -/
 
-import Q1Paper.PaperI.GramCompression
-import Q1Paper.PaperI.Claim15iv
 
 open Matrix Polynomial
 open scoped BigOperators

@@ -1,4 +1,7 @@
-/-
+
+import Q1Paper.PaperI.ComplexityCounts
+
+/-!
 Q1Paper/PaperI/ExactDiv.lean
 
 **Charging the Bareiss divisions as exact integer divisions: a quadratic per-operation
@@ -90,7 +93,6 @@ No `sorry`, no `admit`, no new axioms.  Check with
 `lake env lean Q1Paper/PaperI/ExactDiv.lean`.
 -/
 
-import Q1Paper.PaperI.ComplexityCounts
 
 namespace Q1Paper.PaperI.ComplexityCounts
 

@@ -1,4 +1,8 @@
-/-
+
+import Q1Paper.PaperI.MinorRank
+import Q1Paper.PaperI.SolveCriterion
+
+/-!
 Q1Paper/PaperI/RatDescent.lean
 
 **A rational linear system solvable over `ℝ` is solvable over `ℚ`.**
@@ -28,8 +32,6 @@ the rank criterion over `ℚ` then produces a rational solution.
 No unfinished proofs and no new axioms.
 -/
 
-import Q1Paper.PaperI.MinorRank
-import Q1Paper.PaperI.SolveCriterion
 
 open scoped BigOperators
 open Matrix

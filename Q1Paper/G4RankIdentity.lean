@@ -1,4 +1,9 @@
-/-
+
+import Mathlib.Data.Matrix.ColumnRowPartitioned
+import Mathlib.LinearAlgebra.Matrix.Rank
+import Q1Paper.RankIdentity
+
+/-!
 Q1Paper/G4RankIdentity.lean
 
 Item 1 of the expert reply: the matrix-level rank identity
@@ -13,9 +18,6 @@ Key API used (all verified in the pinned version):
 `LinearEquiv.finrank_map_eq`, `LinearMap.range_comp`.
 -/
 
-import Mathlib.Data.Matrix.ColumnRowPartitioned
-import Mathlib.LinearAlgebra.Matrix.Rank
-import Q1Paper.RankIdentity
 
 open Matrix
 

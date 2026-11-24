@@ -1,4 +1,9 @@
-/-
+
+import Q1Paper.G3Adjugate
+import Q1Paper.G2Assembly
+import Q1Paper.DegreeBounds
+
+/-!
 Q1Paper/G3LeftInverse.lean
 
 The rectangular polynomial left inverse of the paper, assembled from the single-block
@@ -11,9 +16,6 @@ Given `Q : Matrix (Fin q) (Fin ω) K[X]`, index the minors by row embeddings
 `Σ g_e f_e = 1` give `S = Σ g_e • S_e` with `S * Q = 1`.
 -/
 
-import Q1Paper.G3Adjugate
-import Q1Paper.G2Assembly
-import Q1Paper.DegreeBounds
 
 open Matrix Polynomial
 

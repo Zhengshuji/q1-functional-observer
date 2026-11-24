@@ -1,4 +1,6 @@
-/-
+import Q1Paper.PaperI.RationalBasis
+
+/-!
 Q1Paper/PaperI/BitLenMatMul.lean
 
 Scratch module: **submultiplicativity (and additivity) of `bitLenMat`**, the missing
@@ -45,7 +47,7 @@ by `z.natAbs` is the elementary fact that `B.num i j * c = z` for a positive int
 
 Check with `lake env lean Q1Paper/PaperI/BitLenMatMul.lean`.
 -/
-import Q1Paper.PaperI.RationalBasis
+
 
 open Matrix
 

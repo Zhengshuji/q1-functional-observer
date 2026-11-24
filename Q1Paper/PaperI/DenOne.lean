@@ -1,4 +1,7 @@
-/-
+
+import Q1Paper.PaperI.CompressedGram
+
+/-!
 Q1Paper/PaperI/DenOne.lean
 
 **Discharging the integrality hypothesis `hint` of
@@ -48,7 +51,6 @@ No `sorry`, no `admit`, no new axioms.  Everything lives in
   `lake env lean Q1Paper/PaperI/DenOne.lean`.
 -/
 
-import Q1Paper.PaperI.CompressedGram
 
 open Matrix Polynomial
 open scoped BigOperators

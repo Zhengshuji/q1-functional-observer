@@ -1,4 +1,7 @@
-/-
+
+import Q1Paper.PaperI.ChartCount
+
+/-!
 Q1Paper/PaperI/Thm1Cond.lean
 
 **Conditional assembly of Theorem 1 (the external real-algebraic solver is a hypothesis).**
@@ -53,7 +56,6 @@ Honesty notes
   `lake env lean Q1Paper/PaperI/Thm1Cond.lean`.
 -/
 
-import Q1Paper.PaperI.ChartCount
 
 /- `hqn : q ≤ L` is part of the paper's interface (`Q1Paper.beta_le_L_pow` uses it),
 but the specification's hypothesis `β ≤ 240*q*L^7` is already in the `L^7` form,

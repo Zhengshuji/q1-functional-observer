@@ -1,12 +1,14 @@
-/-
+
+import Q1Paper.FreeRows
+import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+
+/-!
 Q1Paper/FPT.lean
 
 Lemma F, first algebraic ingredients: the r = 0 left-inverse branch
 (an injective pencil) and the zero-free-row parameter count.
 -/
 
-import Q1Paper.FreeRows
-import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 
 open Module LinearMap
 

@@ -1,4 +1,7 @@
-/-
+
+import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+
+/-!
 Q1Paper/RankIdentity.lean
 
 The compression identity of the paper, abstract form:
@@ -13,7 +16,6 @@ counterpart of
 the identity through which every compression step of the paper passes.
 -/
 
-import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 
 open Module LinearMap
 

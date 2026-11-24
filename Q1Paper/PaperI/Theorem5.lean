@@ -1,4 +1,11 @@
-/-
+
+import Q1Paper.PaperI.Claim12
+import Q1Paper.PaperI.CompressionMatrix
+import Q1Paper.PaperI.Claim16
+import Q1Paper.BezoutReal
+import Q1Paper.G3Coeff
+
+/-!
 Q1Paper/PaperI/Theorem5.lean
 
 Formalisation of (part of) Theorem 5 of Paper I, Section `sec:existsr`
@@ -68,11 +75,6 @@ Proved here (no `sorry`, no `admit`, no new axioms):
    (a rank/dimension count), which is not formalised.
 -/
 
-import Q1Paper.PaperI.Claim12
-import Q1Paper.PaperI.CompressionMatrix
-import Q1Paper.PaperI.Claim16
-import Q1Paper.BezoutReal
-import Q1Paper.G3Coeff
 
 namespace Q1Paper
 

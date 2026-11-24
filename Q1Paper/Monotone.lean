@@ -1,4 +1,8 @@
-/-
+
+import Mathlib
+import Q1Paper.Q1Subspace
+
+/-!
 Q1Paper/Monotone.lean
 
 The rank-theoretic ingredient of the monotonicity of DEC in the order: appending
@@ -11,8 +15,6 @@ The remaining bookkeeping (carrying the two block equations through
 `Matrix.fromRows`) is not done here.
 -/
 
-import Mathlib
-import Q1Paper.Q1Subspace
 
 open Module LinearMap
 

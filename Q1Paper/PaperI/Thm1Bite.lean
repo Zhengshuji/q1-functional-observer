@@ -1,4 +1,7 @@
-/-
+
+import Q1Paper.PaperI.ChartCount
+
+/-!
 Q1Paper/PaperI/Thm1Bite.lean
 
 **Theorem 1 with the per-chart cost pinned at the actual coefficient bit length.**
@@ -52,7 +55,6 @@ Honesty notes
   Check with `lake env lean Q1Paper/PaperI/Thm1Bite.lean`.
 -/
 
-import Q1Paper.PaperI.ChartCount
 
 namespace Q1Paper
 

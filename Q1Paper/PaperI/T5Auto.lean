@@ -1,4 +1,8 @@
-/-
+
+import Q1Paper.PaperI.T5DecC
+import Q1Paper.PaperI.KernelBasis
+
+/-!
 Q1Paper/PaperI/T5Auto.lean
 
 **Theorem 5 of Paper I with no abstract hypothesis.**
@@ -28,8 +32,6 @@ Main results:
 Complete: every declaration below compiles; nothing is postulated.
 -/
 
-import Q1Paper.PaperI.T5DecC
-import Q1Paper.PaperI.KernelBasis
 
 namespace Q1Paper
 

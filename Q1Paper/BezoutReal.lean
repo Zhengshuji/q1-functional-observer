@@ -1,4 +1,8 @@
-/-
+
+import Q1Paper.G2Assembly
+import Mathlib.Analysis.Complex.Polynomial.Basic
+
+/-!
 Q1Paper/BezoutReal.lean
 
 The real-coefficient Bézout lemma of Paper I (Claim 9, labels `lem:bezout`, `sec:bezout`).
@@ -27,8 +31,6 @@ and the two-polynomial degree-bounded Bézout identity `exists_bezout_deg_lt` gi
 multipliers.
 -/
 
-import Q1Paper.G2Assembly
-import Mathlib.Analysis.Complex.Polynomial.Basic
 
 open Polynomial
 

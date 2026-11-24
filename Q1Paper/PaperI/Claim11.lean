@@ -1,4 +1,9 @@
-/-
+
+import Q1Paper.Window
+import Q1Paper.BezoutReal
+import Q1Paper.PaperI.Gram
+
+/-!
 Q1Paper/PaperI/Claim11.lean
 
 Claim 11 of Paper I, the Bézout/window half.  For `f : ι → K[X]` of degree at
@@ -12,9 +17,6 @@ The remaining step of Claim 11, `(5b) ↔ no common complex root`, is the
 rank/minors equivalence and is not part of this file.
 -/
 
-import Q1Paper.Window
-import Q1Paper.BezoutReal
-import Q1Paper.PaperI.Gram
 
 namespace Q1Paper.PaperI
 

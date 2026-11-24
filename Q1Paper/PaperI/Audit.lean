@@ -1,4 +1,7 @@
-/-
+
+import Q1Paper.PaperI.MainTheorems
+
+/-!
 Q1Paper/PaperI/Audit.lean
 
 Axiom audit for the Paper I formalization.  It prints, for every declaration
@@ -9,7 +12,6 @@ that nothing else occurs is done by `scripts/check_paperI_axioms.py`.
 This file is not imported by `PaperI.lean`: it is a build-time report.
 -/
 
-import Q1Paper.PaperI.MainTheorems
 
 -- compression: rank identity, compression criterion, row spaces
 #print axioms Q1Paper.pairMap_apply

@@ -1,4 +1,7 @@
-/-
+
+import Q1Paper.PaperI.BareissBase
+
+/-!
 Q1Paper/PaperI/Claim15iv.lean
 
 Claim 15(iv) of the paper: the **arithmetic skeleton** of the bit-length bound
@@ -30,7 +33,6 @@ No `sorry`, no `admit`, no new axioms.  Check with
   lake env lean Q1Paper/PaperI/Claim15iv.lean
 -/
 
-import Q1Paper.PaperI.BareissBase
 
 open Matrix
 

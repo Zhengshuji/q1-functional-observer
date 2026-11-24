@@ -1,4 +1,7 @@
-/-
+
+import Q1Paper.PaperI.BitLenAdd
+
+/-!
 Q1Paper/PaperI/InputLen.lean
 
 Scratch module: the input bit-length bound `bitLenMat A ≤ inputLen A` for a
@@ -29,7 +32,6 @@ Imports `Q1Paper.PaperI.BitLenAdd`.  No `sorry`, no new axioms.
 Check with `lake env lean Q1Paper/PaperI/InputLen.lean`.
 -/
 
-import Q1Paper.PaperI.BitLenAdd
 
 open Matrix
 

@@ -1,4 +1,8 @@
-/-
+
+import Q1Paper.PaperI.ComplexityCounts
+import Q1Paper.PaperI.TauMConst
+
+/-!
 Q1Paper/PaperI/TotalCost.lean
 
 **Total bit cost of the Bareiss field operations: `O(n^27 * L^4)`, not `O(n^21 * L^2)`.**
@@ -57,8 +61,6 @@ Check with
 `lake env lean Q1Paper/PaperI/TotalCost.lean`.
 -/
 
-import Q1Paper.PaperI.ComplexityCounts
-import Q1Paper.PaperI.TauMConst
 
 open Q1Paper.PaperI
 

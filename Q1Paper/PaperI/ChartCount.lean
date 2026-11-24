@@ -1,4 +1,7 @@
-/-
+
+import Mathlib
+
+/-!
 Q1Paper/PaperI/ChartCount.lean
 
 **Chart-count arithmetic for Theorem 1.**
@@ -37,7 +40,6 @@ No `sorry`, no `admit`, no new axioms.  Check with
 `lake env lean Q1Paper/PaperI/ChartCount.lean`.
 -/
 
-import Mathlib
 
 namespace Q1Paper
 

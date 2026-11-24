@@ -1,4 +1,11 @@
-/-
+
+import Q1Paper.PaperI.T5Complete
+import Q1Paper.PaperI.Complexify
+import Q1Paper.PaperI.MinorRank
+import Q1Paper.Q1RowSpace
+import Q1Paper.Q1Subspace
+
+/-!
 Q1Paper/PaperI/T5DecC.lean
 
 Closing the remaining pieces of Theorem 5 of Paper I that are *not* covered by
@@ -43,11 +50,6 @@ Closing the remaining pieces of Theorem 5 of Paper I that are *not* covered by
 No `sorry`, no `admit`, no new axioms.
 -/
 
-import Q1Paper.PaperI.T5Complete
-import Q1Paper.PaperI.Complexify
-import Q1Paper.PaperI.MinorRank
-import Q1Paper.Q1RowSpace
-import Q1Paper.Q1Subspace
 
 namespace Q1Paper
 

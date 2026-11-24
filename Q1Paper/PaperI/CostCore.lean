@@ -1,4 +1,7 @@
-/-
+
+import Q1Paper.PaperI.BitLenAdd
+
+/-!
 Q1Paper/PaperI/CostCore.lean
 
 A **minimal cost model** for the paper's complexity formalisation, with all costs
@@ -37,7 +40,6 @@ No `sorry`, no new axioms.  Check with
 `lake env lean Q1Paper/PaperI/CostCore.lean`.
 -/
 
-import Q1Paper.PaperI.BitLenAdd
 
 open Q1Paper.PaperI
 

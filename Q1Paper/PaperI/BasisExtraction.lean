@@ -1,4 +1,10 @@
-/-
+
+import Mathlib.LinearAlgebra.LinearIndependent.Lemmas
+import Mathlib.LinearAlgebra.Dimension.Constructions
+import Mathlib.LinearAlgebra.Matrix.Nonsingular
+import Mathlib.LinearAlgebra.Matrix.Rank
+
+/-!
 Q1Paper/PaperI/BasisExtraction.lean
 
 Two finite-dimensional linear-algebra tools for the rank/minors bridge:
@@ -18,10 +24,6 @@ Two finite-dimensional linear-algebra tools for the rank/minors bridge:
 Neither proof uses Cauchy–Binet.
 -/
 
-import Mathlib.LinearAlgebra.LinearIndependent.Lemmas
-import Mathlib.LinearAlgebra.Dimension.Constructions
-import Mathlib.LinearAlgebra.Matrix.Nonsingular
-import Mathlib.LinearAlgebra.Matrix.Rank
 
 namespace Q1Paper.PaperI
 

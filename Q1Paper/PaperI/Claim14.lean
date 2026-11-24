@@ -1,4 +1,8 @@
-/-
+
+import Q1Paper.Q1RowSpace
+import Q1Paper.Q1Subspace
+
+/-!
 Q1Paper/PaperI/Claim14.lean
 
 Core of Claim 14 of Paper I: the intersection `V = T ∩ S` as the image of the
@@ -59,8 +63,6 @@ All statements below are proved; there is no `sorry`, no `admit`, no new
 axiom.  The axiom footprint of the headline results is printed at the end.
 -/
 
-import Q1Paper.Q1RowSpace
-import Q1Paper.Q1Subspace
 
 namespace Q1Paper.PaperI.Claim14
 

@@ -1,4 +1,9 @@
-/-
+
+import Q1Paper.PaperI.BareissBase
+import Q1Paper.PaperI.CauchyBinet
+import Q1Paper.PaperI.MinorFamilyBridge
+
+/-!
 Q1Paper/PaperI/DesnanotJacobi.lean
 
 **The bordered Desnanot–Jacobi (Sylvester) identity** — the one piece the Bareiss
@@ -56,9 +61,6 @@ No `sorry`, no `admit`, no new axioms (the only axioms used are `propext`,
   `lake env lean Q1Paper/PaperI/DesnanotJacobi.lean`
 -/
 
-import Q1Paper.PaperI.BareissBase
-import Q1Paper.PaperI.CauchyBinet
-import Q1Paper.PaperI.MinorFamilyBridge
 
 open Matrix Polynomial
 

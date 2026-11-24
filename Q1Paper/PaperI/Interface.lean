@@ -1,4 +1,7 @@
-/-
+
+import Mathlib
+
+/-!
 Q1Paper/PaperI/Interface.lean
 
 Formal statement layer of Paper I (Sections II-III).
@@ -17,7 +20,6 @@ directory, `CompressionMatrix.lean`; it is not proved yet, and this file
 deliberately contains no theorem, so that nothing unproved enters the build.
 -/
 
-import Mathlib
 
 namespace Q1Paper.PaperI
 

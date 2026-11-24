@@ -1,4 +1,8 @@
-/-
+
+import Mathlib
+import Q1Paper.PaperI.BitLen
+
+/-!
 Q1Paper/PaperI/Hadamard.lean
 
 Hadamard's determinant inequality, ported from the external package `hex-matrix-theory`
@@ -71,8 +75,6 @@ No `sorry`, no `admit`, no new axioms.  Check with
 `lake env lean Q1Paper/PaperI/Hadamard.lean`.
 -/
 
-import Mathlib
-import Q1Paper.PaperI.BitLen
 
 open Finset Module InnerProductSpace
 open scoped InnerProductSpace

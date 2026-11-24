@@ -1,4 +1,9 @@
-/-
+
+import Mathlib
+import Q1Paper.Q1RowSpace
+import Q1Paper.Q1Subspace
+
+/-!
 Q1Paper/Window.lean
 
 Paper I, Claim 10 (`lem:window`, "degree-windowed relations").
@@ -36,9 +41,6 @@ covered.  The main results do not need the degree hypothesis `deg (f i) ≤ ω`:
 `coef (λ^j * p) = (coef p) shifted by j` holds for every polynomial.
 -/
 
-import Mathlib
-import Q1Paper.Q1RowSpace
-import Q1Paper.Q1Subspace
 
 open Polynomial Matrix
 open scoped BigOperators

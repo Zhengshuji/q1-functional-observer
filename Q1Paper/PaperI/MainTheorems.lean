@@ -1,16 +1,3 @@
-/-
-Q1Paper/PaperI/MainTheorems.lean
-
-Paper I entry point: it imports exactly the modules that belong to Paper I
-(feasibility, compression, finite certificate, fixed-order and FPT upper
-bounds) and nothing from the companion papers (minimum order, hyperplane layer,
-c2 layer).
-
-The imported modules are the formalized material; the paper-level statements
-and their status are recorded in `paper/PAPER_I_FORMALIZATION_MAP.md`.  This
-file is an index, not a proof: the theorems live in the modules imported below,
-under the namespaces `Q1Paper`, `Q1Subspace` and `KappaObs`.
--/
 
 import Q1Paper.Basic
 import Q1Paper.RankIdentity
@@ -121,6 +108,21 @@ import Q1Paper.PaperI.KernelLift
 import Q1Paper.PaperI.ComplexSoundness
 import Q1Paper.PaperI.Completeness
 import Q1Paper.PaperI.CompletenessB
+
+/-!
+Q1Paper/PaperI/MainTheorems.lean
+
+Paper I entry point: it imports exactly the modules that belong to Paper I
+(feasibility, compression, finite certificate, fixed-order and FPT upper
+bounds) and nothing from the companion papers (minimum order, hyperplane layer,
+c2 layer).
+
+The imported modules are the formalized material; the paper-level statements
+and their status are recorded in `paper/PAPER_I_FORMALIZATION_MAP.md`.  This
+file is an index, not a proof: the theorems live in the modules imported below,
+under the namespaces `Q1Paper`, `Q1Subspace` and `KappaObs`.
+-/
+
 
 /-!
 ## What is imported here

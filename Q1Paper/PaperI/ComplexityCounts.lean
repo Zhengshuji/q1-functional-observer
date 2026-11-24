@@ -1,4 +1,9 @@
-/-
+
+import Q1Paper.PaperI.BareissAssemble
+import Q1Paper.PaperI.CostCore
+import Q1Paper.PaperI.RationalBasis
+
+/-!
 Q1Paper/PaperI/ComplexityCounts.lean
 
 **The counting and bit-length layer of the Bareiss complexity analysis.**
@@ -76,9 +81,6 @@ new axioms.  Check with
 `lake env lean Q1Paper/PaperI/ComplexityCounts.lean`.
 -/
 
-import Q1Paper.PaperI.BareissAssemble
-import Q1Paper.PaperI.CostCore
-import Q1Paper.PaperI.RationalBasis
 
 open Matrix
 open Q1Paper.PaperI.BareissTableau

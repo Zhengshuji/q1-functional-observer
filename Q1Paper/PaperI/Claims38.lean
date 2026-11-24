@@ -1,4 +1,15 @@
-/-
+
+import Q1Paper.Q1Subspace
+import Q1Paper.Q1Projection
+import Q1Paper.Q1RowSpace
+import Q1Paper.Monotone
+import Q1Paper.MonotoneBlocks
+import Q1Paper.BoundLower
+import Q1Paper.FreeRows
+import Q1Paper.G5GramRank
+import Q1Paper.PaperI.Interface
+
+/-!
 Q1Paper/PaperI/Claims38.lean
 
 Bridge file from the existing Lean library to **Claims 3--8 of Paper I**
@@ -31,15 +42,6 @@ of the rows of `M`, `pi1`/`pi2`/`piLam` are the projections `(h,g) ↦ h`,
 `(h,g) ↦ g`, `(h,g) ↦ λh - g`.
 -/
 
-import Q1Paper.Q1Subspace
-import Q1Paper.Q1Projection
-import Q1Paper.Q1RowSpace
-import Q1Paper.Monotone
-import Q1Paper.MonotoneBlocks
-import Q1Paper.BoundLower
-import Q1Paper.FreeRows
-import Q1Paper.G5GramRank
-import Q1Paper.PaperI.Interface
 
 set_option linter.unusedSectionVars false
 

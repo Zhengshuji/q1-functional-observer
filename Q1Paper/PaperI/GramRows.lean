@@ -1,4 +1,7 @@
-/-
+
+import Q1Paper.PaperI.Claim15iv
+
+/-!
 Q1Paper/PaperI/GramRows.lean
 
 The Gram entry of a **non-square** window matrix.
@@ -47,7 +50,6 @@ No `sorry`, no `admit`, no new axioms.  Check with
   lake env lean Q1Paper/PaperI/GramRows.lean
 -/
 
-import Q1Paper.PaperI.Claim15iv
 
 open Matrix
 

@@ -1,4 +1,6 @@
-/-
+import Q1Paper.PaperI.Claims38
+
+/-!
 Q1Paper/PaperI/Claim4Converse.lean
 
 The **converse** of Claim 4 (`lem:sandwich`) of Paper I.
@@ -28,7 +30,7 @@ Reuses: `Q1Subspace.rowSpace`, `Q1Subspace.rowSpace_fromRows`,
 `Q1Paper.exists_rows_mul_eq` (`PaperI/Claims38.lean`), `Submodule.exists_isCompl`,
 `Submodule.finrank_sup_add_finrank_inf_eq`, `Module.finBasis`, `Basis.sum_repr`.
 -/
-import Q1Paper.PaperI.Claims38
+
 
 set_option linter.unusedSectionVars false
 

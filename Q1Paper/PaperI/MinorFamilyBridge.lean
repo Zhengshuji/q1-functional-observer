@@ -1,4 +1,7 @@
-/-
+
+import Q1Paper.PaperI.GramCompression
+
+/-!
 Q1Paper/PaperI/MinorFamilyBridge.lean
 
 D1 bridge between the two index families of maximal minors:
@@ -21,7 +24,6 @@ Contents so far:
 * `rowEmb_permOfInjective` : `rowEmb (imageFin ρ) (permOfInjective ρ i) = ρ i`.
 -/
 
-import Q1Paper.PaperI.GramCompression
 
 namespace Q1Paper.PaperI
 

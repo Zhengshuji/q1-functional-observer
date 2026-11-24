@@ -1,4 +1,10 @@
-/-
+
+import Q1Paper.PaperI.RatDescent
+import Q1Paper.PaperI.C16Gcd
+import Q1Paper.PaperI.Claim11Final
+import Q1Paper.BezoutReal
+
+/-!
 Q1Paper/PaperI/BezoutBounded.lean
 
 **Degree-bounded rational Bézout certificate** — the descent step missing from Claim 16 of
@@ -35,10 +41,6 @@ Main results:
 No `sorry`, no `admit`, no new axioms.
 -/
 
-import Q1Paper.PaperI.RatDescent
-import Q1Paper.PaperI.C16Gcd
-import Q1Paper.PaperI.Claim11Final
-import Q1Paper.BezoutReal
 
 open scoped BigOperators
 open Matrix Polynomial

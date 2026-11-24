@@ -1,4 +1,7 @@
-/-
+
+import Q1Paper.PaperI.ChartCount
+
+/-!
 Q1Paper/PaperI/RenegarParams.lean
 
 **Theorem 1 with the parameters of every chart made explicit.**
@@ -73,7 +76,6 @@ Honesty notes
 Check with `lake env lean Q1Paper/PaperI/RenegarParams.lean`.
 -/
 
-import Q1Paper.PaperI.ChartCount
 
 namespace Q1Paper
 

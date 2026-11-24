@@ -1,4 +1,7 @@
-/-
+
+import Q1Paper.PaperI.RationalBasis
+
+/-!
 Q1Paper/PaperI/TauMConst.lean
 
 The paper constant for the Claim 13 bit bound `tauM`.
@@ -33,7 +36,6 @@ Proof route (the bracket estimate is the whole content):
 No `sorry`, no `admit`, no new axioms.
 -/
 
-import Q1Paper.PaperI.RationalBasis
 
 open Matrix
 
