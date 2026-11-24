@@ -37,7 +37,21 @@ at lines 127–160.
   polynomial identity test** (`_chart_family_obstruction`, line 686) — not by sampling.  The
   docstring's soundness direction is right: the chart is a subset of the family, so refuting the
   family refutes the chart.
-* `R3`, `R5`, `R6`, `D1`: documented only; **bodies not read yet**.
+* `R2` `ω > ℓ = rank(AN)`: sound, and the argument is worth recording — (5b) **at `λ = 0`**
+  gives `rank H_A = ω`, while `H_A = L A N` gives `rank H_A ≤ ℓ`.  The `∀λ` hypothesis is used
+  at one specific point.
+* `R5` `ω = q`: `X` is `ω×ω` and invertible, so `λX − G = X(λI − GX⁻¹)`, and the square matrix
+  `GX⁻¹` has a complex eigenvalue `λ₀` where the rank drops.  Sound.
+* `R6` `ω+1 > dim T` or `> dim W₀ + r`: Claim 6 gives `dim W ≥ ω+1`, while `W ⊆ T` and
+  `dim(W/W₀) ≤ r` give `dim W ≤ dim T` and `dim W ≤ dim W₀ + r`.  Sound.
+* `R3` fixed-`λ₀` refutation on the whole affine family `F`, by an exact polynomial identity test
+  (`_MPoly` determinants, not sampling); `F ⊇` chart, so refuting `F` refutes the chart.
+* `bounds` (`ω > min(q,k)`): unreachable, the loop stops at `min(q,k)`; defensive only.
+* `D1`: **body still not read**.
+
+**Conclusion (Round 4).**  A wrong `feasible` is caught by `verify_feasible`'s independent
+asserts, so the silent-risk direction is `infeasible`.  All six refutations were checked to be
+**implications**, not reports of a failed search.
 
 Crucially, `unsat` is never produced by "the search found nothing": in `decide` (line 1229) a
 failed search yields `ChartOutcome(..., "unknown", certificate="no witness, no refutation")`, and
@@ -54,7 +68,7 @@ practice unreachable, because `k = 0` makes `h0 = g0 = 0` and step 4 has already
 
 * `eq:phi` item (v) and the Gram window construction (`gram_window`, `gram_certificate`);
 * `chart_linear_system` against Claim 8's `Mb = c`;
-* the bodies of `R3`, `R5`, `R6`, `D1`;
+* the body of `D1`;
 * `_search_omega`'s completeness (that it explores enough of the chart to justify "no witness");
 * the 1292-line file as a whole.
 
