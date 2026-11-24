@@ -109,6 +109,7 @@ import Q1Paper.PaperI.DenOne
 import Q1Paper.PaperI.FinReindex
 import Q1Paper.PaperI.Claim8Ej
 import Q1Paper.PaperI.Claim8Wire
+import Q1Paper.PaperI.Claim8Literal
 
 /-!
 ## What is imported here

@@ -463,3 +463,8 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.ScratchClaim8Wire.rank_eq_of_elemSymm_pattern
 #print axioms Q1Paper.ScratchClaim8Wire.rank_eq_of_gram_eq
 #print axioms Q1Paper.ScratchClaim8Wire.exists_rank_disjunct_pair
+#print axioms Q1Paper.ScratchClaim8Literal.elemSymmGen_pos_iff_rank_ge
+#print axioms Q1Paper.ScratchClaim8Literal.elemSymmGen_eq_zero_iff_rank_lt
+#print axioms Q1Paper.ScratchClaim8Literal.claim8_disjunction
+#print axioms Q1Paper.ScratchClaim8Literal.withCol_mul_transpose
+#print axioms Q1Paper.ScratchClaim8Literal.rank_le_rank_withCol
