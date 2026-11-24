@@ -116,6 +116,7 @@ import Q1Paper.PaperI.ChartComplex
 import Q1Paper.PaperI.Reindex
 import Q1Paper.PaperI.Reindex2
 import Q1Paper.PaperI.Soundness
+import Q1Paper.PaperI.DecComplex
 
 /-!
 ## What is imported here

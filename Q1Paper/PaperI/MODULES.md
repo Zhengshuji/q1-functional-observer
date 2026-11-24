@@ -14,7 +14,7 @@ The four entry points and their separate jobs:
 
 ## `Q1Paper/PaperI/` — Paper I modules (`namespace Q1Paper.PaperI.*`)
 
-81 files, 808 theorems, 167 definitions/structures.
+82 files, 811 theorems, 169 definitions/structures.
 
 | file | thm | def | first declarations | header summary |
 |---|---:|---:|---|---|
@@ -54,6 +54,7 @@ The four entry points and their separate jobs:
 | `CompressionMatrix.lean` | 17 | 0 | `rank_fromRows_comm`, `rank_fromRows_add_map`, `rank_vstack_add_rank_mul`, `rank_fromRows_eq_rank_add_mul`, … | Matrix-level Claim 2 of Paper I: for `N` a basis matrix of `ker [CA; C]`, the |
 | `CostBareiss.lean` | 29 | 6 | `Reg`, `cost_add_mk`, `run_bind_pure`, `coreOps`, … | Binding the cost model (`Q1Complexity`, `PaperI/CostCore.lean`) to the Bareiss |
 | `CostCore.lean` | 48 | 26 | `Cost`, `zero`, `add`, `scale`, … | A **minimal cost model** for the paper's complexity formalisation, with all costs |
+| `DecComplex.lean` | 3 | 2 | `rank_map_ofReal_any`, `spectralComplexRaw`, `complexDEC`, `spectralComplex_implies_raw`, … |  |
 | `DecR0Iface.lean` | 1 | 2 | `R0Solver`, `spectral_decidable_of_solver`, `R0Solver_nonempty` | An **interface** for the `r = 0` decision problem (R0) of Proposition 4, kept separate from any |
 | `DenOne.lean` | 16 | 4 | `poly_coeff_int_den_eq_one`, `det_int_den_eq_one`, `intToRatPoly`, `intToRatPoly_eq_map`, … | Discharging the integrality hypothesis `hint` of |
 | `DesnanotJacobi.lean` | 13 | 6 | `fromBlocks_map`, `map_det_map`, `bBorder`, `bBorder_map`, … | The bordered Desnanot–Jacobi (Sylvester) identity** — the one piece the Bareiss |
