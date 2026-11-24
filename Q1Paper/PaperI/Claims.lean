@@ -1,4 +1,4 @@
-/-!
+/-
 Q1Paper/PaperI/Claims.lean
 
 The paper interface of the formalisation: the paper's items in the paper's order, each with the
