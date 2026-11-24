@@ -14,7 +14,7 @@ The four entry points and their separate jobs:
 
 ## `Q1Paper/PaperI/` — Paper I modules (`namespace Q1Paper.PaperI.*`)
 
-75 files, 790 theorems, 163 definitions/structures.
+76 files, 791 theorems, 163 definitions/structures.
 
 | file | thm | def | first declarations | header summary |
 |---|---:|---:|---|---|
@@ -29,6 +29,7 @@ The four entry points and their separate jobs:
 | `BitLenMatMul.lean` | 31 | 1 | `bitLenMatAny`, `bitLenMatAny_eq_bitLenMat`, `mat_den_size_le_bitLenMatAny`, `mat_bitLenInt_num_le_bitLenMatAny`, … | Scratch module: **submultiplicativity (and additivity) of `bitLenMat`**, the missing |
 | `C16Gcd.lean` | 16 | 3 | `pencilMinors`, `FamilyGcdIsConst`, `NoCommonComplexRoot`, `exists_ne_zero_of_gcd_isConst`, … | Claim 16 (`lem:zero`) of Paper I, part (iii), in its **gcd form**, and its link to the |
 | `CauchyBinet.lean` | 12 | 1 | `plucker`, `plucker_apply`, `_root_`, `pairingDual_map_toDual_basis`, … | Port of the square Cauchy-Binet identity. |
+| `ChartComplete.lean` | 1 | 0 | `row_LA_mul_le_row_L_mul` |  |
 | `ChartCount.lean` | 5 | 0 | `le_two_pow`, `chart_count_le`, `chart_count_le_pow`, `exp_compose`, … | Chart-count arithmetic for Theorem 1.** |
 | `Claim11.lean` | 5 | 1 | `windowOne`, `windowOne_eq_toFn`, `exists_bezout_iff_mem_rowSpace_window`, `mem_rowSpace_window_of_no_common_complex_root`, … | Claim 11 of Paper I, the Bézout/window half.  For `f : ι → K[X]` of degree at |
 | `Claim11Final.lean` | 6 | 2 | `maximalMinor_map`, `natDegree_det_le`, `pencil_natDegree_le`, `natDegree_maximalMinor_le`, … | The final assembly of Claim 11: |
@@ -96,7 +97,7 @@ The four entry points and their separate jobs:
 
 ## `Q1Paper/` — Root modules (`namespace Q1Paper.*`)
 
-30 files, 142 theorems, 37 definitions/structures.
+31 files, 143 theorems, 37 definitions/structures.
 
 | file | thm | def | first declarations | header summary |
 |---|---:|---:|---|---|
@@ -128,6 +129,7 @@ The four entry points and their separate jobs:
 | `Q1Subspace.lean` | 5 | 1 | `rowSpan`, `rowSpan_le_range`, `range_le_rowSpan`, `range_eq_rowSpan`, … |  |
 | `RankConsistency.lean` | 3 | 0 | `exists_solution_iff_mem_range`, `exists_solution_iff_span_le_range`, `exists_solution_iff_range_eq_sup_span` | Lemma C, structural core: consistency of a linear system is membership of |
 | `RankIdentity.lean` | 2 | 2 | `restrictToKer`, `range_restrictToKer`, `kerRestrictEquiv`, `finrank_range_prod` | The compression identity of the paper, abstract form: |
+| `ScratchChartComplete.lean` | 1 | 0 | `row_LA_mul_le_row_L_mul` |  |
 | `SpectralCertificate.lean` | 2 | 0 | `bezout_of_gcd_eq_one`, `sum_sq_eq_zero_iff` | Lemma D, first algebraic ingredient: the two-polynomial Bezout identity |
 | `Window.lean` | 11 | 3 | `windowMatrix`, `windowMatrix_apply`, `windowMatrix_row`, `natDegree_X_pow_mul_le`, … | Paper I, Claim 10 (`lem:window`, "degree-windowed relations"). |
 

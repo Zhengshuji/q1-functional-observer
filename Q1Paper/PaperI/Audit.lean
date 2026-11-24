@@ -470,3 +470,4 @@ import Q1Paper.PaperI.MainTheorems
 #print axioms Q1Paper.ScratchClaim8Literal.rank_le_rank_withCol
 #print axioms Q1Paper.Claim15iv.minorBound_22_of_twenty
 #print axioms Q1Paper.Claim15iv.bMinor_bitLen_le_22_of_twenty
+#print axioms Q1Paper.ScratchChartComplete.row_LA_mul_le_row_L_mul
