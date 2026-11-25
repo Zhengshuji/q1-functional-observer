@@ -23,6 +23,7 @@ row space and complexifying.
 -/
 
 import Q1Paper.PaperII.Saturate
+import Q1Paper.PaperI.S08_ChartEquivalence.DecComplex
 
 open Module Matrix
 
@@ -92,4 +93,94 @@ theorem pairRows_map {q : Type*} {k : ℕ}
     rw [Fin.addCases_right, Fin.addCases_right]
     rfl
 
+
+/-- Multiplication commutes with the row encoding. -/
+theorem mul_pairRows {q : Type*} [Fintype q] {n k : ℕ}
+    (X : Matrix q (Fin n) K) (H : Matrix (Fin n) (Fin k) K) (HA : Matrix (Fin n) (Fin k) K) :
+    X * pairRows H HA = pairRows (X * H) (X * HA) := by
+  ext i t
+  refine Fin.addCases (motive := fun t =>
+    (X * pairRows H HA) i t = pairRows (X * H) (X * HA) i t) ?_ ?_ t
+  · intro j
+    rw [Matrix.mul_apply]
+    rw [show pairRows (X * H) (X * HA) i (Fin.castAdd k j) = (X * H) i j from
+      Fin.addCases_left j]
+    rw [Matrix.mul_apply]
+    refine Finset.sum_congr rfl (fun l _ => ?_)
+    rw [show pairRows H HA l (Fin.castAdd k j) = H l j from Fin.addCases_left j]
+  · intro j
+    rw [Matrix.mul_apply]
+    rw [show pairRows (X * H) (X * HA) i (Fin.natAdd k j) = (X * HA) i j from
+      Fin.addCases_right j]
+    rw [Matrix.mul_apply]
+    refine Finset.sum_congr rfl (fun l _ => ?_)
+    rw [show pairRows H HA l (Fin.natAdd k j) = HA l j from Fin.addCases_right j]
+
+
+/-- **`W` is the `Φ`-image of the complexified real row space.** -/
+theorem WR_eq_map_complex {r0 n k r : ℕ}
+    (A : Matrix (Fin n) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℝ)
+    (L0 : Matrix (Fin r0) (Fin n) ℝ) (R : Matrix (Fin r) (Fin n) ℝ) :
+    WR A (N.map (algebraMap ℝ ℂ)) L0 R
+      = Submodule.map (Φ (K := ℂ)).toLinearMap
+        (Q1Subspace.rowSpace
+          ((Matrix.fromRows L0 R * pairRows N (A * N)).map (algebraMap ℝ ℂ))) := by
+  have hL : Lc L0 R = (Matrix.fromRows L0 R).map (algebraMap ℝ ℂ) := by
+    rw [← fromRows_Lc]
+    exact Q1Paper.Thm5.fromRows_map_ofReal L0 R
+  have hN : (N.map (algebraMap ℝ ℂ)) = (N.map (algebraMap ℝ ℂ)) := rfl
+  have hA : Ac A * N.map (algebraMap ℝ ℂ) = (A * N).map (algebraMap ℝ ℂ) := by
+    rw [Ac, Matrix.map_mul]
+  have h1 : Lc L0 R * N.map (algebraMap ℝ ℂ)
+      = ((Matrix.fromRows L0 R) * N).map (algebraMap ℝ ℂ) := by
+    rw [hL]
+    exact Matrix.map_mul.symm
+  have h2 : Lc L0 R * (Ac A * N.map (algebraMap ℝ ℂ))
+      = ((Matrix.fromRows L0 R) * (A * N)).map (algebraMap ℝ ℂ) := by
+    rw [hA, hL]
+    exact Matrix.map_mul.symm
+  calc WR A (N.map (algebraMap ℝ ℂ)) L0 R
+      = Submodule.map (Φ (K := ℂ)).toLinearMap
+          (Q1Subspace.rowSpace (pairRows (Lc L0 R * N.map (algebraMap ℝ ℂ))
+            (Lc L0 R * (Ac A * N.map (algebraMap ℝ ℂ))))) := by
+        rw [WR, pairRowSpace_eq_map_pairRows]
+    _ = Submodule.map (Φ (K := ℂ)).toLinearMap
+          (Q1Subspace.rowSpace (pairRows (((Matrix.fromRows L0 R) * N).map (algebraMap ℝ ℂ))
+            (((Matrix.fromRows L0 R) * (A * N)).map (algebraMap ℝ ℂ)))) := by
+        rw [h1, h2]
+    _ = Submodule.map (Φ (K := ℂ)).toLinearMap
+          (Q1Subspace.rowSpace ((pairRows ((Matrix.fromRows L0 R) * N)
+            ((Matrix.fromRows L0 R) * (A * N))).map (algebraMap ℝ ℂ))) := by
+        rw [pairRows_map]
+    _ = Submodule.map (Φ (K := ℂ)).toLinearMap
+          (Q1Subspace.rowSpace
+            ((Matrix.fromRows L0 R * pairRows N (A * N)).map (algebraMap ℝ ℂ))) := by
+        rw [mul_pairRows]
+
+/-- **The dimension identity for a real design**: `dim W = dim V`, `V` the real row
+space. -/
+theorem finrank_WR_eq {r0 n k r : ℕ}
+    (A : Matrix (Fin n) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℝ)
+    (L0 : Matrix (Fin r0) (Fin n) ℝ) (R : Matrix (Fin r) (Fin n) ℝ) :
+    finrank ℂ ↥(WR A (N.map (algebraMap ℝ ℂ)) L0 R)
+      = finrank ℝ ↥(Q1Subspace.rowSpace (Matrix.fromRows L0 R * pairRows N (A * N))) := by
+  rw [WR_eq_map_complex]
+  rw [LinearEquiv.finrank_map_eq (Φ (K := ℂ) (k := k))
+    (Q1Subspace.rowSpace ((Matrix.fromRows L0 R * pairRows N (A * N)).map (algebraMap ℝ ℂ)))]
+  have h1 : finrank ℂ ↥(Q1Subspace.rowSpace
+        ((Matrix.fromRows L0 R * pairRows N (A * N)).map (algebraMap ℝ ℂ)))
+      = ((Matrix.fromRows L0 R * pairRows N (A * N)).map (algebraMap ℝ ℂ)).rank :=
+    (Q1Subspace.rank_eq_finrank_rowSpace _).symm
+  rw [h1]
+  have h2 : ((Matrix.fromRows L0 R * pairRows N (A * N)).map (algebraMap ℝ ℂ)).rank
+      = (Matrix.fromRows L0 R * pairRows N (A * N)).rank :=
+    Q1Paper.PaperI.DecComplex.rank_map_ofReal_any _
+  rw [h2]
+  have h3 : (Matrix.fromRows L0 R * pairRows N (A * N)).rank
+      = finrank ℝ ↥(Q1Subspace.rowSpace (Matrix.fromRows L0 R * pairRows N (A * N))) :=
+    Q1Subspace.rank_eq_finrank_rowSpace _
+  rw [h3]
+
 end Q1Paper.PaperII
+
+
