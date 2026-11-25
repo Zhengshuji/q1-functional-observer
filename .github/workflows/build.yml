@@ -27,6 +27,7 @@ jobs:
         run: |
           lake build Q1Paper.PaperII.MainTheorems
           lake env lean Q1Paper/PaperII/ClaimsCheck.lean
+          lake build Q1Paper.PaperII.Read
           lake env lean Q1Paper/PaperII/Audit.lean > paperII_audit.log
           python3 scripts/check_paperI_axioms.py paperII_audit.log Q1Paper/PaperII/Audit.lean
       - name: Paper I claim index

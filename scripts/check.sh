@@ -18,6 +18,7 @@ python3 scripts/check_paperI_axioms.py "${TMPDIR:-/tmp}/paperI_audit.log" Q1Pape
 # 2b. Paper II
 lake build Q1Paper.PaperII.MainTheorems
 lake env lean Q1Paper/PaperII/ClaimsCheck.lean
+lake build Q1Paper.PaperII.Read
 lake env lean Q1Paper/PaperII/Audit.lean > "${TMPDIR:-/tmp}/paperII_audit.log"
 python3 scripts/check_paperI_axioms.py "${TMPDIR:-/tmp}/paperII_audit.log" Q1Paper/PaperII/Audit.lean
 
