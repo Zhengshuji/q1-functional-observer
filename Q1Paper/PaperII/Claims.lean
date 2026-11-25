@@ -62,6 +62,8 @@ proved, and its converse is the open real-compression lemma (plan §8.5).
   (`t_min = ⊤` when infeasible) — `Q1Paper.PaperII.tMin_le_iff_dec`.
 * **Prop 1, a priori bound**: `t_min ≤ 2ℓ`, `ℓ = rank(A N)` —
   `Q1Paper.PaperII.tMin_le_two_ell` (and `omega_le_ell`, `t_le_two_ell`).
+* **Prop 2 as a bound on the minimum order** (`eq:qmin-lb`): `a − s₀ + 1 ≤ t_min`
+  whenever every feasible `W` has `ω > 0` — `Q1Paper.PaperII.le_tMin_of_lowerBound`.
 * **Theorem 4, correctness half** (the interface): the least feasible order is itself
   feasible — `Q1Paper.PaperII.dec_sInf_tMinSet`; the ordering is
   `Q1Paper.PaperII.tMin_le_iff_dec`, and the abstract least-element statement is

@@ -29,6 +29,7 @@ Reuses: `DEC_to_feasible_c`, `feasible_to_DEC` (`Saturate.lean`, `Converse.lean`
 -/
 
 import Q1Paper.PaperII.Saturate
+import Q1Paper.PaperII.LowerBound
 
 open Module Matrix
 
@@ -156,4 +157,28 @@ theorem exists_least_of_monotone (P : ℕ → Prop) (h : ∃ r, P r) :
     P (sInf {r | P r}) ∧ ∀ s, P s → sInf {r | P r} ≤ s := by
   exact ⟨Nat.sInf_mem h, fun s hs => Nat.sInf_le hs⟩
 
+/-! ### 5. The lower bound on the minimum order -/
+
+/-- **`a − s₀ + 1 ≤ t_min`** (the paper's `eq:qmin-lb`), provided every feasible `W`
+has `ω > 0` and `s₀ ≤ a = rank[U₀;V₀]`: it is Proposition 2 applied to the
+minimising `W`. -/
+theorem le_tMin_of_lowerBound
+    (A : Matrix (Fin n) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℂ)
+    (L0 : Matrix (Fin r0) (Fin n) ℝ)
+    (hω : ∀ V : Submodule ℂ ((Fin k → ℂ) × (Fin k → ℂ)),
+      W0 A N L0 ≤ V → V ≤ TR A N → IsFeasible V → 0 < finrank ℂ ↥(Q1Subspace.pi1 V))
+    (hs₀ : finrank ℂ ↥(W0 A N L0)
+      ≤ finrank ℂ ↥(Q1Subspace.pi1 (W0 A N L0) ⊔ Q1Subspace.pi2 (W0 A N L0))) :
+    ((finrank ℂ ↥(Q1Subspace.pi1 (W0 A N L0) ⊔ Q1Subspace.pi2 (W0 A N L0))
+        - finrank ℂ ↥(W0 A N L0) + 1 : ℕ) : WithTop ℕ) ≤ tMin A N L0 := by
+  by_cases hne : (tMinSet A N L0).Nonempty
+  · rw [tMin, dif_pos hne]
+    refine WithTop.coe_le_coe.mpr ?_
+    obtain ⟨V₀, hV0, hVT, hVf, hVt⟩ := Nat.sInf_mem hne
+    rw [← hVt]
+    exact lowerBound_sub hV0 hVf (hω V₀ hV0 hVT hVf) hs₀
+  · rw [tMin, dif_neg hne]
+    exact le_top
+
 end Q1Paper.PaperII
+

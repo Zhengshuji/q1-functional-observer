@@ -67,6 +67,7 @@ import Q1Paper.PaperII.GraphExtension
 #print axioms Q1Paper.PaperII.tMin_le_two_ell
 #print axioms Q1Paper.PaperII.dec_sInf_tMinSet
 #print axioms Q1Paper.PaperII.exists_least_of_monotone
+#print axioms Q1Paper.PaperII.le_tMin_of_lowerBound
 
 -- Monotone.lean
 #print axioms Q1Paper.PaperII.pairRowSpace_fromRows
