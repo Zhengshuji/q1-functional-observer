@@ -1,8 +1,7 @@
 
-import Q1Paper.PaperI.GramInj
-
+import Q1Paper.PaperI.GramFamilyBridge
 /-!
-Q1Paper/PaperI/GramCert.lean
+Q1Paper/PaperI/GramSubspace.lean
 
 D1 step 5: certificate equivalence.  If two Gram matrices differ by a nonzero
 scalar, solvability of G x = e₀ is the same for both; applied to the window

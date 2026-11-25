@@ -68,13 +68,13 @@ The four entry points and their separate jobs:
 | `FptCore.lean` | 9 | 1 | `FptDimensions`, `fpt_omega_le_two_ell`, `fpt_m`, `fpt_ell_le_kappa`, … |  |
 | `FptSpec.lean` | 21 | 6 | `RenegarBackend`, `one_le_constCost`, `constRenegarBackend`, `fptBackendInhabited`, … |  |
 | `FromRowsMap.lean` | 1 | 0 | `fromRows_map` |  |
-| `Gram.lean` | 4 | 0 | `rowSpace_eq_range_transpose`, `range_transpose_mul_self`, `mem_range_transpose_iff_exists_gram`, `gram_certificate` |  |
-| `GramCert.lean` | 2 | 0 | `gram_solvable_iff_smul`, `gram_certificate_iff_subset` |  |
+| `GramBitLength.lean` | 4 | 0 | `bitLenInt_sum_mul_le_rows`, `gramEntry_bitLen_le_of_rows_sharp`, `gramEntry_bitLen_le_of_rows`, `gramEntry_bitLen_le_of_rows_log` |  |
 | `GramCoefficients.lean` | 3 | 2 | `eval_eq_sum_fin_coeff`, `minorCoeff`, `coeffGram`, `gramKernelEval_eq_coeff_sum`, … |  |
 | `GramCompression.lean` | 2 | 2 | `windowMinorFamily`, `windowGram_entry`, `compressedGram`, `windowGram_eq_compressed` |  |
-| `GramInj.lean` | 4 | 2 | `windowInj`, `windowSub`, `sum_prod_snd`, `sum_snd_prod`, … |  |
+| `GramFamilyBridge.lean` | 4 | 2 | `windowInj`, `windowSub`, `sum_prod_snd`, `sum_snd_prod`, … |  |
 | `GramKernel.lean` | 3 | 4 | `selectedCols`, `rowEmb`, `colEmb`, `selectedCols_apply`, … |  |
-| `GramRows.lean` | 4 | 0 | `bitLenInt_sum_mul_le_rows`, `gramEntry_bitLen_le_of_rows_sharp`, `gramEntry_bitLen_le_of_rows`, `gramEntry_bitLen_le_of_rows_log` |  |
+| `GramSubspace.lean` | 2 | 0 | `gram_solvable_iff_smul`, `gram_certificate_iff_subset` |  |
+| `GramSystem.lean` | 4 | 0 | `rowSpace_eq_range_transpose`, `range_transpose_mul_self`, `mem_range_transpose_iff_exists_gram`, `gram_certificate` |  |
 | `Hadamard.lean` | 7 | 0 | `norm_det_le_prod_norm_column`, `sqrt_pow_le_pow_div_two_add`, `det_natAbs_le_of_entry_bound`, `det_abs_le_of_entry_bound`, … |  |
 | `InputLen.lean` | 5 | 1 | `nat_size_prod_le`, `mat_den_size_le_sum`, `inputLen`, `mat_den_le_den_mul_prod_erase`, … |  |
 | `Interface.lean` | 0 | 10 | `rawAlgebraic`, `rawSpectral`, `compressedAlgebraic`, `compressedSpectral`, … |  |

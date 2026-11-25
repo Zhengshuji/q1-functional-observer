@@ -1,6 +1,5 @@
 
-import Q1Paper.PaperI.GramInj
-
+import Q1Paper.PaperI.GramFamilyBridge
 /-!
 Q1Paper/PaperI/RowSpanBridge.lean
 

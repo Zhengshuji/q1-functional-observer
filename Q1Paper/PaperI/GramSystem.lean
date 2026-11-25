@@ -4,7 +4,7 @@ import Q1Paper.Q1RowSpace
 import Q1Paper.Q1Subspace
 
 /-!
-Q1Paper/PaperI/Gram.lean
+Q1Paper/PaperI/GramSystem.lean
 
 The Gram step of Paper I, Claim 11: for a real matrix `Z` and a vector `e0`,
 

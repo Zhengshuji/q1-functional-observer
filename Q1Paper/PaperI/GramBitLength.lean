@@ -2,7 +2,7 @@
 import Q1Paper.PaperI.Claim15iv
 
 /-!
-Q1Paper/PaperI/GramRows.lean
+Q1Paper/PaperI/GramBitLength.lean
 
 The Gram entry of a **non-square** window matrix.
 
@@ -47,7 +47,7 @@ which is what `bitLenInt_sum_mul_le_rows` proves.  Per-term ingredients:
 `Nat.pow_add`, `Nat.lt_size_self`.
 
 No `sorry`, no `admit`, no new axioms.  Check with
-  lake env lean Q1Paper/PaperI/GramRows.lean
+  lake env lean Q1Paper/PaperI/GramBitLength.lean
 -/
 
 

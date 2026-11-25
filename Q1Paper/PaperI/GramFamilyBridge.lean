@@ -2,7 +2,7 @@
 import Q1Paper.PaperI.WindowSign
 
 /-!
-Q1Paper/PaperI/GramInj.lean
+Q1Paper/PaperI/GramFamilyBridge.lean
 
 D1 step 4: the Gram matrix of the injective-indexed window matrix is (ω!)²
 times the Gram matrix of the subset-indexed one.

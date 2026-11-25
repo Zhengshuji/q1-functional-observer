@@ -78,7 +78,11 @@ def main() -> int:
 
     if not args.dry_run:
         for src, dst, _o, _n in plans:
-            src.rename(dst)
+            # the module docstring normally opens with its own path; that line goes stale on rename
+            text = src.read_text(encoding="utf-8")
+            text = text.replace(src.relative_to(ROOT).as_posix(), dst.relative_to(ROOT).as_posix())
+            dst.write_text(text, encoding="utf-8", newline="\n")
+            src.unlink()
 
     verb = "would rewrite" if args.dry_run else "rewrote"
     print(f"{verb} {len(touched)} files; " + ("no files moved (dry run)" if args.dry_run else f"{len(plans)} files moved"))

@@ -6,7 +6,7 @@ import Mathlib.Algebra.Polynomial.BigOperators
 import Mathlib.Algebra.Polynomial.Degree.Operations
 
 /-!
-Q1Paper/PaperI/Claim11Final.lean
+Q1Paper/PaperI/Claim11_MinorsGram.lean
 
 The final assembly of Claim 11:
 

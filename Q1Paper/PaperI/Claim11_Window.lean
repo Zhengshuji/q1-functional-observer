@@ -1,10 +1,9 @@
 
 import Q1Paper.Window
 import Q1Paper.BezoutReal
-import Q1Paper.PaperI.Gram
-
+import Q1Paper.PaperI.GramSystem
 /-!
-Q1Paper/PaperI/Claim11.lean
+Q1Paper/PaperI/Claim11_Window.lean
 
 Claim 11 of Paper I, the Bézout/window half.  For `f : ι → K[X]` of degree at
 most `ω` and `ω ≥ 1`, a degree-bounded Bézout representation of `1` exists if

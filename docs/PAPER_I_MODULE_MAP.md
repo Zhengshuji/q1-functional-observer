@@ -79,13 +79,13 @@ docstring so a reader can see the author's stated purpose.
 | `Q1Paper/PaperI/FptCore.lean` | 10 | 5 | — | The Renegar-free core of the FPT theorem (Paper I). |
 | `Q1Paper/PaperI/FptSpec.lean` | 18 | 7 | Theorem 2 | unsatisfiable: `chartSpec_empty`).  This file assembles the FPT analogue. |
 | `Q1Paper/PaperI/FromRowsMap.lean` | 1 | 1 | — | a `Sum`, not a `Fin`. |
-| `Q1Paper/PaperI/Gram.lean` | 4 | 4 | — | `e0 ∈ row Z  ↔  ∃ x, (Zᵀ * Z) *ᵥ x = e0`. |
-| `Q1Paper/PaperI/GramCert.lean` | 2 | 2 | — | between the injective-indexed and subset-indexed families. |
+| `Q1Paper/PaperI/GramBitLength.lean` | 4 | 4 | — | The Gram entry of a **non-square** window matrix. |
 | `Q1Paper/PaperI/GramCoefficients.lean` | 5 | 5 | — | in the minor `f_i = maximalMinor P (rowEmb i.1) (colEmb i.2)`. |
 | `Q1Paper/PaperI/GramCompression.lean` | 4 | 4 | — | `(Zᵀ Z)_{t,t'} = ∑_{j : Fin ω} (if j ≤ t and j ≤ t' then S_{t-j, t'-j} else 0)`. |
-| `Q1Paper/PaperI/GramInj.lean` | 6 | 6 | — | times the Gram matrix of the subset-indexed one. |
+| `Q1Paper/PaperI/GramFamilyBridge.lean` | 6 | 6 | — | times the Gram matrix of the subset-indexed one. |
 | `Q1Paper/PaperI/GramKernel.lean` | 7 | 4 | — | *column* set, `I` a *row* set). |
-| `Q1Paper/PaperI/GramRows.lean` | 4 | 4 | — | The Gram entry of a **non-square** window matrix. |
+| `Q1Paper/PaperI/GramSubspace.lean` | 2 | 2 | — | between the injective-indexed and subset-indexed families. |
+| `Q1Paper/PaperI/GramSystem.lean` | 4 | 4 | — | `e0 ∈ row Z  ↔  ∃ x, (Zᵀ * Z) *ᵥ x = e0`. |
 | `Q1Paper/PaperI/Hadamard.lean` | 7 | 5 | — | constant `bitLenInt (n!)` by the sharp Hadamard constant in Claim 21. |
 | `Q1Paper/PaperI/InputLen.lean` | 6 | 4 | — | rational matrix, together with the two ingredients it needs. |
 | `Q1Paper/PaperI/Interface.lean` | 10 | 8 | — | Formal statement layer of Paper I (Sections II-III). |

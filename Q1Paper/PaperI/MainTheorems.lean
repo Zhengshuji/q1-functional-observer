@@ -29,7 +29,7 @@ import Q1Paper.FixedOrder
 import Q1Paper.FPT
 import Q1Paper.PaperI.Interface
 import Q1Paper.PaperI.CompressionMatrix
-import Q1Paper.PaperI.Gram
+import Q1Paper.PaperI.GramSystem
 import Q1Paper.PaperI.Claim11_Window
 import Q1Paper.PaperI.MinorRank
 import Q1Paper.PaperI.SpectralMinor
@@ -44,8 +44,8 @@ import Q1Paper.PaperI.MinorFamilyBridge
 import Q1Paper.PaperI.FibreSum
 import Q1Paper.PaperI.FibreCard
 import Q1Paper.PaperI.WindowSign
-import Q1Paper.PaperI.GramInj
-import Q1Paper.PaperI.GramCert
+import Q1Paper.PaperI.GramFamilyBridge
+import Q1Paper.PaperI.GramSubspace
 import Q1Paper.PaperI.RowSpanBridge
 import Q1Paper.PaperI.BitLen
 import Q1Paper.PaperI.BitLenAdd
@@ -89,7 +89,7 @@ import Q1Paper.PaperI.FptCore
 import Q1Paper.PaperI.Claim4Converse
 import Q1Paper.PaperI.FptSpec
 import Q1Paper.PaperI.Prop4
-import Q1Paper.PaperI.GramRows
+import Q1Paper.PaperI.GramBitLength
 import Q1Paper.PaperI.CompressedGram
 import Q1Paper.PaperI.DecR0Iface
 import Q1Paper.PaperI.DenOne
