@@ -40,7 +40,7 @@ bundled in this repository; it is skipped here and runs in the research reposito
 and a candidate `L = [L0; R]` it decides, in exact rational arithmetic,
 
 * (5a) `rank[LA; L; CA; C] = rank[L; CA; C]`,
-* (5b) the gcd of the `r0`-order minors of `[λL - LA; CA; C]` is a nonzero constant,
+* (5b) the gcd of the `r0`-order minors of `[位L - LA; CA; C]` is a nonzero constant,
 
 prints the shapes and the rank of `[L; CA; C]` first (asserted, so a malformed input trips an
 assertion rather than yielding a confident wrong answer), and returns `DEC = (5a) and (5b)`.
@@ -58,7 +58,7 @@ and the research script cannot silently disagree.
 (chart enumeration, the per-chart system (R0), and a solver).  The pieces are `c318` (the
 `r = 0` system and its gcd test), `c320`-`c324` (the subspace reduction) and `c319` (the
 encoding); `audit_independent.py` additionally implements the decision side
-(`N = ker[C; CA]`, `A' = (NᵀN)⁻¹NᵀAN`, `R0 = AN - NA'`, the invariant closure `V`, `α0`).
+(`N = ker[C; CA]`, `A' = (N岬€N)鈦宦筃岬€AN`, `R0 = AN - NA'`, the invariant closure `V`, `伪0`).
 
 ## The r = 0 decision procedure (an algorithm, not a check)
 
@@ -95,3 +95,26 @@ turned into `False`.
 feasibility oracle.  None of that is implemented here, and the module does not pretend
 otherwise.  The witness is in the compressed form the paper itself uses (the `S` family);
 reconstructing an actual observer matrix `L` from it is a further step.
+## Terminology: paper, Python, Lean
+
+The three layers name the same objects differently, and a reader moving between them has to translate
+twice.  This table is the translation.  It is the one place where the Python and the Lean are compared
+side by side.
+
+| paper | Python | Lean |
+|---|---|---|
+| $\mathrm{DEC}(q)$, conditions (5a) and (5b) over the reals | `decide(A, C, L0, q)` in decide.py | Q1Paper.PaperI.DEC (S00_Interface/Interface.lean) |
+| (5b) over $\mathbb{C}$ -- the paper's own condition | the same decide, since the Python tests the complex pencil | Q1Paper.PaperI.DecComplex.complexDEC |
+| the raw algebraic condition, $\operatorname{rank}[LA;L;CA;C]=\operatorname{rank}[L;CA;C]$ | A, C, L used directly | Q1Paper.PaperI.rawAlgebraic |
+| a chart system $\Phi_{\omega,J}$ of eq:phi | the per-chart system in decide.py | Q1Paper.PaperI.ChartComplete.PhiPoint |
+| the Gram certificate ^{\mathsf T} Z x = e_0$ | cb_gram.py, gram in decide.py | Q1Paper.PaperI.GramSystem.gram_certificate |
+| the  = 0$ system (R0) | decide_r0.py | Q1Paper.prop4_r0_iff_spectral (S06_Algorithms/Prop4.lean) |
+
+Two cautions this table makes visible:
+
+* DEC and complexDEC are **not** the same proposition.  The Python decides the complex condition,
+  which is the paper's; the Lean DEC quantifies over the reals and is retained only as an auxiliary
+  definition (complexDEC → DEC, and the converse fails).  Reading "the Python agrees with DEC" is
+  therefore a stronger statement than it looks.
+* unknown in the Python is an abstention, never False; there is no Lean counterpart, because the Lean
+  formalisation does not include an executable solver.
