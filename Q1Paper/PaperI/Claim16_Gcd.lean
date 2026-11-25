@@ -5,7 +5,7 @@ import Mathlib.RingTheory.PrincipalIdealDomain
 import Mathlib.Algebra.GCDMonoid.Finset
 
 /-!
-Q1Paper/PaperI/C16Gcd.lean
+Q1Paper/PaperI/Claim16_Gcd.lean
 
 Claim 16 (`lem:zero`) of Paper I, part (iii), in its **gcd form**, and its link to the
 "no common complex root" form (ii).

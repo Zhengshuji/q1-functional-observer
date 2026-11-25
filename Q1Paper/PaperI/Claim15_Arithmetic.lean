@@ -2,7 +2,7 @@
 import Q1Paper.PaperI.BareissBase
 
 /-!
-Q1Paper/PaperI/Claim15iv.lean
+Q1Paper/PaperI/Claim15_Arithmetic.lean
 
 Claim 15(iv) of the paper: the **arithmetic skeleton** of the bit-length bound
 for the coefficients of the cleared system `Phi_{omega,J}`.
@@ -30,7 +30,7 @@ and `n ≤ L`.  No `L ≥ 2` hypothesis is needed; when `n = 1` the chain is sti
 valid (`L = 1` is allowed), and when `n ≥ 2` it is implied by `n ≤ L`.
 
 No `sorry`, no `admit`, no new axioms.  Check with
-  lake env lean Q1Paper/PaperI/Claim15iv.lean
+  lake env lean Q1Paper/PaperI/Claim15_Arithmetic.lean
 -/
 
 
@@ -38,7 +38,7 @@ open Matrix
 
 open scoped BigOperators
 
-namespace Q1Paper.Claim15iv
+namespace Q1Paper.Claim15_Arithmetic
 
 open Q1Paper.PaperI
 
@@ -385,4 +385,4 @@ theorem blockProduct_bitLen_le_38 {n L : ℕ} {x y : ℤ}
   have heq : 18 * n ^ 2 * L + 20 * n ^ 2 * L = 38 * n ^ 2 * L := by ring
   omega
 
-end Q1Paper.Claim15iv
+end Q1Paper.Claim15_Arithmetic

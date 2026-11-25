@@ -55,12 +55,12 @@ import Q1Paper.PaperI.DesnanotJacobi
 import Q1Paper.PaperI.BareissTableau
 import Q1Paper.PaperI.BareissAssemble
 import Q1Paper.PaperI.Claim16
-import Q1Paper.PaperI.C16Gcd
+import Q1Paper.PaperI.Claim16_Gcd
 import Q1Paper.PaperI.Claims38
 import Q1Paper.PaperI.Theorem5
 import Q1Paper.PaperI.RankFactorization
 import Q1Paper.PaperI.RationalBasis
-import Q1Paper.PaperI.Claim15iv
+import Q1Paper.PaperI.Claim15_Arithmetic
 import Q1Paper.PaperI.MinorCoeff
 import Q1Paper.PaperI.Claim15
 import Q1Paper.PaperI.Claim14
@@ -74,7 +74,7 @@ import Q1Paper.PaperI.CostBareiss
 import Q1Paper.PaperI.ComplexityCounts
 import Q1Paper.PaperI.BitLenMatMul
 import Q1Paper.PaperI.RatDescent
-import Q1Paper.PaperI.Claim14Basis
+import Q1Paper.PaperI.Claim14_Bases
 import Q1Paper.PaperI.KernelBasis
 import Q1Paper.PaperI.BezoutBounded
 import Q1Paper.PaperI.ChartCount

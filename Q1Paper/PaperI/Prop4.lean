@@ -26,7 +26,7 @@ Contents:
         (`spoly_mul_pencil_eq_one`, used inside `v_implies_i`) and hence forces full column
         rank at every complex parameter (`v_implies_i`).
   - ⟸ : spectral ⟹ the maximal minors of the pencil have no common complex root
-        (`rank_eq_iff_no_common_complex_root`, `PaperI/C16Gcd.lean`)
+        (`rank_eq_iff_no_common_complex_root`, `PaperI/Claim16_Gcd.lean`)
         ⟹ their gcd in `ℚ[λ]` is a nonzero constant
         (`gcd_isConst_of_no_common_complex_root`)
         ⟹ a degree-bounded rational left inverse of the pencil exists

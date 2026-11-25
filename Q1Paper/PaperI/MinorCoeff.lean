@@ -1,7 +1,6 @@
 
-import Q1Paper.PaperI.C16Gcd
-import Q1Paper.PaperI.Claim15iv
-
+import Q1Paper.PaperI.Claim16_Gcd
+import Q1Paper.PaperI.Claim15_Arithmetic
 /-!
 Q1Paper/PaperI/MinorCoeff.lean
 
@@ -9,7 +8,7 @@ Q1Paper/PaperI/MinorCoeff.lean
 of the pencil `P(λ) = λX − G`.**
 
 The paper's object is `pencilMinors X G : (Fin ω ↪ Fin q) → ℚ[λ]`
-(`Q1Paper.pencil` composed with `Q1Paper.minors`, see `PaperI/C16Gcd.lean`,
+(`Q1Paper.pencil` composed with `Q1Paper.minors`, see `PaperI/Claim16_Gcd.lean`,
 `G3Coeff.lean`, `G3LeftInverse.lean`); here the arithmetic is done on the **integer**
 pencil, which is where `bitLenInt` lives, and §7 transfers the result back.
 
@@ -90,7 +89,7 @@ noncomputable def pencilMinorZ {q ω : ℕ} (X G : Matrix (Fin q) (Fin ω) ℤ)
 /-! ## 2.  Toolbox -/
 
 /-- `bitLenInt z ≤ b` gives the strict magnitude bound `|z| < 2^b`
-(this is `Q1Paper.Claim15iv.abs_lt_two_pow_of_bitLenInt_le_mc`). -/
+(this is `Q1Paper.Claim15_Arithmetic.abs_lt_two_pow_of_bitLenInt_le_mc`). -/
 theorem abs_lt_two_pow_of_bitLenInt_le_mc {z : ℤ} {b : ℕ} (h : bitLenInt z ≤ b) :
     |z| < (2 : ℤ) ^ b := by
   have h' : z.natAbs < 2 ^ b := bitLenInt_le_iff.mp h
@@ -412,7 +411,7 @@ theorem one_le_cube {n : ℕ} (hn : 1 ≤ n) : 1 ≤ n ^ 3 := by
 /-- **The paper's constant form.**  If the entries of `X` and `G` have bit length at
 most `18 n²L`, `1 ≤ ω ≤ n` and `n ≤ L`, then every coefficient of every maximal minor
 has at most `22 n³L` bits — the same constant as `bMinor_bitLen_le_22`
-(`PaperI/Claim15iv.lean`), the `C(ω,d)` slot being absorbed into the `4 n³L` slack. -/
+(`PaperI/Claim15_Arithmetic.lean`), the `C(ω,d)` slot being absorbed into the `4 n³L` slack. -/
 theorem pencilMinor_coeff_bitLen_le_22 {q ω n L : ℕ} (X G : Matrix (Fin q) (Fin ω) ℤ)
     (hX : ∀ i j, bitLenInt (X i j) ≤ 18 * n ^ 2 * L)
     (hG : ∀ i j, bitLenInt (G i j) ≤ 18 * n ^ 2 * L)
@@ -428,7 +427,7 @@ theorem pencilMinor_coeff_bitLen_le_22 {q ω n L : ℕ} (X G : Matrix (Fin q) (F
     have hf := bitLenInt_factorial_le ω
     have hs : ω.size ≤ n := by
       calc ω.size ≤ n.size := Nat.size_le_size hωn
-        _ ≤ n := Q1Paper.Claim15iv.nat_size_le_self n
+        _ ≤ n := Q1Paper.Claim15_Arithmetic.nat_size_le_self n
     have hmul : ω * ω.size ≤ n * n := by
       calc ω * ω.size ≤ ω * n := Nat.mul_le_mul_left _ hs
         _ ≤ n * n := Nat.mul_le_mul_right n hωn

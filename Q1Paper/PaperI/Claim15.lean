@@ -1,10 +1,9 @@
 
-import Q1Paper.PaperI.Claim15iv
+import Q1Paper.PaperI.Claim15_Arithmetic
 import Q1Paper.PaperI.BitLenMatMul
 import Q1Paper.PaperI.InputLen
 import Q1Paper.PaperI.ComplexityCounts
-import Q1Paper.PaperI.Claim14Basis
-
+import Q1Paper.PaperI.Claim14_Bases
 /-!
 Q1Paper/PaperI/Claim15.lean
 

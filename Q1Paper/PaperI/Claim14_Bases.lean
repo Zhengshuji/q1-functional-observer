@@ -4,7 +4,7 @@ import Q1Paper.PaperI.Claim14
 import Q1Paper.PaperI.KernelBasis
 
 /-!
-Q1Paper/PaperI/Claim14Basis.lean
+Q1Paper/PaperI/Claim14_Bases.lean
 
 Chart data of Claim 14 (`clm:chartdata`) of Paper I, assembled from the pieces
 that already exist:

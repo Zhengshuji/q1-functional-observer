@@ -1,6 +1,5 @@
 
-import Q1Paper.PaperI.Claim15iv
-
+import Q1Paper.PaperI.Claim15_Arithmetic
 /-!
 Q1Paper/PaperI/GramBitLength.lean
 
@@ -14,7 +13,7 @@ Hence
 
 has `s * omega` summands, not `2 * omega`.
 
-`PaperI/Claim15iv.lean`'s `gramEntry_bitLen_le_47` is stated for the **square**
+`PaperI/Claim15_Arithmetic.lean`'s `gramEntry_bitLen_le_47` is stated for the **square**
 shape `Fin (2ω) → Fin (2ω) → ℤ`, so it does not cover the real object.  This
 file supplies the row-count-generic replacement.  Main results:
 
@@ -30,7 +29,7 @@ paper's window matrix the rows are indexed by `(I, J, j)` and the number of
 maximal minors is `s = C(q,ω) * C(ℓ,ω)`, so the instantiation belongs to the
 compression route rather than here.
 
-**Why the `Claim15iv` sum bound alone is not enough.**  The induction behind
+**Why the `Claim15_Arithmetic` sum bound alone is not enough.**  The induction behind
 `gramEntry_bitLen_le_47` is `bitLenInt_sum_mul_le_univ`, which gives
 `bitLenInt (∑ k, f k * g k) ≤ Fintype.card ι + bf + bg`, i.e. `m + 2b` for
 `ι = Fin m`.  That does **not** imply `2b + Nat.size m + 1`: it would require
@@ -42,7 +41,7 @@ estimate
 
 which is what `bitLenInt_sum_mul_le_rows` proves.  Per-term ingredients:
 `bitLenInt z ≤ b → z.natAbs < 2 ^ b` is `bitLenInt_le_iff` (the same bridge as
-`Claim15iv.abs_lt_two_pow_of_bitLenInt_le`), and the summation is bounded with
+`Claim15_Arithmetic.abs_lt_two_pow_of_bitLenInt_le`), and the summation is bounded with
 `Int.natAbs_sum_le`, `Nat.mul_le_mul_right`, `Nat.mul_lt_mul_of_pos_left`,
 `Nat.pow_add`, `Nat.lt_size_self`.
 

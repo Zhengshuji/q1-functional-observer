@@ -38,7 +38,6 @@ docstring so a reader can see the author's stated purpose.
 | `Q1Paper/PaperI/BitLen.lean` | 42 | 10 | — | Bit-length foundation for Claim 13. |
 | `Q1Paper/PaperI/BitLenAdd.lean` | 8 | 7 | — | `mat_abs_num_lt_two_pow_bitLenMat`. |
 | `Q1Paper/PaperI/BitLenMatMul.lean` | 32 | 7 | — | composition lemma for the single-parameter bit bounds of Paper I. |
-| `Q1Paper/PaperI/C16Gcd.lean` | 19 | 10 | Claim 16 (i)-(iii) | "no common complex root" form (ii). |
 | `Q1Paper/PaperI/CauchyBinet.lean` | 11 | 6 | — | Port of the square Cauchy-Binet identity. |
 | `Q1Paper/PaperI/ChartComplete.lean` | 12 | 11 | — | file proves the first and most specific one. |
 | `Q1Paper/PaperI/ChartComplex.lean` | 4 | 1 | — | stack, and use that complexification preserves the rank. |
@@ -47,10 +46,11 @@ docstring so a reader can see the author's stated purpose.
 | `Q1Paper/PaperI/Claim11_Window.lean` | 6 | 6 | — | root") to obtain the equivalence with the pointwise no-common-root condition. |
 | `Q1Paper/PaperI/Claim12.lean` | 2 | 2 | Claim 12 | Claim 12 of Paper I: the Gram certificate for a full-column-rank pencil. |
 | `Q1Paper/PaperI/Claim14.lean` | 21 | 5 | — | kernel of a stacked (difference) map, and the resulting generating set. |
-| `Q1Paper/PaperI/Claim14Basis.lean` | 25 | 5 | Claim 14 | with the explicit bound `bitLenRat <= tauM M tau`. |
+| `Q1Paper/PaperI/Claim14_Bases.lean` | 25 | 5 | Claim 14 | with the explicit bound `bitLenRat <= tauM M tau`. |
 | `Q1Paper/PaperI/Claim15.lean` | 14 | 6 | — | single explicit polynomial bound in terms of `inputLen`. |
-| `Q1Paper/PaperI/Claim15iv.lean` | 27 | 11 | — | for the coefficients of the cleared system `Phi_{omega,J}`. |
+| `Q1Paper/PaperI/Claim15_Arithmetic.lean` | 27 | 11 | — | for the coefficients of the cleared system `Phi_{omega,J}`. |
 | `Q1Paper/PaperI/Claim16.lean` | 23 | 9 | — | Claim 16 of the paper (`lem:zero`, the "zero-free-row" case). |
+| `Q1Paper/PaperI/Claim16_Gcd.lean` | 19 | 10 | Claim 16 (i)-(iii) | "no common complex root" form (ii). |
 | `Q1Paper/PaperI/Claim4Converse.lean` | 2 | 2 | Claim 4 (converse) | The **converse** of Claim 4 (`lem:sandwich`) of Paper I. |
 | `Q1Paper/PaperI/Claim8_Disjunction.lean` | 9 | 4 | — | (`PaperI/Claims38.lean`). |
 | `Q1Paper/PaperI/Claim8_ElemSymm.lean` | 13 | 5 | Claim 8 (disjunction) | `elemSymm_eq_zero_iff_rank_lt  :  elemSymm M j = 0 ↔ M.rank < j`. |

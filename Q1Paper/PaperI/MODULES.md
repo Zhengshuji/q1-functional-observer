@@ -27,7 +27,6 @@ The four entry points and their separate jobs:
 | `BitLen.lean` | 39 | 3 | `bitLenInt`, `bitLenInt_eq_zero`, `bitLenInt_pos`, `bitLenInt_le_iff`, … |  |
 | `BitLenAdd.lean` | 8 | 0 | `bitLenInt_natCast`, `rat_add_num_natAbs_le`, `rat_add_den_le`, `bitLenRat_add`, … |  |
 | `BitLenMatMul.lean` | 31 | 1 | `bitLenMatAny`, `bitLenMatAny_eq_bitLenMat`, `mat_den_size_le_bitLenMatAny`, `mat_bitLenInt_num_le_bitLenMatAny`, … |  |
-| `C16Gcd.lean` | 16 | 3 | `pencilMinors`, `FamilyGcdIsConst`, `NoCommonComplexRoot`, `exists_ne_zero_of_gcd_isConst`, … |  |
 | `CauchyBinet.lean` | 12 | 1 | `plucker`, `plucker_apply`, `_root_`, `pairingDual_map_toDual_basis`, … |  |
 | `ChartComplete.lean` | 11 | 1 | `row_LA_mul_le_row_L_mul`, `exists_chart_factorization`, `exists_phi_point`, `rowSpace_le_of_chart_factorization`, … |  |
 | `ChartComplex.lean` | 2 | 2 | `RowIdx`, `rank_map_ofReal_sum`, `spectralComplex`, `complex_spectral_implies_real` |  |
@@ -36,10 +35,11 @@ The four entry points and their separate jobs:
 | `Claim11_Window.lean` | 5 | 1 | `windowOne`, `windowOne_eq_toFn`, `exists_bezout_iff_mem_rowSpace_window`, `mem_rowSpace_window_of_no_common_complex_root`, … |  |
 | `Claim12.lean` | 2 | 0 | `exists_left_inverse_of_rank_eq`, `claim12_iff_gram` |  |
 | `Claim14.lean` | 15 | 6 | `diffMap`, `diffMap_apply`, `K0`, `mem_K0_iff`, … |  |
-| `Claim14Basis.lean` | 21 | 4 | `exists_basis_matrix_of_submodule_fintype`, `rowSpace_transpose_eq_range`, `exists_rowBasis_of_submodule`, `rowSpace_mul_le`, … |  |
+| `Claim14_Bases.lean` | 21 | 4 | `exists_basis_matrix_of_submodule_fintype`, `rowSpace_transpose_eq_range`, `exists_rowBasis_of_submodule`, `rowSpace_mul_le`, … |  |
 | `Claim15.lean` | 14 | 0 | `bitLenRat_le_bitLenMat`, `cols_le_inputLen`, `rows_le_inputLen`, `inputLen_le_of_entry_bound`, … |  |
-| `Claim15iv.lean` | 27 | 0 | `bitLenInt_mul_le`, `bitLenInt_add_le`, `bitLenInt_sub_le`, `abs_lt_two_pow_of_bitLenInt_le`, … |  |
+| `Claim15_Arithmetic.lean` | 27 | 0 | `bitLenInt_mul_le`, `bitLenInt_add_le`, `bitLenInt_sub_le`, `abs_lt_two_pow_of_bitLenInt_le`, … |  |
 | `Claim16.lean` | 22 | 1 | `coeffM`, `coeffM_add`, `coeffM_sub`, `coeffM_smul_X_succ`, … |  |
+| `Claim16_Gcd.lean` | 16 | 3 | `pencilMinors`, `FamilyGcdIsConst`, `NoCommonComplexRoot`, `exists_ne_zero_of_gcd_isConst`, … |  |
 | `Claim4Converse.lean` | 2 | 0 | `claim4_converse`, `claim4_converse_zero` |  |
 | `Claim8_Disjunction.lean` | 9 | 0 | `gramBlock_eq_gram_submatrix`, `gramBlock_eq_of_gram_eq`, `elemSymm_eq_of_gram_eq`, `exists_rank_disjunct`, … |  |
 | `Claim8_ElemSymm.lean` | 11 | 2 | `elemSymmGen`, `gram_submatrix_equivFin`, `rank_submatrix_equivFin`, `elemSymmGen_eq_elemSymm`, … |  |

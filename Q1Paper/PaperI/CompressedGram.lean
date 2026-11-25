@@ -1,7 +1,6 @@
 
 import Q1Paper.PaperI.GramCompression
-import Q1Paper.PaperI.Claim15iv
-
+import Q1Paper.PaperI.Claim15_Arithmetic
 /-!
 Q1Paper/PaperI/CompressedGram.lean
 
@@ -34,7 +33,7 @@ also in `2*b + (2*ω).size + 1`).  The transfer to `Zᵀ Z` is the single rewrit
 step `windowGram_eq_compressed`; the `sω`-row matrix is never constructed, and the
 factor `s` never enters any arithmetic estimate.
 
-Patching `Q1Paper.Claim15iv.gramEntry_bitLen_le_47` would be the wrong move: that
+Patching `Q1Paper.Claim15_Arithmetic.gramEntry_bitLen_le_47` would be the wrong move: that
 lemma bounds a `2ω`-term sum for the *square* model and its helper
 `bitLenInt_sum_le` is linear in the number of summands (`card + ∑ b`); neither the
 term count `ω` versus `sω` nor the logarithmic cost of adding the summands is
@@ -117,7 +116,7 @@ theorem windowGram_eq_compressedGramOf {q ℓ : ℕ}
 smaller than `2 ^ b` in absolute value, then the sum has bit length at most
 `b + s.card.size`.  This is the logarithmic-cost sum bound: the number of summands
 enters only through `Nat.size`.  (The existing `bitLenInt_sum_le` of
-`Claim15iv.lean` is linear, `s.card + ∑ b`, and is too lossy for the compressed
+`Claim15_Arithmetic.lean` is linear, `s.card + ∑ b`, and is too lossy for the compressed
 Gram, where the summand count is `ω`.) -/
 theorem bitLenInt_sum_le_card_size {ι : Type*} (s : Finset ι) (f : ι → ℤ) {b : ℕ}
     (h : ∀ i ∈ s, |f i| < (2 : ℤ) ^ b) :
@@ -174,7 +173,7 @@ theorem compressedGram_entry_bitLen_le {ω : ℕ} (S : ℕ → ℕ → ℤ) {b :
   · intro j _
     by_cases h : (j : ℕ) ≤ (t : ℕ) ∧ (j : ℕ) ≤ (t' : ℕ)
     · rw [ite_eq_left h]
-      exact Q1Paper.Claim15iv.abs_lt_two_pow_of_bitLenInt_le (hS _ _)
+      exact Q1Paper.Claim15_Arithmetic.abs_lt_two_pow_of_bitLenInt_le (hS _ _)
     · rw [ite_eq_right h, abs_zero]
       positivity
   · simp

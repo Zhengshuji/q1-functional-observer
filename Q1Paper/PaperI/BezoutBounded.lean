@@ -1,6 +1,6 @@
 
 import Q1Paper.PaperI.RatDescent
-import Q1Paper.PaperI.C16Gcd
+import Q1Paper.PaperI.Claim16_Gcd
 import Q1Paper.PaperI.Claim11_MinorsGram
 import Q1Paper.BezoutReal
 
@@ -35,7 +35,7 @@ Main results:
   `Q1Paper.exists_bezout_family_real`.
 * `claim16_iii_implies_iv_of_gcd_isConst`, `claim16_ii_implies_iv_rat` : Claim 16,
   (iii) ⟹ (iv) and (ii) ⟹ (iv) over `ℚ`, with the degree bound `2ω−2` — i.e. the gap recorded
-  at the end of `PaperI/Claim16.lean` and `PaperI/C16Gcd.lean` is closed.
+  at the end of `PaperI/Claim16.lean` and `PaperI/Claim16_Gcd.lean` is closed.
 * a `True` point showing that the main theorem is not vacuous.
 
 No `sorry`, no `admit`, no new axioms.
@@ -344,7 +344,7 @@ maximal minors have no common complex root, hence (by
 `claim16_iii_implies_iv`, which then produces the degree-bounded left inverse.
 
 This closes the gap recorded at the end of `PaperI/Claim16.lean` and
-`PaperI/C16Gcd.lean` ("the transport back to `ℚ` needs a descent argument for the rational
+`PaperI/Claim16_Gcd.lean` ("the transport back to `ℚ` needs a descent argument for the rational
 linear system which is not formalised here"). -/
 theorem claim16_iii_implies_iv_of_gcd_isConst {q ω : ℕ} (hω : 1 ≤ ω)
     (X G : Matrix (Fin q) (Fin ω) ℚ) (h : FamilyGcdIsConst (pencilMinors X G)) :

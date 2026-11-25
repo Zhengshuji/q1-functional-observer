@@ -110,8 +110,8 @@ every coefficient of every maximal minor and of the Gram entries in terms of the
 The point of this layer is not elegance: it is that a *real* algebraic feasibility question can be
 decided with exact rational arithmetic at a known cost, with no numerical tolerance anywhere.
 
-*Lean:* `Q1Paper/PaperI/Claim14Basis.lean`, `RationalBasis.lean`, `MinorCoeff.lean`,
-`CompressedGram.lean`, `C16Gcd.lean`, `BezoutBounded.lean`.
+*Lean:* `Q1Paper/PaperI/Claim14_Bases.lean`, `RationalBasis.lean`, `MinorCoeff.lean`,
+`CompressedGram.lean`, `Claim16_Gcd.lean`, `BezoutBounded.lean`.
 
 ### Step 5 — decide, and count
 
