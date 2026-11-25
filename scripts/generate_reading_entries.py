@@ -232,7 +232,7 @@ RESULTS: dict[str, list[str]] = {
 def render(file_name: str, title: str, anchor: str, problem: str, prior: str,
            steps, nxt: str) -> str:
     lines = [
-        "import Q1Paper.PaperI.MainTheorems",
+        "import Q1Paper.PaperI.S00_Interface.MainTheorems",
         "",
         "/-!",
         f"# {title}",

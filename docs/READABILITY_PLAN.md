@@ -15,32 +15,37 @@ This file is a working note and should be deleted when the work is done.
 | **P1** | 8 per-section reading entries: `/-!` narrative in proof order + one `#check` per step, generated and CI-checked | low — additive only | done |
 | **P1.5** | a hierarchy per claim: base tool / bridge / core lemma / the official proof | low — metadata, no code | done |
 | **P2** | rename 16 claim-hosting modules in 5 groups | medium — module names change, so imports and the generators follow; the audit does not, because declaration names are namespace-qualified | done |
-| **P3** | move modules into per-section directories | high — 221 import lines | **not executed**; see the section below |
+| **P3** | move modules into per-section directories | high — 221 import lines | done — 86 modules in 9 sections |
 
-## P3: measured, and deliberately not executed
+## P3: executed, and how the classification was made
 
-The original objective named P0 through P3, so this records why P3 stops here rather than leaving it
-silently undone.
+The phase is done.  Its prerequisite was a classification pass, and that is what happened: all 86
+modules under `Q1Paper/PaperI/` were assigned from **their own stated purpose**, read one at a time.
 
-**Cost, measured.**  Moving the 86 modules of `Q1Paper/PaperI/` into per-section directories rewrites
-**221 `import` lines across 87 files**, plus the directory list in `generate_paperI_modules.py`.  The
-axiom audit is *not* affected — declaration names are qualified by namespace, not by module path, which
-is the same property that made P2's renames safe.  The mechanical cost is real but containable.
+A keyword classifier was tried first and rejected: run over the module table it put 39 of the 86 into a
+single bucket, because declaration names contain words like `gram` and `minor`.  That is the misfiling
+failure this plan warned about, caught before any file was moved.
 
-**The blocking problem is classification, not cost.**  A section assignment has to be defensible for all
-86 modules.  Only 20 host a paper item, and those are the easy ones; the other 66 are supporting modules
-whose home is a judgement call — `Hadamard.lean`, `DesnanotJacobi.lean`, `FibreCard.lean`,
-`DenOne.lean`.  Assigning them by filename prefix would misfile some, and a mis-filed module is worse
-than a flat one: it tells the reader something false about why the module exists.
+    S00_Interface 5   S01_Compression 2   S02_Subspace 10   S03_Certificate 22
+    S04_Rationality 13   S05_Complexity 10   S06_Algorithms 9   S07_ExistsReal 4
+    S08_ChartEquivalence 12
 
-**What would make P3 worth doing.**  A per-module reading pass deciding each of the 66 by what it
-actually proves, not by its name — several rounds with a real misfiling risk, in exchange for a
-directory tree.  Against that: after P0-P2 the file names are already semantic, and P1/P1.5 give the
-proof order and the statement hierarchy, which is the part that was actually missing.
+`S08_ChartEquivalence` is not a section of the paper: it holds the chart / Phi / DEC development that
+connects the certificate to the algorithm.  It exists because `S03_Certificate` had grown to 39 members,
+and that overflow was the signal that two topics were being mixed.
 
-**Decision.**  P3 is not executed.  The `Read/` entries remain the answer to "where do I start", and
-`PAPER_I_MODULE_MAP.md` remains the answer to "why does this file exist".  If P3 is ever wanted, its
-prerequisite is the classification pass above, not a script.
+Three things had to change with the move, each found by building rather than by reasoning:
+
+* the directories are `S00_…` rather than `00_…`: a Lean module name may not start with a digit, so
+  `lake build Q1Paper.PaperI.00_Interface.MainTheorems` fails with `unknown target`;
+* 72 module docstrings open with their own path, which had to be rewritten;
+* the audit path in CI and `check.sh` moved to `S00_Interface/Audit.lean`.
+
+What did **not** change: any declaration name, and therefore `Audit.lean`'s 439 entries.  Module paths
+and namespace qualification are independent — the property that also made P0 and P2 safe.
+
+`Q1Paper/*.lean` (the 31-module project layer) stays flat on purpose: it is not the paper's
+formalisation.
 
 ## P0: semantic namespaces, not filename mirrors
 

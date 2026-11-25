@@ -1,4 +1,4 @@
-import Q1Paper.PaperI.MainTheorems
+import Q1Paper.PaperI.S00_Interface.MainTheorems
 
 /-!
 # §3.4 The finite certificate

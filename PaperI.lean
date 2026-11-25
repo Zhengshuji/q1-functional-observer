@@ -10,4 +10,4 @@ Build:
   lake env lean Q1Paper/PaperI/Audit.lean
 -/
 
-import Q1Paper.PaperI.MainTheorems
+import Q1Paper.PaperI.S00_Interface.MainTheorems

@@ -25,7 +25,15 @@ import sys
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DIRS = [
-    ("Q1Paper/PaperI", "Paper I modules (`namespace Q1Paper.PaperI.*`)"),
+        ("Q1Paper/PaperI/S00_Interface", "00_Interface"),
+    ("Q1Paper/PaperI/S01_Compression", "01_Compression"),
+    ("Q1Paper/PaperI/S02_Subspace", "02_Subspace"),
+    ("Q1Paper/PaperI/S03_Certificate", "03_Certificate"),
+    ("Q1Paper/PaperI/S08_ChartEquivalence", "08_ChartEquivalence"),
+    ("Q1Paper/PaperI/S04_Rationality", "04_Rationality"),
+    ("Q1Paper/PaperI/S05_Complexity", "05_Complexity"),
+    ("Q1Paper/PaperI/S06_Algorithms", "06_Algorithms"),
+    ("Q1Paper/PaperI/S07_ExistsReal", "07_ExistsReal"),
     ("Q1Paper", "Root modules (`namespace Q1Paper.*`)"),
 ]
 

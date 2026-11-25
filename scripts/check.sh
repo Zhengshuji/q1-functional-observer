@@ -12,8 +12,8 @@ lake env lean PaperI.lean
 lake build Q1Paper.PaperI.Read.All
 
 # 2. the axiom audit
-lake env lean Q1Paper/PaperI/Audit.lean > "${TMPDIR:-/tmp}/paperI_audit.log"
-python3 scripts/check_paperI_axioms.py "${TMPDIR:-/tmp}/paperI_audit.log" Q1Paper/PaperI/Audit.lean
+lake env lean Q1Paper/PaperI/S00_Interface/Audit.lean > "${TMPDIR:-/tmp}/paperI_audit.log"
+python3 scripts/check_paperI_axioms.py "${TMPDIR:-/tmp}/paperI_audit.log" Q1Paper/PaperI/S00_Interface/Audit.lean
 
 # 3. the generated indexes must match the sources
 python3 scripts/generate_paperI_claims.py --check
