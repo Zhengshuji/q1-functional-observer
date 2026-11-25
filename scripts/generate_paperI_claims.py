@@ -137,7 +137,7 @@ def check_lean() -> str:
         "`scripts/generate_paperI_claims.py`.  A renamed or deleted declaration makes this file",
         "fail to elaborate, which is what keeps `Claims.lean` and `CLAIMS.md` from rotting.",
         "-/",
-        "import Q1Paper.PaperI.MainTheorems",
+        "import Q1Paper.PaperI.S00_Interface.MainTheorems",
         "",
     ]
     for label, title, statement, name, status in PAPER_ITEMS:
