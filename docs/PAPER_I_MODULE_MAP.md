@@ -124,7 +124,6 @@ docstring so a reader can see the author's stated purpose.
 | `Q1Paper/Q1Subspace.lean` | 6 | 3 | — | `M` 是压缩行对矩阵；一行 `u` 经过 `M` 给出压缩行对 `u M`。本文件证明： |
 | `Q1Paper/RankConsistency.lean` | 3 | 1 | — | the paper (and checked by c311); this file isolates the subspace form. |
 | `Q1Paper/RankIdentity.lean` | 4 | 0 | — | the identity through which every compression step of the paper passes. |
-| `Q1Paper/ScratchFromRowsMap.lean` | 1 | 1 | — | a `Sum`, not a `Fin`. |
 | `Q1Paper/SpectralCertificate.lean` | 2 | 1 | — | underlying the bounded-degree certificate. |
 | `Q1Paper/Window.lean` | 14 | 4 | Claim 10 | Paper I, Claim 10 (`lem:window`, "degree-windowed relations"). |
 

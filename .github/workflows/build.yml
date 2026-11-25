@@ -64,3 +64,10 @@ jobs:
           python ci/c317_cauchy_binet_random.py
           python ci/c318_r0_linear_system.py
           python ci/c319_encoding_and_rowspace.py
+      - name: Algorithm test suites
+        working-directory: verification
+        env:
+          PYTHONPATH: "."
+        run: |
+          python test_decide.py
+          python test_fpt.py
