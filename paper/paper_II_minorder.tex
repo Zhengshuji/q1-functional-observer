@@ -759,15 +759,26 @@ Structural bound, upper half (Claim~\ref{claim:struct}), \eqref{eq:struct} & lit
 \texttt{finrank\_le\_two\_mul\_of\_pi1\_eq\_pi2} \\
 Structural bound, lower half (Claim~\ref{claim:struct}), \eqref{eq:struct} & literal &
 \texttt{finrank\_add\_one\_le\_of\_spectral} \\
-Monotonicity (Claim~\ref{lem:monotone}) & abstract core & \texttt{conditions\_fromRows\_zero} \\
+Monotonicity (Claim~\ref{lem:monotone}), real designs & literal & \texttt{decC\_mono} \\
+Saturation (Claim~\ref{lem:monotone}), complex designs & literal & \texttt{dec\_saturates} \\
+Converse of the sandwich (Claim~\ref{claim:sandwich}), complex designs & literal &
+\texttt{feasible\_to\_DEC} \\
+Minimum order $q_{\min}=r_0+t_{\min}$ (\ref{prop:minorder}), complex designs & literal &
+\texttt{tMin\_le\_iff\_dec} \\
+A priori bound $t_{\min}\le2\ell$ (\ref{prop:minorder}) & literal & \texttt{tMin\_le\_two\_ell} \\
 Lower bound \eqref{eq:lb}, the inequality $\operatorname{rank}[U_0;V_0]\le\omega$
 (Proposition~\ref{prop:lowerbound}; the dimensional half of Proposition~\ref{prop:tight}) &
-abstract core & \texttt{finrank\_sup\_pi\_le}, \texttt{finrank\_pi1\_mono} \\
+literal & \texttt{lowerBound\_core}, \texttt{finrank\_sup\_pi\_le}, \texttt{finrank\_pi1\_mono} \\
 \bottomrule
 \end{tabular}
 \end{table*}
 
-The dimension bound $t_{\min}\le 2\ell$ of Proposition~\ref{prop:minorder} is formalised as \texttt{t\_le\_two\_mul}, with the quotient identity \texttt{finrank\_quotient\_eq\_finrank\_sub}; the identity $q_{\min}=r_0+t_{\min}$ itself is paper-level, because the library has no \texttt{DEC} predicate (only the compressed-block predicates of the companion paper).
+The quotient identity is \texttt{t\_eq\_finrank\_sub}, and the bound
+$t_{\min}\le 2\ell$ is \texttt{tMin\_le\_two\_ell}.  The minimum-order identity
+$q_{\min}=r_0+t_{\min}$ is \texttt{tMin\_le\_iff\_dec}, stated for the field-generic predicate over
+$\mathbb C$: the paper's real-design specification $\mathrm{DEC}_{\mathbb C}$ has its forward direction
+(\texttt{decC\_to\_feasible}) and monotonicity (\texttt{decC\_mono}) formalised, while its converse
+(the real-compression lemma) is not; the artifact's Paper II item map records the boundary.
 
 Two kinds of evidence support the statements above, and the artifact records which statement rests on
 which.

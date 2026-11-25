@@ -1,6 +1,6 @@
 # Start here
 
-This repository holds Paper I and its Lean 4 formalisation side by side.  It serves two audiences,
+This repository holds Paper I, Paper II and their Lean 4 formalisations side by side.  It serves two audiences,
 and they should not have to learn each other's notation:
 
 * **a reader of the paper** who wants to know which claims are machine-checked, and where;
@@ -29,6 +29,19 @@ Its structure, which the proof map follows:
 | §4.3 | the zero-free-row case | Claim 16 |
 | §4.4 | membership in the existential theory of the reals | Theorem 5 |
 | appendix | explicit size bounds | Claims 19, 21 |
+
+## Paper II
+
+`paper/paper_II_minorder.tex` (minimum order and construction) has its own Lean
+tree `Q1Paper/PaperII/` with the same shape: `MainTheorems.lean` (entry point),
+`Claims.lean` / `ClaimsCheck.lean` (the paper's items and their machine-checked
+index), `Audit.lean` (axiom footprint, 48 declarations) and the proof modules.
+Its item map is `docs/PAPER_II_PROOF_MAP.md`, its module map
+`docs/PAPER_II_MODULE_MAP.md`.
+
+Paper II reuses Paper I's Claims 4–6 through the column split `Φ`
+(`Q1Paper/PaperII/Interface.lean`) between the row(`[N AN]`) encoding and the
+pair encoding `row[L N  L A N]`.
 
 ## The Lean
 
@@ -86,6 +99,11 @@ The formalisation is not a machine-checked copy of the paper, and the difference
   `claim8_rank_consistency` identifies with the linear system — not stated as a separate structure
   field.  See `docs/ALGORITHM_CORRECTNESS_MAP.md`.
 
+* **Paper II's real designs.** The Paper II tree proves its `DEC` items for complex
+  free blocks, and for the paper's real-design specification `DECℂ` the forward
+  direction and monotonicity; the `DECℂ` converse (real compression) and Prop 3
+  are not formalised.  See `docs/PAPER_II_PROOF_MAP.md`.
+
 ## Reading order
 
 1. This file.
@@ -105,6 +123,7 @@ The formalisation is not a machine-checked copy of the paper, and the difference
    written, how generated artefacts are regenerated, how modules are named and renamed, and how a
    change is verified.
 8. The paper itself.
+9. `docs/PAPER_II_PROOF_MAP.md` and `docs/PAPER_II_MODULE_MAP.md` — Paper II's item map and module map, in the same layout as the Paper I maps.
 
 Development history, including retracted claims and the reasons, is recorded in the project's
 development logs.  Those are **not published** in this repository: they are records, not status
