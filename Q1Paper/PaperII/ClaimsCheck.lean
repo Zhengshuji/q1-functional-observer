@@ -46,3 +46,7 @@ import Q1Paper.PaperII.MainTheorems
 #check @Q1Paper.PaperII.graphExt_pi1
 #check @Q1Paper.PaperII.graphExt_pi2_le
 #check @Q1Paper.PaperII.graphExt_finrank
+#check @Q1Paper.PaperII.graphPencil
+#check @Q1Paper.PaperII.graphExt_piLam
+#check @Q1Paper.PaperII.graphExt_feasible
+#check @Q1Paper.PaperII.t_eq_of_graph

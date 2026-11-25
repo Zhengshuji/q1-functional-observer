@@ -29,6 +29,11 @@ import Q1Paper.PaperII.GraphExtension
 #print axioms Q1Paper.PaperII.graphExt_pi1
 #print axioms Q1Paper.PaperII.graphExt_pi2_le
 #print axioms Q1Paper.PaperII.graphExt_finrank
+#print axioms Q1Paper.PaperII.graphPencil
+#print axioms Q1Paper.PaperII.graphPencil_apply
+#print axioms Q1Paper.PaperII.graphExt_piLam
+#print axioms Q1Paper.PaperII.graphExt_feasible
+#print axioms Q1Paper.PaperII.t_eq_of_graph
 
 -- Interface.lean
 #print axioms Q1Paper.PaperII.Mcol

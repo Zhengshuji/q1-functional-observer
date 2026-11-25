@@ -77,9 +77,12 @@ proved, and its converse is the open real-compression lemma (plan §8.5).
 * **Prop 3, numerical half**: if `dim W = rank[U₀;V₀] + 1` (and `s₀ ≤ rank[U₀;V₀]`),
   then `t = rank[U₀;V₀] − s₀ + 1`, i.e. the bound is attained —
   `Q1Paper.PaperII.t_eq_of_finrank`.
-* **Prop 3, the graph extension (first half)**: `W(G,b) = {(h, Gh + αb)}` has
-  `π₁W = U`, `π₂W ≤ U` and `dim W = dim U + 1` —
-  `Q1Paper.PaperII.graphExt`, `graphExt_pi1`, `graphExt_pi2_le`, `graphExt_finrank`.
-  The pencil identity `πλ W(G,b) = (λI−G)U + span{b}` (hence feasibility from the
-  rank condition) is not yet formalised.
+* **Prop 3, the `(G,b)` direction**: for `W(G,b) = {(h, Gh + αb)}` one has
+  `π₁W = U`, `π₂W ≤ U`, `dim W = dim U + 1` (`graphExt`, `graphExt_pi1`,
+  `graphExt_pi2_le`, `graphExt_finrank`), the pencil identity
+  `πλ W(G,b) = (λI−G)U + span{b}` (`graphExt_piLam`), hence the paper's rank
+  condition `rank[λI−G  b] = dim U` makes `W(G,b)` feasible (`graphExt_feasible`),
+  and then `t = dim U + 1 − s₀` (`t_eq_of_graph`): the lower bound is attained.
+  The converse direction (extracting `(G,b)` from an attaining `W`) is not
+  formalised.
 -/
