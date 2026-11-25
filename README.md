@@ -4,8 +4,9 @@ This repository is the artifact for the paper
 
 > **Parameterized algorithms for functional observer feasibility**
 
-It contains the Lean 4 formalization, the exact rational verification scripts, and the
-LaTeX sources of the four papers in the series.
+It contains the Lean 4 formalization, the exact rational verification scripts, and the LaTeX sources
+of the two papers in this repository — Paper I (decision complexity, the formalised one) and Paper II
+(minimum order).  Papers III and IV exist but are **not** part of this repository.
 
 The paper studies the decision complexity of minimum-order functional observer design:
 given $(A,C,L_0)$ and a prescribed order $q$, decide whether an observer
