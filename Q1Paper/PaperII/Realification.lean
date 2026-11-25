@@ -181,6 +181,36 @@ theorem finrank_WR_eq {r0 n k r : ℕ}
     Q1Subspace.rank_eq_finrank_rowSpace _
   rw [h3]
 
+
+/-- **The dimension identity for `W₀`.** -/
+theorem finrank_W0_eq {r0 n k : ℕ}
+    (A : Matrix (Fin n) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℝ)
+    (L0 : Matrix (Fin r0) (Fin n) ℝ) :
+    finrank ℂ ↥(W0 A (N.map (algebraMap ℝ ℂ)) L0)
+      = finrank ℝ ↥(Q1Subspace.rowSpace (L0 * pairRows N (A * N))) := by
+  have hL0c : L0c L0 = L0.map (algebraMap ℝ ℂ) := rfl
+  have hA : Ac A * N.map (algebraMap ℝ ℂ) = (A * N).map (algebraMap ℝ ℂ) := by
+    rw [Ac]
+    exact Matrix.map_mul.symm
+  have h1 : L0c L0 * N.map (algebraMap ℝ ℂ) = (L0 * N).map (algebraMap ℝ ℂ) := by
+    rw [hL0c]
+    exact Matrix.map_mul.symm
+  have h2 : L0c L0 * (Ac A * N.map (algebraMap ℝ ℂ)) = (L0 * (A * N)).map (algebraMap ℝ ℂ) := by
+    rw [hA, hL0c]
+    exact Matrix.map_mul.symm
+  rw [W0, pairRowSpace_eq_map_pairRows, h1, h2, pairRows_map]
+  rw [← mul_pairRows]
+  rw [LinearEquiv.finrank_map_eq (Φ (K := ℂ) (k := k)) _]
+  have ha : finrank ℂ ↥(Q1Subspace.rowSpace
+        ((L0 * pairRows N (A * N)).map (algebraMap ℝ ℂ)))
+      = ((L0 * pairRows N (A * N)).map (algebraMap ℝ ℂ)).rank :=
+    (Q1Subspace.rank_eq_finrank_rowSpace _).symm
+  rw [ha]
+  have hb : ((L0 * pairRows N (A * N)).map (algebraMap ℝ ℂ)).rank
+      = (L0 * pairRows N (A * N)).rank :=
+    Q1Paper.PaperI.DecComplex.rank_map_ofReal_any _
+  rw [hb]
+  exact Q1Subspace.rank_eq_finrank_rowSpace _
+
+
 end Q1Paper.PaperII
-
-

@@ -96,6 +96,7 @@ import Q1Paper.PaperII.Realification
 #print axioms Q1Paper.PaperII.mul_pairRows
 #print axioms Q1Paper.PaperII.WR_eq_map_complex
 #print axioms Q1Paper.PaperII.finrank_WR_eq
+#print axioms Q1Paper.PaperII.finrank_W0_eq
 
 -- Sandwich.lean
 #print axioms Q1Paper.PaperII.Ac
