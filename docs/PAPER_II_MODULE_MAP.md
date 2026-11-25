@@ -19,7 +19,10 @@ converse is the open real-compression lemma.
 | `MainTheorems.lean` | import entry point | 22 | 0 | — |
 | `Claims.lean` | the paper items in the paper's order, as narration | 76 | 0 | — |
 | `ClaimsCheck.lean` | one `#check` per claim (machine-checked index) | 41 | 0 | — |
-| `Audit.lean` | the axiom footprint of all 48 declarations | 82 | 0 | — |
+| `Realification.lean` | real-design bridges, `real_compress`, `feasible_to_decC`, `decC_saturates`, `tMinC_le_iff_decC` | — | — | Claim 5 / Prop 1 (`DECℂ`) |
+| `GraphExtension.lean` | `W(G,b)`, its pencil, feasibility, `t_eq_of_graph` | — | — | Prop 3 (`(G,b)` direction) |
+| `GraphExtract.lean` | `projU`, kernel dimension, `exists_graph_representation` | — | — | Prop 3 (converse) |
+| `Audit.lean` | the axiom footprint of all declarations | — | 0 | — |
 
 ## How to check it
 
@@ -32,7 +35,8 @@ python3 scripts/check_paperI_axioms.py /tmp/paperII_audit.log Q1Paper/PaperII/Au
 
 ## What is deliberately not here
 
-* `DECℂ` saturation / minimum order: needs the real-compression lemma
-  (the planned real-compression module `PaperII/Realification`).
+* `DECℂ` saturation / minimum order: now proved in `PaperII/Realification.lean`
+  (`real_compress`, `feasible_to_decC`, `decC_saturates`, `tMinC_le_iff_decC`), so
+  this bullet is historical.
 * Prop 3 (tightness), Theorem 4 (interface counting), the OPT/FIND corollaries,
   and the appendix instance: see `PAPER_II_PROOF_MAP.md` §"Not formalised".

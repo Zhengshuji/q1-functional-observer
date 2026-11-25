@@ -99,10 +99,12 @@ The formalisation is not a machine-checked copy of the paper, and the difference
   `claim8_rank_consistency` identifies with the linear system — not stated as a separate structure
   field.  See `docs/ALGORITHM_CORRECTNESS_MAP.md`.
 
-* **Paper II's real designs.** The Paper II tree proves its `DEC` items for complex
-  free blocks, and for the paper's real-design specification `DECℂ` the forward
-  direction and monotonicity; the `DECℂ` converse (real compression) and Prop 3
-  are not formalised.  See `docs/PAPER_II_PROOF_MAP.md`.
+* **Paper II's remaining gaps.** The Paper II tree proves its items for complex free
+  blocks and, for the paper's real-design specification `DECℂ`, the forward
+  direction, monotonicity, saturation and the minimum-order equivalence (via the
+  real-compression lemma `real_compress`).  Prop 3 is proved in both directions.
+  What is *not* formalised is listed in `docs/PAPER_II_PROOF_MAP.md` (interface
+  counting, OPT/FIND corollaries, the appendix instance).
 
 ## Reading order
 
