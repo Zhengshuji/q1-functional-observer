@@ -70,12 +70,13 @@ predicate over `ℂ` (complex free blocks); the paper's real-design specificatio
 | Prop 3, graph extension: `π₁W(G,b) = U`, `π₂ ⊆ U`, `dim = dim U + 1` | `graphExt`, `graphExt_pi1`, `graphExt_pi2_le`, `graphExt_finrank` | `PaperII/GraphExtension.lean` | literal |
 | Prop 3, pencil: `πλ W(G,b) = (λI−G)U + span{b}`; rank condition ⇒ feasible | `graphExt_piLam`, `graphExt_feasible` | `PaperII/GraphExtension.lean` | literal |
 | Prop 3, `(G,b)` direction: `t = dim U + 1 − s₀` | `t_eq_of_graph` | `PaperII/GraphExtension.lean` | literal |
+| Prop 3, converse: `W = W(G,b)` for a feasible `W` with `dim W = dim π₁W + 1` | `exists_graph_representation` | `PaperII/GraphExtract.lean` | literal |
 
 ## Not formalised
 
 | paper item | reason |
 |---|---|
-| Prop 3, the converse direction (extracting `(G,b)` from an attaining `W`) | not formalised; the `(G,b)` direction is complete (`PaperII/GraphExtension.lean`) |
+| — | (Prop 3 is complete in both directions; see the two rows below and the `(G,b)` rows above) |
 | Theorem 4, the `O(log(ℓ+2))` call count | the ordering is `tMin_le_iff_dec` and the least element is `dec_sInf_tMinSet`; the arithmetic of the call count is not formalised |
 | Corollary 5 (OPT), Corollary 6 (FIND) | complexity statements inherited from Paper I; FIND's bit model is open in the paper |
 | the appendix instance (`q_min = 4`) | exact rational certificate; belongs to the Python verification layer |

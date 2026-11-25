@@ -44,6 +44,7 @@ import Q1Paper.PaperII.GraphExtract
 #print axioms Q1Paper.PaperII.ker_finrank_eq_one
 #print axioms Q1Paper.PaperII.exists_kernel_direction
 #print axioms Q1Paper.PaperII.exists_kernel_b
+#print axioms Q1Paper.PaperII.exists_graph_representation
 
 -- Interface.lean
 #print axioms Q1Paper.PaperII.Mcol

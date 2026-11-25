@@ -85,6 +85,8 @@ proved, and its converse is the open real-compression lemma (plan §8.5).
   `πλ W(G,b) = (λI−G)U + span{b}` (`graphExt_piLam`), hence the paper's rank
   condition `rank[λI−G  b] = dim U` makes `W(G,b)` feasible (`graphExt_feasible`),
   and then `t = dim U + 1 − s₀` (`t_eq_of_graph`): the lower bound is attained.
-  The converse direction (extracting `(G,b)` from an attaining `W`) is not
-  formalised.
+* **Prop 3, the converse direction**: a feasible `W` with `dim W = dim (π₁W) + 1`
+  is `W(G,b)` for some `b ≠ 0` and linear `G`
+  (`Q1Paper.PaperII.exists_graph_representation`, via the section of `π₁|_W` and
+  its one-dimensional kernel).
 -/
