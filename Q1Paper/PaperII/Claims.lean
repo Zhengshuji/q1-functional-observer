@@ -62,6 +62,9 @@ proved, and its converse is the open real-compression lemma (plan §8.5).
   (`t_min = ⊤` when infeasible) — `Q1Paper.PaperII.tMin_le_iff_dec`.
 * **Prop 1, a priori bound**: `t_min ≤ 2ℓ`, `ℓ = rank(A N)` —
   `Q1Paper.PaperII.tMin_le_two_ell` (and `omega_le_ell`, `t_le_two_ell`).
+* **Claim 5, saturation, real designs (`DECℂ`)**: `DECℂ r` at the saturation order
+  `m = dim (T/W₀)`, via `real_compress` + `feasible_to_decC` + `decC_mono` —
+  `Q1Paper.PaperII.decC_saturates` (and `decC_to_feasible_design`).
 * **Real-design bridges** (for the `DECℂ` upgrade): the pair row space is the
   `Φ`-image of the encoded row space (`pairRows`, `pairRowSpace_eq_map_pairRows`), its
   dimension is the encoded matrix's rank (`finrank_pairRowSpace_eq_rank`), and the
