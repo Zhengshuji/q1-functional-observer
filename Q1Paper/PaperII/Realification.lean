@@ -298,6 +298,56 @@ theorem real_compress {r0 n k r : ℕ}
         rw [hm]
     _ = WR A (N.map (algebraMap ℝ ℂ)) L0 R := e2.symm
 
+
+/-- **The converse sandwich for real designs (`DECℂ`).**  A feasible real design `R`
+with `W₀ ≤ W` gives `DECℂ` at order `t = dim (W/W₀)`: compress to `t` rows and
+convert the compressed conditions into the raw ones of `DECℂ`. -/
+theorem feasible_to_decC {p r0 n k : ℕ}
+    (C : Matrix (Fin p) (Fin n) ℝ) (A : Matrix (Fin n) (Fin n) ℝ)
+    (L0 : Matrix (Fin r0) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℝ)
+    (hN : (N.map (algebraMap ℝ ℂ)).mulVecLin.range
+      = (Matrix.fromRows ((C.map (algebraMap ℝ ℂ)) * (A.map (algebraMap ℝ ℂ)))
+          (C.map (algebraMap ℝ ℂ))).mulVecLin.ker)
+    {r : ℕ} {R : Matrix (Fin r) (Fin n) ℝ}
+    (hW0 : W0 A (N.map (algebraMap ℝ ℂ)) L0 ≤ WR A (N.map (algebraMap ℝ ℂ)) L0 R)
+    (hfeas : IsFeasible (WR A (N.map (algebraMap ℝ ℂ)) L0 R)) :
+    DecOrder C A L0 (t (W0 A (N.map (algebraMap ℝ ℂ)) L0)
+      (WR A (N.map (algebraMap ℝ ℂ)) L0 R)) := by
+  classical
+  obtain ⟨R', hR'⟩ := real_compress A N L0 R hW0 hfeas
+  have hfeas' : IsFeasible (WR A (N.map (algebraMap ℝ ℂ)) L0 R') := by
+    rw [hR']
+    exact hfeas
+  have hpair : IsFeasible (Q1Paper.pairRowSpace
+      (Lc L0 R' * (N.map (algebraMap ℝ ℂ)))
+      (Lc L0 R' * (Ac A * N.map (algebraMap ℝ ℂ)))) := hfeas'
+  have hcomp := (isFeasible_pairRowSpace_iff
+    (Lc L0 R' * (N.map (algebraMap ℝ ℂ)))
+    (Lc L0 R' * (Ac A * N.map (algebraMap ℝ ℂ)))).mp hpair
+  have hLc : Lc L0 R' = (Matrix.fromRows L0 R').map (algebraMap ℝ ℂ) := by
+    rw [← fromRows_Lc]
+    exact Q1Paper.Thm5.fromRows_map_ofReal L0 R'
+  refine ⟨R', ?_, ?_⟩
+  · refine (PaperI.rawAlgebraic_iff_compressed (C.map (algebraMap ℝ ℂ))
+      ((C.map (algebraMap ℝ ℂ)) * (A.map (algebraMap ℝ ℂ)))
+      ((Matrix.fromRows L0 R').map (algebraMap ℝ ℂ))
+      (((Matrix.fromRows L0 R').map (algebraMap ℝ ℂ)) * (A.map (algebraMap ℝ ℂ)))
+      (N.map (algebraMap ℝ ℂ)) hN).mpr ?_
+    have h := hcomp.1
+    rw [hLc] at h
+    rw [Matrix.mul_assoc]
+    exact h
+  · refine (PaperI.rawSpectral_iff_compressed (C.map (algebraMap ℝ ℂ))
+      ((C.map (algebraMap ℝ ℂ)) * (A.map (algebraMap ℝ ℂ)))
+      ((Matrix.fromRows L0 R').map (algebraMap ℝ ℂ))
+      (((Matrix.fromRows L0 R').map (algebraMap ℝ ℂ)) * (A.map (algebraMap ℝ ℂ)))
+      (N.map (algebraMap ℝ ℂ)) hN).mpr ?_
+    have h := hcomp.2
+    rw [hLc] at h
+    rw [Matrix.mul_assoc]
+    exact h
+
 end Q1Paper.PaperII
+
 
 
