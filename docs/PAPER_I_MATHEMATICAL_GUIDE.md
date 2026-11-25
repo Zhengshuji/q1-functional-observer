@@ -95,7 +95,7 @@ Claim 12 is the same statement for a full-column-rank pencil $\lambda X - G$, wh
 chart coordinates take.
 
 *Lean:* `Q1Paper/PaperI/Claim8_ElemSymm.lean`, `Claim8_SumSquares.lean`, `Claim8_Disjunction.lean`,
-`Claim11.lean`, `Claim11Final.lean`, `Claim12.lean`, `Window.lean`.
+`Claim11_Window.lean`, `Claim11_MinorsGram.lean`, `Claim12.lean`, `Window.lean`.
 
 ### Step 4 — make the certificate finite and rational
 

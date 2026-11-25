@@ -14,7 +14,7 @@ This file is a working note and should be deleted when the work is done.
 | **P0** | give the 15 `Scratch*` namespaces semantic names | medium — changes fully-qualified names, so `open` sites and `Audit.lean` move with them | in progress |
 | **P1** | 8 per-section reading entries: `/-!` narrative in proof order + one `#check` per step, generated and CI-checked | low — additive only | not started |
 | **P1.5** | a hierarchy per claim: base tool / bridge / core lemma / the official proof | low — metadata, no code | not started |
-| **P2** | rename the ~20 claim-hosting modules (`Claim11Final.lean` → `Claim11_gram_certificate.lean`) | medium — module names change, so imports, `Audit.lean` and three generators follow | not started |
+| **P2** | rename the ~20 claim-hosting modules (`Claim11_MinorsGram.lean` → `Claim11_MinorsGram.lean`) | medium — module names change, so imports, `Audit.lean` and three generators follow | not started |
 | **P3** | move modules into per-section directories | high — every module path changes | deliberately last, and **not** an acceptance criterion |
 
 ## Why P3 is not the target

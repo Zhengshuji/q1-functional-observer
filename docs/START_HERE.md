@@ -43,7 +43,7 @@ Four files have four separate jobs; knowing which is which answers most navigati
 
 A declaration's proof lives in whichever module it was developed in — 86 modules under
 `Q1Paper/PaperI/`, with historical names
-such as `Claim11Final.lean` or `GramCompression.lean`.  That is deliberate: this tree does not merge
+such as `Claim11_MinorsGram.lean` or `GramCompression.lean`.  That is deliberate: this tree does not merge
 or rename proof modules, because doing so would touch `Audit.lean`'s fully-qualified names and the
 generated indexes, for no mathematical gain.  **Use the proof map to locate a proof; do not expect
 the file names to spell out the paper's structure.**

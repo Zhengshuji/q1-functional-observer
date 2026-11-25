@@ -62,9 +62,9 @@ them).
 **Claims 9–12** (the certificate).  The route is: `SpectralMinor.lean` and `MinorRank.lean` turn the
 pencil condition into a condition on maximal minors; `BezoutReal.lean` (with `BezoutDeg.lean`,
 `G2Assembly.lean`) produces the real multipliers; `Window.lean` collects the minors' coefficient
-vectors into the window matrix; `Gram.lean`, `GramKernel.lean`, `GramCompression.lean`, `GramInj.lean`
+vectors into the window matrix; `GramSystem.lean`, `GramKernel.lean`, `GramCompression.lean`, `GramFamilyBridge.lean`
 and `CauchyBinet.lean` assemble the Gram matrix and the `Zᵀ Z x = e₀` system; `Complexify.lean` is the
-real-to-complex bridge that the "no common **complex** root" statement needs; `Claim11Final.lean` is the
+real-to-complex bridge that the "no common **complex** root" statement needs; `Claim11_MinorsGram.lean` is the
 assembly, and `Claim12.lean` repeats it for a full-column-rank pencil `λ X - G`.
 
 **Claims 13–16** (rationality and size).  `RationalBasis.lean` (rational bases), then the coefficient
