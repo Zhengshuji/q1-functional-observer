@@ -14,12 +14,21 @@ import Q1Paper.PaperII.LowerBound
 import Q1Paper.PaperII.Converse
 import Q1Paper.PaperII.Saturate
 import Q1Paper.PaperII.MinOrder
+import Q1Paper.PaperII.GraphExtension
 
 -- Converse.lean
 #print axioms Q1Paper.PaperII.WRc
 #print axioms Q1Paper.PaperII.WRc_eq_map
 #print axioms Q1Paper.PaperII.map_symm_map
 #print axioms Q1Paper.PaperII.feasible_to_DEC
+
+-- GraphExtension.lean
+#print axioms Q1Paper.PaperII.graphMap
+#print axioms Q1Paper.PaperII.graphExt
+#print axioms Q1Paper.PaperII.mem_graphExt
+#print axioms Q1Paper.PaperII.graphExt_pi1
+#print axioms Q1Paper.PaperII.graphExt_pi2_le
+#print axioms Q1Paper.PaperII.graphExt_finrank
 
 -- Interface.lean
 #print axioms Q1Paper.PaperII.Mcol

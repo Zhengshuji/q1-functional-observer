@@ -66,12 +66,13 @@ predicate over `ℂ` (complex free blocks); the paper's real-design specificatio
 | Prop 2: `rank[U₀;V₀] − s₀ + 1 ≤ t` | `lowerBound_sub` | `PaperII/LowerBound.lean:76` | literal |
 | `rank[U₀;V₀] ≤ ω` | `finrank_sup_pi_le` | `PaperII/LowerBound.lean:40` | literal |
 | Prop 3, numerical half: `dim W = a+1 ⇒ t = a−s₀+1` | `t_eq_of_finrank` | `PaperII/LowerBound.lean:86` | literal |
+| Prop 3, graph extension: `π₁W(G,b) = U`, `π₂ ⊆ U`, `dim = dim U + 1` | `graphExt`, `graphExt_pi1`, `graphExt_pi2_le`, `graphExt_finrank` | `PaperII/GraphExtension.lean` | literal |
 
 ## Not formalised
 
 | paper item | reason |
 |---|---|
-| Prop 3, the `(G,b)` construction (both directions) | the numerical half is `t_eq_of_finrank`; producing `W(G,b)` from `(G,b)` (and extracting `(G,b)` from an attaining `W`) is not formalised |
+| Prop 3, the `(G,b)` construction (both directions) | the numerical half is `t_eq_of_finrank`; the graph extension's structural facts (`π₁W = U`, `π₂W ≤ U`, `dim W = dim U + 1`) are `graphExt`, `graphExt_pi1`, `graphExt_pi2_le`, `graphExt_finrank` (`PaperII/GraphExtension.lean`); the pencil identity `πλ W(G,b) = (λI−G)U + span{b}` and extracting `(G,b)` from an attaining `W` are not formalised |
 | Theorem 4, the `O(log(ℓ+2))` call count | the ordering is `tMin_le_iff_dec` and the least element is `dec_sInf_tMinSet`; the arithmetic of the call count is not formalised |
 | Corollary 5 (OPT), Corollary 6 (FIND) | complexity statements inherited from Paper I; FIND's bit model is open in the paper |
 | the appendix instance (`q_min = 4`) | exact rational certificate; belongs to the Python verification layer |

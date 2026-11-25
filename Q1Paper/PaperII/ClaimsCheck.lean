@@ -42,3 +42,7 @@ import Q1Paper.PaperII.MainTheorems
 #check @Q1Paper.PaperII.lowerBound_core
 #check @Q1Paper.PaperII.lowerBound_sub
 #check @Q1Paper.PaperII.t_eq_of_finrank
+#check @Q1Paper.PaperII.graphExt
+#check @Q1Paper.PaperII.graphExt_pi1
+#check @Q1Paper.PaperII.graphExt_pi2_le
+#check @Q1Paper.PaperII.graphExt_finrank

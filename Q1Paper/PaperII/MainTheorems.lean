@@ -3,7 +3,7 @@ Q1Paper/PaperII/MainTheorems.lean
 
 Entry point of Paper II's Lean development: the interface layer, the sandwich in
 both directions (complex designs), monotonicity, saturation, the spectral lower
-bound, and the minimum-order theorem.
+bound, the minimum-order theorem, and the graph-extension part of tightness.
 
 Scope note: the statements concerning `PaperI.DEC` over `ℂ` (complex free blocks)
 are the field-generic counterpart of the paper's real-design specification
@@ -19,3 +19,4 @@ import Q1Paper.PaperII.LowerBound
 import Q1Paper.PaperII.Converse
 import Q1Paper.PaperII.Saturate
 import Q1Paper.PaperII.MinOrder
+import Q1Paper.PaperII.GraphExtension
