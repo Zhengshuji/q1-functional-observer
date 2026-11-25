@@ -16,7 +16,7 @@ jobs:
           build: true
       - name: Paper I entry point
         run: |
-          lake build Q1Paper.PaperI.MainTheorems
+          lake build Q1Paper.PaperI.S00_Interface.MainTheorems
           lake env lean PaperI.lean
           lake build Q1Paper.PaperI.Read.All
       - name: Paper I axiom audit
@@ -25,7 +25,7 @@ jobs:
           python3 scripts/check_paperI_axioms.py paperI_audit.log Q1Paper/PaperI/S00_Interface/Audit.lean
       - name: Paper I claim index
         run: |
-          lake env lean Q1Paper/PaperI/ClaimsCheck.lean
+          lake env lean Q1Paper/PaperI/S00_Interface/ClaimsCheck.lean
           python3 scripts/generate_paperI_claims.py --check
           python3 scripts/generate_paperI_modules.py --check
           python3 scripts/paper_lean_index.py --check

@@ -7,7 +7,7 @@ cd "$(dirname "$0")/.."
 export PATH="$HOME/.elan/bin:$PATH"
 
 # 1. the mathematics compiles
-lake build Q1Paper.PaperI.MainTheorems
+lake build Q1Paper.PaperI.S00_Interface.MainTheorems
 lake env lean PaperI.lean
 lake build Q1Paper.PaperI.Read.All
 
