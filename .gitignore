@@ -16,3 +16,6 @@ scripts/promote_paperI.py
 scripts/module_docstrings.py
 scripts/tag_historical_docs.py
 docs/REPLY_from_paper_agent.md
+docs/LEAN_MAP.md
+docs/PAPER_I_FORMALIZATION_MAP.md
+docs/PAPER_I_MASTER_ROADMAP.md

@@ -27,12 +27,10 @@ docs/           the reading entry point, then the historical record
                 PAPER_I_MODULE_MAP.md          every Lean module -> decls, paper items, purpose (generated)
                 ALGORITHM_CORRECTNESS_MAP.md   what is and is not proved about the algorithms
                 --- historical, tagged as such, kept for provenance ---
-                PAPER_I_FORMALIZATION_MAP.md   development log of the formalisation
-                PAPER_I_MASTER_ROADMAP.md      the plan and its progress
                 PAPER_I_MATH_AUDIT.md          independent audit, with counterexamples
                 PAPER_I_CLAIM19_CRAMER.md      the Cramer re-derivation of Claim 19
                 PAPER_I_REUSE_AUDIT.md         theorem-level reuse audit of external Lean code
-                ALGORITHM_REVIEW.md, LEAN_MAP.md
+                ALGORITHM_REVIEW.md
 Q1Paper/        Lean sources
                 Q1Paper/            the project layer (row spaces, projections, rank identities)
                 Q1Paper/PaperI/     the Paper I modules (86 files), plus Audit.lean
@@ -96,9 +94,8 @@ bound of Theorem 2 has its Renegar-free core (the dimension relations and the Gr
 count `sum_t C(m',t) = 2^m' <= 4^ell`) formalised; the remaining layers are in progress.
 Per-claim status lives in `docs/PAPER_I_PROOF_MAP.md` (generated from `CLAIMS.md`, with the defining
 file and line for every item), and the mathematical narrative in
-`docs/PAPER_I_MATHEMATICAL_GUIDE.md`.  `docs/PAPER_I_FORMALIZATION_MAP.md` is a **development log**,
-kept for provenance — it records gaps that were later closed, so it must not be read as the current
-status.
+`docs/PAPER_I_MATHEMATICAL_GUIDE.md`.  Development logs are kept locally for provenance but are **not
+published**: they record gaps that were later closed, so they must not be read as the current status.
 
 Start at `docs/START_HERE.md`.
 

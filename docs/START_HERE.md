@@ -98,6 +98,6 @@ The formalisation is not a machine-checked copy of the paper, and the difference
 5. `Q1Paper/PaperI/CLAIMS.md` — the machine-maintained claim list (both maps are built from it).
 6. The paper itself.
 
-Development history, including retracted claims and the reasons, is in
-`docs/PAPER_I_FORMALIZATION_MAP.md`.  That file is a log, not a status report — read it for provenance,
-not for the current state.
+Development history, including retracted claims and the reasons, is recorded in the project's
+development logs.  Those are **not published** in this repository: they are records, not status
+reports, and gaps they describe may have been closed since.
