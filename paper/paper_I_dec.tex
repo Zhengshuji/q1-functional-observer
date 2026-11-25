@@ -1896,59 +1896,17 @@ paper does not claim, and the evidence behind each statement, is recorded in Sec
 
 \begin{table*}[!t]
 \centering
-\caption{Where each statement of the paper is verified. \emph{Literal}: the Lean statement is the
-statement of the paper. \emph{Abstract core}: the Lean statement is a linear-map, submodule or
-general-field version of it, and the passage to the paper's matrices and coefficients is
-paper-level. \emph{Ingredient}: one step of the proof, not the statement. Statements not listed
-are paper-level throughout. $^{\dagger}$~See Section~\ref{sec:limits}.}
+\caption{Where each statement of the paper is verified. \emph{Coverage}: \emph{Lean} = proved
+with no hypothesis beyond the paper's; \emph{Lean-cond.} = proved relative to the declared
+real-algebraic backend. \emph{Correspondence}: \emph{literal} = the Lean statement is the statement
+of the paper; \emph{abstract core} = a linear-map, submodule or general-field version of it.
+Every numbered statement appears; the reductions to the decision procedure and the complexity
+counting are not numbered statements, and they are paper-level (Section~\ref{sec:limits}).
+$^{\dagger}$~the two Gram certificates are proved for the injective-indexed family; see
+Section~\ref{sec:limits}.}
 \label{tab:evidence}
 \footnotesize
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{4.6cm}>{\raggedright\arraybackslash}p{1.9cm}>{\raggedright\arraybackslash}p{10.2cm}@{}}
-\toprule
-Statement & Lean evidence & Formal name \\
-\midrule
-Rank identity (Claim~\ref{lem:rankid}), \eqref{eq:rankid} & literal &
-\texttt{rank\_\allowbreak{}vstack\_\allowbreak{}add\_\allowbreak{}rank\_\allowbreak{}mul} \\
-Compression criterion (Claim~\ref{lem:compression}) & abstract core &
-\texttt{ker\_\allowbreak{}compressed\_\allowbreak{}iff} \\
-Space of row pairs (Claim~\ref{lem:attainable}) & abstract core & \texttt{freePairSpace},
-\texttt{kappaObs\_\allowbreak{}eq\_\allowbreak{}mul\_\allowbreak{}freePairSpace} \\
-Sandwich and realizability (Claim~\ref{lem:sandwich}) & literal &
-\texttt{rowSpan\_\allowbreak{}fromRows\_\allowbreak{}left}, \texttt{mem\_\allowbreak{}rowSpan\_\allowbreak{}iff\_\allowbreak{}exists\_\allowbreak{}vecMul} \\
-Conditions depend on $W$ (Claim~\ref{lem:W-conditions}) & abstract core &
-\texttt{rank\_\allowbreak{}fromRows\_\allowbreak{}eq\_\allowbreak{}rank\_\allowbreak{}iff}, \texttt{rowSpace\_\allowbreak{}eq} \\
-Structural bound, upper half (Claim~\ref{lem:struct}) & literal &
-\texttt{finrank\_\allowbreak{}le\_\allowbreak{}two\_\allowbreak{}mul\_\allowbreak{}of\_\allowbreak{}pi1\_\allowbreak{}eq\_\allowbreak{}pi2} \\
-Structural bound, lower half (Claim~\ref{lem:struct}) & literal &
-\texttt{finrank\_\allowbreak{}add\_\allowbreak{}one\_\allowbreak{}le\_\allowbreak{}of\_\allowbreak{}spectral} \\
-Rank consistency (Claim~\ref{lem:rankcons}) & literal &
-\texttt{exists\_\allowbreak{}mulVec\_\allowbreak{}eq\_\allowbreak{}iff\_\allowbreak{}rank\_\allowbreak{}gram} \\
-B\'ezout with degree bound (Claim~\ref{lem:bezout}) & literal & \texttt{exists\_\allowbreak{}bezout\_\allowbreak{}family\_\allowbreak{}real} \\
-Window relations (Claim~\ref{lem:window}) & literal &
-\texttt{rowSpace\_\allowbreak{}windowMatrix\_\allowbreak{}eq\_\allowbreak{}windowSet},
-\texttt{mem\_\allowbreak{}rowSpace\_\allowbreak{}iff\_\allowbreak{}exists\_\allowbreak{}window} \\
-Gram certificate (Claim~\ref{prop:gram}), kernel identity & ingredient &
-\texttt{sum\_\allowbreak{}sq\_\allowbreak{}eq\_\allowbreak{}zero\_\allowbreak{}iff} \\
-Gram certificate (Claim~\ref{prop:gram}), full equivalence & abstract core$^{\dagger}$ &
-\texttt{claim11\_\allowbreak{}iff\_\allowbreak{}gram} \\
-Reduced-pencil certificate (Claim~\ref{clm:gramQ}) & abstract core$^{\dagger}$ &
-\texttt{claim12\_\allowbreak{}iff\_\allowbreak{}gram} \\
-Cauchy--Binet compression (Section~\ref{sec:cb}) & literal &
-\texttt{Matrix.det\_\allowbreak{}mul\_\allowbreak{}eq\_\allowbreak{}sum\_\allowbreak{}det\_\allowbreak{}submatrix},
-\texttt{gramKernelEval\_\allowbreak{}eq\_\allowbreak{}double\_\allowbreak{}sum},
-\texttt{gramKernelEval\_\allowbreak{}eq\_\allowbreak{}coeff\_\allowbreak{}sum},
-\texttt{windowGram\_\allowbreak{}entry}, \texttt{windowGram\_\allowbreak{}eq\_\allowbreak{}compressed} \\
-Rectangular left inverse (Claim~\ref{lem:zero}(iii)$\Rightarrow$(iv)) & abstract core &
-\texttt{exists\_\allowbreak{}leftInverse\_\allowbreak{}linear} \\
-Coefficient system \eqref{eq:R0} $\Rightarrow$ left inverse & literal (one direction) &
-\texttt{spoly\_\allowbreak{}mul\_\allowbreak{}pencil\_\allowbreak{}eq\_\allowbreak{}one} \\
-Matrix-product coefficients & literal & \texttt{coeff\_\allowbreak{}mul\_\allowbreak{}apply} \\
-Degree bounds $\deg\det$, $\deg\operatorname{adj}$ & literal &
-\texttt{natDegree\_\allowbreak{}det\_\allowbreak{}le}, \texttt{natDegree\_\allowbreak{}adjugate\_\allowbreak{}le} \\
-Zero-free-row test (Section~\ref{sec:zero}) & paper-level & --- \\
-Encoding (Theorem~\ref{thm:existsr}) & paper-level & --- \\
-\bottomrule
-\end{tabular}
+\input{table_evidence}
 \end{table*}
 
 \section{Conclusions}\label{sec:conclusions}
