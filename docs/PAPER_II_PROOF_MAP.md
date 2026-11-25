@@ -6,11 +6,11 @@ move when a file is edited above them; the declaration names and their
 `#check`s in `Q1Paper/PaperII/ClaimsCheck.lean` are stable).
 
 **Scope.**  Items marked *reused* are proved in the Paper I tree and enter Paper II
-through the column split `Φ`.  Items concerning `DEC` are the field-generic
-predicate over `ℂ` (complex free blocks); the paper's real-design specification
-`DECℂ` has its forward direction and monotonicity proved.  The remaining
-`DECℂ` items are the open real-compression lemma
-(`workspace/paper_split/PAPER_II_LEAN_PLAN.md` §8.5).
+through the column split `Φ`.  Most items are stated twice: for the field-generic
+predicate over `ℂ` (complex free blocks) and for the paper's real-design
+specification `DECℂ`.  The bridge between them is the real-compression lemma
+`real_compress` (`PaperII/Realification.lean`); for `DECℂ` the minimum order is
+`tMinC ≤ r ↔ DECℂ r`, the least quotient dimension over feasible *real* designs.
 
 ## §II Standing results (from Paper I)
 
@@ -37,7 +37,7 @@ predicate over `ℂ` (complex free blocks); the paper's real-design specificatio
 | forward, `DECℂ` (real design) | `decC_to_feasible` | `PaperII/Sandwich.lean:112` | literal |
 | forward, `DEC` (complex designs) | `DEC_to_feasible_c` | `PaperII/Saturate.lean:37` | literal |
 | converse, `DEC` | `feasible_to_DEC` | `PaperII/Converse.lean:71` | literal |
-| converse, `DECℂ` | — | — | **open** (real-compression) |
+| converse, `DECℂ` | `feasible_to_decC` (via `real_compress`) | `PaperII/Realification.lean` | literal |
 
 ## §III Monotonicity and saturation
 
