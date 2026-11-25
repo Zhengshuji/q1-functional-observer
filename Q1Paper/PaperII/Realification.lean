@@ -410,7 +410,78 @@ theorem decC_saturates {p r0 n k : ℕ}
   refine decC_mono (C := C) (A := A) (L0 := L0) (N := N.map (algebraMap ℝ ℂ)) (r := t (W0 A (N.map (algebraMap ℝ ℂ)) L0) (WR A (N.map (algebraMap ℝ ℂ)) L0 R)) (r' := t (W0 A (N.map (algebraMap ℝ ℂ)) L0) (TR A (N.map (algebraMap ℝ ℂ)))) hN hmono ?_
   exact feasible_to_decC (C := C) (A := A) (L0 := L0) (N := N) (R := R) hN hW0 hf
 
+
+/-! ### The minimum order for real designs -/
+
+/-- The possible quotient dimensions of feasible **real** designs. -/
+def tMinCSet (A : Matrix (Fin n) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℝ)
+    (L0 : Matrix (Fin r0) (Fin n) ℝ) : Set ℕ :=
+  {m | ∃ (r : ℕ) (R : Matrix (Fin r) (Fin n) ℝ),
+      W0 A (N.map (algebraMap ℝ ℂ)) L0 ≤ WR A (N.map (algebraMap ℝ ℂ)) L0 R ∧
+      IsFeasible (WR A (N.map (algebraMap ℝ ℂ)) L0 R) ∧
+      t (W0 A (N.map (algebraMap ℝ ℂ)) L0) (WR A (N.map (algebraMap ℝ ℂ)) L0 R) = m}
+
+/-- The minimum quotient dimension over real designs (`⊤` when there is none). -/
+noncomputable def tMinC (A : Matrix (Fin n) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℝ)
+    (L0 : Matrix (Fin r0) (Fin n) ℝ) : WithTop ℕ := by
+  classical
+  exact if h : (tMinCSet A N L0).Nonempty then ↑(sInf (tMinCSet A N L0)) else ⊤
+
+/-- **The minimum order for real designs**: `t_min ≤ r ↔ DECℂ r`. -/
+theorem tMinC_le_iff_decC {p r0 n k : ℕ}
+    (C : Matrix (Fin p) (Fin n) ℝ) (A : Matrix (Fin n) (Fin n) ℝ)
+    (L0 : Matrix (Fin r0) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℝ)
+    (hN : (N.map (algebraMap ℝ ℂ)).mulVecLin.range
+      = (Matrix.fromRows ((C.map (algebraMap ℝ ℂ)) * (A.map (algebraMap ℝ ℂ)))
+          (C.map (algebraMap ℝ ℂ))).mulVecLin.ker)
+    (r : ℕ) :
+    tMinC A N L0 ≤ (r : WithTop ℕ) ↔ DecOrder C A L0 r := by
+  classical
+  constructor
+  · intro hle
+    by_cases hne : (tMinCSet A N L0).Nonempty
+    · rw [tMinC, dif_pos hne] at hle
+      have hle' : sInf (tMinCSet A N L0) ≤ r := WithTop.coe_le_coe.mp hle
+      obtain ⟨rr, R, hW0, hf, ht⟩ := Nat.sInf_mem hne
+      have htle : t (W0 A (N.map (algebraMap ℝ ℂ)) L0)
+          (WR A (N.map (algebraMap ℝ ℂ)) L0 R) ≤ r := by
+        rw [ht]
+        exact hle'
+      refine decC_mono (C := C) (A := A) (L0 := L0) (N := N.map (algebraMap ℝ ℂ))
+        (r := t (W0 A (N.map (algebraMap ℝ ℂ)) L0)
+          (WR A (N.map (algebraMap ℝ ℂ)) L0 R)) (r' := r) hN htle ?_
+      exact feasible_to_decC (C := C) (A := A) (L0 := L0) (N := N) (R := R) hN hW0 hf
+    · rw [tMinC, dif_neg hne] at hle
+      exact absurd hle (WithTop.not_top_le_coe r)
+  · intro hr
+    obtain ⟨R, hW0, _hWT, hf, ht⟩ :=
+      decC_to_feasible_design C A L0 (N.map (algebraMap ℝ ℂ)) hN hr
+    have hmem : t (W0 A (N.map (algebraMap ℝ ℂ)) L0)
+        (WR A (N.map (algebraMap ℝ ℂ)) L0 R) ∈ tMinCSet A N L0 :=
+      ⟨_, R, hW0, hf, rfl⟩
+    have hne : (tMinCSet A N L0).Nonempty := ⟨_, hmem⟩
+    have hle : sInf (tMinCSet A N L0)
+        ≤ t (W0 A (N.map (algebraMap ℝ ℂ)) L0) (WR A (N.map (algebraMap ℝ ℂ)) L0 R) :=
+      Nat.sInf_le hmem
+    rw [tMinC, dif_pos hne]
+    exact WithTop.coe_le_coe.mpr (le_trans hle ht)
+
+
+/-- **The least feasible real order is itself feasible.** -/
+theorem decC_sInf_tMinCSet {p r0 n k : ℕ}
+    (C : Matrix (Fin p) (Fin n) ℝ) (A : Matrix (Fin n) (Fin n) ℝ)
+    (L0 : Matrix (Fin r0) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℝ)
+    (hN : (N.map (algebraMap ℝ ℂ)).mulVecLin.range
+      = (Matrix.fromRows ((C.map (algebraMap ℝ ℂ)) * (A.map (algebraMap ℝ ℂ)))
+          (C.map (algebraMap ℝ ℂ))).mulVecLin.ker)
+    (hne : (tMinCSet A N L0).Nonempty) :
+    DecOrder C A L0 (sInf (tMinCSet A N L0)) := by
+  refine (tMinC_le_iff_decC C A L0 N hN (sInf (tMinCSet A N L0))).mp ?_
+  rw [tMinC, dif_pos hne]
+
 end Q1Paper.PaperII
+
+
 
 
 

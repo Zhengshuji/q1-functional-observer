@@ -103,6 +103,10 @@ import Q1Paper.PaperII.Realification
 #print axioms Q1Paper.PaperII.feasible_to_decC
 #print axioms Q1Paper.PaperII.decC_to_feasible_design
 #print axioms Q1Paper.PaperII.decC_saturates
+#print axioms Q1Paper.PaperII.tMinCSet
+#print axioms Q1Paper.PaperII.tMinC
+#print axioms Q1Paper.PaperII.tMinC_le_iff_decC
+#print axioms Q1Paper.PaperII.decC_sInf_tMinCSet
 
 -- Sandwich.lean
 #print axioms Q1Paper.PaperII.Ac
