@@ -78,15 +78,14 @@ specification `DECℂ`.  The bridge between them is the real-compression lemma
 
 | paper item | reason |
 |---|---|
-| Prop 3, the composed iff (`t_min = a−s₀+1 ⇔ ∃(G,b)`) | − | − | **not formalised**: both directions and the numerical half are proved separately, but the composition — in particular identifying `U = π₁W` with `U₀+V₀` at an attaining `W`, and the real-field statement of Prop 3 — is not |
+| Prop 3, the composed iff (`t_min = a−s₀+1 ⇔ ∃(G,b)`) | both directions and the numerical half are proved separately; the composition — in particular identifying `U = π₁W` with `U₀+V₀` at an attaining `W` — and the real-field form of the statement are not formalised |
 | Theorem 4, the `O(log(ℓ+2))` call count | the ordering is `tMin_le_iff_dec` and the least element is `dec_sInf_tMinSet`; the arithmetic of the call count is not formalised |
 | Corollary 5 (OPT), Corollary 6 (FIND) | complexity statements inherited from Paper I; FIND's bit model is open in the paper |
 | the appendix instance (`q_min = 4`) | exact rational certificate; belongs to the Python verification layer |
-| Prop 3, the composed iff and its real-field form | the two directions and the numerical half are proved; the composition needs `U = π₁W = U₀+V₀` at an attaining `W`, and the real-field version of the statement |
 | Theorem 4, the construction part | the ordering (`tMin ≤ r ↔ DEC`) and the counting boundary are recorded above; recovering the `t`-row `R` from a given `W` by solving the linear system is `claim4_converse` (existence), not the paper's explicit recovery step |
 | FIND: the witness system `Ψ_{t,ω}`, the real-solution/feasible-`W` equivalence, and the sampling step | not formalised; only the complexity inheritance is cited in the paper |
 | Prop 1, `t_min ≤ 2ℓ` for the real-design `tMinC` | `tMin_le_two_ell` is stated for the complex-design `tMin`; the real-design analogue follows from the same structural bound plus `real_compress` but is not stated separately |
-| Prop 2's side condition `ω > 0` | the structural bound needs `ω > 0`; the unconditional `a + 1 − s₀ ≤ t_min` is `le_tMin_of_lowerBound_max`, but the underlying `a + 1 ≤ s₀ + t` still assumes `ω > 0` |
+| Prop 2's non-degeneracy hypothesis `ω > 0` | the structural bound needs `ω > 0`; `le_tMin_of_lowerBound_max` removes only the `s₀ ≤ a` side condition, and the underlying `a + 1 ≤ s₀ + t` still assumes `ω > 0`.  The paper now states this hypothesis in Proposition 2 (it is false for `W = W₀ = 0`) |
 
 ## Verification
 
