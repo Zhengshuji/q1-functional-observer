@@ -778,6 +778,8 @@ Tightness, numerical half: $\dim W=a+1\Rightarrow t=a-s_0+1$ (\ref{prop:tight}) 
 Tightness, the $(G,b)$ direction: $\pi_\lambda W(G,b)=(\lambda I-G)U+\operatorname{span}\{b\}$,
 feasibility from $\operatorname{rank}[\lambda I-G\ \ b]=a$, and $t=a-s_0+1$ & literal &
 \texttt{graphExt\_piLam}, \texttt{graphExt\_feasible}, \texttt{t\_eq\_of\_graph} \\
+Tightness, the converse: a feasible $W$ with $\dim W=\dim\pi_1W+1$ is $W(G,b)$ & literal &
+\texttt{exists\_graph\_representation} \\
 \bottomrule
 \end{tabular}
 \end{table*}
@@ -787,9 +789,8 @@ $t_{\min}\le 2\ell$ is \texttt{tMin\_le\_two\_ell}.  The minimum-order identity
 $q_{\min}=r_0+t_{\min}$ is \texttt{tMin\_le\_iff\_dec}, stated for the field-generic predicate over
 $\mathbb C$: the paper's real-design specification $\mathrm{DEC}_{\mathbb C}$ has its forward direction
 (\texttt{decC\_to\_feasible}) and monotonicity (\texttt{decC\_mono}) formalised, while its converse
-(the real-compression lemma) is not.  Of Proposition~\ref{prop:tight} the $(G,b)$ direction is
-formalised in full; extracting $(G,b)$ from an attaining $W$ is not.  The artifact's Paper II item map
-records both boundaries.
+(the real-compression lemma) is not.  Proposition~\ref{prop:tight} is formalised in both directions.  The artifact's Paper II item map
+records the remaining boundary (the real-design specification).
 
 Two kinds of evidence support the statements above, and the artifact records which statement rests on
 which.
