@@ -4,7 +4,7 @@ import Q1Paper.PaperI.MinorRank
 import Q1Paper.PaperI.BasisExtraction
 
 /-!
-Q1Paper/PaperI/Claim8Ej.lean
+Q1Paper/PaperI/Claim8_SumSquares.lean
 
 **The algebraic core of Claim 8's disjunction, with no spectral theorem.**
 
@@ -42,14 +42,14 @@ cardinality proof travels with the set, so that `S.orderEmbOfFin ⋯` can be wri
 project's `rowEmb`/`colEmb` are exactly `S.orderEmbOfFin ⋯`.
 
 No `sorry`, no `admit`, no new axioms.  Check with
-  lake env lean Q1Paper/PaperI/Claim8Ej.lean
+  lake env lean Q1Paper/PaperI/Claim8_SumSquares.lean
 -/
 
 
 open Matrix
 open Q1Paper.PaperI
 
-namespace Q1Paper.PaperI.Claim8Ej
+namespace Q1Paper.PaperI.Claim8_SumSquares
 
 variable {m n : ℕ}
 
@@ -330,5 +330,5 @@ theorem elemSymm_pos_iff_rank_ge_finset (M : Matrix (Fin m) (Fin n) ℝ) (j : �
   rw [← elemSymm_eq_sum_powersetCard]
   exact elemSymm_pos_iff_rank_ge M j
 
-end Q1Paper.PaperI.Claim8Ej
+end Q1Paper.PaperI.Claim8_SumSquares
 

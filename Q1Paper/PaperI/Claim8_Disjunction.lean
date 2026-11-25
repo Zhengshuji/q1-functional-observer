@@ -1,21 +1,20 @@
 
-import Q1Paper.PaperI.Claim8Ej
-
+import Q1Paper.PaperI.Claim8_SumSquares
 /-!
-Q1Paper/PaperI/Claim8Wire.lean
+Q1Paper/PaperI/Claim8_Disjunction.lean
 
 **Claim 8 (rank consistency): the disjunctive form.**  This file wires the paper's
 disjunction
 
   `∨_t [ e_t(Γ) > 0 ∧ e_{t+1}(Γ) = 0 ∧ e_{t+1}(Γ') = 0 ]`,     `Γ = M * Mᵀ`,
 
-to `Q1Paper.PaperI.Claim8Ej.elemSymm_pos_iff_rank_ge` / `elemSymm_eq_zero_iff_rank_lt`
+to `Q1Paper.PaperI.Claim8_SumSquares.elemSymm_pos_iff_rank_ge` / `elemSymm_eq_zero_iff_rank_lt`
 (`PaperI/Claim8Ej.lean`) and to `Q1Paper.claim8_rank_consistency`
 (`PaperI/Claims38.lean`).
 
 Here `elemSymm M j` is the `j`-th elementary symmetric function of the row Gram matrix
 `Γ = M * Mᵀ`, defined as the sum of the principal `j × j` minors of `Γ`
-(`Q1Paper.PaperI.Claim8Ej.elemSymm`).  The two facts from `Claim8Ej.lean` used below are
+(`Q1Paper.PaperI.Claim8_SumSquares.elemSymm`).  The two facts from `Claim8Ej.lean` used below are
 
   `elemSymm_pos_iff_rank_ge :  0 < elemSymm M j  ↔  j ≤ M.rank`,
   `elemSymm_eq_zero_iff_rank_lt :  elemSymm M j = 0  ↔  M.rank < j`.
@@ -42,16 +41,16 @@ or an `elemSymm` generalised to an arbitrary column index type.  See the closing
 the exact statement that is missing.
 
 No `sorry`, no `admit`, no new axioms.  Check with
-  lake env lean Q1Paper/PaperI/Claim8Wire.lean
+  lake env lean Q1Paper/PaperI/Claim8_Disjunction.lean
 -/
 
 
 open Matrix
 
-namespace Q1Paper.PaperI.Claim8Wire
+namespace Q1Paper.PaperI.Claim8_Disjunction
 
 open Q1Paper.PaperI
-open Q1Paper.PaperI.Claim8Ej
+open Q1Paper.PaperI.Claim8_SumSquares
 
 variable {m n : ℕ}
 
@@ -185,4 +184,4 @@ whose `←` direction is `rank_eq_of_elemSymm_pattern` plus `Q1Paper.rank_augmen
 (`G5GramRank.lean`).  That equivalence is **not** formalised here: it is recorded only to pin
 down the missing ingredient, and it is not claimed as verified. -/
 
-end Q1Paper.PaperI.Claim8Wire
+end Q1Paper.PaperI.Claim8_Disjunction

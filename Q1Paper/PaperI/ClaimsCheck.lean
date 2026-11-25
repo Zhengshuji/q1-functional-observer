@@ -35,7 +35,7 @@ import Q1Paper.PaperI.MainTheorems
 #check @Q1Paper.claim8_rank_consistency
 
 -- Claim 8 (disjunction) (lem:rankcons) [Lean]
-#check @Q1Paper.PaperI.Claim8Literal.claim8_disjunction
+#check @Q1Paper.PaperI.Claim8_ElemSymm.claim8_disjunction
 
 -- Claim 9 (lem:bezout) [Lean]
 #check @Q1Paper.exists_bezout_family_real

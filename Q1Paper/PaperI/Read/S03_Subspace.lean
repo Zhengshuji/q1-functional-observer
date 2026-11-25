@@ -33,7 +33,7 @@ mention this problem; **bridge** = a translation between two formulations of the
 2. **[core]** a feasible $W$ satisfies $\omega + 1 \le \dim W \le 2\omega$ — `Q1Paper.claim6_struct`
 3. **[core]** the problem is monotone in the order — `Q1Paper.claim7_DEC_succ`
 4. **[core]** the rank-consistency criterion, which eliminates the intermediate $B$ — `Q1Paper.claim8_rank_consistency`
-5. **[bridge]** its combinatorial form, as a disjunction over the elementary symmetric functions — `Q1Paper.PaperI.Claim8Literal.claim8_disjunction`
+5. **[bridge]** its combinatorial form, as a disjunction over the elementary symmetric functions — `Q1Paper.PaperI.Claim8_ElemSymm.claim8_disjunction`
 
 ## What the next section does with it
 
@@ -45,4 +45,4 @@ mention this problem; **bridge** = a translation between two formulations of the
 #check Q1Paper.claim6_struct
 #check Q1Paper.claim7_DEC_succ
 #check Q1Paper.claim8_rank_consistency
-#check Q1Paper.PaperI.Claim8Literal.claim8_disjunction
+#check Q1Paper.PaperI.Claim8_ElemSymm.claim8_disjunction

@@ -68,7 +68,7 @@ Proved by `Q1Paper.claim8_rank_consistency`. -/
 
 (exists b, M b = c) iff exists t, e_t(Gamma) > 0, e_{t+1}(Gamma) = 0, e_{t+1}(Gamma') = 0.
 
-Proved by `Q1Paper.PaperI.Claim8Literal.claim8_disjunction`. -/
+Proved by `Q1Paper.PaperI.Claim8_ElemSymm.claim8_disjunction`. -/
 /-- **Claim 9** (`lem:bezout`). `[Lean]`
 
 the degree-bounded Bezout family over R (deg < omega).

@@ -37,6 +37,10 @@ def find_module(name: str) -> pathlib.Path | None:
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--namespace", action="store_true",
+                    help="also rename Q1Paper.PaperI.<Old> to Q1Paper.PaperI.<New>: needed when the "
+                         "module has its own namespace (P0 gave 15 of them one), because that changes "
+                         "fully-qualified declaration names and therefore Audit.lean and CLAIMS.md")
     ap.add_argument("pairs", nargs="+", help="Old New [Old New ...] (bare module names)")
     args = ap.parse_args()
 
@@ -66,11 +70,16 @@ def main() -> int:
         # rewritten (a blanket substitution would strip trailing spaces across the whole tree)
         return m.group(1) + new_mod if m.group(2) == old_mod else m.group(0)
 
-    for path in sorted(ROOT.glob("Q1Paper/**/*.lean")):
+    for path in sorted(list(ROOT.glob("Q1Paper/**/*.lean")) + [ROOT / "Q1Paper" / "PaperI" / "CLAIMS.md"]
+                       + sorted((ROOT / "scripts").glob("*.py"))):
         text = path.read_text(encoding="utf-8")
         original = text
         for _src, _dst, old_mod, new_mod in plans:
             text = IMPORT_RE.sub(lambda m, o=old_mod, n=new_mod: fix(m, o, n), text)
+            if args.namespace:
+                # covers `namespace`, `end`, `open`, fully-qualified names in Audit.lean, and the
+                # declaration names in the claims generator's table
+                text = text.replace(old_mod, new_mod)
         if text != original:
             touched.append(path.relative_to(ROOT).as_posix())
             if not args.dry_run:

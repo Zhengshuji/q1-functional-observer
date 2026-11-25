@@ -1,9 +1,9 @@
 
-import Q1Paper.PaperI.Claim8Wire
+import Q1Paper.PaperI.Claim8_Disjunction
 import Q1Paper.G5GramRank
 
 /-!
-Q1Paper/PaperI/Claim8Literal.lean
+Q1Paper/PaperI/Claim8_ElemSymm.lean
 
 **Claim 8 in the paper's literal form: the disjunction for `Γ' = M Mᵀ + c cᵀ`.**
 
@@ -69,15 +69,15 @@ identities, hence `elemSymmGen (withCol M c) (rank M + 1) = 0`.
 agree and `Q1Paper.exists_mulVec_eq_iff_rank_gram` yields the solution.
 
 No `sorry`, no `admit`, no new axioms.  Check with
-  lake env lean Q1Paper/PaperI/Claim8Literal.lean
+  lake env lean Q1Paper/PaperI/Claim8_ElemSymm.lean
 -/
 
 
 open Matrix
 
-namespace Q1Paper.PaperI.Claim8Literal
+namespace Q1Paper.PaperI.Claim8_ElemSymm
 
-open Q1Paper.PaperI.Claim8Ej
+open Q1Paper.PaperI.Claim8_SumSquares
 
 /-! ## 1.  `elemSymm` for an arbitrary finite column type -/
 
@@ -113,7 +113,7 @@ theorem elemSymmGen_eq_elemSymm {m : ℕ} {ι : Type*} [Fintype ι]
     elemSymmGen M j = elemSymm (M.submatrix id (Fintype.equivFin ι).symm) j := by
   rw [elemSymmGen, elemSymm]
   exact Finset.sum_congr rfl (fun S _ => by
-    rw [Q1Paper.PaperI.Claim8Wire.gramBlock_eq_gram_submatrix
+    rw [Q1Paper.PaperI.Claim8_Disjunction.gramBlock_eq_gram_submatrix
       (M.submatrix id (Fintype.equivFin ι).symm) S, gram_submatrix_equivFin])
 
 /-- **The general-rank-positivity criterion.**  The `j`-th elementary symmetric function of the
@@ -227,4 +227,4 @@ theorem claim8_disjunction {m n : ℕ} (M : Matrix (Fin m) (Fin n) ℝ) (c : Fin
 #check @withCol_mul_transpose
 #check @rank_le_rank_withCol
 
-end Q1Paper.PaperI.Claim8Literal
+end Q1Paper.PaperI.Claim8_ElemSymm

@@ -94,9 +94,9 @@ import Q1Paper.PaperI.CompressedGram
 import Q1Paper.PaperI.DecR0Iface
 import Q1Paper.PaperI.DenOne
 import Q1Paper.PaperI.FinReindex
-import Q1Paper.PaperI.Claim8Ej
-import Q1Paper.PaperI.Claim8Wire
-import Q1Paper.PaperI.Claim8Literal
+import Q1Paper.PaperI.Claim8_SumSquares
+import Q1Paper.PaperI.Claim8_Disjunction
+import Q1Paper.PaperI.Claim8_ElemSymm
 import Q1Paper.PaperI.ChartComplete
 import Q1Paper.PaperI.FromRowsMap
 import Q1Paper.PaperI.ChartComplex

@@ -52,9 +52,9 @@ docstring so a reader can see the author's stated purpose.
 | `Q1Paper/PaperI/Claim15iv.lean` | 27 | 11 | — | for the coefficients of the cleared system `Phi_{omega,J}`. |
 | `Q1Paper/PaperI/Claim16.lean` | 23 | 9 | — | Claim 16 of the paper (`lem:zero`, the "zero-free-row" case). |
 | `Q1Paper/PaperI/Claim4Converse.lean` | 2 | 2 | Claim 4 (converse) | The **converse** of Claim 4 (`lem:sandwich`) of Paper I. |
-| `Q1Paper/PaperI/Claim8Ej.lean` | 23 | 4 | — | `elemSymm M j = ∑_{\|S\| = j} det (Γ_{S,S})`,   `Γ_{S,S} = M_S * M_Sᵀ`. |
-| `Q1Paper/PaperI/Claim8Literal.lean` | 13 | 5 | Claim 8 (disjunction) | `elemSymm_eq_zero_iff_rank_lt  :  elemSymm M j = 0 ↔ M.rank < j`. |
-| `Q1Paper/PaperI/Claim8Wire.lean` | 9 | 4 | — | (`PaperI/Claims38.lean`). |
+| `Q1Paper/PaperI/Claim8_Disjunction.lean` | 9 | 4 | — | (`PaperI/Claims38.lean`). |
+| `Q1Paper/PaperI/Claim8_ElemSymm.lean` | 13 | 5 | Claim 8 (disjunction) | `elemSymm_eq_zero_iff_rank_lt  :  elemSymm M j = 0 ↔ M.rank < j`. |
+| `Q1Paper/PaperI/Claim8_SumSquares.lean` | 23 | 4 | — | `elemSymm M j = ∑_{\|S\| = j} det (Γ_{S,S})`,   `Γ_{S,S} = M_S * M_Sᵀ`. |
 | `Q1Paper/PaperI/Claims.lean` | 0 | 0 | — | **(no module docstring)** |
 | `Q1Paper/PaperI/Claims38.lean` | 26 | 7 | Claim 3, Claim 4 (forward), Claim 5, Claim 6, Claim 7, Claim 8 (rank form) | `lem:struct`, `lem:monotone`, `lem:rankcons`). |
 | `Q1Paper/PaperI/ClaimsCheck.lean` | 0 | 0 | — | **(no module docstring)** |

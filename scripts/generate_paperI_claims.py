@@ -51,7 +51,7 @@ PAPER_ITEMS = [
      "Q1Paper.claim8_rank_consistency", "Lean"),
     ("lem:rankcons", "Claim 8 (disjunction)",
      "(exists b, M b = c) iff exists t, e_t(Gamma) > 0, e_{t+1}(Gamma) = 0, e_{t+1}(Gamma') = 0",
-     "Q1Paper.PaperI.Claim8Literal.claim8_disjunction", "Lean"),
+     "Q1Paper.PaperI.Claim8_ElemSymm.claim8_disjunction", "Lean"),
     ("lem:bezout", "Claim 9", "the degree-bounded Bezout family over R (deg < omega)",
      "Q1Paper.exists_bezout_family_real", "Lean"),
     ("lem:window", "Claim 10", "the window matrix's row space is the window set",
