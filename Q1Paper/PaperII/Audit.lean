@@ -16,6 +16,7 @@ import Q1Paper.PaperII.Saturate
 import Q1Paper.PaperII.MinOrder
 import Q1Paper.PaperII.GraphExtension
 import Q1Paper.PaperII.GraphExtract
+import Q1Paper.PaperII.Realification
 
 -- Converse.lean
 #print axioms Q1Paper.PaperII.WRc
@@ -85,6 +86,13 @@ import Q1Paper.PaperII.GraphExtract
 #print axioms Q1Paper.PaperII.pairRowSpace_pad
 #print axioms Q1Paper.PaperII.decC_mono_add
 #print axioms Q1Paper.PaperII.decC_mono
+
+-- Realification.lean
+#print axioms Q1Paper.PaperII.pairRows
+#print axioms Q1Paper.PaperII.Φ_pairRows
+#print axioms Q1Paper.PaperII.pairRowSpace_eq_map_pairRows
+#print axioms Q1Paper.PaperII.finrank_pairRowSpace_eq_rank
+#print axioms Q1Paper.PaperII.pairRows_map
 
 -- Sandwich.lean
 #print axioms Q1Paper.PaperII.Ac

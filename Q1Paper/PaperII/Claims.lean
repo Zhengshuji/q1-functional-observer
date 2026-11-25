@@ -62,6 +62,10 @@ proved, and its converse is the open real-compression lemma (plan §8.5).
   (`t_min = ⊤` when infeasible) — `Q1Paper.PaperII.tMin_le_iff_dec`.
 * **Prop 1, a priori bound**: `t_min ≤ 2ℓ`, `ℓ = rank(A N)` —
   `Q1Paper.PaperII.tMin_le_two_ell` (and `omega_le_ell`, `t_le_two_ell`).
+* **Real-design bridges** (for the `DECℂ` upgrade): the pair row space is the
+  `Φ`-image of the encoded row space (`pairRows`, `pairRowSpace_eq_map_pairRows`), its
+  dimension is the encoded matrix's rank (`finrank_pairRowSpace_eq_rank`), and the
+  encoding commutes with complexification (`pairRows_map`, `Mcol_map`).
 * **Prop 2 as a bound on the minimum order** (`eq:qmin-lb`): `a − s₀ + 1 ≤ t_min`
   whenever every feasible `W` has `ω > 0` — `Q1Paper.PaperII.le_tMin_of_lowerBound`.
 * **Theorem 4, correctness half** (the interface): the least feasible order is itself
