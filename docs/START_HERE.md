@@ -89,14 +89,19 @@ The formalisation is not a machine-checked copy of the paper, and the difference
 ## Reading order
 
 1. This file.
-2. `docs/PAPER_I_PROOF_MAP.md` — the paper item ↔ declaration ↔ file table, and the boundaries.
-3. `docs/PAPER_I_MODULE_MAP.md` — every Lean module with its declaration count, which paper items it
+2. `Q1Paper/PaperI/Claims.lean` — the paper's items in the paper's order, each with its LaTeX label,
+   its status and the name of the declaration that proves it.  It contains no proofs, so it reads as a
+   checklist; this is the shortest path from the paper into the Lean.
+3. `docs/PAPER_I_PROOF_MAP.md` — the same items with the **module and line** that define each
+   declaration, plus the proof routes and the boundaries.
+4. `docs/PAPER_I_MODULE_MAP.md` — every Lean module with its declaration count, which paper items it
    hosts, and the module's own stated purpose.  Use it when you have a file name and want to know why
-   it exists; use the proof map when you have a paper item and want the declaration.
-4. `docs/ALGORITHM_CORRECTNESS_MAP.md` — what is and is not proved *about the algorithms*, as opposed
+   it exists.
+5. `docs/PAPER_I_MATHEMATICAL_GUIDE.md` — the mathematics, for a reader who does not know Lean: what the
+   paper proves and why each step needs the next.  It complements the paper rather than restating it.
+6. `docs/ALGORITHM_CORRECTNESS_MAP.md` — what is and is not proved *about the algorithms*, as opposed
    to about the mathematics.
-5. `Q1Paper/PaperI/CLAIMS.md` — the machine-maintained claim list (both maps are built from it).
-6. The paper itself.
+7. The paper itself.
 
 Development history, including retracted claims and the reasons, is recorded in the project's
 development logs.  Those are **not published** in this repository: they are records, not status

@@ -1,5 +1,14 @@
 # Paper I: proof map
 
+**Read `Q1Paper/PaperI/Claims.lean` first.**  It lists the paper's items in the paper's own order, each
+with its LaTeX label, its coverage status and the name of the declaration that proves it — and it
+contains no proofs at all (zero declarations), so it reads as a checklist rather than as Lean code.
+It is generated from `CLAIMS.md`, and `ClaimsCheck.lean` machine-checks that every declaration it
+names really exists.
+
+The table below answers the question that file cannot: **where** each proof lives, i.e. the module and
+line that define the declaration.
+
 One row per paper item: the Lean declaration that carries it, the file and line that define it, and
 its coverage status.  The `label` column is the paper's own LaTeX label, so a claim can be found in
 `paper/paper_I_dec.tex` by searching for it.
