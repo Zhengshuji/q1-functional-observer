@@ -27,7 +27,7 @@ Reuses: `Q1Subspace.pi1/pi2`, `Q1Paper.claim6_struct`,
 (`PaperII/Interface.lean`).
 -/
 
-import Q1Paper.PaperII.Interface
+import Q1Paper.PaperII.Sandwich
 
 open Module Matrix
 
@@ -80,6 +80,28 @@ theorem lowerBound_sub [FiniteDimensional K F] [IsAlgClosed K]
     finrank K ↥(Q1Subspace.pi1 W₀ ⊔ Q1Subspace.pi2 W₀) - finrank K ↥W₀ + 1
       ≤ t W₀ W := by
   have h := lowerBound_core hW₀ hfeas hω
+  omega
+
+/-! ### 4. The numerical half of tightness (Prop 3) -/
+
+/-- **Prop 3, numerical half.**  Let `a = rank[U₀;V₀] = dim (π₁W₀ ⊔ π₂W₀)` and
+`s₀ = dim W₀`.  If a feasible `W` has `dim W = a + 1` then its quotient dimension is
+`a − s₀ + 1`: the spectral lower bound is attained.
+
+The other half of Prop 3 — producing such a `W` from a pair `(G, b)` with
+`W₀ ⊆ W(G,b) ⊆ T` — is not formalised. -/
+theorem t_eq_of_finrank (A : Matrix (Fin n) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℂ)
+    (L0 : Matrix (Fin r0) (Fin n) ℝ)
+    {W : Submodule ℂ ((Fin k → ℂ) × (Fin k → ℂ))} (hW0 : W0 A N L0 ≤ W)
+    (ha : finrank ℂ ↥(W0 A N L0)
+      ≤ finrank ℂ ↥(Q1Subspace.pi1 (W0 A N L0) ⊔ Q1Subspace.pi2 (W0 A N L0)))
+    (hdim : finrank ℂ ↥W
+      = finrank ℂ ↥(Q1Subspace.pi1 (W0 A N L0) ⊔ Q1Subspace.pi2 (W0 A N L0)) + 1) :
+    t (W0 A N L0) W
+      = finrank ℂ ↥(Q1Subspace.pi1 (W0 A N L0) ⊔ Q1Subspace.pi2 (W0 A N L0))
+        - finrank ℂ ↥(W0 A N L0) + 1 := by
+  rw [t_eq_finrank_sub hW0]
+  have hmono : finrank ℂ ↥(W0 A N L0) ≤ finrank ℂ ↥W := Submodule.finrank_mono hW0
   omega
 
 end Q1Paper.PaperII

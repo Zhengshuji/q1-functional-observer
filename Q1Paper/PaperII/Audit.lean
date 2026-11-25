@@ -41,6 +41,7 @@ import Q1Paper.PaperII.MinOrder
 #print axioms Q1Paper.PaperII.finrank_pi1_mono
 #print axioms Q1Paper.PaperII.lowerBound_core
 #print axioms Q1Paper.PaperII.lowerBound_sub
+#print axioms Q1Paper.PaperII.t_eq_of_finrank
 
 -- MinOrder.lean
 #print axioms Q1Paper.PaperII.tMinSet

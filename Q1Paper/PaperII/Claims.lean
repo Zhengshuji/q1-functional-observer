@@ -74,4 +74,8 @@ proved, and its converse is the open real-compression lemma (plan §8.5).
 * **Prop 2**: `rank[U₀;V₀] + 1 ≤ s₀ + t` for a feasible `W` with `ω > 0`, hence
   `rank[U₀;V₀] − s₀ + 1 ≤ t` — `Q1Paper.PaperII.lowerBound_core`,
   `lowerBound_sub`.
+* **Prop 3, numerical half**: if `dim W = rank[U₀;V₀] + 1` (and `s₀ ≤ rank[U₀;V₀]`),
+  then `t = rank[U₀;V₀] − s₀ + 1`, i.e. the bound is attained —
+  `Q1Paper.PaperII.t_eq_of_finrank`.  The construction of such a `W` from a pair
+  `(G, b)` is not formalised.
 -/

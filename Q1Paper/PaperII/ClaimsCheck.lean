@@ -41,3 +41,4 @@ import Q1Paper.PaperII.MainTheorems
 -- §III  The spectral lower bound
 #check @Q1Paper.PaperII.lowerBound_core
 #check @Q1Paper.PaperII.lowerBound_sub
+#check @Q1Paper.PaperII.t_eq_of_finrank
