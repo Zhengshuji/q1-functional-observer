@@ -15,6 +15,7 @@ import Q1Paper.PaperII.Converse
 import Q1Paper.PaperII.Saturate
 import Q1Paper.PaperII.MinOrder
 import Q1Paper.PaperII.GraphExtension
+import Q1Paper.PaperII.GraphExtract
 
 -- Converse.lean
 #print axioms Q1Paper.PaperII.WRc
@@ -34,6 +35,15 @@ import Q1Paper.PaperII.GraphExtension
 #print axioms Q1Paper.PaperII.graphExt_piLam
 #print axioms Q1Paper.PaperII.graphExt_feasible
 #print axioms Q1Paper.PaperII.t_eq_of_graph
+
+-- GraphExtract.lean
+#print axioms Q1Paper.PaperII.projW
+#print axioms Q1Paper.PaperII.projW_range
+#print axioms Q1Paper.PaperII.projU
+#print axioms Q1Paper.PaperII.projU_surjective
+#print axioms Q1Paper.PaperII.ker_finrank_eq_one
+#print axioms Q1Paper.PaperII.exists_kernel_direction
+#print axioms Q1Paper.PaperII.exists_kernel_b
 
 -- Interface.lean
 #print axioms Q1Paper.PaperII.Mcol
