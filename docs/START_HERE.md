@@ -72,7 +72,7 @@ The formalisation is not a machine-checked copy of the paper, and the difference
   `complexDEC` is that specification, and both directions of the chart equivalence are proved against
   it.  The older `DEC` quantifies over the real numbers and is now **auxiliary only**;
   `DecComplex.dec_of_complexDEC : complexDEC → DEC` is the only direction that holds.
-* **`ω = 0`.**  The completeness theorem `CompletenessB.phiPoint_of_complexDEC` carries `1 ≤ ω`,
+* **`ω = 0`.**  The completeness theorem `ComplexCompleteness.phiPoint_of_complexDEC` carries `1 ≤ ω`,
   because the Gram certificate comes from `claim11_iff_gram`, which needs it.  The zero-rank branch is
   a separate case in the paper (Proposition 4 step 2, and `decide_r0` in the Python layer) and is not
   covered by that theorem.

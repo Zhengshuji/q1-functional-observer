@@ -100,15 +100,14 @@ import Q1Paper.PaperI.Claim8_ElemSymm
 import Q1Paper.PaperI.ChartComplete
 import Q1Paper.PaperI.FromRowsMap
 import Q1Paper.PaperI.ChartComplex
-import Q1Paper.PaperI.Reindex
-import Q1Paper.PaperI.Reindex2
+import Q1Paper.PaperI.ReindexAlgebraic
+import Q1Paper.PaperI.ReindexSpectral
 import Q1Paper.PaperI.Soundness
 import Q1Paper.PaperI.DecComplex
 import Q1Paper.PaperI.KernelLift
 import Q1Paper.PaperI.ComplexSoundness
-import Q1Paper.PaperI.Completeness
-import Q1Paper.PaperI.CompletenessB
-
+import Q1Paper.PaperI.ComplexCompression
+import Q1Paper.PaperI.ComplexCompleteness
 /-!
 Q1Paper/PaperI/MainTheorems.lean
 

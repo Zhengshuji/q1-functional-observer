@@ -485,11 +485,11 @@ This file is not imported by `PaperI.lean`: it is a build-time report.
 #print axioms Q1Paper.PaperI.ChartComplete.feasible_of_phiPoint
 #print axioms Q1Paper.PaperI.FromRowsMap.fromRows_map
 #print axioms Q1Paper.PaperI.ChartComplex.complex_spectral_implies_real
-#print axioms Q1Paper.PaperI.Reindex.rawAlgebraic_submatrix
-#print axioms Q1Paper.PaperI.Reindex2.rawSpectral_submatrix
+#print axioms Q1Paper.PaperI.ReindexAlgebraic.rawAlgebraic_submatrix
+#print axioms Q1Paper.PaperI.ReindexSpectral.rawSpectral_submatrix
 #print axioms Q1Paper.PaperI.Soundness.dec_of_phiPoint
 #print axioms Q1Paper.PaperI.DecComplex.dec_of_complexDEC
 #print axioms Q1Paper.PaperI.KernelLift.range_mulVecLin_eq_ker_map_complex
 #print axioms Q1Paper.PaperI.ComplexSoundness.decComplex_of_phiPoint
-#print axioms Q1Paper.PaperI.Completeness.compressed_of_spectralComplexRaw
-#print axioms Q1Paper.PaperI.CompletenessB.phiPoint_of_complexDEC
+#print axioms Q1Paper.PaperI.ComplexCompression.compressed_of_spectralComplexRaw
+#print axioms Q1Paper.PaperI.ComplexCompleteness.phiPoint_of_complexDEC

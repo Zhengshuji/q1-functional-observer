@@ -191,7 +191,7 @@ The specification is the **complex-λ** one, `PaperI/DecComplex.lean`'s `complex
 directions of the chart equivalence are both kernel-checked against it:
 
     ComplexSoundness.decComplex_of_phiPoint : chart point  ->  complexDEC      (soundness)
-    CompletenessB.phiPoint_of_complexDEC    : complexDEC (omega >= 1) -> chart point (completeness)
+    ComplexCompleteness.phiPoint_of_complexDEC    : complexDEC (omega >= 1) -> chart point (completeness)
 
 The older real-λ `DEC` is an auxiliary definition, linked only by
 `DecComplex.dec_of_complexDEC : complexDEC -> DEC`.  That direction is the one that holds; the

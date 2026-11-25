@@ -59,8 +59,8 @@ docstring so a reader can see the author's stated purpose.
 | `Q1Paper/PaperI/Claims38.lean` | 26 | 7 | Claim 3, Claim 4 (forward), Claim 5, Claim 6, Claim 7, Claim 8 (rank form) | `lem:struct`, `lem:monotone`, `lem:rankcons`). |
 | `Q1Paper/PaperI/ClaimsCheck.lean` | 0 | 0 | — | **(no module docstring)** |
 | `Q1Paper/PaperI/ColsConcat.lean` | 10 | 6 | — | **Column concatenation** `[A \| B]` and its bit-length bound. |
-| `Q1Paper/PaperI/Completeness.lean` | 1 | 1 | — | `rawSpectral_iff_compressed` at `K = ℂ`.  This file provides that step. |
-| `Q1Paper/PaperI/CompletenessB.lean` | 1 | 1 | — | conditions, the reindexed compressed pair carries a chart point. |
+| `Q1Paper/PaperI/ComplexCompleteness.lean` | 1 | 1 | — | conditions, the reindexed compressed pair carries a chart point. |
+| `Q1Paper/PaperI/ComplexCompression.lean` | 1 | 1 | — | `rawSpectral_iff_compressed` at `K = ℂ`.  This file provides that step. |
 | `Q1Paper/PaperI/ComplexSoundness.lean` | 2 | 1 | — | bijection (below), which is what lets the chart's reindexed block speak about `fromRows L0 R`. |
 | `Q1Paper/PaperI/Complexify.lean` | 5 | 5 | — | (and conversely, since `algebraMap ℝ ℂ` is injective). |
 | `Q1Paper/PaperI/ComplexityCounts.lean` | 26 | 7 | — | Modules 1 and 2 of the complexity layer, plus the denominator bound of module 3. |
@@ -109,8 +109,8 @@ docstring so a reader can see the author's stated purpose.
 | `Q1Paper/PaperI/Read/S07_ZeroFreeRow.lean` | 0 | 0 | — | `#check`, so if a declaration is renamed this file stops compiling — that is what keeps it honest. |
 | `Q1Paper/PaperI/Read/S08_ExistsReal.lean` | 0 | 0 | — | `#check`, so if a declaration is renamed this file stops compiling — that is what keeps it honest. |
 | `Q1Paper/PaperI/Read/S09_BitCost.lean` | 0 | 0 | — | `#check`, so if a declaration is renamed this file stops compiling — that is what keeps it honest. |
-| `Q1Paper/PaperI/Reindex.lean` | 2 | 1 | — | Gram field needs `minorFamily`, which wants `Fin` indices. |
-| `Q1Paper/PaperI/Reindex2.lean` | 1 | 1 | — | scalar multiplication and the subtraction. |
+| `Q1Paper/PaperI/ReindexAlgebraic.lean` | 2 | 1 | — | Gram field needs `minorFamily`, which wants `Fin` indices. |
+| `Q1Paper/PaperI/ReindexSpectral.lean` | 1 | 1 | — | scalar multiplication and the subtraction. |
 | `Q1Paper/PaperI/RenegarParams.lean` | 17 | 5 | Theorem 1 | never occur, so "the Renegar cost of the chart" is not a function of the chart. |
 | `Q1Paper/PaperI/RowSpanBridge.lean` | 4 | 4 | — | subset-indexed family (Section III-D). |
 | `Q1Paper/PaperI/SolveCriterion.lean` | 6 | 5 | — | (`Q1Paper/Q1RowSpace.lean`), i.e. `rank [A; B] = rank B ↔ rowSpace A ≤ rowSpace B`. |

@@ -143,7 +143,7 @@ both directions:
 | direction | meaning | declaration |
 |---|---|---|
 | `PhiPoint` ⇒ `complexDEC` | a chart point is a witness | `ComplexSoundness.decComplex_of_phiPoint` |
-| `complexDEC` ⇒ `PhiPoint` (for $\omega \ge 1$) | no witness is missed | `CompletenessB.phiPoint_of_complexDEC` |
+| `complexDEC` ⇒ `PhiPoint` (for $\omega \ge 1$) | no witness is missed | `ComplexCompleteness.phiPoint_of_complexDEC` |
 
 `DEC` is retained only as an auxiliary definition, linked by `complexDEC → DEC`.
 The $\omega = 0$ branch is *not* covered by the completeness theorem and is a separate case in the

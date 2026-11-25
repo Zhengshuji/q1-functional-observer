@@ -20,7 +20,7 @@ The two ingredients that were missing and are now available:
 namespace Q1Paper.PaperI.ComplexSoundness
 
 open Q1Paper Q1Subspace Q1Paper.PaperI Q1Paper.PaperI.ChartComplete
-  Q1Paper.PaperI.DecComplex Q1Paper.PaperI.Reindex Q1Paper.PaperI.Reindex2
+  Q1Paper.PaperI.DecComplex Q1Paper.PaperI.ReindexAlgebraic Q1Paper.PaperI.ReindexSpectral
   Q1Paper.PaperI.KernelLift Q1Paper.PaperI.Soundness Q1Paper.PaperI.FromRowsMap
 
 variable {K : Type*} [Field K]

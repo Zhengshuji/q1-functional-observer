@@ -78,8 +78,10 @@ def main() -> int:
             text = IMPORT_RE.sub(lambda m, o=old_mod, n=new_mod: fix(m, o, n), text)
             if args.namespace:
                 # covers `namespace`, `end`, `open`, fully-qualified names in Audit.lean, and the
-                # declaration names in the claims generator's table
-                text = text.replace(old_mod, new_mod)
+                # declaration names in the claims generator's table.
+                # The lookahead matters: Reindex is a prefix of Reindex2, so a plain replace would
+                # corrupt the longer name.
+                text = re.sub(re.escape(old_mod) + r"(?![\w'])", new_mod.replace("\\", r"\\"), text)
         if text != original:
             touched.append(path.relative_to(ROOT).as_posix())
             if not args.dry_run:

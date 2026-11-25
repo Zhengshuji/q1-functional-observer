@@ -35,8 +35,8 @@ its coverage status.  The `label` column is the paper's own LaTeX label, so a cl
 **Beyond the paper's claim list**, these declarations carry the algorithm-side development and are not
 rows above: `ChartComplete.phiPoint_of_conditions` / `feasible_of_phiPoint` (the chart equivalence at
 the compressed level), `ComplexSoundness.decComplex_of_phiPoint` (soundness against `complexDEC`),
-`CompletenessB.phiPoint_of_complexDEC` (completeness, `ω ≥ 1`), and the transfer lemmas
-`Reindex.rawAlgebraic_submatrix`, `Reindex2.rawSpectral_submatrix`, `KernelLift.range_mulVecLin_eq_ker_map_complex`.
+`ComplexCompleteness.phiPoint_of_complexDEC` (completeness, `ω ≥ 1`), and the transfer lemmas
+`ReindexAlgebraic.rawAlgebraic_submatrix`, `ReindexSpectral.rawSpectral_submatrix`, `KernelLift.range_mulVecLin_eq_ker_map_complex`.
 
 ## Proof routes for the main claims
 

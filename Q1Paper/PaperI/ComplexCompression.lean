@@ -8,7 +8,7 @@ complex condition out of `complexDEC`'s spectral half, i.e. the `.mp` direction 
 `rawSpectral_iff_compressed` at `K = ℂ`.  This file provides that step.
 -/
 
-namespace Q1Paper.PaperI.Completeness
+namespace Q1Paper.PaperI.ComplexCompression
 
 open Q1Paper Q1Subspace Q1Paper.PaperI Q1Paper.PaperI.DecComplex
   Q1Paper.PaperI.KernelLift Q1Paper.PaperI.FromRowsMap Q1Paper.PaperI.ComplexSoundness
@@ -27,4 +27,4 @@ theorem compressed_of_spectralComplexRaw (C CA : Matrix p n ℝ) (L LA : Matrix 
     (N.map (algebraMap ℝ ℂ)) hNC).mp h
   rwa [← Matrix.map_mul, ← Matrix.map_mul] at hstep
 
-end Q1Paper.PaperI.Completeness
+end Q1Paper.PaperI.ComplexCompression

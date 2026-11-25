@@ -110,7 +110,7 @@ against it:
 | direction | declaration |
 |---|---|
 | chart point ⇒ `complexDEC` (soundness) | `ComplexSoundness.decComplex_of_phiPoint` |
-| `complexDEC` ⇒ chart point (completeness, `ω ≥ 1`) | `CompletenessB.phiPoint_of_complexDEC` |
+| `complexDEC` ⇒ chart point (completeness, `ω ≥ 1`) | `ComplexCompleteness.phiPoint_of_complexDEC` |
 
 The older `DEC` in `Interface.lean` quantifies `(5b)` over the base field, i.e. over the **real**
 numbers; it is kept as an **auxiliary** definition only, linked by

@@ -1,4 +1,4 @@
-import Q1Paper.PaperI.Reindex2
+import Q1Paper.PaperI.ReindexSpectral
 import Q1Paper.PaperI.ChartComplete
 
 /-!
@@ -43,11 +43,11 @@ theorem dec_of_phiPoint {p r0 r n k ω : ℕ}
       (Matrix.fromRows L0 R * A).submatrix finSumFinEquiv.symm id :=
     submatrix_mul_right (Matrix.fromRows L0 R) A finSumFinEquiv.symm
   refine ⟨R, ?_, ?_⟩
-  · refine (Q1Paper.PaperI.Reindex.rawAlgebraic_submatrix C (C * A) (Matrix.fromRows L0 R)
+  · refine (Q1Paper.PaperI.ReindexAlgebraic.rawAlgebraic_submatrix C (C * A) (Matrix.fromRows L0 R)
       (Matrix.fromRows L0 R * A) finSumFinEquiv.symm).mp ?_
     rw [hmul] at h1
     exact h1
-  · refine Q1Paper.PaperI.Reindex2.rawSpectral_submatrix C (C * A) (Matrix.fromRows L0 R)
+  · refine Q1Paper.PaperI.ReindexSpectral.rawSpectral_submatrix C (C * A) (Matrix.fromRows L0 R)
       (Matrix.fromRows L0 R * A) finSumFinEquiv.symm ?_
     rw [hmul] at h2
     exact h2
