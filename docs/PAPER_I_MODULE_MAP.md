@@ -99,6 +99,16 @@ docstring so a reader can see the author's stated purpose.
 | `Q1Paper/PaperI/RankFactorization.lean` | 7 | 4 | — | with `X * B = H`, `XL * X = 1`, `B * BR = 1`. |
 | `Q1Paper/PaperI/RatDescent.lean` | 9 | 4 | — | This is the general linear-algebra fact needed by Claim 16 of the paper. |
 | `Q1Paper/PaperI/RationalBasis.lean` | 20 | 5 | Claim 13 | annihilators with an explicit bit-length bound. |
+| `Q1Paper/PaperI/Read/All.lean` | 0 | 0 | — | **(no module docstring)** |
+| `Q1Paper/PaperI/Read/S01_Compression.lean` | 0 | 0 | — | `#check`, so if a declaration is renamed this file stops compiling — that is what keeps it honest. |
+| `Q1Paper/PaperI/Read/S02_Attainable.lean` | 0 | 0 | — | `#check`, so if a declaration is renamed this file stops compiling — that is what keeps it honest. |
+| `Q1Paper/PaperI/Read/S03_Subspace.lean` | 0 | 0 | — | `#check`, so if a declaration is renamed this file stops compiling — that is what keeps it honest. |
+| `Q1Paper/PaperI/Read/S04_Certificate.lean` | 0 | 0 | — | `#check`, so if a declaration is renamed this file stops compiling — that is what keeps it honest. |
+| `Q1Paper/PaperI/Read/S05_FixedOrder.lean` | 0 | 0 | — | `#check`, so if a declaration is renamed this file stops compiling — that is what keeps it honest. |
+| `Q1Paper/PaperI/Read/S06_FixedParameter.lean` | 0 | 0 | — | `#check`, so if a declaration is renamed this file stops compiling — that is what keeps it honest. |
+| `Q1Paper/PaperI/Read/S07_ZeroFreeRow.lean` | 0 | 0 | — | `#check`, so if a declaration is renamed this file stops compiling — that is what keeps it honest. |
+| `Q1Paper/PaperI/Read/S08_ExistsReal.lean` | 0 | 0 | — | `#check`, so if a declaration is renamed this file stops compiling — that is what keeps it honest. |
+| `Q1Paper/PaperI/Read/S09_BitCost.lean` | 0 | 0 | — | `#check`, so if a declaration is renamed this file stops compiling — that is what keeps it honest. |
 | `Q1Paper/PaperI/Reindex.lean` | 2 | 1 | — | Gram field needs `minorFamily`, which wants `Fin` indices. |
 | `Q1Paper/PaperI/Reindex2.lean` | 1 | 1 | — | scalar multiplication and the subtraction. |
 | `Q1Paper/PaperI/RenegarParams.lean` | 17 | 5 | Theorem 1 | never occur, so "the Renegar cost of the chart" is not a function of the chart. |

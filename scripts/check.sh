@@ -9,6 +9,7 @@ export PATH="$HOME/.elan/bin:$PATH"
 # 1. the mathematics compiles
 lake build Q1Paper.PaperI.MainTheorems
 lake env lean PaperI.lean
+lake build Q1Paper.PaperI.Read.All
 
 # 2. the axiom audit
 lake env lean Q1Paper/PaperI/Audit.lean > "${TMPDIR:-/tmp}/paperI_audit.log"
@@ -18,5 +19,6 @@ python3 scripts/check_paperI_axioms.py "${TMPDIR:-/tmp}/paperI_audit.log" Q1Pape
 python3 scripts/generate_paperI_claims.py --check
 python3 scripts/generate_paperI_modules.py --check
 python3 scripts/paper_lean_index.py --check
+python3 scripts/generate_reading_entries.py --check
 
 echo "all checks passed"

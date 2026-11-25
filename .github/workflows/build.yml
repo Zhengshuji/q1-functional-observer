@@ -18,6 +18,7 @@ jobs:
         run: |
           lake build Q1Paper.PaperI.MainTheorems
           lake env lean PaperI.lean
+          lake build Q1Paper.PaperI.Read.All
       - name: Paper I axiom audit
         run: |
           lake env lean Q1Paper/PaperI/Audit.lean > paperI_audit.log
@@ -28,6 +29,7 @@ jobs:
           python3 scripts/generate_paperI_claims.py --check
           python3 scripts/generate_paperI_modules.py --check
           python3 scripts/paper_lean_index.py --check
+          python3 scripts/generate_reading_entries.py --check
 
   paper:
     runs-on: ubuntu-latest

@@ -1,0 +1,252 @@
+#!/usr/bin/env python3
+"""Generate the per-section reading entries for Paper I.
+
+The four existing indexes answer "where is this paper item".  None of them answers "in what order do I
+read the proof, and what is each step".  These files do, and they are generated so they cannot drift:
+every step is a `#check`, so renaming a declaration turns the entry into a compile error.
+
+Layout: one file per section of the paper, under `Q1Paper/PaperI/Read/`, plus `All.lean` which imports
+them so that a single `lean` invocation checks the whole set.
+
+Usage:
+    python scripts/generate_reading_entries.py           # regenerate
+    python scripts/generate_reading_entries.py --check    # fail if stale (CI)
+"""
+
+from __future__ import annotations
+
+import argparse
+import pathlib
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+OUT = ROOT / "Q1Paper" / "PaperI" / "Read"
+
+# section -> (file, title, paper anchor, problem, prior, [(step title, declaration)], next)
+SECTIONS = [
+    (
+        "S01_Compression.lean",
+        "§3.1 Compression and the pencil criterion",
+        "sec:compression",
+        "Reduce the two conditions on the free block $\\mathcal L$ to conditions on the small compressed\n"
+        "pair $(H, H_A) = (\\mathcal L N, LA\\,N)$, where $N$ is a basis of $\\ker[C; CA]$.",
+        "Nothing; this is the entry point.",
+        [
+            ("the rank identity that makes the dimension bookkeeping exact",
+             "Q1Paper.rank_vstack_add_rank_mul"),
+            ("stacking does not change the row space it spans",
+             "Q1Subspace.rowSpace_fromRows"),
+            ("$(5a)$ is a row-space inclusion, not merely a rank test",
+             "Q1Paper.PaperI.rawAlgebraic_iff_rowSpace"),
+            ("so the raw conditions are equivalent to the compressed ones", 
+             "Q1Paper.PaperI.DEC_iff_compressed"),
+        ],
+        "§3.2 now asks which pairs $(H, H_A)$ are attainable at all.",
+    ),
+    (
+        "S02_Attainable.lean",
+        "§3.2 The space of attainable row pairs",
+        "sec:free",
+        "Describe the set of subspaces $W$ that some free block $R$ can produce, and count the degrees of\n"
+        "freedom.  Without this, a search over subspaces would not be justified.",
+        "The compressed pair from §3.1.",
+        [
+            ("the attainable pairs have dimension $d_0$, giving $\\kappa_{\\text{obs}} = r d_0$",
+             "Q1Paper.claim3_attainable"),
+            ("every attainable $W$ sits between $W_0$ and $T$", "Q1Paper.claim4_sandwich"),
+            ("and conversely every such $W$ is attained by some $R$",
+             "Q1Paper.claim4_converse"),
+        ],
+        "§3.3 may therefore quantify over subspaces $W$ instead of over matrices $R$.",
+    ),
+    (
+        "S03_Subspace.lean",
+        "§3.3 The subspace reduction",
+        "sec:subspace",
+        "Show that $(5a)$ and $(5b)$ depend only on $W$, so that one test per subspace suffices, and\n"
+        "record the structural constraints on a feasible $W$.",
+        "The subspace picture from §3.2.",
+        [
+            ("the conditions depend only on $W$, never on which $R$ produced it",
+             "Q1Paper.claim5_conditions_depend_on_W"),
+            ("a feasible $W$ satisfies $\\omega + 1 \\le \\dim W \\le 2\\omega$", "Q1Paper.claim6_struct"),
+            ("the problem is monotone in the order", "Q1Paper.claim7_DEC_succ"),
+            ("the rank-consistency criterion, which eliminates the intermediate $B$",
+             "Q1Paper.claim8_rank_consistency"),
+            ("its combinatorial form, as a disjunction over the elementary symmetric functions",
+             "Q1Paper.PaperI.Claim8Literal.claim8_disjunction"),
+        ],
+        "§3.4 turns the spectral condition on a fixed $W$ into a finite algebraic certificate.",
+    ),
+    (
+        "S04_Certificate.lean",
+        "§3.4 The finite certificate",
+        "sec:certificate",
+        "Replace `rank $(\\lambda H - H_A) = \\omega$ for every complex $\\lambda$' — a quantifier over\n"
+        "$\\lambda$ — by a finite system that a real-algebraic solver can decide.",
+        "The subspace reduction from §3.3.",
+        [
+            ("real Bézout multipliers exist, so the certificate can stay real",
+             "Q1Paper.exists_bezout_family_real"),
+            ("the window matrix's row space is the window set", 
+             "Q1Paper.rowSpace_windowMatrix_eq_windowSet"),
+            ("$(5b)$ is equivalent to solvability of the Gram system $Z^{\\mathsf T} Z x = e_0$",
+             "Q1Paper.PaperI.claim11_iff_gram"),
+            ("the same for a full-column-rank pencil $\\lambda X - G$, the chart coordinates",
+             "Q1Paper.PaperI.claim12_iff_gram"),
+        ],
+        "§4 needs the certificate to be rational and small; that is §4.1.",
+    ),
+    (
+        "S05_FixedOrder.lean",
+        "§4.1 Fixed order: rationality, size, and the bound",
+        "sec:fixedq",
+        "Make the certificate rational and bound every coefficient, then feed it to a decision procedure\n"
+        "whose cost is known.",
+        "The certificate from §3.4.",
+        [
+            ("rational bases with explicit size bounds", "Q1Paper.PaperI.exists_rational_bases_bounded"),
+            ("the chart data, including bases of $T$, $S$ and $W_0$", "Q1Paper.PaperI.Chart14.exists_chart_bases"),
+            ("every coefficient of every maximal minor is bounded",
+             "Q1Paper.MinorCoeff.pencilMinor_coeff_bitLen_le"),
+            ("the compressed Gram entries are bounded too",
+             "Q1Paper.PaperI.compressedGram_entry_bitLen_le"),
+            ("the degenerate $r = 0$ branch reduces to the system (R0)", "Q1Paper.prop4_r0_iff_spectral"),
+            ("and the resulting bound is $\\mathcal L^{O(q^2)}$",
+             "Q1Paper.theorem1_conditional_params_fixedDeg"),
+        ],
+        "§4.2 re-does the count with $\\ell = \\operatorname{rank}(AN)$ as the parameter.",
+    ),
+    (
+        "S06_FixedParameter.lean",
+        "§4.2 Fixed parameter",
+        "sec:fpt",
+        "Replace the order $q$ by the parameter $\\ell$, and obtain a bound that is fixed-parameter\n"
+        "tractable rather than merely polynomial for fixed order.",
+        "The chart enumeration and cost model of §4.1.",
+        [
+            ("the FPT bound, conditional on the declared backend",
+             "Q1Paper.theorem2_fpt_conditional"),
+        ],
+        "§4.3 and §4.4 handle the degenerate branch and the $\\exists\\mathbb R$ statement.",
+    ),
+    (
+        "S07_ZeroFreeRow.lean",
+        "§4.3 The zero-free-row case",
+        "sec:zero",
+        "The general chart machinery is vacuous when there are no free rows; this branch is handled\n"
+        "separately, and the paper's claim is a chain of equivalences.",
+        "Nothing from §4.1–4.2; this is a separate branch.",
+        [
+            ("the spectral condition, the absence of a common root, and a constant gcd agree",
+             "Q1Paper.claim16_i_iff_iii"),
+            ("a constant gcd yields a rational left inverse of the required degree",
+             "Q1Paper.claim16_iii_implies_iv_of_gcd_isConst"),
+        ],
+        "§4.4 packages the whole decision problem as an $\\exists\\mathbb R$ statement.",
+    ),
+    (
+        "S08_ExistsReal.lean",
+        "§4.4 Membership in the existential theory of the reals",
+        "sec:existsr",
+        "State the decision problem as the existence of an encoding witness, with no abstract hypothesis\n"
+        "left over.",
+        "The certificate of §3.4 and the bounds of §4.1.",
+        [
+            ("the decision problem is equivalent to the existence of an encoding witness",
+             "Q1Paper.Thm5.DECℂ_iff_exists_encodes_auto"),
+        ],
+        "The appendix accounts for the bit cost of the exact-arithmetic layer.",
+    ),
+    (
+        "S09_BitCost.lean",
+        "Appendix: explicit size bounds and bit cost",
+        "app:size",
+        "Account for the cost of the exact-arithmetic layer: the Bareiss tableau and its bit-length\n"
+        "behaviour, which is what makes the bounds in §4 concrete rather than asymptotic.",
+        "The size bounds of §4.1.",
+        [
+            ("the $r = 0$ system's quadratic cost, with exact integer division",
+             "Q1Paper.PaperI.ComplexityCounts.bareiss_total_bit_cost_le_quadratic"),
+            ("the paper's $O(n^{21} L^2)$ bit-cost bound",
+             "Q1Paper.PaperI.ComplexityCounts.bareiss_total_bit_cost_le_n21_L2"),
+        ],
+        "Nothing; this closes the paper.",
+    ),
+]
+
+
+def render(file_name: str, title: str, anchor: str, problem: str, prior: str,
+           steps, nxt: str) -> str:
+    lines = [
+        "import Q1Paper.PaperI.MainTheorems",
+        "",
+        "/-!",
+        f"# {title}",
+        "",
+        f"Paper I, label `{anchor}`.  This file contains **no proofs**: it is a reading entry that lists the",
+        "section's steps in proof order, each with the declaration that carries it.  Every step is a",
+        "`#check`, so if a declaration is renamed this file stops compiling — that is what keeps it honest.",
+        "",
+        "## The problem",
+        "",
+        problem,
+        "",
+        "## What it consumes",
+        "",
+        prior,
+        "",
+        "## Steps, in proof order",
+        "",
+    ]
+    for i, (note, decl) in enumerate(steps, start=1):
+        lines.append(f"{i}. {note} — `{decl}`")
+    lines += [
+        "",
+        "## What the next section does with it",
+        "",
+        nxt,
+        "-/",
+        "",
+        "-- Each step below is the machine-checked part of the list above.",
+    ]
+    for _note, decl in steps:
+        lines.append(f"#check {decl}")
+    lines.append("")
+    return "\n".join(lines)
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--check", action="store_true")
+    args = ap.parse_args()
+
+    OUT.mkdir(parents=True, exist_ok=True)
+    stale: list[str] = []
+    for spec in SECTIONS:
+        path = OUT / spec[0]
+        text = render(*spec)
+        current = path.read_text(encoding="utf-8") if path.exists() else None
+        if current != text:
+            stale.append(spec[0])
+            if not args.check:
+                path.write_text(text, encoding="utf-8", newline="\n")
+
+    all_path = OUT / "All.lean"
+    all_text = "\n".join([f"import Q1Paper.PaperI.Read.{s[0].removesuffix('.lean')}" for s in SECTIONS]) + "\n"
+    if (all_path.read_text(encoding="utf-8") if all_path.exists() else None) != all_text:
+        stale.append("All.lean")
+        if not args.check:
+            all_path.write_text(all_text, encoding="utf-8", newline="\n")
+
+    if args.check:
+        if stale:
+            print("reading entries stale: " + ", ".join(stale))
+            return 1
+        print(f"reading entries up to date ({len(SECTIONS)} sections)")
+        return 0
+    print(f"wrote {len(SECTIONS)} reading entries" + (f" (changed: {', '.join(stale)})" if stale else ""))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
