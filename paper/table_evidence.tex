@@ -1,32 +1,32 @@
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{4.5cm}>{\raggedright\arraybackslash}p{1.6cm}>{\raggedright\arraybackslash}p{2.1cm}>{\raggedright\arraybackslash}p{8.0cm}@{}}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.9cm}>{\raggedright\arraybackslash}p{1.55cm}>{\raggedright\arraybackslash}p{1.5cm}>{\raggedright\arraybackslash}p{1.5cm}>{\raggedright\arraybackslash}p{7.1cm}@{}}
 \toprule
-Statement & Coverage & Correspondence & Lean declaration \\
+Statement & Coverage & Formulation & Bridge & Lean declaration \\
 \midrule
-Claim 1 & Lean & literal & \texttt{rank\_\allowbreak{}vstack\_\allowbreak{}add\_\allowbreak{}rank\_\allowbreak{}mul} \\
-Claim 2 & Lean & literal & \texttt{DEC\_\allowbreak{}iff\_\allowbreak{}compressed} \\
-Claim 3 & Lean & abstract core & \texttt{claim3\_\allowbreak{}attainable} \\
-Claim 4 (forward) & Lean & abstract core & \texttt{claim4\_\allowbreak{}sandwich} \\
-Claim 4 (converse) & Lean & abstract core & \texttt{claim4\_\allowbreak{}converse} \\
-Claim 5 & Lean & abstract core & \texttt{claim5\_\allowbreak{}conditions\_\allowbreak{}depend\_\allowbreak{}on\_\allowbreak{}W} \\
-Claim 6 & Lean & abstract core & \texttt{claim6\_\allowbreak{}struct} \\
-Claim 7 & Lean & literal & \texttt{claim7\_\allowbreak{}DEC\_\allowbreak{}succ} \\
-Claim 8 (rank form) & Lean & literal & \texttt{claim8\_\allowbreak{}rank\_\allowbreak{}consistency} \\
-Claim 8 (disjunction) & Lean & literal & \texttt{claim8\_\allowbreak{}disjunction} \\
-Claim 9 & Lean & literal & \texttt{exists\_\allowbreak{}bezout\_\allowbreak{}family\_\allowbreak{}real} \\
-Claim 10 & Lean & literal & \texttt{rowSpace\_\allowbreak{}windowMatrix\_\allowbreak{}eq\_\allowbreak{}windowSet} \\
-Claim 11 & Lean & abstract core$^{\dagger}$ & \texttt{claim11\_\allowbreak{}iff\_\allowbreak{}gram} \\
-Claim 12 & Lean & abstract core$^{\dagger}$ & \texttt{claim12\_\allowbreak{}iff\_\allowbreak{}gram} \\
-Claim 13 & Lean & literal & \texttt{exists\_\allowbreak{}rational\_\allowbreak{}bases\_\allowbreak{}bounded} \\
-Claim 14 & Lean & literal & \texttt{exists\_\allowbreak{}chart\_\allowbreak{}bases} \\
-Claim 15 (coefficients) & Lean & literal & \texttt{pencilMinor\_\allowbreak{}coeff\_\allowbreak{}bitLen\_\allowbreak{}le} \\
-Claim 15 (Gram entries) & Lean & literal & \texttt{compressedGram\_\allowbreak{}entry\_\allowbreak{}bitLen\_\allowbreak{}le} \\
-Claim 16 (i)-(iii) & Lean & literal & \texttt{claim16\_\allowbreak{}i\_\allowbreak{}iff\_\allowbreak{}iii} \\
-Claim 16 (iii)=>(iv) & Lean & literal & \texttt{claim16\_\allowbreak{}iii\_\allowbreak{}implies\_\allowbreak{}iv\_\allowbreak{}of\_\allowbreak{}gcd\_\allowbreak{}isConst} \\
-Claim 19 & Lean & abstract core & \texttt{bareiss\_\allowbreak{}total\_\allowbreak{}bit\_\allowbreak{}cost\_\allowbreak{}le\_\allowbreak{}quadratic} \\
-Claim 21 & Lean & abstract core & \texttt{bareiss\_\allowbreak{}total\_\allowbreak{}bit\_\allowbreak{}cost\_\allowbreak{}le\_\allowbreak{}n21\_\allowbreak{}L2} \\
-Proposition 4 & Lean & literal & \texttt{prop4\_\allowbreak{}r0\_\allowbreak{}iff\_\allowbreak{}spectral} \\
-Theorem 1 & Lean-cond. & literal & \texttt{theorem1\_\allowbreak{}conditional\_\allowbreak{}params\_\allowbreak{}fixedDeg} \\
-Theorem 2 & Lean-cond. & literal & \texttt{theorem2\_\allowbreak{}fpt\_\allowbreak{}conditional} \\
-Theorem 5 & Lean & literal & \texttt{DEC$\mathbb{C}$\_\allowbreak{}iff\_\allowbreak{}exists\_\allowbreak{}encodes\_\allowbreak{}auto} \\
+Claim 1 & Lean & general & -- & \texttt{rank\_\allowbreak{}vstack\_\allowbreak{}add\_\allowbreak{}rank\_\allowbreak{}mul} \\
+Claim 2 & Lean & general & -- & \texttt{DEC\_\allowbreak{}iff\_\allowbreak{}compressed} \\
+Claim 3 & Lean & abstract & -- & \texttt{claim3\_\allowbreak{}attainable} \\
+Claim 4 (forward) & Lean & abstract & -- & \texttt{claim4\_\allowbreak{}sandwich} \\
+Claim 4 (converse) & Lean & abstract & -- & \texttt{claim4\_\allowbreak{}converse} \\
+Claim 5 & Lean & abstract & -- & \texttt{claim5\_\allowbreak{}conditions\_\allowbreak{}depend\_\allowbreak{}on\_\allowbreak{}W} \\
+Claim 6 & Lean & abstract & -- & \texttt{claim6\_\allowbreak{}struct} \\
+Claim 7 & Lean & general & -- & \texttt{claim7\_\allowbreak{}DEC\_\allowbreak{}succ} \\
+Claim 8 (rank form) & Lean & literal & -- & \texttt{claim8\_\allowbreak{}rank\_\allowbreak{}consistency} \\
+Claim 8 (disjunction) & Lean & literal & -- & \texttt{claim8\_\allowbreak{}disjunction} \\
+Claim 9 & Lean & literal & -- & \texttt{exists\_\allowbreak{}bezout\_\allowbreak{}family\_\allowbreak{}real} \\
+Claim 10 & Lean & general & -- & \texttt{rowSpace\_\allowbreak{}windowMatrix\_\allowbreak{}eq\_\allowbreak{}windowSet} \\
+Claim 11 & Lean & abstract & bridge$^{\dagger}$ & \texttt{claim11\_\allowbreak{}iff\_\allowbreak{}gram} \\
+Claim 12 & Lean & abstract & bridge$^{\dagger}$ & \texttt{claim12\_\allowbreak{}iff\_\allowbreak{}gram} \\
+Claim 13 & Lean & literal & -- & \texttt{exists\_\allowbreak{}rational\_\allowbreak{}bases\_\allowbreak{}bounded} \\
+Claim 14 & Lean & literal & -- & \texttt{exists\_\allowbreak{}chart\_\allowbreak{}bases} \\
+Claim 15 (coefficients) & Lean & literal & -- & \texttt{pencilMinor\_\allowbreak{}coeff\_\allowbreak{}bitLen\_\allowbreak{}le} \\
+Claim 15 (Gram entries) & Lean & literal & -- & \texttt{compressedGram\_\allowbreak{}entry\_\allowbreak{}bitLen\_\allowbreak{}le} \\
+Claim 16 (i)-(iii) & Lean & literal & -- & \texttt{claim16\_\allowbreak{}i\_\allowbreak{}iff\_\allowbreak{}iii} \\
+Claim 16 (iii)=>(iv) & Lean & literal & -- & \texttt{claim16\_\allowbreak{}iii\_\allowbreak{}implies\_\allowbreak{}iv\_\allowbreak{}of\_\allowbreak{}gcd\_\allowbreak{}isConst} \\
+Claim 19 & Lean & abstract & model & \texttt{bareiss\_\allowbreak{}total\_\allowbreak{}bit\_\allowbreak{}cost\_\allowbreak{}le\_\allowbreak{}quadratic} \\
+Claim 21 & Lean & abstract & model & \texttt{bareiss\_\allowbreak{}total\_\allowbreak{}bit\_\allowbreak{}cost\_\allowbreak{}le\_\allowbreak{}n21\_\allowbreak{}L2} \\
+Proposition 4 & Lean & literal & -- & \texttt{prop4\_\allowbreak{}r0\_\allowbreak{}iff\_\allowbreak{}spectral} \\
+Theorem 1 & Lean-cond. & literal & -- & \texttt{theorem1\_\allowbreak{}conditional\_\allowbreak{}params\_\allowbreak{}fixedDeg} \\
+Theorem 2 & Lean-cond. & literal & -- & \texttt{theorem2\_\allowbreak{}fpt\_\allowbreak{}conditional} \\
+Theorem 5 & Lean & literal & -- & \texttt{DEC$\mathbb{C}$\_\allowbreak{}iff\_\allowbreak{}exists\_\allowbreak{}encodes\_\allowbreak{}auto} \\
 \bottomrule
 \end{tabular}
