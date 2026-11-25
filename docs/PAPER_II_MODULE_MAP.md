@@ -33,6 +33,6 @@ python3 scripts/check_paperI_axioms.py /tmp/paperII_audit.log Q1Paper/PaperII/Au
 ## What is deliberately not here
 
 * `DECℂ` saturation / minimum order: needs the real-compression lemma
-  (`PaperII/Realification.lean`, work in progress).
+  (the planned real-compression module `PaperII/Realification`).
 * Prop 3 (tightness), Theorem 4 (interface counting), the OPT/FIND corollaries,
   and the appendix instance: see `PAPER_II_PROOF_MAP.md` §"Not formalised".

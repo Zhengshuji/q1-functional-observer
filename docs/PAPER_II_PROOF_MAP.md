@@ -55,6 +55,8 @@ predicate over `ℂ` (complex free blocks); the paper's real-design specificatio
 | Prop 1: `q_min = r₀ + t_min` (`t_min ≤ r ↔ DEC (r₀+r)`) | `tMin_le_iff_dec` | `PaperII/MinOrder.lean:59` | literal (`DEC`) |
 | Prop 1: `t_min ≤ 2ℓ` | `tMin_le_two_ell` (via `omega_le_ell`, `t_le_two_ell`) | `PaperII/MinOrder.lean:126,90,109` | literal (`DEC`) |
 | Prop 1 with `t_min = ⊤` when infeasible | `tMin`, `tMinSet` | `PaperII/MinOrder.lean:50,43` | literal |
+| Theorem 4, correctness half: the least feasible order is feasible | `dec_sInf_tMinSet` | `PaperII/MinOrder.lean:146` | literal (`DEC`) |
+| the abstract least feasible order (monotone predicate) | `exists_least_of_monotone` | `PaperII/MinOrder.lean:157` | literal |
 
 ## §III The spectral lower bound
 
@@ -69,7 +71,7 @@ predicate over `ℂ` (complex free blocks); the paper's real-design specificatio
 | paper item | reason |
 |---|---|
 | Prop 3 (tightness, both directions) | not started; the `(G,b) ⇒` direction is the natural next target |
-| Theorem 4 (interface: `O(log(ℓ+2))` DEC calls) | the counting is not formalised; the lifting half is `claim4_converse` |
+| Theorem 4, the `O(log(ℓ+2))` call count | the ordering is `tMin_le_iff_dec` and the least element is `dec_sInf_tMinSet`; the arithmetic of the call count is not formalised |
 | Corollary 5 (OPT), Corollary 6 (FIND) | complexity statements inherited from Paper I; FIND's bit model is open in the paper |
 | the appendix instance (`q_min = 4`) | exact rational certificate; belongs to the Python verification layer |
 

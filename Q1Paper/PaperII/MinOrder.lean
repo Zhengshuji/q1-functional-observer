@@ -133,4 +133,27 @@ theorem tMin_le_two_ell (A : Matrix (Fin n) (Fin n) ℝ) (N : Matrix (Fin n) (Fi
   rw [tMin, dif_pos hne]
   exact WithTop.coe_le_coe.mpr (le_trans h1 h2)
 
+/-! ### 4. The minimum order is attained -/
+
+/-- **The least feasible order is itself feasible.**  When a feasible subspace exists,
+`sInf (tMinSet A N L0)` is the quotient dimension of some feasible `W`, hence it is a
+feasible order: this is the correctness half of the interface theorem (Theorem 4 of
+the paper) — the ordering itself is decided by `tMin_le_iff_dec`. -/
+theorem dec_sInf_tMinSet
+    (C : Matrix (Fin p) (Fin n) ℂ) (A : Matrix (Fin n) (Fin n) ℝ)
+    (L0 : Matrix (Fin r0) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℂ)
+    (hN : N.mulVecLin.range = (Matrix.fromRows (C * Ac A) C).mulVecLin.ker)
+    (hne : (tMinSet A N L0).Nonempty) :
+    PaperI.DEC C (Ac A) (L0c L0) (sInf (tMinSet A N L0)) := by
+  refine (tMin_le_iff_dec C A L0 N hN (sInf (tMinSet A N L0))).mp ?_
+  rw [tMin, dif_pos hne]
+
+/-- **The abstract minimum-order problem.**  For a monotone predicate `P` on the
+number of free rows with a feasible order, the least feasible order is `sInf {r | P r}`;
+this is the ordering that a binary search over `tMin_le_iff_dec` computes.  (The
+`O(log (ℓ+2))` count is not formalised.) -/
+theorem exists_least_of_monotone (P : ℕ → Prop) (h : ∃ r, P r) :
+    P (sInf {r | P r}) ∧ ∀ s, P s → sInf {r | P r} ≤ s := by
+  exact ⟨Nat.sInf_mem h, fun s hs => Nat.sInf_le hs⟩
+
 end Q1Paper.PaperII
