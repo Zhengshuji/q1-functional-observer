@@ -101,7 +101,10 @@ The formalisation is not a machine-checked copy of the paper, and the difference
    paper proves and why each step needs the next.  It complements the paper rather than restating it.
 6. `docs/ALGORITHM_CORRECTNESS_MAP.md` — what is and is not proved *about the algorithms*, as opposed
    to about the mathematics.
-7. The paper itself.
+7. docs/CONVENTIONS.md — the rules the repository follows: what is published, how the Lean is
+   written, how generated artefacts are regenerated, how modules are named and renamed, and how a
+   change is verified.
+8. The paper itself.
 
 Development history, including retracted claims and the reasons, is recorded in the project's
 development logs.  Those are **not published** in this repository: they are records, not status

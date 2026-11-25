@@ -22,6 +22,7 @@ paper/          the paper: .tex and .pdf only
                 paper_I_dec            decision complexity (Paper I)
 docs/           five documents: the entry point, the mathematics, and the two maps
                 START_HERE.md                  **start here** — what this repo is, how to verify it
+                CONVENTIONS.md                 the rules: what is published, how to name, verify
                 PAPER_I_MATHEMATICAL_GUIDE.md  the mathematics, for a reader who does not know Lean
                 PAPER_I_PROOF_MAP.md           paper item -> Lean declaration -> file:line (generated)
                 PAPER_I_MODULE_MAP.md          every Lean module -> decls, paper items, purpose (generated)
