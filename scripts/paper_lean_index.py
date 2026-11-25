@@ -148,6 +148,8 @@ def render_modules(rows, decls) -> str:
     audited = audited_names()
     counts: dict[str, list[int]] = {}
     for path in sorted(ROOT.glob("Q1Paper/**/*.lean")):
+        if "PaperII" in path.parts:
+            continue  # Paper II has its own claim table (Q1Paper/PaperII/Claims.lean)
         rel = path.relative_to(ROOT).as_posix()
         n = n_aud = 0
         try:

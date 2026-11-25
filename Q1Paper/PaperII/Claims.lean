@@ -1,0 +1,72 @@
+/-
+Q1Paper/PaperII/Claims.lean
+
+The paper interface of Paper II's formalisation: the paper's items in the paper's
+order, each with the declarations that prove it.
+
+This file is narration only — it declares nothing.  `ClaimsCheck.lean` machine-checks
+that every name below resolves, so a rename breaks the build instead of silently
+invalidating this table.
+
+Scope.  Items marked "(Paper I)" are proved in the Paper I tree and reused here
+through the column split `Φ` (`Interface.lean`).  Items concerning `DEC` are
+stated for the field-generic predicate over `ℂ` (complex free blocks); the
+real-design specification `DECℂ` has its forward direction and monotonicity
+proved, and its converse is the open real-compression lemma (plan §8.5).
+-/
+
+/-! ## §II Standing results (from Paper I, reused)
+
+* **Claim 4, forward** (`lem:sandwich`): `row(L₀M) ⊆ row(LM) ⊆ row M` and
+  `dim row(LM) ≤ dim row(L₀M) + r` — `Q1Paper.claim4_sandwich`.
+* **Claim 4, converse** (`lem:sandwich`): every subspace of the sandwich with
+  `dim W ≤ dim W₀ + r` is `row([L₀;R] M)` for some `R` with `r` rows —
+  `Q1Paper.claim4_converse`.
+* **Claim 5** (`lem:W-conditions`): (5a) and (5b) depend only on `W = row[H H_A]` —
+  `Q1Paper.claim5_conditions_depend_on_W`.
+* **Claim 6** (`lem:struct`): `ω + 1 ≤ dim W ≤ 2ω` for a feasible `W` with
+  `ω > 0` — `Q1Paper.claim6_struct`.
+-/
+
+/-! ## §II Paper II's own interface
+
+* **`t = dim (W/W₀)`**, with `t ≤ r ↔ dim W ≤ dim W₀ + r` (the hypothesis form of
+  Claim 4) — `Q1Paper.PaperII.t`, `t_eq_finrank_sub`, `t_le_iff`.
+* **The two encodings agree**: `row([L]·[N AN])` splits into the row pairs —
+  `Q1Paper.PaperII.map_rowSpace_Mcol`.
+* **Feasibility is the pair of compressed conditions** —
+  `Q1Paper.PaperII.isFeasible_pairRowSpace_iff`.
+-/
+
+/-! ## §III The sandwich in Paper II's form
+
+* **Forward, `DECℂ`**: a feasible real design of order `r₀ + r` gives a feasible
+  `W` with `t ≤ r` — `Q1Paper.PaperII.decC_to_feasible`.
+* **Forward, `DEC`** (complex designs) — `Q1Paper.PaperII.DEC_to_feasible_c`.
+* **Converse** (complex designs): a feasible `W` with `W₀ ≤ W ≤ T` and `t ≤ r`
+  gives `DEC r` — `Q1Paper.PaperII.feasible_to_DEC`.
+-/
+
+/-! ## §III Monotonicity and saturation
+
+* **Claim 5, monotone, `DECℂ`**: `DECℂ r → DECℂ r'` for `r ≤ r'` —
+  `Q1Paper.PaperII.decC_mono`.
+* **Claim 5, monotone, `DEC`** — `Q1Paper.PaperII.dec_mono_complex`.
+* **Claim 5, saturation**: `DEC r ↔ DEC m` for `m = dim (T/W₀) ≤ r` —
+  `Q1Paper.PaperII.dec_saturates`.
+-/
+
+/-! ## §III Minimum order
+
+* **Prop 1, minimum order**: `t_min ≤ r ↔ DEC (r₀ + r)`, i.e. `q_min = r₀ + t_min`
+  (`t_min = ⊤` when infeasible) — `Q1Paper.PaperII.tMin_le_iff_dec`.
+* **Prop 1, a priori bound**: `t_min ≤ 2ℓ`, `ℓ = rank(A N)` —
+  `Q1Paper.PaperII.tMin_le_two_ell` (and `omega_le_ell`, `t_le_two_ell`).
+-/
+
+/-! ## §III The spectral lower bound
+
+* **Prop 2**: `rank[U₀;V₀] + 1 ≤ s₀ + t` for a feasible `W` with `ω > 0`, hence
+  `rank[U₀;V₀] − s₀ + 1 ≤ t` — `Q1Paper.PaperII.lowerBound_core`,
+  `lowerBound_sub`.
+-/
