@@ -30,11 +30,11 @@ import Q1Paper.FPT
 import Q1Paper.PaperI.Interface
 import Q1Paper.PaperI.CompressionMatrix
 import Q1Paper.PaperI.Gram
-import Q1Paper.PaperI.Claim11
+import Q1Paper.PaperI.Claim11_Window
 import Q1Paper.PaperI.MinorRank
 import Q1Paper.PaperI.SpectralMinor
 import Q1Paper.PaperI.Complexify
-import Q1Paper.PaperI.Claim11Final
+import Q1Paper.PaperI.Claim11_MinorsGram
 import Q1Paper.PaperI.Claim12
 import Q1Paper.PaperI.CauchyBinet
 import Q1Paper.PaperI.GramKernel

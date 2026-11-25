@@ -1,7 +1,6 @@
 
 import Q1Paper.PaperI.GramKernel
-import Q1Paper.PaperI.Claim11Final
-
+import Q1Paper.PaperI.Claim11_MinorsGram
 /-!
 Q1Paper/PaperI/GramCoefficients.lean
 

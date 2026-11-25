@@ -32,8 +32,8 @@ The four entry points and their separate jobs:
 | `ChartComplete.lean` | 11 | 1 | `row_LA_mul_le_row_L_mul`, `exists_chart_factorization`, `exists_phi_point`, `rowSpace_le_of_chart_factorization`, … |  |
 | `ChartComplex.lean` | 2 | 2 | `RowIdx`, `rank_map_ofReal_sum`, `spectralComplex`, `complex_spectral_implies_real` |  |
 | `ChartCount.lean` | 5 | 0 | `le_two_pow`, `chart_count_le`, `chart_count_le_pow`, `exp_compose`, … |  |
-| `Claim11.lean` | 5 | 1 | `windowOne`, `windowOne_eq_toFn`, `exists_bezout_iff_mem_rowSpace_window`, `mem_rowSpace_window_of_no_common_complex_root`, … |  |
-| `Claim11Final.lean` | 6 | 2 | `maximalMinor_map`, `natDegree_det_le`, `pencil_natDegree_le`, `natDegree_maximalMinor_le`, … |  |
+| `Claim11_MinorsGram.lean` | 6 | 2 | `maximalMinor_map`, `natDegree_det_le`, `pencil_natDegree_le`, `natDegree_maximalMinor_le`, … |  |
+| `Claim11_Window.lean` | 5 | 1 | `windowOne`, `windowOne_eq_toFn`, `exists_bezout_iff_mem_rowSpace_window`, `mem_rowSpace_window_of_no_common_complex_root`, … |  |
 | `Claim12.lean` | 2 | 0 | `exists_left_inverse_of_rank_eq`, `claim12_iff_gram` |  |
 | `Claim14.lean` | 15 | 6 | `diffMap`, `diffMap_apply`, `K0`, `mem_K0_iff`, … |  |
 | `Claim14Basis.lean` | 21 | 4 | `exists_basis_matrix_of_submodule_fintype`, `rowSpace_transpose_eq_range`, `exists_rowBasis_of_submodule`, `rowSpace_mul_le`, … |  |

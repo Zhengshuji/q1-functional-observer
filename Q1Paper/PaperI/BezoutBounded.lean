@@ -1,7 +1,7 @@
 
 import Q1Paper.PaperI.RatDescent
 import Q1Paper.PaperI.C16Gcd
-import Q1Paper.PaperI.Claim11Final
+import Q1Paper.PaperI.Claim11_MinorsGram
 import Q1Paper.BezoutReal
 
 /-!

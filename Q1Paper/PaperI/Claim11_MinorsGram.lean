@@ -1,7 +1,7 @@
 
 import Q1Paper.PaperI.SpectralMinor
 import Q1Paper.PaperI.Complexify
-import Q1Paper.PaperI.Claim11
+import Q1Paper.PaperI.Claim11_Window
 import Mathlib.Algebra.Polynomial.BigOperators
 import Mathlib.Algebra.Polynomial.Degree.Operations
 

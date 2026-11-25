@@ -1,5 +1,5 @@
 
-import Q1Paper.PaperI.Claim11Final
+import Q1Paper.PaperI.Claim11_MinorsGram
 import Mathlib.LinearAlgebra.Basis.VectorSpace
 
 /-!

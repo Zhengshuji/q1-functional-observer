@@ -43,8 +43,8 @@ docstring so a reader can see the author's stated purpose.
 | `Q1Paper/PaperI/ChartComplete.lean` | 12 | 11 | — | file proves the first and most specific one. |
 | `Q1Paper/PaperI/ChartComplex.lean` | 4 | 1 | — | stack, and use that complexification preserves the rank. |
 | `Q1Paper/PaperI/ChartCount.lean` | 4 | 4 | — | `C * (L + 1) ^ (d * (q + 1) ^ 2)`. |
-| `Q1Paper/PaperI/Claim11.lean` | 6 | 6 | — | root") to obtain the equivalence with the pointwise no-common-root condition. |
-| `Q1Paper/PaperI/Claim11Final.lean` | 8 | 8 | Claim 11 | * `claim11_iff_gram`: `(5b)` is equivalent to solvability of `Zᵀ Z x = e₀`. |
+| `Q1Paper/PaperI/Claim11_MinorsGram.lean` | 8 | 8 | Claim 11 | * `claim11_iff_gram`: `(5b)` is equivalent to solvability of `Zᵀ Z x = e₀`. |
+| `Q1Paper/PaperI/Claim11_Window.lean` | 6 | 6 | — | root") to obtain the equivalence with the pointwise no-common-root condition. |
 | `Q1Paper/PaperI/Claim12.lean` | 2 | 2 | Claim 12 | Claim 12 of Paper I: the Gram certificate for a full-column-rank pencil. |
 | `Q1Paper/PaperI/Claim14.lean` | 21 | 5 | — | kernel of a stacked (difference) map, and the resulting generating set. |
 | `Q1Paper/PaperI/Claim14Basis.lean` | 25 | 5 | Claim 14 | with the explicit bound `bitLenRat <= tauM M tau`. |

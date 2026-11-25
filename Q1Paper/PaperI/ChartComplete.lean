@@ -3,8 +3,7 @@ import Q1Paper.PaperI.Claims38
 import Q1Paper.PaperI.CompressionMatrix
 import Q1Paper.PaperI.RankFactorization
 import Q1Paper.Window
-import Q1Paper.PaperI.Claim11Final
-
+import Q1Paper.PaperI.Claim11_MinorsGram
 /-!
 # Chart completeness, step 1
 
