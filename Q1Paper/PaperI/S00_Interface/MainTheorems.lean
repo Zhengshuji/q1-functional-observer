@@ -108,6 +108,7 @@ import Q1Paper.PaperI.S08_ChartEquivalence.KernelLift
 import Q1Paper.PaperI.S08_ChartEquivalence.ComplexSoundness
 import Q1Paper.PaperI.S08_ChartEquivalence.ComplexCompression
 import Q1Paper.PaperI.S08_ChartEquivalence.ComplexCompleteness
+import Q1Paper.PaperI.S03_Certificate.GramIndexBridge
 /-!
 Q1Paper/PaperI/MainTheorems.lean
 

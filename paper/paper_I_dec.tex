@@ -1900,7 +1900,7 @@ paper does not claim, and the evidence behind each statement, is recorded in Sec
 beyond the paper's; \emph{Lean-cond.} = relative to the declared real-algebraic backend.
 \emph{Formulation}: \emph{literal} = the paper's statement; \emph{general} = a stronger statement whose
 instance is the paper's; \emph{abstract} = the same content for linear maps or submodules.
-\emph{Bridge}: \emph{--} = nothing substantive is left paper-level; \emph{bridge}$^{\dagger}$ = the
+\emph{Bridge}: \emph{--} = nothing substantive is left paper-level; \emph{bridge} = the
 matrix family proved is not yet bridged to the paper's; \emph{model} = only the arithmetic of a cost
 model is proved. Reductions and counting are not numbered statements and stay paper-level
 (Section~\ref{sec:limits}).}
@@ -1944,14 +1944,14 @@ Theorem~\ref{thm:fpt}, Corollary~\ref{cor:time} and Proposition~\ref{prop:zero} 
 the artifact checks the algebraic identities, not the reductions and the counting. The chart-data
 estimate of Claim~\ref{clm:chartdata} and the coefficient estimate of Claim~\ref{lem:coeff} are
 paper-level. The Gram identity of Claim~\ref{prop:gram} and the matrix certificate of
-Claim~\ref{clm:gramQ} are formalized for the injective-map family
-(\texttt{claim11\_iff\_gram}, \texttt{claim12\_iff\_gram}); what remains paper-level is the
-row-space bridge to the subset-indexed matrix used in the paper (Table~\ref{tab:evidence},
-$^{\dagger}$). The Lean family of maximal minors is indexed by \emph{injective maps} rather than by
-subsets; each subset pair then occurs $(\omega!)^2$ times with the signs of the two reorderings, so
-the Lean Gram matrix is $(\omega!)^2$ times the subset-indexed one and the two matrices have the
-same row space. The row-space version of the bridge is not yet formalised, so the equivalence is
-proved for the injective-map matrix.
+Claim~\ref{clm:gramQ} are formalized in both indexings of the maximal minors.  The formalisation
+indexes them by \emph{injective maps} (\texttt{claim11\_iff\_gram}, \texttt{claim12\_iff\_gram});
+each subset pair then occurs $(\omega!)^2$ times with the signs of the two reorderings, so the
+injective-indexed Gram matrix is $(\omega!)^2$ times the subset-indexed one, and a nonzero
+scalar multiple has the same row space.  That passage is formalised as well
+(\texttt{rowSpace\_windowInj\_eq\_windowSub}), which yields the certificates for the
+subset-indexed matrix the paper uses (\texttt{claim11\_iff\_gram\_subset},
+\texttt{claim12\_iff\_gram\_subset}).
 \end{enumerate}
 
 

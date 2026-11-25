@@ -775,8 +775,8 @@ Lower bound \eqref{eq:lb}, the inequality $\operatorname{rank}[U_0;V_0]\le\omega
 literal & \texttt{lowerBound\_core}, \texttt{finrank\_sup\_pi\_le}, \texttt{finrank\_pi1\_mono} \\
 Tightness, numerical half: $\dim W=a+1\Rightarrow t=a-s_0+1$ (\ref{prop:tight}) & literal &
 \texttt{t\_eq\_of\_finrank} \\
-\eqref{eq:qmin-lb}: $q_{\min}\ge r_0+\max(0,a-s_0+1)$, as $a-s_0+1\le t_{\min}$ & literal &
-\texttt{le\_tMin\_of\_lowerBound} \\
+\eqref{eq:qmin-lb}: $q_{\min}\ge r_0+\max(0,a-s_0+1)$, as $a+1-s_0\le t_{\min}$ (no side condition) & literal &
+\texttt{le\_tMin\_of\_lowerBound\_max} \\
 Tightness, the $(G,b)$ direction: $\pi_\lambda W(G,b)=(\lambda I-G)U+\operatorname{span}\{b\}$,
 feasibility from $\operatorname{rank}[\lambda I-G\ \ b]=a$, and $t=a-s_0+1$ & literal &
 \texttt{graphExt\_piLam}, \texttt{graphExt\_feasible}, \texttt{t\_eq\_of\_graph} \\
@@ -792,7 +792,10 @@ $q_{\min}=r_0+t_{\min}$ is \texttt{tMin\_le\_iff\_dec}, stated for the field-gen
 $\mathbb C$, and separately for the paper's real-design specification $\mathrm{DEC}_{\mathbb C}$
 (forward \texttt{decC\_to\_feasible}, monotonicity \texttt{decC\_mono}, saturation
 \texttt{decC\_saturates}, minimum order \texttt{tMinC\_le\_iff\_decC}, via the compression
-\texttt{real\_compress}).  Proposition~\ref{prop:tight} is formalised in both directions.  The artifact's Paper II item map
+\texttt{real\_compress}).  Both directions of Proposition~\ref{prop:tight} are formalised separately (the
+$(G,b)$ direction and the extraction of $(G,b)$ from an attaining $W$), together with the
+numerical half; composing them into the paper's equivalence, and the real-field form of
+the statement, are not.  The artifact's Paper II item map
 records the remaining boundary (the real-design specification).
 
 Two kinds of evidence support the statements above, and the artifact records which statement rests on

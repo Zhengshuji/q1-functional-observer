@@ -34,6 +34,7 @@ import Q1Paper.PaperII.MainTheorems
 #check @Q1Paper.PaperII.tMin_le_iff_dec
 #check @Q1Paper.PaperII.tMin_le_two_ell
 #check @Q1Paper.PaperII.le_tMin_of_lowerBound
+#check @Q1Paper.PaperII.le_tMin_of_lowerBound_max
 #check @Q1Paper.PaperII.pairRows
 #check @Q1Paper.PaperII.pairRowSpace_eq_map_pairRows
 #check @Q1Paper.PaperII.finrank_pairRowSpace_eq_rank

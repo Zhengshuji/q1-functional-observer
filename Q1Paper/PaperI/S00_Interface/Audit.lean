@@ -139,6 +139,10 @@ This file is not imported by `PaperI.lean`: it is a build-time report.
 -- Claim 12
 #print axioms Q1Paper.PaperI.exists_left_inverse_of_rank_eq
 #print axioms Q1Paper.PaperI.claim12_iff_gram
+#print axioms Q1Paper.PaperI.imagePair_surjective
+#print axioms Q1Paper.PaperI.rowSpace_windowInj_eq_windowSub
+#print axioms Q1Paper.PaperI.claim11_iff_gram_subset
+#print axioms Q1Paper.PaperI.claim12_iff_gram_subset
 
 -- Section III-D: square Cauchy-Binet (ported, Apache-2.0, Ralf Stephan)
 #print axioms exteriorPower.plucker

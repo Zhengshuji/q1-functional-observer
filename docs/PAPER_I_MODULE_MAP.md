@@ -71,6 +71,7 @@ docstring so a reader can see the author's stated purpose.
 | `Q1Paper/PaperI/S03_Certificate/GramCoefficients.lean` | 5 | 0 | — | in the minor `f_i = maximalMinor P (rowEmb i.1) (colEmb i.2)`. |
 | `Q1Paper/PaperI/S03_Certificate/GramCompression.lean` | 4 | 0 | — | `(Zᵀ Z)_{t,t'} = ∑_{j : Fin ω} (if j ≤ t and j ≤ t' then S_{t-j, t'-j} else 0)`. |
 | `Q1Paper/PaperI/S03_Certificate/GramFamilyBridge.lean` | 6 | 0 | — | times the Gram matrix of the subset-indexed one. |
+| `Q1Paper/PaperI/S03_Certificate/GramIndexBridge.lean` | 4 | 0 | — | `GramSystem.gram_certificate` the two Gram systems are solvable under the same condition. |
 | `Q1Paper/PaperI/S03_Certificate/GramKernel.lean` | 7 | 0 | — | *column* set, `I` a *row* set). |
 | `Q1Paper/PaperI/S03_Certificate/GramSubspace.lean` | 2 | 0 | — | between the injective-indexed and subset-indexed families. |
 | `Q1Paper/PaperI/S03_Certificate/GramSystem.lean` | 4 | 0 | — | `e0 ∈ row Z  ↔  ∃ x, (Zᵀ * Z) *ᵥ x = e0`. |

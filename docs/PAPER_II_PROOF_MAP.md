@@ -1,9 +1,9 @@
 # Paper II: paper item → Lean declaration
 
 One row per item of `paper/paper_II_minorder.tex`, with the declaration that proves
-it and where it lives.  Line numbers refer to the files at commit `feb5b06` (they
-move when a file is edited above them; the declaration names and their
-`#check`s in `Q1Paper/PaperII/ClaimsCheck.lean` are stable).
+it and where it lives.  Line numbers are indicative and move when a file is edited above them; the
+declaration names and their `#check`s in `Q1Paper/PaperII/ClaimsCheck.lean` are the
+stable reference (use them, not the line numbers, to locate a claim).
 
 **Scope.**  Items marked *reused* are proved in the Paper I tree and enter Paper II
 through the column split `Φ`.  Most items are stated twice: for the field-generic
@@ -78,10 +78,15 @@ specification `DECℂ`.  The bridge between them is the real-compression lemma
 
 | paper item | reason |
 |---|---|
-| — | (Prop 3 is complete in both directions; see the two rows below and the `(G,b)` rows above) |
+| Prop 3, the composed iff (`t_min = a−s₀+1 ⇔ ∃(G,b)`) | − | − | **not formalised**: both directions and the numerical half are proved separately, but the composition — in particular identifying `U = π₁W` with `U₀+V₀` at an attaining `W`, and the real-field statement of Prop 3 — is not |
 | Theorem 4, the `O(log(ℓ+2))` call count | the ordering is `tMin_le_iff_dec` and the least element is `dec_sInf_tMinSet`; the arithmetic of the call count is not formalised |
 | Corollary 5 (OPT), Corollary 6 (FIND) | complexity statements inherited from Paper I; FIND's bit model is open in the paper |
 | the appendix instance (`q_min = 4`) | exact rational certificate; belongs to the Python verification layer |
+| Prop 3, the composed iff and its real-field form | the two directions and the numerical half are proved; the composition needs `U = π₁W = U₀+V₀` at an attaining `W`, and the real-field version of the statement |
+| Theorem 4, the construction part | the ordering (`tMin ≤ r ↔ DEC`) and the counting boundary are recorded above; recovering the `t`-row `R` from a given `W` by solving the linear system is `claim4_converse` (existence), not the paper's explicit recovery step |
+| FIND: the witness system `Ψ_{t,ω}`, the real-solution/feasible-`W` equivalence, and the sampling step | not formalised; only the complexity inheritance is cited in the paper |
+| Prop 1, `t_min ≤ 2ℓ` for the real-design `tMinC` | `tMin_le_two_ell` is stated for the complex-design `tMin`; the real-design analogue follows from the same structural bound plus `real_compress` but is not stated separately |
+| Prop 2's side condition `ω > 0` | the structural bound needs `ω > 0`; the unconditional `a + 1 − s₀ ≤ t_min` is `le_tMin_of_lowerBound_max`, but the underlying `a + 1 ≤ s₀ + t` still assumes `ω > 0` |
 
 ## Verification
 

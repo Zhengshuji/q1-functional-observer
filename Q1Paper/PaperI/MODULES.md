@@ -51,7 +51,7 @@ The four entry points and their separate jobs:
 
 ## `Q1Paper/PaperI/S03_Certificate/` — 03_Certificate
 
-22 files, 117 theorems, 38 definitions/structures.
+23 files, 121 theorems, 38 definitions/structures.
 
 | file | thm | def | first declarations | header summary |
 |---|---:|---:|---|---|
@@ -69,6 +69,7 @@ The four entry points and their separate jobs:
 | `GramCoefficients.lean` | 3 | 2 | `eval_eq_sum_fin_coeff`, `minorCoeff`, `coeffGram`, `gramKernelEval_eq_coeff_sum`, … |  |
 | `GramCompression.lean` | 2 | 2 | `windowMinorFamily`, `windowGram_entry`, `compressedGram`, `windowGram_eq_compressed` |  |
 | `GramFamilyBridge.lean` | 4 | 2 | `windowInj`, `windowSub`, `sum_prod_snd`, `sum_snd_prod`, … |  |
+| `GramIndexBridge.lean` | 4 | 0 | `imagePair_surjective`, `rowSpace_windowInj_eq_windowSub`, `claim11_iff_gram_subset`, `claim12_iff_gram_subset` |  |
 | `GramKernel.lean` | 3 | 4 | `selectedCols`, `rowEmb`, `colEmb`, `selectedCols_apply`, … |  |
 | `GramSubspace.lean` | 2 | 0 | `gram_solvable_iff_smul`, `gram_certificate_iff_subset` |  |
 | `GramSystem.lean` | 4 | 0 | `rowSpace_eq_range_transpose`, `range_transpose_mul_self`, `mem_range_transpose_iff_exists_gram`, `gram_certificate` |  |

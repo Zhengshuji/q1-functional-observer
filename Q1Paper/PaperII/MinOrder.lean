@@ -180,5 +180,32 @@ theorem le_tMin_of_lowerBound
   · rw [tMin, dif_neg hne]
     exact le_top
 
+
+/-- **`eq:qmin-lb` in the paper's unconditional form**: `a + 1 − s₀ ≤ t_min`, i.e.
+`max 0 (a − s₀ + 1) ≤ t_min` (natural-number subtraction), with no side condition on
+`s₀ ≤ a`.  The only hypothesis is `ω > 0` for every feasible `W`, which the paper's
+structural bound also uses. -/
+theorem le_tMin_of_lowerBound_max
+    (A : Matrix (Fin n) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℂ)
+    (L0 : Matrix (Fin r0) (Fin n) ℝ)
+    (hω : ∀ V : Submodule ℂ ((Fin k → ℂ) × (Fin k → ℂ)),
+      W0 A N L0 ≤ V → V ≤ TR A N → IsFeasible V → 0 < finrank ℂ ↥(Q1Subspace.pi1 V)) :
+    ((finrank ℂ ↥(Q1Subspace.pi1 (W0 A N L0) ⊔ Q1Subspace.pi2 (W0 A N L0)) + 1
+        - finrank ℂ ↥(W0 A N L0) : ℕ) : WithTop ℕ) ≤ tMin A N L0 := by
+  by_cases hsa : finrank ℂ ↥(W0 A N L0)
+      ≤ finrank ℂ ↥(Q1Subspace.pi1 (W0 A N L0) ⊔ Q1Subspace.pi2 (W0 A N L0))
+  · have h := le_tMin_of_lowerBound A N L0 hω hsa
+    have hfin : finrank ℂ ↥(Q1Subspace.pi1 (W0 A N L0) ⊔ Q1Subspace.pi2 (W0 A N L0)) + 1
+        - finrank ℂ ↥(W0 A N L0)
+        = finrank ℂ ↥(Q1Subspace.pi1 (W0 A N L0) ⊔ Q1Subspace.pi2 (W0 A N L0))
+          - finrank ℂ ↥(W0 A N L0) + 1 := by omega
+    rw [hfin]
+    exact h
+  · have h0 : finrank ℂ ↥(Q1Subspace.pi1 (W0 A N L0) ⊔ Q1Subspace.pi2 (W0 A N L0)) + 1
+        - finrank ℂ ↥(W0 A N L0) = 0 := by omega
+    rw [h0]
+    exact zero_le
+
 end Q1Paper.PaperII
+
 

@@ -80,12 +80,15 @@ import Q1Paper.PaperII.Realification
 #print axioms Q1Paper.PaperII.dec_sInf_tMinSet
 #print axioms Q1Paper.PaperII.exists_least_of_monotone
 #print axioms Q1Paper.PaperII.le_tMin_of_lowerBound
+#print axioms Q1Paper.PaperII.le_tMin_of_lowerBound_max
 
 -- Monotone.lean
 #print axioms Q1Paper.PaperII.pairRowSpace_fromRows
 #print axioms Q1Paper.PaperII.pairRowSpace_pad
 #print axioms Q1Paper.PaperII.decC_mono_add
 #print axioms Q1Paper.PaperII.decC_mono
+
+-- Read.lean
 
 -- Realification.lean
 #print axioms Q1Paper.PaperII.pairRows
