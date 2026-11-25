@@ -21,7 +21,7 @@ lines 1135-1185):
 A second, independent check ties this module to the Lean development: the elementary symmetric
 function of the Gram matrix ``M M^T``, written as the sum of its principal minors, is positive
 in degree ``omega`` exactly when ``rank M >= omega`` -- the theorem
-``elemSymm_pos_iff_rank_ge`` of ``Q1Paper/PaperI/Claim8Ej.lean``.  Algorithm 2's condition (i)
+``elemSymm_pos_iff_rank_ge`` of ``Q1Paper/PaperI/Claim8_SumSquares.lean``.  Algorithm 2's condition (i)
 is stated in exactly this form (``e_omega(H H^T) > 0``), so checking it here on random
 instances is a cross-check between the paper's phrasing, this implementation, and Lean.
 
@@ -234,7 +234,7 @@ def _det_int(M):
 def check_elem_symm(n_instances=25, seed=7):
     """e_omega(M M^T) > 0  <=>  rank M >= omega, on random small integer matrices.
 
-    This is the theorem `elemSymm_pos_iff_rank_ge` of Q1Paper/PaperI/Claim8Ej.lean; the paper's
+    This is the theorem `elemSymm_pos_iff_rank_ge` of Q1Paper/PaperI/Claim8_SumSquares.lean; the paper's
     Algorithm 2 states its condition (i) in exactly this form.
     """
     import random

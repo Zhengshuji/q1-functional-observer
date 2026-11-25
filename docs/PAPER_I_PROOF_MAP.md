@@ -55,8 +55,8 @@ with the small pair `(H, H_A)` instead of the free block.  `KernelBasis.lean` su
 **Claims 3–8** (the subspace picture).  `Claims38.lean` carries 3, 4 (forward), 5, 6, 7 and the rank form
 of 8; `Claim4Converse.lean` is the converse of 4 (every admissible `W` is realised by some `R`), which is
 what makes the search over subspaces complete rather than merely sound.  Claim 8's combinatorial form is
-split across `Claim8Literal.lean` (the statement in the paper's terms), `Claim8Ej.lean` (the algebraic
-core, elementary symmetric functions and the Gram blocks) and `Claim8Wire.lean` (the wiring between
+split across `Claim8_ElemSymm.lean` (the statement in the paper's terms), `Claim8_SumSquares.lean` (the algebraic
+core, elementary symmetric functions and the Gram blocks) and `Claim8_Disjunction.lean` (the wiring between
 them).
 
 **Claims 9–12** (the certificate).  The route is: `SpectralMinor.lean` and `MinorRank.lean` turn the

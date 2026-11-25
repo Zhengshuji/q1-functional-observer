@@ -94,7 +94,7 @@ $\omega \times \omega$ minors have no common root.  Two facts close the gap:
 Claim 12 is the same statement for a full-column-rank pencil $\lambda X - G$, which is the form the
 chart coordinates take.
 
-*Lean:* `Q1Paper/PaperI/Claim8Literal.lean`, `Claim8Ej.lean`, `Claim8Wire.lean`,
+*Lean:* `Q1Paper/PaperI/Claim8_ElemSymm.lean`, `Claim8_SumSquares.lean`, `Claim8_Disjunction.lean`,
 `Claim11.lean`, `Claim11Final.lean`, `Claim12.lean`, `Window.lean`.
 
 ### Step 4 — make the certificate finite and rational

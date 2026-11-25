@@ -7,14 +7,14 @@ Q1Paper/PaperI/Claim8_ElemSymm.lean
 
 **Claim 8 in the paper's literal form: the disjunction for `Γ' = M Mᵀ + c cᵀ`.**
 
-`PaperI/Claim8Ej.lean` defines `elemSymm M j` (sum of the principal `j × j` minors of
+`PaperI/Claim8_SumSquares.lean` defines `elemSymm M j` (sum of the principal `j × j` minors of
 `Γ = M * Mᵀ`) for `M : Matrix (Fin m) (Fin n) ℝ`, i.e. with the column index fixed to `Fin n`,
 and proves
 
   `elemSymm_pos_iff_rank_ge      :  0 < elemSymm M j ↔ j ≤ M.rank`,
   `elemSymm_eq_zero_iff_rank_lt  :  elemSymm M j = 0 ↔ M.rank < j`.
 
-`PaperI/Claim8Wire.lean` proves the disjunction for a single Gram matrix and records the gap:
+`PaperI/Claim8_Disjunction.lean` proves the disjunction for a single Gram matrix and records the gap:
 the paper's second Gram matrix is `Γ' = M Mᵀ + c cᵀ = [M  c] * [M  c]ᵀ`, whose column index type
 is `Fin n ⊕ Fin 1`, so `elemSymm` (fixed to `Fin n`) cannot be applied to it.
 
@@ -30,7 +30,7 @@ any reference to an ordering of the column index type:
 
 It agrees with `elemSymm` after reindexing the columns by `Fintype.equivFin ι`
 (`elemSymmGen_eq_elemSymm`), which is the bridge that lets the whole existing proof in
-`Claim8Ej.lean` be reused.  The main results transfer verbatim:
+`Claim8_SumSquares.lean` be reused.  The main results transfer verbatim:
 
   `elemSymmGen_pos_iff_rank_ge      :  0 < elemSymmGen M j ↔ j ≤ M.rank`,
   `elemSymmGen_eq_zero_iff_rank_lt  :  elemSymmGen M j = 0 ↔ M.rank < j`.
@@ -38,7 +38,7 @@ It agrees with `elemSymm` after reindexing the columns by `Fintype.equivFin ι`
 (The Cauchy–Binet lemma `Matrix.det_mul_transpose_eq_sum_det_submatrix` of
 `PaperI/CauchyBinet.lean` is already general in the column index `ι`, but it requires a
 `LinearOrder ι` for the enumeration `orderEmbOfFin`; the reindexing route avoids having to
-transport the order and reuses `Claim8Ej.lean` unchanged.)
+transport the order and reuses `Claim8_SumSquares.lean` unchanged.)
 
 ## 2.  The second Gram matrix
 
@@ -83,7 +83,7 @@ open Q1Paper.PaperI.Claim8_SumSquares
 
 /-- **The `j`-th elementary symmetric function of `Γ = M * Mᵀ` for an arbitrary finite column
 type `ι`**: the sum of the principal `j × j` minors of `M * Mᵀ`.  This is `elemSymm` of
-`PaperI/Claim8Ej.lean` written without fixing the column index to `Fin n` and without choosing
+`PaperI/Claim8_SumSquares.lean` written without fixing the column index to `Fin n` and without choosing
 an enumeration of the columns. -/
 noncomputable def elemSymmGen {m : ℕ} {ι : Type*} [Fintype ι]
     (M : Matrix (Fin m) ι ℝ) (j : ℕ) : ℝ :=
@@ -107,7 +107,7 @@ theorem rank_submatrix_equivFin {m : ℕ} {ι : Type*} [Fintype ι]
   simpa using Matrix.rank_submatrix M (Equiv.refl (Fin m)) ((Fintype.equivFin ι).symm)
 
 /-- **`elemSymmGen` is `elemSymm` after reindexing the columns to `Fin (card ι)`.**  This is the
-bridge that reuses the whole proof of `PaperI/Claim8Ej.lean`. -/
+bridge that reuses the whole proof of `PaperI/Claim8_SumSquares.lean`. -/
 theorem elemSymmGen_eq_elemSymm {m : ℕ} {ι : Type*} [Fintype ι]
     (M : Matrix (Fin m) ι ℝ) (j : ℕ) :
     elemSymmGen M j = elemSymm (M.submatrix id (Fintype.equivFin ι).symm) j := by

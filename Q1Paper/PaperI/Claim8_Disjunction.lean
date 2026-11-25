@@ -9,12 +9,12 @@ disjunction
   `∨_t [ e_t(Γ) > 0 ∧ e_{t+1}(Γ) = 0 ∧ e_{t+1}(Γ') = 0 ]`,     `Γ = M * Mᵀ`,
 
 to `Q1Paper.PaperI.Claim8_SumSquares.elemSymm_pos_iff_rank_ge` / `elemSymm_eq_zero_iff_rank_lt`
-(`PaperI/Claim8Ej.lean`) and to `Q1Paper.claim8_rank_consistency`
+(`PaperI/Claim8_SumSquares.lean`) and to `Q1Paper.claim8_rank_consistency`
 (`PaperI/Claims38.lean`).
 
 Here `elemSymm M j` is the `j`-th elementary symmetric function of the row Gram matrix
 `Γ = M * Mᵀ`, defined as the sum of the principal `j × j` minors of `Γ`
-(`Q1Paper.PaperI.Claim8_SumSquares.elemSymm`).  The two facts from `Claim8Ej.lean` used below are
+(`Q1Paper.PaperI.Claim8_SumSquares.elemSymm`).  The two facts from `Claim8_SumSquares.lean` used below are
 
   `elemSymm_pos_iff_rank_ge :  0 < elemSymm M j  ↔  j ≤ M.rank`,
   `elemSymm_eq_zero_iff_rank_lt :  elemSymm M j = 0  ↔  M.rank < j`.
@@ -35,7 +35,7 @@ What is proved here (each docstring names the part of the paper's disjunction it
 
 Not wired: the paper's Claim 8 uses `Γ' = Γ + c cᵀ`, the Gram matrix of the *augmented*
 matrix `[M  c]`.  `Q1Paper.augment` (in `G5GramRank.lean`) lives on the column index type
-`Fin n ⊕ Fin 1`, while `elemSymm` in `Claim8Ej.lean` is stated for column index `Fin n`;
+`Fin n ⊕ Fin 1`, while `elemSymm` in `Claim8_SumSquares.lean` is stated for column index `Fin n`;
 applying `elemSymm` to `[M  c]` therefore needs either a reindexing `Fin n ⊕ Fin 1 ≃ Fin (n+1)`
 or an `elemSymm` generalised to an arbitrary column index type.  See the closing comment for
 the exact statement that is missing.
@@ -164,7 +164,7 @@ theorem exists_rank_disjunct_pair {m n₁ n₂ : ℕ} (M : Matrix (Fin m) (Fin n
 
 The paper's Claim 8 takes `Γ' = M Mᵀ + c cᵀ`, the Gram matrix of the augmented matrix
 `[M  c] = Q1Paper.augment M c`.  `augment M c` has column index `Fin n ⊕ Fin 1`, whereas
-`elemSymm` (`PaperI/Claim8Ej.lean`) is stated for column index `Fin n`.  So the literal
+`elemSymm` (`PaperI/Claim8_SumSquares.lean`) is stated for column index `Fin n`.  So the literal
 disjunct `e_{t+1}(Γ') = 0` cannot be written with `elemSymm` without one of
 
 * a reindexing `e : Fin n ⊕ Fin 1 ≃ Fin (n+1)` together with
@@ -172,7 +172,7 @@ disjunct `e_{t+1}(Γ') = 0` cannot be written with `elemSymm` without one of
   (entrywise) and `Matrix.rank_reindex` gives `U.rank = (augment M c).rank`; or
 * an `elemSymm` generalised to an arbitrary finite column index type `ι`.  (The underlying
   Cauchy–Binet lemma `Matrix.det_mul_transpose_eq_sum_det_submatrix` of
-  `PaperI/CauchyBinet.lean` is already stated for a general `ι`; only `Claim8Ej.lean`
+  `PaperI/CauchyBinet.lean` is already stated for a general `ι`; only `Claim8_SumSquares.lean`
   specialises the column index to `Fin n`.)
 
 With either of these, the paper's Claim 8 in disjunctive form would read
