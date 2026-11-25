@@ -766,9 +766,16 @@ Converse of the sandwich (Claim~\ref{claim:sandwich}), complex designs & literal
 Minimum order $q_{\min}=r_0+t_{\min}$ (\ref{prop:minorder}), complex designs & literal &
 \texttt{tMin\_le\_iff\_dec} \\
 A priori bound $t_{\min}\le2\ell$ (\ref{prop:minorder}) & literal & \texttt{tMin\_le\_two\_ell} \\
+Minimum order attained, and the abstract least order (\ref{prop:minorder}, interface) & literal &
+\texttt{dec\_sInf\_tMinSet}, \texttt{exists\_least\_of\_monotone} \\
 Lower bound \eqref{eq:lb}, the inequality $\operatorname{rank}[U_0;V_0]\le\omega$
 (Proposition~\ref{prop:lowerbound}; the dimensional half of Proposition~\ref{prop:tight}) &
 literal & \texttt{lowerBound\_core}, \texttt{finrank\_sup\_pi\_le}, \texttt{finrank\_pi1\_mono} \\
+Tightness, numerical half: $\dim W=a+1\Rightarrow t=a-s_0+1$ (\ref{prop:tight}) & literal &
+\texttt{t\_eq\_of\_finrank} \\
+Tightness, the $(G,b)$ direction: $\pi_\lambda W(G,b)=(\lambda I-G)U+\operatorname{span}\{b\}$,
+feasibility from $\operatorname{rank}[\lambda I-G\ \ b]=a$, and $t=a-s_0+1$ & literal &
+\texttt{graphExt\_piLam}, \texttt{graphExt\_feasible}, \texttt{t\_eq\_of\_graph} \\
 \bottomrule
 \end{tabular}
 \end{table*}
@@ -778,7 +785,9 @@ $t_{\min}\le 2\ell$ is \texttt{tMin\_le\_two\_ell}.  The minimum-order identity
 $q_{\min}=r_0+t_{\min}$ is \texttt{tMin\_le\_iff\_dec}, stated for the field-generic predicate over
 $\mathbb C$: the paper's real-design specification $\mathrm{DEC}_{\mathbb C}$ has its forward direction
 (\texttt{decC\_to\_feasible}) and monotonicity (\texttt{decC\_mono}) formalised, while its converse
-(the real-compression lemma) is not; the artifact's Paper II item map records the boundary.
+(the real-compression lemma) is not.  Of Proposition~\ref{prop:tight} the $(G,b)$ direction is
+formalised in full; extracting $(G,b)$ from an attaining $W$ is not.  The artifact's Paper II item map
+records both boundaries.
 
 Two kinds of evidence support the statements above, and the artifact records which statement rests on
 which.
