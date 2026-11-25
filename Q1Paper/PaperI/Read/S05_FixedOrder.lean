@@ -16,14 +16,23 @@ whose cost is known.
 
 The certificate from §3.4.
 
+## The result
+
+- `Q1Paper.prop4_r0_iff_spectral`
+- `Q1Paper.theorem1_conditional_params_fixedDeg`
+
+Everything else below is scaffolding for those: **tool** = general linear algebra that does not
+mention this problem; **bridge** = a translation between two formulations of the same fact;
+**core** = mathematical content specific to this paper.
+
 ## Steps, in proof order
 
-1. rational bases with explicit size bounds — `Q1Paper.PaperI.exists_rational_bases_bounded`
-2. the chart data, including bases of $T$, $S$ and $W_0$ — `Q1Paper.PaperI.Chart14.exists_chart_bases`
-3. every coefficient of every maximal minor is bounded — `Q1Paper.MinorCoeff.pencilMinor_coeff_bitLen_le`
-4. the compressed Gram entries are bounded too — `Q1Paper.PaperI.compressedGram_entry_bitLen_le`
-5. the degenerate $r = 0$ branch reduces to the system (R0) — `Q1Paper.prop4_r0_iff_spectral`
-6. and the resulting bound is $\mathcal L^{O(q^2)}$ — `Q1Paper.theorem1_conditional_params_fixedDeg`
+1. **[bridge]** rational bases with explicit size bounds — `Q1Paper.PaperI.exists_rational_bases_bounded`
+2. **[core]** the chart data, including bases of $T$, $S$ and $W_0$ — `Q1Paper.PaperI.Chart14.exists_chart_bases`
+3. **[core]** every coefficient of every maximal minor is bounded — `Q1Paper.MinorCoeff.pencilMinor_coeff_bitLen_le`
+4. **[core]** the compressed Gram entries are bounded too — `Q1Paper.PaperI.compressedGram_entry_bitLen_le`
+5. **[core]** the degenerate $r = 0$ branch reduces to the system (R0) — `Q1Paper.prop4_r0_iff_spectral`
+6. **[core]** and the resulting bound is $\mathcal L^{O(q^2)}$ — `Q1Paper.theorem1_conditional_params_fixedDeg`
 
 ## What the next section does with it
 

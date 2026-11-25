@@ -16,10 +16,19 @@ separately, and the paper's claim is a chain of equivalences.
 
 Nothing from §4.1–4.2; this is a separate branch.
 
+## The result
+
+- `Q1Paper.claim16_i_iff_iii`
+- `Q1Paper.claim16_iii_implies_iv_of_gcd_isConst`
+
+Everything else below is scaffolding for those: **tool** = general linear algebra that does not
+mention this problem; **bridge** = a translation between two formulations of the same fact;
+**core** = mathematical content specific to this paper.
+
 ## Steps, in proof order
 
-1. the spectral condition, the absence of a common root, and a constant gcd agree — `Q1Paper.claim16_i_iff_iii`
-2. a constant gcd yields a rational left inverse of the required degree — `Q1Paper.claim16_iii_implies_iv_of_gcd_isConst`
+1. **[core]** the spectral condition, the absence of a common root, and a constant gcd agree — `Q1Paper.claim16_i_iff_iii`
+2. **[core]** a constant gcd yields a rational left inverse of the required degree — `Q1Paper.claim16_iii_implies_iv_of_gcd_isConst`
 
 ## What the next section does with it
 

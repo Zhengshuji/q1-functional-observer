@@ -16,10 +16,19 @@ behaviour, which is what makes the bounds in §4 concrete rather than asymptotic
 
 The size bounds of §4.1.
 
+## The result
+
+- `Q1Paper.PaperI.ComplexityCounts.bareiss_total_bit_cost_le_quadratic`
+- `Q1Paper.PaperI.ComplexityCounts.bareiss_total_bit_cost_le_n21_L2`
+
+Everything else below is scaffolding for those: **tool** = general linear algebra that does not
+mention this problem; **bridge** = a translation between two formulations of the same fact;
+**core** = mathematical content specific to this paper.
+
 ## Steps, in proof order
 
-1. the $r = 0$ system's quadratic cost, with exact integer division — `Q1Paper.PaperI.ComplexityCounts.bareiss_total_bit_cost_le_quadratic`
-2. the paper's $O(n^{21} L^2)$ bit-cost bound — `Q1Paper.PaperI.ComplexityCounts.bareiss_total_bit_cost_le_n21_L2`
+1. **[core]** the $r = 0$ system's quadratic cost, with exact integer division — `Q1Paper.PaperI.ComplexityCounts.bareiss_total_bit_cost_le_quadratic`
+2. **[core]** the paper's $O(n^{21} L^2)$ bit-cost bound — `Q1Paper.PaperI.ComplexityCounts.bareiss_total_bit_cost_le_n21_L2`
 
 ## What the next section does with it
 

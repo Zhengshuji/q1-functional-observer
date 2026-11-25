@@ -175,6 +175,60 @@ SECTIONS = [
 ]
 
 
+#: What each declaration *is*, so a reader can tell the result from the scaffolding.  Three roles:
+#: a **tool** is general linear algebra that could be stated without this problem; a **bridge** moves
+#: between two formulations of the same thing; a **core** lemma is mathematical content specific to
+#: this paper.  A declaration absent from this table renders without a tag.
+ROLES: dict[str, str] = {
+    "Q1Paper.rank_vstack_add_rank_mul": "tool",
+    "Q1Subspace.rowSpace_fromRows": "tool",
+    "Q1Paper.PaperI.rawAlgebraic_iff_rowSpace": "bridge",
+    "Q1Paper.PaperI.DEC_iff_compressed": "core",
+    "Q1Paper.claim3_attainable": "core",
+    "Q1Paper.claim4_sandwich": "core",
+    "Q1Paper.claim4_converse": "core",
+    "Q1Paper.claim5_conditions_depend_on_W": "core",
+    "Q1Paper.claim6_struct": "core",
+    "Q1Paper.claim7_DEC_succ": "core",
+    "Q1Paper.claim8_rank_consistency": "core",
+    "Q1Paper.PaperI.Claim8Literal.claim8_disjunction": "bridge",
+    "Q1Paper.exists_bezout_family_real": "core",
+    "Q1Paper.rowSpace_windowMatrix_eq_windowSet": "bridge",
+    "Q1Paper.PaperI.claim11_iff_gram": "core",
+    "Q1Paper.PaperI.claim12_iff_gram": "core",
+    "Q1Paper.PaperI.exists_rational_bases_bounded": "bridge",
+    "Q1Paper.PaperI.Chart14.exists_chart_bases": "core",
+    "Q1Paper.MinorCoeff.pencilMinor_coeff_bitLen_le": "core",
+    "Q1Paper.PaperI.compressedGram_entry_bitLen_le": "core",
+    "Q1Paper.prop4_r0_iff_spectral": "core",
+    "Q1Paper.theorem1_conditional_params_fixedDeg": "core",
+    "Q1Paper.theorem2_fpt_conditional": "core",
+    "Q1Paper.claim16_i_iff_iii": "core",
+    "Q1Paper.claim16_iii_implies_iv_of_gcd_isConst": "core",
+    "Q1Paper.Thm5.DECℂ_iff_exists_encodes_auto": "core",
+    "Q1Paper.PaperI.ComplexityCounts.bareiss_total_bit_cost_le_quadratic": "core",
+    "Q1Paper.PaperI.ComplexityCounts.bareiss_total_bit_cost_le_n21_L2": "core",
+}
+
+#: The declaration(s) that *are* the section's result, i.e. what the paper states as its claim there.
+RESULTS: dict[str, list[str]] = {
+    "S01_Compression.lean": ["Q1Paper.PaperI.DEC_iff_compressed"],
+    "S02_Attainable.lean": ["Q1Paper.claim3_attainable", "Q1Paper.claim4_sandwich",
+                            "Q1Paper.claim4_converse"],
+    "S03_Subspace.lean": ["Q1Paper.claim5_conditions_depend_on_W", "Q1Paper.claim6_struct",
+                          "Q1Paper.claim7_DEC_succ", "Q1Paper.claim8_rank_consistency"],
+    "S04_Certificate.lean": ["Q1Paper.PaperI.claim11_iff_gram", "Q1Paper.PaperI.claim12_iff_gram"],
+    "S05_FixedOrder.lean": ["Q1Paper.prop4_r0_iff_spectral",
+                            "Q1Paper.theorem1_conditional_params_fixedDeg"],
+    "S06_FixedParameter.lean": ["Q1Paper.theorem2_fpt_conditional"],
+    "S07_ZeroFreeRow.lean": ["Q1Paper.claim16_i_iff_iii",
+                             "Q1Paper.claim16_iii_implies_iv_of_gcd_isConst"],
+    "S08_ExistsReal.lean": ["Q1Paper.Thm5.DECℂ_iff_exists_encodes_auto"],
+    "S09_BitCost.lean": ["Q1Paper.PaperI.ComplexityCounts.bareiss_total_bit_cost_le_quadratic",
+                         "Q1Paper.PaperI.ComplexityCounts.bareiss_total_bit_cost_le_n21_L2"],
+}
+
+
 def render(file_name: str, title: str, anchor: str, problem: str, prior: str,
            steps, nxt: str) -> str:
     lines = [
@@ -195,11 +249,25 @@ def render(file_name: str, title: str, anchor: str, problem: str, prior: str,
         "",
         prior,
         "",
+        "## The result",
+        "",
+    ]
+    for decl in RESULTS.get(file_name, []):
+        lines.append(f"- `{decl}`")
+    lines += [
+        "",
+        "Everything else below is scaffolding for those: **tool** = general linear algebra that does not",
+        "mention this problem; **bridge** = a translation between two formulations of the same fact;",
+        "**core** = mathematical content specific to this paper.",
+        "",
         "## Steps, in proof order",
         "",
     ]
-    for i, (note, decl) in enumerate(steps, start=1):
-        lines.append(f"{i}. {note} — `{decl}`")
+    for i, item in enumerate(steps, start=1):
+        note, decl = item[0], item[1]
+        role = ROLES.get(decl)
+        tag = f"**[{role}]** " if role else ""
+        lines.append(f"{i}. {tag}{note} — `{decl}`")
     lines += [
         "",
         "## What the next section does with it",
@@ -209,8 +277,8 @@ def render(file_name: str, title: str, anchor: str, problem: str, prior: str,
         "",
         "-- Each step below is the machine-checked part of the list above.",
     ]
-    for _note, decl in steps:
-        lines.append(f"#check {decl}")
+    for item in steps:
+        lines.append(f"#check {item[1]}")
     lines.append("")
     return "\n".join(lines)
 

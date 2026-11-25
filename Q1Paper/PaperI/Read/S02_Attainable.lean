@@ -16,11 +16,21 @@ freedom.  Without this, a search over subspaces would not be justified.
 
 The compressed pair from §3.1.
 
+## The result
+
+- `Q1Paper.claim3_attainable`
+- `Q1Paper.claim4_sandwich`
+- `Q1Paper.claim4_converse`
+
+Everything else below is scaffolding for those: **tool** = general linear algebra that does not
+mention this problem; **bridge** = a translation between two formulations of the same fact;
+**core** = mathematical content specific to this paper.
+
 ## Steps, in proof order
 
-1. the attainable pairs have dimension $d_0$, giving $\kappa_{\text{obs}} = r d_0$ — `Q1Paper.claim3_attainable`
-2. every attainable $W$ sits between $W_0$ and $T$ — `Q1Paper.claim4_sandwich`
-3. and conversely every such $W$ is attained by some $R$ — `Q1Paper.claim4_converse`
+1. **[core]** the attainable pairs have dimension $d_0$, giving $\kappa_{\text{obs}} = r d_0$ — `Q1Paper.claim3_attainable`
+2. **[core]** every attainable $W$ sits between $W_0$ and $T$ — `Q1Paper.claim4_sandwich`
+3. **[core]** and conversely every such $W$ is attained by some $R$ — `Q1Paper.claim4_converse`
 
 ## What the next section does with it
 

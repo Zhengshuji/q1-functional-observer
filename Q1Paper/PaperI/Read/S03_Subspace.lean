@@ -16,13 +16,24 @@ record the structural constraints on a feasible $W$.
 
 The subspace picture from §3.2.
 
+## The result
+
+- `Q1Paper.claim5_conditions_depend_on_W`
+- `Q1Paper.claim6_struct`
+- `Q1Paper.claim7_DEC_succ`
+- `Q1Paper.claim8_rank_consistency`
+
+Everything else below is scaffolding for those: **tool** = general linear algebra that does not
+mention this problem; **bridge** = a translation between two formulations of the same fact;
+**core** = mathematical content specific to this paper.
+
 ## Steps, in proof order
 
-1. the conditions depend only on $W$, never on which $R$ produced it — `Q1Paper.claim5_conditions_depend_on_W`
-2. a feasible $W$ satisfies $\omega + 1 \le \dim W \le 2\omega$ — `Q1Paper.claim6_struct`
-3. the problem is monotone in the order — `Q1Paper.claim7_DEC_succ`
-4. the rank-consistency criterion, which eliminates the intermediate $B$ — `Q1Paper.claim8_rank_consistency`
-5. its combinatorial form, as a disjunction over the elementary symmetric functions — `Q1Paper.PaperI.Claim8Literal.claim8_disjunction`
+1. **[core]** the conditions depend only on $W$, never on which $R$ produced it — `Q1Paper.claim5_conditions_depend_on_W`
+2. **[core]** a feasible $W$ satisfies $\omega + 1 \le \dim W \le 2\omega$ — `Q1Paper.claim6_struct`
+3. **[core]** the problem is monotone in the order — `Q1Paper.claim7_DEC_succ`
+4. **[core]** the rank-consistency criterion, which eliminates the intermediate $B$ — `Q1Paper.claim8_rank_consistency`
+5. **[bridge]** its combinatorial form, as a disjunction over the elementary symmetric functions — `Q1Paper.PaperI.Claim8Literal.claim8_disjunction`
 
 ## What the next section does with it
 

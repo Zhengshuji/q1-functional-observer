@@ -16,9 +16,17 @@ tractable rather than merely polynomial for fixed order.
 
 The chart enumeration and cost model of §4.1.
 
+## The result
+
+- `Q1Paper.theorem2_fpt_conditional`
+
+Everything else below is scaffolding for those: **tool** = general linear algebra that does not
+mention this problem; **bridge** = a translation between two formulations of the same fact;
+**core** = mathematical content specific to this paper.
+
 ## Steps, in proof order
 
-1. the FPT bound, conditional on the declared backend — `Q1Paper.theorem2_fpt_conditional`
+1. **[core]** the FPT bound, conditional on the declared backend — `Q1Paper.theorem2_fpt_conditional`
 
 ## What the next section does with it
 

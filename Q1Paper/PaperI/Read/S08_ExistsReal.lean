@@ -16,9 +16,17 @@ left over.
 
 The certificate of §3.4 and the bounds of §4.1.
 
+## The result
+
+- `Q1Paper.Thm5.DECℂ_iff_exists_encodes_auto`
+
+Everything else below is scaffolding for those: **tool** = general linear algebra that does not
+mention this problem; **bridge** = a translation between two formulations of the same fact;
+**core** = mathematical content specific to this paper.
+
 ## Steps, in proof order
 
-1. the decision problem is equivalent to the existence of an encoding witness — `Q1Paper.Thm5.DECℂ_iff_exists_encodes_auto`
+1. **[core]** the decision problem is equivalent to the existence of an encoding witness — `Q1Paper.Thm5.DECℂ_iff_exists_encodes_auto`
 
 ## What the next section does with it
 
