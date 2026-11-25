@@ -46,7 +46,7 @@ predicate over `ℂ` (complex free blocks); the paper's real-design specificatio
 | Claim 5, monotone, `DECℂ` | `decC_mono` | `PaperII/Monotone.lean:154` | literal |
 | Claim 5, monotone, `DEC` | `dec_mono_complex` | `PaperII/Saturate.lean:107` | literal |
 | Claim 5, saturation, `DEC` | `dec_saturates` | `PaperII/Saturate.lean:87` | literal |
-| Claim 5, saturation, `DECℂ` | — | — | **open** (real-compression) |
+| Claim 5, saturation, `DECℂ` | `decC_saturates` (via `real_compress`, `feasible_to_decC`) | `PaperII/Realification.lean` | literal |
 
 ## §III Minimum order
 
@@ -56,6 +56,8 @@ predicate over `ℂ` (complex free blocks); the paper's real-design specificatio
 | Prop 1: `t_min ≤ 2ℓ` | `tMin_le_two_ell` (via `omega_le_ell`, `t_le_two_ell`) | `PaperII/MinOrder.lean:126,90,109` | literal (`DEC`) |
 | Prop 1 with `t_min = ⊤` when infeasible | `tMin`, `tMinSet` | `PaperII/MinOrder.lean:50,43` | literal |
 | Theorem 4, correctness half: the least feasible order is feasible | `dec_sInf_tMinSet` | `PaperII/MinOrder.lean:146` | literal (`DEC`) |
+| Prop 1, minimum order, real designs: `t_min^ℝ ≤ r ↔ DECℂ r` | `tMinC_le_iff_decC` | `PaperII/Realification.lean` | literal (`DECℂ`) |
+| the least feasible real order is feasible | `decC_sInf_tMinCSet` | `PaperII/Realification.lean` | literal (`DECℂ`) |
 | the abstract least feasible order (monotone predicate) | `exists_least_of_monotone` | `PaperII/MinOrder.lean:157` | literal |
 
 ## §III The spectral lower bound
