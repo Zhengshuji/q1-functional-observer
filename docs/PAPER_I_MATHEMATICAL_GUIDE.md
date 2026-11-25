@@ -158,6 +158,17 @@ paper; see `docs/ALGORITHM_CORRECTNESS_MAP.md`.
 | The real-algebraic backend itself (Renegar) | **cited, not formalised** — no correctness field exists |
 | An executable solver | **absent**; `verification/` holds a Python model used for differential testing only |
 
+**One place where the coverage is finer than "Claim 11 is done".**  Claim 11 comes in two shapes.  The
+Lean development proves the Gram certificate for the **injective** index family — an ordered choice of
+$\omega$ rows and $\omega$ columns — and that is the form the statement is proved in.  The paper's
+running text often indexes the same certificate by **subsets**, and the aggregation identity that
+converts a sum over subsets into a sum over injective tuples (with the $(\omega!)^2$ multiplicity) is
+*not* a single Lean theorem: what exists are its components — the fibre count
+`sum_comp_eq_card_smul_sum` in `FibreSum.lean`, and the sign relation between the two families.  So
+"Claim 11 is formalised" is true of the statement as written in the paper's displayed equivalence, and
+the passage between the two index families is argued rather than compiled.  This is the same caveat the
+README records; it is repeated here because a reader tracing the certificate will meet it.
+
 "439 declarations pass the axiom audit" therefore means: 439 statements depend only on `propext`,
 `Classical.choice` and `Quot.sound`.  It does **not** mean that every claim of the paper, every
 algorithm, and its implementation are verified.

@@ -41,7 +41,8 @@ Four files have four separate jobs; knowing which is which answers most navigati
 | `Q1Paper/PaperI/ClaimsCheck.lean` | the same items as `#check`s, machine-checked |
 | `Q1Paper/PaperI/Audit.lean` | the **axiom footprint** of all 439 audited declarations |
 
-A declaration's proof lives in whichever module it was developed in — 75 modules, historical names
+A declaration's proof lives in whichever module it was developed in — 86 modules under
+`Q1Paper/PaperI/`, with historical names
 such as `Claim11Final.lean` or `GramCompression.lean`.  That is deliberate: this tree does not merge
 or rename proof modules, because doing so would touch `Audit.lean`'s fully-qualified names and the
 generated indexes, for no mathematical gain.  **Use the proof map to locate a proof; do not expect
