@@ -6,7 +6,7 @@ import Q1Paper.ConstantRankPencil
 /-!
 Q1Paper/MonotoneBlocks.lean
 
-Monotonicity of the feasible order (Paper II, Claim 5 / `lem:monotone`):
+Monotonicity of the feasible order (Paper I, Claim 7 / `lem:monotone`):
 the bookkeeping that carries the two design conditions through `Matrix.fromRows`.
 
 The paper's proof of monotonicity is one sentence: *adjoining a zero row to `R`
