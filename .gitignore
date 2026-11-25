@@ -8,3 +8,11 @@
 __pycache__/
 *.pyc
 .DS_Store
+# Local development files: kept on disk, deliberately not published.
+# The repository is the public artifact (Lean sources, papers, verification programs, CI);
+# these are maintainer tooling, agent handoff notes and correspondence.
+Q1Paper/AGENTS.md
+scripts/promote_paperI.py
+scripts/module_docstrings.py
+scripts/tag_historical_docs.py
+docs/REPLY_from_paper_agent.md

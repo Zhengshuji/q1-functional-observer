@@ -32,12 +32,11 @@ docs/           the reading entry point, then the historical record
                 PAPER_I_MATH_AUDIT.md          independent audit, with counterexamples
                 PAPER_I_CLAIM19_CRAMER.md      the Cramer re-derivation of Claim 19
                 PAPER_I_REUSE_AUDIT.md         theorem-level reuse audit of external Lean code
-                ALGORITHM_REVIEW.md, LEAN_MAP.md, REPLY_from_paper_agent.md
+                ALGORITHM_REVIEW.md, LEAN_MAP.md
 Q1Paper/        Lean sources
                 Q1Paper/            the project layer (row spaces, projections, rank identities)
                 Q1Paper/PaperI/     the Paper I modules (86 files), plus Audit.lean
-                AGENTS.md           handoff notes (environment, pitfalls, API index)
-scripts/        check.sh, check_paperI_axioms.py, promote_paperI.py
+scripts/        check.sh, check_paperI_axioms.py, generate_paperI_*.py, paper_lean_index.py
 verification/   exact rational checks; see verification/README.md for the index
 .github/        CI: a Lean job, a paper job, a verification job
 ```

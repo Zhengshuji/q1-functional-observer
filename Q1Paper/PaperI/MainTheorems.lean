@@ -118,7 +118,7 @@ bounds) and nothing from the companion papers (minimum order, hyperplane layer,
 c2 layer).
 
 The imported modules are the formalized material; the paper-level statements
-and their status are recorded in `paper/PAPER_I_FORMALIZATION_MAP.md`.  This
+and their status are recorded in `docs/PAPER_I_PROOF_MAP.md` and `docs/START_HERE.md`.  This
 file is an index, not a proof: the theorems live in the modules imported below,
 under the namespaces `Q1Paper`, `Q1Subspace` and `KappaObs`.
 -/
