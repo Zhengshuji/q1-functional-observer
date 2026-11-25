@@ -147,9 +147,9 @@ algorithms*.
 
 ## Where each paper item is proved
 
-[Q1Paper/PaperI/CLAIMS.md](Q1Paper/PaperI/CLAIMS.md) is the generated index: one row per paper item
+[Q1Paper/PaperI/S00_Interface/CLAIMS.md](Q1Paper/PaperI/S00_Interface/CLAIMS.md) is the generated index: one row per paper item
 (Claims 1-16, Proposition 4, Theorems 1/2/5, the appendix claims), with the Lean declaration
 that proves it and its status ([Lean], [Lean-conditional], [Paper]).  It is generated from a
 single table by `scripts/generate_paperI_claims.py`, and CI runs
-`Q1Paper/PaperI/ClaimsCheck.lean` (one `#check` per item) plus the generator's `--check` mode, so
+`Q1Paper/PaperI/S00_Interface/ClaimsCheck.lean` (one `#check` per item) plus the generator's `--check` mode, so
 the index cannot drift from the code.

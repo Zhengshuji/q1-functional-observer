@@ -27,7 +27,7 @@ import re
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-CLAIMS = ROOT / "Q1Paper" / "PaperI" / "CLAIMS.md"
+CLAIMS = ROOT / "Q1Paper" / "PaperI" / "S00_Interface" / "CLAIMS.md"
 TARGET = ROOT / "docs" / "PAPER_I_PROOF_MAP.md"
 BEGIN = "<!-- BEGIN GENERATED: claim -> declaration -> file -->"
 END = "<!-- END GENERATED -->"

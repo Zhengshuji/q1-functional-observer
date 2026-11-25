@@ -29,8 +29,6 @@ docstring so a reader can see the author's stated purpose.
 | `Q1Paper/KappaObs.lean` | 11 | 0 | — | kappa_obs = r * rank[N, AN]. |
 | `Q1Paper/Monotone.lean` | 2 | 0 | — | a row of zeros to a matrix leaves both its row space and its rank unchanged. |
 | `Q1Paper/MonotoneBlocks.lean` | 16 | 0 | — | the bookkeeping that carries the two design conditions through `Matrix.fromRows`. |
-| `Q1Paper/PaperI/Claims.lean` | 0 | 0 | — | **(no module docstring)** |
-| `Q1Paper/PaperI/ClaimsCheck.lean` | 0 | 0 | — | **(no module docstring)** |
 | `Q1Paper/PaperI/Read/All.lean` | 0 | 0 | — | **(no module docstring)** |
 | `Q1Paper/PaperI/Read/S01_Compression.lean` | 0 | 0 | — | `#check`, so if a declaration is renamed this file stops compiling — that is what keeps it honest. |
 | `Q1Paper/PaperI/Read/S02_Attainable.lean` | 0 | 0 | — | `#check`, so if a declaration is renamed this file stops compiling — that is what keeps it honest. |

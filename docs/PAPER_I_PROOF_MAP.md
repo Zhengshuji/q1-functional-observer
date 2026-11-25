@@ -1,6 +1,6 @@
 # Paper I: proof map
 
-**Read `Q1Paper/PaperI/Claims.lean` first.**  It lists the paper's items in the paper's own order, each
+**Read `Q1Paper/PaperI/S00_Interface/Claims.lean` first.**  It lists the paper's items in the paper's own order, each
 with its LaTeX label, its coverage status and the name of the declaration that proves it — and it
 contains no proofs at all (zero declarations), so it reads as a checklist rather than as Lean code.
 It is generated from `CLAIMS.md`, and `ClaimsCheck.lean` machine-checks that every declaration it

@@ -8,7 +8,7 @@ and they should not have to learn each other's notation:
 
 `docs/PAPER_I_PROOF_MAP.md` is the bridge: one table row per paper item, giving the Lean declaration,
 the file and line that define it, and its coverage status.  That table is **generated** from
-`Q1Paper/PaperI/CLAIMS.md` plus the sources, so it cannot drift.
+`Q1Paper/PaperI/S00_Interface/CLAIMS.md` plus the sources, so it cannot drift.
 
 ## The paper
 
@@ -37,8 +37,8 @@ Four files have four separate jobs; knowing which is which answers most navigati
 | file | job |
 |---|---|
 | `Q1Paper/PaperI/MainTheorems.lean` | what Lean must **load** — the import entry point |
-| `Q1Paper/PaperI/Claims.lean` | what the paper **claims**, in the paper's order, each with a docstring |
-| `Q1Paper/PaperI/ClaimsCheck.lean` | the same items as `#check`s, machine-checked |
+| `Q1Paper/PaperI/S00_Interface/Claims.lean` | what the paper **claims**, in the paper's order, each with a docstring |
+| `Q1Paper/PaperI/S00_Interface/ClaimsCheck.lean` | the same items as `#check`s, machine-checked |
 | `Q1Paper/PaperI/Audit.lean` | the **axiom footprint** of all 439 audited declarations |
 
 A declaration's proof lives in whichever module it was developed in — 86 modules under
@@ -89,7 +89,7 @@ The formalisation is not a machine-checked copy of the paper, and the difference
 ## Reading order
 
 1. This file.
-2. `Q1Paper/PaperI/Claims.lean` — the paper's items in the paper's order, each with its LaTeX label,
+2. `Q1Paper/PaperI/S00_Interface/Claims.lean` — the paper's items in the paper's order, each with its LaTeX label,
    its status and the name of the declaration that proves it.  It contains no proofs, so it reads as a
    checklist; this is the shortest path from the paper into the Lean.
 3. `docs/PAPER_I_PROOF_MAP.md` — the same items with the **module and line** that define each
