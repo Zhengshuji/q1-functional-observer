@@ -213,4 +213,91 @@ theorem finrank_W0_eq {r0 n k : ℕ}
   exact Q1Subspace.rank_eq_finrank_rowSpace _
 
 
+
+/-- The complexification map on function spaces. -/
+noncomputable def phi (ι : Type*) : (ι → ℝ) →ₗ[ℝ] (ι → ℂ) where
+  toFun f i := algebraMap ℝ ℂ (f i)
+  map_add' f g := by ext i; simp
+  map_smul' c f := by ext i; simp
+
+/-- **Complexification of a row space.**  The row space of `M.map f` is the
+`ℂ`-span of the complexified rows of `M`. -/
+theorem rowSpace_map_complex {q : Type*} [Fintype q] {k : ℕ} (M : Matrix q (Fin k) ℝ) :
+    Q1Subspace.rowSpace (M.map (algebraMap ℝ ℂ))
+      = Submodule.span ℂ ((phi (Fin k)) '' (Q1Subspace.rowSpace M)) := by
+  have hrange : Set.range (M.map (algebraMap ℝ ℂ))
+      = (phi (Fin k)) '' (Set.range (fun i => M i)) := by
+    ext x
+    constructor
+    · rintro ⟨i, rfl⟩
+      exact ⟨M i, ⟨i, rfl⟩, rfl⟩
+    · rintro ⟨y, ⟨i, rfl⟩, rfl⟩
+      exact ⟨i, rfl⟩
+  have hcomap : Q1Subspace.rowSpace M
+      ≤ Submodule.comap (phi (Fin k))
+        ((Submodule.span ℂ ((phi (Fin k)) '' (Set.range (fun i => M i)))).restrictScalars ℝ) := by
+    rw [Q1Subspace.rowSpace, Submodule.span_le]
+    intro s hs
+    exact Submodule.mem_comap.mpr (Submodule.subset_span ⟨s, hs, rfl⟩)
+  rw [Q1Subspace.rowSpace, Q1Subspace.rowSpace, hrange]
+  apply le_antisymm
+  · exact Submodule.span_mono (Set.image_mono (Submodule.subset_span))
+  · rw [Submodule.span_le]
+    intro x hx
+    obtain ⟨y, hy, rfl⟩ := hx
+    exact hcomap hy
+
+
+/-- **The real-compression lemma.**  A feasible real design `R` whose pair row space
+contains `W₀` can be re-realised by a real design `R'` with `t = dim (W/W₀)` rows,
+giving the *same* `W`. -/
+theorem real_compress {r0 n k r : ℕ}
+    (A : Matrix (Fin n) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℝ)
+    (L0 : Matrix (Fin r0) (Fin n) ℝ) (R : Matrix (Fin r) (Fin n) ℝ)
+    (hW0 : W0 A (N.map (algebraMap ℝ ℂ)) L0 ≤ WR A (N.map (algebraMap ℝ ℂ)) L0 R)
+    (hfeas : IsFeasible (WR A (N.map (algebraMap ℝ ℂ)) L0 R)) :
+    ∃ R' : Matrix (Fin (t (W0 A (N.map (algebraMap ℝ ℂ)) L0)
+        (WR A (N.map (algebraMap ℝ ℂ)) L0 R))) (Fin n) ℝ,
+      WR A (N.map (algebraMap ℝ ℂ)) L0 R' = WR A (N.map (algebraMap ℝ ℂ)) L0 R := by
+  classical
+  have hs := Q1Paper.claim4_sandwich (K := ℝ) L0 R (pairRows N (A * N))
+  have hV0le : finrank ℝ ↥(Q1Subspace.rowSpace (L0 * pairRows N (A * N)))
+      ≤ finrank ℝ ↥(Q1Subspace.rowSpace (Matrix.fromRows L0 R * pairRows N (A * N))) :=
+    Submodule.finrank_mono hs.1
+  have hdim : finrank ℝ ↥(Q1Subspace.rowSpace (Matrix.fromRows L0 R * pairRows N (A * N)))
+      ≤ finrank ℝ ↥(Q1Subspace.rowSpace (L0 * pairRows N (A * N)))
+        + t (W0 A (N.map (algebraMap ℝ ℂ)) L0) (WR A (N.map (algebraMap ℝ ℂ)) L0 R) := by
+    have ht := t_eq_finrank_sub (K := ℂ) hW0
+    rw [ht, finrank_WR_eq A N L0 R, finrank_W0_eq A N L0]
+    omega
+  obtain ⟨R', hR'⟩ := Q1Paper.claim4_converse (K := ℝ) L0 (pairRows N (A * N))
+    (Q1Subspace.rowSpace (Matrix.fromRows L0 R * pairRows N (A * N))) hs.1 hs.2.1 hdim
+  refine ⟨R', ?_⟩
+  have e1 : WR A (N.map (algebraMap ℝ ℂ)) L0 R'
+      = Submodule.map (Φ (K := ℂ)).toLinearMap
+        (Q1Subspace.rowSpace
+          ((Matrix.fromRows L0 R' * pairRows N (A * N)).map (algebraMap ℝ ℂ))) :=
+    WR_eq_map_complex A N L0 R'
+  have e2 : WR A (N.map (algebraMap ℝ ℂ)) L0 R
+      = Submodule.map (Φ (K := ℂ)).toLinearMap
+        (Q1Subspace.rowSpace
+          ((Matrix.fromRows L0 R * pairRows N (A * N)).map (algebraMap ℝ ℂ))) :=
+    WR_eq_map_complex A N L0 R
+  have hm : Q1Subspace.rowSpace
+        ((Matrix.fromRows L0 R' * pairRows N (A * N)).map (algebraMap ℝ ℂ))
+      = Q1Subspace.rowSpace
+        ((Matrix.fromRows L0 R * pairRows N (A * N)).map (algebraMap ℝ ℂ)) := by
+    rw [rowSpace_map_complex, rowSpace_map_complex, hR']
+  calc WR A (N.map (algebraMap ℝ ℂ)) L0 R'
+      = Submodule.map (Φ (K := ℂ)).toLinearMap
+          (Q1Subspace.rowSpace
+            ((Matrix.fromRows L0 R' * pairRows N (A * N)).map (algebraMap ℝ ℂ))) := e1
+    _ = Submodule.map (Φ (K := ℂ)).toLinearMap
+          (Q1Subspace.rowSpace
+            ((Matrix.fromRows L0 R * pairRows N (A * N)).map (algebraMap ℝ ℂ))) := by
+        rw [hm]
+    _ = WR A (N.map (algebraMap ℝ ℂ)) L0 R := e2.symm
+
 end Q1Paper.PaperII
+
+

@@ -97,6 +97,9 @@ import Q1Paper.PaperII.Realification
 #print axioms Q1Paper.PaperII.WR_eq_map_complex
 #print axioms Q1Paper.PaperII.finrank_WR_eq
 #print axioms Q1Paper.PaperII.finrank_W0_eq
+#print axioms Q1Paper.PaperII.phi
+#print axioms Q1Paper.PaperII.rowSpace_map_complex
+#print axioms Q1Paper.PaperII.real_compress
 
 -- Sandwich.lean
 #print axioms Q1Paper.PaperII.Ac
