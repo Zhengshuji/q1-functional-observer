@@ -1900,55 +1900,51 @@ paper does not claim, and the evidence behind each statement, is recorded in Sec
 statement of the paper. \emph{Abstract core}: the Lean statement is a linear-map, submodule or
 general-field version of it, and the passage to the paper's matrices and coefficients is
 paper-level. \emph{Ingredient}: one step of the proof, not the statement. Statements not listed
-are paper-level throughout. $^{\dagger}$~The Lean family of maximal minors is indexed by
-\emph{injective maps} rather than by subsets; each subset pair then occurs $(\omega!)^2$ times with
-the signs of the two reorderings, so the Lean Gram matrix is $(\omega!)^2$ times the subset-indexed
-one and the two matrices have the same row space. The row-space version of the bridge is not yet
-formalised, so the equivalence is proved for the injective-map matrix.}
+are paper-level throughout. $^{\dagger}$~See Section~\ref{sec:limits}.}
 \label{tab:evidence}
 \footnotesize
-\begin{tabular}{@{}lll@{}}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{4.6cm}>{\raggedright\arraybackslash}p{1.9cm}>{\raggedright\arraybackslash}p{10.2cm}@{}}
 \toprule
 Statement & Lean evidence & Formal name \\
 \midrule
 Rank identity (Claim~\ref{lem:rankid}), \eqref{eq:rankid} & literal &
-\texttt{rank\_vstack\_add\_rank\_mul} \\
+\texttt{rank\_\allowbreak{}vstack\_\allowbreak{}add\_\allowbreak{}rank\_\allowbreak{}mul} \\
 Compression criterion (Claim~\ref{lem:compression}) & abstract core &
-\texttt{ker\_compressed\_iff} \\
+\texttt{ker\_\allowbreak{}compressed\_\allowbreak{}iff} \\
 Space of row pairs (Claim~\ref{lem:attainable}) & abstract core & \texttt{freePairSpace},
-\texttt{kappaObs\_eq\_mul\_freePairSpace} \\
+\texttt{kappaObs\_\allowbreak{}eq\_\allowbreak{}mul\_\allowbreak{}freePairSpace} \\
 Sandwich and realizability (Claim~\ref{lem:sandwich}) & literal &
-\texttt{rowSpan\_fromRows\_left}, \texttt{mem\_rowSpan\_iff\_exists\_vecMul} \\
+\texttt{rowSpan\_\allowbreak{}fromRows\_\allowbreak{}left}, \texttt{mem\_\allowbreak{}rowSpan\_\allowbreak{}iff\_\allowbreak{}exists\_\allowbreak{}vecMul} \\
 Conditions depend on $W$ (Claim~\ref{lem:W-conditions}) & abstract core &
-\texttt{rank\_fromRows\_eq\_rank\_iff}, \texttt{rowSpace\_eq} \\
+\texttt{rank\_\allowbreak{}fromRows\_\allowbreak{}eq\_\allowbreak{}rank\_\allowbreak{}iff}, \texttt{rowSpace\_\allowbreak{}eq} \\
 Structural bound, upper half (Claim~\ref{lem:struct}) & literal &
-\texttt{finrank\_le\_two\_mul\_of\_pi1\_eq\_pi2} \\
+\texttt{finrank\_\allowbreak{}le\_\allowbreak{}two\_\allowbreak{}mul\_\allowbreak{}of\_\allowbreak{}pi1\_\allowbreak{}eq\_\allowbreak{}pi2} \\
 Structural bound, lower half (Claim~\ref{lem:struct}) & literal &
-\texttt{finrank\_add\_one\_le\_of\_spectral} \\
+\texttt{finrank\_\allowbreak{}add\_\allowbreak{}one\_\allowbreak{}le\_\allowbreak{}of\_\allowbreak{}spectral} \\
 Rank consistency (Claim~\ref{lem:rankcons}) & literal &
-\texttt{exists\_mulVec\_eq\_iff\_rank\_gram} \\
-B\'ezout with degree bound (Claim~\ref{lem:bezout}) & literal & \texttt{exists\_bezout\_family\_real} \\
+\texttt{exists\_\allowbreak{}mulVec\_\allowbreak{}eq\_\allowbreak{}iff\_\allowbreak{}rank\_\allowbreak{}gram} \\
+B\'ezout with degree bound (Claim~\ref{lem:bezout}) & literal & \texttt{exists\_\allowbreak{}bezout\_\allowbreak{}family\_\allowbreak{}real} \\
 Window relations (Claim~\ref{lem:window}) & literal &
-\texttt{rowSpace\_windowMatrix\_eq\_windowSet},
-\texttt{mem\_rowSpace\_iff\_exists\_window} \\
+\texttt{rowSpace\_\allowbreak{}windowMatrix\_\allowbreak{}eq\_\allowbreak{}windowSet},
+\texttt{mem\_\allowbreak{}rowSpace\_\allowbreak{}iff\_\allowbreak{}exists\_\allowbreak{}window} \\
 Gram certificate (Claim~\ref{prop:gram}), kernel identity & ingredient &
-\texttt{sum\_sq\_eq\_zero\_iff} \\
+\texttt{sum\_\allowbreak{}sq\_\allowbreak{}eq\_\allowbreak{}zero\_\allowbreak{}iff} \\
 Gram certificate (Claim~\ref{prop:gram}), full equivalence & abstract core$^{\dagger}$ &
-\texttt{claim11\_iff\_gram} \\
+\texttt{claim11\_\allowbreak{}iff\_\allowbreak{}gram} \\
 Reduced-pencil certificate (Claim~\ref{clm:gramQ}) & abstract core$^{\dagger}$ &
-\texttt{claim12\_iff\_gram} \\
+\texttt{claim12\_\allowbreak{}iff\_\allowbreak{}gram} \\
 Cauchy--Binet compression (Section~\ref{sec:cb}) & literal &
-\texttt{Matrix.det\_mul\_eq\_sum\_det\_submatrix},
-\texttt{gramKernelEval\_eq\_double\_sum},
-\texttt{gramKernelEval\_eq\_coeff\_sum},
-\texttt{windowGram\_entry}, \texttt{windowGram\_eq\_compressed} \\
+\texttt{Matrix.det\_\allowbreak{}mul\_\allowbreak{}eq\_\allowbreak{}sum\_\allowbreak{}det\_\allowbreak{}submatrix},
+\texttt{gramKernelEval\_\allowbreak{}eq\_\allowbreak{}double\_\allowbreak{}sum},
+\texttt{gramKernelEval\_\allowbreak{}eq\_\allowbreak{}coeff\_\allowbreak{}sum},
+\texttt{windowGram\_\allowbreak{}entry}, \texttt{windowGram\_\allowbreak{}eq\_\allowbreak{}compressed} \\
 Rectangular left inverse (Claim~\ref{lem:zero}(iii)$\Rightarrow$(iv)) & abstract core &
-\texttt{exists\_leftInverse\_linear} \\
+\texttt{exists\_\allowbreak{}leftInverse\_\allowbreak{}linear} \\
 Coefficient system \eqref{eq:R0} $\Rightarrow$ left inverse & literal (one direction) &
-\texttt{spoly\_mul\_pencil\_eq\_one} \\
-Matrix-product coefficients & literal & \texttt{coeff\_mul\_apply} \\
+\texttt{spoly\_\allowbreak{}mul\_\allowbreak{}pencil\_\allowbreak{}eq\_\allowbreak{}one} \\
+Matrix-product coefficients & literal & \texttt{coeff\_\allowbreak{}mul\_\allowbreak{}apply} \\
 Degree bounds $\deg\det$, $\deg\operatorname{adj}$ & literal &
-\texttt{natDegree\_det\_le}, \texttt{natDegree\_adjugate\_le} \\
+\texttt{natDegree\_\allowbreak{}det\_\allowbreak{}le}, \texttt{natDegree\_\allowbreak{}adjugate\_\allowbreak{}le} \\
 Zero-free-row test (Section~\ref{sec:zero}) & paper-level & --- \\
 Encoding (Theorem~\ref{thm:existsr}) & paper-level & --- \\
 \bottomrule
@@ -1993,7 +1989,11 @@ paper-level. The Gram identity of Claim~\ref{prop:gram} and the matrix certifica
 Claim~\ref{clm:gramQ} are formalized for the injective-map family
 (\texttt{claim11\_iff\_gram}, \texttt{claim12\_iff\_gram}); what remains paper-level is the
 row-space bridge to the subset-indexed matrix used in the paper (Table~\ref{tab:evidence},
-$^{\dagger}$).
+$^{\dagger}$). The Lean family of maximal minors is indexed by \emph{injective maps} rather than by
+subsets; each subset pair then occurs $(\omega!)^2$ times with the signs of the two reorderings, so
+the Lean Gram matrix is $(\omega!)^2$ times the subset-indexed one and the two matrices have the
+same row space. The row-space version of the bridge is not yet formalised, so the equivalence is
+proved for the injective-map matrix.
 \end{enumerate}
 
 
