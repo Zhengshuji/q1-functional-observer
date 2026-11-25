@@ -2,9 +2,8 @@
 import Q1Paper.PaperI.S07_ExistsReal.T5Complete
 import Q1Paper.PaperI.S08_ChartEquivalence.Complexify
 import Q1Paper.PaperI.S03_Certificate.MinorRank
-import Q1Paper.Q1RowSpace
-import Q1Paper.Q1Subspace
-
+import Q1Paper.RowSpaceAlgebraic
+import Q1Paper.SubspaceQuotient
 /-!
 Q1Paper/PaperI/S07_ExistsReal/T5DecC.lean
 

@@ -1,7 +1,6 @@
 
-import Q1Paper.Q1RowSpace
-import Q1Paper.Q1Subspace
-
+import Q1Paper.RowSpaceAlgebraic
+import Q1Paper.SubspaceQuotient
 /-!
 Q1Paper/PaperI/S02_Subspace/Claim14.lean
 

@@ -12,21 +12,22 @@ docstring so a reader can see the author's stated purpose.
 |---|---|---|---|---|
 | `Q1Paper/Basic.lean` | 6 | 0 | — | Abstract linear-algebra core for the paper. |
 | `Q1Paper/BezoutDeg.lean` | 4 | 0 | — | Towards the degree-bounded Bezout lemma of the paper. |
+| `Q1Paper/BezoutFamily.lean` | 4 | 0 | — | * `isCoprime_of_no_common_root` and `exists_bezout_deg_lt` (BezoutDeg). |
 | `Q1Paper/BezoutReal.lean` | 19 | 0 | Claim 9 | The real-coefficient Bézout lemma of Paper I (Claim 9, labels `lem:bezout`, `sec:bezout`). |
 | `Q1Paper/BoundLower.lean` | 5 | 0 | — | second projection is contained in its first (`pi2 W ≤ pi1 W`, the paper's algebraic condition). |
 | `Q1Paper/Compression.lean` | 4 | 0 | — | kernel-inclusion criterion on the invisible subspace K0. |
+| `Q1Paper/CompressionIdentity.lean` | 4 | 0 | — | is a basis matrix of `ker J`. |
+| `Q1Paper/ConstantRankPencil.lean` | 8 | 0 | — | pencil here is `z • H - H_A` with `H_A` an independent matrix. |
 | `Q1Paper/DegreeBounds.lean` | 6 | 0 | — | Degree estimates for determinants and adjugates over `K[X]` (G3b). |
 | `Q1Paper/FPT.lean` | 4 | 0 | — | (an injective pencil) and the zero-free-row parameter count. |
 | `Q1Paper/FixedOrder.lean` | 1 | 0 | — | H_A = G B for some unconstrained G. |
 | `Q1Paper/FreeRows.lean` | 5 | 0 | — | range of the pair map, and its dimension is the rank of [N; AN]. |
-| `Q1Paper/G2Assembly.lean` | 4 | 0 | — | * `isCoprime_of_no_common_root` and `exists_bezout_deg_lt` (BezoutDeg). |
-| `Q1Paper/G3Adjugate.lean` | 4 | 0 | — | where `E_I` is the row-selection matrix.  Then `S_I * Q = f_I • 1`. |
-| `Q1Paper/G3Coeff.lean` | 8 | 0 | — | The coefficient encoding of the polynomial left inverse (G3c, Lemma 6 (iv) ⟺ (v)). |
-| `Q1Paper/G3LeftInverse.lean` | 5 | 0 | — | `Σ g_e f_e = 1` give `S = Σ g_e • S_e` with `S * Q = 1`. |
-| `Q1Paper/G4RankIdentity.lean` | 4 | 0 | Claim 1 | identity `finrank_range_prod`. |
-| `Q1Paper/G5GramRank.lean` | 9 | 0 | — | criterion to the augmented-matrix rank test of the second half. |
+| `Q1Paper/GramRankAugmented.lean` | 9 | 0 | — | criterion to the augmented-matrix rank test of the second half. |
 | `Q1Paper/HyperplaneAvoid.lean` | 2 | 0 | — | roots of a first nonzero combination `F = Σ aᵢ fᵢ`. |
 | `Q1Paper/KappaObs.lean` | 11 | 0 | — | kappa_obs = r * rank[N, AN]. |
+| `Q1Paper/LeftInverse.lean` | 5 | 0 | — | `Σ g_e f_e = 1` give `S = Σ g_e • S_e` with `S * Q = 1`. |
+| `Q1Paper/LeftInverseAdjugate.lean` | 4 | 0 | — | where `E_I` is the row-selection matrix.  Then `S_I * Q = f_I • 1`. |
+| `Q1Paper/LeftInverseCoefficient.lean` | 8 | 0 | — | The coefficient encoding of the polynomial left inverse (G3c, Lemma 6 (iv) ⟺ (v)). |
 | `Q1Paper/Monotone.lean` | 2 | 0 | — | a row of zeros to a matrix leaves both its row space and its rank unchanged. |
 | `Q1Paper/MonotoneBlocks.lean` | 16 | 0 | — | the bookkeeping that carries the two design conditions through `Matrix.fromRows`. |
 | `Q1Paper/PaperI/Read/All.lean` | 0 | 0 | — | **(no module docstring)** |
@@ -39,6 +40,7 @@ docstring so a reader can see the author's stated purpose.
 | `Q1Paper/PaperI/Read/S07_ZeroFreeRow.lean` | 0 | 0 | — | `#check`, so if a declaration is renamed this file stops compiling — that is what keeps it honest. |
 | `Q1Paper/PaperI/Read/S08_ExistsReal.lean` | 0 | 0 | — | `#check`, so if a declaration is renamed this file stops compiling — that is what keeps it honest. |
 | `Q1Paper/PaperI/Read/S09_BitCost.lean` | 0 | 0 | — | `#check`, so if a declaration is renamed this file stops compiling — that is what keeps it honest. |
+| `Q1Paper/PaperI/Read/S10_ChartEquivalence.lean` | 0 | 0 | — | `#check`, so if a declaration is renamed this file stops compiling — that is what keeps it honest. |
 | `Q1Paper/PaperI/S00_Interface/Audit.lean` | 0 | 0 | — | that the Paper I map records as formalized, the axioms its proof depends on. |
 | `Q1Paper/PaperI/S00_Interface/Claims.lean` | 0 | 0 | — | **(no module docstring)** |
 | `Q1Paper/PaperI/S00_Interface/ClaimsCheck.lean` | 0 | 0 | — | **(no module docstring)** |
@@ -54,7 +56,7 @@ docstring so a reader can see the author's stated purpose.
 | `Q1Paper/PaperI/S02_Subspace/Claim8_SumSquares.lean` | 23 | 0 | — | `elemSymm M j = ∑_{\|S\| = j} det (Γ_{S,S})`,   `Γ_{S,S} = M_S * M_Sᵀ`. |
 | `Q1Paper/PaperI/S02_Subspace/Claims38.lean` | 26 | 0 | Claim 3, Claim 4 (forward), Claim 5, Claim 6, Claim 7, Claim 8 (rank form) | `lem:struct`, `lem:monotone`, `lem:rankcons`). |
 | `Q1Paper/PaperI/S02_Subspace/RankFactorization.lean` | 7 | 0 | — | with `X * B = H`, `XL * X = 1`, `B * BR = 1`. |
-| `Q1Paper/PaperI/S02_Subspace/SolveCriterion.lean` | 6 | 0 | — | (`Q1Paper/Q1RowSpace.lean`), i.e. `rank [A; B] = rank B ↔ rowSpace A ≤ rowSpace B`. |
+| `Q1Paper/PaperI/S02_Subspace/SolveCriterion.lean` | 6 | 0 | — | (`Q1Paper/RowSpaceAlgebraic.lean`), i.e. `rank [A; B] = rank B ↔ rowSpace A ≤ rowSpace B`. |
 | `Q1Paper/PaperI/S03_Certificate/BasisExtraction.lean` | 2 | 0 | — | maximality forces it to span the same space, so its cardinality is `ω`. |
 | `Q1Paper/PaperI/S03_Certificate/BezoutBounded.lean` | 14 | 0 | Claim 16 (iii)=>(iv) | of that system into a rational one. |
 | `Q1Paper/PaperI/S03_Certificate/CauchyBinet.lean` | 11 | 0 | — | Port of the square Cauchy-Binet identity. |
@@ -125,16 +127,15 @@ docstring so a reader can see the author's stated purpose.
 | `Q1Paper/PaperI/S08_ChartEquivalence/ReindexAlgebraic.lean` | 2 | 0 | — | Gram field needs `minorFamily`, which wants `Fin` indices. |
 | `Q1Paper/PaperI/S08_ChartEquivalence/ReindexSpectral.lean` | 1 | 0 | — | scalar multiplication and the subtraction. |
 | `Q1Paper/PaperI/S08_ChartEquivalence/Soundness.lean` | 2 | 0 | — | certificate, which characterises the complex-λ condition — complex implies real). |
-| `Q1Paper/Q1Compression.lean` | 4 | 0 | — | is a basis matrix of `ker J`. |
-| `Q1Paper/Q1Pencil.lean` | 8 | 0 | — | pencil here is `z • H - H_A` with `H_A` an independent matrix. |
-| `Q1Paper/Q1Projection.lean` | 8 | 0 | — | zero gives `dim (pi2 W) = dim (pi1 W)`. |
-| `Q1Paper/Q1RankInclusion.lean` | 2 | 0 | — | `rank [H_A; H] = rank H  ⟺  row H_A ⊆ row H`. |
-| `Q1Paper/Q1RowSpace.lean` | 5 | 0 | — | * `rank_fromRows_eq_rank_iff` : `rank [A; B] = rank B ↔ rowSpace A ≤ rowSpace B`. |
-| `Q1Paper/Q1Step3.lean` | 4 | 0 | — | inclusion gives equality. |
-| `Q1Paper/Q1Subspace.lean` | 6 | 0 | — | `M` 是压缩行对矩阵；一行 `u` 经过 `M` 给出压缩行对 `u M`。本文件证明： |
+| `Q1Paper/RankAdditivity.lean` | 2 | 0 | — | `rank [H_A; H] = rank H  ⟺  row H_A ⊆ row H`. |
 | `Q1Paper/RankConsistency.lean` | 3 | 0 | — | the paper (and checked by c311); this file isolates the subspace form. |
 | `Q1Paper/RankIdentity.lean` | 4 | 0 | — | the identity through which every compression step of the paper passes. |
+| `Q1Paper/RankIdentityMatrix.lean` | 4 | 0 | Claim 1 | identity `finrank_range_prod`. |
+| `Q1Paper/RowEqualityStep.lean` | 4 | 0 | — | inclusion gives equality. |
+| `Q1Paper/RowSpaceAlgebraic.lean` | 5 | 0 | — | * `rank_fromRows_eq_rank_iff` : `rank [A; B] = rank B ↔ rowSpace A ≤ rowSpace B`. |
 | `Q1Paper/SpectralCertificate.lean` | 2 | 0 | — | underlying the bounded-degree certificate. |
+| `Q1Paper/SubspaceProjection.lean` | 8 | 0 | — | zero gives `dim (pi2 W) = dim (pi1 W)`. |
+| `Q1Paper/SubspaceQuotient.lean` | 6 | 0 | — | `M` 是压缩行对矩阵；一行 `u` 经过 `M` 给出压缩行对 `u M`。本文件证明： |
 | `Q1Paper/Window.lean` | 14 | 0 | Claim 10 | Paper I, Claim 10 (`lem:window`, "degree-windowed relations"). |
 
 <!-- END GENERATED -->

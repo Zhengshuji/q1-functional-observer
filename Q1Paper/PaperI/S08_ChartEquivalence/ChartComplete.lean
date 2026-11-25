@@ -1,4 +1,4 @@
-import Q1Paper.Q1RowSpace
+import Q1Paper.RowSpaceAlgebraic
 import Q1Paper.PaperI.S02_Subspace.Claims38
 import Q1Paper.PaperI.S01_Compression.CompressionMatrix
 import Q1Paper.PaperI.S02_Subspace.RankFactorization

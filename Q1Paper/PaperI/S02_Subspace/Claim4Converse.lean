@@ -26,7 +26,7 @@ Route (no `sorry`, no new axioms):
   (`Matrix.fromRows_mul`, `Q1Subspace.rowSpace_fromRows`).
 
 Reuses: `Q1Subspace.rowSpace`, `Q1Subspace.rowSpace_fromRows`,
-`Q1Subspace.mem_rowSpan_iff_exists_vecMul` (`Q1RowSpace.lean`, `Q1Subspace.lean`),
+`Q1Subspace.mem_rowSpan_iff_exists_vecMul` (`RowSpaceAlgebraic.lean`, `SubspaceQuotient.lean`),
 `Q1Paper.exists_rows_mul_eq` (`PaperI/Claims38.lean`), `Submodule.exists_isCompl`,
 `Submodule.finrank_sup_add_finrank_inf_eq`, `Module.finBasis`, `Basis.sum_repr`.
 -/

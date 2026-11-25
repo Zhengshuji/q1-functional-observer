@@ -3,8 +3,7 @@ import Q1Paper.PaperI.S03_Certificate.Claim12
 import Q1Paper.PaperI.S01_Compression.CompressionMatrix
 import Q1Paper.PaperI.S04_Rationality.Claim16
 import Q1Paper.BezoutReal
-import Q1Paper.G3Coeff
-
+import Q1Paper.LeftInverseCoefficient
 /-!
 Q1Paper/PaperI/S07_ExistsReal/Theorem5.lean
 

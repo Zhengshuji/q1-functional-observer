@@ -1,6 +1,5 @@
 import Q1Paper.PaperI.S03_Certificate.MinorRank
-import Q1Paper.G3Adjugate
-
+import Q1Paper.LeftInverseAdjugate
 /-!
 Q1Paper/PaperI/S02_Subspace/RankFactorization.lean
 

@@ -1,8 +1,7 @@
 import Mathlib
-import Q1Paper.Q1Pencil
-import Q1Paper.Q1RowSpace
-import Q1Paper.Q1Projection
-
+import Q1Paper.ConstantRankPencil
+import Q1Paper.RowSpaceAlgebraic
+import Q1Paper.SubspaceProjection
 /-!
 # Step 3, matrix form: `row H_A = row H`
 

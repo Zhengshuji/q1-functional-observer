@@ -9,7 +9,7 @@ of the pencil `P(λ) = λX − G`.**
 
 The paper's object is `pencilMinors X G : (Fin ω ↪ Fin q) → ℚ[λ]`
 (`Q1Paper.pencil` composed with `Q1Paper.minors`, see `PaperI/Claim16_Gcd.lean`,
-`G3Coeff.lean`, `G3LeftInverse.lean`); here the arithmetic is done on the **integer**
+`LeftInverseCoefficient.lean`, `LeftInverse.lean`); here the arithmetic is done on the **integer**
 pencil, which is where `bitLenInt` lives, and §7 transfers the result back.
 
 ## The route: column multilinearity (NOT Cauchy–Binet)

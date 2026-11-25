@@ -1,7 +1,6 @@
 
 import Q1Paper.PaperI.S02_Subspace.Claim8_Disjunction
-import Q1Paper.G5GramRank
-
+import Q1Paper.GramRankAugmented
 /-!
 Q1Paper/PaperI/S02_Subspace/Claim8_ElemSymm.lean
 
@@ -44,7 +43,7 @@ transport the order and reuses `Claim8_SumSquares.lean` unchanged.)
 
 Naming trap in the pinned Mathlib: `Matrix.fromRows` **stacks rows**
 (`Matrix m₁ n R → Matrix m₂ n R → Matrix (m₁ ⊕ m₂) n R`), so the column append `[M  c]`
-described in the task is `Matrix.fromCols`, and `Q1Paper.augment` (`G5GramRank.lean`) is
+described in the task is `Matrix.fromCols`, and `Q1Paper.augment` (`GramRankAugmented.lean`) is
 exactly `M.fromCols (colMatrix c) : Matrix (Fin m) (Fin n ⊕ Fin 1) ℝ`.  We therefore work with
 `withCol M c := Matrix.fromCols M (colMatrix c)`, which is definitionally `Q1Paper.augment M c`,
 and prove

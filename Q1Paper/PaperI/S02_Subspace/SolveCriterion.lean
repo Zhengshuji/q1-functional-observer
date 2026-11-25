@@ -1,6 +1,6 @@
 import Mathlib
-import Q1Paper.Q1RowSpace
-import Q1Paper.Q1Subspace
+import Q1Paper.RowSpaceAlgebraic
+import Q1Paper.SubspaceQuotient
 import Q1Paper.PaperI.S01_Compression.CompressionMatrix
 
 /-!
@@ -9,7 +9,7 @@ import Q1Paper.PaperI.S01_Compression.CompressionMatrix
 Mathlib has `Matrix.mulVec_surjective_iff_rank_eq_card` (surjectivity of `x ↦ A x`), but no
 criterion for a *single* right-hand side.  This file supplies it, reducing everything to the
 project's row-space bridge `Q1Subspace.rank_fromRows_eq_rank_iff`
-(`Q1Paper/Q1RowSpace.lean`), i.e. `rank [A; B] = rank B ↔ rowSpace A ≤ rowSpace B`.
+(`Q1Paper/RowSpaceAlgebraic.lean`), i.e. `rank [A; B] = rank B ↔ rowSpace A ≤ rowSpace B`.
 
 ## The shape of the statement (why the transpose appears)
 

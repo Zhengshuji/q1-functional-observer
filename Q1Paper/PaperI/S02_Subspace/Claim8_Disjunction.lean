@@ -34,7 +34,7 @@ What is proved here (each docstring names the part of the paper's disjunction it
                                    `Γ' = M' * M'ᵀ`.
 
 Not wired: the paper's Claim 8 uses `Γ' = Γ + c cᵀ`, the Gram matrix of the *augmented*
-matrix `[M  c]`.  `Q1Paper.augment` (in `G5GramRank.lean`) lives on the column index type
+matrix `[M  c]`.  `Q1Paper.augment` (in `GramRankAugmented.lean`) lives on the column index type
 `Fin n ⊕ Fin 1`, while `elemSymm` in `Claim8_SumSquares.lean` is stated for column index `Fin n`;
 applying `elemSymm` to `[M  c]` therefore needs either a reindexing `Fin n ⊕ Fin 1 ≃ Fin (n+1)`
 or an `elemSymm` generalised to an arbitrary column index type.  See the closing comment for
@@ -181,7 +181,7 @@ With either of these, the paper's Claim 8 in disjunctive form would read
 
 whose `→` direction is `exists_rank_disjunct` plus "solvable ⟹ `rank [M c] = rank M`" and
 whose `←` direction is `rank_eq_of_elemSymm_pattern` plus `Q1Paper.rank_augment_eq_iff`
-(`G5GramRank.lean`).  That equivalence is **not** formalised here: it is recorded only to pin
+(`GramRankAugmented.lean`).  That equivalence is **not** formalised here: it is recorded only to pin
 down the missing ingredient, and it is not claimed as verified. -/
 
 end Q1Paper.PaperI.Claim8_Disjunction

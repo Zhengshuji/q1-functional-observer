@@ -1,5 +1,4 @@
-import Q1Paper.Q1Projection
-
+import Q1Paper.SubspaceProjection
 /-!
 # The lower half of the structural bound: `ω + 1 ≤ dim W`
 

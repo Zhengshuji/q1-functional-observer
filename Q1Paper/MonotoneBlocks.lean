@@ -1,9 +1,8 @@
 
 import Mathlib
 import Q1Paper.Monotone
-import Q1Paper.Q1RowSpace
-import Q1Paper.Q1Pencil
-
+import Q1Paper.RowSpaceAlgebraic
+import Q1Paper.ConstantRankPencil
 /-!
 Q1Paper/MonotoneBlocks.lean
 
@@ -47,9 +46,9 @@ Contents.
 * `spectralCondition_append_zero_rows`, `hasConstantRank_append_zero_rows` — the
   same statement in the *compressed* coordinates, on the library's own predicates
   `Q1Subspace.SpectralCondition` and `Q1Subspace.HasConstantRank` from
-  `Q1Paper/Q1Pencil.lean`.
+  `Q1Paper/ConstantRankPencil.lean`.
 
-What is **not** here.  There is no `DEC` predicate in this library.  `Q1Pencil.lean`
+What is **not** here.  There is no `DEC` predicate in this library.  `ConstantRankPencil.lean`
 offers `SpectralCondition`/`HasConstantRank` on compressed blocks `(H, H_A)`, but no
 module defines the compression `H = L * N`, `H_A = L * A * N`, the prescribed block
 `L_0`, or the family `L = [L_0; R]` indexed by the order `q`.  Hence the q-level
@@ -227,7 +226,7 @@ theorem conditions_fromRows_zero {q c n d : Type*}
           = Matrix.rank (Matrix.fromRows L D))) := by
   rw [algebraicCondition_fromRows_zero L A D, spectralCondition_fromRows_zero L A D]
 
-/-! ### 6. The same, on the compressed blocks of `Q1Paper/Q1Pencil.lean` -/
+/-! ### 6. The same, on the compressed blocks of `Q1Paper/ConstantRankPencil.lean` -/
 
 /-- **The paper's spectral condition on the compressed blocks** is invariant under
 adjoining zero rows to `L`: `SpectralCondition (fromRows H 0) (fromRows H_A 0)` iff

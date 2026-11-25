@@ -1,6 +1,6 @@
 
-import Q1Paper.G3Coeff
-import Q1Paper.G3LeftInverse
+import Q1Paper.LeftInverseCoefficient
+import Q1Paper.LeftInverse
 import Q1Paper.BezoutReal
 import Mathlib.LinearAlgebra.Matrix.Rank
 

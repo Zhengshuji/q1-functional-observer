@@ -1,7 +1,6 @@
 
 import Mathlib
-import Q1Paper.Q1Subspace
-
+import Q1Paper.SubspaceQuotient
 /-!
 Q1Paper/Monotone.lean
 

@@ -1,5 +1,5 @@
 
-import Q1Paper.G2Assembly
+import Q1Paper.BezoutFamily
 import Mathlib.Analysis.Complex.Polynomial.Basic
 
 /-!
@@ -9,7 +9,7 @@ The real-coefficient Bézout lemma of Paper I (Claim 9, labels `lem:bezout`, `se
 
 Paper I needs multipliers `g_i` that are *real* polynomials, because the identity
 `∑ g_i f_i = 1` is substituted into a real system of polynomial equations.  The
-declarations in `Q1Paper/BezoutDeg.lean` and `Q1Paper/G2Assembly.lean` are stated over an
+declarations in `Q1Paper/BezoutDeg.lean` and `Q1Paper/BezoutFamily.lean` are stated over an
 arbitrary algebraically closed field and therefore do not give this.
 
 Main results:

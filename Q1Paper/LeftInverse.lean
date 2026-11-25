@@ -1,10 +1,10 @@
 
-import Q1Paper.G3Adjugate
-import Q1Paper.G2Assembly
+import Q1Paper.LeftInverseAdjugate
+import Q1Paper.BezoutFamily
 import Q1Paper.DegreeBounds
 
 /-!
-Q1Paper/G3LeftInverse.lean
+Q1Paper/LeftInverse.lean
 
 The rectangular polynomial left inverse of the paper, assembled from the single-block
 identity `adjRowInverse_mul` (G3Adjugate) and the degree-bounded Bezout lemma

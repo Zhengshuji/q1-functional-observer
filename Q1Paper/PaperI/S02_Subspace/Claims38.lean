@@ -1,12 +1,12 @@
 
-import Q1Paper.Q1Subspace
-import Q1Paper.Q1Projection
-import Q1Paper.Q1RowSpace
+import Q1Paper.SubspaceQuotient
+import Q1Paper.SubspaceProjection
+import Q1Paper.RowSpaceAlgebraic
 import Q1Paper.Monotone
 import Q1Paper.MonotoneBlocks
 import Q1Paper.BoundLower
 import Q1Paper.FreeRows
-import Q1Paper.G5GramRank
+import Q1Paper.GramRankAugmented
 import Q1Paper.PaperI.S00_Interface.Interface
 
 /-!
@@ -135,10 +135,10 @@ the onto statement that every `w ∈ 𝒯` is `u M` for some free row `u`.  The
 auxiliary `exists_rows_mul_eq` upgrades the onto statement to a whole family
 of rows: any `t` vectors of `𝒯` are simultaneously the rows of `R * M`.
 
-Reuses: `rowSpan_fromRows_left` (`Q1Subspace.lean`, the "sandwich" lemma),
-`mem_rowSpan_iff_exists_vecMul` (`Q1Subspace.lean`, realizability),
-`rowSpace_fromRows` (`Q1RowSpace.lean`), `rank_eq_finrank_rowSpace`
-(`Q1RowSpace.lean`), `Matrix.fromRows_mul`, `Matrix.rank_le_card_height`.
+Reuses: `rowSpan_fromRows_left` (`SubspaceQuotient.lean`, the "sandwich" lemma),
+`mem_rowSpan_iff_exists_vecMul` (`SubspaceQuotient.lean`, realizability),
+`rowSpace_fromRows` (`RowSpaceAlgebraic.lean`), `rank_eq_finrank_rowSpace`
+(`RowSpaceAlgebraic.lean`), `Matrix.fromRows_mul`, `Matrix.rank_le_card_height`.
 
 Gap: the full converse — choosing a basis of `W/W₀`, lifting it to `W`,
 taking preimages in `𝒯` and padding with zero rows to exactly `r` rows — is
@@ -220,9 +220,9 @@ row pairs.  The theorem first identifies the projections of this subspace
 (`π₁ = row H`, `π₂ = row H_A`, `π_λ = row(λH - H_A)`) and then transports the
 two rank criteria of `Q1RowSpace`/`Q1Pencil` across that identification.
 
-Reuses: `pi1`, `pi2` (`Q1Projection.lean`), `piLam` (`BoundLower.lean`),
-`rank_fromRows_eq_rank_iff` (`Q1RowSpace.lean`),
-`rank_eq_finrank_rowSpace` (`Q1RowSpace.lean`).
+Reuses: `pi1`, `pi2` (`SubspaceProjection.lean`), `piLam` (`BoundLower.lean`),
+`rank_fromRows_eq_rank_iff` (`RowSpaceAlgebraic.lean`),
+`rank_eq_finrank_rowSpace` (`RowSpaceAlgebraic.lean`).
 
 Gap: the paper applies `π_λ` to the complexification `W_ℂ`; this file works
 over a single field `K` and does not formalize the scalar extension.  The
@@ -312,7 +312,7 @@ Lean form: `ω = finrank K (pi1 W)`; feasibility is the algebraic condition
 
 Reuses: `finrank_add_one_le_of_spectral` (`BoundLower.lean`, the lower half),
 `pi1_eq_pi2_of_spectral` (`BoundLower.lean`, `λ = 0` step),
-`finrank_le_two_mul_of_pi1_eq_pi2` (`Q1Projection.lean`, the upper half).
+`finrank_le_two_mul_of_pi1_eq_pi2` (`SubspaceProjection.lean`, the upper half).
 
 Gap: nothing beyond the standing `ω > 0` hypothesis; the paper notes the bound
 fails at `ω = 0` (`H = H_A = 0`, `dim W = 0`). -/
@@ -403,7 +403,7 @@ Lean form: the rank criterion, together with the equivalent augmented-matrix
 rank test `rank[M  c] = rank M`.
 
 Reuses: `exists_mulVec_eq_iff_rank_gram` and `rank_augment_eq_iff`
-(`G5GramRank.lean`), `exists_solution_iff_mem_range` (`RankConsistency.lean`),
+(`GramRankAugmented.lean`), `exists_solution_iff_mem_range` (`RankConsistency.lean`),
 `Matrix.rank_self_mul_transpose`.
 
 Gap: the elementary-symmetric-function form

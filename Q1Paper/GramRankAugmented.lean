@@ -5,7 +5,7 @@ import Mathlib.LinearAlgebra.Matrix.Rank
 import Q1Paper.RankConsistency
 
 /-!
-Q1Paper/G5GramRank.lean
+Q1Paper/GramRankAugmented.lean
 
 Item 2 of the expert reply, first half: the augmented matrix `D = [M  c]` satisfies
 `D Dᵀ = M Mᵀ + c cᵀ`.  With `Matrix.rank_self_mul_transpose` this reduces the rank-consistency

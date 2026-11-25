@@ -1,8 +1,7 @@
 
-import Q1Paper.G3LeftInverse
-
+import Q1Paper.LeftInverse
 /-!
-Q1Paper/G3Coeff.lean
+Q1Paper/LeftInverseCoefficient.lean
 
 The coefficient encoding of the polynomial left inverse (G3c, Lemma 6 (iv) ⟺ (v)).
 

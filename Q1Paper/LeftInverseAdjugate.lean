@@ -2,7 +2,7 @@
 import Mathlib.LinearAlgebra.Matrix.Adjugate
 
 /-!
-Q1Paper/G3Adjugate.lean
+Q1Paper/LeftInverseAdjugate.lean
 
 The rectangular left inverse of the paper: for a `q × ω` matrix `Q` over a commutative
 ring and a choice `e : Fin ω → Fin q` of `ω` rows, put

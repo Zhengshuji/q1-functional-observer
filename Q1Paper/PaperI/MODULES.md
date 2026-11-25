@@ -169,32 +169,32 @@ The four entry points and their separate jobs:
 |---|---:|---:|---|---|
 | `Basic.lean` | 4 | 2 | `pairMap`, `pairMap_apply`, `ker_pairMap`, `finrank_range_pairMap`, … |  |
 | `BezoutDeg.lean` | 4 | 0 | `exists_ne_zero_linearCombination`, `exists_ne_zero_with_finite_roots`, `isCoprime_of_no_common_root`, `exists_bezout_deg_lt` |  |
+| `BezoutFamily.lean` | 3 | 1 | `evalComb`, `evalComb_ne_zero`, `natDegree_sum_C_mul_le`, `exists_bezout_family` |  |
 | `BezoutReal.lean` | 15 | 4 | `complexify`, `complexify_injective`, `complexify_ne_zero`, `eval_complexify_ofReal`, … |  |
 | `BoundLower.lean` | 4 | 1 | `piLam`, `mem_piLam`, `piLam_zero`, `pi1_eq_pi2_of_spectral`, … |  |
 | `Compression.lean` | 1 | 3 | `incl`, `compressedH`, `compressedHA`, `ker_compressed_iff` |  |
+| `CompressionIdentity.lean` | 2 | 2 | `restrictToKer`, `range_restrictToKer`, `kerRestrictEquiv`, `finrank_range_prod` |  |
+| `ConstantRankPencil.lean` | 4 | 4 | `matrixRank`, `HasConstantRank`, `RankIndependentOfScalar`, `SpectralCondition`, … |  |
 | `DegreeBounds.lean` | 6 | 0 | `natDegree_intCast_le`, `natDegree_neg_one_pow`, `natDegree_det_le_sum`, `natDegree_det_le`, … |  |
 | `FPT.lean` | 4 | 0 | `injective_of_leftInverse`, `finrank_le_of_leftInverse`, `kappaObs_zero`, `freePairDim_le_kappaObs` |  |
 | `FixedOrder.lean` | 1 | 0 | `G_form_iff` |  |
 | `FreeRows.lean` | 4 | 1 | `freePairSpace`, `mem_freePairSpace_iff`, `finrank_freePairSpace_add_ker`, `kappaObs_eq_mul_freePairSpace`, … |  |
-| `G2Assembly.lean` | 3 | 1 | `evalComb`, `evalComb_ne_zero`, `natDegree_sum_C_mul_le`, `exists_bezout_family` |  |
-| `G3Adjugate.lean` | 2 | 2 | `rowSel`, `rowSel_mul`, `adjRowInverse`, `adjRowInverse_mul` |  |
-| `G3Coeff.lean` | 6 | 2 | `pencil`, `spoly`, `pencil_apply`, `spoly_mul_pencil`, … |  |
-| `G3LeftInverse.lean` | 4 | 1 | `minors`, `leftInverse_of_bezout`, `exists_leftInverse`, `natDegree_adjRowInverse_le`, … |  |
-| `G4RankIdentity.lean` | 3 | 1 | `sumArrowEquivProd`, `rank_fromRows_add_map`, `mulVecLin_range_eq_ker`, `rank_vstack_add_rank_mul` |  |
-| `G5GramRank.lean` | 7 | 2 | `colMatrix`, `augment`, `colMatrix_mul_transpose`, `augment_mul_transpose`, … |  |
+| `GramRankAugmented.lean` | 7 | 2 | `colMatrix`, `augment`, `colMatrix_mul_transpose`, `augment_mul_transpose`, … |  |
 | `HyperplaneAvoid.lean` | 2 | 0 | `exists_apply_ne_zero`, `exists_forall_apply_ne_zero` |  |
 | `KappaObs.lean` | 9 | 2 | `pairMap`, `pairMap_apply`, `ker_pairMap`, `finrank_ker_add_finrank_range`, … |  |
+| `LeftInverse.lean` | 4 | 1 | `minors`, `leftInverse_of_bezout`, `exists_leftInverse`, `natDegree_adjRowInverse_le`, … |  |
+| `LeftInverseAdjugate.lean` | 2 | 2 | `rowSel`, `rowSel_mul`, `adjRowInverse`, `adjRowInverse_mul` |  |
+| `LeftInverseCoefficient.lean` | 6 | 2 | `pencil`, `spoly`, `pencil_apply`, `spoly_mul_pencil`, … |  |
 | `Monotone.lean` | 2 | 0 | `rowSpan_fromRows_zero`, `rank_fromRows_zero` |  |
 | `MonotoneBlocks.lean` | 16 | 0 | `fromRows_mul_eq`, `fromRows_smul`, `fromRows_sub`, `fromRows_zero_mul`, … |  |
-| `Q1Compression.lean` | 2 | 2 | `restrictToKer`, `range_restrictToKer`, `kerRestrictEquiv`, `finrank_range_prod` |  |
-| `Q1Pencil.lean` | 4 | 4 | `matrixRank`, `HasConstantRank`, `RankIndependentOfScalar`, `SpectralCondition`, … |  |
-| `Q1Projection.lean` | 6 | 2 | `pi1`, `pi2`, `mem_pi1`, `mem_pi2`, … |  |
-| `Q1RankInclusion.lean` | 2 | 0 | `finrank_sup_eq_iff_le`, `finrank_sup_eq_iff_not_le` |  |
-| `Q1RowSpace.lean` | 4 | 1 | `rowSpace`, `rowSpace_eq_span_col_transpose`, `rank_eq_finrank_rowSpace`, `rowSpace_fromRows`, … |  |
-| `Q1Step3.lean` | 4 | 0 | `mulVecLin_neg`, `matrixRank_neg`, `rank_of_spectralCondition`, `rowSpace_eq` |  |
-| `Q1Subspace.lean` | 5 | 1 | `rowSpan`, `rowSpan_le_range`, `range_le_rowSpan`, `range_eq_rowSpan`, … |  |
+| `RankAdditivity.lean` | 2 | 0 | `finrank_sup_eq_iff_le`, `finrank_sup_eq_iff_not_le` |  |
 | `RankConsistency.lean` | 3 | 0 | `exists_solution_iff_mem_range`, `exists_solution_iff_span_le_range`, `exists_solution_iff_range_eq_sup_span` |  |
 | `RankIdentity.lean` | 2 | 2 | `restrictToKer`, `range_restrictToKer`, `kerRestrictEquiv`, `finrank_range_prod` |  |
+| `RankIdentityMatrix.lean` | 3 | 1 | `sumArrowEquivProd`, `rank_fromRows_add_map`, `mulVecLin_range_eq_ker`, `rank_vstack_add_rank_mul` |  |
+| `RowEqualityStep.lean` | 4 | 0 | `mulVecLin_neg`, `matrixRank_neg`, `rank_of_spectralCondition`, `rowSpace_eq` |  |
+| `RowSpaceAlgebraic.lean` | 4 | 1 | `rowSpace`, `rowSpace_eq_span_col_transpose`, `rank_eq_finrank_rowSpace`, `rowSpace_fromRows`, … |  |
 | `SpectralCertificate.lean` | 2 | 0 | `bezout_of_gcd_eq_one`, `sum_sq_eq_zero_iff` |  |
+| `SubspaceProjection.lean` | 6 | 2 | `pi1`, `pi2`, `mem_pi1`, `mem_pi2`, … |  |
+| `SubspaceQuotient.lean` | 5 | 1 | `rowSpan`, `rowSpan_le_range`, `range_le_rowSpan`, `range_eq_rowSpan`, … |  |
 | `Window.lean` | 11 | 3 | `windowMatrix`, `windowMatrix_apply`, `windowMatrix_row`, `natDegree_X_pow_mul_le`, … |  |
 

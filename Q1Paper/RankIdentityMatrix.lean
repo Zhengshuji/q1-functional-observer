@@ -4,7 +4,7 @@ import Mathlib.LinearAlgebra.Matrix.Rank
 import Q1Paper.RankIdentity
 
 /-!
-Q1Paper/G4RankIdentity.lean
+Q1Paper/RankIdentityMatrix.lean
 
 Item 1 of the expert reply: the matrix-level rank identity
 

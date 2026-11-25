@@ -12,7 +12,7 @@ toolchain `v4.35.0`): Mathlib has `Matrix.fromCols` in
 `Mathlib/Data/Matrix/ColumnRowPartitioned.lean`, with the API
 `Matrix.fromCols_apply_inl/inr`, `Matrix.transpose_fromCols`,
 `Matrix.fromCols_mulVec`, `Matrix.fromCols_mul_fromRows`.  It is already used in this very
-project by `Q1Paper/G5GramRank.lean` (`M.fromCols (colMatrix c)`), which typechecks at
+project by `Q1Paper/GramRankAugmented.lean` (`M.fromCols (colMatrix c)`), which typechecks at
 `Matrix (Fin m) (Fin n ⊕ Fin 1) ℝ`.  So `[N | A*N]` is `N.fromCols (A * N)` directly, and
 nothing needs transposing.  Sections 2 and 3 below therefore state the bound twice: once for
 the project-local `fromCols` (as requested, defined via `fromRows` of the transposes) and

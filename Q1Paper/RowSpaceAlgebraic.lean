@@ -1,6 +1,5 @@
 import Mathlib
-import Q1Paper.Q1RankInclusion
-
+import Q1Paper.RankAdditivity
 /-!
 # Row spaces, and the matrix form of the algebraic condition
 

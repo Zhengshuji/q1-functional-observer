@@ -328,7 +328,7 @@ theorem exists_rat_bounded_bezout_of_no_common_root
 /-! ## Feeding Claim 16 -/
 
 /-- The two pencil definitions in the project agree: `PaperI.pencil` (entrywise,
-`SpectralMinor.lean`) and `Q1Paper.pencil` (a matrix expression, `G3Coeff.lean`). -/
+`SpectralMinor.lean`) and `Q1Paper.pencil` (a matrix expression, `LeftInverseCoefficient.lean`). -/
 theorem pencil_eq_paperI_pencil {q ω : ℕ} (X G : Matrix (Fin q) (Fin ω) ℚ) :
     PaperI.pencil X G = pencil X G := by
   funext i j

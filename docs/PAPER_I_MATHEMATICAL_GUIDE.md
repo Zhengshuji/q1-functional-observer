@@ -59,7 +59,7 @@ This is Claim 1 (the rank identity $\operatorname{rank}[P;M] = \operatorname{ran
 that makes the dimension bookkeeping exact) and Claim 2 (the equivalence).  Its point: the free block
 $R$ has now been replaced by a *pair of small matrices* $(H, H_A)$ with $H \in \mathbb C^{q \times d_0}$.
 
-*Lean:* `Q1Paper/G4RankIdentity.lean`, `Q1Paper/PaperI/CompressionMatrix.lean`.
+*Lean:* `Q1Paper/RankIdentityMatrix.lean`, `Q1Paper/PaperI/CompressionMatrix.lean`.
 
 ### Step 2 — describe which pairs $(H, H_A)$ are attainable
 

@@ -1,7 +1,7 @@
 
-import Q1Paper.G4RankIdentity
-import Q1Paper.Q1RowSpace
-import Q1Paper.Q1Subspace
+import Q1Paper.RankIdentityMatrix
+import Q1Paper.RowSpaceAlgebraic
+import Q1Paper.SubspaceQuotient
 import Q1Paper.PaperI.S00_Interface.Interface
 
 /-!

@@ -3,7 +3,7 @@ import Q1Paper.BezoutDeg
 import Q1Paper.HyperplaneAvoid
 
 /-!
-Q1Paper/G2Assembly.lean
+Q1Paper/BezoutFamily.lean
 
 The degree-bounded Bezout lemma for a family of polynomials (Lemma 4 of the paper),
 assembled from the pieces:
