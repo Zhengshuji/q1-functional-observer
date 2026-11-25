@@ -11,18 +11,36 @@ This file is a working note and should be deleted when the work is done.
 
 | phase | work | risk | status |
 |---|---|---|---|
-| **P0** | give the 15 `Scratch*` namespaces semantic names | medium — changes fully-qualified names, so `open` sites and `Audit.lean` move with them | in progress |
-| **P1** | 8 per-section reading entries: `/-!` narrative in proof order + one `#check` per step, generated and CI-checked | low — additive only | not started |
-| **P1.5** | a hierarchy per claim: base tool / bridge / core lemma / the official proof | low — metadata, no code | not started |
-| **P2** | rename the ~20 claim-hosting modules (`Claim11_MinorsGram.lean` → `Claim11_MinorsGram.lean`) | medium — module names change, so imports, `Audit.lean` and three generators follow | not started |
-| **P3** | move modules into per-section directories | high — every module path changes | deliberately last, and **not** an acceptance criterion |
+| **P0** | give the 15 `Scratch*` namespaces semantic names | medium — changes fully-qualified names, so `open` sites and `Audit.lean` move with them | done |
+| **P1** | 8 per-section reading entries: `/-!` narrative in proof order + one `#check` per step, generated and CI-checked | low — additive only | done |
+| **P1.5** | a hierarchy per claim: base tool / bridge / core lemma / the official proof | low — metadata, no code | done |
+| **P2** | rename 16 claim-hosting modules in 5 groups (`Claim11Final.lean` → `Claim11_MinorsGram.lean`, …) | medium — module names change, so imports and the generators follow; the audit does not, because declaration names are namespace-qualified | done |
+| **P3** | move modules into per-section directories | high — 221 import lines | **not executed**; see the section below |
 
-## Why P3 is not the target
+## P3: measured, and deliberately not executed
 
-Reorganising 86 flat files into seven directories does not answer the reader's actual question, which
-is *why* `Claim11Final` depends on `GramCompression`.  If P0 + P1 + P1.5 make the proof route and the
-statement/lemma hierarchy visible, the flat file list is a cosmetic remainder.  Conversely, a tidy
-directory tree with no hierarchy inside each claim would leave the reader exactly where they started.
+The original objective named P0 through P3, so this records why P3 stops here rather than leaving it
+silently undone.
+
+**Cost, measured.**  Moving the 86 modules of `Q1Paper/PaperI/` into per-section directories rewrites
+**221 `import` lines across 87 files**, plus the directory list in `generate_paperI_modules.py`.  The
+axiom audit is *not* affected — declaration names are qualified by namespace, not by module path, which
+is the same property that made P2's renames safe.  The mechanical cost is real but containable.
+
+**The blocking problem is classification, not cost.**  A section assignment has to be defensible for all
+86 modules.  Only 20 host a paper item, and those are the easy ones; the other 66 are supporting modules
+whose home is a judgement call — `Hadamard.lean`, `DesnanotJacobi.lean`, `FibreCard.lean`,
+`DenOne.lean`.  Assigning them by filename prefix would misfile some, and a mis-filed module is worse
+than a flat one: it tells the reader something false about why the module exists.
+
+**What would make P3 worth doing.**  A per-module reading pass deciding each of the 66 by what it
+actually proves, not by its name — several rounds with a real misfiling risk, in exchange for a
+directory tree.  Against that: after P0-P2 the file names are already semantic, and P1/P1.5 give the
+proof order and the statement hierarchy, which is the part that was actually missing.
+
+**Decision.**  P3 is not executed.  The `Read/` entries remain the answer to "where do I start", and
+`PAPER_I_MODULE_MAP.md` remains the answer to "why does this file exist".  If P3 is ever wanted, its
+prerequisite is the classification pass above, not a script.
 
 ## P0: semantic namespaces, not filename mirrors
 
