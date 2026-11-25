@@ -11,9 +11,12 @@ asserts the basic invariants before drawing a conclusion.
 
 ```
 ci/       the three scripts run by .github/workflows/build.yml
-archive/  the remaining scripts, kept as the exact-arithmetic record
-*.py      the two shared helpers (spectral_gcd.py, audit_independent.py)
+*.py      the shared helpers (spectral_gcd.py, audit_independent.py) and the programs below
 ```
+
+The research log's numbered experiments (`cNNN_*.py`) are **not published** here; they are kept in the
+author's working copy as the exact-arithmetic record.  What is published is the set of programs that
+correspond to the paper's algorithms, plus the tests and the two CI scripts.
 
 Run a script from this directory: `python ci/cNNN_<topic>.py` (the CI scripts import
 `spectral_gcd`, which is found through this directory).
@@ -25,26 +28,6 @@ Run a script from this directory: `python ci/cNNN_<topic>.py` (the CI scripts im
 | `ci/c317_cauchy_binet_random.py` | $K(\lambda,\mu)=\sum_{I,J}f_{IJ}(\lambda)f_{IJ}(\mu)$ and the coefficient identity (Section V) |
 | `ci/c318_r0_linear_system.py` | the linear system (R0) $\iff$ the gcd test, with counts and the degree bound (Proposition 1, Appendix A) |
 | `ci/c319_encoding_and_rowspace.py` | the coefficient-vector row space, the encoding witness, necessity of the data constraints (Theorem 3, Appendix A) |
-
-## Archive (evidence, not run by CI)
-
-| Script | What it checks |
-|---|---|
-| `c311_rank_consistency.py` | the rank-consistency elimination identity on random systems (Claim 8) |
-| `c312_fixed_q_factor.py` | $H=XB$, $B_{:,J}=I_\omega$, $H_A=FH$ on a feasible instance (Section VI) |
-| `c313_gram_indexing.py` | the shifted-index formula and $e_0\in\operatorname{row}Z$ (Claim 10) |
-| `c314_G_form.py` | $G=FX$, $H_A=GB$ and the rank identity (Section V) |
-| `c315_r0_left_inverse.py` | the rectangular adjugate: $SZ=I_\omega$ and $\deg S\le2\omega-2$ (Appendix A) |
-| `c316_gram_certificate_random.py` | the Gram certificate on random polynomial families, with negative controls (Claim 11) |
-| `c320_subspace_reduction.py` | the subspace (quotient) reduction of DEC |
-| `c321_dimensional_test.py` | whether feasibility is determined by the dimensions alone under the reduction |
-| `c322_opt_find.py` | OPT and FIND under the subspace reduction |
-| `c323_common_projection_core.py` | the iterated common-projection core $S_*$ of the reduction |
-| `c324_boundary_cases.py` | the boundary cases of the reduction |
-| `c325_fer26b_example_audit.py` | audit of the illustrative example of the referenced paper |
-| `c326_fer26b_order4_observer.py` | the explicit order-4 functional observer for that example |
-| `c328_example_direct_dec.py` | the criteria applied directly to that order-4 observer |
-| `c329_bounds_comparison.py` | comparison of the spectral lower bound with the quotient-space bound |
 
 ## Known limitation
 

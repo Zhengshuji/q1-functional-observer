@@ -4,7 +4,7 @@
 SCOPE.  This module builds the *objects* of Algorithm 2 in exact rational arithmetic and
 checks their invariants.  It does **not** decide ``DEC``: the inner test of Algorithm 2 is
 real feasibility of ``Psi_{t,omega}``, which needs a real-algebraic oracle and is deliberately
-absent (see ``docs/ALGORITHM_REVIEW.md`` and the boundary note at the end of this docstring).
+absent (see ``docs/ALGORITHM_CORRECTNESS_MAP.md`` and the boundary note at the end of this docstring).
 
 What is here, and what each piece corresponds to in ``paper/paper_I_dec.tex`` (Algorithm 2,
 lines 1135-1185):

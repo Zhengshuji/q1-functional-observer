@@ -20,17 +20,12 @@ $\exists\mathbb R$.
 ```
 paper/          the paper: .tex and .pdf only
                 paper_I_dec            decision complexity (Paper I)
-docs/           the reading entry point, then the historical record
+docs/           five documents: the entry point, the mathematics, and the two maps
                 START_HERE.md                  **start here** — what this repo is, how to verify it
                 PAPER_I_MATHEMATICAL_GUIDE.md  the mathematics, for a reader who does not know Lean
                 PAPER_I_PROOF_MAP.md           paper item -> Lean declaration -> file:line (generated)
                 PAPER_I_MODULE_MAP.md          every Lean module -> decls, paper items, purpose (generated)
                 ALGORITHM_CORRECTNESS_MAP.md   what is and is not proved about the algorithms
-                --- historical, tagged as such, kept for provenance ---
-                PAPER_I_MATH_AUDIT.md          independent audit, with counterexamples
-                PAPER_I_CLAIM19_CRAMER.md      the Cramer re-derivation of Claim 19
-                PAPER_I_REUSE_AUDIT.md         theorem-level reuse audit of external Lean code
-                ALGORITHM_REVIEW.md
 Q1Paper/        Lean sources
                 Q1Paper/            the project layer (row spaces, projections, rank identities)
                 Q1Paper/PaperI/     the Paper I modules (86 files), plus Audit.lean
