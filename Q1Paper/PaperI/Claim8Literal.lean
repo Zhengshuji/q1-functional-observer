@@ -75,9 +75,9 @@ No `sorry`, no `admit`, no new axioms.  Check with
 
 open Matrix
 
-namespace Q1Paper.ScratchClaim8Literal
+namespace Q1Paper.PaperI.Claim8Literal
 
-open Q1Paper.ScratchClaim8Ej
+open Q1Paper.PaperI.Claim8Ej
 
 /-! ## 1.  `elemSymm` for an arbitrary finite column type -/
 
@@ -113,7 +113,7 @@ theorem elemSymmGen_eq_elemSymm {m : ℕ} {ι : Type*} [Fintype ι]
     elemSymmGen M j = elemSymm (M.submatrix id (Fintype.equivFin ι).symm) j := by
   rw [elemSymmGen, elemSymm]
   exact Finset.sum_congr rfl (fun S _ => by
-    rw [Q1Paper.ScratchClaim8Wire.gramBlock_eq_gram_submatrix
+    rw [Q1Paper.PaperI.Claim8Wire.gramBlock_eq_gram_submatrix
       (M.submatrix id (Fintype.equivFin ι).symm) S, gram_submatrix_equivFin])
 
 /-- **The general-rank-positivity criterion.**  The `j`-th elementary symmetric function of the
@@ -227,4 +227,4 @@ theorem claim8_disjunction {m n : ℕ} (M : Matrix (Fin m) (Fin n) ℝ) (c : Fin
 #check @withCol_mul_transpose
 #check @rank_le_rank_withCol
 
-end Q1Paper.ScratchClaim8Literal
+end Q1Paper.PaperI.Claim8Literal

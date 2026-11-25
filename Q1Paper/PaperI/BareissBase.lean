@@ -4,7 +4,7 @@ import Q1Paper.PaperI.BitLenAdd
 /-!
 Q1Paper/PaperI/BareissBase.lean
 
-Scratch file for Claim 13 / Claim 21: the *Bareiss fraction-free elimination*
+Claim 13 / Claim 21 support: the *Bareiss fraction-free elimination*
 layer (design-report companion).
 
 The general theorem — "every entry of the Bareiss tableau is a bordered minor of

@@ -10,9 +10,9 @@ only the free block is.  So the relevant bijection is `Equiv.sumCongr e (Equiv.r
 scalar multiplication and the subtraction.
 -/
 
-namespace Q1Paper.ScratchReindex2
+namespace Q1Paper.PaperI.Reindex2
 
-open Q1Paper Q1Subspace Q1Paper.PaperI Q1Paper.ScratchReindex
+open Q1Paper Q1Subspace Q1Paper.PaperI Q1Paper.PaperI.Reindex
 
 variable {K : Type*} [Field K]
 variable {p q q' n : Type*} [Fintype p] [Fintype q] [Fintype q'] [Fintype n]
@@ -43,4 +43,4 @@ theorem rawSpectral_submatrix (C CA : Matrix p n K) (L LA : Matrix q n K) (e : q
   simp only [Matrix.rank_submatrix] at hspec
   exact hspec
 
-end Q1Paper.ScratchReindex2
+end Q1Paper.PaperI.Reindex2

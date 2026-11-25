@@ -49,7 +49,7 @@ No `sorry`, no `admit`, no new axioms.  Check with
 open Matrix
 open Q1Paper.PaperI
 
-namespace Q1Paper.ScratchClaim8Ej
+namespace Q1Paper.PaperI.Claim8Ej
 
 variable {m n : ℕ}
 
@@ -330,5 +330,5 @@ theorem elemSymm_pos_iff_rank_ge_finset (M : Matrix (Fin m) (Fin n) ℝ) (j : �
   rw [← elemSymm_eq_sum_powersetCard]
   exact elemSymm_pos_iff_rank_ge M j
 
-end Q1Paper.ScratchClaim8Ej
+end Q1Paper.PaperI.Claim8Ej
 

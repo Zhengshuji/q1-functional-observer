@@ -6,7 +6,7 @@ import Q1Paper.PaperI.Claim12
 /-!
 Q1Paper/PaperI/RationalBasis.lean
 
-Scratch module for Claim 13 (`lem:rationalbasis`) of Paper I: rational bases and
+Claim 13 (`lem:rationalbasis`) of Paper I: rational bases and
 annihilators with an explicit bit-length bound.
 
 The claim (existence + explicit bit bound; the "computed in polynomially many bit

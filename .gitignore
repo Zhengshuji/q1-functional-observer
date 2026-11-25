@@ -25,3 +25,4 @@ docs/PAPER_I_MATH_AUDIT.md
 docs/PAPER_I_CLAIM19_CRAMER.md
 docs/PAPER_I_REUSE_AUDIT.md
 docs/ALGORITHM_REVIEW.md
+scripts/fix_scratch_namespaces.py

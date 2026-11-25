@@ -17,11 +17,11 @@ The two ingredients that were missing and are now available:
   bijection (below), which is what lets the chart's reindexed block speak about `fromRows L0 R`.
 -/
 
-namespace Q1Paper.ScratchComplexSoundness
+namespace Q1Paper.PaperI.ComplexSoundness
 
-open Q1Paper Q1Subspace Q1Paper.PaperI Q1Paper.ScratchChartComplete
-  Q1Paper.ScratchDecComplex Q1Paper.ScratchReindex Q1Paper.ScratchReindex2
-  Q1Paper.ScratchKernelLift Q1Paper.ScratchSoundness Q1Paper.ScratchFromRowsMap
+open Q1Paper Q1Subspace Q1Paper.PaperI Q1Paper.PaperI.ChartComplete
+  Q1Paper.PaperI.DecComplex Q1Paper.PaperI.Reindex Q1Paper.PaperI.Reindex2
+  Q1Paper.PaperI.KernelLift Q1Paper.PaperI.Soundness Q1Paper.PaperI.FromRowsMap
 
 variable {K : Type*} [Field K]
 
@@ -107,4 +107,4 @@ theorem decComplex_of_phiPoint {p r0 r n k ω : ℕ}
     exact hcompL
   exact ⟨R, key1, key2⟩
 
-end Q1Paper.ScratchComplexSoundness
+end Q1Paper.PaperI.ComplexSoundness

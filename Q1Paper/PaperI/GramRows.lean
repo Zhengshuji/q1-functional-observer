@@ -55,7 +55,7 @@ open Matrix
 
 open scoped BigOperators
 
-namespace Q1Paper.ScratchGramRows
+namespace Q1Paper.PaperI.GramRows
 
 open Q1Paper.PaperI
 
@@ -138,4 +138,4 @@ theorem gramEntry_bitLen_le_of_rows_log {m ω b : ℕ} (Z : Matrix (Fin m) (Fin 
 /-! ## 3.  Axiom audit (stripped on promotion) -/
 
 
-end Q1Paper.ScratchGramRows
+end Q1Paper.PaperI.GramRows

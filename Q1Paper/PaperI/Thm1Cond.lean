@@ -60,7 +60,7 @@ Honesty notes
 /- `hqn : q ≤ L` is part of the paper's interface (`Q1Paper.beta_le_L_pow` uses it),
 but the specification's hypothesis `β ≤ 240*q*L^7` is already in the `L^7` form,
 so the route below only needs `1 ≤ q`.  The statement is kept verbatim, and the
-unused-variable linter is silenced for this scratch file rather than weakening it. -/
+unused-variable linter is silenced for this module rather than weakening it. -/
 set_option linter.unusedVariables false
 
 namespace Q1Paper

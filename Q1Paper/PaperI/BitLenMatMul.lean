@@ -3,7 +3,7 @@ import Q1Paper.PaperI.RationalBasis
 /-!
 Q1Paper/PaperI/BitLenMatMul.lean
 
-Scratch module: **submultiplicativity (and additivity) of `bitLenMat`**, the missing
+**submultiplicativity (and additivity) of `bitLenMat`**, the missing
 composition lemma for the single-parameter bit bounds of Paper I.
 
 Motivation.  `BitLen.lean` bounds the *entries* of the cleared matrix `A.num`

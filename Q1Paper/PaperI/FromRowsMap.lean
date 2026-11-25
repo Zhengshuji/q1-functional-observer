@@ -7,7 +7,7 @@ mapping a function over its entries should equal stacking the mapped blocks.  It
 the `Sum` index — the earlier attempts failed only because they used `Fin.addCases` on a type that is
 a `Sum`, not a `Fin`. -/
 
-namespace Q1Paper.ScratchFromRowsMap
+namespace Q1Paper.PaperI.FromRowsMap
 
 open Q1Paper Q1Subspace
 
@@ -22,4 +22,4 @@ theorem fromRows_map (f : R → S) (A : Matrix m₁ n R) (B : Matrix m₂ n R) :
   | inl a => rfl
   | inr b => rfl
 
-end Q1Paper.ScratchFromRowsMap
+end Q1Paper.PaperI.FromRowsMap

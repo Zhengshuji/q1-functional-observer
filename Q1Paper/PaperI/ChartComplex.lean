@@ -18,9 +18,9 @@ Two interface lemmas make that possible:
 * `fromRows_map` (in `PaperI/FromRowsMap.lean`): `fromRows` commutes with an entrywise map.
 -/
 
-namespace Q1Paper.ScratchChartComplex
+namespace Q1Paper.PaperI.ChartComplex
 
-open Q1Paper Q1Subspace Q1Paper.PaperI Q1Paper.ScratchFromRowsMap
+open Q1Paper Q1Subspace Q1Paper.PaperI Q1Paper.PaperI.FromRowsMap
 
 /-- The row index of the four-block stack `[·; ·; CA; C]`. -/
 abbrev RowIdx (q p : ℕ) := Fin q ⊕ (Fin p ⊕ Fin p)
@@ -72,4 +72,4 @@ theorem complex_spectral_implies_real {p q n : ℕ}
   rw [e1, e2, rank_map_ofReal_sum, rank_map_ofReal_sum] at hspec
   exact hspec
 
-end Q1Paper.ScratchChartComplex
+end Q1Paper.PaperI.ChartComplex

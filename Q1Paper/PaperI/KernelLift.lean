@@ -17,9 +17,9 @@ Then `Submodule.eq_of_le_of_finrank_eq` finishes.  No hypothesis of full column 
 used — `hN` alone suffices, which is the point of the dimension route.
 -/
 
-namespace Q1Paper.ScratchKernelLift
+namespace Q1Paper.PaperI.KernelLift
 
-open Q1Paper Q1Subspace Q1Paper.PaperI Q1Paper.ScratchDecComplex
+open Q1Paper Q1Subspace Q1Paper.PaperI Q1Paper.PaperI.DecComplex
 
 variable {p n k : Type*} [Fintype p] [Fintype n] [Fintype k] [DecidableEq k]
 
@@ -64,4 +64,4 @@ theorem range_mulVecLin_eq_ker_map_complex (M : Matrix p n ℝ) (N : Matrix n k 
     omega
   rw [hrN, hkerM, hN]
 
-end Q1Paper.ScratchKernelLift
+end Q1Paper.PaperI.KernelLift

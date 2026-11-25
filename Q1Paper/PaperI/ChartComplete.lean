@@ -27,7 +27,7 @@ The proof is the paper's one-liner: `(5a)` gives `row(LA) ≤ row[L; CA; C]`; ri
 `[H; 0; 0]` because `N` annihilates `C` and `C A`.
 -/
 
-namespace Q1Paper.ScratchChartComplete
+namespace Q1Paper.PaperI.ChartComplete
 
 open Q1Paper Q1Subspace Q1Paper.PaperI Q1Paper.PaperI.RankFactorization
 
@@ -297,4 +297,4 @@ theorem feasible_of_phiPoint {p q n k ω : ℕ}
     rw [hspec, hHr]
   exact raw_of_compressed C A L N hN h5a h5b
 
-end Q1Paper.ScratchChartComplete
+end Q1Paper.PaperI.ChartComplete

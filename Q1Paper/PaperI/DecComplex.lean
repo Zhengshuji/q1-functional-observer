@@ -17,9 +17,9 @@ polymorphic in its index **types** (`{p q n : Type*}`), but I had declared `spec
 Indexing by types fixes it — and the same generalisation is needed for the rank lemma.
 -/
 
-namespace Q1Paper.ScratchDecComplex
+namespace Q1Paper.PaperI.DecComplex
 
-open Q1Paper Q1Subspace Q1Paper.PaperI Q1Paper.ScratchFromRowsMap
+open Q1Paper Q1Subspace Q1Paper.PaperI Q1Paper.PaperI.FromRowsMap
 
 /-- **Complexification preserves the rank, for any finite index types.**  Reindex to `Fin`, use
 `rank_map_ofReal`, reindex back. -/
@@ -84,4 +84,4 @@ theorem dec_of_complexDEC {p r0 n : ℕ}
   obtain ⟨R, h1, h2⟩ := h
   exact ⟨R, h1, spectralComplex_implies_raw C (C * A) _ _ h2⟩
 
-end Q1Paper.ScratchDecComplex
+end Q1Paper.PaperI.DecComplex

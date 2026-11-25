@@ -11,12 +11,12 @@ Note the hypothesis `1 ≤ ω`: `PhiPoint`'s Gram certificate comes from `claim1
 `1 ≤ ω`.  The degenerate case `ω = 0` is a separate branch in the paper and is **not** covered here.
 -/
 
-namespace Q1Paper.ScratchCompletenessB
+namespace Q1Paper.PaperI.CompletenessB
 
-open Q1Paper Q1Subspace Q1Paper.PaperI Q1Paper.ScratchChartComplete
-  Q1Paper.ScratchDecComplex Q1Paper.ScratchReindex Q1Paper.ScratchReindex2
-  Q1Paper.ScratchKernelLift Q1Paper.ScratchFromRowsMap
-  Q1Paper.ScratchComplexSoundness Q1Paper.ScratchCompleteness Q1Paper.ScratchSoundness
+open Q1Paper Q1Subspace Q1Paper.PaperI Q1Paper.PaperI.ChartComplete
+  Q1Paper.PaperI.DecComplex Q1Paper.PaperI.Reindex Q1Paper.PaperI.Reindex2
+  Q1Paper.PaperI.KernelLift Q1Paper.PaperI.FromRowsMap
+  Q1Paper.PaperI.ComplexSoundness Q1Paper.PaperI.Completeness Q1Paper.PaperI.Soundness
 
 /-- **Completeness, nondegenerate case.** -/
 theorem phiPoint_of_complexDEC {p r0 r n k ω : ℕ}
@@ -73,4 +73,4 @@ theorem phiPoint_of_complexDEC {p r0 r n k ω : ℕ}
   obtain ⟨x, hx⟩ := (claim11_iff_gram H HA hω hωr ⟨F, hF⟩).mp hcompZ
   exact ⟨X, B, G, XL, x, hXrankv, hXBv, hGBv, hXLv, hx⟩
 
-end Q1Paper.ScratchCompletenessB
+end Q1Paper.PaperI.CompletenessB

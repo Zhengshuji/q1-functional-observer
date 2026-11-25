@@ -13,9 +13,9 @@ The bridge is the reindexing pair `rawAlgebraic_submatrix` / `rawSpectral_submat
 indexed by `Fin q`, while `DEC`'s `L = fromRows L0 R` has row type `Fin r0 ⊕ Fin r`.
 -/
 
-namespace Q1Paper.ScratchSoundness
+namespace Q1Paper.PaperI.Soundness
 
-open Q1Paper Q1Subspace Q1Paper.PaperI Q1Paper.ScratchChartComplete
+open Q1Paper Q1Subspace Q1Paper.PaperI Q1Paper.PaperI.ChartComplete
 
 /-- Reindexing the rows of a product: `(X.submatrix e id) * A = (X * A).submatrix e id`. -/
 theorem submatrix_mul_right {m m' n p : Type*} [Fintype m] [Fintype m'] [Fintype n] [Fintype p]
@@ -43,13 +43,13 @@ theorem dec_of_phiPoint {p r0 r n k ω : ℕ}
       (Matrix.fromRows L0 R * A).submatrix finSumFinEquiv.symm id :=
     submatrix_mul_right (Matrix.fromRows L0 R) A finSumFinEquiv.symm
   refine ⟨R, ?_, ?_⟩
-  · refine (Q1Paper.ScratchReindex.rawAlgebraic_submatrix C (C * A) (Matrix.fromRows L0 R)
+  · refine (Q1Paper.PaperI.Reindex.rawAlgebraic_submatrix C (C * A) (Matrix.fromRows L0 R)
       (Matrix.fromRows L0 R * A) finSumFinEquiv.symm).mp ?_
     rw [hmul] at h1
     exact h1
-  · refine Q1Paper.ScratchReindex2.rawSpectral_submatrix C (C * A) (Matrix.fromRows L0 R)
+  · refine Q1Paper.PaperI.Reindex2.rawSpectral_submatrix C (C * A) (Matrix.fromRows L0 R)
       (Matrix.fromRows L0 R * A) finSumFinEquiv.symm ?_
     rw [hmul] at h2
     exact h2
 
-end Q1Paper.ScratchSoundness
+end Q1Paper.PaperI.Soundness

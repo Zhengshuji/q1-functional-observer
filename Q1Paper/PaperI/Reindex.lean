@@ -12,7 +12,7 @@ row bijection.  `rawAlgebraic` is a rank equality of a four-block stack, so the 
 assembled blockwise; then `Matrix.rank_submatrix` (a `@[simp]` invariance) finishes it.
 -/
 
-namespace Q1Paper.ScratchReindex
+namespace Q1Paper.PaperI.Reindex
 
 open Q1Paper Q1Subspace Q1Paper.PaperI
 
@@ -44,4 +44,4 @@ theorem rawAlgebraic_submatrix (C CA : Matrix p n K) (L LA : Matrix q n K) (e : 
     Matrix.rank_submatrix (em := blockEquiv e p) (en := Equiv.refl n),
     Matrix.rank_submatrix (em := Equiv.sumCongr e (Equiv.refl (p ⊕ p))) (en := Equiv.refl n)]
 
-end Q1Paper.ScratchReindex
+end Q1Paper.PaperI.Reindex

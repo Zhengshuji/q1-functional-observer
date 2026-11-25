@@ -4,7 +4,7 @@ import Q1Paper.PaperI.BitLenAdd
 /-!
 Q1Paper/PaperI/InputLen.lean
 
-Scratch module: the input bit-length bound `bitLenMat A ≤ inputLen A` for a
+The input bit-length bound `bitLenMat A ≤ inputLen A` for a
 rational matrix, together with the two ingredients it needs.
 
 Contents:
