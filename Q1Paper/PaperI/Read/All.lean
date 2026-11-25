@@ -7,3 +7,4 @@ import Q1Paper.PaperI.Read.S06_FixedParameter
 import Q1Paper.PaperI.Read.S07_ZeroFreeRow
 import Q1Paper.PaperI.Read.S08_ExistsReal
 import Q1Paper.PaperI.Read.S09_BitCost
+import Q1Paper.PaperI.Read.S10_ChartEquivalence

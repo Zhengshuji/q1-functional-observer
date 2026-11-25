@@ -172,6 +172,43 @@ SECTIONS = [
         ],
         "Nothing; this closes the paper.",
     ),
+    (
+        "S10_ChartEquivalence.lean",
+        "The chart equivalence: from the certificate to the decision problem",
+        "sec:algorithms",
+        "The paper's condition (5b) quantifies over the **complex** numbers, and the chart argument\n"
+        "returns a witness — a point of `eq:phi` — rather than a truth value.  This section states the\n"
+        "specification those two facts require, and proves that a chart point and the specification\n"
+        "imply each other.  It is the bridge between the certificate of §3.4 and the algorithms of §4.",
+        "The compressed conditions of §3.4 and the chart data of §3.4.",
+        [
+            ("the real-to-complex spectral bridge, so the paper's data can meet the certificate",
+             "Q1Paper.PaperI.ChartComplex.complex_spectral_implies_real"),
+            ("the specification itself: `(5b)` over the complex numbers", 
+             "Q1Paper.PaperI.DecComplex.complexDEC"),
+            ("complex implies real, and that is the only direction that holds",
+             "Q1Paper.PaperI.DecComplex.dec_of_complexDEC"),
+            ("a chart point witnesses the (real-lambda) decision problem",
+             "Q1Paper.PaperI.Soundness.dec_of_phiPoint"),
+            ("a chart point witnesses the paper's own specification",
+             "Q1Paper.PaperI.ComplexSoundness.decComplex_of_phiPoint"),
+            ("the complex condition compresses, so the two levels can be compared",
+             "Q1Paper.PaperI.ComplexCompression.compressed_of_spectralComplexRaw"),
+            ("and conversely the specification yields a chart point (for `omega >= 1`)",
+             "Q1Paper.PaperI.ComplexCompleteness.phiPoint_of_complexDEC"),
+            ("the chart point built from the two compressed conditions",
+             "Q1Paper.PaperI.ChartComplete.phiPoint_of_conditions"),
+            ("the complexified kernel basis spans the complex kernel",
+             "Q1Paper.PaperI.KernelLift.range_mulVecLin_eq_ker_map_complex"),
+            ("row reindexing, which lets the chart speak about `[L0; R]`", 
+             "Q1Paper.PaperI.ReindexAlgebraic.rawAlgebraic_submatrix"),
+            ("the same for the spectral condition",
+             "Q1Paper.PaperI.ReindexSpectral.rawSpectral_submatrix"),
+            ("and `fromRows` commuting with the entrywise map, which makes the reindexing work",
+             "Q1Paper.PaperI.FromRowsMap.fromRows_map"),
+        ],
+        "Nothing: this closes the formalisation.  The cost of acting on the witness is §4.1's subject.",
+    ),
 ]
 
 
@@ -208,6 +245,18 @@ ROLES: dict[str, str] = {
     "Q1Paper.Thm5.DECℂ_iff_exists_encodes_auto": "core",
     "Q1Paper.PaperI.ComplexityCounts.bareiss_total_bit_cost_le_quadratic": "core",
     "Q1Paper.PaperI.ComplexityCounts.bareiss_total_bit_cost_le_n21_L2": "core",
+    "Q1Paper.PaperI.ChartComplex.complex_spectral_implies_real": "bridge",
+    "Q1Paper.PaperI.DecComplex.complexDEC": "core",
+    "Q1Paper.PaperI.DecComplex.dec_of_complexDEC": "bridge",
+    "Q1Paper.PaperI.Soundness.dec_of_phiPoint": "core",
+    "Q1Paper.PaperI.ComplexSoundness.decComplex_of_phiPoint": "core",
+    "Q1Paper.PaperI.ComplexCompression.compressed_of_spectralComplexRaw": "bridge",
+    "Q1Paper.PaperI.ComplexCompleteness.phiPoint_of_complexDEC": "core",
+    "Q1Paper.PaperI.ChartComplete.phiPoint_of_conditions": "bridge",
+    "Q1Paper.PaperI.KernelLift.range_mulVecLin_eq_ker_map_complex": "bridge",
+    "Q1Paper.PaperI.ReindexAlgebraic.rawAlgebraic_submatrix": "bridge",
+    "Q1Paper.PaperI.ReindexSpectral.rawSpectral_submatrix": "bridge",
+    "Q1Paper.PaperI.FromRowsMap.fromRows_map": "tool",
 }
 
 #: The declaration(s) that *are* the section's result, i.e. what the paper states as its claim there.
@@ -226,6 +275,8 @@ RESULTS: dict[str, list[str]] = {
     "S08_ExistsReal.lean": ["Q1Paper.Thm5.DECℂ_iff_exists_encodes_auto"],
     "S09_BitCost.lean": ["Q1Paper.PaperI.ComplexityCounts.bareiss_total_bit_cost_le_quadratic",
                          "Q1Paper.PaperI.ComplexityCounts.bareiss_total_bit_cost_le_n21_L2"],
+    "S10_ChartEquivalence.lean": ["Q1Paper.PaperI.ComplexSoundness.decComplex_of_phiPoint",
+                                   "Q1Paper.PaperI.ComplexCompleteness.phiPoint_of_complexDEC"],
 }
 
 
