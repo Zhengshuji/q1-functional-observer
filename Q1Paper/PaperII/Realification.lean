@@ -23,7 +23,10 @@ row space and complexifying.
 -/
 
 import Q1Paper.PaperII.Saturate
+import Q1Paper.PaperII.Monotone
 import Q1Paper.PaperI.S08_ChartEquivalence.DecComplex
+
+set_option maxHeartbeats 1000000
 
 open Module Matrix
 
@@ -347,7 +350,68 @@ theorem feasible_to_decC {p r0 n k : ℕ}
     rw [Matrix.mul_assoc]
     exact h
 
+
+/-- **The forward sandwich, exposing the design.**  `DECℂ r` gives a real `R` whose
+pair row space is feasible, sits between `W₀` and `T`, and has `t ≤ r`. -/
+theorem decC_to_feasible_design {p r0 n k : ℕ}
+    (C : Matrix (Fin p) (Fin n) ℝ) (A : Matrix (Fin n) (Fin n) ℝ)
+    (L0 : Matrix (Fin r0) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℂ)
+    (hN : N.mulVecLin.range
+      = (Matrix.fromRows ((C.map (algebraMap ℝ ℂ)) * (A.map (algebraMap ℝ ℂ)))
+          (C.map (algebraMap ℝ ℂ))).mulVecLin.ker)
+    {r : ℕ} (h : DecOrder C A L0 r) :
+    ∃ R : Matrix (Fin r) (Fin n) ℝ,
+      W0 A N L0 ≤ WR A N L0 R ∧ WR A N L0 R ≤ TR A N ∧
+        IsFeasible (WR A N L0 R) ∧ t (W0 A N L0) (WR A N L0 R) ≤ r := by
+  obtain ⟨R, h1, h2⟩ := (PaperI.DEC_complex_iff_compressed C A L0 r N hN).mp h
+  have hs := Q1Paper.claim4_sandwich (K := ℂ) (L0c L0) (Rc R) (Mcol N (Ac A))
+  have hW0W : W0 A N L0 ≤ WR A N L0 R := by
+    rw [W0_eq_map, WR_eq_map]
+    exact Submodule.map_mono hs.1
+  have hWT : WR A N L0 R ≤ TR A N := by
+    rw [WR_eq_map, TR_eq_map]
+    exact Submodule.map_mono hs.2.1
+  have hdim : finrank ℂ ↥(WR A N L0 R) ≤ finrank ℂ ↥(W0 A N L0) + r := by
+    have h' := hs.2.2.1
+    rw [Fintype.card_fin] at h'
+    rw [WR_eq_map, W0_eq_map,
+      LinearEquiv.finrank_map_eq (Φ (K := ℂ))
+        (Q1Subspace.rowSpace (Matrix.fromRows (L0c L0) (Rc R) * Mcol N (Ac A))),
+      LinearEquiv.finrank_map_eq (Φ (K := ℂ))
+        (Q1Subspace.rowSpace (L0c L0 * Mcol N (Ac A)))]
+    exact h'
+  refine ⟨R, hW0W, hWT, ?_, ?_⟩
+  · have h1' : PaperI.compressedAlgebraic (Lc L0 R * N) (Lc L0 R * (Ac A * N)) :=
+      (Matrix.mul_assoc (Lc L0 R) (Ac A) N) ▸ h1
+    have h2' : PaperI.compressedSpectral (Lc L0 R * N) (Lc L0 R * (Ac A * N)) :=
+      (Matrix.mul_assoc (Lc L0 R) (Ac A) N) ▸ h2
+    exact (isFeasible_pairRowSpace_iff (Lc L0 R * N) (Lc L0 R * (Ac A * N))).mpr
+      ⟨h1', h2'⟩
+  · rw [t_le_iff hW0W]
+    exact hdim
+
+/-- **Claim 5, saturation, real designs.**  `DECℂ r` is equivalent to `DECℂ` at the
+saturation order `m = dim (T/W₀)`: every feasible real design compresses to `m` rows,
+and `m ≤ r`. -/
+theorem decC_saturates {p r0 n k : ℕ}
+    (C : Matrix (Fin p) (Fin n) ℝ) (A : Matrix (Fin n) (Fin n) ℝ)
+    (L0 : Matrix (Fin r0) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℝ)
+    (hN : (N.map (algebraMap ℝ ℂ)).mulVecLin.range
+      = (Matrix.fromRows ((C.map (algebraMap ℝ ℂ)) * (A.map (algebraMap ℝ ℂ)))
+          (C.map (algebraMap ℝ ℂ))).mulVecLin.ker)
+    {r : ℕ} (h : t (W0 A (N.map (algebraMap ℝ ℂ)) L0) (TR A (N.map (algebraMap ℝ ℂ))) ≤ r)
+    (hr : DecOrder C A L0 r) :
+    DecOrder C A L0 (t (W0 A (N.map (algebraMap ℝ ℂ)) L0) (TR A (N.map (algebraMap ℝ ℂ)))) := by
+  obtain ⟨R, hW0, hWT, hf, _ht⟩ :=
+    decC_to_feasible_design C A L0 (N.map (algebraMap ℝ ℂ)) hN hr
+  have hmono : t (W0 A (N.map (algebraMap ℝ ℂ)) L0) (WR A (N.map (algebraMap ℝ ℂ)) L0 R)
+      ≤ t (W0 A (N.map (algebraMap ℝ ℂ)) L0) (TR A (N.map (algebraMap ℝ ℂ))) :=
+    t_le_t_of_le hW0 hWT
+  refine decC_mono (C := C) (A := A) (L0 := L0) (N := N.map (algebraMap ℝ ℂ)) (r := t (W0 A (N.map (algebraMap ℝ ℂ)) L0) (WR A (N.map (algebraMap ℝ ℂ)) L0 R)) (r' := t (W0 A (N.map (algebraMap ℝ ℂ)) L0) (TR A (N.map (algebraMap ℝ ℂ)))) hN hmono ?_
+  exact feasible_to_decC (C := C) (A := A) (L0 := L0) (N := N) (R := R) hN hW0 hf
+
 end Q1Paper.PaperII
+
 
 
 

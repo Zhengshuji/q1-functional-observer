@@ -101,6 +101,8 @@ import Q1Paper.PaperII.Realification
 #print axioms Q1Paper.PaperII.rowSpace_map_complex
 #print axioms Q1Paper.PaperII.real_compress
 #print axioms Q1Paper.PaperII.feasible_to_decC
+#print axioms Q1Paper.PaperII.decC_to_feasible_design
+#print axioms Q1Paper.PaperII.decC_saturates
 
 -- Sandwich.lean
 #print axioms Q1Paper.PaperII.Ac
