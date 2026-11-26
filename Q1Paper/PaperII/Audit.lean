@@ -20,6 +20,13 @@ import Q1Paper.PaperII.GraphExtract
 import Q1Paper.PaperII.Realification
 import Q1Paper.PaperII.Tightness
 import Q1Paper.PaperII.RealGraph
+import Q1Paper.PaperII.Complexity
+
+-- Complexity.lean
+#print axioms Q1Paper.PaperII.lt_two_pow_log2_succ
+#print axioms Q1Paper.PaperII.div_two_pow_log2_succ_eq_zero
+#print axioms Q1Paper.PaperII.bisect_steps_le
+#print axioms Q1Paper.PaperII.log2_mono_le
 
 -- Converse.lean
 #print axioms Q1Paper.PaperII.WRc
