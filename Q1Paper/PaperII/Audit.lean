@@ -125,6 +125,8 @@ import Q1Paper.PaperII.RealGraph
 #print axioms Q1Paper.PaperII.exists_design_of_encoded
 #print axioms Q1Paper.PaperII.exists_design_of_pairRowSpace
 #print axioms Q1Paper.PaperII.tMinC_le_of_graph_real
+#print axioms Q1Paper.PaperII.tMinC_le_of_mem
+#print axioms Q1Paper.PaperII.exists_graph_of_tMinC_eq
 
 -- Realification.lean
 #print axioms Q1Paper.PaperII.pairRows

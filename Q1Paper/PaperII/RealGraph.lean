@@ -16,6 +16,8 @@ image in the complex pair space.  This module builds that image:
 import Q1Paper.PaperII.Realification
 import Q1Paper.PaperII.GraphExtension
 
+set_option maxHeartbeats 1000000
+
 open Module Matrix
 
 namespace Q1Paper.PaperII
@@ -479,5 +481,88 @@ theorem tMinC_le_of_graph_real {p : ℕ}
     rw [← ht]
     exact feasible_to_decC C A L0 N hN hW0le hfeasR
   exact (tMinC_le_iff_decC C A L0 N hN _).mpr hdec
+
+
+/-- `t_min^ℝ` is below the order of any real design. -/
+theorem tMinC_le_of_mem {A : Matrix (Fin n) (Fin n) ℝ} {N : Matrix (Fin n) (Fin k) ℝ}
+    {L0 : Matrix (Fin r0) (Fin n) ℝ} {m : ℕ} (hm : m ∈ tMinCSet A N L0) :
+    tMinC A N L0 ≤ (m : WithTop ℕ) := by
+  by_cases hne : (tMinCSet A N L0).Nonempty
+  · rw [tMinC, dif_pos hne]
+    exact WithTop.coe_le_coe.mpr (Nat.sInf_le hm)
+  · exact absurd ⟨_, hm⟩ hne
+
+/-- **Prop 3, the `(⇒)` direction for the paper's real designs.**  If the minimum order over
+real designs saturates, `t_min^ℝ = a + 1 − s₀`, then the complex tightness data exist: a
+feasible `W` in the sandwich whose projection is `U₀+V₀`, realised as a graph `W(G,b)`. -/
+theorem exists_graph_of_tMinC_eq {p : ℕ}
+    (C : Matrix (Fin p) (Fin n) ℝ) (A : Matrix (Fin n) (Fin n) ℝ)
+    (L0 : Matrix (Fin r0) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℝ)
+    (hN : (N.map (algebraMap ℝ ℂ)).mulVecLin.range
+      = (Matrix.fromRows ((C.map (algebraMap ℝ ℂ)) * (A.map (algebraMap ℝ ℂ)))
+          (C.map (algebraMap ℝ ℂ))).mulVecLin.ker)
+    (hsa : Module.finrank ℂ ↥(W0 A (N.map (algebraMap ℝ ℂ)) L0)
+      ≤ Module.finrank ℂ ↥(Q1Subspace.pi1 (W0 A (N.map (algebraMap ℝ ℂ)) L0)
+          ⊔ Q1Subspace.pi2 (W0 A (N.map (algebraMap ℝ ℂ)) L0)))
+    (heq : tMinC A N L0
+      = ((Module.finrank ℂ ↥(Q1Subspace.pi1 (W0 A (N.map (algebraMap ℝ ℂ)) L0)
+            ⊔ Q1Subspace.pi2 (W0 A (N.map (algebraMap ℝ ℂ)) L0))
+          + 1 - Module.finrank ℂ ↥(W0 A (N.map (algebraMap ℝ ℂ)) L0) : ℕ) : WithTop ℕ)) :
+    ∃ (V : Submodule ℂ ((Fin k → ℂ) × (Fin k → ℂ)))
+      (G : ↥(Q1Subspace.pi1 V) →ₗ[ℂ] ↥(Q1Subspace.pi1 V))
+      (b : ↥(Q1Subspace.pi1 V)),
+      W0 A (N.map (algebraMap ℝ ℂ)) L0 ≤ V ∧ V ≤ TR A (N.map (algebraMap ℝ ℂ)) ∧
+        IsFeasible V ∧ b ≠ 0 ∧ V = graphExt (Q1Subspace.pi1 V) G b ∧
+        Q1Subspace.pi1 V
+          = Q1Subspace.pi1 (W0 A (N.map (algebraMap ℝ ℂ)) L0)
+            ⊔ Q1Subspace.pi2 (W0 A (N.map (algebraMap ℝ ℂ)) L0) ∧
+        (∀ lam : ℂ,
+          finrank ℂ ↥(Submodule.map (graphPencil (Q1Subspace.pi1 V) G lam) ⊤
+            ⊔ Submodule.span ℂ {((b : ↥(Q1Subspace.pi1 V)) : Fin k → ℂ)})
+            = finrank ℂ ↥(Q1Subspace.pi1 V)) := by
+  classical
+  set r : ℕ := Module.finrank ℂ ↥(Q1Subspace.pi1 (W0 A (N.map (algebraMap ℝ ℂ)) L0)
+      ⊔ Q1Subspace.pi2 (W0 A (N.map (algebraMap ℝ ℂ)) L0))
+    + 1 - Module.finrank ℂ ↥(W0 A (N.map (algebraMap ℝ ℂ)) L0) with hr
+  -- the decision predicate holds at the saturated order
+  have hdec : DecOrder C A L0 r :=
+    (tMinC_le_iff_decC C A L0 N hN r).mp (by rw [hr]; exact le_of_eq heq)
+  obtain ⟨R, hW0R, hWTR, hfeasR, htR⟩ :=
+    decC_to_feasible_design (C := C) (A := A) (L0 := L0) (N := N.map (algebraMap ℝ ℂ)) hN hdec
+  -- its order is exactly `r`
+  have hmem : t (W0 A (N.map (algebraMap ℝ ℂ)) L0) (WR A (N.map (algebraMap ℝ ℂ)) L0 R)
+      ∈ tMinCSet A N L0 := ⟨_, R, hW0R, hfeasR, rfl⟩
+  have hle : tMinC A N L0
+      ≤ ((t (W0 A (N.map (algebraMap ℝ ℂ)) L0)
+          (WR A (N.map (algebraMap ℝ ℂ)) L0 R) : ℕ) : WithTop ℕ) :=
+    tMinC_le_of_mem hmem
+  have hle' : (r : WithTop ℕ)
+      ≤ ((t (W0 A (N.map (algebraMap ℝ ℂ)) L0)
+          (WR A (N.map (algebraMap ℝ ℂ)) L0 R) : ℕ) : WithTop ℕ) := by
+    rw [← heq]
+    exact hle
+  have ht : t (W0 A (N.map (algebraMap ℝ ℂ)) L0) (WR A (N.map (algebraMap ℝ ℂ)) L0 R) = r :=
+    le_antisymm htR (WithTop.coe_le_coe.mp hle')
+  -- the quotient dimension is `a + 1`
+  have hdim : Module.finrank ℂ ↥(WR A (N.map (algebraMap ℝ ℂ)) L0 R)
+      = Module.finrank ℂ ↥(Q1Subspace.pi1 (W0 A (N.map (algebraMap ℝ ℂ)) L0)
+          ⊔ Q1Subspace.pi2 (W0 A (N.map (algebraMap ℝ ℂ)) L0)) + 1 := by
+    have hsub := t_eq_finrank_sub hW0R
+    have hmono := Submodule.finrank_mono hW0R
+    omega
+  have hpi := pi1_eq_sup_of_finrank A (N.map (algebraMap ℝ ℂ)) L0 hW0R hfeasR hdim
+  have hdim' : Module.finrank ℂ ↥(WR A (N.map (algebraMap ℝ ℂ)) L0 R)
+      = Module.finrank ℂ ↥(Q1Subspace.pi1 (WR A (N.map (algebraMap ℝ ℂ)) L0 R)) + 1 := by
+    rw [hpi]
+    exact hdim
+  obtain ⟨b, hb, G, hWV⟩ := exists_graph_representation
+    (WR A (N.map (algebraMap ℝ ℂ)) L0 R) hfeasR hdim'
+  refine ⟨_, G, b, hW0R, hWTR, hfeasR, hb, hWV, hpi, ?_⟩
+  intro lam
+  have hpen := graphExt_piLam (Q1Subspace.pi1 (WR A (N.map (algebraMap ℝ ℂ)) L0 R)) G b lam
+  have hspec := hfeasR.2 lam
+  rw [hWV] at hspec
+  rw [hpen, graphExt_pi1] at hspec
+  exact hspec
 
 end Q1Paper.PaperII
