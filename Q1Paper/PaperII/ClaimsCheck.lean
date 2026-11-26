@@ -6,6 +6,7 @@ this build instead of silently invalidating the claims table.
 -/
 
 import Q1Paper.PaperII.MainTheorems
+import Q1Paper.PaperII.Complexity
 
 -- §II  Standing results (from Paper I, reused)
 #check @Q1Paper.claim3_attainable
@@ -77,3 +78,19 @@ import Q1Paper.PaperII.MainTheorems
 #check @Q1Paper.PaperII.pi1_eq_sup_of_finrank
 #check @Q1Paper.PaperII.tMin_eq_of_graph
 #check @Q1Paper.PaperII.exists_graph_of_tMin_eq
+#check @Q1Paper.PaperII.tMin_eq_iff_graph
+#check @Q1Paper.PaperII.tMinC_eq_iff_real_graph
+#check @Q1Paper.PaperII.tMinC_le_of_graph_real_pure
+#check @Q1Paper.PaperII.tMinC_eq_of_real_graph
+#check @Q1Paper.PaperII.exists_real_graph_of_tMinC_eq
+#check @Q1Paper.PaperII.WR_eq_span_phiPair_WRreal
+#check @Q1Paper.PaperII.W0_eq_span_phiPair_W0real
+#check @Q1Paper.PaperII.TR_eq_span_phiPair_TRreal
+#check @Q1Paper.PaperII.graphExt_span_phiPair
+#check @Q1Paper.PaperII.mem_of_phiPair_mem_span
+#check @Q1Paper.PaperII.isFeasible_real_of_span_phiPair
+#check @Q1Paper.PaperII.exists_design_of_pairRowSpace
+#check @Q1Paper.PaperII.lt_two_pow_log2_succ
+#check @Q1Paper.PaperII.div_two_pow_log2_succ_eq_zero
+#check @Q1Paper.PaperII.bisect_steps_le
+#check @Q1Paper.PaperII.log2_mono_le

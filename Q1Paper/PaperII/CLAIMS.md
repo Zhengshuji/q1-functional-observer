@@ -30,15 +30,19 @@ the linear-map/submodule version; *ingredient* = one step of a proof.
 | **Proposition 3 (pi_1 W = U0 + V0 at an attaining W)** (`prop:tight`) | the identification that closes the composition | `Q1Paper.PaperII.pi1_eq_sup_of_finrank` | literal |
 | **Proposition 3 (composition, from the data)** (`prop:tight`) | a (G,b) pair with the sandwich and rank condition forces t_min = a + 1 - s0 | `Q1Paper.PaperII.tMin_eq_of_graph` | literal |
 | **Proposition 3 (composition, from saturation)** (`prop:tight`) | a saturating t_min produces the data | `Q1Paper.PaperII.exists_graph_of_tMin_eq` | literal |
+| **Proposition 3 (packaged, complex designs)** (`prop:tight`) | t_min = a + 1 - s0 iff the tightness data exist on U0 + V0 | `Q1Paper.PaperII.tMin_eq_iff_graph` | literal |
+| **Proposition 3 (packaged, real designs)** (`prop:tight`) | t_min^R = a + 1 - s0 iff a real design realises a real graph W(G,b) in the sandwich whose complexification is feasible | `Q1Paper.PaperII.tMinC_eq_iff_real_graph` | literal |
+| **Proposition 3 (real designs, the two halves)** (`prop:tight`) | the (G,b) direction with purely real hypotheses, and the extraction of real data from a saturating order | `Q1Paper.PaperII.tMinC_le_of_graph_real_pure`, `Q1Paper.PaperII.tMinC_eq_of_real_graph`, `Q1Paper.PaperII.exists_real_graph_of_tMinC_eq` | literal |
+| **Proposition 3 (the real <-> complex bridges)** (`prop:tight`) | the complexification of a design's W and of W0, T, the real points of a complex span, the descent of feasibility, and the real sandwich converse | `Q1Paper.PaperII.WR_eq_span_phiPair_WRreal`, `Q1Paper.PaperII.W0_eq_span_phiPair_W0real`, `Q1Paper.PaperII.TR_eq_span_phiPair_TRreal`, `Q1Paper.PaperII.graphExt_span_phiPair`, `Q1Paper.PaperII.mem_of_phiPair_mem_span`, `Q1Paper.PaperII.isFeasible_real_of_span_phiPair`, `Q1Paper.PaperII.exists_design_of_pairRowSpace` | literal |
 | **Theorem 4 (ordering half)** (`thm:interface`) | the decision problem is monotone, so the order is a threshold of t_min | `Q1Paper.PaperII.exists_least_of_monotone` | literal |
+| **Theorem 4 (the arithmetic of the call count)** (`thm:interface`) | log2 N + 1 halvings empty an interval of N candidates, so bisection over min(r, 2 ell) candidates makes O(log(ell+2)) calls | `Q1Paper.PaperII.lt_two_pow_log2_succ`, `Q1Paper.PaperII.div_two_pow_log2_succ_eq_zero`, `Q1Paper.PaperII.bisect_steps_le`, `Q1Paper.PaperII.log2_mono_le` | literal |
 
 ## Not formalised
 
 | paper item | what is missing |
 |---|---|
-| **the O(log(l+2)) call count** (`thm:interface`) | the ordering and the least element are formalised; the arithmetic of the call count is not |
+| **the search algorithm itself** (`thm:interface`) | the arithmetic of the call count is formalised; the bisection procedure is paper-level |
 | **the OPT corollary** (`cor:opt`) | complexity statement; inherits the call count from the interface theorem |
 | **the FIND corollary and the witness system Psi_{t,omega}** (`cor:find`) | the chart system, the real-solution/feasible-W equivalence and the sampling step are paper-level |
-| **the single <-> packaging and the real-design form of Proposition 3** (`prop:tight`) | both directions are proved separately; the packaging is a transport, and the real-design tightness criterion needs the complexification of the graph data |
 | **the appendix instance (q_min = 4)** (`app:example`) | exact rational certificate, verified by the Python layer |
 
