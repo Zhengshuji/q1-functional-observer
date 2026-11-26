@@ -1941,7 +1941,8 @@ Three items remain outside the verified core.
 \item \textbf{Coefficient bounds.} The coefficient-size claim in Section~\ref{sec:fpt} is paper-level; Appendix~\ref{app:size} derives it with explicit constants ($\beta\le240q\,n^5\mathcal L$ at fixed order and $\beta\le8\times10^4n^9\mathcal L$ on a chart), which have not been audited by a third party.
 \item \textbf{The complexity accounting is paper-level.} The counts of Theorem~\ref{thm:fixedq},
 Theorem~\ref{thm:fpt}, Corollary~\ref{cor:time} and Proposition~\ref{prop:zero} are not formalized:
-the artifact checks the algebraic identities, not the reductions and the counting. The chart-data
+the artifact checks the algebraic identities and the chart-point equivalence, not the enumeration and
+the counting. The chart-data
 estimate of Claim~\ref{clm:chartdata} and the coefficient estimate of Claim~\ref{lem:coeff} are
 paper-level. The Gram identity of Claim~\ref{prop:gram} and the matrix certificate of
 Claim~\ref{clm:gramQ} are formalized in both indexings of the maximal minors.  The formalisation
@@ -1987,6 +1988,11 @@ reductions and the complexity accounting are paper-level, so this is not a forma
 verification of the algorithmic theorems. In particular the exact polynomial-time decision
 procedure of Proposition~\ref{prop:zero} --- the elimination on \eqref{eq:R0} and its bit bound ---
 is paper-level; the table's left-inverse entry covers the existence and degree bound of $S$ only.
+What \emph{is} formalized of the reduction is the equivalence between the two conditions and the
+existence of a chart point: \texttt{phiPoint\_of\_conditions} produces one from \eqref{eq:5a}
+and~\eqref{eq:5b}, and \texttt{feasible\_of\_phiPoint} recovers the conditions from one. What
+remains paper-level is that the chart family is finite and effectively enumerable, that each chart
+is settled by the backend, and the counting.
 \item \emph{Paper-level proofs.} The Cauchy--Binet compression of the certificate, the coefficient-size estimates and the existential-real encoding.
 \item \emph{Exact rational arithmetic.} The identities on which the constructions rest are re-checked, both on randomly generated instances and on the constructed families; this excludes arithmetic slips but does not replace the proofs.
 \end{enumerate}
