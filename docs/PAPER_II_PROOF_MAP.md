@@ -1,4 +1,4 @@
-# Paper II: paper item → Lean declaration
+﻿# Paper II: paper item → Lean declaration
 
 One row per item of `paper/paper_II_minorder.tex`, with the declaration that proves
 it and where it lives.  Line numbers are indicative and move when a file is edited above them; the
@@ -93,7 +93,7 @@ specification `DECℂ`.  The bridge between them is the real-compression lemma
 
 ## Verification
 
-`lake build Q1Paper.PaperII.MainTheorems` (9174 jobs) and
+`lake build Q1Paper.PaperII.MainTheorems Q1Paper.PaperII.Read.All` (about 9.2k jobs; CI builds it) and
 `lake env lean Q1Paper/PaperII/ClaimsCheck.lean`; the axiom audit is
 `Q1Paper/PaperII/Audit.lean` checked by `scripts/check_paperI_axioms.py`
 (106 declarations, only `propext`, `Classical.choice`, `Quot.sound`).
