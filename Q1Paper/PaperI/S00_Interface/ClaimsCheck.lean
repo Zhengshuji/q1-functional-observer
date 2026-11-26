@@ -84,3 +84,9 @@ import Q1Paper.PaperI.S00_Interface.MainTheorems
 
 -- Theorem 5 (thm:existsr) [Lean]
 #check @Q1Paper.Thm5.DECℂ_iff_exists_encodes_auto
+
+-- Corollary (arithmetic cost) (cor:arith) [Paper]
+-- no declaration: not formalised
+
+-- Corollary (bit-model time) (cor:time) [Paper]
+-- no declaration: not formalised

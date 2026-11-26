@@ -27,6 +27,10 @@ NS_CLOSE_RE = re.compile(r"^\s*end\s+(\S+)\s*$")
 PATH_RE = re.compile(r"^Q1Paper/\S+\.lean$")
 DOC_REF_RE = re.compile(r"`([A-Za-z][\w'.]*)`")
 MODULE_REF_RE = re.compile(r"\b([A-Za-z][\w]*)\.lean\b")
+TEX_TT_RE = re.compile(r"\\texttt\{((?:[^{}]|\{[^{}]*\})*)\}")
+TEX_REF_RE = re.compile(r"\\(?:eq)?ref\{([^}]*)\}")
+TEX_LABEL_RE = re.compile(r"\\label\{([^}]*)\}")
+TEX_CLAIM_LABEL_RE = re.compile(r"\\label\{((?:lem|prop|clm|thm|cor):[\w-]+)\}")
 
 
 def tracked() -> set[str]:
@@ -100,6 +104,50 @@ def main() -> int:
             if ref not in declared and not any(d.startswith(ref + ".") for d in declared):
                 issues.append(f"{doc.relative_to(ROOT).as_posix()}: names {ref}, "
                               f"which is not a declared name")
+
+    # The paper is the other half of the promise: a declaration name or a \ref in the .tex has to
+    # resolve, or the paper has drifted from the formalisation.  Only names containing an underscore
+    # are judged, because that is this project's naming convention and it keeps Mathlib names
+    # (propext, Classical.choice, Quot.sound) and ordinary words out of the check.
+    tex_files = sorted((ROOT / "paper").glob("*.tex"))
+    tex_labels: set[str] = set()
+    for tex in tex_files:
+        tex_labels |= set(TEX_LABEL_RE.findall(tex.read_text(encoding="utf-8")))
+    short_declared = {d.rsplit(".", 1)[-1] for d in declared}
+    for tex in tex_files:
+        if tex.relative_to(ROOT).as_posix() not in keep:
+            continue
+        text = tex.read_text(encoding="utf-8")
+        for raw in sorted(set(TEX_TT_RE.findall(text))):
+            name = (raw.replace(r"\_", "_").replace(r"\allowbreak{}", "")
+                       .replace("$", "").replace(r"\mathbb{C}", "\u2102").strip())
+            if "_" not in name:
+                continue
+            if name not in short_declared:
+                issues.append(f"{tex.relative_to(ROOT).as_posix()}: names {name}, "
+                              f"which is not a declared name")
+        for label in sorted(set(TEX_REF_RE.findall(text))):
+            if label not in tex_labels:
+                issues.append(f"{tex.relative_to(ROOT).as_posix()}: refers to {label}, "
+                              f"which no .tex labels")
+
+    # Table 5's caption says every numbered statement appears.  That is a claim about coverage, and
+    # it is checkable: every claim-like \label in the paper must be listed in the generated index.
+    claims_md = ROOT / "Q1Paper" / "PaperI" / "S00_Interface" / "CLAIMS.md"
+    indexed: set[str] = set()
+    if claims_md.exists():
+        indexed = set(re.findall(r"`((?:lem|prop|clm|thm|cor):[\w-]+)`",
+                                 claims_md.read_text(encoding="utf-8")))
+    claim_labels: set[str] = set()
+    for tex in tex_files:
+        # only Paper I: CLAIMS.md indexes Paper I, and Paper II has its own index.
+        # (prefix-matching "paper_I" would also match "paper_II_...", hence the exact name)
+        if tex.name != "paper_I_dec.tex":
+            continue
+        claim_labels |= set(TEX_CLAIM_LABEL_RE.findall(tex.read_text(encoding="utf-8")))
+    for label in sorted(claim_labels - indexed):
+        issues.append(f"paper: statement {label} is numbered but not in the claim index, "
+                      f"so Table 5 omits it")
 
     print(f"modules: {len(modules)}, declared names: {len(declared)}")
     if issues:

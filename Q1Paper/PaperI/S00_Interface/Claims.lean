@@ -149,4 +149,14 @@ Proved by `Q1Paper.theorem2_fpt_conditional`. -/
 DEC_C is equivalent to the existence of an encoding witness, with no abstract hypothesis.
 
 Proved by `Q1Paper.Thm5.DECℂ_iff_exists_encodes_auto`. -/
+/-- **Corollary (arithmetic cost)** (`cor:arith`). `[Paper]`
+
+the FPT algorithm uses exp(O(ell^2 log(ell+2))) poly(L) arithmetic operations.
+
+No declaration: the artifact does not cover this clause. -/
+/-- **Corollary (bit-model time)** (`cor:time`). `[Paper]`
+
+for every r >= 0 the bit-model decision time is at most the minimum of L^{O(q^2)} and the FPT bound.
+
+No declaration: the artifact does not cover this clause. -/
 -- (no declarations: see ClaimsCheck.lean for the machine-checked index)
