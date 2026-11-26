@@ -351,3 +351,13 @@ Claim 4、Claim 5（`DECℂ` 单调 + 饱和）、Prop 1（`q_min`、`t_min ≤ 
 - 新增 `scripts/verify_paperII_example.py`（附录实例的精确有理证书：k=4、d_0=6、s_0=2、ℓ=4、
   (5a) 两秩=7、铅笔 det=0 且 64 个 7×7 子式 gcd=1），论文 reproducibility 段改为点名该脚本。
   **此前正文声称"exact rational arithmetic 验证"但仓库里没有脚本，这是实质缺口。**
+
+## 8.14 全覆盖：实设计 Prop 3 的第一步（2026-11-27）
+
+新增 `PaperII/RealGraph.lean`（111 条审计，已推送）：`Gfun`（复化矩阵作为 ℂ-线性映射）、`Gfun_mem_UC`（保持 `UC U`）、`GcU`（实矩阵在 `UC U` 上的复化）、`GcU_phi`（`GcU ⟨phi u⟩ = ⟨phi (Gm *ᵥ u)⟩`），另加 `phi_apply`、`map_mulVec_phi`。
+
+**剩余路线**（按顺序）：
+1. 实图 `W_R := graphExt U G_R ⟨b⟩` 与复图的复化对齐：需要 `phiPair` 与 `Submodule.span ℂ (phiPair '' graphExt …) = graphExt (UC U) (GcU …) …`；
+2. 用 `claim4_converse (K := ℝ)` 从 `W_R` 得到实设计 `R`，并把实 pencil 秩条件从复秩条件在实 λ 上转移过来；
+3. (⇐) 得 `tMinC` 的等式（上界用 `tMinC_le_iff_decC.mpr`，下界用 `le_tMinC_of_lowerBound`）；
+4. (⇒) 从 `tMinC` 饱和取现实设计，用复域 `exists_graph_of_tMin_eq` + `decC_to_feasible_design` 取数据。
