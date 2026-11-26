@@ -23,3 +23,4 @@ import Q1Paper.PaperII.GraphExtension
 import Q1Paper.PaperII.GraphExtract
 import Q1Paper.PaperII.Realification
 import Q1Paper.PaperII.Tightness
+import Q1Paper.PaperII.RealGraph

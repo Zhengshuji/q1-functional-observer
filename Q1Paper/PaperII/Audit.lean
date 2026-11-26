@@ -19,6 +19,7 @@ import Q1Paper.PaperII.GraphExtension
 import Q1Paper.PaperII.GraphExtract
 import Q1Paper.PaperII.Realification
 import Q1Paper.PaperII.Tightness
+import Q1Paper.PaperII.RealGraph
 
 -- Converse.lean
 #print axioms Q1Paper.PaperII.WRc
@@ -89,6 +90,13 @@ import Q1Paper.PaperII.Tightness
 #print axioms Q1Paper.PaperII.pairRowSpace_pad
 #print axioms Q1Paper.PaperII.decC_mono_add
 #print axioms Q1Paper.PaperII.decC_mono
+
+-- RealGraph.lean
+#print axioms Q1Paper.PaperII.map_mulVec_phi
+#print axioms Q1Paper.PaperII.Gfun
+#print axioms Q1Paper.PaperII.Gfun_mem_UC
+#print axioms Q1Paper.PaperII.GcU
+#print axioms Q1Paper.PaperII.GcU_phi
 
 -- Realification.lean
 #print axioms Q1Paper.PaperII.pairRows
