@@ -379,3 +379,20 @@ Claim 4、Claim 5（`DECℂ` 单调 + 饱和）、Prop 1（`q_min`、`t_min ≤ 
 3. `claim4_converse (K := ℝ)` 取实设计 `R`（需要 `rowSpace (L0*M) ≤ W_enc ≤ rowSpace M` 与维数界）；
 4. (⇐) 得 `tMinC` 等式；(⇒) 用 `decC_sInf_tMinCSet` + `decC_to_feasible_design` + 泛型
    `exists_graph_representation (K := ℝ)`。
+
+## 8.16 图对齐：卡点已定位（2026-11-27 夜）
+
+`phiU`/`phiDom`/`graphMap_phiDom` 写了三版，都卡在**同一个子目标**（`snd` 分量）。化简后它是
+
+```
+↑(GcU U Gm hG (phiU U u)) + (algebraMap ℂ (Fin k → ℂ)) (c : ℝ) * phi b
+  = phi (Gm *ᵥ u) + phi ((algebraMap ℝ (Fin k → ℝ)) c * b)
+```
+
+两侧只差两处改写：①`↑(GcU (phiU u)) = phi (Gm *ᵥ u)`（`GcU_phi` 的 `congrArg Subtype.val`，
+但参数要先 `show` 成 `⟨phi u, subset_span …⟩`，因为 `phiU` 的定义不与之definitionally 相同）；
+②右侧 `phi ((algebraMap ℝ _) c * b)` 要 `map_mul`/`map_smul` 化成 `c • phi b`（注意
+`(algebraMap ℝ (Fin k → ℝ)) c` 是常函数）。
+
+**下一版**：先把两条 `have` 立好（`h1 : ↑(phiU U u) = phi u`、`h2 : ↑(GcU … (phiU U u)) = phi (Gm *ᵥ u)`），
+再 `simp only [..., h1, h2, ...]` + `ring`。失败版本已回退，树保持绿色。
