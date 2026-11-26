@@ -185,4 +185,50 @@ theorem span_phiU (U : Submodule ℝ (Fin k → ℝ)) :
   have hh : h' = h := Subtype.ext heq
   rwa [hh] at hh'
 
+
+/-- **`phiDom` spans its target**: every `(h, c)` with `h ∈ UC U` is reached. -/
+theorem span_phiDom (U : Submodule ℝ (Fin k → ℝ)) :
+    Submodule.span ℂ (Set.range (phiDom U)) = ⊤ := by
+  set S := Submodule.span ℂ (Set.range (phiDom U)) with hS
+  have hinl : Submodule.map (LinearMap.inl ℂ ↥(UC U) ℂ) (⊤ : Submodule ℂ ↥(UC U)) ≤ S := by
+    rw [← span_phiU U, Submodule.map_span, Submodule.span_le]
+    rintro _ ⟨y, ⟨u, rfl⟩, rfl⟩
+    exact Submodule.subset_span ⟨(u, 0), rfl⟩
+  refine le_antisymm le_top ?_
+  intro z _
+  obtain ⟨hh, c⟩ := z
+  have h1 : ((hh, (0 : ℂ)) : ↥(UC U) × ℂ) ∈ S :=
+    hinl (Submodule.mem_map_of_mem (Submodule.mem_top))
+  have hz : ((hh, c) : ↥(UC U) × ℂ) = (hh, 0) + ((0 : ↥(UC U)), c) := by
+    ext <;> simp
+  rw [hz]
+  refine Submodule.add_mem _ h1 ?_
+  have hsplit : (((0 : ↥(UC U)), c) : ↥(UC U) × ℂ) = c • (((0 : ↥(UC U)), (1 : ℂ))) := by
+    ext <;> simp
+  rw [hsplit]
+  refine Submodule.smul_mem _ c (Submodule.subset_span ⟨(0, 1), ?_⟩)
+  rw [phiDom_apply]
+  simp
+
+/-- **The complex graph is the `ℂ`-span of the real graph's image.** -/
+theorem graphExt_span_phiPair (U : Submodule ℝ (Fin k → ℝ)) (Gm : Matrix (Fin k) (Fin k) ℝ)
+    (hG : ∀ x ∈ U, Gm *ᵥ x ∈ U) (b : ↥U) :
+    Submodule.span ℂ
+        (phiPair '' (graphExt U (GR U Gm hG) b : Set ((Fin k → ℝ) × (Fin k → ℝ))))
+      = graphExt (UC U) (GcU U Gm hG)
+          ⟨phi (Fin k) (b : Fin k → ℝ), Submodule.subset_span ⟨b, b.2, rfl⟩⟩ := by
+  have hb : phi (Fin k) (b : Fin k → ℝ) ∈ UC U := Submodule.subset_span ⟨b, b.2, rfl⟩
+  have hcomp : (phiPair ∘ graphMap U (GR U Gm hG) b)
+      = (graphMap (UC U) (GcU U Gm hG) ⟨phi (Fin k) (b : Fin k → ℝ), hb⟩ ∘ phiDom U) :=
+    funext fun p => (graphMap_phiDom U Gm hG b p).symm
+  have hset : (phiPair '' (graphExt U (GR U Gm hG) b : Set ((Fin k → ℝ) × (Fin k → ℝ))))
+      = graphMap (UC U) (GcU U Gm hG) ⟨phi (Fin k) (b : Fin k → ℝ), hb⟩
+        '' (Set.range (phiDom U)) := by
+    show phiPair '' (Set.range (graphMap U (GR U Gm hG) b))
+      = graphMap (UC U) (GcU U Gm hG) ⟨phi (Fin k) (b : Fin k → ℝ), hb⟩
+        '' (Set.range (phiDom U))
+    rw [← Set.range_comp, hcomp, Set.range_comp]
+  rw [hset, ← Submodule.map_span, span_phiDom U, Submodule.map_top]
+  rfl
+
 end Q1Paper.PaperII
