@@ -109,6 +109,8 @@ import Q1Paper.PaperII.RealGraph
 #print axioms Q1Paper.PaperII.phiDom
 #print axioms Q1Paper.PaperII.phiDom_apply
 #print axioms Q1Paper.PaperII.graphMap_phiDom
+#print axioms Q1Paper.PaperII.range_phiU_val
+#print axioms Q1Paper.PaperII.span_phiU
 
 -- Realification.lean
 #print axioms Q1Paper.PaperII.pairRows

@@ -158,4 +158,31 @@ theorem graphMap_phiDom (U : Submodule ℝ (Fin k → ℝ)) (Gm : Matrix (Fin k)
       ext i
       simp]
 
+
+/-- The `phi`-images of `U` are the values of the range of `phiU`. -/
+theorem range_phiU_val (U : Submodule ℝ (Fin k → ℝ)) :
+    ((phi (Fin k)) '' (U : Set (Fin k → ℝ)))
+      = Subtype.val '' (Set.range (phiU U)) := by
+  ext x
+  constructor
+  · rintro ⟨u, hu, rfl⟩
+    exact ⟨phiU U ⟨u, hu⟩, ⟨⟨u, hu⟩, rfl⟩, rfl⟩
+  · rintro ⟨-, ⟨u, rfl⟩, rfl⟩
+    exact ⟨u, u.2, rfl⟩
+
+/-- **`phiU` spans the complexification.** -/
+theorem span_phiU (U : Submodule ℝ (Fin k → ℝ)) :
+    Submodule.span ℂ (Set.range (phiU U)) = ⊤ := by
+  refine le_antisymm le_top ?_
+  intro h _
+  have hmap : (h : Fin k → ℂ) ∈ Submodule.map (Submodule.subtype (UC U))
+      (Submodule.span ℂ (Set.range (phiU U))) := by
+    rw [Submodule.map_span]
+    show (h : Fin k → ℂ) ∈ Submodule.span ℂ (Subtype.val '' Set.range (phiU U))
+    rw [← range_phiU_val U]
+    exact h.2
+  obtain ⟨h', hh', heq⟩ := Submodule.mem_map.mp hmap
+  have hh : h' = h := Subtype.ext heq
+  rwa [hh] at hh'
+
 end Q1Paper.PaperII
