@@ -517,3 +517,21 @@ commit `8f77caf` **本地已提交但尚未推送**（GitHub SSH 连不上，稍
 **如果继续攻这个缺口**，路线是：定义 `reIm : (Fin k → ℂ) ≃ₗ[ℝ] (Fin k → ℝ) × (Fin k → ℝ)`，
 证明 `reIm '' (span ℂ (phi '' X)) = X × X`（ℂ-作用把 `(x,0)` 送到 `(0,x)`），
 于是"实点"恰好是 `X × {0}`。
+
+## 8.24 复跨度的实点：real-G 提取的最后一块（2026-11-27，`Audit` 152 条）
+
+新增 `reFun`/`imFun`（逐坐标实部/虚部，`ℝ`-线性）、
+**`re_im_mem_of_mem_span`**（`span ℂ (phi '' Y)` 中元素的实部与虚部都落在 `Y`）、
+**`mem_of_phi_mem_span`**（`phi x` 落在复跨度里 ⟹ `x ∈ Y`）。
+
+关键技巧：对 `ℂ`-标量作用那一步，用 `Complex.mul_re`/`Complex.mul_im` 把
+`Re(c·z)`、`Im(c·z)` 拆成 `c.re`、`c.im` 与 `Re z`、`Im z` 的组合，再用 `Y` 的 `ℝ`-子模闭包。
+
+**下一步（real-G 提取，两步）**：
+1. `isFeasible_real_of_span_phiPair`：若 `span ℂ (phiPair '' X)` 复可行，则 `X` 实可行
+   ——`π2 X ≤ π1 X` 用 `pi2/pi1_span_phiPair` + `mem_of_phi_mem_span`；
+   `∀λ` 的维数等式用 `piLam/pi1_span_phiPair` + `finrank_UC` + `finrank_span_phiPair`；
+2. 对实 `W_R := WRreal R` 用泛型 `exists_graph_representation (K := ℝ)` 得实 `G_R, b_R`
+   （维数由 `finrank_span_phiPair` 与 `graphExt_finrank` 提供），
+   再用 `graphExt_span_phiPair` 得 `V = graphExt (UC U) (GcU …) b_ℂ`，
+   即把 (⇒) 的复数据升级为实数据。
