@@ -7,10 +7,12 @@ extension `W(G,b)` inside `T` whose pencil has the paper's rank.
 
 Contents.
 * `pi1_eq_sup_of_finrank` — at an attaining `W` (feasible, `W₀ ≤ W`,
-  `dim W = a + 1`), the projection `π₁W` is exactly `U₀+V₀`.
-* `tMin_eq_of_graph` — the `(⇐)` direction.
-
-The `(⇒)` direction (extracting `(G,b)` from an attaining `W`) is next.
+  `dim W = a + 1`), the projection `π₁W` is exactly `U₀+V₀` (and `ω > 0` is derived,
+  not assumed).
+* `omega_pos_of_nonzero` — `ω > 0` for every feasible `W ≥ W₀` when `W₀ ≠ 0`.
+* `W0_ne_bot_of_pos` — `W₀ ≠ 0` when the paper's data has positive dimension.
+* `tMin_eq_of_graph` — the `(⇐)` direction (no non-degeneracy hypothesis).
+* `exists_graph_of_tMin_eq` — the `(⇒)` direction.
 -/
 
 import Q1Paper.PaperII.MinOrder
@@ -25,17 +27,54 @@ namespace Q1Paper.PaperII
 
 variable {p r0 n k : ℕ}
 
+/-- **`ω > 0` for every feasible `W ≥ W₀`** when `W₀ ≠ 0`: such a `W` is nonzero, and
+`dim W ≤ 2ω`. -/
+theorem omega_pos_of_nonzero
+    (A : Matrix (Fin n) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℂ)
+    (L0 : Matrix (Fin r0) (Fin n) ℝ)
+    (hW0ne : W0 A N L0 ≠ ⊥) :
+    ∀ V : Submodule ℂ ((Fin k → ℂ) × (Fin k → ℂ)),
+      W0 A N L0 ≤ V → V ≤ TR A N → IsFeasible V → 0 < finrank ℂ ↥(Q1Subspace.pi1 V) := by
+  intro V hV _ hfeas
+  have h1 := Q1Subspace.finrank_le_pi1_add_pi2 (K := ℂ) V
+  have h2 : finrank ℂ ↥(Q1Subspace.pi2 V) ≤ finrank ℂ ↥(Q1Subspace.pi1 V) :=
+    Submodule.finrank_mono hfeas.1
+  have hne : V ≠ ⊥ := fun h => hW0ne (le_bot_iff.mp (h ▸ hV))
+  have hpos : 0 < finrank ℂ ↥V := by
+    by_contra h
+    exact hne ((Submodule.finrank_eq_zero).mp (by omega))
+  omega
+
+/-- `W₀ ≠ ⊥` when the paper's data has positive dimension. -/
+theorem W0_ne_bot_of_pos
+    (A : Matrix (Fin n) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℂ)
+    (L0 : Matrix (Fin r0) (Fin n) ℝ)
+    (hpos : 0 < finrank ℂ ↥(Q1Subspace.pi1 (W0 A N L0) ⊔ Q1Subspace.pi2 (W0 A N L0))) :
+    W0 A N L0 ≠ ⊥ := by
+  intro h
+  have hbot : Q1Subspace.pi1 (W0 A N L0) ⊔ Q1Subspace.pi2 (W0 A N L0) = ⊥ := by
+    rw [h]
+    simp only [Q1Subspace.pi1, Q1Subspace.pi2, Submodule.map_bot, sup_bot_eq]
+  rw [hbot] at hpos
+  simp at hpos
+
 /-- **At an attaining `W`, `π₁W = U₀+V₀`.**  `W₀ ≤ W` gives `U₀+V₀ ≤ π₁W`, the
-structural bound gives `ω ≤ a` from `dim W = a+1`, and `a ≤ ω` is monotonicity. -/
+structural bound gives `ω ≤ a` from `dim W = a+1`, and `a ≤ ω` is monotonicity.
+The positivity `ω > 0` needed by the structural bound is derived from
+`dim W ≤ 2ω` and `dim W = a + 1 > 0`. -/
 theorem pi1_eq_sup_of_finrank
     (A : Matrix (Fin n) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℂ)
     (L0 : Matrix (Fin r0) (Fin n) ℝ)
     {W : Submodule ℂ ((Fin k → ℂ) × (Fin k → ℂ))}
     (hW0 : W0 A N L0 ≤ W) (hfeas : IsFeasible W)
     (hdim : finrank ℂ ↥W
-      = finrank ℂ ↥(Q1Subspace.pi1 (W0 A N L0) ⊔ Q1Subspace.pi2 (W0 A N L0)) + 1)
-    (hω : 0 < finrank ℂ ↥(Q1Subspace.pi1 W)) :
+      = finrank ℂ ↥(Q1Subspace.pi1 (W0 A N L0) ⊔ Q1Subspace.pi2 (W0 A N L0)) + 1) :
     Q1Subspace.pi1 W = Q1Subspace.pi1 (W0 A N L0) ⊔ Q1Subspace.pi2 (W0 A N L0) := by
+  have hω : 0 < finrank ℂ ↥(Q1Subspace.pi1 W) := by
+    have h1 := Q1Subspace.finrank_le_pi1_add_pi2 (K := ℂ) W
+    have h2 : finrank ℂ ↥(Q1Subspace.pi2 W) ≤ finrank ℂ ↥(Q1Subspace.pi1 W) :=
+      Submodule.finrank_mono hfeas.1
+    omega
   have hle : Q1Subspace.pi1 (W0 A N L0) ⊔ Q1Subspace.pi2 (W0 A N L0)
       ≤ Q1Subspace.pi1 W := by
     refine sup_le ?_ ?_
@@ -49,13 +88,10 @@ theorem pi1_eq_sup_of_finrank
       ≤ finrank ℂ ↥(Q1Subspace.pi1 W) := Submodule.finrank_mono hle
   exact Q1Subspace.eq_of_le_of_finrank_eq hle (by omega)
 
-
 /-- **Prop 3, the `(⇐)` direction.**  If there are `b ≠ 0` and `G : U₀+V₀ → U₀+V₀`
 with `W₀ ⊆ W(G,b) ⊆ T` and the paper's pencil rank condition, then the minimum order
-saturates: `t_min = dim (U₀+V₀) + 1 − s₀`.
-
-The hypotheses are exactly the data of Prop 3; `ω > 0` for every feasible `W` is the
-non-degeneracy condition used by the structural bound. -/
+saturates: `t_min = dim (U₀+V₀) + 1 − s₀`.  No non-degeneracy hypothesis: `ω > 0`
+for every feasible `W ≥ W₀` follows from `b ≠ 0`. -/
 theorem tMin_eq_of_graph
     (A : Matrix (Fin n) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℂ)
     (L0 : Matrix (Fin r0) (Fin n) ℝ)
@@ -72,11 +108,19 @@ theorem tMin_eq_of_graph
           (graphPencil (Q1Subspace.pi1 (W0 A N L0) ⊔ Q1Subspace.pi2 (W0 A N L0)) G lam) ⊤
         ⊔ Submodule.span ℂ
             {((b : ↥(Q1Subspace.pi1 (W0 A N L0) ⊔ Q1Subspace.pi2 (W0 A N L0))) : Fin k → ℂ)})
-        = finrank ℂ ↥(Q1Subspace.pi1 (W0 A N L0) ⊔ Q1Subspace.pi2 (W0 A N L0)))
-    (hω : ∀ V : Submodule ℂ ((Fin k → ℂ) × (Fin k → ℂ)),
-      W0 A N L0 ≤ V → V ≤ TR A N → IsFeasible V → 0 < finrank ℂ ↥(Q1Subspace.pi1 V)) :
+        = finrank ℂ ↥(Q1Subspace.pi1 (W0 A N L0) ⊔ Q1Subspace.pi2 (W0 A N L0))) :
     tMin A N L0 = ↑((finrank ℂ ↥(Q1Subspace.pi1 (W0 A N L0) ⊔ Q1Subspace.pi2 (W0 A N L0)))
       + 1 - finrank ℂ ↥(W0 A N L0)) := by
+  have hW0ne : W0 A N L0 ≠ ⊥ := by
+    intro h
+    have hbot : Q1Subspace.pi1 (W0 A N L0) ⊔ Q1Subspace.pi2 (W0 A N L0) = ⊥ := by
+      rw [h]
+      simp only [Q1Subspace.pi1, Q1Subspace.pi2, Submodule.map_bot, sup_bot_eq]
+    haveI : Subsingleton ↥(Q1Subspace.pi1 (W0 A N L0) ⊔ Q1Subspace.pi2 (W0 A N L0)) := by
+      rw [hbot]
+      infer_instance
+    exact hb (Subsingleton.elim b 0)
+  have hω := omega_pos_of_nonzero A N L0 hW0ne
   have hfeas : IsFeasible
       (graphExt (Q1Subspace.pi1 (W0 A N L0) ⊔ Q1Subspace.pi2 (W0 A N L0)) G b) :=
     graphExt_feasible _ G b hrank
@@ -97,7 +141,6 @@ theorem tMin_eq_of_graph
     exact WithTop.coe_le_coe.mpr (by rw [← ht]; exact Nat.sInf_le hmem)
   exact le_antisymm hub (le_tMin_of_lowerBound_max A N L0 hω)
 
-
 /-- **Prop 3, the `(⇒)` direction.**  If the minimum order saturates,
 `t_min = a + 1 − s₀` (with `s₀ ≤ a`), then some feasible `W` with `W₀ ≤ W ≤ T` and
 `dim W = a + 1` is a graph extension `W(G, b)`, and its projection is exactly
@@ -105,8 +148,6 @@ theorem tMin_eq_of_graph
 theorem exists_graph_of_tMin_eq
     (A : Matrix (Fin n) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℂ)
     (L0 : Matrix (Fin r0) (Fin n) ℝ)
-    (hω : ∀ V : Submodule ℂ ((Fin k → ℂ) × (Fin k → ℂ)),
-      W0 A N L0 ≤ V → V ≤ TR A N → IsFeasible V → 0 < finrank ℂ ↥(Q1Subspace.pi1 V))
     (hsa : finrank ℂ ↥(W0 A N L0)
       ≤ finrank ℂ ↥(Q1Subspace.pi1 (W0 A N L0) ⊔ Q1Subspace.pi2 (W0 A N L0)))
     (heq : tMin A N L0
@@ -143,12 +184,11 @@ theorem exists_graph_of_tMin_eq
     have hsub := t_eq_finrank_sub (K := ℂ) hV0
     have hmono := Submodule.finrank_mono hV0
     omega
-  have hωV : 0 < finrank ℂ ↥(Q1Subspace.pi1 V) := hω V hV0 hVT hVf
-  have hpi := pi1_eq_sup_of_finrank A N L0 hV0 hVf hdimV hωV
+  have hpi := pi1_eq_sup_of_finrank A N L0 hV0 hVf hdimV
   have hdimV' : finrank ℂ ↥V = finrank ℂ ↥(Q1Subspace.pi1 V) + 1 := by
     rw [hpi]
     exact hdimV
-  obtain ⟨b, hb, G, hWV⟩ := exists_graph_representation V hVf hdimV' 
+  obtain ⟨b, hb, G, hWV⟩ := exists_graph_representation V hVf hdimV'
   refine ⟨V, G, b, hV0, hVT, hVf, hb, hWV, hpi, ?_⟩
   intro lam
   have hpen := graphExt_piLam (Q1Subspace.pi1 V) G b lam

@@ -133,6 +133,8 @@ import Q1Paper.PaperII.Tightness
 #print axioms Q1Paper.PaperII.dec_mono_complex
 
 -- Tightness.lean
+#print axioms Q1Paper.PaperII.omega_pos_of_nonzero
+#print axioms Q1Paper.PaperII.W0_ne_bot_of_pos
 #print axioms Q1Paper.PaperII.pi1_eq_sup_of_finrank
 #print axioms Q1Paper.PaperII.tMin_eq_of_graph
 #print axioms Q1Paper.PaperII.exists_graph_of_tMin_eq
