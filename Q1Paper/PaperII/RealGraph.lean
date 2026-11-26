@@ -768,6 +768,9 @@ theorem exists_real_graph_of_tMinC_eq {p : ℕ}
           + 1 - Module.finrank ℂ ↥(W0 A (N.map (algebraMap ℝ ℂ)) L0))) (Fin n) ℝ)
       (U : Submodule ℝ (Fin k → ℝ)) (G : ↥U →ₗ[ℝ] ↥U) (b : ↥U),
       WRreal A N L0 R = graphExt U G b ∧ b ≠ 0 ∧
+        Module.finrank ℝ ↥U
+          = Module.finrank ℂ ↥(Q1Subspace.pi1 (W0 A (N.map (algebraMap ℝ ℂ)) L0)
+              ⊔ Q1Subspace.pi2 (W0 A (N.map (algebraMap ℝ ℂ)) L0)) ∧
         W0 A (N.map (algebraMap ℝ ℂ)) L0 ≤ WR A (N.map (algebraMap ℝ ℂ)) L0 R ∧
         WR A (N.map (algebraMap ℝ ℂ)) L0 R ≤ TR A (N.map (algebraMap ℝ ℂ)) ∧
         IsFeasible (Submodule.span ℂ
@@ -819,7 +822,17 @@ theorem exists_real_graph_of_tMinC_eq {p : ℕ}
       rw [← pi1_span_phiPair (WRreal A N L0 R), ← WR_eq_span_phiPair_WRreal]
     rw [h1, h2, hpi]
     exact hdimW
+  have hU : Module.finrank ℝ ↥(Q1Subspace.pi1 (WRreal A N L0 R))
+      = Module.finrank ℂ ↥(Q1Subspace.pi1 (W0 A (N.map (algebraMap ℝ ℂ)) L0)
+          ⊔ Q1Subspace.pi2 (W0 A (N.map (algebraMap ℝ ℂ)) L0)) := by
+    rw [← finrank_UC (Q1Subspace.pi1 (WRreal A N L0 R))]
+    show Module.finrank ℂ ↥(Submodule.span ℂ
+        ((phi (Fin k)) '' (Q1Subspace.pi1 (WRreal A N L0 R) : Set (Fin k → ℝ))))
+      = Module.finrank ℂ ↥(Q1Subspace.pi1 (W0 A (N.map (algebraMap ℝ ℂ)) L0)
+          ⊔ Q1Subspace.pi2 (W0 A (N.map (algebraMap ℝ ℂ)) L0))
+    rw [← pi1_span_phiPair (WRreal A N L0 R), ← WR_eq_span_phiPair_WRreal, hpi]
   obtain ⟨b, hb, G, hXG⟩ := exists_graph_representation (WRreal A N L0 R) hXreal hdimX
-  exact ⟨R, Q1Subspace.pi1 (WRreal A N L0 R), G, b, hXG, hb, hW0R, hWTR, hXfeas⟩
+  exact ⟨R, Q1Subspace.pi1 (WRreal A N L0 R), G, b, hXG, hb, hU, hW0R, hWTR, hXfeas⟩
+
 
 end Q1Paper.PaperII
