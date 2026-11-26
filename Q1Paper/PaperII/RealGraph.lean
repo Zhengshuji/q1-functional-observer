@@ -719,4 +719,31 @@ theorem mem_of_phi_mem_span (Y : Submodule ℝ (Fin k → ℝ)) {x : Fin k → �
   have h' := (re_im_mem_of_mem_span Y h).1
   rwa [reFun_phi] at h'
 
+
+/-- **Complex feasibility descends to the real pair space.** -/
+theorem isFeasible_real_of_span_phiPair
+    {X : Submodule ℝ ((Fin k → ℝ) × (Fin k → ℝ))}
+    (h : IsFeasible (Submodule.span ℂ (phiPair '' (X : Set ((Fin k → ℝ) × (Fin k → ℝ)))))) :
+    IsFeasible X := by
+  refine ⟨?_, ?_⟩
+  · intro x hx
+    have h2 : phi (Fin k) x
+        ∈ Q1Subspace.pi2 (Submodule.span ℂ (phiPair '' (X : Set ((Fin k → ℝ) × (Fin k → ℝ))))) := by
+      rw [pi2_span_phiPair]
+      exact Submodule.subset_span ⟨x, hx, rfl⟩
+    have h3 : phi (Fin k) x
+        ∈ Q1Subspace.pi1 (Submodule.span ℂ (phiPair '' (X : Set ((Fin k → ℝ) × (Fin k → ℝ))))) :=
+      h.1 h2
+    rw [pi1_span_phiPair] at h3
+    exact mem_of_phi_mem_span (Q1Subspace.pi1 X) h3
+  · intro lam
+    have h2 := h.2 (lam : ℂ)
+    rw [piLam_span_phiPair X lam, pi1_span_phiPair X] at h2
+    rw [show Submodule.span ℂ ((phi (Fin k)) '' (Q1Subspace.piLam (K := ℝ) lam X : Set (Fin k → ℝ)))
+        = UC (Q1Subspace.piLam (K := ℝ) lam X) from rfl,
+      show Submodule.span ℂ ((phi (Fin k)) '' (Q1Subspace.pi1 X : Set (Fin k → ℝ)))
+        = UC (Q1Subspace.pi1 X) from rfl] at h2
+    rw [← finrank_UC (Q1Subspace.piLam (K := ℝ) lam X), ← finrank_UC (Q1Subspace.pi1 X)]
+    exact h2
+
 end Q1Paper.PaperII
