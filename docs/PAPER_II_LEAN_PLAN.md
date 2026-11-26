@@ -361,3 +361,21 @@ Claim 4、Claim 5（`DECℂ` 单调 + 饱和）、Prop 1（`q_min`、`t_min ≤ 
 2. 用 `claim4_converse (K := ℝ)` 从 `W_R` 得到实设计 `R`，并把实 pencil 秩条件从复秩条件在实 λ 上转移过来；
 3. (⇐) 得 `tMinC` 的等式（上界用 `tMinC_le_iff_decC.mpr`，下界用 `le_tMinC_of_lowerBound`）；
 4. (⇒) 从 `tMinC` 饱和取现实设计，用复域 `exists_graph_of_tMin_eq` + `decC_to_feasible_design` 取数据。
+
+## 8.15 实设计 Prop 3：图嵌入已完成（2026-11-27）
+
+`PaperII/RealGraph.lean` 现在有 `GR`（实限制）、`phiPair`（对空间逐坐标复化）与
+`phiPair_mem_graphExt`：实图 `W_ℝ(G,b)` 经 `phiPair` 落在复图 `W_ℂ(G,b)` 内。
+
+**一个要记住的细节**：不能用"维数相等"直接在 `ℝ`-层把包含升级为等式——复图作为
+`ℝ`-空间维数是 `2(dim U + 1)`，实图只有 `dim U + 1`。正确说法是
+`Submodule.span ℂ (phiPair '' W_ℝ) = graphExt (UC U) (GcU …) b_ℂ`，两边 `ℂ`-维数都是
+`dim U + 1`；升级等式时用 `Submodule.span_le` + `eq_of_le_of_finrank_eq` 在 `ℂ` 上做。
+
+**剩余步骤**：
+1. 上述 `ℂ`-span 等式；
+2. 编码桥：`pairRowSpace H HA = Φ '' rowSpace (pairRows H HA)` 与 `rowSpace_map_complex` 组合，
+   把实图对应到 `WR A (N.map f) L0 R`；
+3. `claim4_converse (K := ℝ)` 取实设计 `R`（需要 `rowSpace (L0*M) ≤ W_enc ≤ rowSpace M` 与维数界）；
+4. (⇐) 得 `tMinC` 等式；(⇒) 用 `decC_sInf_tMinCSet` + `decC_to_feasible_design` + 泛型
+   `exists_graph_representation (K := ℝ)`。
