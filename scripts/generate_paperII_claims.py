@@ -127,7 +127,8 @@ PAPER_ITEMS = [
      ["Q1Paper.PaperII.lt_two_pow_log2_succ", "Q1Paper.PaperII.div_two_pow_log2_succ_eq_zero",
       "Q1Paper.PaperII.bisect_steps_le", "Q1Paper.PaperII.log2_mono_le",
       "Q1Paper.PaperII.half_width", "Q1Paper.PaperII.bisectGo",
-      "Q1Paper.PaperII.bisectGo_spec", "Q1Paper.PaperII.bisectGo_collapses"], "literal"),
+      "Q1Paper.PaperII.bisectGo_spec", "Q1Paper.PaperII.bisectGo_collapses",
+      "Q1Paper.PaperII.bisectGo_invariant", "Q1Paper.PaperII.bisectGo_finds"], "literal"),
 ]
 
 NOT_FORMALISED = [

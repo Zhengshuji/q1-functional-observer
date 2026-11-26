@@ -120,4 +120,63 @@ theorem bisectGo_collapses (P : Nat → Bool) (lo hi : Nat) (h : lo ≤ hi) :
     omega
   omega
 
+
+/-- **The bisection invariant.**  If `hi` satisfies the monotone predicate and `lo` is its
+boundary (either `lo = 0` or `lo - 1` fails), then so does the returned interval: `hi'`
+satisfies it and `lo'` is still its boundary. -/
+theorem bisectGo_invariant (P : Nat → Bool)
+    (hmono : ∀ a b : Nat, a ≤ b → P a = true → P b = true) :
+    ∀ (k lo hi : Nat), lo ≤ hi → P hi = true → (lo = 0 ∨ P (lo - 1) = false) →
+      P (bisectGo P k lo hi).2 = true ∧
+        ((bisectGo P k lo hi).1 = 0 ∨ P ((bisectGo P k lo hi).1 - 1) = false)
+  | 0, lo, hi, h, hhi, hlo => by
+    refine ⟨?_, ?_⟩ <;> simpa [bisectGo] using ‹_›
+  | k + 1, lo, hi, h, hhi, hlo => by
+    rw [bisectGo]
+    by_cases hlt : lo < hi
+    · rw [if_pos hlt]
+      have hm1 : lo ≤ (lo + hi) / 2 := by omega
+      have hm2 : (lo + hi) / 2 + 1 ≤ hi := by omega
+      by_cases hp : P ((lo + hi) / 2) = true
+      · rw [if_pos hp]
+        exact bisectGo_invariant P hmono k lo ((lo + hi) / 2) hm1 hp hlo
+      · rw [if_neg hp]
+        refine bisectGo_invariant P hmono k ((lo + hi) / 2 + 1) hi hm2 hhi ?_
+        right
+        have hsub : ((lo + hi) / 2 + 1) - 1 = (lo + hi) / 2 := by omega
+        rw [hsub]
+        cases hb : P ((lo + hi) / 2) with
+        | false => rfl
+        | true => exact absurd hb hp
+    · rw [if_neg hlt]
+      exact ⟨hhi, hlo⟩
+
+
+/-- **Bisection finds the threshold.**  If `P` is monotone, `P hi` holds and `lo` is its boundary,
+then `log2 (hi - lo) + 1` halvings return a point `x` with `P x` true and `P (x - 1)` false: the
+least `x ≤ hi` satisfying `P`. -/
+theorem bisectGo_finds (P : Nat → Bool)
+    (hmono : ∀ a b : Nat, a ≤ b → P a = true → P b = true)
+    (lo hi : Nat) (h : lo ≤ hi) (hhi : P hi = true) (hlo : lo = 0 ∨ P (lo - 1) = false) :
+    P (bisectGo P ((hi - lo).log2 + 1) lo hi).1 = true ∧
+      ((bisectGo P ((hi - lo).log2 + 1) lo hi).1 = 0 ∨
+        P ((bisectGo P ((hi - lo).log2 + 1) lo hi).1 - 1) = false) ∧
+      (∀ y : Nat, y < (bisectGo P ((hi - lo).log2 + 1) lo hi).1 → P y = false) := by
+  have hinv := bisectGo_invariant P hmono ((hi - lo).log2 + 1) lo hi h hhi hlo
+  have hcol := bisectGo_collapses P lo hi h
+  rw [← hcol] at hinv
+  refine ⟨hinv.1, hinv.2, ?_⟩
+  intro y hy
+  by_contra hcon
+  have hytrue : P y = true := by
+    cases hb : P y with
+    | false => exact absurd hb hcon
+    | true => rfl
+  rcases hinv.2 with h0 | hfalse
+  · omega
+  · have hle : y ≤ (bisectGo P ((hi - lo).log2 + 1) lo hi).1 - 1 := by omega
+    have hmono' := hmono y ((bisectGo P ((hi - lo).log2 + 1) lo hi).1 - 1) hle hytrue
+    rw [hfalse] at hmono'
+    exact Bool.noConfusion hmono'
+
 end Q1Paper.PaperII

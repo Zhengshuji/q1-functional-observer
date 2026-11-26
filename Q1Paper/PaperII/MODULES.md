@@ -19,7 +19,7 @@ The entry points and their separate jobs:
 
 | file | thm | def | first declarations | header summary |
 |---|---:|---:|---|---|
-| `Complexity.lean` | 7 | 1 | `lt_two_pow_log2_succ`, `div_two_pow_log2_succ_eq_zero`, `bisect_steps_le` |  |
+| `Complexity.lean` | 9 | 1 | `lt_two_pow_log2_succ`, `div_two_pow_log2_succ_eq_zero`, `bisect_steps_le` |  |
 | `Converse.lean` | 3 | 1 | `WRc`, `WRc_eq_map`, `map_symm_map` | Paper II's sandwich, converse direction, for the complex-design predicate |
 | `GraphExtension.lean` | 8 | 3 | `graphMap`, `graphExt`, `mem_graphExt` | Paper II, Proposition `prop:tight`, the `(G, b)` construction: the graph-like subspace |
 | `GraphExtract.lean` | 6 | 2 | `projW`, `projW_range`, `projU` | Paper II, Proposition `prop:tight`, the converse direction — the setup. |
