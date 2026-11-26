@@ -132,6 +132,12 @@ import Q1Paper.PaperII.RealGraph
 #print axioms Q1Paper.PaperII.pi1_span_phiPair
 #print axioms Q1Paper.PaperII.pi2_span_phiPair
 #print axioms Q1Paper.PaperII.piLam_span_phiPair
+#print axioms Q1Paper.PaperII.reFun
+#print axioms Q1Paper.PaperII.imFun
+#print axioms Q1Paper.PaperII.reFun_phi
+#print axioms Q1Paper.PaperII.imFun_phi
+#print axioms Q1Paper.PaperII.re_im_mem_of_mem_span
+#print axioms Q1Paper.PaperII.mem_of_phi_mem_span
 
 -- Realification.lean
 #print axioms Q1Paper.PaperII.pairRows

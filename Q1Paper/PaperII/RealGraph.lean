@@ -666,4 +666,57 @@ theorem piLam_span_phiPair (X : Submodule ℝ ((Fin k → ℝ) × (Fin k → ℝ
   · rintro ⟨a, ⟨x, hx, rfl⟩, rfl⟩
     exact ⟨x, hx, hcomp x⟩
 
+
+/-- Real part, coordinatewise, as a real-linear map. -/
+noncomputable def reFun : (Fin k → ℂ) →ₗ[ℝ] (Fin k → ℝ) where
+  toFun z i := (z i).re
+  map_add' x y := by ext i; simp
+  map_smul' c x := by ext i; simp
+
+/-- Imaginary part, coordinatewise, as a real-linear map. -/
+noncomputable def imFun : (Fin k → ℂ) →ₗ[ℝ] (Fin k → ℝ) where
+  toFun z i := (z i).im
+  map_add' x y := by ext i; simp
+  map_smul' c x := by ext i; simp
+
+@[simp] theorem reFun_phi (x : Fin k → ℝ) : reFun (phi (Fin k) x) = x := by
+  ext i
+  simp [reFun, phi_apply]
+
+@[simp] theorem imFun_phi (x : Fin k → ℝ) : imFun (phi (Fin k) x) = 0 := by
+  ext i
+  simp [imFun, phi_apply]
+
+/-- **Real and imaginary parts of a complex combination of real vectors stay in the span.**
+This is the "real points" fact: the real part of an element of `span ℂ (phi '' Y)` lies in `Y`. -/
+theorem re_im_mem_of_mem_span (Y : Submodule ℝ (Fin k → ℝ)) {z : Fin k → ℂ}
+    (hz : z ∈ Submodule.span ℂ ((phi (Fin k)) '' (Y : Set (Fin k → ℝ)))) :
+    reFun z ∈ Y ∧ imFun z ∈ Y := by
+  refine Submodule.span_induction (p := fun z _ => reFun z ∈ Y ∧ imFun z ∈ Y) ?_ ?_ ?_ ?_ hz
+  · rintro _ ⟨y, hy, rfl⟩
+    rw [reFun_phi, imFun_phi]
+    exact ⟨hy, Y.zero_mem⟩
+  · rw [map_zero, map_zero]
+    exact ⟨Y.zero_mem, Y.zero_mem⟩
+  · intro a b _ _ ha hb
+    rw [map_add, map_add]
+    exact ⟨Y.add_mem ha.1 hb.1, Y.add_mem ha.2 hb.2⟩
+  · intro c a _ ha
+    have hre : reFun (c • a) = (c.re : ℝ) • reFun a - (c.im : ℝ) • imFun a := by
+      ext i
+      simp [reFun, imFun, Pi.sub_apply, Pi.smul_apply, Complex.mul_re]
+    have him : imFun (c • a) = (c.re : ℝ) • imFun a + (c.im : ℝ) • reFun a := by
+      ext i
+      simp [reFun, imFun, Pi.add_apply, Pi.smul_apply, Complex.mul_im]
+    rw [hre, him]
+    exact ⟨Y.sub_mem (Y.smul_mem _ ha.1) (Y.smul_mem _ ha.2),
+      Y.add_mem (Y.smul_mem _ ha.2) (Y.smul_mem _ ha.1)⟩
+
+/-- **The real points of `span ℂ (phi '' Y)` are exactly `Y`.** -/
+theorem mem_of_phi_mem_span (Y : Submodule ℝ (Fin k → ℝ)) {x : Fin k → ℝ}
+    (h : phi (Fin k) x ∈ Submodule.span ℂ ((phi (Fin k)) '' (Y : Set (Fin k → ℝ)))) :
+    x ∈ Y := by
+  have h' := (re_im_mem_of_mem_span Y h).1
+  rwa [reFun_phi] at h'
+
 end Q1Paper.PaperII
