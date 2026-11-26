@@ -198,4 +198,38 @@ theorem exists_graph_of_tMin_eq
   rw [graphExt_pi1] at hspec
   exact hspec
 
+
+/-- `U₀ + V₀`, the projection of the prescribed subspace (a short name keeps the
+statements below small). -/
+noncomputable def UV (A : Matrix (Fin n) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℂ)
+    (L0 : Matrix (Fin r0) (Fin n) ℝ) : Submodule ℂ (Fin k → ℂ) :=
+  Q1Subspace.pi1 (W0 A N L0) ⊔ Q1Subspace.pi2 (W0 A N L0)
+
+theorem UV_eq (A : Matrix (Fin n) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℂ)
+    (L0 : Matrix (Fin r0) (Fin n) ℝ) :
+    UV A N L0 = Q1Subspace.pi1 (W0 A N L0) ⊔ Q1Subspace.pi2 (W0 A N L0) := rfl
+
+/-- Membership in `tMinSet`, stated with an abstract `V`. -/
+theorem mem_tMinSet
+    (A : Matrix (Fin n) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℂ)
+    (L0 : Matrix (Fin r0) (Fin n) ℝ)
+    {V : Submodule ℂ ((Fin k → ℂ) × (Fin k → ℂ))}
+    (hV0 : W0 A N L0 ≤ V) (hVT : V ≤ TR A N) (hVf : IsFeasible V) :
+    t (W0 A N L0) V ∈ tMinSet A N L0 :=
+  ⟨V, hV0, hVT, hVf, rfl⟩
+
+/-- `t_min` is below the quotient dimension of any feasible `W ≥ W₀`. -/
+theorem tMin_le_of_feasible
+    (A : Matrix (Fin n) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℂ)
+    (L0 : Matrix (Fin r0) (Fin n) ℝ)
+    {V : Submodule ℂ ((Fin k → ℂ) × (Fin k → ℂ))}
+    (hV0 : W0 A N L0 ≤ V) (hVT : V ≤ TR A N) (hVf : IsFeasible V) :
+    tMin A N L0 ≤ ((t (W0 A N L0) V : ℕ) : WithTop ℕ) := by
+  have hmem := mem_tMinSet A N L0 hV0 hVT hVf
+  by_cases hne : (tMinSet A N L0).Nonempty
+  · rw [tMin, dif_pos hne]
+    exact WithTop.coe_le_coe.mpr (Nat.sInf_le hmem)
+  · exact absurd ⟨_, hmem⟩ hne
+
 end Q1Paper.PaperII
+

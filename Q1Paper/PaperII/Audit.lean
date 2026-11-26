@@ -139,4 +139,8 @@ import Q1Paper.PaperII.Tightness
 #print axioms Q1Paper.PaperII.pi1_eq_sup_of_finrank
 #print axioms Q1Paper.PaperII.tMin_eq_of_graph
 #print axioms Q1Paper.PaperII.exists_graph_of_tMin_eq
+#print axioms Q1Paper.PaperII.UV
+#print axioms Q1Paper.PaperII.UV_eq
+#print axioms Q1Paper.PaperII.mem_tMinSet
+#print axioms Q1Paper.PaperII.tMin_le_of_feasible
 
