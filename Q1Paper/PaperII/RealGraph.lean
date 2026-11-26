@@ -746,4 +746,80 @@ theorem isFeasible_real_of_span_phiPair
     rw [← finrank_UC (Q1Subspace.piLam (K := ℝ) lam X), ← finrank_UC (Q1Subspace.pi1 X)]
     exact h2
 
+
+/-- **Real graph data for a saturating real minimum order.**  If `t_min^ℝ = a + 1 − s₀`, some
+real design `R` realises a real subspace `W_ℝ` that is a graph `W(G,b)` with `b ≠ 0`, whose
+complexification is feasible. -/
+theorem exists_real_graph_of_tMinC_eq {p : ℕ}
+    (C : Matrix (Fin p) (Fin n) ℝ) (A : Matrix (Fin n) (Fin n) ℝ)
+    (L0 : Matrix (Fin r0) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℝ)
+    (hN : (N.map (algebraMap ℝ ℂ)).mulVecLin.range
+      = (Matrix.fromRows ((C.map (algebraMap ℝ ℂ)) * (A.map (algebraMap ℝ ℂ)))
+          (C.map (algebraMap ℝ ℂ))).mulVecLin.ker)
+    (hsa : Module.finrank ℂ ↥(W0 A (N.map (algebraMap ℝ ℂ)) L0)
+      ≤ Module.finrank ℂ ↥(Q1Subspace.pi1 (W0 A (N.map (algebraMap ℝ ℂ)) L0)
+          ⊔ Q1Subspace.pi2 (W0 A (N.map (algebraMap ℝ ℂ)) L0)))
+    (heq : tMinC A N L0
+      = ((Module.finrank ℂ ↥(Q1Subspace.pi1 (W0 A (N.map (algebraMap ℝ ℂ)) L0)
+            ⊔ Q1Subspace.pi2 (W0 A (N.map (algebraMap ℝ ℂ)) L0))
+          + 1 - Module.finrank ℂ ↥(W0 A (N.map (algebraMap ℝ ℂ)) L0) : ℕ) : WithTop ℕ)) :
+    ∃ (R : Matrix (Fin (Module.finrank ℂ ↥(Q1Subspace.pi1 (W0 A (N.map (algebraMap ℝ ℂ)) L0)
+            ⊔ Q1Subspace.pi2 (W0 A (N.map (algebraMap ℝ ℂ)) L0))
+          + 1 - Module.finrank ℂ ↥(W0 A (N.map (algebraMap ℝ ℂ)) L0))) (Fin n) ℝ)
+      (U : Submodule ℝ (Fin k → ℝ)) (G : ↥U →ₗ[ℝ] ↥U) (b : ↥U),
+      WRreal A N L0 R = graphExt U G b ∧ b ≠ 0 ∧
+        W0 A (N.map (algebraMap ℝ ℂ)) L0 ≤ WR A (N.map (algebraMap ℝ ℂ)) L0 R ∧
+        WR A (N.map (algebraMap ℝ ℂ)) L0 R ≤ TR A (N.map (algebraMap ℝ ℂ)) ∧
+        IsFeasible (Submodule.span ℂ
+          (phiPair '' (WRreal A N L0 R : Set ((Fin k → ℝ) × (Fin k → ℝ))))) := by
+  classical
+  set r : ℕ := Module.finrank ℂ ↥(Q1Subspace.pi1 (W0 A (N.map (algebraMap ℝ ℂ)) L0)
+      ⊔ Q1Subspace.pi2 (W0 A (N.map (algebraMap ℝ ℂ)) L0))
+    + 1 - Module.finrank ℂ ↥(W0 A (N.map (algebraMap ℝ ℂ)) L0) with hr
+  have hdec : DecOrder C A L0 r :=
+    (tMinC_le_iff_decC C A L0 N hN r).mp (by rw [hr]; exact le_of_eq heq)
+  obtain ⟨R, hW0R, hWTR, hfeasR, htR⟩ :=
+    decC_to_feasible_design (C := C) (A := A) (L0 := L0) (N := N.map (algebraMap ℝ ℂ)) hN hdec
+  have hmem : t (W0 A (N.map (algebraMap ℝ ℂ)) L0) (WR A (N.map (algebraMap ℝ ℂ)) L0 R)
+      ∈ tMinCSet A N L0 := ⟨_, R, hW0R, hfeasR, rfl⟩
+  have hle : tMinC A N L0
+      ≤ ((t (W0 A (N.map (algebraMap ℝ ℂ)) L0)
+          (WR A (N.map (algebraMap ℝ ℂ)) L0 R) : ℕ) : WithTop ℕ) :=
+    tMinC_le_of_mem hmem
+  have hle' : (r : WithTop ℕ)
+      ≤ ((t (W0 A (N.map (algebraMap ℝ ℂ)) L0)
+          (WR A (N.map (algebraMap ℝ ℂ)) L0 R) : ℕ) : WithTop ℕ) := by
+    rw [← heq]
+    exact hle
+  have ht : t (W0 A (N.map (algebraMap ℝ ℂ)) L0) (WR A (N.map (algebraMap ℝ ℂ)) L0 R) = r :=
+    le_antisymm htR (WithTop.coe_le_coe.mp hle')
+  have hdimW : Module.finrank ℂ ↥(WR A (N.map (algebraMap ℝ ℂ)) L0 R)
+      = Module.finrank ℂ ↥(Q1Subspace.pi1 (W0 A (N.map (algebraMap ℝ ℂ)) L0)
+          ⊔ Q1Subspace.pi2 (W0 A (N.map (algebraMap ℝ ℂ)) L0)) + 1 := by
+    have hsub := t_eq_finrank_sub hW0R
+    have hmono := Submodule.finrank_mono hW0R
+    omega
+  have hpi := pi1_eq_sup_of_finrank A (N.map (algebraMap ℝ ℂ)) L0 hW0R hfeasR hdimW
+  have hXfeas : IsFeasible (Submodule.span ℂ
+      (phiPair '' (WRreal A N L0 R : Set ((Fin k → ℝ) × (Fin k → ℝ))))) := by
+    rw [← WR_eq_span_phiPair_WRreal]
+    exact hfeasR
+  have hXreal : IsFeasible (WRreal A N L0 R) := isFeasible_real_of_span_phiPair hXfeas
+  have hdimX : Module.finrank ℝ ↥(WRreal A N L0 R)
+      = Module.finrank ℝ ↥(Q1Subspace.pi1 (WRreal A N L0 R)) + 1 := by
+    have h1 : Module.finrank ℝ ↥(WRreal A N L0 R)
+        = Module.finrank ℂ ↥(WR A (N.map (algebraMap ℝ ℂ)) L0 R) := by
+      rw [WR_eq_span_phiPair_WRreal, finrank_span_phiPair]
+    have h2 : Module.finrank ℝ ↥(Q1Subspace.pi1 (WRreal A N L0 R))
+        = Module.finrank ℂ ↥(Q1Subspace.pi1 (WR A (N.map (algebraMap ℝ ℂ)) L0 R)) := by
+      rw [← finrank_UC (Q1Subspace.pi1 (WRreal A N L0 R))]
+      show Module.finrank ℂ ↥(Submodule.span ℂ
+          ((phi (Fin k)) '' (Q1Subspace.pi1 (WRreal A N L0 R) : Set (Fin k → ℝ))))
+        = Module.finrank ℂ ↥(Q1Subspace.pi1 (WR A (N.map (algebraMap ℝ ℂ)) L0 R))
+      rw [← pi1_span_phiPair (WRreal A N L0 R), ← WR_eq_span_phiPair_WRreal]
+    rw [h1, h2, hpi]
+    exact hdimW
+  obtain ⟨b, hb, G, hXG⟩ := exists_graph_representation (WRreal A N L0 R) hXreal hdimX
+  exact ⟨R, Q1Subspace.pi1 (WRreal A N L0 R), G, b, hXG, hb, hW0R, hWTR, hXfeas⟩
+
 end Q1Paper.PaperII
