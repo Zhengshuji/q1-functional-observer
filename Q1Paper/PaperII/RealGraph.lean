@@ -231,4 +231,81 @@ theorem graphExt_span_phiPair (U : Submodule ℝ (Fin k → ℝ)) (Gm : Matrix (
   rw [hset, ← Submodule.map_span, span_phiDom U, Submodule.map_top]
   rfl
 
+
+/-- The real pair row space of a real design (the `ℝ`-analogue of `WR`). -/
+noncomputable def WRreal (A : Matrix (Fin n) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℝ)
+    (L0 : Matrix (Fin r0) (Fin n) ℝ) (R : Matrix (Fin r) (Fin n) ℝ) :
+    Submodule ℝ ((Fin k → ℝ) × (Fin k → ℝ)) :=
+  Q1Paper.pairRowSpace (Matrix.fromRows L0 R * N) (Matrix.fromRows L0 R * (A * N))
+
+/-- The complexified `L` times the complexified `N` is the complexification of the product. -/
+theorem Lc_mul (L0 : Matrix (Fin r0) (Fin n) ℝ) (R : Matrix (Fin r) (Fin n) ℝ)
+    (N : Matrix (Fin n) (Fin k) ℝ) :
+    Lc L0 R * (N.map (algebraMap ℝ ℂ))
+      = (Matrix.fromRows L0 R * N).map (algebraMap ℝ ℂ) := by
+  rw [Lc]
+  exact (Matrix.map_mul (f := algebraMap ℝ ℂ)).symm
+
+/-- The complexified `L` times the complexified `A N` is the complexification of the product. -/
+theorem Lc_mul_A (A : Matrix (Fin n) (Fin n) ℝ) (L0 : Matrix (Fin r0) (Fin n) ℝ)
+    (R : Matrix (Fin r) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℝ) :
+    Lc L0 R * (Ac A * (N.map (algebraMap ℝ ℂ)))
+      = (Matrix.fromRows L0 R * (A * N)).map (algebraMap ℝ ℂ) := by
+  have hA : Ac A * N.map (algebraMap ℝ ℂ) = (A * N).map (algebraMap ℝ ℂ) := by
+    rw [Ac]
+    exact (Matrix.map_mul (f := algebraMap ℝ ℂ)).symm
+  rw [hA, Lc]
+  exact (Matrix.map_mul (f := algebraMap ℝ ℂ)).symm
+
+/-- **The complex `W` of a real design is the complexification of its real `W`.** -/
+theorem WR_eq_span_phiPair_WRreal (A : Matrix (Fin n) (Fin n) ℝ)
+    (N : Matrix (Fin n) (Fin k) ℝ) (L0 : Matrix (Fin r0) (Fin n) ℝ)
+    (R : Matrix (Fin r) (Fin n) ℝ) :
+    WR A (N.map (algebraMap ℝ ℂ)) L0 R
+      = Submodule.span ℂ (phiPair '' (WRreal A N L0 R : Set ((Fin k → ℝ) × (Fin k → ℝ)))) := by
+  have h1 := Lc_mul L0 R N
+  have h2 := Lc_mul_A A L0 R N
+  have hset : Set.range (fun i : Fin r0 ⊕ Fin r =>
+        (((Matrix.fromRows L0 R * N).map (algebraMap ℝ ℂ)) i,
+         ((Matrix.fromRows L0 R * (A * N)).map (algebraMap ℝ ℂ)) i))
+      = phiPair '' Set.range (fun i : Fin r0 ⊕ Fin r =>
+        (((Matrix.fromRows L0 R * N) i), ((Matrix.fromRows L0 R * (A * N)) i))) := by
+    ext z
+    constructor
+    · rintro ⟨i, rfl⟩
+      refine ⟨_, ⟨i, rfl⟩, ?_⟩
+      apply Prod.ext <;> funext j <;> simp [phi_apply, Matrix.map_apply]
+    · rintro ⟨_, ⟨i, rfl⟩, rfl⟩
+      exact ⟨i, rfl⟩
+  rw [WR, WRreal, Q1Paper.pairRowSpace, Q1Paper.pairRowSpace, h1, h2, hset]
+  -- the `ℝ`-span and the generating set have the same `ℂ`-span of `phiPair`-images
+  have key : ∀ z ∈ Submodule.span ℝ (Set.range (fun i : Fin r0 ⊕ Fin r =>
+        (((Matrix.fromRows L0 R * N) i), ((Matrix.fromRows L0 R * (A * N)) i)))),
+      phiPair z ∈ Submodule.span ℂ
+        (phiPair '' Set.range (fun i : Fin r0 ⊕ Fin r =>
+          (((Matrix.fromRows L0 R * N) i), ((Matrix.fromRows L0 R * (A * N)) i)))) := by
+    intro z hz
+    refine Submodule.span_induction (p := fun y _ => phiPair y ∈ Submodule.span ℂ
+      (phiPair '' Set.range (fun i : Fin r0 ⊕ Fin r =>
+        (((Matrix.fromRows L0 R * N) i), ((Matrix.fromRows L0 R * (A * N)) i))))) ?_ ?_ ?_ ?_ hz
+    · rintro _ ⟨i, rfl⟩
+      exact Submodule.subset_span ⟨_, ⟨i, rfl⟩, rfl⟩
+    · exact Submodule.zero_mem _
+    · intro a b _ _ ha hb
+      rw [map_add]
+      exact Submodule.add_mem _ ha hb
+    · intro c a _ ha
+      have hc : phiPair (c • a) = (c : ℂ) • phiPair a := by
+        rw [map_smul]
+        ext <;> simp
+      rw [hc]
+      exact Submodule.smul_mem _ (c : ℂ) ha
+  refine le_antisymm ?_ ?_
+  · refine Submodule.span_le.mpr ?_
+    rintro _ ⟨z, hz, rfl⟩
+    exact Submodule.subset_span ⟨z, Submodule.subset_span hz, rfl⟩
+  · rw [Submodule.span_le]
+    rintro _ ⟨z, hz, rfl⟩
+    exact key z hz
+
 end Q1Paper.PaperII

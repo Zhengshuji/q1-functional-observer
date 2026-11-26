@@ -113,6 +113,10 @@ import Q1Paper.PaperII.RealGraph
 #print axioms Q1Paper.PaperII.span_phiU
 #print axioms Q1Paper.PaperII.span_phiDom
 #print axioms Q1Paper.PaperII.graphExt_span_phiPair
+#print axioms Q1Paper.PaperII.WRreal
+#print axioms Q1Paper.PaperII.Lc_mul
+#print axioms Q1Paper.PaperII.Lc_mul_A
+#print axioms Q1Paper.PaperII.WR_eq_span_phiPair_WRreal
 
 -- Realification.lean
 #print axioms Q1Paper.PaperII.pairRows
