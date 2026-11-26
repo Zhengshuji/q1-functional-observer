@@ -478,3 +478,23 @@ commit `8f77caf` **本地已提交但尚未推送**（GitHub SSH 连不上，稍
    得 `WR R = W_ℂ`；
 3. `feasible_to_decC` 得 `DECℂ (t W0 (WR R))`，于是 `tMinC ≤ ↑(finrank U + 1 − s₀)`（`tMinC_le_iff_decC.mpr`）；
 4. 下界 `le_tMinC_of_lowerBound`（用 `omega_pos_of_nonzero`，因为论文的 Prop 3 有 `W₀ ≠ 0`）。
+
+## 8.22 实设计 Prop 3 的 (⇐) 完成（2026-11-27，`Audit` 139 条）
+
+**`tMinC_le_of_graph_real`**：若实图 `W_ℝ(G,b)` 落在实 sandwich 内（`W0real ≤ W_ℝ ≤ TRreal`）、
+其复化 `W_ℂ` 在 `W₀` 之上且 `IsFeasible`，则
+`t_min^ℝ ≤ dim_ℝ U + 1 − s₀`。
+
+证明链：`exists_design_of_pairRowSpace` 取实设计 `R` → `WR R = W_ℂ`
+（`WR_eq_span_phiPair_WRreal` + `graphExt_span_phiPair`）→ `feasible_to_decC` 得 `DECℂ`
+→ `tMinC_le_iff_decC.mpr`。
+
+**一个要记住的方法论**：假设必须**分层**——ℂ-层的包含（`W₀ ≤ W_ℂ`）推不出 ℝ-层的包含
+（`W0real ≤ W_ℝ`），所以两条都作为假设：实 sandwich 用来造实设计，ℂ-层包含用来喂 `feasible_to_decC`。
+这在论文里是同一个陈述（实设计的 `W` 本来就是实的），Lean 里则要显式分开。
+
+**剩余（实设计 Prop 3 的 (⇒) 与打包）**：
+1. `decC_sInf_tMinCSet` 取到 `tMinC` 处的实设计，`decC_to_feasible_design` 给实 `W`；
+2. 对实 `W` 用**泛型** `exists_graph_representation (K := ℝ)` 得实 `G, b`（该引理对任意域成立）；
+3. 复化后把 pencil 秩条件（复域）搬过去，得到 (⇒)；
+4. 最后与 (⇐) 合成 `t_min^ℝ = a + 1 − s₀` 的等式（上界用 (⇐)，下界用 `le_tMinC_of_lowerBound`）。
