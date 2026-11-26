@@ -794,6 +794,8 @@ Tightness, the identification $\pi_1W=U_0+V_0$ at an attaining $W$ & literal &
 \texttt{pi1\_eq\_sup\_of\_finrank} \\
 Tightness, the composition in both directions & literal &
 \texttt{tMin\_eq\_of\_graph}, \texttt{exists\_graph\_of\_tMin\_eq} \\
+Tightness, packaged as a single equivalence (complex designs) & literal &
+\texttt{tMin\_eq\_iff\_graph} \\
 Real-compression lemma (Claim~\ref{claim:sandwich}, real designs) & literal &
 \texttt{real\_compress}, \texttt{feasible\_to\_decC} \\
 Prop.~\ref{prop:minorder} for real designs: $t_{\min}^{\mathbb R}\le2\ell$ & literal &
@@ -832,8 +834,8 @@ $\mathbb C$, and separately for the paper's real-design specification $\mathrm{D
 \texttt{real\_compress}).  Both directions of Proposition~\ref{prop:tight} are formalised separately (the
 $(G,b)$ direction and the extraction of $(G,b)$ from an attaining $W$), together with the
 numerical half and the identification $\pi_1W=U_0+V_0$; the two directions are composed
-(\texttt{tMin\_eq\_of\_graph}, \texttt{exists\_graph\_of\_tMin\_eq}), but they are not packaged into a single
-$\leftrightarrow$.  For the paper's real designs the criterion is packaged as a single equivalence,
+(\texttt{tMin\_eq\_of\_graph}, \texttt{exists\_graph\_of\_tMin\_eq}) and are packaged as a single
+equivalence \texttt{tMin\_eq\_iff\_graph}.  For the paper's real designs the criterion is packaged as a single equivalence,
 \texttt{tMinC\_eq\_iff\_real\_graph}, through the real sandwich converse
 (\texttt{exists\_design\_of\_pairRowSpace}), the complexification identities
 (\texttt{graphExt\_span\_phiPair}, \texttt{finrank\_span\_phiPair}, and the projection
