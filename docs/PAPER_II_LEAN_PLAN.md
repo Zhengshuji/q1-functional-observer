@@ -458,3 +458,23 @@ commit `8f77caf` **本地已提交但尚未推送**（GitHub SSH 连不上，稍
 **下一步**：`WRreal` 只是"给定实设计 R 的 W"；要反过来从实图取 `R`，需
 `claim4_converse (K := ℝ)`（配 `pairRows`/`Φ` 编码，实图 = 编码空间的子空间），
 然后 (⇐)：`tMinC ≤ ↑(dim (UC U) + 1 − s₀)`（上界经 `tMinC_le_iff_decC.mpr`）+ `le_tMinC_of_lowerBound`。
+
+## 8.21 实 sandwich 反向完成（2026-11-27，`Audit` 137 条）
+
+`RealGraph.lean` 新增：
+
+* `W0real_eq`、`TRreal_eq`：`W₀`、`T` 的编码形式（`pairRowSpace = map Φ (rowSpace (pairRows …))`）；
+* **`exists_design_of_pairRowSpace`**：实子空间 `W` 满足 `W0real ≤ W ≤ TRreal` 与维数界
+  ⟹ 存在 `r` 行实设计 `R` 使 `WRreal A N L0 R = W`。
+
+实现要点：取 `Wenc := comap Φ W`（即 `Φ.symm` 的像），包含关系用 `Submodule.mem_comap` 搬
+（`W ≤ TRreal` 那一步用 `Φ` 的单射性），维数用 `LinearEquiv.finrank_map_eq`，最后调
+`exists_design_of_encoded` 并用 `map Φ Wenc = W` 收尾。
+
+**实设计 Prop 3 的 (⇐) 现在已无阻碍**，剩余写法：
+1. 假设放在**实层面**：`W0real ≤ W_ℝ(G,b) ≤ TRreal`（因为 ℂ-层的包含推不出 ℝ-层的包含），
+   再加 `IsFeasible W_ℂ`（复 pencil 秩条件）；
+2. `exists_design_of_pairRowSpace` 给 `R`，`WR_eq_span_phiPair_WRreal` + `graphExt_span_phiPair`
+   得 `WR R = W_ℂ`；
+3. `feasible_to_decC` 得 `DECℂ (t W0 (WR R))`，于是 `tMinC ≤ ↑(finrank U + 1 − s₀)`（`tMinC_le_iff_decC.mpr`）；
+4. 下界 `le_tMinC_of_lowerBound`（用 `omega_pos_of_nonzero`，因为论文的 Prop 3 有 `W₀ ≠ 0`）。
