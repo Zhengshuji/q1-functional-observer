@@ -132,6 +132,9 @@ PAPER_ITEMS = [
     ("cor:opt", "Corollary 5 (OPT), computationally",
      "bisection on the DEC predicate over [0, 2 ell] returns t_min: log2(2 ell) + 1 calls",
      ["Q1Paper.PaperII.tMin_eq_bisectGo"], "literal"),
+    ("cor:opt", "Corollary 5 (OPT) for real designs",
+     "bisection on the DecOrder predicate over [0, 2 ell] returns t_min^R",
+     ["Q1Paper.PaperII.tMinC_eq_bisectGo"], "literal"),
 ]
 
 NOT_FORMALISED = [

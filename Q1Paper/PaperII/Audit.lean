@@ -34,6 +34,9 @@ import Q1Paper.PaperII.Complexity
 #print axioms Q1Paper.PaperII.bisectGo_invariant
 #print axioms Q1Paper.PaperII.bisectGo_finds
 #print axioms Q1Paper.PaperII.tMin_eq_bisectGo
+#print axioms Q1Paper.PaperII.decOrderPred
+#print axioms Q1Paper.PaperII.decOrderPred_true_iff
+#print axioms Q1Paper.PaperII.tMinC_eq_bisectGo
 
 -- Converse.lean
 #print axioms Q1Paper.PaperII.WRc
