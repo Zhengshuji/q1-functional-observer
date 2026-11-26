@@ -825,6 +825,10 @@ The $O(\log(\ell+2))$ counting: bisection keeps half the interval and collapses 
 $\log_2 N+1$ halvings & literal &
 \texttt{bisectGo}, \texttt{bisectGo\_spec}, \texttt{bisectGo\_collapses},
 \texttt{lt\_two\_pow\_log2\_succ} \\
+Corollary~\ref{cor:opt} ($\mathrm{OPT}$), complex designs: bisection on $\mathrm{DEC}$ over
+$[0,2\ell]$ returns $t_{\min}$ & literal & \texttt{tMin\_eq\_bisectGo} \\
+Corollary~\ref{cor:opt} ($\mathrm{OPT}$), real designs & literal &
+\texttt{tMinC\_eq\_bisectGo} \\
 \bottomrule
 \end{tabular}
 \end{table*}

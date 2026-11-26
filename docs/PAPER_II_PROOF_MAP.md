@@ -81,7 +81,7 @@ specification `DECℂ`.  The bridge between them is the real-compression lemma
 
 | paper item | status / reason |
 |---|---|
-| Corollary 5 (OPT), Corollary 6 (FIND) | complexity statements inherited from Paper I; FIND's bit model is open in the paper itself |
+| Corollary 6 (FIND) | the construction at the minimum order, via the witness system `Ψ_{t,ω}`; the paper presents it as an algorithmic scheme over charts, and FIND's bit model is open in the paper itself |
 | FIND: the witness system `Ψ_{t,ω}`, the real-solution/feasible-`W` equivalence, and the sampling step | not formalised; the paper presents it as an algorithmic certificate scheme |
 | the appendix instance (`q_min = 4`) | exact rational certificate in `scripts/verify_paperII_example.py`; belongs to the Python verification layer, not to Lean |
 | Theorem 4, the `O(log(ℓ+2))` call count | **formalised**: the bisection `bisectGo` with `bisectGo_spec` (length `≤ (hi−lo)/2^k`) and `bisectGo_collapses` (a single point after `log2(hi−lo)+1` halvings), on top of `half_width`, `lt_two_pow_log2_succ`, `div_two_pow_log2_succ_eq_zero`, `bisect_steps_le`, `log2_mono_le` (`PaperII/Complexity.lean`) |
@@ -94,6 +94,7 @@ specification `DECℂ`.  The bridge between them is the real-compression lemma
 | Prop 3 over the real designs | `tMinC_eq_iff_real_graph`, with `tMinC_le_of_graph_real`, `tMinC_eq_of_real_graph` and `exists_real_graph_of_tMinC_eq`; the bridges are `exists_design_of_pairRowSpace`, `WR_eq_span_phiPair_WRreal`, `graphExt_span_phiPair`, `finrank_span_phiPair`, the projection commutations, the real points `re_im_mem_of_mem_span`/`mem_of_phi_mem_span` and `isFeasible_real_of_span_phiPair` |
 | Theorem 4, the construction part | `claim4_converse` plus the real sandwich converse `exists_design_of_pairRowSpace` (recovering the design from a given `W`) |
 | Prop 1 for real designs (`2ℓ`, spectral bound, `t_min ≤ t_min^ℝ`) | `tMinC_le_two_ell`, `le_tMinC_of_lowerBound`, `tMin_le_tMinC` |
+| Corollary 5 (OPT) | `tMin_eq_bisectGo` (complex designs) and `tMinC_eq_bisectGo` (real designs): bisection on the decision predicate over `[0, 2ℓ]` returns the minimum order in `log₂(2ℓ)+1` calls, with the algorithm `bisectGo` formalised |
 | Prop 2's non-degeneracy `ω > 0` | `omega_pos_of_nonzero` under `W₀ ≠ 0`, which is exactly the hypothesis added to Prop 3 in the paper |
 
 ## Verification
