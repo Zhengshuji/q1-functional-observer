@@ -442,3 +442,19 @@ commit `8f77caf` **本地已提交但尚未推送**（GitHub SSH 连不上，稍
 2. 再由 `Matrix.ext`/`funext` 直接读行，`phiPair` 的第一分量就是 `↑((M*N) i j)`，第二分量同理用
    `Ac A * N.map f` 的 `map` 形式；
 3. 剩下只是 `Set.range` 的像与 `pairRowSpace` 的 span 对齐（`hrange` 那一步已经写过，只需 `simpa`）。
+
+## 8.20 实设计的 W 复化：完成（2026-11-27）
+
+`RealGraph.lean` 新增（`Audit` 131 条）：
+
+* `WRreal`：实配对行空间 `pairRowSpace (fromRows L0 R * N) (fromRows L0 R * (A * N))`（`ℝ` 上）；
+* `Lc_mul`、`Lc_mul_A`：`Lc L0 R * (N.map f) = (fromRows L0 R * N).map f`（及 `A N` 版本），
+  用 `Matrix.map_mul`（其 `f` 是隐式参数，不要传矩阵作参数）；
+* **`WR_eq_span_phiPair_WRreal`**：`WR A (N.map f) L0 R = span ℂ (phiPair '' WRreal …)`。
+
+关键：**不要逐元素求和**——先把两处乘积认成 `.map f`（矩阵等式），再对齐 `Set.range` 的像，
+最后用一次 `ℝ`-span 上的归纳证明"`ℝ`-组合的像仍在 `ℂ`-span 里"。
+
+**下一步**：`WRreal` 只是"给定实设计 R 的 W"；要反过来从实图取 `R`，需
+`claim4_converse (K := ℝ)`（配 `pairRows`/`Φ` 编码，实图 = 编码空间的子空间），
+然后 (⇐)：`tMinC ≤ ↑(dim (UC U) + 1 − s₀)`（上界经 `tMinC_le_iff_decC.mpr`）+ `le_tMinC_of_lowerBound`。
