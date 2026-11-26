@@ -4,13 +4,15 @@ import Q1Paper.PaperII.Read.S03_MinOrder
 import Q1Paper.PaperII.Read.S04_LowerBound
 import Q1Paper.PaperII.Read.S05_Tightness
 import Q1Paper.PaperII.Read.S06_RealDesigns
+import Q1Paper.PaperII.Read.S07_Algorithms
 
 /-!
 Q1Paper/PaperII/Read/All.lean
 
 Reading entry for Paper II, in the paper's order: the standing results and the interface
 (`S01`), the sandwich with monotonicity and saturation (`S02`), the minimum order (`S03`), the
-spectral lower bound (`S04`), tightness (`S05`), and the real-design specification (`S06`).
+spectral lower bound (`S04`), tightness (`S05`), the real-design specification (`S06`),
+and the algorithms of the interface theorem (`S07`).
 
 Each section file contains **no proofs**: it lists that section's steps in proof order, each
 with a `#check` of the declaration that carries it, so that a rename breaks the build instead of
