@@ -3,8 +3,9 @@ Q1Paper/PaperII/Audit.lean
 
 The axiom footprint of every declaration of Paper II's Lean development.
 
-Generated from the `PaperII/` sources (declaration names only).  Every audited
-declaration must depend only on `propext`, `Classical.choice` and `Quot.sound`.
+Generated from the `PaperII/` sources (declaration names only) by
+`scripts/generate_audit.py`; do not edit by hand.  Every audited declaration must
+depend only on `propext`, `Classical.choice` and `Quot.sound`.
 -/
 
 import Q1Paper.PaperII.Interface
@@ -88,8 +89,6 @@ import Q1Paper.PaperII.Tightness
 #print axioms Q1Paper.PaperII.pairRowSpace_pad
 #print axioms Q1Paper.PaperII.decC_mono_add
 #print axioms Q1Paper.PaperII.decC_mono
-
--- Read.lean
 
 -- Realification.lean
 #print axioms Q1Paper.PaperII.pairRows

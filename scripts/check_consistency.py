@@ -80,6 +80,7 @@ def main() -> int:
     module_basename = {}
     for dotted in modules:
         module_basename[dotted.rsplit(".", 1)[-1]] = dotted
+    module_names = set(modules)
 
     issues: list[str] = []
     for rel, stale in sorted(path_problems.items()):
@@ -99,6 +100,8 @@ def main() -> int:
             # only judge things that look like a fully-qualified Lean name in this project
             if ref.endswith(".lean"):
                 continue  # a module path in a code span, not a declaration
+            if ref in module_names:
+                continue  # a module name (e.g. Q1Paper.PaperII.Read.All), not a declaration
             if not ref.startswith(("Q1Paper.", "Q1Subspace.", "Thm5.")):
                 continue
             if ref not in declared and not any(d.startswith(ref + ".") for d in declared):

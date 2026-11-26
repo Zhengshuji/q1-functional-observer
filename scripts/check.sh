@@ -27,6 +27,7 @@ python3 scripts/generate_paperI_claims.py --check
 python3 scripts/generate_paperI_modules.py --check
 python3 scripts/generate_paperII_modules.py --check
 python3 scripts/generate_paperII_claims.py --check
+python3 scripts/generate_audit.py --check
 python3 scripts/paper_lean_index.py --check
 python3 scripts/generate_reading_entries.py --check
 python3 scripts/check_consistency.py

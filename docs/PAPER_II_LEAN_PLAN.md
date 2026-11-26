@@ -1,4 +1,4 @@
-> **Working log.**  This file is the running log of the Paper II Lean development:
+﻿> **Working log.**  This file is the running log of the Paper II Lean development:
 > what was proved in which round, the boundaries that were consciously left open, and the
 > roadmap.  The *current* coverage is stated by `docs/PAPER_II_PROOF_MAP.md`; where the two
 > disagree, the proof map wins (it is the one that is checked).
@@ -82,7 +82,7 @@
 - **验收**：不可行时两者都 `⊤`；可行时 `qMin` 被取到（`WithTop` 的 `sInf_mem` 版本）。
 
 ### M1.4 `PaperII/LowerBound.lean`（Paper II 最有价值的新数学）
-- 重写 `finrank_sup_pi_le`（`TightDim.lean` 已不存在）与 `finrank_pi1_mono`；
+- 重写 `finrank_sup_pi_le`（早期临时模块，已不存在）与 `finrank_pi1_mono`；
 - `lowerBound_core : a + 1 ≤ s₀ + t`（`a = finrank (π₁ W₀ ⊔ π₂ W₀)`，`[IsAlgClosed K]`，`0 < ω`）；
 - `lowerBound_sub`（`s₀ ≤ a` 时的减法形式）、`qMin_lower : r0 + (a + 1 - s₀) ≤ qMin`。
 - **验收**：假设与论文 Prop 2 逐条对应；`a + 1 ≤ s₀ + t` 是主陈述（避免 ℕ 截断减法）。
@@ -96,11 +96,11 @@
   谱条件，从而 `tMin ≤ a − s₀ + 1`；与 `lowerBound_core` 合起来给出等式条件。
 - 反方向（`ker π₁|_W` 一维 + 截面）**明确列为可选**；若做，单独一个文件。
 
-### M2.2 `PaperII/Opt.lean`
+### M2.2 OPT（计划中，尚未创建）
 - 抽象二分引理：单调谓词 `P : ℕ → Prop`、`∃ n, P n` ⟹ 返回最小可行 `n`（用 `Nat.find`，与 DEC 后端解耦）。
 - `opt_correct : DecOrder` 的二分返回 `qMin`（条件：`DecOrder` 单调 + 饱和，已在 M1 得到）。
 
-### M2.3 `PaperII/Find.lean`
+### M2.3 FIND（计划中，尚未创建）
 - 只证 **lifting**：`claim4_converse` 已经给出 `∃ R, rowSpace [L₀;R] * M = W`，
   把 `W` 反推成 `R` 的构造写成接口；**明确声明**未验证 BPR 采样算法。
 
@@ -135,7 +135,7 @@
 
 ## 7. 下一步（按顺序，每步一次 commit）
 
-1. **M1.1 探针**：在 WSL 建 `ScratchP2Interface.lean`，确认 `DECℂ → pairRowSpace → claim6_struct`
+1. **M1.1 探针**：在 WSL 建一个临时探针文件（未入库），确认 `DECℂ → pairRowSpace → claim6_struct`
    这条链无额外假设；通了就 promote 成 `PaperII/Interface.lean`。
 2. M1.2 饱和 + `DECℂ` 单调；M1.3 最小阶；M1.4 谱下界。
 3. 每完成一个模块：`lake build` → `#print axioms` → promote → commit（artifact 仓库）。
@@ -337,7 +337,7 @@ Claim 4、Claim 5（`DECℂ` 单调 + 饱和）、Prop 1（`q_min`、`t_min ≤ 
 1. 新增生成器 `scripts/generate_paperII_modules.py`（→ `Q1Paper/PaperII/MODULES.md`）与
    `scripts/generate_paperII_claims.py`（→ `Q1Paper/PaperII/CLAIMS.md`，并校验表中每个声明都在
    `ClaimsCheck.lean` 里）。两者 `--check` 已接入 CI 与 `scripts/check.sh`。
-2. `Read.lean` 拆成 `Read/`：`S01_Standing`、`S02_Sandwich`、`S03_MinOrder`、`S04_LowerBound`、
+2. 旧的单文件阅读入口拆成 `Read/` 目录：`S01_Standing`、`S02_Sandwich`、`S03_MinOrder`、`S04_LowerBound`、
    `S05_Tightness`、`S06_RealDesigns`、`All`（按论文章节，逐步骤 `#check`，与 Paper I 的 `Read/` 同形）；
    CI 改为构建 `Q1Paper.PaperII.Read.All`。
 3. `ClaimsCheck.lean` 补 Paper I 复用声明（`claim3_attainable`、`DEC_iff_compressed`）；
