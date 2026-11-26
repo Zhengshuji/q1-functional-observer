@@ -79,17 +79,22 @@ specification `DECℂ`.  The bridge between them is the real-compression lemma
 
 ## Not formalised
 
-| paper item | reason |
+| paper item | status / reason |
 |---|---|
-| Prop 3, the single `↔` packaging (complex designs) | **formalised**: `tMin_eq_iff_graph` — `t_min = a + 1 − s₀` iff the tightness data exist on `U₀+V₀` (a graph `W(G,b)`, `b ≠ 0`, inside the sandwich, pencil rank constant). The `(⇒)` half transports the extracted data along `π₁V = U₀+V₀`, which is done by rewriting `V = W(G,b)` into the inclusions first and then transporting the whole existential with `Eq.rec`, since the types of `G, b` mention `π₁V` |
-| Prop 3 over the real designs (`DECℂ`) | **formalised, packaged as an equivalence**: `tMinC_eq_iff_real_graph` — `t_min^ℝ = a + 1 − s₀` iff some real design realises a real graph `W(G,b)` (with `b ≠ 0`, `dim_ℝ U = a`) whose complexification is feasible and lies in the sandwich.  The two halves are `tMinC_le_of_graph_real`/`tMinC_eq_of_real_graph` and `exists_real_graph_of_tMinC_eq`; the bridges are `exists_design_of_pairRowSpace`, `WR_eq_span_phiPair_WRreal`, `graphExt_span_phiPair`, `finrank_span_phiPair`, the projection commutations `pi1/pi2/piLam_span_phiPair`, the real points `re_im_mem_of_mem_span`/`mem_of_phi_mem_span`, and the feasibility descent `isFeasible_real_of_span_phiPair` |
-| Theorem 4, the `O(log(ℓ+2))` call count | the ordering is `tMin_le_iff_dec` and the least element is `dec_sInf_tMinSet`; the arithmetic of the call count is not formalised |
-| Corollary 5 (OPT), Corollary 6 (FIND) | complexity statements inherited from Paper I; FIND's bit model is open in the paper |
-| the appendix instance (`q_min = 4`) | exact rational certificate; belongs to the Python verification layer |
-| Theorem 4, the construction part | the ordering (`tMin ≤ r ↔ DEC`) and the counting boundary are recorded above; recovering the `t`-row `R` from a given `W` by solving the linear system is `claim4_converse` (existence), not the paper's explicit recovery step |
-| FIND: the witness system `Ψ_{t,ω}`, the real-solution/feasible-`W` equivalence, and the sampling step | not formalised; only the complexity inheritance is cited in the paper |
-| — | (resolved: `tMinC_le_two_ell`, `le_tMinC_of_lowerBound` and `tMin_le_tMinC` now cover Prop 1 for the real design) |
-| Prop 2's non-degeneracy hypothesis `ω > 0` | the structural bound needs `ω > 0`; `le_tMin_of_lowerBound_max` removes only the `s₀ ≤ a` side condition, and the underlying `a + 1 ≤ s₀ + t` still assumes `ω > 0`.  The paper now states this hypothesis in Proposition 2 (it is false for `W = W₀ = 0`) |
+| Corollary 5 (OPT), Corollary 6 (FIND) | complexity statements inherited from Paper I; FIND's bit model is open in the paper itself |
+| FIND: the witness system `Ψ_{t,ω}`, the real-solution/feasible-`W` equivalence, and the sampling step | not formalised; the paper presents it as an algorithmic certificate scheme |
+| the appendix instance (`q_min = 4`) | exact rational certificate in `scripts/verify_paperII_example.py`; belongs to the Python verification layer, not to Lean |
+| Theorem 4, the `O(log(ℓ+2))` call count | the arithmetic core is formalised (`PaperII/Complexity.lean`: `lt_two_pow_log2_succ`, `div_two_pow_log2_succ_eq_zero`, `bisect_steps_le`, `log2_mono_le`); the search algorithm itself is not |
+
+## Resolved (previously listed as not formalised)
+
+| paper item | now formalised by |
+|---|---|
+| Prop 3, single `↔` packaging (complex designs) | `tMin_eq_iff_graph` |
+| Prop 3 over the real designs | `tMinC_eq_iff_real_graph`, with `tMinC_le_of_graph_real`, `tMinC_eq_of_real_graph` and `exists_real_graph_of_tMinC_eq`; the bridges are `exists_design_of_pairRowSpace`, `WR_eq_span_phiPair_WRreal`, `graphExt_span_phiPair`, `finrank_span_phiPair`, the projection commutations, the real points `re_im_mem_of_mem_span`/`mem_of_phi_mem_span` and `isFeasible_real_of_span_phiPair` |
+| Theorem 4, the construction part | `claim4_converse` plus the real sandwich converse `exists_design_of_pairRowSpace` (recovering the design from a given `W`) |
+| Prop 1 for real designs (`2ℓ`, spectral bound, `t_min ≤ t_min^ℝ`) | `tMinC_le_two_ell`, `le_tMinC_of_lowerBound`, `tMin_le_tMinC` |
+| Prop 2's non-degeneracy `ω > 0` | `omega_pos_of_nonzero` under `W₀ ≠ 0`, which is exactly the hypothesis added to Prop 3 in the paper |
 
 ## Verification
 

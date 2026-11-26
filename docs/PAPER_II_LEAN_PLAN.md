@@ -535,3 +535,19 @@ commit `8f77caf` **本地已提交但尚未推送**（GitHub SSH 连不上，稍
    （维数由 `finrank_span_phiPair` 与 `graphExt_finrank` 提供），
    再用 `graphExt_span_phiPair` 得 `V = graphExt (UC U) (GcU …) b_ℂ`，
    即把 (⇒) 的复数据升级为实数据。
+
+## 8.26 覆盖闭合与文档校准（2026-11-27，`Audit` 161 条）
+
+Paper II 的数学条目现在全部有 Lean 检查：
+
+* Claim 1–5、Prop 1–3（复域与实设计，两条判据都已打包成单一 `↔`）、Theorem 4 的顺序半；
+* `O(log(ℓ+2))` 计数的**算术核心**：`PaperII/Complexity.lean`
+  （`lt_two_pow_log2_succ`、`div_two_pow_log2_succ_eq_zero`、`bisect_steps_le`、`log2_mono_le`）；
+* 附录实例保持 Python 精确证书（`scripts/verify_paperII_example.py`：64/64 个非零 7×7 子式、gcd = 1、
+  `q_min ≤ 4`）。
+
+仍未形式化的只有：OPT/FIND 的复杂度陈述、FIND 的 `Ψ_{t,ω}` 见证系统与采样步骤、以及上面那个附录实例
+——论文本身把它们当作算法描述/数值证书。
+
+`docs/PAPER_II_PROOF_MAP.md` 的 "Not formalised" 一节已重写：把已解决的条目（复域打包、实设计判据、
+Theorem 4 的构造部分、实设计的 Prop 1、`ω > 0`）移到 "Resolved"，并给每条注明现在是哪条声明覆盖它。
