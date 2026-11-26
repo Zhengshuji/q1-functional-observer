@@ -98,6 +98,17 @@ import Q1Paper.PaperII.RealGraph
 #print axioms Q1Paper.PaperII.Gfun_mem_UC
 #print axioms Q1Paper.PaperII.GcU
 #print axioms Q1Paper.PaperII.GcU_phi
+#print axioms Q1Paper.PaperII.GR
+#print axioms Q1Paper.PaperII.GR_apply
+#print axioms Q1Paper.PaperII.phiPair
+#print axioms Q1Paper.PaperII.phiPair_apply
+#print axioms Q1Paper.PaperII.phiPair_mem_graphExt
+#print axioms Q1Paper.PaperII.phiU
+#print axioms Q1Paper.PaperII.phiU_apply
+#print axioms Q1Paper.PaperII.phiU_eq
+#print axioms Q1Paper.PaperII.phiDom
+#print axioms Q1Paper.PaperII.phiDom_apply
+#print axioms Q1Paper.PaperII.graphMap_phiDom
 
 -- Realification.lean
 #print axioms Q1Paper.PaperII.pairRows

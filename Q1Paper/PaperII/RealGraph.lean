@@ -105,4 +105,57 @@ theorem phiPair_mem_graphExt (U : Submodule ℝ (Fin k → ℝ)) (Gm : Matrix (F
   congr 1
   exact (congrArg Subtype.val (GcU_phi U Gm hG h)).symm
 
+
+/-- The inclusion `U → ↥(UC U)`, `u ↦ phi u`. -/
+noncomputable def phiU (U : Submodule ℝ (Fin k → ℝ)) : ↥U →ₗ[ℝ] ↥(UC U) where
+  toFun u := ⟨phi (Fin k) (u : Fin k → ℝ), Submodule.subset_span ⟨u, u.2, rfl⟩⟩
+  map_add' x y := Subtype.ext (by simp)
+  map_smul' c x := Subtype.ext (by simp)
+
+@[simp] theorem phiU_apply (U : Submodule ℝ (Fin k → ℝ)) (u : ↥U) :
+    ((phiU U u : ↥(UC U)) : Fin k → ℂ) = phi (Fin k) (u : Fin k → ℝ) := rfl
+
+theorem phiU_eq (U : Submodule ℝ (Fin k → ℝ)) (u : ↥U) :
+    phiU U u = ⟨phi (Fin k) (u : Fin k → ℝ), Submodule.subset_span ⟨u, u.2, rfl⟩⟩ := rfl
+
+/-- The domain of the graph parameters, complexified: `(h, c) ↦ (phi h, c)`. -/
+noncomputable def phiDom (U : Submodule ℝ (Fin k → ℝ)) :
+    (↥U × ℝ) →ₗ[ℝ] (↥(UC U) × ℂ) where
+  toFun p := (phiU U p.1, (p.2 : ℂ))
+  map_add' p q := by
+    ext <;> simp
+  map_smul' c p := by
+    ext <;> simp
+
+@[simp] theorem phiDom_apply (U : Submodule ℝ (Fin k → ℝ)) (p : ↥U × ℝ) :
+    phiDom U p = (phiU U p.1, (p.2 : ℂ)) := rfl
+
+/-- **The two graph maps agree after complexification.** -/
+theorem graphMap_phiDom (U : Submodule ℝ (Fin k → ℝ)) (Gm : Matrix (Fin k) (Fin k) ℝ)
+    (hG : ∀ x ∈ U, Gm *ᵥ x ∈ U) (b : ↥U) (p : ↥U × ℝ) :
+    graphMap (UC U) (GcU U Gm hG)
+        ⟨phi (Fin k) (b : Fin k → ℝ), Submodule.subset_span ⟨b, b.2, rfl⟩⟩ (phiDom U p)
+      = phiPair (graphMap U (GR U Gm hG) b p) := by
+  obtain ⟨u, c⟩ := p
+  have h2 : ((GcU U Gm hG (phiU U u) : ↥(UC U)) : Fin k → ℂ)
+      = phi (Fin k) (Gm *ᵥ (u : Fin k → ℝ)) := by
+    rw [phiU_eq U u]
+    exact congrArg Subtype.val (GcU_phi U Gm hG u)
+  have h3 : (algebraMap ℝ (Fin k → ℝ)) c * (b : Fin k → ℝ) = c • (b : Fin k → ℝ) := by
+    ext i
+    simp
+  have h4 : (algebraMap ℂ (Fin k → ℂ)) (c : ℝ) * phi (Fin k) (b : Fin k → ℝ)
+      = (c : ℂ) • phi (Fin k) (b : Fin k → ℝ) := by
+    ext i
+    simp
+  apply Prod.ext
+  · rfl
+  · simp only [graphMap, LinearMap.coe_mk, AddHom.coe_mk, phiPair_apply, phiDom_apply,
+      Submodule.coe_add, Submodule.coe_smul, GR_apply, h2, phiU_apply, h3, h4, map_add,
+      map_smul]
+    rw [show ((c : ℂ) • (phi (Fin k) (b : Fin k → ℝ)))
+        = c • (phi (Fin k) (b : Fin k → ℝ)) from by
+      ext i
+      simp]
+
 end Q1Paper.PaperII
