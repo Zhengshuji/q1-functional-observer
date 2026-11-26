@@ -33,11 +33,22 @@ Its structure, which the proof map follows:
 ## Paper II
 
 `paper/paper_II_minorder.tex` (minimum order and construction) has its own Lean
-tree `Q1Paper/PaperII/` with the same shape: `MainTheorems.lean` (entry point),
-`Claims.lean` / `ClaimsCheck.lean` (the paper's items and their machine-checked
-index), `Audit.lean` (axiom footprint, 48 declarations) and the proof modules.
-Its item map is `docs/PAPER_II_PROOF_MAP.md`, its module map
-`docs/PAPER_II_MODULE_MAP.md`.
+tree `Q1Paper/PaperII/` with the same shape as Paper I:
+
+| file | job |
+|---|---|
+| `MainTheorems.lean` | entry point: what Lean must load |
+| `Claims.lean` | the paper's items, in the paper's order (narrative) |
+| `ClaimsCheck.lean` | machine-checked index: one `#check` per item |
+| `CLAIMS.md` | the same table for readers who do not know Lean (generated) |
+| `MODULES.md` | the module index: which file proves what (generated) |
+| `Audit.lean` | the axiom footprint of every audited declaration (106) |
+| `Read/All.lean` | the reading entry: the paper's order, one `#check` per step |
+
+The section-by-section reading order is `Q1Paper/PaperII/Read/` (`S01_Standing`,
+`S02_Sandwich`, `S03_MinOrder`, `S04_LowerBound`, `S05_Tightness`,
+`S06_RealDesigns`), mirroring Paper I's `Read/`.  The item map is
+`docs/PAPER_II_PROOF_MAP.md`, the module map `docs/PAPER_II_MODULE_MAP.md`.
 
 Paper II reuses Paper I's Claims 4–6 through the column split `Φ`
 (`Q1Paper/PaperII/Interface.lean`) between the row(`[N AN]`) encoding and the

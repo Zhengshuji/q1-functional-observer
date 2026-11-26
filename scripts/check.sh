@@ -18,13 +18,15 @@ python3 scripts/check_paperI_axioms.py "${TMPDIR:-/tmp}/paperI_audit.log" Q1Pape
 # 2b. Paper II
 lake build Q1Paper.PaperII.MainTheorems
 lake env lean Q1Paper/PaperII/ClaimsCheck.lean
-lake build Q1Paper.PaperII.Read
+lake build Q1Paper.PaperII.Read.All
 lake env lean Q1Paper/PaperII/Audit.lean > "${TMPDIR:-/tmp}/paperII_audit.log"
 python3 scripts/check_paperI_axioms.py "${TMPDIR:-/tmp}/paperII_audit.log" Q1Paper/PaperII/Audit.lean
 
 # 3. the generated indexes must match the sources
 python3 scripts/generate_paperI_claims.py --check
 python3 scripts/generate_paperI_modules.py --check
+python3 scripts/generate_paperII_modules.py --check
+python3 scripts/generate_paperII_claims.py --check
 python3 scripts/paper_lean_index.py --check
 python3 scripts/generate_reading_entries.py --check
 python3 scripts/check_consistency.py

@@ -1,4 +1,4 @@
-\documentclass[journal]{IEEEtran}
+﻿\documentclass[journal]{IEEEtran}
 \usepackage{amsmath,amssymb,mathtools}
 \usepackage{amsthm}
 \usepackage{booktabs,array}
@@ -427,7 +427,9 @@ and $\operatorname{rank}\bigl[\lambda I-G\ \ b\bigr]=a$ for every $\lambda\in\ma
 If such a pair $(G,b)$ exists, then $W(G,b)$ is a subspace of $\mathcal T$ with $W_0\subseteq W(G,b)$,
 $\dim W(G,b)=a+1$ because $b\neq0$, and $\pi_\lambda(W(G,b))=(\lambda I-G)(U_0+V_0)+\operatorname{span}\{b\}$
 has dimension $a$ for every $\lambda$; by Claim~\ref{claim:W} it is feasible, so its quotient
-dimension $a+1-s_0$ bounds $t_{\min}$ above and \eqref{eq:qmin-lb} bounds it below.
+dimension $a+1-s_0$ bounds $t_{\min}$ above and \eqref{eq:qmin-lb} bounds it below (its
+non-degeneracy hypothesis holds here: $W(G,b)$ is feasible with $\dim W(G,b)=a+1>0$, and
+$\dim W\le2\omega$ gives $\omega>0$).
 
 Conversely, let $W$ attain $t_{\min}=a-s_0+1$, so $\dim W=s_0+t_{\min}=a+1$. By
 Claim~\ref{claim:W} $\pi_1(W)=\pi_2(W)=:U$; since $\pi_1(W)\supseteq U_0$ and
@@ -782,6 +784,16 @@ feasibility from $\operatorname{rank}[\lambda I-G\ \ b]=a$, and $t=a-s_0+1$ & li
 \texttt{graphExt\_piLam}, \texttt{graphExt\_feasible}, \texttt{t\_eq\_of\_graph} \\
 Tightness, the converse: a feasible $W$ with $\dim W=\dim\pi_1W+1$ is $W(G,b)$ & literal &
 \texttt{exists\_graph\_representation} \\
+Tightness, the identification $\pi_1W=U_0+V_0$ at an attaining $W$ & literal &
+\texttt{pi1\_eq\_sup\_of\_finrank} \\
+Tightness, the composition in both directions & literal &
+\texttt{tMin\_eq\_of\_graph}, \texttt{exists\_graph\_of\_tMin\_eq} \\
+Real-compression lemma (Claim~\ref{claim:sandwich}, real designs) & literal &
+\texttt{real\_compress}, \texttt{feasible\_to\_decC} \\
+Prop.~\ref{prop:minorder} for real designs: $t_{\min}^{\mathbb R}\le2\ell$ & literal &
+\texttt{tMinC\_le\_two\_ell} \\
+\eqref{eq:qmin-lb} for real designs: $a+1-s_0\le t_{\min}^{\mathbb R}$ & literal &
+\texttt{le\_tMinC\_of\_lowerBound}, \texttt{tMin\_le\_tMinC} \\
 \bottomrule
 \end{tabular}
 \end{table*}
@@ -794,9 +806,10 @@ $\mathbb C$, and separately for the paper's real-design specification $\mathrm{D
 \texttt{decC\_saturates}, minimum order \texttt{tMinC\_le\_iff\_decC}, via the compression
 \texttt{real\_compress}).  Both directions of Proposition~\ref{prop:tight} are formalised separately (the
 $(G,b)$ direction and the extraction of $(G,b)$ from an attaining $W$), together with the
-numerical half; composing them into the paper's equivalence, and the real-field form of
-the statement, are not.  The artifact's Paper II item map
-records the remaining boundary (the real-design specification).
+numerical half and the identification $\pi_1W=U_0+V_0$; the two directions are composed
+(\texttt{tMin\_eq\_of\_graph}, \texttt{exists\_graph\_of\_tMin\_eq}), but they are not packaged into a single
+$\leftrightarrow$, and the real-design form of the criterion is not formalised (only the
+dimension bridge $\dim_{\mathbb C}=\dim_{\mathbb R}$ of a real subspace is).
 
 Two kinds of evidence support the statements above, and the artifact records which statement rests on
 which.

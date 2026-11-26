@@ -8,6 +8,8 @@ this build instead of silently invalidating the claims table.
 import Q1Paper.PaperII.MainTheorems
 
 -- §II  Standing results (from Paper I, reused)
+#check @Q1Paper.claim3_attainable
+#check @Q1Paper.PaperI.DEC_iff_compressed
 #check @Q1Paper.claim4_sandwich
 #check @Q1Paper.claim4_converse
 #check @Q1Paper.claim5_conditions_depend_on_W
