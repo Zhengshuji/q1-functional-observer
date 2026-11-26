@@ -23,6 +23,7 @@ row space and complexifying.
 -/
 
 import Q1Paper.PaperII.Saturate
+import Q1Paper.PaperII.MinOrder
 import Q1Paper.PaperII.Monotone
 import Q1Paper.PaperI.S08_ChartEquivalence.DecComplex
 
@@ -479,7 +480,27 @@ theorem decC_sInf_tMinCSet {p r0 n k : ℕ}
   refine (tMinC_le_iff_decC C A L0 N hN (sInf (tMinCSet A N L0))).mp ?_
   rw [tMinC, dif_pos hne]
 
+
+/-- **`t_min ≤ 2ℓ` for real designs.**  Every feasible real design has `W ≤ T` and
+quotient dimension `≤ 2ℓ`, so the minimum over real designs obeys the bound. -/
+theorem tMinC_le_two_ell
+    (A : Matrix (Fin n) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℝ)
+    (L0 : Matrix (Fin r0) (Fin n) ℝ)
+    (hne : (tMinCSet A N L0).Nonempty) :
+    tMinC A N L0 ≤ ((2 * ell A (N.map (algebraMap ℝ ℂ)) : ℕ) : WithTop ℕ) := by
+  rw [tMinC, dif_pos hne]
+  refine WithTop.coe_le_coe.mpr ?_
+  have hmem : sInf (tMinCSet A N L0) ∈ tMinCSet A N L0 := Nat.sInf_mem hne
+  obtain ⟨r, R, hW0, hf, ht⟩ := hmem
+  rw [← ht]
+  have hWT : WR A (N.map (algebraMap ℝ ℂ)) L0 R ≤ TR A (N.map (algebraMap ℝ ℂ)) := by
+    rw [WR_eq_map, TR_eq_map]
+    exact Submodule.map_mono
+      (Q1Paper.rowSpace_mul_le (Matrix.fromRows (L0c L0) (Rc R)) (Mcol (N.map (algebraMap ℝ ℂ)) (Ac A)))
+  exact t_le_two_ell A (N.map (algebraMap ℝ ℂ)) L0 hW0 hWT hf
+
 end Q1Paper.PaperII
+
 
 
 
