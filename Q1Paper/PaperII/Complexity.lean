@@ -43,4 +43,12 @@ theorem log2_mono_le {m N : ℕ} (h : m ≤ N) : m.log2 ≤ N.log2 := by
       have h3 : 2 ^ m.log2 ≤ N := le_trans h2 h
       exact (Nat.le_log2 (Nat.pos_iff_ne_zero.mp hN)).mpr h3
 
+
+/-- **One bisection step at least halves the interval.**  Splitting `[lo, hi]` at the midpoint
+`m = (lo + hi) / 2` leaves two subintervals of length at most `(hi − lo) / 2`. -/
+theorem half_width (lo hi : ℕ) (h : lo < hi) :
+    ((lo + hi) / 2 - lo ≤ (hi - lo) / 2) ∧
+      (hi - ((lo + hi) / 2 + 1) ≤ (hi - lo) / 2) := by
+  constructor <;> omega
+
 end Q1Paper.PaperII

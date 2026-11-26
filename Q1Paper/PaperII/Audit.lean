@@ -27,6 +27,7 @@ import Q1Paper.PaperII.Complexity
 #print axioms Q1Paper.PaperII.div_two_pow_log2_succ_eq_zero
 #print axioms Q1Paper.PaperII.bisect_steps_le
 #print axioms Q1Paper.PaperII.log2_mono_le
+#print axioms Q1Paper.PaperII.half_width
 
 -- Converse.lean
 #print axioms Q1Paper.PaperII.WRc
