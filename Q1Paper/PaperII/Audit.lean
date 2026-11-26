@@ -149,6 +149,12 @@ import Q1Paper.PaperII.Complexity
 #print axioms Q1Paper.PaperII.exists_real_graph_of_tMinC_eq
 #print axioms Q1Paper.PaperII.tMinC_eq_of_real_graph
 #print axioms Q1Paper.PaperII.tMinC_eq_iff_real_graph
+#print axioms Q1Paper.PaperII.L0c_mul
+#print axioms Q1Paper.PaperII.L0c_mul_A
+#print axioms Q1Paper.PaperII.W0_eq_span_phiPair_W0real
+#print axioms Q1Paper.PaperII.W0_le_span_phiPair
+#print axioms Q1Paper.PaperII.W0_le_of_WRreal_le
+#print axioms Q1Paper.PaperII.tMinC_le_of_graph_real_pure
 
 -- Realification.lean
 #print axioms Q1Paper.PaperII.pairRows

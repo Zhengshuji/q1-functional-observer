@@ -918,4 +918,99 @@ theorem tMinC_eq_iff_real_graph {p : ℕ}
     rw [WR_eq_span_phiPair_WRreal]
     exact hfeas
 
+
+/-- The complexified `L₀` times `N` is the complexification of the product. -/
+theorem L0c_mul (L0 : Matrix (Fin r0) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℝ) :
+    L0c L0 * (N.map (algebraMap ℝ ℂ)) = (L0 * N).map (algebraMap ℝ ℂ) := by
+  rw [L0c]
+  exact (Matrix.map_mul (f := algebraMap ℝ ℂ)).symm
+
+/-- The complexified `L₀` times the complexified `A N`. -/
+theorem L0c_mul_A (A : Matrix (Fin n) (Fin n) ℝ) (L0 : Matrix (Fin r0) (Fin n) ℝ)
+    (N : Matrix (Fin n) (Fin k) ℝ) :
+    L0c L0 * (Ac A * (N.map (algebraMap ℝ ℂ)))
+      = (L0 * (A * N)).map (algebraMap ℝ ℂ) := by
+  have hA : Ac A * N.map (algebraMap ℝ ℂ) = (A * N).map (algebraMap ℝ ℂ) := by
+    rw [Ac]
+    exact (Matrix.map_mul (f := algebraMap ℝ ℂ)).symm
+  rw [hA, L0c]
+  exact (Matrix.map_mul (f := algebraMap ℝ ℂ)).symm
+
+/-- **`W₀` is the complexification of its real counterpart** `W0real`. -/
+theorem W0_eq_span_phiPair_W0real (A : Matrix (Fin n) (Fin n) ℝ)
+    (N : Matrix (Fin n) (Fin k) ℝ) (L0 : Matrix (Fin r0) (Fin n) ℝ) :
+    W0 A (N.map (algebraMap ℝ ℂ)) L0
+      = Submodule.span ℂ (phiPair '' (W0real A N L0 : Set ((Fin k → ℝ) × (Fin k → ℝ)))) := by
+  have h1 := L0c_mul L0 N
+  have h2 := L0c_mul_A A L0 N
+  have hset : Set.range (fun i : Fin r0 =>
+        (((L0 * N).map (algebraMap ℝ ℂ)) i, ((L0 * (A * N)).map (algebraMap ℝ ℂ)) i))
+      = phiPair '' Set.range (fun i : Fin r0 =>
+        (((L0 * N) i), ((L0 * (A * N)) i))) := by
+    ext z
+    constructor
+    · rintro ⟨i, rfl⟩
+      refine ⟨_, ⟨i, rfl⟩, ?_⟩
+      apply Prod.ext <;> funext j <;> simp [phi_apply, Matrix.map_apply]
+    · rintro ⟨_, ⟨i, rfl⟩, rfl⟩
+      exact ⟨i, rfl⟩
+  rw [W0, W0real, Q1Paper.pairRowSpace, Q1Paper.pairRowSpace, h1, h2, hset]
+  refine le_antisymm ?_ ?_
+  · refine Submodule.span_le.mpr ?_
+    rintro _ ⟨z, hz, rfl⟩
+    exact Submodule.subset_span ⟨z, Submodule.subset_span hz, rfl⟩
+  · rw [Submodule.span_le]
+    rintro z ⟨y, hy, rfl⟩
+    refine Submodule.span_induction (p := fun y _ => phiPair y ∈ Submodule.span ℂ
+      (phiPair '' Set.range (fun i : Fin r0 => (((L0 * N) i), ((L0 * (A * N)) i))))) ?_ ?_ ?_ ?_ hy
+    · rintro _ ⟨i, rfl⟩
+      exact Submodule.subset_span ⟨_, ⟨i, rfl⟩, rfl⟩
+    · exact Submodule.zero_mem _
+    · intro a b _ _ ha hb
+      rw [map_add]
+      exact Submodule.add_mem _ ha hb
+    · intro c a _ ha
+      have hc : phiPair (c • a) = (c : ℂ) • phiPair a := by
+        rw [map_smul]
+        ext <;> simp
+      rw [hc]
+      exact Submodule.smul_mem _ (c : ℂ) ha
+
+/-- The real inclusion of `W₀` implies its inclusion in the complexification. -/
+theorem W0_le_span_phiPair {X : Submodule ℝ ((Fin k → ℝ) × (Fin k → ℝ))}
+    (h : W0real A N L0 ≤ X) :
+    W0 A (N.map (algebraMap ℝ ℂ)) L0
+      ≤ Submodule.span ℂ (phiPair '' (X : Set ((Fin k → ℝ) × (Fin k → ℝ)))) := by
+  rw [W0_eq_span_phiPair_W0real]
+  exact Submodule.span_mono (Set.image_mono h)
+
+/-- The real sandwich inclusion implies the complex one. -/
+theorem W0_le_of_WRreal_le {R : Matrix (Fin r) (Fin n) ℝ}
+    (h : W0real A N L0 ≤ WRreal A N L0 R) :
+    W0 A (N.map (algebraMap ℝ ℂ)) L0 ≤ WR A (N.map (algebraMap ℝ ℂ)) L0 R := by
+  rw [W0_eq_span_phiPair_W0real, WR_eq_span_phiPair_WRreal]
+  exact Submodule.span_mono (Set.image_mono h)
+
+
+/-- **The real-design bound from purely real hypotheses.**  The complex inclusion of `W₀` is
+derived from the real one. -/
+theorem tMinC_le_of_graph_real_pure {p : ℕ}
+    (C : Matrix (Fin p) (Fin n) ℝ) (A : Matrix (Fin n) (Fin n) ℝ)
+    (L0 : Matrix (Fin r0) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℝ)
+    (hN : (N.map (algebraMap ℝ ℂ)).mulVecLin.range
+      = (Matrix.fromRows ((C.map (algebraMap ℝ ℂ)) * (A.map (algebraMap ℝ ℂ)))
+          (C.map (algebraMap ℝ ℂ))).mulVecLin.ker)
+    {U : Submodule ℝ (Fin k → ℝ)} {Gm : Matrix (Fin k) (Fin k) ℝ}
+    (hG : ∀ x ∈ U, Gm *ᵥ x ∈ U) {b : ↥U} (hb : b ≠ 0)
+    (hW0 : W0real A N L0 ≤ graphExt U (GR U Gm hG) b)
+    (hWT : graphExt U (GR U Gm hG) b ≤ TRreal A N)
+    (hfeas : IsFeasible (graphExt (UC U) (GcU U Gm hG)
+      ⟨phi (Fin k) (b : Fin k → ℝ), Submodule.subset_span ⟨b, b.2, rfl⟩⟩)) :
+    tMinC A N L0
+      ≤ ((Module.finrank ℝ ↥U + 1
+          - Module.finrank ℂ ↥(W0 A (N.map (algebraMap ℝ ℂ)) L0) : ℕ) : WithTop ℕ) := by
+  refine tMinC_le_of_graph_real C A L0 N hN hG hb hW0 hWT ?_ hfeas
+  rw [← graphExt_span_phiPair U Gm hG b]
+  exact W0_le_span_phiPair hW0
+
 end Q1Paper.PaperII
