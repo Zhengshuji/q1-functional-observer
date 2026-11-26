@@ -88,7 +88,7 @@ specification `DECℂ`.  The bridge between them is the real-compression lemma
 | the appendix instance (`q_min = 4`) | exact rational certificate; belongs to the Python verification layer |
 | Theorem 4, the construction part | the ordering (`tMin ≤ r ↔ DEC`) and the counting boundary are recorded above; recovering the `t`-row `R` from a given `W` by solving the linear system is `claim4_converse` (existence), not the paper's explicit recovery step |
 | FIND: the witness system `Ψ_{t,ω}`, the real-solution/feasible-`W` equivalence, and the sampling step | not formalised; only the complexity inheritance is cited in the paper |
-| Prop 1, `t_min ≤ 2ℓ` for the real-design `tMinC` | `tMin_le_two_ell` is stated for the complex-design `tMin`; the real-design analogue follows from the same structural bound plus `real_compress` but is not stated separately |
+| — | (resolved: `tMinC_le_two_ell`, `le_tMinC_of_lowerBound` and `tMin_le_tMinC` now cover Prop 1 for the real design) |
 | Prop 2's non-degeneracy hypothesis `ω > 0` | the structural bound needs `ω > 0`; `le_tMin_of_lowerBound_max` removes only the `s₀ ≤ a` side condition, and the underlying `a + 1 ≤ s₀ + t` still assumes `ω > 0`.  The paper now states this hypothesis in Proposition 2 (it is false for `W = W₀ = 0`) |
 
 ## Verification

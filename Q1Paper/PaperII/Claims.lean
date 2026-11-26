@@ -62,6 +62,9 @@ proved, and its converse is the open real-compression lemma (plan §8.5).
   (`t_min = ⊤` when infeasible) — `Q1Paper.PaperII.tMin_le_iff_dec`.
 * **Prop 1, a priori bound**: `t_min ≤ 2ℓ`, `ℓ = rank(A N)` —
   `Q1Paper.PaperII.tMin_le_two_ell` (and `omega_le_ell`, `t_le_two_ell`).
+* **Prop 1, the real-design bounds**: `t_min^ℝ ≤ 2ℓ` (`tMinC_le_two_ell`), the
+  spectral lower bound `a + 1 − s₀ ≤ t_min^ℝ` (`le_tMinC_of_lowerBound`), and
+  `t_min ≤ t_min^ℝ` (`tMin_le_tMinC`).
 * **Prop 1, minimum order, real designs (`DECℂ`)**: `t_min^ℝ ≤ r ↔ DECℂ r`, where
   `t_min^ℝ = tMinC` is the least quotient dimension over feasible **real** designs
   (`Q1Paper.PaperII.tMinC_le_iff_decC`), and the least feasible real order is itself
