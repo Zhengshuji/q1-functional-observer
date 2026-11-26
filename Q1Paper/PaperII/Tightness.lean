@@ -231,5 +231,38 @@ theorem tMin_le_of_feasible
     exact WithTop.coe_le_coe.mpr (Nat.sInf_le hmem)
   · exact absurd ⟨_, hmem⟩ hne
 
-end Q1Paper.PaperII
 
+/-- **Prop 3 for complex designs, packaged as an equivalence.**  The minimum order saturates at
+`a + 1 − s₀` exactly when the tightness data exist: a graph `W(G,b)` on `U₀+V₀` inside the
+sandwich whose pencil has constant rank. -/
+theorem tMin_eq_iff_graph
+    (A : Matrix (Fin n) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℂ)
+    (L0 : Matrix (Fin r0) (Fin n) ℝ)
+    (hsa : finrank ℂ ↥(W0 A N L0)
+      ≤ finrank ℂ ↥(Q1Subspace.pi1 (W0 A N L0) ⊔ Q1Subspace.pi2 (W0 A N L0))) :
+    tMin A N L0
+        = ↑((finrank ℂ ↥(Q1Subspace.pi1 (W0 A N L0) ⊔ Q1Subspace.pi2 (W0 A N L0)))
+          + 1 - finrank ℂ ↥(W0 A N L0)) ↔
+      ∃ (G : ↥(Q1Subspace.pi1 (W0 A N L0) ⊔ Q1Subspace.pi2 (W0 A N L0)) →ₗ[ℂ]
+            ↥(Q1Subspace.pi1 (W0 A N L0) ⊔ Q1Subspace.pi2 (W0 A N L0)))
+        (b : ↥(Q1Subspace.pi1 (W0 A N L0) ⊔ Q1Subspace.pi2 (W0 A N L0))),
+        b ≠ 0 ∧
+          W0 A N L0
+            ≤ graphExt (Q1Subspace.pi1 (W0 A N L0) ⊔ Q1Subspace.pi2 (W0 A N L0)) G b ∧
+          graphExt (Q1Subspace.pi1 (W0 A N L0) ⊔ Q1Subspace.pi2 (W0 A N L0)) G b
+            ≤ TR A N ∧
+          (∀ lam : ℂ,
+            finrank ℂ ↥(Submodule.map
+                (graphPencil (Q1Subspace.pi1 (W0 A N L0) ⊔ Q1Subspace.pi2 (W0 A N L0)) G lam) ⊤
+              ⊔ Submodule.span ℂ
+                  {((b : ↥(Q1Subspace.pi1 (W0 A N L0) ⊔ Q1Subspace.pi2 (W0 A N L0))) : Fin k → ℂ)})
+              = finrank ℂ ↥(Q1Subspace.pi1 (W0 A N L0) ⊔ Q1Subspace.pi2 (W0 A N L0))) := by
+  constructor
+  · intro heq
+    obtain ⟨V, G, b, hV0, hVT, _hVf, hb, hVe, hpi, hrank⟩ := exists_graph_of_tMin_eq A N L0 hsa heq
+    rw [hVe] at hV0 hVT
+    exact hpi ▸ ⟨G, b, hb, hV0, hVT, hrank⟩
+  · rintro ⟨G, b, hb, hW0le, hWTle, hrank⟩
+    exact tMin_eq_of_graph A N L0 hb hW0le hWTle hrank
+
+end Q1Paper.PaperII

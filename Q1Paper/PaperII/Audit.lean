@@ -200,4 +200,5 @@ import Q1Paper.PaperII.RealGraph
 #print axioms Q1Paper.PaperII.UV_eq
 #print axioms Q1Paper.PaperII.mem_tMinSet
 #print axioms Q1Paper.PaperII.tMin_le_of_feasible
+#print axioms Q1Paper.PaperII.tMin_eq_iff_graph
 

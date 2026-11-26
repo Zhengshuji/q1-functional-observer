@@ -30,7 +30,7 @@ The entry points and their separate jobs:
 | `Realification.lean` | 20 | 5 | `pairRows`, `Φ_pairRows`, `pairRowSpace_eq_map_pairRows` | Real-design bridges: the real-compression lemma `real_compress` (upgrade of the |
 | `Sandwich.lean` | 5 | 7 | `Ac`, `L0c`, `Rc` | Paper II's sandwich in the pair encoding: the forward direction, from a feasible |
 | `Saturate.lean` | 4 | 0 | `DEC_to_feasible_c`, `t_le_t_of_le`, `dec_saturates` | Paper II, Claim `lem:monotone`, the saturation half: `DEC r` and `DEC m` are |
-| `Tightness.lean` | 8 | 1 | `omega_pos_of_nonzero`, `W0_ne_bot_of_pos`, `pi1_eq_sup_of_finrank` | Paper II, Proposition `prop:tight`, the composed criterion (complex designs): |
+| `Tightness.lean` | 9 | 1 | `omega_pos_of_nonzero`, `W0_ne_bot_of_pos`, `pi1_eq_sup_of_finrank` | Paper II, Proposition `prop:tight`, the composed criterion (complex designs): |
 
 ## `Q1Paper/PaperII/Read/` -- the reading order
 
