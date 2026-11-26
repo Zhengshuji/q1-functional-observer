@@ -24,6 +24,7 @@ row space and complexifying.
 
 import Q1Paper.PaperII.Saturate
 import Q1Paper.PaperII.MinOrder
+import Q1Paper.PaperII.Tightness
 import Q1Paper.PaperII.Monotone
 import Q1Paper.PaperI.S08_ChartEquivalence.DecComplex
 
@@ -535,7 +536,51 @@ theorem finrank_UC {k : ℕ} (U : Submodule ℝ (Fin k → ℝ)) :
   rw [Q1Paper.PaperI.DecComplex.rank_map_ofReal_any M]
   rw [Q1Subspace.rank_eq_finrank_rowSpace M, hM]
 
+
+/-- `WR` of any real design lies in `TR` (so the real designs are a subset of the
+feasible complex `W`). -/
+theorem WR_le_TR (A : Matrix (Fin n) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℝ)
+    (L0 : Matrix (Fin r0) (Fin n) ℝ) (r : ℕ) (R : Matrix (Fin r) (Fin n) ℝ) :
+    WR A (N.map (algebraMap ℝ ℂ)) L0 R ≤ TR A (N.map (algebraMap ℝ ℂ)) := by
+  rw [WR_eq_map, TR_eq_map]
+  exact Submodule.map_mono
+    (Q1Paper.rowSpace_mul_le (Matrix.fromRows (L0c L0) (Rc R)) (Mcol (N.map (algebraMap ℝ ℂ)) (Ac A)))
+
+/-- **The complex-domain minimum is the smaller one**: real designs are among the
+feasible complex `W`, so `t_min ≤ t_min^ℝ`. -/
+theorem tMin_le_tMinC (A : Matrix (Fin n) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℝ)
+    (L0 : Matrix (Fin r0) (Fin n) ℝ) :
+    tMin A (N.map (algebraMap ℝ ℂ)) L0 ≤ tMinC A N L0 := by
+  classical
+  by_cases hne : (tMinCSet A N L0).Nonempty
+  · rw [tMinC, dif_pos hne]
+    obtain ⟨r, R, hW0, hf, ht⟩ := Nat.sInf_mem hne
+    have hWT := WR_le_TR A N L0 r R
+    have hle : tMin A (N.map (algebraMap ℝ ℂ)) L0
+        ≤ ((t (W0 A (N.map (algebraMap ℝ ℂ)) L0)
+            (WR A (N.map (algebraMap ℝ ℂ)) L0 R) : ℕ) : WithTop ℕ) :=
+      tMin_le_of_feasible A (N.map (algebraMap ℝ ℂ)) L0 hW0 hWT hf
+    rw [← ht]
+    exact hle
+  · rw [tMinC, dif_neg hne]
+    exact le_top
+
+/-- **Prop 1's `qmin-lb` for real designs**: `a + 1 − s₀ ≤ t_min^ℝ`. -/
+theorem le_tMinC_of_lowerBound
+    (A : Matrix (Fin n) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℝ)
+    (L0 : Matrix (Fin r0) (Fin n) ℝ)
+    (hω : ∀ V : Submodule ℂ ((Fin k → ℂ) × (Fin k → ℂ)),
+      W0 A (N.map (algebraMap ℝ ℂ)) L0 ≤ V → V ≤ TR A (N.map (algebraMap ℝ ℂ))
+        → IsFeasible V → 0 < finrank ℂ ↥(Q1Subspace.pi1 V)) :
+    ((finrank ℂ ↥(Q1Subspace.pi1 (W0 A (N.map (algebraMap ℝ ℂ)) L0)
+        ⊔ Q1Subspace.pi2 (W0 A (N.map (algebraMap ℝ ℂ)) L0)) + 1
+        - finrank ℂ ↥(W0 A (N.map (algebraMap ℝ ℂ)) L0) : ℕ) : WithTop ℕ)
+      ≤ tMinC A N L0 :=
+  le_trans (le_tMin_of_lowerBound_max A (N.map (algebraMap ℝ ℂ)) L0 hω)
+    (tMin_le_tMinC A N L0)
+
 end Q1Paper.PaperII
+
 
 
 
