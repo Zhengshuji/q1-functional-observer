@@ -140,8 +140,10 @@ PAPER_ITEMS = [
 NOT_FORMALISED = [
     ("thm:interface", "the search algorithm itself",
      "the arithmetic of the call count is formalised; the bisection procedure is paper-level"),
-    ("cor:find", "the FIND corollary and the witness system Psi_{t,omega}",
-     "the chart system, the real-solution/feasible-W equivalence and the sampling step are paper-level"),
+    ("cor:find", "the chart parametrisation in Psi_{t,omega} and the sampling step",
+     "items (iii)-(v) of Psi (sandwich + pencil) are formalised as isFeasible_pairRowSpace_iff / "
+     "claim5_conditions_depend_on_W; the chart parametrisation W = row[XB GB] and the "
+     "sampling-point algorithm are citations to the companion paper"),
     ("app:example", "the appendix instance (q_min = 4)",
      "exact rational certificate, verified by the Python layer"),
 ]
