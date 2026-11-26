@@ -1954,6 +1954,16 @@ subset-indexed matrix the paper uses (\texttt{claim11\_iff\_gram\_subset},
 \texttt{claim12\_iff\_gram\_subset}).
 \end{enumerate}
 
+The three items above are not equally load-bearing, and it is worth saying which conclusion each
+one carries. A mistake in the \emph{reduction} would make Theorems~\ref{thm:fixedq}
+and~\ref{thm:fpt} decide the wrong problem, so the algorithm's \emph{correctness}, not merely its
+cost, would fail. A mistake in the \emph{counting} would invalidate their complexity bounds and
+leave their correctness intact. A mistake in the \emph{backend} would cost the oracle its
+termination and its cost, again leaving the algebra untouched. The characterization of
+Claims~\ref{lem:rankid}--\ref{clm:gramQ}, the structural bound of Claim~\ref{lem:struct} and the
+existence theorem are independent of all three: they are statements about the two conditions, and
+they are what the artifact checks.
+
 
 
 \subsection{Reproducibility and evidence}\label{sec:repro}
@@ -1963,16 +1973,17 @@ The degree-windowed relations of Claim~\ref{lem:window} are formalised in full, 
 The results rest on three kinds of evidence, and the accompanying artifact records which statement rests on which.
 
 \begin{enumerate}
-\item \emph{Lean~4 with Mathlib.} The labels of Table~\ref{tab:evidence} separate statements
-formalized as stated (\emph{literal}) from those formalized at the level of linear maps,
-submodules or a general field (\emph{abstract core}), the translation to the paper's matrices being
-paper-level; the single \emph{ingredient} is one step of the proof of the certificate. The
-rectangular-left-inverse row is of this kind: its declaration produces a polynomial left
-inverse over an algebraically closed field, and the
-passage to rational coefficients is
-paper-level. Every declaration is checked by the
+\item \emph{Lean~4 with Mathlib.} Table~\ref{tab:evidence} answers two separate questions for each
+numbered statement, in two separate columns. \emph{Formulation} says what the Lean theorem is: the
+paper's statement (\emph{literal}), a stronger statement of which the paper's is an instance
+(\emph{general}), or the same content stated for linear maps or submodules (\emph{abstract}).
+\emph{Bridge} says what is still missing: nothing substantive (\emph{--}), a bridge from the matrix
+family proved to the paper's, or the refinement from a cost model to an actual run. The
+rectangular-left-inverse row is of the third formulation: its declaration produces a polynomial left
+inverse over an algebraically closed field, and the passage to rational coefficients is paper-level.
+Every declaration is checked by the
 kernel against only (\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}). The
-reductions, the certificate and the complexity accounting are paper-level, so this is not a formal
+reductions and the complexity accounting are paper-level, so this is not a formal
 verification of the algorithmic theorems. In particular the exact polynomial-time decision
 procedure of Proposition~\ref{prop:zero} --- the elimination on \eqref{eq:R0} and its bit bound ---
 is paper-level; the table's left-inverse entry covers the existence and degree bound of $S$ only.
