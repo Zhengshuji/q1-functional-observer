@@ -499,7 +499,44 @@ theorem tMinC_le_two_ell
       (Q1Paper.rowSpace_mul_le (Matrix.fromRows (L0c L0) (Rc R)) (Mcol (N.map (algebraMap ℝ ℂ)) (Ac A)))
   exact t_le_two_ell A (N.map (algebraMap ℝ ℂ)) L0 hW0 hWT hf
 
+
+/-- **The complexification of a real subspace** of `Fin k → ℝ`. -/
+noncomputable def UC {k : ℕ} (U : Submodule ℝ (Fin k → ℝ)) : Submodule ℂ (Fin k → ℂ) :=
+  Submodule.span ℂ ((phi (Fin k)) '' (U : Set (Fin k → ℝ)))
+
+/-- **Complexification preserves the dimension.**  Every submodule of `Fin k → ℝ` is the
+row space of a matrix, so this reduces to `rowSpace_map_complex` and
+`rank_map_ofReal`. -/
+theorem finrank_UC {k : ℕ} (U : Submodule ℝ (Fin k → ℝ)) :
+    finrank ℂ ↥(UC U) = finrank ℝ ↥U := by
+  classical
+  let d := finrank ℝ ↥U
+  let B : Basis (Fin d) ℝ ↥U := Module.finBasis ℝ ↥U
+  let M : Matrix (Fin d) (Fin k) ℝ := fun i => (B i : Fin k → ℝ)
+  have hM : Q1Subspace.rowSpace M = U := by
+    apply le_antisymm
+    · rw [Q1Subspace.rowSpace, Submodule.span_le]
+      rintro _ ⟨i, rfl⟩
+      exact (B i).2
+    · intro x hx
+      have hrepr := B.sum_repr (⟨x, hx⟩ : ↥U)
+      have hco := congrArg (fun y : ↥U => (y : Fin k → ℝ)) hrepr
+      simp only [Submodule.coe_sum, Submodule.coe_smul, Finset.sum_apply,
+        Pi.smul_apply, smul_eq_mul] at hco
+      rw [show x = ∑ i, (B.repr ⟨x, hx⟩) i • (B i : Fin k → ℝ) from hco.symm]
+      refine Submodule.sum_mem _ (fun i _ => ?_)
+      exact Submodule.smul_mem _ _ (Submodule.subset_span ⟨i, rfl⟩)
+  have hUC : UC U = Q1Subspace.rowSpace (M.map (algebraMap ℝ ℂ)) := by
+    have h := rowSpace_map_complex M
+    rw [hM] at h
+    exact h.symm
+  rw [hUC]
+  rw [← Q1Subspace.rank_eq_finrank_rowSpace (M.map (algebraMap ℝ ℂ))]
+  rw [Q1Paper.PaperI.DecComplex.rank_map_ofReal_any M]
+  rw [Q1Subspace.rank_eq_finrank_rowSpace M, hM]
+
 end Q1Paper.PaperII
+
 
 
 

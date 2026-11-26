@@ -112,6 +112,8 @@ import Q1Paper.PaperII.Tightness
 #print axioms Q1Paper.PaperII.tMinC_le_iff_decC
 #print axioms Q1Paper.PaperII.decC_sInf_tMinCSet
 #print axioms Q1Paper.PaperII.tMinC_le_two_ell
+#print axioms Q1Paper.PaperII.UC
+#print axioms Q1Paper.PaperII.finrank_UC
 
 -- Sandwich.lean
 #print axioms Q1Paper.PaperII.Ac
