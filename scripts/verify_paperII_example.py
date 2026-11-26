@@ -72,10 +72,11 @@ def main() -> int:
     assert k == 4, k
     assert d0 == 6, d0
 
-    # s_0 = dim row(L0 N), N a basis of ker[C; CA] (the compressed H = L0 N)
-    L0N = L0 * Nmat
-    s0 = rank(L0N)
-    print(f"s_0 = dim row(L0 N)  = {s0}")
+    # s_0 = dim row(L0 M) with M = [N AN] (the paper's W_0 = row(L0 M))
+    Mmat = sp.Matrix.hstack(Nmat, A * Nmat)
+    s0 = rank(L0 * Mmat)
+    print(f"s_0 = dim row(L0 M)  = {s0}   (M = [N AN])")
+    print(f"      dim row(L0 N)  = {rank(L0 * Nmat)}")
     assert s0 == 2, s0
     ell_val = rank(A * Nmat)
     print(f"ell = rank(A N)      = {ell_val}")

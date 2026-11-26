@@ -32,9 +32,9 @@ subspaces $W$ of a compressed row-pair space, constrained by $W_0\subseteq W\sub
 $\dim(W/W_0)\le r$, on which the two conditions are a row-space inclusion and the constant rank of a
 pencil. Three results follow. First, the minimum order is $q_{\min}=r_0+t_{\min}$, where $t_{\min}$ is
 the smallest quotient dimension of a feasible $W$, the structural bound $\omega+1\le\dim W\le2\omega$
-gives $t_{\min}\le2\ell$ with $\ell=\operatorname{rank}(AN)$, and the feasible orders are monotone and
+gives $t_{\min}\le2\ell$ with $\ell=\operatorname{rank}(AN)$ whenever a feasible design exists, and the feasible orders are monotone and
 saturate, so the threshold problem is a single decision instance. Second, the spectral condition yields
-the lower bound $q_{\min}\ge r_0+\max\bigl(0,\operatorname{rank}[U_0;V_0]-s_0+1\bigr)$, which rests on
+the lower bound $q_{\min}\ge r_0+\max\bigl(0,\operatorname{rank}[U_0;V_0]-s_0+1\bigr)$ for $W_0\neq0$, which rests on
 a different necessary condition than the published algebraic bound $q_0$ and is strictly stronger on the
 instance below, where $q_0=3$ and $q_{\min}=4$. Third, given a decision procedure, the minimum order is
 found in $O(\log(\ell+2))$ calls and a minimum-order observer is recovered by lifting a basis of
@@ -85,13 +85,14 @@ instance, and
 \begin{equation*}
 \begin{gathered}
 q_{\min}=r_0+t_{\min},\\
-t_{\min}=\min\{\dim(W/W_0):W\text{ feasible}\}\le2\ell .
+t_{\min}=\min\{\dim(W/W_0):W\text{ feasible}\}\le2\ell ,
 \end{gathered}
 \end{equation*}
+the last inequality presuming that a feasible $W$ exists (otherwise $t_{\min}=q_{\min}=+\infty$).
 The three quantities play different roles: $r_0$ is fixed, $t_{\min}$ is minimized, and
 $\ell=\operatorname{rank}(AN)$ bounds the search.
 \item \emph{A spectral lower bound} (Section~\ref{sec:lowerbound}). With
-$U_0=\operatorname{row}(L_0N)$, $V_0=\operatorname{row}(L_0AN)$ and $s_0=\dim W_0$,
+$U_0=\operatorname{row}(L_0N)$, $V_0=\operatorname{row}(L_0AN)$, $s_0=\dim W_0$ and $W_0\neq0$,
 \begin{equation*}
 q_{\min}\ \ge\ r_0+\max\bigl(0,\ \operatorname{rank}[U_0;V_0]-s_0+1\bigr).
 \end{equation*}
@@ -368,7 +369,7 @@ $\dim(W/W_0)\le r$ is already realized with at most $m$ free rows. The disjuncti
 
 \begin{prop}[Minimum order]\label{prop:minorder}
 Let $t_{\min}=\min\{\dim(W/W_0):W \text{ feasible}\}$, and $t_{\min}=q_{\min}=+\infty$ when no $W$
-is feasible. Then $q_{\min}=r_0+t_{\min}$ and $t_{\min}\le2\ell$.
+is feasible. Then $q_{\min}=r_0+t_{\min}$, and $t_{\min}\le2\ell$ whenever a feasible $W$ exists.
 \end{prop}
 
 \begin{proof}
@@ -382,8 +383,8 @@ $\dim W\le2\omega\le2\ell$, that is $t_{\min}\le\dim W-s_0\le2\ell$.
 \subsection{The spectral lower bound, and when it is attained}\label{sec:lowerbound}
 
 \begin{prop}[A computable lower bound]\label{prop:lowerbound}
-Let $U_0=\operatorname{row}(L_0N)$ and $V_0=\operatorname{row}(L_0AN)$, and let $W$ be feasible with
-$t=\dim(W/W_0)$ and $\omega=\dim\pi_1(W)>0$. Then
+Let $U_0=\operatorname{row}(L_0N)$, $V_0=\operatorname{row}(L_0AN)$, and assume $W_0\neq0$. Then for
+every feasible $W$, writing $t=\dim(W/W_0)$ and $\omega=\dim\pi_1(W)$, we have $\omega>0$ and
 \begin{equation}\label{eq:lb}
 \operatorname{rank}\,[\,U_0;\,V_0\,]\ \le\ \omega\ \le\ s_0+t-1,
 \end{equation}
@@ -398,8 +399,10 @@ Since $W\supseteq W_0$ the projections satisfy $\pi_1(W)\supseteq\pi_1(W_0)=U_0$
 $\pi_2(W)\supseteq\pi_2(W_0)=V_0$. By Claim~\ref{claim:W} at $\lambda=0$ we have
 $\pi_1(W)=\pi_2(W)=U$ with $\dim U=\omega$, so $U\supseteq U_0+V_0$ and
 $\omega\ge\operatorname{rank}[U_0;V_0]$. The upper bound is Claim~\ref{claim:struct}:
-$\omega+1\le\dim W=s_0+t$. Combining and using $q_{\min}=r_0+t_{\min}$ with $t_{\min}\ge0$ gives
-\eqref{eq:qmin-lb}.
+$\omega+1\le\dim W=s_0+t$. The hypothesis $W_0\neq0$ makes the upper bound applicable to every
+feasible $W$: such a $W$ contains $W_0$, hence is nonzero, and $\dim W\le2\omega$ gives $\omega>0$. So
+\eqref{eq:lb} holds for every feasible $W$, and combining it with $q_{\min}=r_0+t_{\min}$ and
+$t_{\min}\ge0$ gives \eqref{eq:qmin-lb}.
 \end{proof}
 
 Proposition~\ref{prop:lowerbound} is the spectral counterpart of the algebraic bound of
@@ -414,8 +417,9 @@ design conditions of \cite{fer10,dar25,fer26a,fer26b} and the order bound $q_0$ 
 as a source of a bound.
 
 \begin{prop}[When the bound is attained]\label{prop:tight}
-Let $U_0=\pi_1(W_0)$, $V_0=\pi_2(W_0)$, $a=\operatorname{rank}[U_0;V_0]$ and $a-s_0+1>0$. Then
-$t_{\min}=a-s_0+1$ if and only if there exist $b\in U_0+V_0$, $b\neq0$, and a linear map
+Let $U_0=\pi_1(W_0)$, $V_0=\pi_2(W_0)$, $a=\operatorname{rank}[U_0;V_0]$, and assume
+$a-s_0+1>0$ and $W_0\neq0$. Then $t_{\min}=a-s_0+1$ if and only if there exist $b\in U_0+V_0$,
+$b\neq0$, and a linear map
 $G:U_0+V_0\to U_0+V_0$ such that
 \begin{equation*}
 W_0\subseteq W(G,b):=\bigl\{(h,Gh+\alpha b):h\in U_0+V_0,\ \alpha\in\mathbb R\bigr\}\subseteq\mathcal T
@@ -476,8 +480,8 @@ $n\times2k$.
 
 \begin{proof}
 (i) By Proposition~\ref{prop:minorder} the feasible orders are monotone in $q$ and $t_{\min}\le2\ell$,
-so a binary search over the window \eqref{eq:range} locates the least feasible order in $O(\log\ell)$
-calls. (ii) By Claim~\ref{claim:sandwich} a basis $w_1,\dots,w_t$ of $W/W_0$ lifts to rows $r_i$ with
+so a binary search over the window \eqref{eq:range} locates the least feasible order in
+$O(\log(\ell+2))$ calls. (ii) By Claim~\ref{claim:sandwich} a basis $w_1,\dots,w_t$ of $W/W_0$ lifts to rows $r_i$ with
 $r_i[N\ AN]=w_i$, and padding with zero rows realizes $W$ with exactly $t$ rows.
 \end{proof}
 
@@ -655,7 +659,8 @@ predicate.
 The feasible designs form a constrained family of subspaces, $W_0\subseteq W\subseteq\mathcal T$ with
 $\dim(W/W_0)\le r$, and everything in this paper follows from that reading. The family is monotone and
 saturates, so the threshold problem is a single decision instance and the minimum order is
-$q_{\min}=r_0+t_{\min}$ with $t_{\min}\le2\ell$ (Proposition~\ref{prop:minorder}). The spectral
+$q_{\min}=r_0+t_{\min}$ with $t_{\min}\le2\ell$ when a feasible design exists
+(Proposition~\ref{prop:minorder}). The spectral
 condition gives the lower bound \eqref{eq:qmin-lb}, which rests on a different necessary condition than
 the algebraic bound $q_0$ of \cite{fer26a,fer26b} and is strictly stronger on the instance of
 Appendix~\ref{app:example}. Given a decision procedure for a prescribed order, minimum order and a
@@ -769,7 +774,8 @@ Converse of the sandwich (Claim~\ref{claim:sandwich}), complex designs & literal
 \texttt{feasible\_to\_DEC} \\
 Minimum order $q_{\min}=r_0+t_{\min}$ (\ref{prop:minorder}), complex designs & literal &
 \texttt{tMin\_le\_iff\_dec} \\
-A priori bound $t_{\min}\le2\ell$ (\ref{prop:minorder}) & literal & \texttt{tMin\_le\_two\_ell} \\
+A priori bound $t_{\min}\le2\ell$ given a feasible $W$ (\ref{prop:minorder}) & literal &
+\texttt{tMin\_le\_two\_ell} \\
 Minimum order attained, and the abstract least order (\ref{prop:minorder}, interface) & literal &
 \texttt{dec\_sInf\_tMinSet}, \texttt{exists\_least\_of\_monotone} \\
 Lower bound \eqref{eq:lb}, the inequality $\operatorname{rank}[U_0;V_0]\le\omega$
@@ -777,8 +783,9 @@ Lower bound \eqref{eq:lb}, the inequality $\operatorname{rank}[U_0;V_0]\le\omega
 literal & \texttt{lowerBound\_core}, \texttt{finrank\_sup\_pi\_le}, \texttt{finrank\_pi1\_mono} \\
 Tightness, numerical half: $\dim W=a+1\Rightarrow t=a-s_0+1$ (\ref{prop:tight}) & literal &
 \texttt{t\_eq\_of\_finrank} \\
-\eqref{eq:qmin-lb}: $q_{\min}\ge r_0+\max(0,a-s_0+1)$, as $a+1-s_0\le t_{\min}$ (no side condition) & literal &
-\texttt{le\_tMin\_of\_lowerBound\_max} \\
+\eqref{eq:qmin-lb}: $q_{\min}\ge r_0+\max(0,a-s_0+1)$ for $W_0\neq0$, as
+$a+1-s_0\le t_{\min}$ (no side condition $s_0\le a$) & literal &
+\texttt{le\_tMin\_of\_lowerBound\_max}, \texttt{omega\_pos\_of\_nonzero} \\
 Tightness, the $(G,b)$ direction: $\pi_\lambda W(G,b)=(\lambda I-G)U+\operatorname{span}\{b\}$,
 feasibility from $\operatorname{rank}[\lambda I-G\ \ b]=a$, and $t=a-s_0+1$ & literal &
 \texttt{graphExt\_piLam}, \texttt{graphExt\_feasible}, \texttt{t\_eq\_of\_graph} \\
@@ -794,6 +801,8 @@ Prop.~\ref{prop:minorder} for real designs: $t_{\min}^{\mathbb R}\le2\ell$ & lit
 \texttt{tMinC\_le\_two\_ell} \\
 \eqref{eq:qmin-lb} for real designs: $a+1-s_0\le t_{\min}^{\mathbb R}$ & literal &
 \texttt{le\_tMinC\_of\_lowerBound}, \texttt{tMin\_le\_tMinC} \\
+Complexification of a real subspace preserves the dimension & literal &
+\texttt{UC}, \texttt{finrank\_UC} \\
 \bottomrule
 \end{tabular}
 \end{table*}
