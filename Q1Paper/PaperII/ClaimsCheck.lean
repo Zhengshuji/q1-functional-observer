@@ -100,3 +100,4 @@ import Q1Paper.PaperII.Complexity
 #check @Q1Paper.PaperII.bisectGo_collapses
 #check @Q1Paper.PaperII.bisectGo_invariant
 #check @Q1Paper.PaperII.bisectGo_finds
+#check @Q1Paper.PaperII.tMin_eq_bisectGo

@@ -36,13 +36,13 @@ the linear-map/submodule version; *ingredient* = one step of a proof.
 | **Proposition 3 (the real <-> complex bridges)** (`prop:tight`) | the complexification of a design's W and of W0, T, the real points of a complex span, the descent of feasibility, and the real sandwich converse | `Q1Paper.PaperII.WR_eq_span_phiPair_WRreal`, `Q1Paper.PaperII.W0_eq_span_phiPair_W0real`, `Q1Paper.PaperII.TR_eq_span_phiPair_TRreal`, `Q1Paper.PaperII.graphExt_span_phiPair`, `Q1Paper.PaperII.mem_of_phiPair_mem_span`, `Q1Paper.PaperII.isFeasible_real_of_span_phiPair`, `Q1Paper.PaperII.exists_design_of_pairRowSpace` | literal |
 | **Theorem 4 (ordering half)** (`thm:interface`) | the decision problem is monotone, so the order is a threshold of t_min | `Q1Paper.PaperII.exists_least_of_monotone` | literal |
 | **Theorem 4 (the arithmetic of the call count)** (`thm:interface`) | log2 N + 1 halvings empty an interval of N candidates, so bisection over min(r, 2 ell) candidates makes O(log(ell+2)) calls | `Q1Paper.PaperII.lt_two_pow_log2_succ`, `Q1Paper.PaperII.div_two_pow_log2_succ_eq_zero`, `Q1Paper.PaperII.bisect_steps_le`, `Q1Paper.PaperII.log2_mono_le`, `Q1Paper.PaperII.half_width`, `Q1Paper.PaperII.bisectGo`, `Q1Paper.PaperII.bisectGo_spec`, `Q1Paper.PaperII.bisectGo_collapses`, `Q1Paper.PaperII.bisectGo_invariant`, `Q1Paper.PaperII.bisectGo_finds` | literal |
+| **Corollary 5 (OPT), computationally** (`cor:opt`) | bisection on the DEC predicate over [0, 2 ell] returns t_min: log2(2 ell) + 1 calls | `Q1Paper.PaperII.tMin_eq_bisectGo` | literal |
 
 ## Not formalised
 
 | paper item | what is missing |
 |---|---|
 | **the search algorithm itself** (`thm:interface`) | the arithmetic of the call count is formalised; the bisection procedure is paper-level |
-| **the OPT corollary** (`cor:opt`) | complexity statement; inherits the call count from the interface theorem |
 | **the FIND corollary and the witness system Psi_{t,omega}** (`cor:find`) | the chart system, the real-solution/feasible-W equivalence and the sampling step are paper-level |
 | **the appendix instance (q_min = 4)** (`app:example`) | exact rational certificate, verified by the Python layer |
 

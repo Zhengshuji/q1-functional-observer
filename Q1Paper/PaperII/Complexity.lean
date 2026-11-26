@@ -179,4 +179,68 @@ theorem bisectGo_finds (P : Nat → Bool)
     rw [hfalse] at hmono'
     exact Bool.noConfusion hmono'
 
+
+open scoped Classical in
+/-- **The OPT corollary, computationally.**  Bisection on the decision predicate `DEC` over the
+interval `[0, 2ℓ]` returns the minimum order: `t_min` is found with `log2(2ℓ) + 1` calls. -/
+theorem tMin_eq_bisectGo {p : ℕ}
+    (C : Matrix (Fin p) (Fin n) ℂ) (A : Matrix (Fin n) (Fin n) ℝ)
+    (L0 : Matrix (Fin r0) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℂ)
+    (hN : N.mulVecLin.range = (Matrix.fromRows (C * Ac A) C).mulVecLin.ker)
+    (hne : (tMinSet A N L0).Nonempty) :
+    tMin A N L0
+        = (((bisectGo (fun r => decide (PaperI.DEC C (Ac A) (L0c L0) r))
+            ((2 * ell A N).log2 + 1) 0 (2 * ell A N)).1 : ℕ) : WithTop ℕ) ∧
+      PaperI.DEC C (Ac A) (L0c L0)
+        (bisectGo (fun r => decide (PaperI.DEC C (Ac A) (L0c L0) r))
+          ((2 * ell A N).log2 + 1) 0 (2 * ell A N)).1 ∧
+      (∀ r' < (bisectGo (fun r => decide (PaperI.DEC C (Ac A) (L0c L0) r))
+          ((2 * ell A N).log2 + 1) 0 (2 * ell A N)).1,
+        ¬ PaperI.DEC C (Ac A) (L0c L0) r') := by
+  classical
+  set P : ℕ → Bool := fun r => decide (PaperI.DEC C (Ac A) (L0c L0) r) with hP
+  have hmono : ∀ a b : ℕ, a ≤ b → P a = true → P b = true := by
+    intro a b hab ha
+    have hdec : PaperI.DEC C (Ac A) (L0c L0) a := by simpa [hP] using ha
+    have hle : tMin A N L0 ≤ ((a : ℕ) : WithTop ℕ) :=
+      (tMin_le_iff_dec C A L0 N hN a).mpr hdec
+    have hle' : tMin A N L0 ≤ ((b : ℕ) : WithTop ℕ) := by
+      refine le_trans hle ?_
+      exact WithTop.coe_le_coe.mpr hab
+    simpa [hP] using (tMin_le_iff_dec C A L0 N hN b).mp hle'
+  have hhi : P (2 * ell A N) = true := by
+    have hle := tMin_le_two_ell A N L0 hne
+    simpa [hP] using (tMin_le_iff_dec C A L0 N hN (2 * ell A N)).mp hle
+  obtain ⟨hx, -, hleast⟩ :=
+    bisectGo_finds P hmono 0 (2 * ell A N) (Nat.zero_le _) hhi (Or.inl rfl)
+  have hdecr : PaperI.DEC C (Ac A) (L0c L0)
+      (bisectGo P ((2 * ell A N).log2 + 1) 0 (2 * ell A N)).1 := by
+    simpa [hP] using hx
+  have hnotdec : ∀ r' < (bisectGo P ((2 * ell A N).log2 + 1) 0 (2 * ell A N)).1,
+      ¬ PaperI.DEC C (Ac A) (L0c L0) r' := by
+    intro r' hr' hdec
+    have hPtrue : P r' = true := by simpa [hP] using hdec
+    rw [hleast r' hr'] at hPtrue
+    exact Bool.noConfusion hPtrue
+  have hub : tMin A N L0
+      ≤ (((bisectGo P ((2 * ell A N).log2 + 1) 0 (2 * ell A N)).1 : ℕ) : WithTop ℕ) :=
+    (tMin_le_iff_dec C A L0 N hN _).mpr hdecr
+  have hfin : tMin A N L0 ≤ ((2 * ell A N : ℕ) : WithTop ℕ) := tMin_le_two_ell A N L0 hne
+  have hlb : (((bisectGo P ((2 * ell A N).log2 + 1) 0 (2 * ell A N)).1 : ℕ) : WithTop ℕ)
+      ≤ tMin A N L0 := by
+    obtain ⟨m, hm⟩ : ∃ m : ℕ, tMin A N L0 = ((m : ℕ) : WithTop ℕ) := by
+      cases h : tMin A N L0 with
+      | top => rw [h] at hfin
+               exact absurd hfin (WithTop.not_top_le_coe (2 * ell A N))
+      | coe m => exact ⟨m, rfl⟩
+    by_contra hcon
+    have hlt : tMin A N L0 < (((bisectGo P ((2 * ell A N).log2 + 1) 0 (2 * ell A N)).1 : ℕ) :
+        WithTop ℕ) := not_le.mp hcon
+    have hmr : m < (bisectGo P ((2 * ell A N).log2 + 1) 0 (2 * ell A N)).1 := by
+      rw [hm] at hlt
+      exact WithTop.coe_lt_coe.mp hlt
+    have hdec := (tMin_le_iff_dec C A L0 N hN m).mp (le_of_eq hm)
+    exact hnotdec m hmr hdec
+  exact ⟨le_antisymm hub hlb, hdecr, hnotdec⟩
+
 end Q1Paper.PaperII

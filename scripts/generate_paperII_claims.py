@@ -129,13 +129,14 @@ PAPER_ITEMS = [
       "Q1Paper.PaperII.half_width", "Q1Paper.PaperII.bisectGo",
       "Q1Paper.PaperII.bisectGo_spec", "Q1Paper.PaperII.bisectGo_collapses",
       "Q1Paper.PaperII.bisectGo_invariant", "Q1Paper.PaperII.bisectGo_finds"], "literal"),
+    ("cor:opt", "Corollary 5 (OPT), computationally",
+     "bisection on the DEC predicate over [0, 2 ell] returns t_min: log2(2 ell) + 1 calls",
+     ["Q1Paper.PaperII.tMin_eq_bisectGo"], "literal"),
 ]
 
 NOT_FORMALISED = [
     ("thm:interface", "the search algorithm itself",
      "the arithmetic of the call count is formalised; the bisection procedure is paper-level"),
-    ("cor:opt", "the OPT corollary",
-     "complexity statement; inherits the call count from the interface theorem"),
     ("cor:find", "the FIND corollary and the witness system Psi_{t,omega}",
      "the chart system, the real-solution/feasible-W equivalence and the sampling step are paper-level"),
     ("app:example", "the appendix instance (q_min = 4)",
