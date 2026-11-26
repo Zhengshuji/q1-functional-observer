@@ -410,3 +410,22 @@ commit `8f77caf` **本地已提交但尚未推送**（GitHub SSH 连不上，稍
 **下一步**：用 `graphMap_phiDom` + `Submodule.map_span` 证
 `graphExt (UC U) (GcU …) b_C = span ℂ (phiPair '' graphExt U (GR …) b)`（ℂ-子模相等），
 然后走编码桥与 `claim4_converse (K := ℝ)`。
+
+## 8.18 复图 = 实图的复化：完成（2026-11-27）
+
+`PaperII/RealGraph.lean` 现在有完整的"图对齐"链（`Audit` 127 条）：
+
+* `range_phiU_val`、`span_phiU`：`phi '' U = Subtype.val '' range phiU`，且 `phiU` 张成 `UC U`；
+* `span_phiDom`：`phiDom` 张成 `↥(UC U) × ℂ`（用 `LinearMap.inl` 的像 + `span_le`，绕开依赖 motive 的 span 归纳）；
+* **`graphExt_span_phiPair`**：`span ℂ (phiPair '' graphExt U (GR …) b) = graphExt (UC U) (GcU …) b_C`。
+
+证明链：`graphExt = graphMap.range` → `image_range` → `range_comp` → `graphMap_phiDom` →
+`map_span` → `span_phiDom` → `map_top`。
+
+**下一步（实设计 Prop 3 的收尾）**：
+1. 复化"实设计的 W"：定义实配对的 `WRreal A N L0 R : Submodule ℝ ((Fin k → ℝ)²)`，并证
+   `WR A (N.map f) L0 R = span ℂ (phiPair '' WRreal …)`（用 `rowSpace_map_complex` 与
+   `map_mulVec_phi`）；
+2. 用 `claim4_converse (K := ℝ)`（配 `pairRows`/`Φ` 编码）把实图 `graphExt U (GR …) b` 变成实设计 `R`；
+3. (⇐)：`tMinC ≤ ↑(dim (UC U) + 1 − s₀)`（经 `tMinC_le_iff_decC.mpr`），下界用 `le_tMinC_of_lowerBound`；
+4. (⇒)：`decC_sInf_tMinCSet` + `decC_to_feasible_design` + 泛型 `exists_graph_representation (K := ℝ)`。
