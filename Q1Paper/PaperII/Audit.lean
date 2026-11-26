@@ -93,6 +93,7 @@ import Q1Paper.PaperII.RealGraph
 
 -- RealGraph.lean
 #print axioms Q1Paper.PaperII.phi_apply
+#print axioms Q1Paper.PaperII.phi_eq_zero
 #print axioms Q1Paper.PaperII.map_mulVec_phi
 #print axioms Q1Paper.PaperII.Gfun
 #print axioms Q1Paper.PaperII.Gfun_mem_UC
@@ -123,6 +124,7 @@ import Q1Paper.PaperII.RealGraph
 #print axioms Q1Paper.PaperII.TRreal_eq
 #print axioms Q1Paper.PaperII.exists_design_of_encoded
 #print axioms Q1Paper.PaperII.exists_design_of_pairRowSpace
+#print axioms Q1Paper.PaperII.tMinC_le_of_graph_real
 
 -- Realification.lean
 #print axioms Q1Paper.PaperII.pairRows

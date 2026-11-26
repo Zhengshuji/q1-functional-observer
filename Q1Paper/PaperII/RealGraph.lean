@@ -26,6 +26,12 @@ variable {k : ℕ}
 @[simp] theorem phi_apply (x : Fin k → ℝ) (i : Fin k) :
     phi (Fin k) x i = (x i : ℂ) := rfl
 
+/-- `phi` is injective at zero. -/
+theorem phi_eq_zero {x : Fin k → ℝ} (h : phi (Fin k) x = 0) : x = 0 := by
+  funext i
+  have hi := congrFun h i
+  simpa [phi_apply] using hi
+
 /-- Complexifying a real matrix commutes with applying it to a vector. -/
 theorem map_mulVec_phi (Gm : Matrix (Fin k) (Fin k) ℝ) (x : Fin k → ℝ) :
     (Gm.map (algebraMap ℝ ℂ)) *ᵥ (phi (Fin k) x) = phi (Fin k) (Gm *ᵥ x) := by
@@ -413,5 +419,65 @@ theorem exists_design_of_pairRowSpace (A : Matrix (Fin n) (Fin n) ℝ)
     rw [hdim0, hdimW]
     exact hdim)
   exact ⟨R, by rw [hR, hmap]⟩
+
+
+/-- **Prop 3, the `(⇐)` direction for the paper's real designs.**  If the real graph
+`W_ℝ(G,b)` sits inside the real sandwich and its complexification is feasible, then the
+minimum order over real designs satisfies
+`t_min^ℝ ≤ dim_ℝ U + 1 − s₀`. -/
+theorem tMinC_le_of_graph_real {p : ℕ}
+    (C : Matrix (Fin p) (Fin n) ℝ) (A : Matrix (Fin n) (Fin n) ℝ)
+    (L0 : Matrix (Fin r0) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℝ)
+    (hN : (N.map (algebraMap ℝ ℂ)).mulVecLin.range
+      = (Matrix.fromRows ((C.map (algebraMap ℝ ℂ)) * (A.map (algebraMap ℝ ℂ)))
+          (C.map (algebraMap ℝ ℂ))).mulVecLin.ker)
+    {U : Submodule ℝ (Fin k → ℝ)} {Gm : Matrix (Fin k) (Fin k) ℝ}
+    (hG : ∀ x ∈ U, Gm *ᵥ x ∈ U) {b : ↥U} (hb : b ≠ 0)
+    (hW0 : W0real A N L0 ≤ graphExt U (GR U Gm hG) b)
+    (hWT : graphExt U (GR U Gm hG) b ≤ TRreal A N)
+    (hW0C : W0 A (N.map (algebraMap ℝ ℂ)) L0
+      ≤ graphExt (UC U) (GcU U Gm hG)
+          ⟨phi (Fin k) (b : Fin k → ℝ), Submodule.subset_span ⟨b, b.2, rfl⟩⟩)
+    (hfeas : IsFeasible (graphExt (UC U) (GcU U Gm hG)
+      ⟨phi (Fin k) (b : Fin k → ℝ), Submodule.subset_span ⟨b, b.2, rfl⟩⟩)) :
+    tMinC A N L0
+      ≤ ((Module.finrank ℝ ↥U + 1
+          - Module.finrank ℂ ↥(W0 A (N.map (algebraMap ℝ ℂ)) L0) : ℕ) : WithTop ℕ) := by
+  classical
+  set bC : ↥(UC U) := ⟨phi (Fin k) (b : Fin k → ℝ), Submodule.subset_span ⟨b, b.2, rfl⟩⟩ with hbC
+  set WRr : Submodule ℝ ((Fin k → ℝ) × (Fin k → ℝ)) := graphExt U (GR U Gm hG) b with hWRr
+  set WC : Submodule ℂ ((Fin k → ℂ) × (Fin k → ℂ)) := graphExt (UC U) (GcU U Gm hG) bC with hWC
+  -- build the real design
+  obtain ⟨R, hR⟩ := exists_design_of_pairRowSpace (A := A) (N := N) (L0 := L0) (W := WRr)
+    (by rw [hWRr]; exact hW0) (by rw [hWRr]; exact hWT) (by
+      rw [hWRr, graphExt_finrank U (GR U Gm hG) b hb]
+      exact Nat.le_add_left _ _)
+  -- its complex `W` is the complex graph
+  have hWR : WR A (N.map (algebraMap ℝ ℂ)) L0 R = WC := by
+    rw [WR_eq_span_phiPair_WRreal, hR, hWRr, hWC]
+    exact graphExt_span_phiPair U Gm hG b
+  have hW0le : W0 A (N.map (algebraMap ℝ ℂ)) L0 ≤ WR A (N.map (algebraMap ℝ ℂ)) L0 R := by
+    rw [hWR]; exact hW0C
+  have hfeasR : IsFeasible (WR A (N.map (algebraMap ℝ ℂ)) L0 R) := by
+    rw [hWR]; exact hfeas
+  -- the order the design realises
+  have hbC : bC ≠ 0 := by
+    intro h
+    apply hb
+    apply Subtype.ext
+    apply phi_eq_zero
+    have hv := congrArg Subtype.val h
+    simpa [hbC] using hv
+  have ht : t (W0 A (N.map (algebraMap ℝ ℂ)) L0) (WR A (N.map (algebraMap ℝ ℂ)) L0 R)
+      = Module.finrank ℝ ↥U + 1
+        - Module.finrank ℂ ↥(W0 A (N.map (algebraMap ℝ ℂ)) L0) := by
+    rw [t_eq_finrank_sub hW0le, hWR, hWC,
+      graphExt_finrank (UC U) (GcU U Gm hG) bC hbC, finrank_UC U]
+  -- hence `DEC_c` at that order, and `t_min^ℝ` is below it
+  have hdec : DecOrder C A L0 (Module.finrank ℝ ↥U + 1
+      - Module.finrank ℂ ↥(W0 A (N.map (algebraMap ℝ ℂ)) L0)) := by
+    rw [← ht]
+    exact feasible_to_decC C A L0 N hN hW0le hfeasR
+  exact (tMinC_le_iff_decC C A L0 N hN _).mpr hdec
 
 end Q1Paper.PaperII
