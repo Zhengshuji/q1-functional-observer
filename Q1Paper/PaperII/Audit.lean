@@ -117,6 +117,9 @@ import Q1Paper.PaperII.RealGraph
 #print axioms Q1Paper.PaperII.Lc_mul
 #print axioms Q1Paper.PaperII.Lc_mul_A
 #print axioms Q1Paper.PaperII.WR_eq_span_phiPair_WRreal
+#print axioms Q1Paper.PaperII.W0real
+#print axioms Q1Paper.PaperII.TRreal
+#print axioms Q1Paper.PaperII.exists_design_of_encoded
 
 -- Realification.lean
 #print axioms Q1Paper.PaperII.pairRows

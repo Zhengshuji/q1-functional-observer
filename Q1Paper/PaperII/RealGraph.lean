@@ -308,4 +308,33 @@ theorem WR_eq_span_phiPair_WRreal (A : Matrix (Fin n) (Fin n) ℝ)
     rintro _ ⟨z, hz, rfl⟩
     exact key z hz
 
+
+/-- The real `W₀` in the pair space (the `ℝ`-analogue of `W0`). -/
+noncomputable def W0real (A : Matrix (Fin n) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℝ)
+    (L0 : Matrix (Fin r0) (Fin n) ℝ) : Submodule ℝ ((Fin k → ℝ) × (Fin k → ℝ)) :=
+  Q1Paper.pairRowSpace (L0 * N) (L0 * (A * N))
+
+/-- The real `T` in the pair space (the `ℝ`-analogue of `TR`). -/
+noncomputable def TRreal (A : Matrix (Fin n) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℝ) :
+    Submodule ℝ ((Fin k → ℝ) × (Fin k → ℝ)) :=
+  Q1Paper.pairRowSpace N (A * N)
+
+/-- **The real sandwich, converse, in the encoded space**: an encoded subspace between
+`row(L₀M)` and `row(M)` of the right dimension is realised by a real design of `r` rows,
+whose real pair space is the image of the encoded subspace under `Φ`. -/
+theorem exists_design_of_encoded (A : Matrix (Fin n) (Fin n) ℝ)
+    (N : Matrix (Fin n) (Fin k) ℝ) (L0 : Matrix (Fin r0) (Fin n) ℝ)
+    {Wenc : Submodule ℝ (Fin (k + k) → ℝ)}
+    (hW0 : Q1Subspace.rowSpace (L0 * pairRows N (A * N)) ≤ Wenc)
+    (hWT : Wenc ≤ Q1Subspace.rowSpace (pairRows N (A * N)))
+    (hdim : Module.finrank ℝ ↥Wenc
+      ≤ Module.finrank ℝ ↥(Q1Subspace.rowSpace (L0 * pairRows N (A * N))) + r) :
+    ∃ R : Matrix (Fin r) (Fin n) ℝ,
+      WRreal A N L0 R = Submodule.map (Φ (K := ℝ)).toLinearMap Wenc := by
+  obtain ⟨R, hR⟩ := Q1Paper.claim4_converse (K := ℝ) (L0 := L0)
+    (M := pairRows N (A * N)) (W := Wenc) hW0 hWT hdim
+  refine ⟨R, ?_⟩
+  rw [WRreal, pairRowSpace_eq_map_pairRows, ← hR,
+    (mul_pairRows (Matrix.fromRows L0 R) N (A * N)).symm]
+
 end Q1Paper.PaperII
