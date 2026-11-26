@@ -125,7 +125,9 @@ PAPER_ITEMS = [
      "log2 N + 1 halvings empty an interval of N candidates, so bisection over min(r, 2 ell) "
      "candidates makes O(log(ell+2)) calls",
      ["Q1Paper.PaperII.lt_two_pow_log2_succ", "Q1Paper.PaperII.div_two_pow_log2_succ_eq_zero",
-      "Q1Paper.PaperII.bisect_steps_le", "Q1Paper.PaperII.log2_mono_le"], "literal"),
+      "Q1Paper.PaperII.bisect_steps_le", "Q1Paper.PaperII.log2_mono_le",
+      "Q1Paper.PaperII.half_width", "Q1Paper.PaperII.bisectGo",
+      "Q1Paper.PaperII.bisectGo_spec", "Q1Paper.PaperII.bisectGo_collapses"], "literal"),
 ]
 
 NOT_FORMALISED = [

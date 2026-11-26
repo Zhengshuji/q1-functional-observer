@@ -51,4 +51,73 @@ theorem half_width (lo hi : ℕ) (h : lo < hi) :
       (hi - ((lo + hi) / 2 + 1) ≤ (hi - lo) / 2) := by
   constructor <;> omega
 
+
+/-- **Bisection with fuel.**  `bisectGo P k lo hi` performs `k` halvings of the interval
+`[lo, hi]`, querying the predicate `P` at the midpoint and keeping the half on which a threshold
+must lie. -/
+def bisectGo (P : Nat → Bool) : Nat → Nat → Nat → Nat × Nat
+  | 0, lo, hi => (lo, hi)
+  | k + 1, lo, hi =>
+      if lo < hi then
+        let m := (lo + hi) / 2
+        if P m then bisectGo P k lo m else bisectGo P k (m + 1) hi
+      else (lo, hi)
+
+/-- **The interval shrinks by `2 ^ k`.**  After `k` halvings the interval lies inside the
+original one and its length is at most `(hi - lo) / 2 ^ k`. -/
+theorem bisectGo_spec (P : Nat → Bool) :
+    ∀ (k lo hi : Nat), lo ≤ hi →
+      lo ≤ (bisectGo P k lo hi).1 ∧ (bisectGo P k lo hi).1 ≤ (bisectGo P k lo hi).2 ∧
+        (bisectGo P k lo hi).2 ≤ hi ∧
+        (bisectGo P k lo hi).2 - (bisectGo P k lo hi).1 ≤ (hi - lo) / 2 ^ k
+  | 0, lo, hi, h => by
+    refine ⟨le_rfl, h, le_rfl, ?_⟩
+    simp [bisectGo]
+  | k + 1, lo, hi, h => by
+    rw [bisectGo]
+    by_cases hlt : lo < hi
+    · rw [if_pos hlt]
+      have hw := half_width lo hi hlt
+      have hm1 : lo ≤ (lo + hi) / 2 := by omega
+      have hm2 : (lo + hi) / 2 + 1 ≤ hi := by omega
+      by_cases hp : P ((lo + hi) / 2)
+      · rw [if_pos hp]
+        obtain ⟨a1, a2, a3, a4⟩ := bisectGo_spec P k lo ((lo + hi) / 2) hm1
+        refine ⟨a1, a2, by omega, ?_⟩
+        calc (bisectGo P k lo ((lo + hi) / 2)).2 - (bisectGo P k lo ((lo + hi) / 2)).1
+            ≤ ((lo + hi) / 2 - lo) / 2 ^ k := a4
+          _ ≤ ((hi - lo) / 2) / 2 ^ k := Nat.div_le_div_right hw.1
+          _ = (hi - lo) / 2 ^ (k + 1) := by
+              rw [Nat.div_div_eq_div_mul, pow_succ]
+              ring_nf
+      · rw [if_neg hp]
+        obtain ⟨a1, a2, a3, a4⟩ := bisectGo_spec P k ((lo + hi) / 2 + 1) hi hm2
+        refine ⟨by omega, a2, a3, ?_⟩
+        calc (bisectGo P k ((lo + hi) / 2 + 1) hi).2 - (bisectGo P k ((lo + hi) / 2 + 1) hi).1
+            ≤ (hi - ((lo + hi) / 2 + 1)) / 2 ^ k := a4
+          _ ≤ ((hi - lo) / 2) / 2 ^ k := Nat.div_le_div_right hw.2
+          _ = (hi - lo) / 2 ^ (k + 1) := by
+              rw [Nat.div_div_eq_div_mul, pow_succ]
+              ring_nf
+    · rw [if_neg hlt]
+      have hle : hi ≤ lo := by omega
+      have hEq : hi = lo := le_antisymm hle h
+      subst hEq
+      exact ⟨le_rfl, le_rfl, le_rfl, by simp⟩
+
+
+/-- **Bisection collapses the interval within `log2 N + 1` halvings.**  For an interval of `N + 1`
+integers (length `N`), that many halvings leave a single point, so the search makes
+`log2 N + 1 = O(log(N+2))` queries. -/
+theorem bisectGo_collapses (P : Nat → Bool) (lo hi : Nat) (h : lo ≤ hi) :
+    (bisectGo P ((hi - lo).log2 + 1) lo hi).1
+      = (bisectGo P ((hi - lo).log2 + 1) lo hi).2 := by
+  have hs := bisectGo_spec P ((hi - lo).log2 + 1) lo hi h
+  have hz : (hi - lo) / 2 ^ ((hi - lo).log2 + 1) = 0 := div_two_pow_log2_succ_eq_zero _
+  have hw : (bisectGo P ((hi - lo).log2 + 1) lo hi).2
+      - (bisectGo P ((hi - lo).log2 + 1) lo hi).1 = 0 := by
+    have h4 := hs.2.2.2
+    omega
+  omega
+
 end Q1Paper.PaperII

@@ -28,6 +28,9 @@ import Q1Paper.PaperII.Complexity
 #print axioms Q1Paper.PaperII.bisect_steps_le
 #print axioms Q1Paper.PaperII.log2_mono_le
 #print axioms Q1Paper.PaperII.half_width
+#print axioms Q1Paper.PaperII.bisectGo
+#print axioms Q1Paper.PaperII.bisectGo_spec
+#print axioms Q1Paper.PaperII.bisectGo_collapses
 
 -- Converse.lean
 #print axioms Q1Paper.PaperII.WRc

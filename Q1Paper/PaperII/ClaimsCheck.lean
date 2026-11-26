@@ -94,3 +94,7 @@ import Q1Paper.PaperII.Complexity
 #check @Q1Paper.PaperII.div_two_pow_log2_succ_eq_zero
 #check @Q1Paper.PaperII.bisect_steps_le
 #check @Q1Paper.PaperII.log2_mono_le
+#check @Q1Paper.PaperII.half_width
+#check @Q1Paper.PaperII.bisectGo
+#check @Q1Paper.PaperII.bisectGo_spec
+#check @Q1Paper.PaperII.bisectGo_collapses

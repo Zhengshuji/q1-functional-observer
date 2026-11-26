@@ -84,7 +84,7 @@ specification `DECℂ`.  The bridge between them is the real-compression lemma
 | Corollary 5 (OPT), Corollary 6 (FIND) | complexity statements inherited from Paper I; FIND's bit model is open in the paper itself |
 | FIND: the witness system `Ψ_{t,ω}`, the real-solution/feasible-`W` equivalence, and the sampling step | not formalised; the paper presents it as an algorithmic certificate scheme |
 | the appendix instance (`q_min = 4`) | exact rational certificate in `scripts/verify_paperII_example.py`; belongs to the Python verification layer, not to Lean |
-| Theorem 4, the `O(log(ℓ+2))` call count | the arithmetic core is formalised (`PaperII/Complexity.lean`: `lt_two_pow_log2_succ`, `div_two_pow_log2_succ_eq_zero`, `bisect_steps_le`, `log2_mono_le`); the search algorithm itself is not |
+| Theorem 4, the `O(log(ℓ+2))` call count | **formalised**: the bisection `bisectGo` with `bisectGo_spec` (length `≤ (hi−lo)/2^k`) and `bisectGo_collapses` (a single point after `log2(hi−lo)+1` halvings), on top of `half_width`, `lt_two_pow_log2_succ`, `div_two_pow_log2_succ_eq_zero`, `bisect_steps_le`, `log2_mono_le` (`PaperII/Complexity.lean`) |
 
 ## Resolved (previously listed as not formalised)
 

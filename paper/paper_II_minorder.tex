@@ -821,10 +821,10 @@ literal &
 \texttt{isFeasible\_real\_of\_span\_phiPair} \\
 Prop.~\ref{prop:tight} for real designs, packaged as an equivalence & literal &
 \texttt{tMinC\_eq\_of\_real\_graph}, \texttt{tMinC\_eq\_iff\_real\_graph} \\
-Arithmetic core of the $O(\log(\ell+2))$ counting: $\log_2 N+1$ halvings empty an interval of
-$N$ candidates & literal &
-\texttt{lt\_two\_pow\_log2\_succ}, \texttt{div\_two\_pow\_log2\_succ\_eq\_zero},
-\texttt{bisect\_steps\_le} \\
+The $O(\log(\ell+2))$ counting: bisection keeps half the interval and collapses it within
+$\log_2 N+1$ halvings & literal &
+\texttt{bisectGo}, \texttt{bisectGo\_spec}, \texttt{bisectGo\_collapses},
+\texttt{lt\_two\_pow\_log2\_succ} \\
 \bottomrule
 \end{tabular}
 \end{table*}
