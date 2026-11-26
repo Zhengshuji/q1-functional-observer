@@ -123,6 +123,8 @@ def main() -> int:
                        .replace("$", "").replace(r"\mathbb{C}", "\u2102").strip())
             if "_" not in name:
                 continue
+            if "/" in name or name.endswith(".py") or name.endswith(".lean"):
+                continue  # a script or module path in a code span, not a declaration
             if name not in short_declared:
                 issues.append(f"{tex.relative_to(ROOT).as_posix()}: names {name}, "
                               f"which is not a declared name")
