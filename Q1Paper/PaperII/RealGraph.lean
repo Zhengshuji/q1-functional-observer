@@ -319,6 +319,21 @@ noncomputable def TRreal (A : Matrix (Fin n) (Fin n) ℝ) (N : Matrix (Fin n) (F
     Submodule ℝ ((Fin k → ℝ) × (Fin k → ℝ)) :=
   Q1Paper.pairRowSpace N (A * N)
 
+/-- `W₀` in encoded form. -/
+theorem W0real_eq (A : Matrix (Fin n) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℝ)
+    (L0 : Matrix (Fin r0) (Fin n) ℝ) :
+    W0real A N L0 = Submodule.map (Φ (K := ℝ)).toLinearMap
+      (Q1Subspace.rowSpace (pairRows (L0 * N) (L0 * (A * N)))) := by
+  rw [W0real]
+  exact pairRowSpace_eq_map_pairRows (L0 * N) (L0 * (A * N))
+
+/-- `T` in encoded form. -/
+theorem TRreal_eq (A : Matrix (Fin n) (Fin n) ℝ) (N : Matrix (Fin n) (Fin k) ℝ) :
+    TRreal A N = Submodule.map (Φ (K := ℝ)).toLinearMap
+      (Q1Subspace.rowSpace (pairRows N (A * N))) := by
+  rw [TRreal]
+  exact pairRowSpace_eq_map_pairRows N (A * N)
+
 /-- **The real sandwich, converse, in the encoded space**: an encoded subspace between
 `row(L₀M)` and `row(M)` of the right dimension is realised by a real design of `r` rows,
 whose real pair space is the image of the encoded subspace under `Φ`. -/
@@ -336,5 +351,67 @@ theorem exists_design_of_encoded (A : Matrix (Fin n) (Fin n) ℝ)
   refine ⟨R, ?_⟩
   rw [WRreal, pairRowSpace_eq_map_pairRows, ← hR,
     (mul_pairRows (Matrix.fromRows L0 R) N (A * N)).symm]
+
+
+/-- **The real sandwich, converse, in the pair space**: a real subspace between `W₀` and `T`
+of quotient dimension at most `r` is realised by a real design of `r` rows. -/
+theorem exists_design_of_pairRowSpace (A : Matrix (Fin n) (Fin n) ℝ)
+    (N : Matrix (Fin n) (Fin k) ℝ) (L0 : Matrix (Fin r0) (Fin n) ℝ)
+    {W : Submodule ℝ ((Fin k → ℝ) × (Fin k → ℝ))}
+    (hW0 : W0real A N L0 ≤ W) (hWT : W ≤ TRreal A N)
+    (hdim : Module.finrank ℝ ↥W ≤ Module.finrank ℝ ↥(W0real A N L0) + r) :
+    ∃ R : Matrix (Fin r) (Fin n) ℝ, WRreal A N L0 R = W := by
+  classical
+  set Wenc : Submodule ℝ (Fin (k + k) → ℝ) :=
+    Submodule.comap (Φ (K := ℝ)).toLinearMap W with hWenc
+  -- membership transports through `Φ`
+  have hmem : ∀ x : Fin (k + k) → ℝ, x ∈ Wenc ↔ (Φ (K := ℝ)) x ∈ W := by
+    intro x
+    rw [hWenc]
+    exact Submodule.mem_comap
+  -- `W` is the image of `Wenc`
+  have hmap : Submodule.map (Φ (K := ℝ)).toLinearMap Wenc = W := by
+    ext z
+    constructor
+    · rintro ⟨y, hy, rfl⟩
+      exact (hmem y).mp hy
+    · intro hz
+      refine ⟨(Φ (K := ℝ)).symm z, ?_, (Φ (K := ℝ)).apply_symm_apply z⟩
+      refine (hmem _).mpr ?_
+      rwa [LinearEquiv.apply_symm_apply]
+  -- the two sandwich conditions
+  have hW0' : Q1Subspace.rowSpace (L0 * pairRows N (A * N)) ≤ Wenc := by
+    intro x hx
+    refine (hmem x).mpr ?_
+    refine hW0 ?_
+    rw [W0real_eq]
+    exact Submodule.mem_map_of_mem (by rwa [← mul_pairRows])
+  have hWT' : Wenc ≤ Q1Subspace.rowSpace (pairRows N (A * N)) := by
+    intro x hx
+    have hxW : (Φ (K := ℝ)) x ∈ TRreal A N := hWT ((hmem x).mp hx)
+    rw [TRreal_eq] at hxW
+    obtain ⟨y, hy, hyx⟩ := Submodule.mem_map.mp hxW
+    rwa [← (Φ (K := ℝ)).injective hyx]
+  -- the dimension
+  have hdimW : Module.finrank ℝ ↥Wenc = Module.finrank ℝ ↥W := by
+    have hcomap : Wenc = Submodule.map (Φ (K := ℝ)).symm.toLinearMap W := by
+      ext x
+      rw [hmem]
+      constructor
+      · intro hx
+        exact ⟨Φ (K := ℝ) x, hx, (Φ (K := ℝ)).symm_apply_apply x⟩
+      · rintro ⟨y, hy, rfl⟩
+        simpa using hy
+    rw [hcomap]
+    exact LinearEquiv.finrank_map_eq (Φ (K := ℝ)).symm W
+  have hdim0 : Module.finrank ℝ ↥(Q1Subspace.rowSpace (L0 * pairRows N (A * N)))
+      = Module.finrank ℝ ↥(W0real A N L0) := by
+    rw [W0real_eq, mul_pairRows]
+    exact (LinearEquiv.finrank_map_eq (Φ (K := ℝ)) _).symm
+  -- apply the encoded converse
+  obtain ⟨R, hR⟩ := exists_design_of_encoded A N L0 hW0' hWT' (by
+    rw [hdim0, hdimW]
+    exact hdim)
+  exact ⟨R, by rw [hR, hmap]⟩
 
 end Q1Paper.PaperII

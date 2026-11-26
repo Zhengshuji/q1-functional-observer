@@ -119,7 +119,10 @@ import Q1Paper.PaperII.RealGraph
 #print axioms Q1Paper.PaperII.WR_eq_span_phiPair_WRreal
 #print axioms Q1Paper.PaperII.W0real
 #print axioms Q1Paper.PaperII.TRreal
+#print axioms Q1Paper.PaperII.W0real_eq
+#print axioms Q1Paper.PaperII.TRreal_eq
 #print axioms Q1Paper.PaperII.exists_design_of_encoded
+#print axioms Q1Paper.PaperII.exists_design_of_pairRowSpace
 
 -- Realification.lean
 #print axioms Q1Paper.PaperII.pairRows
