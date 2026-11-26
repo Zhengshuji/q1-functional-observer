@@ -396,3 +396,17 @@ Claim 4、Claim 5（`DECℂ` 单调 + 饱和）、Prop 1（`q_min`、`t_min ≤ 
 
 **下一版**：先把两条 `have` 立好（`h1 : ↑(phiU U u) = phi u`、`h2 : ↑(GcU … (phiU U u)) = phi (Gm *ᵥ u)`），
 再 `simp only [..., h1, h2, ...]` + `ring`。失败版本已回退，树保持绿色。
+
+## 8.17 图对齐完成：graphMap_phiDom（2026-11-27 夜）
+
+卡了三版的子目标已解决：`graphMap_phiDom`
+（`graphMap (UC U) (GcU …) b_C (phiDom p) = phiPair (graphMap U (GR …) b p)`）。
+两处关键改写：①`GcU` 在 `phiU u` 上的取值（先把 `phiU u` `show` 成 `⟨phi u, …⟩`）；
+②函数空间上实数标量与复数标量一致（`ext i; simp` 证 `c • x = ↑c • x`）。
+
+**当前状态**：`Audit` 123 条（123/0），`lake build` 9180 jobs，三个生成器 `--check` 与一致性检查全绿。
+commit `8f77caf` **本地已提交但尚未推送**（GitHub SSH 连不上，稍后重试）。
+
+**下一步**：用 `graphMap_phiDom` + `Submodule.map_span` 证
+`graphExt (UC U) (GcU …) b_C = span ℂ (phiPair '' graphExt U (GR …) b)`（ℂ-子模相等），
+然后走编码桥与 `claim4_converse (K := ℝ)`。
