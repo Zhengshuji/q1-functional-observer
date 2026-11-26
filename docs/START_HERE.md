@@ -10,6 +10,11 @@ and they should not have to learn each other's notation:
 the file and line that define it, and its coverage status.  That table is **generated** from
 `Q1Paper/PaperI/S00_Interface/CLAIMS.md` plus the sources, so it cannot drift.
 
+For **Paper II** the same role is played by `Q1Paper/PaperII/README.md` (what the directory
+contains, the verification commands and the coverage status), `docs/PAPER_II_PROOF_MAP.md` (paper
+item → declaration) and the generated `Q1Paper/PaperII/CLAIMS.md` plus `Q1Paper/PaperII/MODULES.md`.
+The reading entries `Q1Paper/PaperII/Read/S01`–`S07` follow the paper's order and add no proofs.
+
 ## The paper
 
 `paper/paper_I_dec.tex` (and the compiled `paper/paper_I_dec.pdf`).  The `.tex` is the only source of
