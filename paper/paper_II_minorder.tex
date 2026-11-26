@@ -833,7 +833,10 @@ The Popov--Belevitch--Hautus criterion that turns $\dim W=\dim\pi_1(W)$ into a k
 paper-level, since the artifact contains no controllability theory; so are the interface of
 Section~\ref{sec:compute} and the counting arguments, hence this is not a formal verification of the
 complexity statements.
-\item \emph{Exact rational arithmetic.} The instance of Appendix~\ref{app:example} is verified by exact
+\item \emph{Exact rational arithmetic.} The instance of Appendix~\ref{app:example} is verified by
+\texttt{scripts/verify\_paperII\_example.py} in exact rational arithmetic: it recomputes
+$k=4$, $d_0=6$, $s_0=2$, $\ell=4$, the two ranks of \eqref{eq:5a}, and for the pencil the
+vanishing determinant together with the gcd $1$ of its $64$ minors of order $7$.  That script is
 rational computation, not by numerical evaluation: the two rank equalities of \eqref{eq:5a}, the
 vanishing of the determinant of the $8\times8$ pencil together with the nonzero $7\times7$ minors and
 their gcd, and the rank of $[U_0;V_0]$ that enters \eqref{eq:qmin-lb}. This excludes arithmetic slips
