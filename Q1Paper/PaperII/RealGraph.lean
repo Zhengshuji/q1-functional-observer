@@ -610,4 +610,60 @@ theorem finrank_span_phiPair {X : Submodule ℝ ((Fin k → ℝ) × (Fin k → �
     exact h.symm
   rw [hset, hspan, LinearEquiv.finrank_map_eq (Φ (K := ℂ)) (UC Y), finrank_UC Y, hYrank]
 
+
+/-- The first projection commutes with complexification. -/
+theorem pi1_span_phiPair (X : Submodule ℝ ((Fin k → ℝ) × (Fin k → ℝ))) :
+    Q1Subspace.pi1 (Submodule.span ℂ (phiPair '' (X : Set ((Fin k → ℝ) × (Fin k → ℝ)))))
+      = Submodule.span ℂ (phi (Fin k) '' (Q1Subspace.pi1 X : Set (Fin k → ℝ))) := by
+  rw [Q1Subspace.pi1, Q1Subspace.pi1, Submodule.map_span, Set.image_image]
+  congr 1
+  ext w
+  constructor
+  · rintro ⟨x, hx, rfl⟩
+    exact ⟨x.1, ⟨x, hx, rfl⟩, rfl⟩
+  · rintro ⟨a, ⟨x, hx, rfl⟩, rfl⟩
+    exact ⟨x, hx, rfl⟩
+
+/-- The second projection commutes with complexification. -/
+theorem pi2_span_phiPair (X : Submodule ℝ ((Fin k → ℝ) × (Fin k → ℝ))) :
+    Q1Subspace.pi2 (Submodule.span ℂ (phiPair '' (X : Set ((Fin k → ℝ) × (Fin k → ℝ)))))
+      = Submodule.span ℂ (phi (Fin k) '' (Q1Subspace.pi2 X : Set (Fin k → ℝ))) := by
+  rw [Q1Subspace.pi2, Q1Subspace.pi2, Submodule.map_span, Set.image_image]
+  congr 1
+  ext w
+  constructor
+  · rintro ⟨x, hx, rfl⟩
+    exact ⟨x.2, ⟨x, hx, rfl⟩, rfl⟩
+  · rintro ⟨a, ⟨x, hx, rfl⟩, rfl⟩
+    exact ⟨x, hx, rfl⟩
+
+/-- The pencil projection commutes with complexification. -/
+theorem piLam_span_phiPair (X : Submodule ℝ ((Fin k → ℝ) × (Fin k → ℝ))) (lam : ℝ) :
+    Q1Subspace.piLam (K := ℂ) (lam : ℂ)
+        (Submodule.span ℂ (phiPair '' (X : Set ((Fin k → ℝ) × (Fin k → ℝ)))))
+      = Submodule.span ℂ (phi (Fin k) '' (Q1Subspace.piLam (K := ℝ) lam X : Set (Fin k → ℝ))) := by
+  have hcomp : ∀ x : (Fin k → ℝ) × (Fin k → ℝ),
+      ((lam : ℂ) • LinearMap.fst ℂ (Fin k → ℂ) (Fin k → ℂ)
+          - LinearMap.snd ℂ (Fin k → ℂ) (Fin k → ℂ)) (phiPair x)
+        = phi (Fin k) ((lam • LinearMap.fst ℝ (Fin k → ℝ) (Fin k → ℝ)
+            - LinearMap.snd ℝ (Fin k → ℝ) (Fin k → ℝ)) x) := by
+    intro x
+    funext j
+    show (lam : ℂ) * (phi (Fin k) x.1) j - (phi (Fin k) x.2) j
+      = (phi (Fin k) ((lam • LinearMap.fst ℝ (Fin k → ℝ) (Fin k → ℝ)
+          - LinearMap.snd ℝ (Fin k → ℝ) (Fin k → ℝ)) x)) j
+    rw [phi_apply, phi_apply, phi_apply]
+    simp only [LinearMap.sub_apply, LinearMap.smul_apply, Pi.sub_apply, Pi.smul_apply,
+      smul_eq_mul]
+    push_cast
+    ring
+  rw [Q1Subspace.piLam, Q1Subspace.piLam, Submodule.map_span, Set.image_image]
+  congr 1
+  ext w
+  constructor
+  · rintro ⟨x, hx, rfl⟩
+    exact ⟨_, ⟨x, hx, rfl⟩, (hcomp x).symm⟩
+  · rintro ⟨a, ⟨x, hx, rfl⟩, rfl⟩
+    exact ⟨x, hx, hcomp x⟩
+
 end Q1Paper.PaperII
