@@ -429,3 +429,16 @@ commit `8f77caf` **本地已提交但尚未推送**（GitHub SSH 连不上，稍
 2. 用 `claim4_converse (K := ℝ)`（配 `pairRows`/`Φ` 编码）把实图 `graphExt U (GR …) b` 变成实设计 `R`；
 3. (⇐)：`tMinC ≤ ↑(dim (UC U) + 1 − s₀)`（经 `tMinC_le_iff_decC.mpr`），下界用 `le_tMinC_of_lowerBound`；
 4. (⇒)：`decC_sInf_tMinCSet` + `decC_to_feasible_design` + 泛型 `exists_graph_representation (K := ℝ)`。
+
+## 8.19 复化"实设计的 W"：卡点与更省的路线（2026-11-27）
+
+尝试 `WRreal`（实配对空间）与 `WR A (N.map f) L0 R = span ℂ (phiPair '' WRreal …)`，
+卡在**矩阵元素的强制转换**：目标形如 `↑(∑ j, M i j * N j k) = ∑ j, ↑(M i j) * ↑(N j k)`，
+`push_cast` 与 `map_sum` 都不按预期触发（`map_sum` 模式是 `∑ x ∈ s`，我们的写法是 `∑ x`）。
+
+**下一版走矩阵等式而不是逐元素求和**：
+1. 先证 `Lc L0 R * (N.map f) = (Matrix.fromRows L0 R * N).map f`（两边都是矩阵，用 `Matrix.map_mul`
+   配 `Lc` 的定义；注意 `Matrix.map_mul` 的 `f` 是隐式的 `algebraMap ℝ ℂ`）；
+2. 再由 `Matrix.ext`/`funext` 直接读行，`phiPair` 的第一分量就是 `↑((M*N) i j)`，第二分量同理用
+   `Ac A * N.map f` 的 `map` 形式；
+3. 剩下只是 `Set.range` 的像与 `pairRowSpace` 的 span 对齐（`hrange` 那一步已经写过，只需 `simpa`）。
