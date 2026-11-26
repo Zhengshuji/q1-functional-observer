@@ -100,4 +100,10 @@ proved, and its converse is the open real-compression lemma (plan §8.5).
   is `W(G,b)` for some `b ≠ 0` and linear `G`
   (`Q1Paper.PaperII.exists_graph_representation`, via the section of `π₁|_W` and
   its one-dimensional kernel).
+* **Prop 3, the composed criterion** (complex designs): the two directions are
+  `tMin_eq_of_graph` (`(G,b)` ⇒ `t_min = a + 1 − s₀`) and `exists_graph_of_tMin_eq`
+  (`t_min = a + 1 − s₀` ⇒ the data), with the identification `π₁W = U₀+V₀` at an
+  attaining `W` in `pi1_eq_sup_of_finrank`.  (Packaging them into a single `↔` with
+  `G` typed on `U₀+V₀` needs a transport along that identification; the two
+  directions are what is proved.)
 -/

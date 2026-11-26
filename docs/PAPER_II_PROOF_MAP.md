@@ -72,13 +72,16 @@ specification `DECℂ`.  The bridge between them is the real-compression lemma
 | Prop 3, graph extension: `π₁W(G,b) = U`, `π₂ ⊆ U`, `dim = dim U + 1` | `graphExt`, `graphExt_pi1`, `graphExt_pi2_le`, `graphExt_finrank` | `PaperII/GraphExtension.lean` | literal |
 | Prop 3, pencil: `πλ W(G,b) = (λI−G)U + span{b}`; rank condition ⇒ feasible | `graphExt_piLam`, `graphExt_feasible` | `PaperII/GraphExtension.lean` | literal |
 | Prop 3, `(G,b)` direction: `t = dim U + 1 − s₀` | `t_eq_of_graph` | `PaperII/GraphExtension.lean` | literal |
+| Prop 3, the minimum saturates from a `(G,b)` pair: `t_min = a + 1 − s₀` | `tMin_eq_of_graph` | `PaperII/Tightness.lean` | literal |
+| Prop 3, the data extracted from an attaining `W` | `exists_graph_of_tMin_eq` | `PaperII/Tightness.lean` | literal |
+| Prop 3, `π₁W = U₀+V₀` at an attaining `W` | `pi1_eq_sup_of_finrank` | `PaperII/Tightness.lean` | literal |
 | Prop 3, converse: `W = W(G,b)` for a feasible `W` with `dim W = dim π₁W + 1` | `exists_graph_representation` | `PaperII/GraphExtract.lean` | literal |
 
 ## Not formalised
 
 | paper item | reason |
 |---|---|
-| Prop 3, the composed iff (`t_min = a−s₀+1 ⇔ ∃(G,b)`) | both directions and the numerical half are proved separately; the composition — in particular identifying `U = π₁W` with `U₀+V₀` at an attaining `W` — and the real-field form of the statement are not formalised |
+| Prop 3, the composed iff (`t_min = a−s₀+1 ⇔ ∃(G,b)`) | both directions are proved (`tMin_eq_of_graph` and `exists_graph_of_tMin_eq`), together with the identification `π₁W = U₀+V₀` at an attaining `W` (`pi1_eq_sup_of_finrank`); what is not done is packaging them into a single `↔` with `G` typed on `U₀+V₀` (a transport along that identification), and the real-field form of the statement |
 | Theorem 4, the `O(log(ℓ+2))` call count | the ordering is `tMin_le_iff_dec` and the least element is `dec_sInf_tMinSet`; the arithmetic of the call count is not formalised |
 | Corollary 5 (OPT), Corollary 6 (FIND) | complexity statements inherited from Paper I; FIND's bit model is open in the paper |
 | the appendix instance (`q_min = 4`) | exact rational certificate; belongs to the Python verification layer |

@@ -17,6 +17,7 @@ import Q1Paper.PaperII.MinOrder
 import Q1Paper.PaperII.GraphExtension
 import Q1Paper.PaperII.GraphExtract
 import Q1Paper.PaperII.Realification
+import Q1Paper.PaperII.Tightness
 
 -- Converse.lean
 #print axioms Q1Paper.PaperII.WRc
@@ -130,4 +131,9 @@ import Q1Paper.PaperII.Realification
 #print axioms Q1Paper.PaperII.t_le_t_of_le
 #print axioms Q1Paper.PaperII.dec_saturates
 #print axioms Q1Paper.PaperII.dec_mono_complex
+
+-- Tightness.lean
+#print axioms Q1Paper.PaperII.pi1_eq_sup_of_finrank
+#print axioms Q1Paper.PaperII.tMin_eq_of_graph
+#print axioms Q1Paper.PaperII.exists_graph_of_tMin_eq
 

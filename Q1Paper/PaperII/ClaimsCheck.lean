@@ -66,3 +66,6 @@ import Q1Paper.PaperII.MainTheorems
 #check @Q1Paper.PaperII.graphExt_feasible
 #check @Q1Paper.PaperII.t_eq_of_graph
 #check @Q1Paper.PaperII.exists_graph_representation
+#check @Q1Paper.PaperII.pi1_eq_sup_of_finrank
+#check @Q1Paper.PaperII.tMin_eq_of_graph
+#check @Q1Paper.PaperII.exists_graph_of_tMin_eq
