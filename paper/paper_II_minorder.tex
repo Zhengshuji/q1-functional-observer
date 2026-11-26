@@ -854,32 +854,38 @@ Two kinds of evidence support the statements above, and the artifact records whi
 which.
 
 \begin{enumerate}
-\item \emph{Lean~4 with Mathlib.} The structural statements of Section~\ref{sec:standing}, together
-with the dimensional parts of Propositions~\ref{prop:lowerbound} and~\ref{prop:tight}, are formalized;
-Table~\ref{tab:evidence} lists them statement by statement, with the grade of the formalization and
-the declaration names. The grades separate what is formalized as stated (\emph{literal}) from what is
-formalized at the level of linear maps and submodules (\emph{abstract core}), the translation to
-matrices being paper-level; the single \emph{ingredient} is one step of the proof of
-Lemma~\ref{lem:monotone}. Two points about the coverage. First, the lower half $\omega+1\le\dim W$ of
-Claim~\ref{claim:struct} is formalized over an algebraically closed field, so the graph argument that
-the spectral condition rules out $\dim W=\dim\pi_1(W)$ for a feasible $W$ is covered. Second,
-Proposition~\ref{prop:tight} is only partly covered: what the artifact does cover of it is its
-dimensional half, namely, for $W_0\subseteq W$ with $\pi_2(W)\subseteq\pi_1(W)$,
-$\dim(\pi_1(W_0)+\pi_2(W_0))\le\dim\pi_1(W)$ and $\dim\pi_1(W_0)\le\dim\pi_1(W)$, which is
-$\operatorname{rank}[U_0;V_0]\le\omega$ for $U_0=\pi_1(W_0)$, $V_0=\pi_2(W_0)$. Every declaration is
-checked by the kernel against only (\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}).
-The Popov--Belevitch--Hautus criterion that turns $\dim W=\dim\pi_1(W)$ into a kernel condition is
-paper-level, since the artifact contains no controllability theory; so are the interface of
-Section~\ref{sec:compute} and the counting arguments, hence this is not a formal verification of the
-complexity statements.
+\item \emph{Lean~4 with Mathlib.} The structural statements of Section~\ref{sec:standing}, the
+dimensional parts of Propositions~\ref{prop:lowerbound} and~\ref{prop:tight}, the numerical half of
+Proposition~\ref{prop:tight} together with both of its directions --- over $\mathbb C$ and over the
+paper's real designs, each packaged as a single equivalence --- the ordering half of
+Theorem~\ref{thm:interface}, the counting argument behind it (the bisection procedure, its
+termination, its correctness and the resulting call count), and Corollary~\ref{cor:opt} in both the
+complex and the real form are formalized; Table~\ref{tab:evidence} lists them statement by
+statement, with the grade of the formalization and the declaration names. The grades separate what
+is formalized as stated (\emph{literal}) from what is formalized at the level of linear maps and
+submodules (\emph{abstract core}), the translation to matrices being paper-level; the single
+\emph{ingredient} is one step of the proof of Lemma~\ref{lem:monotone}. Two points about the
+coverage. First, the lower half $\omega+1\le\dim W$ of Claim~\ref{claim:struct} is formalized over an
+algebraically closed field, so the graph argument that the spectral condition rules out
+$\dim W=\dim\pi_1(W)$ for a feasible $W$ is covered. Second, what stays outside the formalization is
+what the paper itself states as a citation: the chart parametrisation of $\Psi_{t,\omega}$ together
+with the sampling-point algorithm and its bit cost (Remark~\ref{rem:find-bit}), and the
+arithmetic-cost accounting of Corollaries~\ref{cor:opt} and~\ref{cor:find}. The mathematical content
+of the system $\Psi_{t,\omega}$ itself --- that its conditions on $W$ are equivalent to the
+feasibility of $W$ --- is formalized, as is the call count of the interface theorem. Every
+declaration is checked by the kernel against only (\texttt{propext}, \texttt{Classical.choice},
+\texttt{Quot.sound}), and the computable bisection is axiom-free. The Popov--Belevitch--Hautus
+criterion that turns $\dim W=\dim\pi_1(W)$ into a kernel condition remains paper-level, since the
+artifact contains no controllability theory.
 \item \emph{Exact rational arithmetic.} The instance of Appendix~\ref{app:example} is verified by
 \texttt{scripts/verify\_paperII\_example.py} in exact rational arithmetic: it recomputes
 $k=4$, $d_0=6$, $s_0=2$, $\ell=4$, the two ranks of \eqref{eq:5a}, and for the pencil the
 vanishing determinant together with the gcd $1$ of its $64$ minors of order $7$.  That script is
 rational computation, not by numerical evaluation: the two rank equalities of \eqref{eq:5a}, the
 vanishing of the determinant of the $8\times8$ pencil together with the nonzero $7\times7$ minors and
-their gcd, and the rank of $[U_0;V_0]$ that enters \eqref{eq:qmin-lb}. This excludes arithmetic slips
-but does not replace the proofs.
+their gcd, and the rank of $[U_0;V_0]$ that enters \eqref{eq:qmin-lb}. The same script pins the
+integer vector that a Lean declaration re-checks as a kernel vector of the pencil at $\lambda=0$, so
+the two layers cannot drift apart. This excludes arithmetic slips but does not replace the proofs.
 \end{enumerate}
 
 The Lean development and the exact-arithmetic scripts form the artifact at
