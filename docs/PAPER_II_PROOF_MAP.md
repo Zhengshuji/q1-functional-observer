@@ -81,7 +81,8 @@ specification `DECℂ`.  The bridge between them is the real-compression lemma
 
 | paper item | reason |
 |---|---|
-| Prop 3, the composed iff (`t_min = a−s₀+1 ⇔ ∃(G,b)`) | both directions are proved (`tMin_eq_of_graph` and `exists_graph_of_tMin_eq`), together with the identification `π₁W = U₀+V₀` at an attaining `W` (`pi1_eq_sup_of_finrank`); what is not done is packaging them into a single `↔` with `G` typed on `U₀+V₀` (a transport along that identification), and the real-field form of the statement |
+| Prop 3, the single `↔` packaging (complex designs) | **frozen by decision**: the two directions `tMin_eq_of_graph` / `exists_graph_of_tMin_eq` and the identification `pi1_eq_sup_of_finrank` carry the mathematics; packaging them into one `↔` with `G` typed on `U₀+V₀` only adds interface convenience and repeatedly trips Lean's elaboration (whnf heartbeat exhaustion even with a short alias and 800k hearts).  A future packaging should use a predicate `IsTightExtension V` with `G, b` typed on `π₁V`, not a full transport |
+| Prop 3 over the real designs (`DECℂ`) | not formalised: the graph machinery (`graphExt`, `graphExt_piLam`, `graphExt_feasible`, `t_eq_of_graph`, `exists_graph_representation`) is field-generic, but the design-level real statement needs the real↔complex bridge for `U₀+V₀` (a real subspace and its ℂ-span) and for the pencil's complex rank |
 | Theorem 4, the `O(log(ℓ+2))` call count | the ordering is `tMin_le_iff_dec` and the least element is `dec_sInf_tMinSet`; the arithmetic of the call count is not formalised |
 | Corollary 5 (OPT), Corollary 6 (FIND) | complexity statements inherited from Paper I; FIND's bit model is open in the paper |
 | the appendix instance (`q_min = 4`) | exact rational certificate; belongs to the Python verification layer |
