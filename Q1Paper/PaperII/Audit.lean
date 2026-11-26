@@ -92,6 +92,7 @@ import Q1Paper.PaperII.RealGraph
 #print axioms Q1Paper.PaperII.decC_mono
 
 -- RealGraph.lean
+#print axioms Q1Paper.PaperII.phi_apply
 #print axioms Q1Paper.PaperII.map_mulVec_phi
 #print axioms Q1Paper.PaperII.Gfun
 #print axioms Q1Paper.PaperII.Gfun_mem_UC

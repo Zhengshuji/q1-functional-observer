@@ -24,7 +24,8 @@ OUT = os.path.join(DIR, "Audit.lean")
 
 SKIP = {"MainTheorems.lean", "Audit.lean", "Claims.lean", "ClaimsCheck.lean"}
 DECL = re.compile(
-    r"^(?:noncomputable\s+)?(?:theorem|def|abbrev)\s+([A-Za-z_\u00c0-\uffff][A-Za-z0-9_'\u00c0-\uffff]*)"
+    r"^(?:@\[[^\]]*\]\s+)?(?:noncomputable\s+)?(?:theorem|def|abbrev)\s+"
+    r"([A-Za-z_\u00c0-\uffff][A-Za-z0-9_'\u00c0-\uffff]*)"
 )
 
 HEADER = """/-
