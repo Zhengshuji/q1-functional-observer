@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Build Lean project
         uses: leanprover/lean-action@v1
         with:
@@ -38,6 +40,7 @@ jobs:
           python3 scripts/paper_lean_index.py --check
           python3 scripts/generate_reading_entries.py --check
           python3 scripts/check_consistency.py
+          python3 scripts/check_pdf_fresh.py
 
   paper:
     runs-on: ubuntu-latest

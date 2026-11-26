@@ -40,6 +40,10 @@ AUDIT_RE = re.compile(r"^#print axioms\s+([\w'.!?]+)")
 
 DECL_RE = re.compile(r"^\s*(?:noncomputable\s+)?(?:theorem|def|abbrev|structure|lemma)\s+([\w'!?]+)")
 CLAIM_ROW_RE = re.compile(r"^\|\s*\*\*(.+?)\*\*\s*\(`([^`]+)`\)\s*(?:—|-)\s*(.+?)\s*\|\s*`([^`]+)`\s*\|\s*`([^`]+)`\s*\|")
+# a paper-level item has no declaration: its cell is `--`, so it needs its own pattern.  Such an item
+# still belongs in the map -- the map's job is to say where each statement of the paper stands, and
+# "nowhere, it is paper-level" is a position.
+PAPER_ROW_RE = re.compile(r"^\|\s*\*\*(.+?)\*\*\s*\(`([^`]+)`\)\s*(?:—|-)\s*(.+?)\s*\|\s*--\s*\|\s*`\[([^\]]+)\]`\s*\|")
 
 
 def scan_declarations() -> dict[str, tuple[str, int]]:
@@ -65,6 +69,11 @@ def claim_rows() -> list[tuple[str, str, str, str, str]]:
         m = CLAIM_ROW_RE.match(line)
         if m:
             rows.append((m.group(1), m.group(2), m.group(3), m.group(4), m.group(5)))
+            continue
+        m = PAPER_ROW_RE.match(line)
+        if m:
+            # no declaration: the empty string marks a paper-level statement
+            rows.append((m.group(1), m.group(2), m.group(3), "", m.group(4)))
     return rows
 
 
@@ -79,6 +88,10 @@ def render(rows, decls) -> tuple[str, list[str]]:
         "|---|---|---|---|---|",
     ]
     for item, label, desc, decl, status in rows:
+        if not decl:
+            # a paper-level statement: there is no declaration to locate, and that is not an error
+            out.append(f"| {item} | `{label}` | -- | -- (paper-level) | {status} |")
+            continue
         short = decl.rsplit(".", 1)[-1]
         loc = decls.get(short)
         if loc is None:

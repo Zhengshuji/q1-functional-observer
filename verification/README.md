@@ -97,9 +97,11 @@ otherwise.  The witness is in the compressed form the paper itself uses (the `S`
 reconstructing an actual observer matrix `L` from it is a further step.
 ## Terminology: paper, Python, Lean
 
-The three layers name the same objects differently, and a reader moving between them has to translate
-twice.  This table is the translation.  It is the one place where the Python and the Lean are compared
-side by side.
+The three layers name the same objects differently, and a reader moving between them has to
+translate twice.  This table is the translation, and it is the one place where the Python and the
+Lean are compared side by side.  It covers Paper I only: `verification/` implements Paper I's
+Algorithm 1 and its `r = 0` branch, there is no Paper II script, and Paper II is checked by its own
+`ClaimsCheck.lean` and `Audit.lean`.
 
 | paper | Python | Lean |
 |---|---|---|
