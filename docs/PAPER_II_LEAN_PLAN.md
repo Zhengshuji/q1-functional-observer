@@ -498,3 +498,22 @@ commit `8f77caf` **本地已提交但尚未推送**（GitHub SSH 连不上，稍
 2. 对实 `W` 用**泛型** `exists_graph_representation (K := ℝ)` 得实 `G, b`（该引理对任意域成立）；
 3. 复化后把 pencil 秩条件（复域）搬过去，得到 (⇒)；
 4. 最后与 (⇐) 合成 `t_min^ℝ = a + 1 − s₀` 的等式（上界用 (⇐)，下界用 `le_tMinC_of_lowerBound`）。
+
+## 8.23 投影与复化交换；实设计 Prop 3 的覆盖口径（2026-11-27，`Audit` 146 条）
+
+**新增**：`pi1_span_phiPair`、`pi2_span_phiPair`、`piLam_span_phiPair`（投影/铅笔与复化交换；
+`piLam` 版对实数 `λ` 成立，标量对齐用显式 `show` + `push_cast` + `ring`）。
+
+**复↔实工具箱现在齐了**：`finrank_span_phiPair`（复化保维数）、三条投影交换、
+`graphExt_span_phiPair`（复图 = 实图复化）、`WR_eq_span_phiPair_WRreal`（设计的复 W = 实 W 复化）、
+`exists_design_of_pairRowSpace`（实 sandwich 反向）。
+
+**实设计 Prop 3 的覆盖口径（写进论文证据表与 proof map）**：
+* (⇐)：**实数据版**已形式化——`tMinC_le_of_graph_real`；
+* (⇒)：已形式化但产出**复数据**（含 `π₁V = U₀+V₀` 与 pencil 秩条件）——`exists_graph_of_tMinC_eq`；
+* 两者之间的最后一步是"**复跨度的实点**"（real points of a complex span）：把提取出的复 `G` 变成实 `G`。
+  这是标准事实（ℂ^k 作为 2 维实空间的实结构），但目前未形式化。
+
+**如果继续攻这个缺口**，路线是：定义 `reIm : (Fin k → ℂ) ≃ₗ[ℝ] (Fin k → ℝ) × (Fin k → ℝ)`，
+证明 `reIm '' (span ℂ (phi '' X)) = X × X`（ℂ-作用把 `(x,0)` 送到 `(0,x)`），
+于是"实点"恰好是 `X × {0}`。

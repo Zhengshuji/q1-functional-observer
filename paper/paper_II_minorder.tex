@@ -802,6 +802,13 @@ Prop.~\ref{prop:minorder} for real designs: $t_{\min}^{\mathbb R}\le2\ell$ & lit
 \texttt{le\_tMinC\_of\_lowerBound}, \texttt{tMin\_le\_tMinC} \\
 Complexification of a real subspace preserves the dimension & literal &
 \texttt{UC}, \texttt{finrank\_UC} \\
+Real sandwich converse: a real subspace between $\mathrm{row}(L_0M)$ and $\mathrm{row}M$ is
+realised by a real design & literal &
+\texttt{exists\_design\_of\_pairRowSpace} \\
+Prop.~\ref{prop:tight} for real designs, $(G,b)\Rightarrow t_{\min}^{\mathbb R}\le a+1-s_0$ &
+literal & \texttt{tMinC\_le\_of\_graph\_real} \\
+Prop.~\ref{prop:tight} for real designs, from saturation to the tightness data & literal &
+\texttt{exists\_graph\_of\_tMinC\_eq} \\
 \bottomrule
 \end{tabular}
 \end{table*}
@@ -816,8 +823,13 @@ $\mathbb C$, and separately for the paper's real-design specification $\mathrm{D
 $(G,b)$ direction and the extraction of $(G,b)$ from an attaining $W$), together with the
 numerical half and the identification $\pi_1W=U_0+V_0$; the two directions are composed
 (\texttt{tMin\_eq\_of\_graph}, \texttt{exists\_graph\_of\_tMin\_eq}), but they are not packaged into a single
-$\leftrightarrow$, and the real-design form of the criterion is not formalised (only the
-dimension bridge $\dim_{\mathbb C}=\dim_{\mathbb R}$ of a real subspace is).
+$\leftrightarrow$.  For the paper's real designs both directions are formalised as well
+(\texttt{tMinC\_le\_of\_graph\_real} takes the real data, \texttt{exists\_graph\_of\_tMinC\_eq}
+returns the tightness data with $\pi_1V=U_0+V_0$), through the real sandwich converse
+(\texttt{exists\_design\_of\_pairRowSpace}) and the complexification identities
+(\texttt{graphExt\_span\_phiPair}, \texttt{finrank\_span\_phiPair}); what is missing is the
+refinement that turns the extracted data into a real $G$, which is the standard
+``real points of a complex span'' fact and is not formalised.
 
 Two kinds of evidence support the statements above, and the artifact records which statement rests on
 which.
