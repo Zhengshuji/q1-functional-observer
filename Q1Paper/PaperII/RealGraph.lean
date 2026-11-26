@@ -565,4 +565,49 @@ theorem exists_graph_of_tMinC_eq {p : ℕ}
   rw [hpen, graphExt_pi1] at hspec
   exact hspec
 
+
+/-- `Φ` and the coordinatewise complexification agree with `phiPair`. -/
+theorem phiPair_eq (x : (Fin k → ℝ) × (Fin k → ℝ)) :
+    phiPair x = Φ (K := ℂ) (phi (Fin (k + k)) ((Φ (K := ℝ)).symm x)) := by
+  have h1 : (fun j : Fin k => (Φ (K := ℝ)).symm x (finSumFinEquiv (Sum.inl j))) = x.1 := by
+    have h := (Φ_apply ((Φ (K := ℝ)).symm x)).symm.trans
+      (LinearEquiv.apply_symm_apply (Φ (K := ℝ)) x)
+    exact congrArg Prod.fst h
+  have h2 : (fun j : Fin k => (Φ (K := ℝ)).symm x (finSumFinEquiv (Sum.inr j))) = x.2 := by
+    have h := (Φ_apply ((Φ (K := ℝ)).symm x)).symm.trans
+      (LinearEquiv.apply_symm_apply (Φ (K := ℝ)) x)
+    exact congrArg Prod.snd h
+  apply Prod.ext
+  · funext j
+    show phi (Fin k) x.1 j
+      = (phi (Fin (k + k))) ((Φ (K := ℝ)).symm x) (finSumFinEquiv (Sum.inl j))
+    rw [phi_apply, phi_apply, congrFun h1 j]
+  · funext j
+    show phi (Fin k) x.2 j
+      = (phi (Fin (k + k))) ((Φ (K := ℝ)).symm x) (finSumFinEquiv (Sum.inr j))
+    rw [phi_apply, phi_apply, congrFun h2 j]
+
+/-- **Complexification preserves the dimension of a real pair space.** -/
+theorem finrank_span_phiPair {X : Submodule ℝ ((Fin k → ℝ) × (Fin k → ℝ))} :
+    Module.finrank ℂ ↥(Submodule.span ℂ (phiPair '' (X : Set ((Fin k → ℝ) × (Fin k → ℝ)))))
+      = Module.finrank ℝ ↥X := by
+  set Y : Submodule ℝ (Fin (k + k) → ℝ) := Submodule.map (Φ (K := ℝ)).symm.toLinearMap X with hY
+  have hYrank : Module.finrank ℝ ↥Y = Module.finrank ℝ ↥X :=
+    LinearEquiv.finrank_map_eq (Φ (K := ℝ)).symm X
+  have hset : (phiPair '' (X : Set ((Fin k → ℝ) × (Fin k → ℝ))))
+      = (Φ (K := ℂ)) '' ((phi (Fin (k + k))) '' (Y : Set (Fin (k + k) → ℝ))) := by
+    ext z
+    constructor
+    · rintro ⟨x, hx, rfl⟩
+      refine ⟨phi (Fin (k + k)) ((Φ (K := ℝ)).symm x),
+        ⟨(Φ (K := ℝ)).symm x, ⟨x, hx, rfl⟩, rfl⟩, (phiPair_eq x).symm⟩
+    · rintro ⟨g, ⟨y, ⟨x, hx, rfl⟩, rfl⟩, rfl⟩
+      exact ⟨x, hx, phiPair_eq x⟩
+  have hspan : Submodule.span ℂ ((Φ (K := ℂ)) '' ((phi (Fin (k + k))) '' (Y : Set (Fin (k + k) → ℝ))))
+      = Submodule.map (Φ (K := ℂ)).toLinearMap (UC Y) := by
+    have h := Submodule.map_span (f := (Φ (K := ℂ)).toLinearMap)
+      (s := ((phi (Fin (k + k))) '' (Y : Set (Fin (k + k) → ℝ))))
+    exact h.symm
+  rw [hset, hspan, LinearEquiv.finrank_map_eq (Φ (K := ℂ)) (UC Y), finrank_UC Y, hYrank]
+
 end Q1Paper.PaperII

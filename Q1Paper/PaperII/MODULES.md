@@ -26,7 +26,7 @@ The entry points and their separate jobs:
 | `LowerBound.lean` | 5 | 0 | `finrank_sup_pi_le`, `finrank_pi1_mono`, `lowerBound_core` | Paper II, Proposition `prop:lowerbound`, the spectral lower bound: |
 | `MinOrder.lean` | 8 | 3 | `tMinSet`, `tMin`, `tMin_le_iff_dec` | Paper II, Proposition `prop:minorder` (minimum order): `q_min = r₀ + t_min`, with |
 | `Monotone.lean` | 4 | 0 | `pairRowSpace_fromRows`, `pairRowSpace_pad`, `decC_mono_add` | Paper II, Claim `lem:monotone`, the monotone half: a feasible real design can be |
-| `RealGraph.lean` | 21 | 9 | `phi_eq_zero`, `map_mulVec_phi`, `Gfun` | Paper II, Proposition `prop:tight`: the complexification of a real graph extension. |
+| `RealGraph.lean` | 23 | 9 | `phi_eq_zero`, `map_mulVec_phi`, `Gfun` | Paper II, Proposition `prop:tight`: the complexification of a real graph extension. |
 | `Realification.lean` | 20 | 5 | `pairRows`, `Φ_pairRows`, `pairRowSpace_eq_map_pairRows` | Real-design bridges: the real-compression lemma `real_compress` (upgrade of the |
 | `Sandwich.lean` | 5 | 7 | `Ac`, `L0c`, `Rc` | Paper II's sandwich in the pair encoding: the forward direction, from a feasible |
 | `Saturate.lean` | 4 | 0 | `DEC_to_feasible_c`, `t_le_t_of_le`, `dec_saturates` | Paper II, Claim `lem:monotone`, the saturation half: `DEC r` and `DEC m` are |

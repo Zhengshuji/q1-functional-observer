@@ -127,6 +127,8 @@ import Q1Paper.PaperII.RealGraph
 #print axioms Q1Paper.PaperII.tMinC_le_of_graph_real
 #print axioms Q1Paper.PaperII.tMinC_le_of_mem
 #print axioms Q1Paper.PaperII.exists_graph_of_tMinC_eq
+#print axioms Q1Paper.PaperII.phiPair_eq
+#print axioms Q1Paper.PaperII.finrank_span_phiPair
 
 -- Realification.lean
 #print axioms Q1Paper.PaperII.pairRows
