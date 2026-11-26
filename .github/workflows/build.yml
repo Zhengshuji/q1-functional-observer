@@ -1,4 +1,4 @@
-name: build
+﻿name: build
 
 on:
   push:
@@ -32,7 +32,7 @@ jobs:
           lake build Q1Paper.PaperII.Read.All
           lake env lean Q1Paper/PaperII/Audit.lean > paperII_audit.log
           python3 scripts/check_paperI_axioms.py paperII_audit.log Q1Paper/PaperII/Audit.lean
-      - name: Paper I claim index
+      - name: Claim and module indexes (Paper I and Paper II)
         run: |
           lake env lean Q1Paper/PaperI/S00_Interface/ClaimsCheck.lean
           python3 scripts/generate_paperI_claims.py --check
