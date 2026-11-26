@@ -817,6 +817,8 @@ Complex feasibility descends to the real pair space (via the real points of a co
 literal &
 \texttt{re\_im\_mem\_of\_mem\_span}, \texttt{mem\_of\_phi\_mem\_span},
 \texttt{isFeasible\_real\_of\_span\_phiPair} \\
+Prop.~\ref{prop:tight} for real designs, packaged as an equivalence & literal &
+\texttt{tMinC\_eq\_of\_real\_graph}, \texttt{tMinC\_eq\_iff\_real\_graph} \\
 \bottomrule
 \end{tabular}
 \end{table*}
@@ -831,13 +833,12 @@ $\mathbb C$, and separately for the paper's real-design specification $\mathrm{D
 $(G,b)$ direction and the extraction of $(G,b)$ from an attaining $W$), together with the
 numerical half and the identification $\pi_1W=U_0+V_0$; the two directions are composed
 (\texttt{tMin\_eq\_of\_graph}, \texttt{exists\_graph\_of\_tMin\_eq}), but they are not packaged into a single
-$\leftrightarrow$.  For the paper's real designs both directions are formalised as well
-(\texttt{tMinC\_le\_of\_graph\_real} takes the real data, \texttt{exists\_graph\_of\_tMinC\_eq}
-returns the tightness data with $\pi_1V=U_0+V_0$), through the real sandwich converse
-(\texttt{exists\_design\_of\_pairRowSpace}) and the complexification identities
-(\texttt{graphExt\_span\_phiPair}, \texttt{finrank\_span\_phiPair}); what is missing is the
-refinement that turns the extracted data into a real $G$, which is the standard
-``real points of a complex span'' fact and is not formalised.
+$\leftrightarrow$.  For the paper's real designs the criterion is packaged as a single equivalence,
+\texttt{tMinC\_eq\_iff\_real\_graph}, through the real sandwich converse
+(\texttt{exists\_design\_of\_pairRowSpace}), the complexification identities
+(\texttt{graphExt\_span\_phiPair}, \texttt{finrank\_span\_phiPair}, and the projection
+commutations), the real points of a complex span (\texttt{mem\_of\_phi\_mem\_span}), and the
+descent of feasibility (\texttt{isFeasible\_real\_of\_span\_phiPair}).
 
 Two kinds of evidence support the statements above, and the artifact records which statement rests on
 which.
