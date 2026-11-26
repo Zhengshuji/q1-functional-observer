@@ -48,6 +48,12 @@ import Q1Paper.PaperII.MainTheorems
 #check @Q1Paper.PaperII.tMinC
 #check @Q1Paper.PaperII.tMinC_le_iff_decC
 #check @Q1Paper.PaperII.decC_sInf_tMinCSet
+#check @Q1Paper.PaperII.tMinC_le_two_ell
+#check @Q1Paper.PaperII.WR_le_TR
+#check @Q1Paper.PaperII.tMin_le_tMinC
+#check @Q1Paper.PaperII.le_tMinC_of_lowerBound
+#check @Q1Paper.PaperII.UC
+#check @Q1Paper.PaperII.finrank_UC
 #check @Q1Paper.PaperII.dec_sInf_tMinSet
 #check @Q1Paper.PaperII.exists_least_of_monotone
 #check @Q1Paper.PaperII.omega_le_ell

@@ -12,7 +12,9 @@ Scope.  Items marked "(Paper I)" are proved in the Paper I tree and reused here
 through the column split `Φ` (`Interface.lean`).  Items concerning `DEC` are
 stated for the field-generic predicate over `ℂ` (complex free blocks); the
 real-design specification `DECℂ` has its forward direction and monotonicity
-proved, and its converse is the open real-compression lemma (plan §8.5).
+proved through the real-compression lemma `real_compress`, so both the forward and the
+converse directions are available for `DECℂ` (the residual boundary is the single-`↔`
+packaging of Proposition 3 and the real-design form of its tightness criterion).
 -/
 
 /-! ## §II Standing results (from Paper I, reused)

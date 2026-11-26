@@ -1,8 +1,10 @@
 /-
 Q1Paper/PaperII/Realification.lean
 
-Bridges for the real-compression lemma (the upgrade of the complex-design results
-to the paper's real-design specification `DECℂ`).
+Real-design bridges: the real-compression lemma `real_compress` (upgrade of the
+complex-design results to the paper's real-design specification `DECℂ`), the
+real-design minimum order `tMinC` with its saturation and bounds, and the
+complexification of real subspaces (`UC`, `finrank_UC`).
 
 The pair row space `row[H  H_A]` is encoded in `K^{k+k}` by stacking the two blocks
 of each row (`pairRows`); the column split `Φ` reads that encoding as row pairs.

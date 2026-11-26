@@ -96,4 +96,4 @@ specification `DECℂ`.  The bridge between them is the real-compression lemma
 `lake build Q1Paper.PaperII.MainTheorems` (9174 jobs) and
 `lake env lean Q1Paper/PaperII/ClaimsCheck.lean`; the axiom audit is
 `Q1Paper/PaperII/Audit.lean` checked by `scripts/check_paperI_axioms.py`
-(48 declarations, only `propext`, `Classical.choice`, `Quot.sound`).
+(106 declarations, only `propext`, `Classical.choice`, `Quot.sound`).
