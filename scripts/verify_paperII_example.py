@@ -112,6 +112,17 @@ def main() -> int:
     print(f"gcd of the minors   = {g}")
     assert g.is_number and sp.simplify(g) != 0, g
 
+    # ---- the lambda = 0 slice, in the form Lean re-checks ----
+    # Q1Paper/PaperII/Appendix.lean records `appendixPencil0` (the pencil at lambda = 0) and the
+    # integer kernel vector below, and proves that the matrix kills it.  Pin that vector here so
+    # the two layers cannot drift apart.
+    LEAN_KERNEL = [-390, 97, -22, 272, -419, 58, -252, 55]
+    P0 = P.subs(lam, 0)
+    v0 = sp.Matrix(LEAN_KERNEL)
+    print(f"pencil at lambda=0 kills {LEAN_KERNEL}:", list(P0 * v0) == [0] * 8)
+    assert list(P0 * v0) == [0] * 8, list(P0 * v0)
+    assert any(LEAN_KERNEL), "the kernel vector must be nonzero"
+
     print("OK: (5a) and (5b) hold for this four-row witness; q_min <= 4 for the instance.")
     return 0
 
