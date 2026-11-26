@@ -7,6 +7,7 @@ this build instead of silently invalidating the claims table.
 
 import Q1Paper.PaperII.MainTheorems
 import Q1Paper.PaperII.Complexity
+import Q1Paper.PaperII.Appendix
 
 -- §II  Standing results (from Paper I, reused)
 #check @Q1Paper.claim3_attainable
@@ -102,3 +103,4 @@ import Q1Paper.PaperII.Complexity
 #check @Q1Paper.PaperII.bisectGo_finds
 #check @Q1Paper.PaperII.tMin_eq_bisectGo
 #check @Q1Paper.PaperII.tMinC_eq_bisectGo
+#check @Q1Paper.PaperII.appendix_pencil_kernel

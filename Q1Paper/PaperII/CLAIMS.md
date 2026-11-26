@@ -45,5 +45,5 @@ the linear-map/submodule version; *ingredient* = one step of a proof.
 |---|---|
 | **the search algorithm itself** (`thm:interface`) | the arithmetic of the call count is formalised; the bisection procedure is paper-level |
 | **the chart parametrisation in Psi_{t,omega} and the sampling step** (`cor:find`) | items (iii)-(v) of Psi (sandwich + pencil) are formalised as isFeasible_pairRowSpace_iff / claim5_conditions_depend_on_W; the chart parametrisation W = row[XB GB] and the sampling-point algorithm are citations to the companion paper |
-| **the appendix instance (q_min = 4)** (`app:example`) | exact rational certificate, verified by the Python layer |
+| **the appendix instance (q_min = 4)** (`app:example`) | the full certificate is the Python layer (scripts/verify_paperII_example.py); PaperII/Appendix.lean re-checks in Lean that the pencil at lambda = 0 is singular (appendix_pencil_kernel) |
 

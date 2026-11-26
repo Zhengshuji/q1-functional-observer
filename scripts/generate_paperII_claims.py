@@ -145,7 +145,9 @@ NOT_FORMALISED = [
      "claim5_conditions_depend_on_W; the chart parametrisation W = row[XB GB] and the "
      "sampling-point algorithm are citations to the companion paper"),
     ("app:example", "the appendix instance (q_min = 4)",
-     "exact rational certificate, verified by the Python layer"),
+     "the full certificate is the Python layer (scripts/verify_paperII_example.py); "
+     "PaperII/Appendix.lean re-checks in Lean that the pencil at lambda = 0 is singular "
+     "(appendix_pencil_kernel)"),
 ]
 
 

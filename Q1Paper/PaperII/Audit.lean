@@ -21,6 +21,12 @@ import Q1Paper.PaperII.Realification
 import Q1Paper.PaperII.Tightness
 import Q1Paper.PaperII.RealGraph
 import Q1Paper.PaperII.Complexity
+import Q1Paper.PaperII.Appendix
+
+-- Appendix.lean
+#print axioms Q1Paper.PaperII.appendixPencil0
+#print axioms Q1Paper.PaperII.appendixKernel
+#print axioms Q1Paper.PaperII.appendix_pencil_kernel
 
 -- Complexity.lean
 #print axioms Q1Paper.PaperII.lt_two_pow_log2_succ
