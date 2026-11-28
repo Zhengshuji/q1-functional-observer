@@ -30,6 +30,7 @@ lake env lean Q1Paper/PaperV/Audit.lean > "${TMPDIR:-/tmp}/paperV_audit.log"
 python3 scripts/check_paperI_axioms.py "${TMPDIR:-/tmp}/paperV_audit.log" Q1Paper/PaperV/Audit.lean
 python3 scripts/check_paperV_counts.py
 lake env lean Q1Paper/PaperV/ThinCounterexample.lean > "${TMPDIR:-/tmp}/paperV_thin.log"
+lake env lean Q1Paper/PaperV/DiagonalComponents.lean > "${TMPDIR:-/tmp}/paperV_diag.log"
 
 # 3. the generated indexes must match the sources
 python3 scripts/generate_paperI_claims.py --check
