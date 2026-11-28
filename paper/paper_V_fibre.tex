@@ -40,8 +40,9 @@ free rows, the admissible values of $LA$ form an affine space --- the \emph{fibr
 is $q\,a$, where $a=\dim(U\cap T)$ and $T$ is the intrinsic space of row pairs attainable by rows
 that vanish on the unobservable subspace. On the fibre the spectral condition is equivalent to the
 vanishing of the degree of a single greatest common divisor, computed over the rational function field
-of the fibre; the criterion is polynomial for every fixed compressed rank and does not enumerate
-maximal minors. We then characterise when the whole fibre fails. If the number $q$ of observer rows
+of the fibre; the criterion is polynomial for every fixed compressed rank and needs no drop-locus
+recursion, i.e.\ no case split on which minor is nonzero. We then characterise when the whole fibre
+fails. If the number $q$ of observer rows
 exceeds the compressed rank $d'$ and the fibre direction is common to all rows --- which is the case
 here --- then the failure of the fibre is necessarily a fixed spectral factor: the common divisor is
 independent of the fibre parameters. Consequently the bad set is closed in the Grassmannian of
@@ -209,7 +210,7 @@ $(\lambda H-H_A)$ matters, so the criterion below is stated for a general $K=HZ'
 k}$ with $G'\in T^{q}$.
 
 \begin{thm}[Criterion]\label{thm:criterion}
-Assume $\mathcal F_U\ne\varnothing$. The following are equivalent.
+Assume $d'\ge1$ and $\mathcal F_U\ne\varnothing$. The following are equivalent.
 \begin{enumerate}[label=(\roman*),leftmargin=2.2em,itemsep=1pt]
 \item There exists $G'\in\mathcal F_U$ such that $\operatorname{rank}P(\lambda)=d'$ for all
 $\lambda$.
@@ -226,10 +227,14 @@ no eigenvalue \cite[Ch.~6]{vzgg13}. For the equivalence with the existence of a 
 $f_j$ are polynomials in the fibre parameters $t$ with coefficients in $\mathbb C[\lambda]$, so
 $\deg g=0$ says that some finite $\mathbb Z$-combination of the $f_j$ (after clearing denominators)
 is a nonzero constant $D\in\mathbb C[t]$. Evaluating at $t_0$ with $D(t_0)\ne0$ gives a point of the
-affine space $\mathcal F_U$ at which the specialised minors have gcd one, hence constant rank $d'$;
-the converse is immediate because a common root at one point would make $\gcd$ positive at the
-generic point. Since $\mathcal F_U$ is affine over $\mathbb C$ with the coordinates $t$, and $D$ is a
-nonzero polynomial, such a $t_0$ exists.
+affine space $\mathcal F_U$ at which the specialised minors have gcd one, hence constant rank $d'$.
+For the converse one cannot argue pointwise: a single bad point does not make the generic gcd
+positive, because the drop point may move with the fibre parameters
+(Example~\ref{ex:bad} is a case where it does not). What is true, and what the converse uses, is
+Corollary~\ref{cor:every-bad}: if the generic gcd has positive degree, its primitive representative
+has a constant $\lambda$-leading coefficient (a nonzero $d'$-minor of $H$), so by
+Lemma~\ref{lem:specialize} every point of the fibre is bad. Since $\mathcal F_U$ is affine over
+$\mathbb C$ with the coordinates $t$, and $D$ is a nonzero polynomial, such a $t_0$ exists.
 \end{proof}
 
 The step that makes the criterion effective is that a positive-degree common divisor cannot
@@ -307,8 +312,10 @@ Schwartz--Zippel applied to $D$ of degree at most $2d'^{2}$.
 \section{The bad set}\label{sec:bad}
 
 \begin{defn}\label{def:bad}
-$U\in\mathrm{Gr}(d',k)$ is \emph{bad} if $\mathcal F_U\ne\varnothing$ and the fibre is entirely bad,
-i.e.\ every $G'\in\mathcal F_U$ fails $(5b)$. Write $\mathcal B$ for the bad set.
+Fix $U_0$ (the row space of the prescribed block, $U_0=\operatorname{row}(L_0N)$). For
+$U\in\mathrm{Gr}(d',k)$ with $U\supseteq U_0$, call $U$ \emph{bad} if $\mathcal F_U\ne\varnothing$ and
+the fibre is entirely bad, i.e.\ every $G'\in\mathcal F_U$ fails $(5b)$. Write $\mathcal B$ for the bad
+set.
 \end{defn}
 
 \begin{cor}\label{cor:every-bad}
@@ -321,14 +328,17 @@ The next theorem is the structural statement this paper is built around: the fai
 parameter-dependent once $q>d'$, because the fibre direction is common to all rows.
 
 \begin{thm}[Fixed spectral factor]\label{thm:factor}
-Let $U$ be such that $\mathcal F_U\ne\varnothing$, $q>d'$, and $M$ be a matrix with
-$H_A=HZ''+Y'M$, $Y'\in\mathbb C^{q\times a}$, $M\in\mathbb C^{a\times d'}$ (the fibre direction is
-common to all rows, as in \eqref{eq:fibre}). If the fibre is entirely bad then $g\in\mathbb C[\lambda]$:
-the common divisor does not depend on the fibre parameters.
+Let $U$ be such that $\mathcal F_U\ne\varnothing$, $q>d'$, and let $V^{+}$ be a left inverse of a
+full-row-rank factorisation $H=XV$. Write $B_0=HZ''V^{+}$ and suppose the fibre direction is common
+to all rows, i.e.\ $H_AV^{+}=B_0+Y'M$ with $Y'\in\mathbb C^{q\times a}$, $M\in\mathbb C^{a\times d'}$
+(as it is for \eqref{eq:fibre}). If the fibre is entirely bad then $g\in\mathbb C[\lambda]$: the
+common divisor does not depend on the fibre parameters.
 \end{thm}
 
 \begin{proof}
-Write $P(Y,\lambda)=\lambda X-B_0-YM$ with $X=H$, $B_0=HZ''$. Consider the incidence variety
+Work in the reduced pencil $P(Y,\lambda)=\lambda X-B_0-YM$ with $X\in\mathbb C^{q\times d'}$ of full
+column rank (the minors of $P$ are the minors of $\lambda H-H_A$ up to the nonzero factor
+$\det(VV')$, so their gcd is the same). Consider the incidence variety
 \begin{equation}\label{eq:incidence}
 \begin{aligned}
 \mathcal I=\{((Y,\alpha,[v])):&\ (\alpha X-B_0-YM)v=0\}\\
@@ -346,45 +356,63 @@ parameter-free set $\{\alpha:\operatorname{rank}(\alpha X-B_0)<d'\}$, and $g\in\
 \end{proof}
 
 \begin{thm}[Closed and thin]\label{thm:closed}
-$\mathcal B$ is closed in $\mathrm{Gr}(d',k)$; the feasible set is relatively open in the
-compatibility stratum $\mathcal C=\{U:\ \mathcal F_U\ne\varnothing\}$, which is itself closed.
-Moreover $\mathcal B$ has empty interior.
+Assume $q>d'$ and the common-direction hypothesis of Theorem~\ref{thm:factor}, so that badness at
+$U$ is equivalent to the vanishing of the coefficient polynomials $q_{I,m}$ of
+Proposition~\ref{prop:coeff} at a fixed $\lambda_0$. Then $\mathcal B$ is closed in
+$\mathrm{Gr}(d',k)$; the feasible set is relatively open in the compatibility stratum
+$\mathcal C=\{U\supseteq U_0:\ \mathcal F_U\ne\varnothing\}$, which is itself closed.
 \end{thm}
 
 \begin{proof}
-Badness is the vanishing of the coefficient polynomials $q_{I,m}$ of Theorem~\ref{thm:rp} read as
-functions of the Plücker coordinates: the gcd of a bounded-degree family of univariate polynomials is
-one exactly when a certain Bezout system has a solution, which is an open condition on the
-coefficients; its complement is closed. Closedness of $\mathcal C$ is bilinearity of
-$UZ''\subseteq U+T$. Emptiness of the interior follows from the example of
-Section~\ref{sec:examples}, where a bad point has feasible points arbitrarily close.
+Badness is the vanishing of the coefficient polynomials $q_{I,m}$ of
+Proposition~\ref{prop:coeff} read as functions of the Plücker coordinates: the gcd of a bounded-degree
+family of univariate polynomials is one exactly when a certain Bezout system has a solution, which is
+an open condition on the coefficients; its complement is closed. Closedness of $\mathcal C$ is
+bilinearity of $UZ''\subseteq U+T$. $\mathcal B$ need not be thin: when $q=d'$ the whole stratum is
+bad (\cite{paperI}, the square-pencil argument), while Example~\ref{ex:bad} shows that it can also be
+a proper closed set with feasible points arbitrarily close.
+\end{proof}
+
+\begin{prop}[Coefficient test]\label{prop:coeff}
+Write each nonzero $d'$-minor as $f_I(\lambda,y)=\sum_e\lambda^{e}\sum_m a_{I,e,m}y^{m}$ and put
+$q_{I,m}(\lambda)=\sum_e a_{I,e,m}\lambda^{e}\in\mathbb C[\lambda]$. Then the fibre is entirely bad
+if and only if the family $\{q_{I,m}\}_{I,m}$ has a common root.
+\end{prop}
+
+\begin{proof}
+A fixed $\lambda_0$ kills every minor at every point of the fibre exactly when each
+$f_I(\lambda_0,\cdot)$ vanishes as a polynomial in $y$, which is the same as
+$q_{I,m}(\lambda_0)=0$ for all $I,m$. So a common root exists exactly when some $\lambda_0$ makes the
+fibre bad at every point.
 \end{proof}
 
 \begin{thm}[Infeasibility]\label{thm:no}
 Let $\mathcal C$ be the compatibility stratum for the given $d'$ and $\mathcal B$ the bad set. There
 is no feasible $U$ of dimension $d'$ if and only if $\mathcal C\subseteq\mathcal B$. If
-$\mathcal C\not\subseteq\mathcal B$ then the feasible set is dense in $\mathcal C$.
+$\mathcal C\not\subseteq\mathcal B$ then the feasible set is dense in some irreducible component of
+$\mathcal C$.
 \end{thm}
 
 \begin{proof}
 Immediate from Theorem~\ref{thm:closed}: the feasible set is $\mathcal C\setminus\mathcal B$, and a
-nonempty relatively open subset of an irreducible closed set is dense. (For a reducible stratum,
-apply the argument to each component.)
+nonempty relatively open subset of an irreducible closed set is dense. Different components can
+behave differently --- one may be entirely bad --- so density is claimed per component.
 \end{proof}
 
 We record a sufficient condition that is checkable in linear algebra and that explains the smallest
 bad examples.
 
 \begin{prop}[Column drop]\label{prop:drop}
-Let $K=HZ''+G'$ and suppose that for some $\lambda_0$ and some set $J$ of columns with
-$|J|>k-d'$ the columns $K_{:,j}=\lambda_0H_{:,j}$ hold identically in the fibre parameters for
-$j\in J$. Then $U$ is bad.
+Let $K=HZ''+G'$ and let $\operatorname{supp}(T)$ be the set of columns in which $T$ is supported. If
+for some $\lambda_0$ and some set $J$ of columns with $|J|>k-d'$ and $J\cap\operatorname{supp}(T)=\varnothing$
+the identity $(HZ'')_{:,j}=\lambda_0H_{:,j}$ holds for $j\in J$, then $U$ is bad.
 \end{prop}
 
 \begin{proof}
-At $\lambda_0$, $P(\lambda_0)_{:,j}=\lambda_0H_{:,j}-K_{:,j}=0$ for $j\in J$, so at most $k-|J|$
-columns of $P(\lambda_0)$ are nonzero and $\operatorname{rank}P(\lambda_0)\le k-|J|<d'$, for every
-point of the fibre. Hence $(5b)$ fails everywhere.
+For $j\notin\operatorname{supp}(T)$ the column $G'_{:,j}$ vanishes identically in the fibre, since
+every row of $G'$ lies in $T$. Hence at $\lambda_0$ the columns $P(\lambda_0)_{:,j}$ vanish for
+$j\in J$: at most $k-|J|$ columns are nonzero, so $\operatorname{rank}P(\lambda_0)\le k-|J|<d'$ at
+every point of the fibre, and $(5b)$ fails everywhere.
 \end{proof}
 
 The converse of Proposition~\ref{prop:drop} is false; column dependencies of a more general shape,
@@ -394,47 +422,49 @@ columns vanishing.
 \section{Algorithms and examples}\label{sec:algorithms}
 
 \begin{thm}[Region with automatic compatibility]\label{thm:regime}
-Let $s=\dim(U_0\cap T)$ and suppose $d'+t-k\ge s$ with $t=\dim T$. Then, for every $d'$,
-infeasibility of the $d'$-stratum is decidable by a one-sided randomised procedure: sample a rational
+Let $s=\dim(U_0\cap T)$ and suppose $d'+t-k\ge s$ with $t=\dim T$. Then, for every $d'$, the
+following procedure accepts the $d'$-stratum one-sidedly: sample a rational
 $U\in\mathrm{Gr}(d',k)$ containing $U_0$, test the fibre with Theorem~\ref{thm:rp}, and accept when a
-witness is found.
+witness is found. Acceptance is sound (a witness is a feasible $U$), and on a feasible stratum it
+happens with probability at least $1-\varepsilon$ after $O(\log(1/\varepsilon))$ trials. A negative
+answer is not certified.
 \end{thm}
 
 \begin{proof}
 Under the hypothesis a generic $U$ satisfies $\dim(U+T)=k$, so compatibility $UZ''\subseteq U+T$ is
 automatic and $\mathcal C$ contains a dense open subset of $\mathrm{Gr}(d',k)$. By
-Theorem~\ref{thm:closed} the feasible set is open and dense whenever nonempty, and by
-Theorem~\ref{thm:witness} a feasible point is certified by a witness; a random rational $U$ therefore
-lands in the feasible set with probability bounded below by $1-2d'^{2}/|S|$ for a grid $S$, and the
-one-sided test of Theorem~\ref{thm:rp} accepts. If the stratum is entirely bad no witness exists and
-the procedure never accepts.
+Theorem~\ref{thm:closed} the feasible set is open and, when nonempty, dense in the component that
+meets it; by Theorem~\ref{thm:witness} a feasible point is certified by a witness. A random rational
+$U$ therefore lands in the feasible set with probability bounded below by
+$1-2d'^{2}/|S|$ for a grid $S$, and the one-sided test of Theorem~\ref{thm:rp} accepts. If the
+stratum is entirely bad no witness exists and the procedure never accepts.
 \end{proof}
 
 \begin{thm}[The stratum $t=1$]\label{thm:t1}
-If $t=1$ and $U$ is feasible then $U$ is invariant under $Z''$; consequently, for $t=1$ the existence
-question is decided by enumerating the $d'$-dimensional invariant subspaces of $Z''$ that contain
-$T$ and $U_0$, and testing each with Theorem~\ref{thm:criterion}.
+Assume $t=1$ and that $U$ is feasible with $a=\dim(U\cap T)\ge1$ (a feasible candidate always has
+$a\ge1$; this is the rank barrier of \cite{paperI}, whose proof we do not repeat). Then $U$ is
+invariant under $Z''$; consequently, for $t=1$ the existence question is decided by enumerating the
+$d'$-dimensional invariant subspaces of $Z''$ that contain $T$ and $U_0$, and testing each with
+Theorem~\ref{thm:criterion}.
 \end{thm}
 
 \begin{proof}
-Feasibility forces $a=\dim(U\cap T)\ge1$ (otherwise the fibre is a single point and the pencil is
-square, hence has an eigenvalue, so $(5b)$ fails); with $t=1$ this gives $T\subseteq U$, hence
-$U+T=U$ and compatibility reads $UZ''\subseteq U$, i.e.\ invariance. The enumeration is finite and
-each test is the criterion.
+With $a\ge1$ and $t=1$ we have $T\subseteq U$, hence $U+T=U$ and compatibility reads
+$UZ''\subseteq U$, i.e.\ invariance. The enumeration is finite and each test is the criterion.
 \end{proof}
 
 \subsection{Examples}\label{sec:examples}
 
-\begin{example}[A feasible fibre at $t=2$]\label{ex:feasible}
-Take $k=3$, $q=3$, $d'=2$, $T=\operatorname{span}\{e_1,e_2\}$,
+\begin{example}[A feasible fibre at $t=1$]\label{ex:feasible}
+Take $k=2$, $q=3$, $d'=2$, $T=\operatorname{span}\{e_1\}$,
 \[
 H=\begin{bmatrix}2&2\\-1&-1\\2&1\end{bmatrix},\quad
 Z''=\begin{bmatrix}1&2\\1&1\end{bmatrix},\quad U=\operatorname{row}H=\mathbb C^{2}.
 \]
-The fibre is $\mathcal F_U=T^{\,3}$ (three free parameters), and the three nonzero $2$-minors of
-$\lambda H-HZ''-G'$ have gcd one, so the fibre is feasible by Theorem~\ref{thm:criterion}. The
-corresponding observer is realisable over $\mathbb Q$ with $n=4$, $p=1$, $r=3$, and its conditions
-(\ref{eq:fivea})--(\ref{eq:fiveb}) hold on the original matrices.
+The fibre is a coset of $(U\cap T)^{3}$, of dimension $q\,a=3$, so three free parameters; the three
+nonzero $2$-minors of $\lambda H-HZ''-G'$ have gcd one, so the fibre is feasible by
+Theorem~\ref{thm:criterion}. The corresponding observer is realisable over $\mathbb Q$ with $n=4$,
+$p=1$, $r=3$, and its conditions (\ref{eq:fivea})--(\ref{eq:fiveb}) hold on the original matrices.
 \end{example}
 
 \begin{example}[A bad point with feasible neighbours]\label{ex:bad}
@@ -451,9 +481,13 @@ interior --- the statement of Theorem~\ref{thm:closed}.
 \begin{example}[The thin region can be feasible]\label{ex:thin}
 $k=3$, $t=2$, $d'=1$, $q=2$, $T=\operatorname{span}\{e_1,e_2\}$, $U=U_0=\operatorname{span}\{e_1\}$,
 $Z''=0$, $H$ with both rows $e_1$. Compatibility is automatic and the fibre is $U^{2}$; with
-$G'_i=(y_i,0,0)$ the pencil is $\operatorname{diag}(\lambda-y_1,\lambda-y_2)$ on the first two
-columns, whose $1$-minors have gcd $1$ for $y_1\ne y_2$. Hence the stratum is feasible although
-$d'+t-k=0<s=1$; sampling heuristics that only look at $d'+t-k$ versus $s$ are not sound.
+$G'_i=(y_i,0,0)$ the pencil is
+\[
+P(\lambda)=\begin{bmatrix}\lambda-y_1&0&0\\ \lambda-y_2&0&0\end{bmatrix},
+\]
+whose $1$-minors have gcd $1$ for $y_1\ne y_2$ (both nonzero entries sit in the first column, and the
+two parameters are independent). Hence the stratum is feasible although $d'+t-k=0<s=1$; sampling
+heuristics that only compare $d'+t-k$ with $s$ are not sound.
 \end{example}
 
 \section{Open problems}\label{sec:open}
@@ -463,17 +497,16 @@ $d'+t-k=0<s=1$; sampling heuristics that only look at $d'+t-k$ versus $s$ are no
 $\mathcal C$ is a proper subvariety and the sampling argument of Theorem~\ref{thm:regime} does not
 apply. Deciding $\mathcal C\subseteq\mathcal B$ there --- equivalently deciding the existence
 question --- is open. Example~\ref{ex:thin} shows that feasibility is possible in that region, so the
-question is not vacuous.
-\item \emph{Bit complexity.} Theorem~\ref{thm:criterion} is polynomial for fixed compressed rank in
+question is not vacuous.\item \emph{Bit complexity.} Theorem~\ref{thm:criterion} is polynomial for fixed compressed rank in
 the arithmetic model; its bit cost, and that of the coefficient test behind
 Theorem~\ref{thm:closed}, are not accounted for here. The bound of Theorem~\ref{thm:witness} is on
 the witness, not on the running time.
 \item \emph{Algebraic witnesses.} Theorem~\ref{thm:witness} assumes $U$ rational. For $t=1$ the
 feasible $U$ are invariant subspaces of $Z''$ and may be algebraic, of degree growing with $n$; then
 the witness may be algebraic as well and its height is not bounded here.
-\item \emph{Hardness.} No reduction is given in either direction. Since the region
-$d'+t-k\ge s$ is decidable by a randomised procedure, a hardness proof would have to encode its
-instance into the thin stratum (A).
+\item \emph{Hardness.} No reduction is given in either direction. Since on the region
+$d'+t-k\ge s$ feasibility is \emph{accepted} one-sidedly (Theorem~\ref{thm:regime}), a hardness proof
+would have to encode its instance into the thin stratum (A).
 \end{enumerate}
 
 \subsection{Reproducibility and evidence}\label{sec:repro}
