@@ -296,7 +296,7 @@ $l[N\ AN]=K_i$, which adds only polynomial height.
 
 \begin{thm}[One-sided test]\label{thm:rp}
 Draw two constant-coefficient combinations $F_1=\sum c_jf_j$, $F_2=\sum d_jf_j$ of the minors and put
-$D=\operatorname{Res}_\lambda(F_1,F_2)$. If the fibre is entirely bad then $D\equiv0$ for every choice
+$D=\operatorname{Res}_\lambda(F_1,F_2)$. If the fibre is bad (Definition~\ref{def:bad}) then $D\equiv0$ for every choice
 of $(c,d)$. If the fibre is feasible then $D\equiv0$ only on a proper closed subset of the coefficient
 space: for generic $(c,d)$ one has $\gcd(F_1,F_2)=1$ and $D\not\equiv0$. Consequently, sampling
 $(c,d)$ from a grid and $t_0$ from a grid, and declaring the fibre feasible when $D(t_0)\ne0$, is
@@ -336,8 +336,11 @@ parameter-dependent once $q>d'$, because the fibre direction is common to all ro
 
 \begin{prop}[Coefficient test]\label{prop:coeff}
 Write each nonzero $d'$-minor as $f_I(\lambda,y)=\sum_e\lambda^{e}\sum_m a_{I,e,m}y^{m}$ and put
-$q_{I,m}(\lambda)=\sum_e a_{I,e,m}\lambda^{e}\in\mathbb C[\lambda]$. Then the fibre is entirely bad
-if and only if the family $\{q_{I,m}\}_{I,m}$ has a common root.
+$q_{I,m}(\lambda)=\sum_e a_{I,e,m}\lambda^{e}\in\mathbb C[\lambda]$. Then $U$ is bad in the sense of
+Definition~\ref{def:bad} if and only if the family $\{q_{I,m}\}_{I,m}$ has a common root. The two notions of
+Definition~\ref{def:bad} coincide when $q>d'$ (Theorem~\ref{thm:factor}); when $q=d'$ every $U$ with
+nonempty fibre is pointwise bad, while $\mathcal B=\mathcal C$ may fail, so the proposition is stated for the
+uniform notion and Theorem~\ref{thm:factor} is what connects the two.
 \end{prop}
 
 \begin{proof}
@@ -368,7 +371,7 @@ standard charts cover $\mathrm{Gr}(d',k)$, hence $\mathcal B$ is closed.
 \begin{thm}[Fixed spectral factor]\label{thm:factor}
 Let $U$ be such that $\mathcal F_U\ne\varnothing$, $q>d'$, and let $H=XV$ be a full-row-rank factorisation and $V^{+}$ a right inverse of $V$. Write $B_0=HZ''V^{+}$ and suppose the fibre direction is common
 to all rows, i.e.\ $H_AV^{+}=B_0+Y'M$ with $Y'\in\mathbb C^{q\times a}$, $M\in\mathbb C^{a\times d'}$
-(as it is for \eqref{eq:fibre}). If the fibre is entirely bad then $g\in\mathbb C[\lambda]$: the
+(as it is for \eqref{eq:fibre}). If the fibre is bad (Definition~\ref{def:bad}) then $g\in\mathbb C[\lambda]$: the
 common divisor does not depend on the fibre parameters.
 \end{thm}
 
@@ -466,7 +469,7 @@ set of vanishing columns.
 Let $A\subseteq\mathbb C^{k}$ be a subspace, $\lambda_0\in\mathbb C$, and suppose that for every
 $G'\in\mathcal F_U$
 $$(T\cap U)\,A=0\quad\text{and}\quad\bigl(\lambda_0H-HZ''-G'\bigr)A=0 .$$
-If $\dim A>k-d'$ then $U$ is bad.
+If $\dim A>k-d'$ then $U$ is infeasible: either $\mathcal F_U=\varnothing$ or $U$ is bad.
 \end{prop}
 
 \begin{proof}
@@ -588,7 +591,7 @@ neighbouring spaces $U_s=\{y:y_3=y_2+s\,y_1\}$, $s\ne0$, are feasible, so the ba
 interior --- the statement of Theorem~\ref{thm:closed}.
 \end{example}
 
-\begin{example}[The thin region can be feasible]\label{ex:thin}
+\begin{example}[$d'+t-k<s$ does not by itself forbid feasibility]\label{ex:thin}
 $k=3$, $t=2$, $d'=1$, $q=2$, $T=\operatorname{span}\{e_1,e_2\}$, $U=U_0=\operatorname{span}\{e_1\}$,
 $Z''=0$, $H$ with both rows $e_1$. Compatibility is automatic and the fibre is $U^{2}$; with
 $G'_i=(y_i,0,0)$ the pencil is
