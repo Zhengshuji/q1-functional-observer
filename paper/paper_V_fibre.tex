@@ -484,9 +484,12 @@ there, and a stated sampling distribution; we do not have them, and we do not cl
 The failure probability of the test is explicit. The coefficient polynomials $q_{I,m}$ have degree at
 most $d'$ in $\lambda$, so the resultant $D$ of Theorem~\ref{thm:rp} has $t$-degree at most
 $2d'^{2}$. Sampling the fibre parameters from the grid $\{0,\dots,2d'^{2}\}^{qa}$ therefore misses the
-zero set of $D$ with probability at least $1/2$, and $O(\log(1/\varepsilon))$ independent trials
-bring the failure probability below $\varepsilon$. Everything else in the test is exact: the ranks,
-the compatibility test $UZ''\subseteq U+T$ and the evaluation of the resultant.
+zero set of $D$ with probability at least $1/2$, and the coefficient grid contributes the term
+$d'/|S_c|$ of Theorem~\ref{thm:rp}; $O(\log(1/\varepsilon))$ independent trials of the inner test
+bring its failure probability below $\varepsilon$. Everything else in the test is exact: the ranks,
+the compatibility test $UZ''\subseteq U+T$ and the evaluation of the resultant. This is a statement
+about one fibre; the outer search of Theorem~\ref{thm:regime} has no such bound
+(Remark~\ref{rem:no-outer-bound}).
 \end{remark}
 
 The procedure of Theorem~\ref{thm:regime} is, in full:
