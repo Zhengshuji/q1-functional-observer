@@ -65,4 +65,25 @@ theorem exists_eval_ne_zero_of_isUnit_gcd {K : Type*} [Field K] [IsAlgClosed K]
   exact ⟨i, hi, by simpa [Polynomial.IsRoot.def] using hne0⟩
 
 
+/-- **Theorem 4, necessity at a point.** If some `x` makes every member of the family vanish, the gcd
+cannot be a unit: this is the shape used when a single fibre point already fails the rank condition. -/
+theorem not_isUnit_gcd_of_forall_eval_eq_zero {K : Type*} [Field K] [IsAlgClosed K]
+    {ι : Type*} (s : Finset ι) (f : ι → Polynomial K) (x : K)
+    (h : ∀ i ∈ s, (f i).eval x = 0) : ¬ IsUnit (s.gcd f) := by
+  intro hg
+  have hdvd : (X - C x : Polynomial K) ∣ s.gcd f :=
+    Finset.dvd_gcd fun i hi => Polynomial.dvd_iff_isRoot.mpr (by
+      rw [Polynomial.IsRoot.def]; exact h i hi)
+  have hunit : IsUnit (X - C x : Polynomial K) :=
+    isUnit_iff_dvd_one.mpr (dvd_trans hdvd (isUnit_iff_dvd_one.mp hg))
+  have hnot : ¬ IsUnit (X - C x : Polynomial K) := by
+    rintro ⟨v, hv⟩
+    have hmul : (X - C x : Polynomial K) * ((v⁻¹ : (Polynomial K)ˣ) : Polynomial K) = 1 := by
+      rw [← hv]
+      simp
+    have hc := congrArg (Polynomial.eval x) hmul
+    simpa using hc
+  exact hnot hunit
+
+
 end Q1Paper.PaperV
