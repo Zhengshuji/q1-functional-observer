@@ -49,3 +49,7 @@ exactly the eleven `#check`s of `ClaimsCheck.lean`.
 #print axioms Q1Paper.PaperV.eval_zero_iff_coeff_eval_zero
 #print axioms Q1Paper.PaperV.forall_eval_zero_iff_forall_coeff
 #print axioms Q1Paper.PaperV.exists_forall_eval_zero_iff_exists_forall_coeff
+
+-- KerRank.lean (Proposition 18, rank kernel)
+#print axioms Q1Paper.PaperV.rank_lt_of_le_ker
+#print axioms Q1Paper.PaperV.matrix_rank_lt_of_le_ker

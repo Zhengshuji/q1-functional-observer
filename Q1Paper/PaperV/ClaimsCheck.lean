@@ -45,3 +45,7 @@ declarations here are exactly the eleven `#print axioms` lines of `Audit.lean`.
 #check @Q1Paper.PaperV.eval_zero_iff_coeff_eval_zero
 #check @Q1Paper.PaperV.forall_eval_zero_iff_forall_coeff
 #check @Q1Paper.PaperV.exists_forall_eval_zero_iff_exists_forall_coeff
+
+-- §IV  Proposition 18 (column dependence, rank kernel)
+#check @Q1Paper.PaperV.rank_lt_of_le_ker
+#check @Q1Paper.PaperV.matrix_rank_lt_of_le_ker
