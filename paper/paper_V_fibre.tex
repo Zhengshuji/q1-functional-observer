@@ -91,6 +91,11 @@ and become, respectively, a row-space inclusion and a constant-rank condition:
 \operatorname{row}H_A\subseteq\operatorname{row}H,\qquad
 \operatorname{rank}(\lambda H-H_A)=\operatorname{rank}H\quad\forall\lambda .
 \end{equation}
+Throughout, $H$ is \emph{row-full-rank}: $\operatorname{rank}H=d'$, where $d'\le q$ is the compressed
+rank. This is what makes the pencil's rank bounded above by $d'$ automatically --- $\lambda H-H_A$ has
+$q$ rows and the rows of $H_A$ lie in those of $H$ --- so that the criterion below only has to check the
+lower bound. Without that hypothesis the equivalence can fail: for $H=0_{2\times2}$ and $H_A=-I_2$ one has
+$d'=\operatorname{rank}H=0$ while $\operatorname{rank}(\lambda H-H_A)=2$ for every $\lambda$.
 The pair $(H,H_A)$ is not arbitrary: it ranges over the row pairs attainable by $r$ free rows, a
 subspace of $\mathbb C^{2k}$ that depends only on $A$, $C$ and $L_0$. Choosing those rows is the
 only design freedom, and the two conditions pull in opposite directions --- $(5a)$ wants $H_A$
