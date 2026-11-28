@@ -11,9 +11,9 @@ point of the fibre fails the spectral condition `(5b)`.
 
 The paper proves three things about that question:
 
-1. **The fibre is an affine space** (Theorem 2): it is empty or a coset of `T ⊆?U`, of
-   dimension `q·a` with `a = dim(U ∈?T)`, and it is nonempty exactly when
-   `U Z'' ⊆?U + T`.
+1. **The fibre is an affine space** (Theorem 2): it is empty or a coset of `T ⊆ U`, of
+   dimension `q·a` with `a = dim(U ∩ T)`, and it is nonempty exactly when
+   `U Z'' ⊆ U + T`.
 2. **On the fibre the spectral condition is a degree condition** (Theorem 4): some point
    of the fibre satisfies `(5b)` exactly when the gcd of the `d'`-minors of
    `λ H - H Z'' - G'`, taken over the fibre's function field, has degree zero.  The only
@@ -40,10 +40,12 @@ compatibility is a genuine constraint.
 | Lemma 5 (specialisation) | `natDegree_map_eval_of_leadingCoeff_const`, `map_dvd_of_dvd` | `Q1Paper/PaperV/Specialize.lean` |
 | Corollary 10 (shape) | `specialized_common_factor` | `Q1Paper/PaperV/Specialize.lean` |
 
-The axiom audit is `Q1Paper/PaperV/Audit.lean` (40 declarations, all on
+The axiom audit is `Q1Paper/PaperV/Audit.lean` (40 declarations checked, all on
 `propext`, `Classical.choice`, `Quot.sound`); `scripts/check.sh` runs it.  The claims
 table is `Q1Paper/PaperV/Claims.lean` and its machine check is
-`Q1Paper/PaperV/ClaimsCheck.lean` (the same forty declarations).
+`Q1Paper/PaperV/ClaimsCheck.lean` (the same forty declarations).  The 40 is the number of
+*audited declarations*, not the number of paper items: `Claims.lean` marks how many items are
+complete, which is a strictly smaller set.
 
 ## What is *not* machine-checked, and why
 
@@ -85,9 +87,9 @@ CI.
 
 | Paper item | Lean declarations | Module |
 |---|---|---|
-| Thm 1 (fibre): per-row coset, nonemptiness | `fibre`, `mem_fibre`, `fibre_nonempty_iff`, `fibre_eq_coset`, `fibre_prod_nonempty_iff` | `Fibre.lean` |
-| Thm 1 (product dimension `q·a`) | `piConstEquiv`, `mem_pi_const`, `finrank_pi_const`, `finrank_iInf_comap_proj` | `FibreDim.lean` |
-| Lemma 5 (specialisation), Cone 10 | `natDegree_map_eval_of_leadingCoeff_const`, `map_dvd_of_dvd`, `specialized_common_factor` | `Specialize.lean` |
+| Theorem 2 (fibre): per-row coset, nonemptiness | `fibre`, `mem_fibre`, `fibre_nonempty_iff`, `fibre_eq_coset`, `fibre_prod_nonempty_iff` | `Fibre.lean` |
+| Theorem 2 (product dimension `q·a`) | `piConstEquiv`, `mem_pi_const`, `finrank_pi_const`, `finrank_iInf_comap_proj` | `FibreDim.lean` |
+| Lemma 5 (specialisation), Corollary 10 | `natDegree_map_eval_of_leadingCoeff_const`, `map_dvd_of_dvd`, `specialized_common_factor` | `Specialize.lean` |
 | Thm 4's leading-coefficient step | `coeff_one_C_mul_X_sub_C`, `natDegree_C_mul_X_sub_C_le`, `coeff_det_smul_sub_X`, `coeff_det_smul_sub_X_ne_zero` | `LeadingCoeff.lean` |
 | Thm 4's algebraic core (gcd ↔ no common root) | `gcd_ne_zero`, `exists_root_of_not_isUnit`, `isCoprime_iff_no_common_root`, `gcd_eq_one_iff_no_common_root`, `exists_common_root_of_not_isUnit` | `GcdRoot.lean` |
 | Thm 4, finite-family form | `isUnit_gcd_iff_no_common_root` | `FamilyGcd.lean` |
