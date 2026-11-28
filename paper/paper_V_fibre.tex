@@ -303,8 +303,10 @@ Fix a nonzero member $f$ of the family and draw a constant-coefficient combinati
 $g_c=\sum_j c_jf_j$ of the remaining members; put $D_c=\operatorname{Res}_\lambda(f,g_c)$. If the fibre is bad (Definition~\ref{def:bad}) then $D_c\equiv0$ for every $c$. If the fibre is feasible then $D_c\equiv0$ only on a proper closed subset of coefficient space: for
 generic $c$ one has $\gcd(f,g_c)=1$ and $D_c\not\equiv0$ (Lemma~\ref{lem:generic-combo}). Consequently, sampling $c$ from a grid and $t_0$ from a grid, and declaring the fibre feasible when
 $D_c(t_0)\ne0$, is one-sided: a bad fibre is never reported feasible, and a feasible fibre is reported
-with probability at least $1-2d'^{2}/|S|-d'/|S_c|$, where $|S_c|$ is the coefficient grid size --- the
-degree of $D_c$ in $c$ is at most $d'$, because $\operatorname{Res}_\lambda(f,g_c)$ is homogeneous of
+with probability at least $1-2d'^{2}/|S|-d'/|S_c|$, where $|S_c|$ is the coefficient grid size and the
+two grids are sampled \emph{independently}; the bound applies to a feasible fibre (for a bad one the
+acceptance probability is zero and the statement is vacuous), and the degenerate cases of the family are
+deleted as in Appendix~\ref{app:root}. The degree of $D_c$ in $c$ is at most $d'$, because $\operatorname{Res}_\lambda(f,g_c)$ is homogeneous of
 degree $\deg f\le d'$ in the coefficients of $g_c$, each of which is linear in $c$.
 \end{thm}
 
@@ -425,8 +427,10 @@ dimension $qa-q$, and the base has dimension $1+(d'-1)=d'$; hence
 \begin{equation}\label{eq:dimI}
 \dim\mathcal I^{\circ}\le qa-q+d'<qa .
 \end{equation}
-The set $Z:=\overline{\pi(\mathcal I^{\circ})}$, with $\pi:\mathcal I\to\mathbb C^{qa}$ the projection,
-is a proper closed subset of $\mathbb C^{qa}$, because $\dim Z\le\dim\mathcal I^{\circ}<qa$. So for
+The set $Z:=\overline{\pi(\mathcal I^{\circ})}$, with $\pi:\mathcal I\to\mathbb C^{qa}$ the projection, is a
+proper closed subset of $\mathbb C^{qa}$: it is closed by definition, and $\dim Z\le\dim\mathcal
+I^{\circ}<qa$. The closure has to be taken here --- $\pi$ is \emph{not} proper on the open part
+$\mathcal I^{\circ}$, so $\pi(\mathcal I^{\circ})$ itself need not be closed, only its closure is. So for
 $Y\notin Z$ no point of $\mathcal I^{\circ}$ lies over $Y$: every common root of $P(Y,\cdot)$ has
 $Mv=0$. At such a root the equation reduces to $(\alpha X-B_0)v=0$, which does not involve $Y$ at
 all.
@@ -545,11 +549,14 @@ coefficient test of Proposition~\ref{prop:coeff} a test of the whole fibre rathe
 \begin{thm}[Region with automatic compatibility]\label{thm:regime}
 Let $s=\dim(U_0\cap T)$ and suppose $d'+t-k\ge s$ with $t=\dim T$, $d'\ge\dim U_0$, and (for the
 openness and density statements) $q>d'$ together with the common-direction hypothesis of
-Theorem~\ref{thm:factor}. Then, the
-following procedure accepts the $d'$-stratum one-sidedly: sample a rational
-$U\in\mathrm{Gr}(d',k)$ containing $U_0$, test the fibre with Theorem~\ref{thm:rp}, and accept when a
-witness is found. Acceptance is sound --- a witness is a feasible $U$ --- so the procedure never
-reports a bad stratum as feasible.
+Theorem~\ref{thm:factor}. Fix in addition a stratum $\mathcal S_a=\{U:\dim(U\cap T)=a\}$ with
+$a\ge1$ constant, and suppose that stratum meets the compatible set. Then the following procedure
+accepts one-sidedly \emph{within that stratum}: draw a rational $U\in\mathcal S_a$ containing $U_0$,
+test the fibre with Theorem~\ref{thm:rp}, and accept when a witness is found. Acceptance is sound ---
+a witness is a feasible $U$ --- so the procedure never reports a bad stratum as feasible. What is
+\emph{not} claimed is that drawing from the ambient $\mathrm{Gr}(d',k)$ suffices: the density used below
+is density inside the chosen stratum, and a feasible point lying only in a lower-dimensional stratum
+would be missed with probability one by an ambient draw (Remark~\ref{rem:no-outer-bound}).
 \end{thm}
 
 \begin{proof}
@@ -586,8 +593,9 @@ about one fibre; the outer search of Theorem~\ref{thm:regime} has no such bound
 
 The procedure of Theorem~\ref{thm:regime} is, in full:
 \begin{enumerate}[label=\textup{(\arabic*)},leftmargin=2.2em,itemsep=1pt]
-\item draw a rational $U\subseteq\mathbb C^{k}$ of dimension $d'$ containing $U_0$ (a random rational
-basis, then row reduction);
+\item draw a rational $U$ of dimension $d'$ containing $U_0$ \emph{from the chosen stratum} $\mathcal S_a$
+(for instance by drawing a random rational basis subject to $\dim(U\cap T)=a$, which is a nonempty open
+condition inside the set of bases, then row reduction);
 \item test compatibility $UZ''\subseteq U+T$ exactly; if it fails, redraw;
 \item parameterise the fibre of Theorem~\ref{thm:fibre} and pick a grid point $G'\in\mathcal F_U$ of
 size at most $2d'^{2}$ per coordinate;
