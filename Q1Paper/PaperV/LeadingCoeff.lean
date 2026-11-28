@@ -9,7 +9,7 @@ Paper statement used in the proof of Theorem 4 (`§III`):
 
   *The `λ`-leading coefficient of the `d' × d'` minor of `λ H - H A` on rows `I` and
   columns `J` is `det H_{IJ}`; on a nonzero minor this is a nonzero constant, which is
-  what Lemma 2 (specialisation) needs.*
+  what Lemma 5 (specialisation) needs.*
 
 This file proves the **complete identity**, not just its nonvanishing form: the
 coefficient of `λ ^ d` in `det (λ • H - B)` is `det H`, for arbitrary `B` and with no

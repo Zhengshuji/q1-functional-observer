@@ -130,18 +130,18 @@ docstring so a reader can see the author's stated purpose.
 | `Q1Paper/PaperI/S08_ChartEquivalence/Soundness.lean` | 2 | 0 | — | certificate, which characterises the complex-λ condition — complex implies real). |
 | `Q1Paper/PaperV/Audit.lean` | 0 | 0 | — | The axiom footprint of every declaration of Paper V's Lean development. |
 | `Q1Paper/PaperV/Claims.lean` | 0 | 0 | — | unfolding `Q1Paper.PaperV.mem_fibre`. |
-| `Q1Paper/PaperV/ClaimsCheck.lean` | 0 | 0 | — | declarations here are exactly the fifty-eight `#print axioms` lines of `Audit.lean`. |
+| `Q1Paper/PaperV/ClaimsCheck.lean` | 0 | 0 | — | declarations here are exactly the 58 `#print axioms` lines of `Audit.lean`. |
 | `Q1Paper/PaperV/CoeffTest.lean` | 4 | 0 | — | fibre" is the same as "every coefficient polynomial `q_{I,m}` vanishes at `λ₀`". |
-| `Q1Paper/PaperV/ColumnDrop.lean` | 3 | 0 | — | §IV, Proposition 14 — the linear-algebra kernel of **column drop**. |
+| `Q1Paper/PaperV/ColumnDrop.lean` | 3 | 0 | — | §IV, Proposition 16 — the linear-algebra kernel of **column drop**. |
 | `Q1Paper/PaperV/Criterion.lean` | 2 | 0 | — | §III, Theorem 4 in Lean form (sufficiency direction). |
 | `Q1Paper/PaperV/CriticalSet.lean` | 2 | 0 | — | §IV, the finiteness of the critical set `A` in the proof of Theorem 13. |
 | `Q1Paper/PaperV/Enumeration.lean` | 2 | 0 | — | §V, the logical skeleton of Theorem 22's enumeration. |
 | `Q1Paper/PaperV/FamilyGcd.lean` | 3 | 0 | — | §III, the finite-family form of the criterion's algebraic core. |
-| `Q1Paper/PaperV/Fibre.lean` | 6 | 0 | — | §II, Theorem 1 (**the fibre is a coset of `T ⊓ U`**). |
+| `Q1Paper/PaperV/Fibre.lean` | 6 | 0 | — | §II, Theorem 2 (**the fibre is a coset of `T ⊓ U`**). |
 | `Q1Paper/PaperV/FibreDim.lean` | 5 | 0 | — | subspace `S` has dimension `q * dim S`**. |
 | `Q1Paper/PaperV/GcdRoot.lean` | 5 | 0 | — | §III, the algebraic core of the criterion: **no common root ⟺ the gcd is a unit**. |
 | `Q1Paper/PaperV/Invariant.lean` | 3 | 0 | — | `U` into `U`**, i.e. `U` is `Z''`-invariant. |
-| `Q1Paper/PaperV/KerRank.lean` | 2 | 0 | — | §IV, Proposition 18 — the linear-algebra kernel of **column dependence**. |
+| `Q1Paper/PaperV/KerRank.lean` | 2 | 0 | — | §IV, Proposition 17 — the linear-algebra kernel of **column dependence**. |
 | `Q1Paper/PaperV/LeadingCoeff.lean` | 4 | 0 | — | §III, the leading coefficient step behind Theorem 4. |
 | `Q1Paper/PaperV/MainTheorems.lean` | 0 | 0 | — | specialisation lemma (Lemma 5) that carries the criterion. |
 | `Q1Paper/PaperV/MinorEval.lean` | 1 | 0 | — | §III, the evaluation bridge for minors. |
@@ -151,7 +151,7 @@ docstring so a reader can see the author's stated purpose.
 | `Q1Paper/PaperV/Read/S01_Fibre.lean` | 0 | 0 | — | rename breaks the build instead of silently rotting the map. |
 | `Q1Paper/PaperV/Read/S02_Criterion.lean` | 0 | 0 | — | §III  The criterion: the specialisation lemma. |
 | `Q1Paper/PaperV/RootBound.lean` | 2 | 0 | — | §V, the counting step behind Theorem 8's failure probability. |
-| `Q1Paper/PaperV/Specialize.lean` | 3 | 0 | — | §III, Lemma 2 (**specialisation does not drop the λ-degree**). |
+| `Q1Paper/PaperV/Specialize.lean` | 3 | 0 | — | §III, Lemma 5 (**specialisation does not drop the λ-degree**). |
 | `Q1Paper/PaperV/SpectralRank.lean` | 3 | 0 | — | The linear-algebra core of the spectral form of the thin-stratum criterion. |
 | `Q1Paper/PaperV/UniformBadness.lean` | 2 | 0 | — | §IV, the direction "a fixed spectral factor fails the fibre everywhere". |
 | `Q1Paper/PaperV/UnionZeros.lean` | 3 | 0 | — | §IV, the algebraic core of Theorem 13's last step. |

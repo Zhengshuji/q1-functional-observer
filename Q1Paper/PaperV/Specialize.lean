@@ -3,7 +3,7 @@ import Mathlib
 /-!
 Q1Paper/PaperV/Specialize.lean
 
-§III, Lemma 2 (**specialisation does not drop the λ-degree**).
+§III, Lemma 5 (**specialisation does not drop the λ-degree**).
 
 Paper statement (verbatim):
 
@@ -15,7 +15,7 @@ This is the only non-trivial step of the paper's criterion (§III): it says that
 positive-degree common divisor of the minors — whose primitive representative has a
 constant λ-leading coefficient, namely `det H_{IJ}` on a nonzero `d' × d'` minor —
 cannot disappear when the fibre parameters are specialised.  Hence "positive generic
-degree" ⇔ "bad at every point of the fibre" (Corollary 8).
+degree" ⇔ "bad at every point of the fibre" (Corollary 10).
 
 The coefficient ring is `MvPolynomial σ ℂ`, the fibre's coordinate ring; `eval t₀`
 is the specialisation.  No `sorry`, no axioms beyond Lean's three standard ones.
@@ -27,7 +27,7 @@ namespace Q1Paper.PaperV
 
 variable {σ : Type*}
 
-/-- **Lemma 2 (degree).** A nonzero constant λ-leading coefficient survives every
+/-- **Lemma 5 (degree).** A nonzero constant λ-leading coefficient survives every
 specialisation, so the λ-degree cannot drop. -/
 theorem natDegree_map_eval_of_leadingCoeff_const
     (h : Polynomial (MvPolynomial σ ℂ)) (t0 : σ → ℂ) (c : ℂ)
@@ -41,13 +41,13 @@ theorem natDegree_map_eval_of_leadingCoeff_const
   · rw [Polynomial.coeff_map, Polynomial.coeff_natDegree]
     exact hmap
 
-/-- **Lemma 2 (divisibility).** Divisibility is preserved by specialisation. -/
+/-- **Lemma 5 (divisibility).** Divisibility is preserved by specialisation. -/
 theorem map_dvd_of_dvd {h f : Polynomial (MvPolynomial σ ℂ)} (t0 : σ → ℂ)
     (hdvd : h ∣ f) :
     h.map (MvPolynomial.eval t0) ∣ f.map (MvPolynomial.eval t0) :=
   Polynomial.map_dvd _ hdvd
 
-/-- **Corollary 8 (shape).** A divisor of positive degree with constant nonzero
+/-- **Corollary 10 (shape).** A divisor of positive degree with constant nonzero
 λ-leading coefficient keeps positive degree after every specialisation: the fibre
 cannot become feasible at a point where the generic common divisor has a root. -/
 theorem specialized_common_factor

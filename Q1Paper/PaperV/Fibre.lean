@@ -3,7 +3,7 @@ import Mathlib
 /-!
 Q1Paper/PaperV/Fibre.lean
 
-§II, Theorem 1 (**the fibre is a coset of `T ⊓ U`**).
+§II, Theorem 2 (**the fibre is a coset of `T ⊓ U`**).
 
 Paper statement (verbatim):
 
@@ -42,7 +42,7 @@ def fibre (T U : Submodule K E) (y : E) : Set E := {x | x ∈ T ∧ x + y ∈ U}
 theorem mem_fibre {T U : Submodule K E} {y x : E} :
     x ∈ fibre T U y ↔ x ∈ T ∧ x + y ∈ U := Iff.rfl
 
-/-- **Theorem 1 (nonemptiness).** The fibre is empty exactly when the translate misses,
+/-- **Theorem 2 (nonemptiness).** The fibre is empty exactly when the translate misses,
 i.e. `y ∉ U + T`.  This is the paper's `T ∩ (U - x) ≠ ∅ ⇔ x ∈ U + T`. -/
 theorem fibre_nonempty_iff (T U : Submodule K E) (y : E) :
     (fibre T U y).Nonempty ↔ y ∈ U ⊔ T := by
@@ -61,7 +61,7 @@ theorem fibre_nonempty_iff (T U : Submodule K E) (y : E) :
     rw [this]
     exact hu
 
-/-- **Theorem 1 (coset form).** Any point of the fibre generates it as a coset of the
+/-- **Theorem 2 (coset form).** Any point of the fibre generates it as a coset of the
 direction `T ⊓ U`; hence the fibre is affine with direction `T ⊓ U`. -/
 theorem fibre_eq_coset (T U : Submodule K E) (y : E) {x₀ : E}
     (hx : x₀ ∈ fibre T U y) :
@@ -81,7 +81,7 @@ theorem fibre_eq_coset (T U : Submodule K E) (y : E) {x₀ : E}
     rw [this]
     exact add_mem hxU hzU
 
-/-- **Theorem 1 (product over the rows).** The fibre of the paper is the product of the
+/-- **Theorem 2 (product over the rows).** The fibre of the paper is the product of the
 per-row fibres, so it is nonempty exactly when every row's translate lies in `U + T`;
 that is the paper's criterion `U Z'' ⊆ U + T`, read row by row. -/
 theorem fibre_prod_nonempty_iff {q : ℕ} (T U : Submodule K E) (y : Fin q → E) :

@@ -15,7 +15,7 @@ The criterion of Theorem 4 says that a fibre is feasible exactly when the gcd of
 The only non-trivial step in that equivalence is that a positive-degree common divisor
 cannot disappear when the fibre parameters are specialised: its primitive
 representative has a constant λ-leading coefficient (a nonzero `d' × d'` minor of `H`),
-and Lemma 2 says such a coefficient is never killed by specialisation.
+and Lemma 5 says such a coefficient is never killed by specialisation.
 
 ## The result
 

@@ -12,7 +12,7 @@ rename breaks the build instead of silently rotting the map.
 ## What it sets up
 
 The paper fixes the compressed row space `U` of an observer and lets the free rows vary.
-The admissible values of `H_A` form the *fibre*, and Theorem 1 says it is empty or a
+The admissible values of `H_A` form the *fibre*, and Theorem 2 says it is empty or a
 coset of `T ⊓ U`: the per-row fibre `{x ∈ T | x + y ∈ U}` is nonempty exactly when the
 translate `y` lies in `U + T`, i.e. exactly when `U Z'' ⊆ U + T` holds row by row.
 

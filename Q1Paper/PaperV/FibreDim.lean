@@ -3,7 +3,7 @@ import Mathlib
 /-!
 Q1Paper/PaperV/FibreDim.lean
 
-§II, Theorem 1 — the dimension step: **the space of `q` rows all lying in one and the same
+§II, Theorem 2 — the dimension step: **the space of `q` rows all lying in one and the same
 subspace `S` has dimension `q * dim S`**.
 
 In the paper the fibre is a product over the `q` rows of cosets of `T ⊓ U`; its dimension is
@@ -37,7 +37,7 @@ theorem mem_pi_const (S : Submodule K E) (q : ℕ) (x : Fin q → E) :
     x ∈ Submodule.pi (Set.univ : Set (Fin q)) (fun _ : Fin q => S) ↔ ∀ i, x i ∈ S := by
   simp [Submodule.mem_pi]
 
-/-- **Theorem 1 (product dimension).** The space of `q` rows all lying in `S` has dimension
+/-- **Theorem 2 (product dimension).** The space of `q` rows all lying in `S` has dimension
 `q * dim S`. -/
 theorem finrank_pi_const [FiniteDimensional K E] (S : Submodule K E) (q : ℕ) :
     Module.finrank K ↥(Submodule.pi (Set.univ : Set (Fin q)) (fun _ : Fin q => S))

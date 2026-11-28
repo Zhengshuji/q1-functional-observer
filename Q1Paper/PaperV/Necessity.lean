@@ -14,7 +14,7 @@ This file formalises the step that was previously only in the paper:
 
 * over an algebraically closed field, a polynomial of positive `natDegree` has a root
   (`exists_root_of_natDegree_pos`);
-* specialisation preserves the positive degree (Lemma 2, `Specialize.lean`);
+* specialisation preserves the positive degree (Lemma 5, `Specialize.lean`);
 * specialisation preserves divisibility (`map_dvd_of_dvd`);
 
 hence the specialised divisor has a root, and that root is a common root of the

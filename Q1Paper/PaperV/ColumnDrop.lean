@@ -3,7 +3,7 @@ import Mathlib
 /-!
 Q1Paper/PaperV/ColumnDrop.lean
 
-§IV, Proposition 14 — the linear-algebra kernel of **column drop**.
+§IV, Proposition 16 — the linear-algebra kernel of **column drop**.
 
 Paper statement (verbatim, with the support condition):
 
@@ -22,7 +22,7 @@ open Matrix
 
 namespace Q1Paper.PaperV
 
-/-- **Proposition 14 (rank step).** If every column indexed by `J` vanishes, then
+/-- **Proposition 16 (rank step).** If every column indexed by `J` vanishes, then
 `rank M ≤ card n - card J`; hence a matrix with `|J| > k - d'` vanishing columns has rank
 below `d'`. -/
 theorem rank_le_card_compl_of_cols_zero {K : Type*} [Field K]
@@ -61,14 +61,14 @@ theorem rank_le_card_compl_of_cols_zero {K : Type*} [Field K]
     _ ≤ Jᶜ.card := by rw [hT]; exact Finset.card_image_le
     _ = Fintype.card n - J.card := Finset.card_compl J
 
-/-- **Proposition 14 (conclusion step).** If the columns in `J` vanish and `k - |J| < d'`, then
+/-- **Proposition 16 (conclusion step).** If the columns in `J` vanish and `k - |J| < d'`, then
 the rank at that `λ` is below `d'`, so `(5b)` fails there for every point of the fibre. -/
 theorem rank_lt_of_cols_zero {K : Type*} [Field K] {q k : ℕ} (P : Matrix (Fin q) (Fin k) K)
     (J : Finset (Fin k)) (h : ∀ j ∈ J, ∀ i, P i j = 0) {d : ℕ}
     (hd : Fintype.card (Fin k) - J.card < d) : P.rank < d :=
   lt_of_le_of_lt (rank_le_card_compl_of_cols_zero P J h) hd
 
-/-- **Proposition 14 (vanishing column).** If `T` is supported away from the coordinate `j`, then
+/-- **Proposition 16 (vanishing column).** If `T` is supported away from the coordinate `j`, then
 every row of `G'` vanishes in that coordinate: this is the step that makes the column of `P(λ₀)`
 vanish identically in the fibre parameters. -/
 theorem column_zero_of_mem {K : Type*} [Field K] {k q : ℕ} {T : Submodule K (Fin k → K)}
