@@ -134,7 +134,8 @@ fibre supplies.
 
 Matrices have complex entries and rational data; $\operatorname{row}M$ is the row space and
 $\operatorname{rank}M$ its dimension. For a subspace $U$ and a matrix $X$ with $k$ columns,
-$UX=\{uX:u\in U\}$ is a subspace, and $U-X=\{u-X_i:\text{row }i\}$ is read row by row below. A pencil
+$UX=\{uX:u\in U\}$ is a subspace, and for a matrix $X$ with $q$ rows and $U\subseteq\mathbb C^{k}$ we write
+$U-X$ for the set of matrices whose row $i$ lies in $U-X_i$; a statement about $U-X$ is read row by row. A pencil
 is a matrix whose entries are polynomials of degree at most one in $\lambda$. The Grassmannian of
 $d'$-dimensional subspaces of $\mathbb C^k$ is $\mathrm{Gr}(d',k)$; a subspace containing a fixed
 $U_0$ is written $U\supseteq U_0$. For a field $F$ and a set $S\subseteq F[\lambda]$, $\gcd S$ is the
@@ -171,9 +172,10 @@ $W=AN-NZ'$; then $(lN,lAN)=(lN,\,lNZ'+lW)$, so
 \begin{equation}\label{eq:decomp}
 H_A=HZ''+G',\qquad Z''=Z'+W_{\mathrm{top}},\qquad G'\in T^{q},
 \end{equation}
-where $W_{\mathrm{top}}$ collects the rows of $W$ that are not in $T$'s complement position; the
-decomposition is the standard one of the compressed pencil. Different choices of $Z'$ translate
-$G'$ inside $T^{q}$ and leave the pencil $\lambda H-H_A$ unchanged.
+here $W=AN-NZ'$ is $n\times k$ and is split as $W=NW_{\mathrm{top}}+[0;W_{\mathrm{bot}}]$ with
+$W_{\mathrm{top}}\in\mathbb C^{k\times k}$ and $W_{\mathrm{bot}}\in\mathbb C^{(n-k)\times k}$; the space $T$ of
+\eqref{eq:T} equals $\operatorname{row}(W_{\mathrm{bot}})$, and $Z''=Z'+W_{\mathrm{top}}$. Different choices
+of $Z'$ translate $G'$ inside $T^{q}$ and change the parametrisation, not the pencil $\lambda H-H_A$.
 
 \begin{thm}[Fibre]\label{thm:fibre}
 Fix $H$ with $U=\operatorname{row}H$ and $d'=\operatorname{rank}H$. The admissible values of $H_A$ for this
@@ -691,10 +693,10 @@ nonemptiness criterion and its row-by-row product --- and the specialisation lem
 the criterion of Theorem~\ref{thm:criterion}, the leading-coefficient identity that supplies that
 lemma's hypothesis (the $\lambda^{d}$ coefficient of $\det(\lambda H-B)$ is $\det H$), and the rank
 step of Proposition~\ref{prop:drop}, and the algebraic core of the criterion (coprimality of the
-minors $\iff$ no common root, in the normalization-free form), the coefficient test of
-Proposition~\ref{prop:coeff}, the conclusion step of Proposition~\ref{prop:drop}, and the
-`t=1` structure step of Theorem~\ref{thm:t1}; the axiom audit covers those twenty-four
-declarations.
+minors $\iff$ no common root, in the normalization-free form), the coefficient test of Proposition~\ref{prop:coeff} in its coefficient form, the rank step of
+Proposition~\ref{prop:drop} (together with its conclusion step) and of Proposition~\ref{prop:dependence},
+and the `t=1` structure step of Theorem~\ref{thm:t1}; the axiom audit covers those twenty-four
+declarations. What is \emph{not} formalised is stated there too, item by item.
 The dimension count behind Theorem~\ref{thm:factor}, the closedness of
 Theorem~\ref{thm:closed} and the probabilistic argument of Theorem~\ref{thm:regime} are paper
 proofs and are not formalised. The examples of Section~\ref{sec:examples} are certified by exact
@@ -706,7 +708,7 @@ counterexample of Example~\ref{ex:thin} are recorded as such; they are not used 
 any statement in this paper.
 
 \appendix
-\section{Two algebraic lemmas used in \S IV}\label{app:algebra}
+\section{Algebraic lemmas used in \S III and \S IV}\label{app:algebra}
 
 \subsection{Why the coefficient test is a test of \emph{all} fibres}\label{app:coeff}
 
