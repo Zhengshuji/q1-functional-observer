@@ -298,13 +298,13 @@ $l[N\ AN]=K_i$, which adds only polynomial height.
 \end{proof}
 
 \begin{thm}[One-sided test]\label{thm:rp}
-Draw two constant-coefficient combinations $F_1=\sum c_jf_j$, $F_2=\sum d_jf_j$ of the minors and put
-$D=\operatorname{Res}_\lambda(F_1,F_2)$. If the fibre is bad (Definition~\ref{def:bad}) then $D\equiv0$ for every choice
-of $(c,d)$. If the fibre is feasible then $D\equiv0$ only on a proper closed subset of the coefficient
-space: for generic $(c,d)$ one has $\gcd(F_1,F_2)=1$ and $D\not\equiv0$. Consequently, sampling
-$(c,d)$ from a grid and $t_0$ from a grid, and declaring the fibre feasible when $D(t_0)\ne0$, is
-one-sided: a bad fibre is never reported feasible, and a feasible fibre is reported with probability at
-least $1-2d'^{2}/|S|-d'/|S_c|$, where $|S_c|$ is the coefficient grid size.
+Fix a nonzero member $f$ of the family and draw a constant-coefficient combination
+$g_c=\sum_j c_jf_j$ of the remaining members; put $D_c=\operatorname{Res}_\lambda(f,g_c)$. If the fibre is bad (Definition~\ref{def:bad}) then $D_c\equiv0$ for every $c$. If the fibre is feasible then $D_c\equiv0$ only on a proper closed subset of coefficient space: for
+generic $c$ one has $\gcd(f,g_c)=1$ and $D_c\not\equiv0$ (Lemma~\ref{lem:generic-combo}). Consequently, sampling $c$ from a grid and $t_0$ from a grid, and declaring the fibre feasible when
+$D_c(t_0)\ne0$, is one-sided: a bad fibre is never reported feasible, and a feasible fibre is reported
+with probability at least $1-2d'^{2}/|S|-d'/|S_c|$, where $|S_c|$ is the coefficient grid size --- the
+degree of $D_c$ in $c$ is at most $d'$, because $\operatorname{Res}_\lambda(f,g_c)$ is homogeneous of
+degree $\deg f\le d'$ in the coefficients of $g_c$, each of which is linear in $c$.
 \end{thm}
 
 \begin{proof}
@@ -339,7 +339,7 @@ parameter-dependent once $q>d'$, because the fibre direction is common to all ro
 
 \begin{prop}[Coefficient test]\label{prop:coeff}
 Write each nonzero $d'$-minor as $f_I(\lambda,y)=\sum_e\lambda^{e}\sum_m a_{I,e,m}y^{m}$ and put
-$q_{I,m}(\lambda)=\sum_e a_{I,e,m}\lambda^{e}\in\mathbb C[\lambda]$. Then $U$ is bad in the sense of
+$q_{I,m}(\lambda)=\sum_e a_{I,e,m}\lambda^{e}\in\mathbb C[\lambda]$. Assume $\mathcal F_U\ne\varnothing$. Then $U$ is bad in the sense of
 Definition~\ref{def:bad} if and only if the family $\{q_{I,m}\}_{I,m}$ has a common root. The two notions of
 Definition~\ref{def:bad} coincide when $q>d'$ (Theorem~\ref{thm:factor}); when $q=d'$ every $U$ with
 nonempty fibre is pointwise bad, while $\mathcal B=\mathcal C$ may fail, so the proposition is stated for the
@@ -360,7 +360,9 @@ $\mathcal B$ is closed in $\mathrm{Gr}(d',k)$.
 \begin{proof}
 Fix a chart $G_\alpha\cong\mathbb A^{N}$ with coordinates $p$, and let $\mathfrak S\subseteq
 \mathbb P^{1}\times G_\alpha$ be the set of pairs $(\lambda_0,p)$ at which every $q_{I,m}$ of
-Proposition~\ref{prop:coeff} vanishes. Each $q_{I,m}$ is a polynomial in $(\lambda_0,p)$, so
+Proposition~\ref{prop:coeff} vanishes \emph{and} the compatibility condition
+$UZ''\subseteq U+T$ holds; compatibility is a polynomial condition in $p$, so $\mathfrak S$ is again
+the zero set of finitely many polynomials. Each $q_{I,m}$ is a polynomial in $(\lambda_0,p)$, so
 $\mathfrak S$ is the zero set of finitely many polynomials, hence closed; it is a closed subset of the
 \emph{projective} total space $\mathbb P^{1}\times G_\alpha$. The projection
 $\pi\colon\mathbb P^{1}\times G_\alpha\to G_\alpha$ is a closed map, because $\mathbb P^{1}$ is
@@ -560,7 +562,9 @@ content of Section~\ref{sec:open} (A).
 Assume $t=1$, $d'\ge1$, and that $U$ is feasible with $a=\dim(U\cap T)\ge1$ --- the last being a
 theorem of the companion development (the rank barrier for the compressed pencil), which we take as a
 hypothesis here. Then $U$ is
-invariant under $Z''$; consequently, for $t=1$ the existence question is decided by enumerating the
+invariant under $Z''$. Consequently, when the $d'$-dimensional invariant subspaces of $Z''$ that contain
+$T$ and $U_0$ form a finite set (for instance when the eigenvalues of $Z''$ are simple, so that its
+invariant subspaces are spanned by eigenvectors), the existence question is decided by enumerating the
 $d'$-dimensional invariant subspaces of $Z''$ that contain $T$ and $U_0$, and testing each with
 Theorem~\ref{thm:criterion}.
 \end{thm}
@@ -688,7 +692,8 @@ have to decide containment there. Both directions are open, and neither is claim
 
 \subsection{Reproducibility and evidence}\label{sec:repro}
 
-Every theorem of this paper is accompanied by evidence in the artifact repository. The Lean~4
+Every theorem of this paper is accompanied by a proof in the text; selected algebraic steps are
+machine-checked, and the examples are verified independently. The split is stated below. The Lean~4
 development formalises the fibre of Theorem~\ref{thm:fibre} --- the coset description, the
 nonemptiness criterion and its row-by-row product --- and the specialisation lemma
 (Lemma~\ref{lem:specialize}) together with its corollary, which is the only non-trivial step of
