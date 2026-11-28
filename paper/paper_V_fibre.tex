@@ -176,8 +176,9 @@ decomposition is the standard one of the compressed pencil. Different choices of
 $G'$ inside $T^{q}$ and leave the pencil $\lambda H-H_A$ unchanged.
 
 \begin{thm}[Fibre]\label{thm:fibre}
-Fix $H$ with $U=\operatorname{row}H$ and $d'=\operatorname{rank}H$. The set of admissible $H_A$ for
-this $H$ is $HZ''+\mathcal F_U$ with
+Fix $H$ with $U=\operatorname{row}H$ and $d'=\operatorname{rank}H$. The admissible values of $H_A$ for this
+$H$ are, by definition, the pairs that also satisfy $(5a)$, i.e.\ the elements of
+$\mathcal K(H)\cap U^{q}$; they are $HZ''+\mathcal F_U$ with
 \begin{equation}\label{eq:fibre}
 \mathcal F_U=\prod_{i=1}^{q}\bigl(T\cap(U-H_iZ'')\bigr).
 \end{equation}
@@ -369,7 +370,7 @@ standard charts cover $\mathrm{Gr}(d',k)$, hence $\mathcal B$ is closed.
 \end{proof}
 
 \begin{thm}[Fixed spectral factor]\label{thm:factor}
-Let $U$ be such that $\mathcal F_U\ne\varnothing$, $q>d'$, and let $H=XV$ be a full-row-rank factorisation and $V^{+}$ a right inverse of $V$. Write $B_0=HZ''V^{+}$ and suppose the fibre direction is common
+Let $U$ be such that $\mathcal F_U\ne\varnothing$, $q>d'$, and let $H=XV$ be a full-row-rank factorisation and $V^{+}$ a right inverse of $V$. Write $B_0:=H_AV^{+}$ and suppose the fibre direction is common
 to all rows, i.e.\ $H_AV^{+}=B_0+Y'M$ with $Y'\in\mathbb C^{q\times a}$, $M\in\mathbb C^{a\times d'}$
 (as it is for \eqref{eq:fibre}). If the fibre is bad (Definition~\ref{def:bad}) then $g\in\mathbb C[\lambda]$: the
 common divisor does not depend on the fibre parameters.
@@ -377,8 +378,10 @@ common divisor does not depend on the fibre parameters.
 
 \begin{proof}
 Work in the reduced pencil $P(Y,\lambda)=\lambda X-B_0-YM$ with $X\in\mathbb C^{q\times d'}$ of full
-column rank (the minors of $P$ are the minors of $\lambda H-H_A$ up to the nonzero factor
-$\det(VV')$, so their gcd is the same). Consider the incidence variety
+column rank. The two pencils are related by $\lambda H-H_A=(\lambda X-B_0)V$, and by Cauchy--Binet every
+$d'$-minor of $\lambda H-H_A$ is a linear combination of the $d'$-minors of $\lambda X-B_0$ (and conversely,
+$V$ being of full row rank), so the two families generate the same ideal and have the same gcd. Consider
+the incidence variety
 \begin{equation}\label{eq:incidence}
 \begin{aligned}
 \mathcal I=\{((Y,\alpha,[v])):&\ (\alpha X-B_0-YM)v=0\}\\
@@ -502,7 +505,7 @@ coefficient test of Proposition~\ref{prop:coeff} a test of the whole fibre rathe
 \section{Algorithms and examples}\label{sec:algorithms}
 
 \begin{thm}[Region with automatic compatibility]\label{thm:regime}
-Let $s=\dim(U_0\cap T)$ and suppose $d'+t-k\ge s$ with $t=\dim T$. Then, for every $d'$, the
+Let $s=\dim(U_0\cap T)$ and suppose $d'+t-k\ge s$ with $t=\dim T$, and $d'\ge\dim U_0$. Then, the
 following procedure accepts the $d'$-stratum one-sidedly: sample a rational
 $U\in\mathrm{Gr}(d',k)$ containing $U_0$, test the fibre with Theorem~\ref{thm:rp}, and accept when a
 witness is found. Acceptance is sound --- a witness is a feasible $U$ --- so the procedure never
@@ -554,8 +557,9 @@ reports a bad stratum as feasible. It is not a decision procedure for the bad ca
 content of Section~\ref{sec:open} (A).
 
 \begin{thm}[The stratum $t=1$]\label{thm:t1}
-Assume $t=1$ and that $U$ is feasible with $a=\dim(U\cap T)\ge1$ (a feasible candidate always has
-$a\ge1$; this is the rank barrier of \cite{paperI}, whose proof we do not repeat). Then $U$ is
+Assume $t=1$, $d'\ge1$, and that $U$ is feasible with $a=\dim(U\cap T)\ge1$ --- the last being a
+theorem of the companion development (the rank barrier for the compressed pencil), which we take as a
+hypothesis here. Then $U$ is
 invariant under $Z''$; consequently, for $t=1$ the existence question is decided by enumerating the
 $d'$-dimensional invariant subspaces of $Z''$ that contain $T$ and $U_0$, and testing each with
 Theorem~\ref{thm:criterion}.
