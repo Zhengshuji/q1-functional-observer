@@ -574,10 +574,15 @@ system solved by the coefficient test (the resultant route of Theorem~\ref{thm:w
 $\deg_t D\le2d'^{2}$, so the missing piece is the coefficient height of $D$, not its degree).
 \item \emph{Algebraic witnesses.} Theorem~\ref{thm:witness} assumes $U$ rational. For $t=1$ the
 feasible $U$ are invariant subspaces of $Z''$ and may be algebraic, of degree growing with $n$; then
-the witness may be algebraic as well and its height is not bounded here.
+the witness may be algebraic as well and its height is not bounded here. What would close it: a bound
+on the degree of the invariant subspaces carrying a feasible fibre --- note that Example~\ref{ex:bad}
+is rational and that the rational case is the one the algorithm of Section~\ref{sec:algorithms}
+produces, so this is a question about \emph{which} feasible $U$ the search may have to accept, not
+about the criterion.
 \item \emph{Hardness.} No reduction is given in either direction. Since on the region
 $d'+t-k\ge s$ feasibility is \emph{accepted} one-sidedly (Theorem~\ref{thm:regime}), a hardness proof
-would have to encode its instance into the thin stratum (A).
+would have to encode its instance into the thin stratum (A); conversely a polynomial algorithm would
+have to decide containment there. Both directions are open, and neither is claimed.
 \end{enumerate}
 
 \subsection{Reproducibility and evidence}\label{sec:repro}
