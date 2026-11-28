@@ -7,6 +7,7 @@ import Q1Paper.PaperV.Invariant
 import Q1Paper.PaperV.CoeffTest
 import Q1Paper.PaperV.KerRank
 import Q1Paper.PaperV.FibreDim
+import Q1Paper.PaperV.UnitIdeal
 
 /-!
 Q1Paper/PaperV/MainTheorems.lean

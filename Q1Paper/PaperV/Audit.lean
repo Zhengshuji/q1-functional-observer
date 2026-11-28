@@ -60,3 +60,8 @@ exactly the twenty-eight `#check`s of `ClaimsCheck.lean`.
 #print axioms Q1Paper.PaperV.finrank_pi_const
 #print axioms Q1Paper.PaperV.finrank_iInf_comap_proj
 #print axioms Q1Paper.PaperV.le_of_finrank_eq_one
+
+-- UnitIdeal.lean (Bezout step)
+#print axioms Q1Paper.PaperV.exists_combination_eq_one_of_gcd_eq_one
+#print axioms Q1Paper.PaperV.ideal_span_eq_top_of_gcd_eq_one
+#print axioms Q1Paper.PaperV.exists_combination_eq_one
