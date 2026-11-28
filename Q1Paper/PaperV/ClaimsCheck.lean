@@ -26,3 +26,9 @@ declarations here are exactly the eleven `#print axioms` lines of `Audit.lean`.
 
 -- §IV  Proposition 14, rank step
 #check @Q1Paper.PaperV.rank_le_card_compl_of_cols_zero
+
+-- §III  gcd is a unit ⟺ no common root (Theorem 4's algebraic core)
+#check @Q1Paper.PaperV.gcd_ne_zero
+#check @Q1Paper.PaperV.exists_root_of_not_isUnit
+#check @Q1Paper.PaperV.isCoprime_iff_no_common_root
+#check @Q1Paper.PaperV.gcd_eq_one_iff_no_common_root

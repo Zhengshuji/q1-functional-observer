@@ -30,3 +30,9 @@ exactly the eleven `#check`s of `ClaimsCheck.lean`.
 
 -- ColumnDrop.lean
 #print axioms Q1Paper.PaperV.rank_le_card_compl_of_cols_zero
+
+-- GcdRoot.lean
+#print axioms Q1Paper.PaperV.gcd_ne_zero
+#print axioms Q1Paper.PaperV.exists_root_of_not_isUnit
+#print axioms Q1Paper.PaperV.isCoprime_iff_no_common_root
+#print axioms Q1Paper.PaperV.gcd_eq_one_iff_no_common_root

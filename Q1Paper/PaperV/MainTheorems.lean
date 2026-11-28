@@ -2,6 +2,7 @@ import Q1Paper.PaperV.Specialize
 import Q1Paper.PaperV.Fibre
 import Q1Paper.PaperV.ColumnDrop
 import Q1Paper.PaperV.LeadingCoeff
+import Q1Paper.PaperV.GcdRoot
 
 /-!
 Q1Paper/PaperV/MainTheorems.lean
