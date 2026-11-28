@@ -774,9 +774,10 @@ family $(f,g_c)$ whose resultant is the polynomial $D$ of Theorem~\ref{thm:rp}; 
 $\deg\gcd(f,g_c)\ge1\iff\operatorname{Res}_\lambda(f,g_c)=0$ is the classical root criterion for two
 polynomials of positive degree \cite[Ch.~6]{vzgg13}.
 
-Two degenerate cases have to be separated before the lemma applies, and both are recorded in the proof
-of Corollary~\ref{cor:closed}: if every $q_{I,m}$ vanishes identically the chart is bad and
-$r_1=0$; if some member is a nonzero constant the family has no common root and $r_1=1$. Otherwise the
+Two degenerate cases have to be separated before the lemma applies. The family cannot vanish
+identically: the $\lambda^{d'}$ coefficient of the minor on rows $I$ and columns $J$ is $\det H_{IJ}$, and
+$\operatorname{rank}H=d'$ makes some of these nonzero. And if some member is a nonzero constant then the
+family has no common root and the covering set is empty. Otherwise the
 family contains a nonzero member $f$, and the members that vanish identically are simply deleted ---
 they impose no condition --- after which Lemma~\ref{lem:generic-combo} applies to the remaining
 nonzero members. The root criterion is stated for two polynomials of positive degree; if the retained
@@ -794,8 +795,9 @@ intersection with every member of an open cover is closed in that member.
 Two points deserve emphasis, because they are exactly where a careless reading goes wrong.
 First, intrinsicness of $\mathcal B$ is what makes the local descriptions describe \emph{one} set; it
 does not by itself produce the polynomials. The polynomials come from
-Corollary~\ref{cor:closed}, chart by chart, and that proposition is where the resultant
-elimination of Appendix~\ref{app:root} is used. Second, the degenerate cases of that elimination
+Proposition~\ref{prop:coeff}, chart by chart, with a stratification by $a=\dim(U\cap T)$ as in the proof
+of Corollary~\ref{cor:closed}; no elimination of $\lambda_0$ is performed, and the resultant of
+Appendix~\ref{app:root} is used elsewhere, in the one-sided test of Theorem~\ref{thm:rp}. Second, the degenerate cases
 (vanishing members, a vanishing family, constants) are handled there; in particular a family with an
 identically vanishing member does not make the elimination vacuous, because vanishing members are
 deleted before the generic combination is formed.
