@@ -378,9 +378,14 @@ compact (equivalently, $\pi$ is proper). No elimination of $\lambda_0$ is perfor
 not depend on any non-degeneracy of the coefficients --- in contrast with a criterion based on a
 resultant, whose vanishing can also signal a degree drop. Therefore
 $$\mathcal B_{\mathrm{unif}}\cap G_\alpha=\pi(\mathfrak S)$$
-is closed in $G_\alpha$. By Definition~\ref{def:bad} the set $\mathcal B$ is defined intrinsically, so
+is closed in $G_\alpha$. One point of care: the coefficients $a_{I,m,e}(p)$ come from a parametrisation
+of the fibre, and the dimension $a=\dim(U\cap T)$ can jump inside a chart. Stratify $G_\alpha$ by $a$ and,
+inside each stratum, by a fixed nonvanishing $a\times a$ minor of the matrix whose rows span $T$; on each
+such locally closed stratum the fibre admits a polynomial frame and $a_{I,m,e}$ is a polynomial there, so
+$\mathfrak S$ is closed stratum by stratum and hence closed on $G_\alpha$, finitely many strata being
+involved. By Definition~\ref{def:bad} the set $\mathcal B_{\mathrm{unif}}$ is defined intrinsically, so
 these local descriptions are the traces of one global subset; closedness is a local property and the
-standard charts cover $\mathrm{Gr}(d',k)$, hence $\mathcal B$ is closed.
+standard charts cover $\mathrm{Gr}(d',k)$, hence $\mathcal B_{\mathrm{unif}}$ is closed.
 \end{proof}
 
 \begin{thm}[Fixed spectral factor]\label{thm:factor}
@@ -450,10 +455,10 @@ $\mathcal C=\{U\supseteq U_0:\ \mathcal F_U\ne\varnothing\}$, which is itself cl
 \end{thm}
 
 \begin{proof}
-By Corollary~\ref{cor:closed} (chart by chart), badness is the vanishing of finitely many
-polynomials in the chart coordinates; hence $\mathcal B$ is closed, and by
-Corollary~\ref{cor:closed} it is closed globally. Closedness of $\mathcal C$ is bilinearity of
-$UZ''\subseteq U+T$. $\mathcal B$ need not be thin: when $q=d'$ the whole stratum is
+By Corollary~\ref{cor:closed}, $\mathcal B_{\mathrm{unif}}$ is closed; by Theorem~\ref{thm:factor},
+$\mathcal B=\mathcal B_{\mathrm{unif}}$, so $\mathcal B$ is closed as well, and the feasible set
+$\mathcal C\setminus\mathcal B$ is relatively open in $\mathcal C$. Closedness of $\mathcal C$ is the
+determinantal (submatrix) nature of the condition $UZ''\subseteq U+T$. $\mathcal B$ need not be thin: when $q=d'$ the whole stratum is
 bad (\cite{paperI}, the square-pencil argument), while Example~\ref{ex:bad} shows that it can also be
 a proper closed set with feasible points arbitrarily close --- so the particular bad point is not an interior point (the set can have interior elsewhere: when $q=d'$ it is everything).
 \end{proof}
