@@ -469,6 +469,20 @@ bring the failure probability below $\varepsilon$. Everything else in the test i
 the compatibility test $UZ''\subseteq U+T$ and the evaluation of the resultant.
 \end{remark}
 
+The procedure of Theorem~\ref{thm:regime} is, in full:
+\begin{enumerate}[label=\textup{(\arabic*)},leftmargin=2.2em,itemsep=1pt]
+\item draw a rational $U\subseteq\mathbb C^{k}$ of dimension $d'$ containing $U_0$ (a random rational
+basis, then row reduction);
+\item test compatibility $UZ''\subseteq U+T$ exactly; if it fails, redraw;
+\item parameterise the fibre of Theorem~\ref{thm:fibre} and pick a grid point $G'\in\mathcal F_U$ of
+size at most $2d'^{2}$ per coordinate;
+\item evaluate the resultant of Theorem~\ref{thm:rp} at $G'$; if it is nonzero, output $U$ and stop;
+\item otherwise repeat from (1), at most $O(\log(1/\varepsilon))$ times.
+\end{enumerate}
+Step (4) is sound: a nonzero resultant is a witness that $U$ is feasible, so the algorithm never
+reports a bad stratum as feasible. It is not a decision procedure for the bad case --- that is the
+content of Section~\ref{sec:open} (A).
+
 \begin{thm}[The stratum $t=1$]\label{thm:t1}
 Assume $t=1$ and that $U$ is feasible with $a=\dim(U\cap T)\ge1$ (a feasible candidate always has
 $a\ge1$; this is the rank barrier of \cite{paperI}, whose proof we do not repeat). Then $U$ is
