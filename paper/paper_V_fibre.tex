@@ -419,13 +419,22 @@ $$U\ \text{is bad}\iff r_1(p)=\dots=r_N(p)=0 .$$
 \begin{proof}
 By Proposition~\ref{prop:coeff}, $U$ is bad iff the family
 $\{q_{I,m}(\lambda;p)\}_{I,m}$ has a common root, the polynomials being read in $\lambda$ with
-coefficients that are polynomials in $p$; their degrees are bounded by $d'$. For a family of
-univariate polynomials of degree at most $d'$, having a common root is equivalent to its gcd having
-positive degree, and that in turn is equivalent to the vanishing of the whole subresultant chain:
-the subresultants $S_0,\dots,S_{d'}$ are polynomials in the coefficients of the family, obtained as
-determinants of Sylvester-type matrices, and $\deg\gcd\ge1$ holds exactly when
-$S_0=\dots=S_{d'}=0$. Composing with the polynomial dependence of the coefficients on $p$ gives the
-polynomials $r_j$.
+coefficients that are polynomials in $p$. Reduce the family to two members as follows: pick a member
+$f\neq0$ of the family and put $g_c=\sum_j c_j f_j$ over the remaining members. For all $c$ in a
+nonempty Zariski-open set of coefficient vectors, $\gcd(f,g_c)$ equals the gcd of the whole family
+(any common factor of $f$ and of every $g_c$ divides every $f_j$). Hence, for such a $c$,
+$$\text{the family has a common root}\iff \deg_\lambda\gcd(f,g_c)\ge1
+\iff \operatorname{Res}_\lambda(f,g_c)=0,$$
+the second equivalence being the standard root criterion for two polynomials of degree at least
+one. Now $\operatorname{Res}_\lambda(f,g_c)$, as a polynomial in $(\lambda,c,p)$, is a polynomial in
+$c$ whose coefficients are polynomials in the coefficients of the family, hence polynomials in $p$;
+the condition "$\operatorname{Res}\equiv0$ as a polynomial in $c$" is therefore the vanishing of the
+finitely many coefficient polynomials $r_j(p)$, and by the choice of $c$ it is independent of which
+$c$ in the open set is used. Degenerate cases: if every $q_{I,m}$ vanishes identically then every
+$\lambda$ is a common root and every $p$ is bad (take the single polynomial $r_1=0$); if a chosen
+$f$ is not zero but has degree zero, then it is a nonzero constant, its gcd with anything is a unit and
+the family has no common root, so take $r_1$ to be that nonzero constant's denominator -- formally,
+$r_1=1$ and the set is empty.
 \end{proof}
 
 \begin{cor}\label{cor:closed}
@@ -433,11 +442,14 @@ The bad set $\mathcal B$ is closed in $\mathrm{Gr}(d',k)$.
 \end{cor}
 
 \begin{proof}
-Cover $\mathrm{Gr}(d',k)$ by its standard charts, and use the notation of
-Proposition~\ref{prop:algebraic} in each of them. There, $\mathcal B$ is the zero set of the finitely
-many polynomials $r_j$, hence closed in the chart; on overlaps the chart coordinates are related by
-invertible linear changes, so the local pieces patch into a closed subset of $\mathrm{Gr}(d',k)$.
-(When the family vanishes identically, every $p$ in the chart is bad, which is also closed.)
+Cover $\mathrm{Gr}(d',k)$ by its standard charts and take one chart $G_\alpha$; by
+Proposition~\ref{prop:algebraic}, $\mathcal B\cap G_\alpha$ is the zero set of finitely many
+polynomials in the chart coordinates, hence closed \emph{in} $G_\alpha$. The set $\mathcal B$ itself is
+defined intrinsically --- $U$ is bad when a fixed $\lambda_0$ kills every minor on the whole fibre ---
+so these local descriptions define one and the same subset of the Grassmannian, not different local
+candidates; that is where the argument uses intrinsicness rather than any property of the chart
+transitions (which are rational, not linear). Closedness is a local property, the charts form an open
+cover, and therefore $\mathcal B$ is closed in $\mathrm{Gr}(d',k)$.
 \end{proof}
 
 \begin{thm}[Infeasibility]\label{thm:no}
