@@ -63,3 +63,4 @@ declarations here are exactly the twenty-eight `#print axioms` lines of `Audit.l
 #check @Q1Paper.PaperV.exists_combination_eq_one
 #check @Q1Paper.PaperV.exists_common_root_of_not_isUnit
 #check @Q1Paper.PaperV.isUnit_gcd_iff_no_common_root
+#check @Q1Paper.PaperV.eval_det_submatrix

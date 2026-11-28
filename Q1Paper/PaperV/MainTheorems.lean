@@ -9,6 +9,7 @@ import Q1Paper.PaperV.KerRank
 import Q1Paper.PaperV.FibreDim
 import Q1Paper.PaperV.UnitIdeal
 import Q1Paper.PaperV.FamilyGcd
+import Q1Paper.PaperV.MinorEval
 
 /-!
 Q1Paper/PaperV/MainTheorems.lean
