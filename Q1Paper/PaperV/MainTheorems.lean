@@ -15,6 +15,7 @@ import Q1Paper.PaperV.Criterion
 import Q1Paper.PaperV.SpectralRank
 import Q1Paper.PaperV.UnionZeros
 import Q1Paper.PaperV.RootBound
+import Q1Paper.PaperV.CriticalSet
 
 /-!
 Q1Paper/PaperV/MainTheorems.lean

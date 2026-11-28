@@ -59,7 +59,7 @@ cd paper && pdflatex paper_I_dec.tex && pdflatex paper_I_dec.tex
 
 Paper V (the free-row fibre) is `paper/paper_V_fibre.tex`; its Lean entry point is
 `lake build Q1Paper.PaperV.MainTheorems` and its axiom audit is
-`lake env lean Q1Paper/PaperV/Audit.lean` (8 declarations).  The evidence it adds to
+`lake env lean Q1Paper/PaperV/Audit.lean` (52 declarations).  The evidence it adds to
 §V is `verification/fibre.py` (the three examples, decided exactly).
 
 ## What is kernel-checked
