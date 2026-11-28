@@ -622,6 +622,28 @@ Theorem~\ref{thm:regime} is where that containment can be refuted by a single sa
 stratum (Section~\ref{sec:open}, (A)) is precisely the part of the search that neither paper can
 currently decide by sampling.
 
+\subsection{The two layers of randomisation}\label{sec:two-layers}
+
+It is worth separating two independent random choices, because they have different status. The
+\emph{inner} layer samples the coefficient vector $c$ and the fibre point $G'$, and controls the
+probability that a \emph{given} $U$ is certified. The \emph{outer} layer samples the subspace
+$U\in\mathrm{Gr}(d',k)$, and controls whether the search ever meets a feasible $U$.
+
+For the inner layer the bound is explicit (Theorem~\ref{thm:rp}): the condition
+$\operatorname{Res}_\lambda(f,g_c)\equiv0$ fails on a proper closed subset of coefficient space, and
+the resultant has $t$-degree at most $2d'^{2}$, so the two grids give
+$2d'^{2}/|S|+d'/|S_c|$. For the outer layer no such bound is available
+(Remark~\ref{rem:no-outer-bound}): the degree bound that drives the inner estimate is in the fibre
+coordinates and says nothing about the defining polynomial of the feasible set inside the
+Grassmannian. Consequently Theorem~\ref{thm:regime} is a statement about soundness only. A quantitative
+outer bound would need an explicit rational chart, a degree bound for the complement of the feasible
+set there, and a specified sampling distribution --- three ingredients we do not have.
+
+This asymmetry is not an artefact of the proof: when the compatibility stratum is thin
+($d'+t-k<s$), the feasible set is not dense in the stratum, so no distribution supported on the whole
+stratum can be shown to hit it. The thin stratum is therefore the precise place where a randomised
+algorithm of this shape must fail, and it is the first item of Section~\ref{sec:open}.
+
 \section{Open problems}\label{sec:open}
 
 \begin{enumerate}[label=(\Alph*),leftmargin=2.2em,itemsep=2pt]
@@ -675,6 +697,53 @@ symbolically over $\mathbb Q$, the gcd is taken in $\mathbb Q[\lambda]$, and the
 instances. The classification experiments that suggested Theorem~\ref{thm:factor} and the
 counterexample of Example~\ref{ex:thin} are recorded as such; they are not used as evidence for
 any statement in this paper.
+
+\appendix
+\section{Two algebraic lemmas used in \S IV}\label{app:algebra}
+
+\subsection{Why the coefficient test is a test of \emph{all} fibres}\label{app:coeff}
+
+Write $R=\mathbb C[y]$ for the fibre's coordinate ring, so that a minor is an element
+$f_I\in R[\lambda]$ and the substitution $\lambda\mapsto\lambda_0$ is the ring homomorphism
+$\operatorname{ev}_{\lambda_0}\colon \mathbb C[\lambda]\to\mathbb C$ applied to the coefficients; in
+the notation of the paper this is $f_I\mapsto f_I(\lambda_0,\cdot)\in R$. Proposition~\ref{prop:coeff}
+says that $f_I(\lambda_0,\cdot)=0$ in $R$ exactly when every coefficient of $f_I$ in $\lambda$ vanishes
+at $\lambda_0$. The point of the proposition is the quantifier structure: the statement is about
+\emph{all} $y$ at once, and it is equivalent to a finite system of scalar equations in
+$\lambda_0$. Two consequences are used in \S IV: the condition is a condition on $\lambda_0$ alone
+(not on the fibre point), and it is the vanishing of finitely many polynomials.
+
+\subsection{The root criterion for a family}\label{app:root}
+
+\begin{lem}\label{lem:generic-combo}
+Let $f_1,\dots,f_m\in\mathbb C[\lambda]$ be nonzero and let $g_c=\sum_{j=2}^{m}c_jf_j$ with
+$c\in\mathbb C^{m-1}$. For $c$ in a nonempty Zariski-open subset of $\mathbb C^{m-1}$,
+$$\gcd(f_1,g_c)=\gcd(f_1,\dots,f_m).$$
+\end{lem}
+
+\begin{proof}
+Let $h=\gcd(f_1,\dots,f_m)$ and write $f_j=h\tilde f_j$ with $\gcd(\tilde f_1,\dots,\tilde f_m)=1$;
+then $\gcd(\tilde f_1,\sum_j c_j\tilde f_j)$ is what remains to be shown equal to one. If a common
+divisor $\delta$ of $\tilde f_1$ and $\sum_{j\ge2}c_j\tilde f_j$ were nonconstant, then for the
+finitely many roots $\alpha$ of $\delta$ one would have $\sum_{j\ge2}c_j\tilde f_j(\alpha)=0$. Each
+such equation is a nonzero linear condition on $c$ (the vector $(\tilde f_2(\alpha),\dots)$ is not
+zero, else $\alpha$ would be a common root of all $\tilde f_j$). Finitely many hyperplanes therefore
+exclude the bad $c$, and their complement is a nonempty Zariski-open set.
+\end{proof}
+
+Applying the lemma to the family $\{q_{I,m}\}$ of Proposition~\ref{prop:coeff} produces the two-member
+family $(f,g_c)$ whose resultant is the polynomial $D$ of Theorem~\ref{thm:rp}; the identity
+$\deg\gcd(f,g_c)\ge1\iff\operatorname{Res}_\lambda(f,g_c)=0$ is the classical root criterion for two
+polynomials of positive degree \cite[Ch.~6]{vzgg13}.
+
+\subsection{Charts and closedness}\label{app:charts}
+
+The standard charts of $\mathrm{Gr}(d',k)$ are the sets $G_\alpha$ of subspaces whose Plücker
+coordinate $\alpha$ does not vanish; each is an affine space with coordinates $p$. Transitions between
+charts are rational maps in the Plücker coordinates, and the only property the argument of
+Corollary~\ref{cor:closed} uses is that the charts are an open cover on which the same intrinsic set
+$\mathcal B$ is described. Closedness of $\mathcal B$ is then local: a subset is closed iff its
+intersection with every member of an open cover is closed in that member.
 
 \begin{thebibliography}{99}
 \bibitem{fer10} J. A. Fernando, H. Trinh, L. Jennings. Functional observability and the design of minimum order linear functional observers. \emph{IEEE Trans. Automat. Control} 55(5):1268--1273, 2010.
