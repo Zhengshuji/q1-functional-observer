@@ -741,6 +741,16 @@ nonzero constant $2$; two polynomials differing by a nonzero constant are coprim
 family is $1$ and $U$ is feasible. Thus a genuinely constrained thin stratum with $Z''\ne0$ can contain
 feasible points.
 
+In fact the whole compatibility locus of this thin stratum is feasible off a proper closed subset.
+Varying $U$ as $\operatorname{span}\{e_1,(s,1+t,1,u)\}$ keeps $a=1$ and $U\supsetneq U_0$, and a hand
+computation gives $UZ''=\mathbb Ce_3$, so $e_3=\alpha e_1+\beta e_2+\gamma(s,1+t,1,u)$ forces
+$\gamma=1$ and $u=0$: compatibility is exactly the hyperplane $u=0$. On it the fibre rows are
+$(y_0,t+1,0,0)$, $(y_1,0,0,0)$, $(y_2,t+1,0,0)$, and the minors include $-\lambda t$ and
+$\lambda^2-\lambda y_0-y_1(t+1)$; for $t\notin\{0,-1\}$ the first is a nonzero multiple of $\lambda$ and
+the second does not vanish at $\lambda=0$, so they are coprime and the family gcd is $1$. Hence every
+compatible $U$ with $t\notin\{0,-1\}$ is feasible, i.e.\ the bad set meets this thin stratum in a
+subset of a proper closed set.
+
 The compressed data is realised by a system of order $n=8$. Put $K_0=\ker[C;CA]$ with
 $$C=\begin{pmatrix}0&0&0&0&1&0&0&0\\0&0&0&0&0&1&0&0\end{pmatrix},\quad
 A=\begin{pmatrix}Z''&0\\ R&B\end{pmatrix},$$
