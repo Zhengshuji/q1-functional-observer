@@ -76,7 +76,7 @@ CI.
 4. 搂V (examples) 鈥?run `python verification/fibre.py`.
 
 
-## Coverage at a glance (29 kernel-checked declarations)
+## Coverage at a glance (39 kernel-checked declarations)
 
 | Paper item | Lean declarations | Module |
 |---|---|---|
@@ -86,6 +86,9 @@ CI.
 | Thm 4's leading-coefficient step | `coeff_one_C_mul_X_sub_C`, `natDegree_C_mul_X_sub_C_le`, `coeff_det_smul_sub_X`, `coeff_det_smul_sub_X_ne_zero` | `LeadingCoeff.lean` |
 | Thm 4's algebraic core (gcd ↔ no common root) | `gcd_ne_zero`, `exists_root_of_not_isUnit`, `isCoprime_iff_no_common_root`, `gcd_eq_one_iff_no_common_root`, `exists_common_root_of_not_isUnit` | `GcdRoot.lean` |
 | Thm 4, finite-family form | `isUnit_gcd_iff_no_common_root` | `FamilyGcd.lean` |
+| Thm 4, sufficiency assembled | `le_rank_map_of_isUnit_gcd_minor`, `minor` | `Criterion.lean` |
+| minors and pointwise evaluation | `eval_det_submatrix` | `MinorEval.lean` |
+| rank vs nonzero minor (both directions) | `exists_submatrix_det_ne_zero_of_le_rank`, `le_rank_of_det_submatrix_ne_zero` | `RankMinor.lean` |
 | Bezout / unit ideal (gcd = 1 ⇒ ∑ Aᵢfᵢ = 1) | `exists_combination_eq_one_of_gcd_eq_one`, `ideal_span_eq_top_of_gcd_eq_one`, `exists_combination_eq_one` | `UnitIdeal.lean` |
 | Prop 11 (coefficient test) | `evalRingHom_apply`, `eval_zero_iff_coeff_eval_zero`, `forall_eval_zero_iff_forall_coeff`, `exists_forall_eval_zero_iff_exists_forall_coeff` | `CoeffTest.lean` |
 | Prop 16 (column drop) | `column_zero_of_mem`, `rank_le_card_compl_of_cols_zero`, `rank_lt_of_cols_zero` | `ColumnDrop.lean` |
