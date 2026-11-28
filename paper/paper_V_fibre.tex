@@ -479,15 +479,19 @@ instance into the thin stratum (A).
 \subsection{Reproducibility and evidence}\label{sec:repro}
 
 Every theorem of this paper is accompanied by evidence in the artifact repository. The Lean~4
-development formalises the core of Theorem~\ref{thm:criterion} --- the specialisation step of
-Lemma~\ref{lem:specialize}, in the form used to prove Corollary~\ref{cor:every-bad} --- together with
-the fibre identity of Theorem~\ref{thm:fibre} and the rank inequality used in the proof of
-Theorem~\ref{thm:factor}. The examples of Section~\ref{sec:examples} are certified by exact rational
-scripts: the minors are computed symbolically over $\mathbb Q$, the gcd is taken in the polynomial
-ring, and the conditions (\ref{eq:fivea})--(\ref{eq:fiveb}) are re-verified on the original matrices
-for the realisable instances. The classification experiments that suggested
-Theorem~\ref{thm:factor} and the counterexample of Example~\ref{ex:thin} are recorded as such; they
-are not used as evidence for any statement in this paper.
+development formalises the fibre of Theorem~\ref{thm:fibre} --- the coset description, the
+nonemptiness criterion and its row-by-row product --- and the specialisation lemma
+(Lemma~\ref{lem:specialize}) together with its corollary, which is the only non-trivial step of
+the criterion of Theorem~\ref{thm:criterion}; the axiom audit covers those eight declarations.
+The dimension count behind Theorem~\ref{thm:factor}, the closedness of
+Theorem~\ref{thm:closed} and the probabilistic argument of Theorem~\ref{thm:regime} are paper
+proofs and are not formalised. The examples of Section~\ref{sec:examples} are certified by exact
+rational scripts: the fibre's membership system is solved completely, the minors are computed
+symbolically over $\mathbb Q$, the gcd is taken in $\mathbb Q[\lambda]$, and the conditions
+(\ref{eq:fivea})--(\ref{eq:fiveb}) are re-verified on the original matrices for the realisable
+instances. The classification experiments that suggested Theorem~\ref{thm:factor} and the
+counterexample of Example~\ref{ex:thin} are recorded as such; they are not used as evidence for
+any statement in this paper.
 
 \begin{thebibliography}{99}
 \bibitem{fer10} J. A. Fernando, H. Trinh, L. Jennings. Functional observability and the design of minimum order linear functional observers. \emph{IEEE Trans. Automat. Control} 55(5):1268--1273, 2010.
