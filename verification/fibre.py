@@ -99,6 +99,7 @@ def main() -> int:
     T2 = sp.Matrix([[1, 0, 0], [0, 1, 0]])
     G2, _ = fibre(H2, Z2, T2)
     assert G2 is not None, "Example 2: the fibre must be nonempty"
+    assert H2.rank() == 2, "Example 2: the compressed rank must be d' = 2"
     deg2, g2 = inner_deg(H2, Z2, G2)
     assert deg2 == 1, f"Example 2 must be bad, got degree {deg2}"
     assert sp.simplify(g2 - (LAM + 3)) == 0, f"expected λ+3, got {sp.factor(g2)}"

@@ -33,15 +33,15 @@ compatibility is a genuine constraint.
 
 | Paper item | Lean declaration | File |
 |---|---|---|
-| Theorem 1 (fibre as a coset; nonemptiness) | `Q1Paper.PaperV.fibre`, `fibre_nonempty_iff`, `fibre_eq_coset`, `fibre_prod_nonempty_iff` | `Q1Paper/PaperV/Fibre.lean` |
+| Theorem 1 (fibre as a coset; nonemptiness) | `Q1Paper.PaperV.fibre`, `mem_fibre`, `fibre_nonempty_iff`, `fibre_eq_coset`, `fibre_prod_nonempty_iff` | `Q1Paper/PaperV/Fibre.lean` (the assembled `q`-fold product and its dimension `q·a` are paper) |
 | Theorem 4's leading-coefficient step | `coeff_det_smul_sub_X`, `coeff_det_smul_sub_X_ne_zero` | `Q1Paper/PaperV/LeadingCoeff.lean` |
 | Lemma 2 (specialisation) | `natDegree_map_eval_of_leadingCoeff_const`, `map_dvd_of_dvd` | `Q1Paper/PaperV/Specialize.lean` |
 | Corollary 8 (shape) | `specialized_common_factor` | `Q1Paper/PaperV/Specialize.lean` |
 
-The axiom audit is `Q1Paper/PaperV/Audit.lean` (8 declarations, all on
+The axiom audit is `Q1Paper/PaperV/Audit.lean` (11 declarations, all on
 `propext`, `Classical.choice`, `Quot.sound`); `scripts/check.sh` runs it.  The claims
 table is `Q1Paper/PaperV/Claims.lean` and its machine check is
-`Q1Paper/PaperV/ClaimsCheck.lean`.
+`Q1Paper/PaperV/ClaimsCheck.lean` (the same eleven declarations).
 
 ## What is *not* machine-checked, and why
 
