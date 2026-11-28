@@ -501,6 +501,27 @@ two parameters are independent). Hence the stratum is feasible although $d'+t-k=
 heuristics that only compare $d'+t-k$ with $s$ are not sound.
 \end{example}
 
+\subsection{Interface with the companion papers}\label{sec:interface}
+
+The two companion papers decide existence and minimum order by enumerating candidates $U$ and
+testing each with a chart system. Theorem~\ref{thm:criterion} is a drop-in replacement for that test
+at fixed $U$: it replaces the order-by-order chart system by one gcd over the fibre's function field,
+and it needs no case split on which minor is nonzero. Two consequences are immediate and are the
+reason the fibre is worth isolating.
+
+\emph{Fixed order.} Inside the $\mathcal L^{O(q^2)}$ fixed-order algorithm of \cite{paperI}, every
+candidate is already processed at fixed compressed rank; substituting
+Theorem~\ref{thm:criterion} for the per-chart system keeps the bound and removes the chart recursion
+from the inner test. What is \emph{not} claimed is an improvement of the outer exponent: the
+enumeration of $U$ is untouched.
+
+\emph{Minimum order.} The monotone search of \cite{paperII} asks, for increasing $q$, whether some
+$U$ of dimension $d'\le q$ is feasible. Theorem~\ref{thm:no} says exactly when a whole dimension
+layer answers no, namely when the compatibility stratum is contained in the bad set; the region of
+Theorem~\ref{thm:regime} is where that containment can be refuted by a single sample. The thin
+stratum (Section~\ref{sec:open}, (A)) is precisely the part of the search that neither paper can
+currently decide by sampling.
+
 \section{Open problems}\label{sec:open}
 
 \begin{enumerate}[label=(\Alph*),leftmargin=2.2em,itemsep=2pt]
