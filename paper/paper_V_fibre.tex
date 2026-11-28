@@ -448,8 +448,9 @@ root of a point outside $Z$ is a root of $\varphi$. Let $g$ be the gcd over $F$ 
 $k=\deg g\le d'$, and let $G=Dg\in\mathbb C[Y][\lambda]$ be a primitive representative, $D\ne0$ being its
 denominator and $\operatorname{lc}_\lambda G=D$ (Lemma~\ref{lem:specialize} applied to the minor with
 nonzero $\det H_{IJ}$ shows such a representative exists). For $Y$ outside $Z$ and outside the zero set
-of $D$ --- a dense open set --- the specialised gcd equals $G(Y,\cdot)/D(Y)$, which is monic of degree $k$
-and divides $\varphi$, because its roots are roots of $\varphi$. A monic polynomial of
+of $D$ --- a dense open set --- the normalised polynomial $G(Y,\cdot)/D(Y)$ is monic of degree $k$ and is a
+\emph{common divisor} of the specialised minors (not necessarily their gcd, which can be strictly larger);
+each of its roots lies in $A$ by the previous paragraph, so it divides $\varphi$. A monic polynomial of
 degree $k$ that divides a fixed polynomial has only finitely many possibilities; hence $G(Y,\cdot)$
 takes finitely many values on a dense open set, so its coefficients are constant there, i.e.\ $g\in\mathbb
 C[\lambda]$. Finally $k\ge1$, because the fibre is bad, so $g$ has a root $\lambda_0\in\mathbb C$; by
@@ -556,23 +557,27 @@ coefficient test of Proposition~\ref{prop:coeff} a test of the whole fibre rathe
 \begin{thm}[Region with automatic compatibility]\label{thm:regime}
 Let $s=\dim(U_0\cap T)$ and suppose $d'+t-k\ge s$ with $t=\dim T$, $d'\ge\dim U_0$, and (for the
 openness and density statements) $q>d'$ together with the common-direction hypothesis of
-Theorem~\ref{thm:factor}. Fix in addition a stratum $\mathcal S_a=\{U:\dim(U\cap T)=a\}$ with
-$a\ge1$ constant, and suppose that stratum meets the compatible set. Then the following procedure
-accepts one-sidedly \emph{within that stratum}: draw a rational $U\in\mathcal S_a$ containing $U_0$,
-test the fibre with Theorem~\ref{thm:rp}, and accept when a witness is found. Acceptance is sound ---
-a witness is a feasible $U$ --- so the procedure never reports a bad stratum as feasible. What is
-\emph{not} claimed is that drawing from the ambient $\mathrm{Gr}(d',k)$ suffices: the density used below
-is density inside the chosen stratum, and a feasible point lying only in a lower-dimensional stratum
-would be missed with probability one by an ambient draw (Remark~\ref{rem:no-outer-bound}).
+Theorem~\ref{thm:factor}, and suppose $r:=d'+t-k\ge1$. Let
+$\mathcal S_r=\{U:\dim(U\cap T)=r\}$ be the \emph{generic} stratum; by $r\ge s$ every $U\in\mathcal
+S_r$ containing $U_0$ satisfies $U+T=\mathbb C^{k}$, so compatibility is automatic there and
+$\mathcal S_r\subseteq\mathcal C$. Then the following procedure accepts one-sidedly \emph{within
+$\mathcal S_r$}: draw a rational $U\in\mathcal S_r$ containing $U_0$, test the fibre with
+Theorem~\ref{thm:rp}, and accept when a witness is found. Acceptance is sound --- a witness is a feasible
+$U$ --- so the procedure never reports a bad stratum as feasible. Three restrictions are explicit: only
+the generic stratum is sampled (a lower-dimensional stratum $\mathcal S_a$, $a\neq r$, is a locally closed
+set on which compatibility is a genuine constraint, excluded here); the ambient Grassmannian is not
+sampled, a feasible point lying only in a lower stratum being missed with probability one by an ambient
+draw (Remark~\ref{rem:no-outer-bound}); and no outer probability bound is claimed.
 \end{thm}
 
 \begin{proof}
 Under the hypothesis a generic $U$ satisfies $\dim(U+T)=k$, so compatibility $UZ''\subseteq U+T$ is
 automatic and $\mathcal C$ contains a dense open subset of $\mathrm{Gr}(d',k)$. On the stratum where $a$ is constant, Theorem~\ref{thm:closed} gives that the feasible set is relatively
 open and, when nonempty, dense in the component that meets it, so a $U$ drawn at random \emph{from that
-stratum} is feasible with positive probability, provided the sampling distribution on rational points of the stratum
-assigns positive mass to every nonempty relatively open subset --- for instance the uniform distribution on
-a rational grid whose range grows, which eventually meets any nonempty open set; sampling the ambient Grassmannian gives no
+stratum} is feasible with positive probability, provided the sampling distribution on rational points of $\mathcal S_r$ assigns positive mass to every
+nonempty relatively open subset of $\mathcal S_r$; one such distribution is the limit of the uniform
+distributions on rational grids of growing range (each fixed grid gives a finite distribution, and the
+limit has full support), and the two grids used in Theorem~\ref{thm:rp} are sampled independently; sampling the ambient Grassmannian gives no
 such guarantee (Remark~\ref{rem:no-outer-bound}); by Theorem~\ref{thm:witness} a
 feasible point is certified by a witness, which Theorem~\ref{thm:rp} finds with the stated
 probability. If the stratum is entirely bad no witness exists and the procedure never accepts.

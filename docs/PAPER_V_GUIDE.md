@@ -42,7 +42,7 @@ compatibility is a genuine constraint.
 The axiom audit is `Q1Paper/PaperV/Audit.lean` (28 declarations, all on
 `propext`, `Classical.choice`, `Quot.sound`); `scripts/check.sh` runs it.  The claims
 table is `Q1Paper/PaperV/Claims.lean` and its machine check is
-`Q1Paper/PaperV/ClaimsCheck.lean` (the same eleven declarations).
+`Q1Paper/PaperV/ClaimsCheck.lean` (the same twenty-eight declarations).
 
 ## What is *not* machine-checked, and why
 
