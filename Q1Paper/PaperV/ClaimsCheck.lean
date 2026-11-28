@@ -35,6 +35,7 @@ declarations here are exactly the eleven `#print axioms` lines of `Audit.lean`.
 
 -- §IV  Proposition 14, conclusion step
 #check @Q1Paper.PaperV.rank_lt_of_cols_zero
+#check @Q1Paper.PaperV.column_zero_of_mem
 
 -- §V  Theorem 17, structure step
 #check @Q1Paper.PaperV.map_mem_of_le_sup

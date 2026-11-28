@@ -68,4 +68,12 @@ theorem rank_lt_of_cols_zero {K : Type*} [Field K] {q k : ℕ} (P : Matrix (Fin 
     (hd : Fintype.card (Fin k) - J.card < d) : P.rank < d :=
   lt_of_le_of_lt (rank_le_card_compl_of_cols_zero P J h) hd
 
+/-- **Proposition 14 (vanishing column).** If `T` is supported away from the coordinate `j`, then
+every row of `G'` vanishes in that coordinate: this is the step that makes the column of `P(λ₀)`
+vanish identically in the fibre parameters. -/
+theorem column_zero_of_mem {K : Type*} [Field K] {k q : ℕ} {T : Submodule K (Fin k → K)}
+    {j : Fin k} (hj : ∀ t ∈ T, t j = 0) {G : Fin q → (Fin k → K)} (hG : ∀ i, G i ∈ T) :
+    ∀ i, G i j = 0 :=
+  fun i => hj (G i) (hG i)
+
 end Q1Paper.PaperV

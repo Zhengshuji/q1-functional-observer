@@ -39,6 +39,7 @@ exactly the twenty-four `#check`s of `ClaimsCheck.lean`.
 
 -- ColumnDrop.lean (conclusion step)
 #print axioms Q1Paper.PaperV.rank_lt_of_cols_zero
+#print axioms Q1Paper.PaperV.column_zero_of_mem
 
 -- Invariant.lean
 #print axioms Q1Paper.PaperV.map_mem_of_le_sup
