@@ -22,7 +22,7 @@ The paper proves three things about that question:
 3. **Failure of the whole fibre is a fixed spectral factor** when `q > d'`
    (Theorem 13): the common divisor does not depend on the fibre parameters.  Hence the
    bad set is closed on each stratum of constant a (Corollary 12; closedness on the whole
-Grassmannian is open, see VI(E)), the feasible set is relatively open there, and infeasibility
+Grassmannian fails in general, Example 27 and VI(E)), the feasible set is relatively open there, and infeasibility
    is exactly the containment of the compatibility stratum in the bad set (Theorem 15).
 
 Section V turns this into procedures: a one-sided randomised decision procedure on the
@@ -40,33 +40,37 @@ compatibility is a genuine constraint.
 | Lemma 5 (specialisation) | `natDegree_map_eval_of_leadingCoeff_const`, `map_dvd_of_dvd` | `Q1Paper/PaperV/Specialize.lean` |
 | Corollary 10 (shape) | `specialized_common_factor` | `Q1Paper/PaperV/Specialize.lean` |
 
-The axiom audit is `Q1Paper/PaperV/Audit.lean` (54 declarations checked, all on
+The axiom audit is `Q1Paper/PaperV/Audit.lean` (58 declarations checked, all on
 `propext`, `Classical.choice`, `Quot.sound`); `scripts/check.sh` runs it.  The claims
 table is `Q1Paper/PaperV/Claims.lean` and its machine check is
-`Q1Paper/PaperV/ClaimsCheck.lean` (the same fifty-four declarations).  The 52 is the number of
+`Q1Paper/PaperV/ClaimsCheck.lean` (the same 58 declarations).  The 58 is the number of
 *audited declarations*, not the number of paper items: `Claims.lean` marks how many items are
 complete, which is a strictly smaller set.
 
 ## What is *not* machine-checked, and why
 
 * **Theorem 4's gcd criterion** — *partial*: the algebraic core (Lemma 5, the leading-coefficient
-  step, the Bezout/unit-ideal step, gcd ↔ no common root, minors vs rank) is checked, and the
-  sufficiency direction is assembled (`Criterion.lean`); what is *not* checked is the necessity
-  direction over `K(t)[λ]`, which needs multivariate polynomial gcds.
+  step, the Bezout/unit-ideal step, gcd ↔ no common root, minors vs rank) is checked, the
+  sufficiency direction is assembled (`Criterion.lean`), and the necessity side's specialisation
+  and root step is checked (`Necessity.lean`: a positive-degree divisor with constant nonzero
+  leading coefficient gives a common root at every point).  What is *not* checked is the Gauss step
+  from the gcd over `K(t)[λ]` to such a primitive divisor over the coordinate ring.
 * **Theorem 13 (fixed spectral factor)** — an incidence-variety dimension count.
 * **Corollary 12 / Theorem 14 (closedness of the bad set)** — quantifier elimination over the
-  coefficient space of the coefficient test.
+  coefficient space of the coefficient test; stratum by stratum only, and the global statement is
+  false (Example 27, §VI(E)).
 * **Theorems 7 and 8** — the rational witness with its height, and the two-grid
   Schwartz–Zippel bound.
 * **Theorem 19 (regime) and Theorem 22 (enumeration)** — one-sided acceptance inside the generic
-  stratum, and the combinatorial enumeration.
+  stratum, and the combinatorial enumeration.  Theorem 22's *logical* skeleton is Lean
+  (`Enumeration.lean`); what is paper-side is the construction of the finite list.
 
 `Q1Paper/PaperV/MainTheorems.lean` records this split; `Q1Paper/PaperV/Claims.lean` says it
 item by item.  Nothing is silently omitted.
 
 ## What is certified exactly
 
-`verification/fibre.py` decides the three examples of 搂V in exact rational arithmetic:
+`verification/fibre.py` decides the three examples of §V in exact rational arithmetic:
 the feasible fibre (gcd 1), the bad point (gcd `λ + 3`, parameter independent), and the
 thin-region instance.  It asserts the ranks and the nonemptiness of the fibre *before*
 deciding, so a wrong model fails loudly.  `verification/ci/c773_paperV_fibre.py` runs it in
@@ -74,16 +78,16 @@ CI.
 
 ## How to read the paper alongside the artifact
 
-1. 搂II (the fibre) —read with `Fibre.lean` open; every step of Theorem 2m 1 is a named
+1. §II (the fibre) —read with `Fibre.lean` open; every step of Theorem 2 is a named
    declaration.
 2. Section III (the criterion): Lemma 5 is `Specialize.lean`; the rest of the criterion is the
    paper's argument.
-3. 搂IV (the bad set) —the paper's Theorem 13 is the structural heart; the coefficient test
+3. §IV (the bad set) —the paper's Theorem 13 is the structural heart; the coefficient test
    behind Corollary 12 is `verification/fibre.py`'s `inner_deg`.
-4. 搂V (examples) —run `python verification/fibre.py`.
+4. §V (examples) —run `python verification/fibre.py`.
 
 
-## Coverage at a glance (54 kernel-checked declarations)
+## Coverage at a glance (58 kernel-checked declarations)
 
 | Paper item | Lean declarations | Module |
 |---|---|---|
@@ -104,21 +108,27 @@ CI.
 | Prop 16 (column drop) | `column_zero_of_mem`, `rank_le_card_compl_of_cols_zero`, `rank_lt_of_cols_zero` | `ColumnDrop.lean` |
 | Prop 17 (column dependence) | `rank_lt_of_le_ker`, `matrix_rank_lt_of_le_ker` | `KerRank.lean` |
 | Thm 22 structure step (`T ≤ U` ⟹ compat = invariance) | `map_mem_of_le_sup`, `invariant_iff_compat_of_le` | `Invariant.lean` |
+| Cor 10 root step (positive degree ⇒ common root at every specialisation) | `exists_root_of_natDegree_pos`, `exists_common_root_of_divisor` | `Necessity.lean` |
+| Thm 22 enumeration skeleton (complete finite list ⇒ decidable search) | `exists_iff_exists_mem_finset`, `decidable_exists_of_complete_finset` | `Enumeration.lean` |
 
 Each row above is **complete** in the sense that the paper's statement of that item is formalised;
 `Claims.lean` carries the same three-tier labels.
 
 **Partial** (core formalised, full statement not): Theorem 4 — the sufficiency direction is
-assembled (`Criterion.lean`), the necessity direction over `ℂ(t)[λ]` is not.
+assembled (`Criterion.lean`); on the necessity side the specialisation/root step is checked
+(`Necessity.lean`), but the Gauss step from the gcd over `ℂ(t)[λ]` to a primitive divisor over the
+coordinate ring is still paper-side.
 
 **Paper only, with the reason stated in `Claims.lean`:** Theorem 7 (rational witness and its
 height), Theorem 8 (two-grid probability bound), Theorem 13 (incidence dimension), Corollary 12 /
-Theorem 14 (closedness — proved stratum by stratum, global case open, §VI(E)), Theorem 15
-(infeasibility), Theorem 19 (regime), and the enumeration half of Theorem 22.
+Theorem 14 (closedness — proved stratum by stratum; the global statement is false, Example 27 and
+§VI(E)), Theorem 15
+(infeasibility), Theorem 19 (regime), and the *construction* of the finite list in Theorem 22 (its
+logical skeleton is Lean).
 
 ## Status
 
 The paper contains no claim that its proof does not support: every assertion is either proved in
-the text, cited, machine-checked (the table above), or listed as an open problem. The single
-unresolved structural item is §VI(E), closedness of the bad set on the whole Grassmannian; the
-paper states the stratum-wise version instead.
+the text, cited, machine-checked (the table above), or listed as an open problem. The structural
+item §VI(E) is not open: closedness on the whole Grassmannian is false (Example 27), and the paper
+states the stratum-wise version that survives.

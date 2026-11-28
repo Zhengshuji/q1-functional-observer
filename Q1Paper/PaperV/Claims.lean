@@ -10,7 +10,7 @@ name below resolves, so a rename breaks the build instead of silently invalidati
 The three tiers, used for every item below and mirrored in `docs/PAPER_V_GUIDE.md`:
 
 * **complete** — the paper's statement of the item is formalised as stated (modulo the paper's
-  standing hypotheses), 54 declarations in total, audited in `Audit.lean`;
+  standing hypotheses), 58 declarations in total, audited in `Audit.lean`;
 * **partial** — the mathematical core of the item is formalised but the full statement is not
   (typically because assembling it needs multivariate gcds, Grassmannians, or probability);
 * **paper only** — not formalised, with the reason.
@@ -52,6 +52,11 @@ Nothing is silently omitted; every "paper only" item says why.
   `Q1Paper.PaperV.exists_common_root_of_not_isUnit`.
 * **Algebraic core (finite family)**: `Q1Paper.PaperV.isUnit_gcd_iff_no_common_root`, and its
   pointwise consequence `Q1Paper.PaperV.exists_eval_ne_zero_of_isUnit_gcd`.
+* **Corollary 10, root step (Necessity.lean)**: over `ℂ` a polynomial of positive `natDegree`
+  has a root (`Q1Paper.PaperV.exists_root_of_natDegree_pos`), so a positive-degree divisor with
+  constant nonzero leading coefficient produces a common root at *every* specialisation —
+  `Q1Paper.PaperV.exists_common_root_of_divisor`.  This is the step "positive generic degree ⇒
+  the fibre point is bad".
 * **Minors, evaluation, rank**: `Q1Paper.PaperV.eval_det_submatrix` (evaluating a minor is taking
   the minor of the evaluation), and both directions of "rank ≥ d ⟺ some d-minor is nonzero" —
   `Q1Paper.PaperV.exists_submatrix_det_ne_zero_of_le_rank`,
@@ -92,11 +97,18 @@ hypothesis `rank H = d'` supplies, and the intrinsic form (Theorem 6).
   `Q1Paper.PaperV.exists_minor_ne_zero_of_det_ne_zero`.
 
 *Paper only*: Theorem 13 (fixed spectral factor — an incidence-variety dimension count),
-Corollary 12 and Theorem 14 (closedness — proved stratum by stratum, global case open, §VI(E)),
+Corollary 12 and Theorem 14 (closedness — proved stratum by stratum; the global statement is
+false, Example 27 in §VI(E)),
 Theorem 15 (infeasibility, a logical consequence of the closedness statement).
 -/
 
 /-! ## §V  Algorithms
+
+* **Complete — Theorem 22, enumerative skeleton** (`Enumeration.lean`): if a finite list is
+  complete for a predicate, the unbounded existential is the existential over the list, hence
+  decidable — `Q1Paper.PaperV.exists_iff_exists_mem_finset`,
+  `Q1Paper.PaperV.decidable_exists_of_complete_finset`.  The construction of the list itself
+  (the invariant subspaces) stays paper-side, as stated in the paper.
 
 * **Complete — Theorem 22, structure step**: `T ≤ U` turns compatibility into invariance —
   `Q1Paper.PaperV.map_mem_of_le_sup`, `Q1Paper.PaperV.invariant_iff_compat_of_le`, together with the
@@ -108,6 +120,7 @@ Theorem 15 (infeasibility, a logical consequence of the closedness statement).
 
 *Paper only*: Theorem 7 (rational witness and its height), Theorem 8 (the two-grid probability
 bound and the resultant degree estimate), Theorem 19 (the regime: one-sided acceptance inside the
-generic stratum, no outer probability bound), and the enumeration half of Theorem 22. The examples
-of §V are decided by exact rational arithmetic in `verification/`, not in Lean.
+generic stratum, no outer probability bound), and the *construction* of the finite list in
+Theorem 22 (its logical skeleton is Lean, its enumeration of invariant subspaces is paper). The
+examples of §V are decided by exact rational arithmetic in `verification/`, not in Lean.
 -/

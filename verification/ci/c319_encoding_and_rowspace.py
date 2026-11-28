@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """Exact checks for the paper's remaining bookkeeping items (freeze audit).
 
 Three items of the freeze checklist are closed by written lemmas in the paper;
@@ -218,7 +218,7 @@ def main() -> None:
     print(f"[3] with L0 perturbed, rows {bad} of (B.1) fail while every other "
           f"constraint still holds: (B.1)-(B.2) are necessary")
 
-    # ---- 5. the parameter family of 搂10.2 ---------------------------------
+    # ---- 5. the parameter family of §10.2 ---------------------------------
     # p = n-1, C = [I_{n-1} 0], last column of A in ker C  =>  k = 1, d0 <= 2
     for n in range(4, 9):
         Cm = sp.zeros(n - 1, n)

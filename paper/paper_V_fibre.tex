@@ -46,7 +46,8 @@ fails. If the number $q$ of observer rows
 exceeds the compressed rank $d'$ and the fibre direction is common to all rows --- which is the case
 here --- then the failure of the fibre is necessarily a fixed spectral factor: the common divisor is
 independent of the fibre parameters. Consequently the bad set is closed on each stratum
-of constant $a=\dim(U\cap T)$ (closedness on the whole Grassmannian is left open), the feasible set is
+of constant $a=\dim(U\cap T)$ (closedness on the whole Grassmannian fails in general;
+Section~\ref{sec:open}(E)), the feasible set is
 relatively open there, and infeasibility is exactly the statement that the whole compatibility stratum
 consists of bad points. The failure test reduces to checking whether a
 certain resultant vanishes identically, which gives a one-sided (randomised) test of a single fibre; on
@@ -120,8 +121,7 @@ $\lambda H-H_A$, computed over the rational function field of the fibre, has deg
 (Theorem~\ref{thm:intrinsic}), the witness it produces has polynomial height
 (Theorem~\ref{thm:witness}), and testing it is a one-sided randomised procedure
 (Theorem~\ref{thm:rp}). Section~\ref{sec:bad} characterises the failure of the whole fibre: when
-$q>d'$ the failure is a fixed spectral factor (Theorem~\ref{thm:factor}), hence the bad set is closed on each stratum of constant $a$ (Theorem~\ref{thm:closed}; closedness on the
-whole Grassmannian is open, Section~\ref{sec:open}) and infeasibility is exactly containment of the
+$q>d'$ the failure is a fixed spectral factor (Theorem~\ref{thm:factor}), hence the bad set is closed on each stratum of constant $a$ (Theorem~\ref{thm:closed}; global closedness fails, Example~\ref{ex:noclose}) and infeasibility is exactly containment of the
 compatibility stratum in the bad set (Theorem~\ref{thm:no}). Section~\ref{sec:algorithms} turns this into procedures on an
 explicit region (Theorem~\ref{thm:regime}) and settles the stratum $t=1$ by enumeration when the invariant subspaces form a finite set
 (Theorem~\ref{thm:t1}). Section~\ref{sec:open} states what remains open.
@@ -377,8 +377,8 @@ fibre bad at every point.
 \begin{cor}[The uniformly bad set is closed on each stratum]\label{cor:closed}
 Fix the stratum where $a=\dim(U\cap T)$ is constant. Then $\mathcal B_{\mathrm{unif}}$ is closed in that
 stratum, and, under the hypotheses of Theorem~\ref{thm:factor}, so is $\mathcal B$. Closedness on the whole
-of $\mathrm{Gr}(d',k)$ is not claimed: the strata are only locally closed and the jump locus of $a$ is their
-common boundary.
+of $\mathrm{Gr}(d',k)$ fails in general: the strata are only locally closed and the jump locus of $a$ is
+their common boundary (Example~\ref{ex:noclose}, Section~\ref{sec:open}(E)).
 \end{cor}
 
 \begin{proof}
@@ -411,7 +411,8 @@ $\mathcal B_{\mathrm{unif}}$ is closed in $\mathcal S_a$.
 \emph{What is not done.} Nothing here passes from `closed in each $\mathcal S_a$' to `closed in
 $\mathrm{Gr}(d',k)$': the strata are only locally closed and the jump locus of $a$ is their common
 boundary, so a finite union of closed-in-stratum sets need not be closed in the chart. That passage is
-left open (Section~\ref{sec:open}(E)). Also note that no elimination of $\lambda_0$ is performed, so the
+not merely unproved: it is \emph{false} in general --- Example~\ref{ex:noclose} exhibits bad points
+accumulating at a feasible limit point (Section~\ref{sec:open}(E)). Also note that no elimination of $\lambda_0$ is performed, so the
 argument does not depend on any non-degeneracy of the coefficients --- in contrast with a criterion based
 on a resultant, whose vanishing can also signal a degree drop.
 \end{proof}
@@ -501,7 +502,7 @@ $U$ is equivalent to the vanishing of the coefficient polynomials $q_{I,m}$ of
 Proposition~\ref{prop:coeff} at a fixed $\lambda_0$. Then, on each stratum of constant
 $a=\dim(U\cap T)$, the set $\mathcal B$ is closed and the feasible set is relatively open in the
 compatibility stratum $\mathcal C=\{U\supseteq U_0:\ \mathcal F_U\ne\varnothing\}$. Closedness on the
-whole of $\mathrm{Gr}(d',k)$ is left open (Section~\ref{sec:open}).
+whole of $\mathrm{Gr}(d',k)$ fails in general (Example~\ref{ex:noclose}); see Section~\ref{sec:open}(E).
 \end{thm}
 
 \begin{proof}
@@ -509,7 +510,7 @@ On each stratum where $a=\dim(U\cap T)$ is constant, Corollary~\ref{cor:closed} 
 $\mathcal B_{\mathrm{unif}}$ is closed there, and Theorem~\ref{thm:factor} gives
 $\mathcal B=\mathcal B_{\mathrm{unif}}$ on that stratum; hence $\mathcal B$ is closed on the stratum and the
 feasible set $\mathcal C\setminus\mathcal B$ is relatively open there. Openness on the whole of $\mathcal C$
-is not claimed, for the reason recorded in Corollary~\ref{cor:closed}. The compatibility stratum $\mathcal C$ is **not** closed in general: with $k=2$, $d'=1$,
+is not claimed and in fact fails in general (Example~\ref{ex:noclose}), for the reason recorded in Corollary~\ref{cor:closed}. The compatibility stratum $\mathcal C$ is **not** closed in general: with $k=2$, $d'=1$,
 $T=\operatorname{span}\{e_1\}$ and $Z''=\begin{bsmallmatrix}0&0\\1&0\end{bsmallmatrix}$, every line
 $U\ne T$ satisfies $U+T=\mathbb C^{2}$ and hence compatibility, while $U=T$ does not, so
 $\mathcal C=\mathrm{Gr}(1,2)\setminus\{T\}$ is open. What is closed is the intersection of $\mathcal C$
@@ -756,6 +757,23 @@ $\ker[C;CA]=\operatorname{col}[I_4;0]$, $P_1AN=Z''$ and $\operatorname{row}(P_2A
 decomposition of \eqref{eq:decomp}, while $H=LN$ for $L=[\,H\mid 0\,]$ and $\operatorname{rank}[L;C]=4$.
 \end{example}
 
+\begin{example}[The bad set is not closed on the Grassmannian]\label{ex:noclose}
+Take $k=4$, $q=3$, $d'=2$, $T=\operatorname{span}\{e_1,e_2\}$, $Z''=e_1e_1^{\top}$, and the chart
+$U_\epsilon=\operatorname{span}\{e_1,\ e_2+\epsilon e_3\}$ with $\epsilon\ne0$; then $a=1$ and
+$U_\epsilon\cap T=\mathbb Ce_1$. Every compatible point of this chart is bad: the rows of $HZ''$ lie in
+$T\cap U_\epsilon=\mathbb Ce_1$, and every row of $G'$ lies in $T\cap U_\epsilon$ by the definition of
+the fibre, so at $\lambda_0=0$ the matrix $-(HZ''+G')$ has rank at most $1<d'=2$ for every $G'$ in the
+fibre; hence all $2$-minors vanish at $0$ and no point of the fibre satisfies $(5b)$.
+Letting $\epsilon\to0$ gives $U^\ast=T$. Now $a=2$ and $U^\ast Z''=\mathbb Ce_1\subseteq U^\ast$, so
+$U^\ast$ is compatible, and $U^\ast$ is \emph{feasible}: with rows $e_1,e_2,e_1+e_2$ for $H$ and
+\[
+G'=\begin{pmatrix}0&0&0&0\\0&0&0&0\\2&1&0&0\end{pmatrix},
+\]
+the gcd of the $18$ $2$-minors of $\lambda H-HZ''-G'$ is a nonzero constant (exact rational
+computation, \texttt{verification/ci/c804\_paperV\_noclose.py}). Thus $\mathcal B$ is not closed in
+$\mathrm{Gr}(d',k)$: $\overline{\mathcal B}\supsetneq\mathcal B$, and the feasible set is not open.
+\end{example}
+
 \subsection{Interface with the companion papers}\label{sec:interface}
 
 The two companion papers decide existence and minimum order by enumerating candidates $U$ and
@@ -824,8 +842,8 @@ Thm.~\ref{thm:witness} (witness) & conditional & $U$ rational; bit size poly in 
 Thm.~\ref{thm:rp} (one-sided test) & proved & soundness; probability given grids \\
 Thm.~\ref{thm:factor} (fixed factor) & proved & $q>d'$, common direction \\
 Prop.~\ref{prop:coeff} (coefficient test) & proved & uniform badness \\
-Cor.~\ref{cor:closed} (closedness) & conditional & on each stratum $a=\mathrm{const}$; global open, (E) \\
-Thm.~\ref{thm:closed} (closed; not thin) & conditional & same stratum restriction \\
+Cor.~\ref{cor:closed} (closedness) & conditional & on each stratum $a=\mathrm{const}$; global closedness is false, Ex.~\ref{ex:noclose}, (E) \\
+Thm.~\ref{thm:closed} (closed; not thin) & conditional & same stratum restriction; global statement false \\
 Thm.~\ref{thm:no} (infeasibility) & conditional & $q>d'$ + common direction \\
 Prop.~\ref{prop:drop}, \ref{prop:dependence} & proved & sufficient conditions \\
 Thm.~\ref{thm:regime} (regime) & conditional & $d'+t-k\ge s$, $d'\ge\dim U_0$, $q>d'$; sampling within a stratum \\
@@ -836,8 +854,13 @@ Thm.~\ref{thm:t1} ($t=1$) & conditional & $a\ge1$; invariant subspaces finite \\
 
 The three theorems that are not machine-checked in the artifact (13, 12/14 and 15 in the numbering
 above) are exactly the ones whose proofs use the geometry of the Grassmannian rather than linear
-algebra; the algebraic content is kernel-checked, the split being recorded in the artifact's
-documentation.
+algebra; the split, including the steps that remain paper-side, is recorded in the artifact's
+documentation. Theorem~\ref{thm:criterion} is the boundary case: its sufficiency direction, its
+specialisation lemma and its root step are kernel-checked, while the Gauss step from the gcd over
+$\mathbb C(t)[\lambda]$ to a primitive divisor over the coordinate ring is paper-side. The global
+closedness question of Section~\ref{sec:open}(E) is not merely unproved:
+it is false (Example~\ref{ex:noclose}), so no strengthening of Corollary~\ref{cor:closed} along the
+strata is available.
 
 \section{Open problems}\label{sec:open}
 
@@ -883,14 +906,13 @@ claimed. What is known: on $d'+t-k\ge s$ feasibility is accepted one-sidedly ins
 reduction that encodes an NP-hard problem into it. A proof either way would settle the complexity of the
 problem this paper analyses; a single stratum where the containment can be tested in polynomial time, or a
 single reduction, would be the decisive step.
-\item \emph{Global closedness of the bad set.} Corollary~\ref{cor:closed} establishes closedness on each
-stratum of constant $a=\dim(U\cap T)$, and Theorem~\ref{thm:no} and the regime statement are stated
-accordingly. Closedness on the whole of $\mathrm{Gr}(d',k)$ would follow from either of two routes we do
-not carry out: (i) ordering the strata so that each is open in the union of those above it, or (ii) a
-coordinate-free description --- ``$f_I(\lambda_0,\cdot)$ vanishes on the fibre'' $\iff$
-$\operatorname{row}\bigl(f_I(\lambda_0,\cdot)\bigr)\subseteq\operatorname{row}(\Lambda(p))$, where
-$\Lambda(p)$ is a polynomial matrix describing the fibre direction --- which would make the condition
-polynomial in $p$ without choosing a frame.
+\item \emph{Global closedness of the bad set: answered negatively.} Corollary~\ref{cor:closed} gives
+closedness on each stratum of constant $a=\dim(U\cap T)$; closedness on the whole of
+$\mathrm{Gr}(d',k)$ is \emph{false}. By Example~\ref{ex:noclose} the bad set has a limit point that is
+feasible: the stratum $a=1$ is entirely bad there, while its boundary point $U=T$ ($a=2$) admits a
+witness. Hence $\mathcal B$ is not closed and the feasible set is not open, so the stratum-wise
+statement of Theorem~\ref{thm:closed} cannot be upgraded by patching strata together. What remains
+open is a constructive description of the feasible set that is stable under such degenerations.
 \end{enumerate}
 
 \subsection{Reproducibility and evidence}\label{sec:repro}
@@ -922,7 +944,7 @@ $(H,Z'',T)$. The realisation of the first example as an original $(A,C,L_0,L)$, 
 counterexample of Example~\ref{ex:thin} are recorded as such; they are not used as evidence for
 any statement in this paper.
 
-\appendix
+\appendices
 \section{Algebraic lemmas used in \S III and \S IV}\label{app:algebra}
 
 \subsection{Why the coefficient test is a test of \emph{all} fibres}\label{app:coeff}
@@ -978,7 +1000,9 @@ charts are rational maps in the Plücker coordinates, and the only property the 
 Corollary~\ref{cor:closed} uses is that the charts are an open cover on which the same intrinsic set
 $\mathcal B$ is described. On each stratum of constant $a=\dim(U\cap T)$ the argument is local: a subset of a chart is closed iff its
 intersection with every member of an open cover of that stratum is closed there. Closedness on the whole of
-$\mathrm{Gr}(d',k)$ is *not* obtained this way; it is left open in Section~\ref{sec:open}(E).
+$\mathrm{Gr}(d',k)$ is *not* obtained this way, and it is false
+(Section~\ref{sec:open}(E), Example~\ref{ex:noclose}): the stratum-wise argument cannot be patched
+across the jump locus of $a$.
 
 Two points deserve emphasis, because they are exactly where a careless reading goes wrong.
 First, intrinsicness of $\mathcal B$ is what makes the local descriptions describe \emph{one} set; it

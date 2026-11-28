@@ -43,6 +43,11 @@ The last identification is **definitional**: 9 says a $U\in\mathcal C$ is bad wh
 fibre fails, so its negation is exactly the existence of a feasible point. It is *not* a theorem, and
 the earlier version of this table wrongly attributed it to 15.
 
+**Scope warning (2026-11-28).** Items 12 and 14 are *stratum-wise*: they say `closed on each stratum
+of constant a`, not `closed on the Grassmannian`. The global statement is **false**: the `a = 1`
+stratum can be entirely bad while its boundary point `U = T` (`a = 2`) is feasible (Example 27,
+`verification/ci/c804_paperV_noclose.py`). The chain above therefore closes only inside one stratum.
+
 ## Residual hypotheses that the paper does not prove
 
 1. $a\ge1$ in item 22 (the rank barrier of the companion development; stated as a hypothesis);

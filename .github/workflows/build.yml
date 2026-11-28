@@ -39,6 +39,7 @@ jobs:
           lake build Q1Paper.PaperV.Read.All
           lake env lean Q1Paper/PaperV/Audit.lean > paperV_audit.log
           python3 scripts/check_paperI_axioms.py paperV_audit.log Q1Paper/PaperV/Audit.lean
+          python3 scripts/check_paperV_counts.py
       - name: Claim and module indexes (Paper I and Paper II)
         run: |
           lake env lean Q1Paper/PaperI/S00_Interface/ClaimsCheck.lean
@@ -89,6 +90,7 @@ jobs:
           python ci/c318_r0_linear_system.py
           python ci/c319_encoding_and_rowspace.py
           python ci/c773_paperV_fibre.py
+          python ci/c804_paperV_noclose.py
           python ../scripts/verify_paperII_example.py
       - name: Algorithm test suites
         working-directory: verification
