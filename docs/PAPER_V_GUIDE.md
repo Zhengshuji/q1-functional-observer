@@ -73,3 +73,30 @@ CI.
 3. 搂IV (the bad set) 鈥?the paper's Theorem 11 is the structural heart; the coefficient test
    behind Theorem 12 is `verification/fibre.py`'s `inner_deg`.
 4. 搂V (examples) 鈥?run `python verification/fibre.py`.
+
+
+## Coverage at a glance (28 kernel-checked declarations)
+
+| Paper item | Lean declarations | Module |
+|---|---|---|
+| Thm 1 (fibre): per-row coset, nonemptiness | `fibre`, `mem_fibre`, `fibre_nonempty_iff`, `fibre_eq_coset`, `fibre_prod_nonempty_iff` | `Fibre.lean` |
+| Thm 1 (product dimension `q·a`) | `piConstEquiv`, `mem_pi_const`, `finrank_pi_const`, `finrank_iInf_comap_proj` | `FibreDim.lean` |
+| Lemma 5 (specialisation), Cone 10 | `natDegree_map_eval_of_leadingCoeff_const`, `map_dvd_of_dvd`, `specialized_common_factor` | `Specialize.lean` |
+| Thm 4's leading-coefficient step | `coeff_one_C_mul_X_sub_C`, `natDegree_C_mul_X_sub_C_le`, `coeff_det_smul_sub_X`, `coeff_det_smul_sub_X_ne_zero` | `LeadingCoeff.lean` |
+| Thm 4's algebraic core (gcd ↔ no common root) | `gcd_ne_zero`, `exists_root_of_not_isUnit`, `isCoprime_iff_no_common_root`, `gcd_eq_one_iff_no_common_root` | `GcdRoot.lean` |
+| Prop 11 (coefficient test) | `evalRingHom_apply`, `eval_zero_iff_coeff_eval_zero`, `forall_eval_zero_iff_forall_coeff`, `exists_forall_eval_zero_iff_exists_forall_coeff` | `CoeffTest.lean` |
+| Prop 16 (column drop) | `column_zero_of_mem`, `rank_le_card_compl_of_cols_zero`, `rank_lt_of_cols_zero` | `ColumnDrop.lean` |
+| Prop 17 (column dependence) | `rank_lt_of_le_ker`, `matrix_rank_lt_of_le_ker` | `KerRank.lean` |
+| Thm 22 structure step (`T ≤ U` ⟹ compat = invariance) | `map_mem_of_le_sup`, `invariant_iff_compat_of_le` | `Invariant.lean` |
+
+**Paper only, with the reason stated in `MainTheorems.lean` and `Claims.lean`:** the gcd
+criterion's matrix-level statement (needs multivariate gcd plus minors), Theorem 13 (incidence
+dimension), Corollary 12 / Theorem 14 (closedness — open on general strata, see §VI(E)),
+Theorem 15 (infeasibility), Theorem 19 (probabilistic regime), Theorem 22 (enumeration).
+
+## Status
+
+The paper contains no claim that its proof does not support: every assertion is either proved in
+the text, cited, machine-checked (the table above), or listed as an open problem. The single
+unresolved structural item is §VI(E), closedness of the bad set on the whole Grassmannian; the
+paper states the stratum-wise version instead.
