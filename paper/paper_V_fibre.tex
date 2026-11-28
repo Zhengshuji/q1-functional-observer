@@ -451,6 +451,15 @@ $1-2d'^{2}/|S|$ for a grid $S$, and the one-sided test of Theorem~\ref{thm:rp} a
 stratum is entirely bad no witness exists and the procedure never accepts.
 \end{proof}
 
+\begin{remark}[Constants]\label{rem:constants}
+The failure probability of the test is explicit. The coefficient polynomials $q_{I,m}$ have degree at
+most $d'$ in $\lambda$, so the resultant $D$ of Theorem~\ref{thm:rp} has $t$-degree at most
+$2d'^{2}$. Sampling the fibre parameters from the grid $\{0,\dots,2d'^{2}\}^{qa}$ therefore misses the
+zero set of $D$ with probability at least $1/2$, and $O(\log(1/\varepsilon))$ independent trials
+bring the failure probability below $\varepsilon$. Everything else in the test is exact: the ranks,
+the compatibility test $UZ''\subseteq U+T$ and the evaluation of the resultant.
+\end{remark}
+
 \begin{thm}[The stratum $t=1$]\label{thm:t1}
 Assume $t=1$ and that $U$ is feasible with $a=\dim(U\cap T)\ge1$ (a feasible candidate always has
 $a\ge1$; this is the rank barrier of \cite{paperI}, whose proof we do not repeat). Then $U$ is
