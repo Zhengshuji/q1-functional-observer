@@ -10,7 +10,7 @@ name below resolves, so a rename breaks the build instead of silently invalidati
 The three tiers, used for every item below and mirrored in `docs/PAPER_V_GUIDE.md`:
 
 * **complete** — the paper's statement of the item is formalised as stated (modulo the paper's
-  standing hypotheses), 45 declarations in total, audited in `Audit.lean`;
+  standing hypotheses), 50 declarations in total, audited in `Audit.lean`;
 * **partial** — the mathematical core of the item is formalised but the full statement is not
   (typically because assembling it needs multivariate gcds, Grassmannians, or probability);
 * **paper only** — not formalised, with the reason.

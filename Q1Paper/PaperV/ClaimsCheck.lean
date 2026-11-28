@@ -78,3 +78,10 @@ declarations here are exactly the thirty-nine `#print axioms` lines of `Audit.le
 -- Fibre.lean / FibreDim.lean (Theorem 2, assembled)
 #check @Q1Paper.PaperV.fibre_prod_coset
 #check @Q1Paper.PaperV.fibre_dir_finrank
+#check @Q1Paper.PaperV.exists_minor_ne_zero_of_det_ne_zero
+
+-- RootBound.lean (Theorem 8 counting step)
+#check @Q1Paper.PaperV.card_roots_le_natDegree
+#check @Q1Paper.PaperV.exists_ne_root_of_card
+#check @Q1Paper.PaperV.rank_mul_of_det_ne_zero
+#check @Q1Paper.PaperV.rank_smul_sub_mul_of_det_ne_zero

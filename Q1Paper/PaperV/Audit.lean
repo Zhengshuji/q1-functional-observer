@@ -82,3 +82,10 @@ exactly the thirty-nine `#check`s of `ClaimsCheck.lean`.
 -- Fibre.lean / FibreDim.lean (Theorem 2, assembled)
 #print axioms Q1Paper.PaperV.fibre_prod_coset
 #print axioms Q1Paper.PaperV.fibre_dir_finrank
+#print axioms Q1Paper.PaperV.exists_minor_ne_zero_of_det_ne_zero
+
+-- RootBound.lean (Theorem 8 counting step)
+#print axioms Q1Paper.PaperV.card_roots_le_natDegree
+#print axioms Q1Paper.PaperV.exists_ne_root_of_card
+#print axioms Q1Paper.PaperV.rank_mul_of_det_ne_zero
+#print axioms Q1Paper.PaperV.rank_smul_sub_mul_of_det_ne_zero

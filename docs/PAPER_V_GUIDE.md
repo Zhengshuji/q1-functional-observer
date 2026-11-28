@@ -40,10 +40,10 @@ compatibility is a genuine constraint.
 | Lemma 5 (specialisation) | `natDegree_map_eval_of_leadingCoeff_const`, `map_dvd_of_dvd` | `Q1Paper/PaperV/Specialize.lean` |
 | Corollary 10 (shape) | `specialized_common_factor` | `Q1Paper/PaperV/Specialize.lean` |
 
-The axiom audit is `Q1Paper/PaperV/Audit.lean` (45 declarations checked, all on
+The axiom audit is `Q1Paper/PaperV/Audit.lean` (50 declarations checked, all on
 `propext`, `Classical.choice`, `Quot.sound`); `scripts/check.sh` runs it.  The claims
 table is `Q1Paper/PaperV/Claims.lean` and its machine check is
-`Q1Paper/PaperV/ClaimsCheck.lean` (the same forty-five declarations).  The 40 is the number of
+`Q1Paper/PaperV/ClaimsCheck.lean` (the same fifty declarations).  The 40 is the number of
 *audited declarations*, not the number of paper items: `Claims.lean` marks how many items are
 complete, which is a strictly smaller set.
 
@@ -83,7 +83,7 @@ CI.
 4. 搂V (examples) —run `python verification/fibre.py`.
 
 
-## Coverage at a glance (45 kernel-checked declarations)
+## Coverage at a glance (50 kernel-checked declarations)
 
 | Paper item | Lean declarations | Module |
 |---|---|---|
@@ -96,6 +96,8 @@ CI.
 | Thm 4, sufficiency assembled | `le_rank_map_of_isUnit_gcd_minor`, `minor` | `Criterion.lean` |
 | minors and pointwise evaluation | `eval_det_submatrix` | `MinorEval.lean` |
 | rank vs nonzero minor (both directions) | `exists_submatrix_det_ne_zero_of_le_rank`, `le_rank_of_det_submatrix_ne_zero` | `RankMinor.lean` |
+| Thm 8 counting step (nonzero polynomial has ≤ deg roots in a grid) | `card_roots_le_natDegree`, `exists_ne_root_of_card` | `RootBound.lean` |
+| spectral form: non-eigenvalues do not drop the rank | `rank_mul_of_det_ne_zero`, `rank_smul_sub_mul_of_det_ne_zero`, `exists_minor_ne_zero_of_det_ne_zero` | `SpectralRank.lean` |
 | Thm 13 covering step (finite union of proper zero sets is proper) | `eq_zero_of_forall_eval_eq_zero`, `exists_forall_eval_ne_zero`, `exists_eq_zero_of_forall_exists_eval_eq_zero` | `UnionZeros.lean` |
 | Bezout / unit ideal (gcd = 1 ⇒ ∑ Aᵢfᵢ = 1) | `exists_combination_eq_one_of_gcd_eq_one`, `ideal_span_eq_top_of_gcd_eq_one`, `exists_combination_eq_one` | `UnitIdeal.lean` |
 | Prop 11 (coefficient test) | `evalRingHom_apply`, `eval_zero_iff_coeff_eval_zero`, `forall_eval_zero_iff_forall_coeff`, `exists_forall_eval_zero_iff_exists_forall_coeff` | `CoeffTest.lean` |

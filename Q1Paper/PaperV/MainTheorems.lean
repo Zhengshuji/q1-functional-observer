@@ -12,7 +12,9 @@ import Q1Paper.PaperV.FamilyGcd
 import Q1Paper.PaperV.MinorEval
 import Q1Paper.PaperV.RankMinor
 import Q1Paper.PaperV.Criterion
+import Q1Paper.PaperV.SpectralRank
 import Q1Paper.PaperV.UnionZeros
+import Q1Paper.PaperV.RootBound
 
 /-!
 Q1Paper/PaperV/MainTheorems.lean
