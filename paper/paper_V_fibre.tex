@@ -561,7 +561,12 @@ currently decide by sampling.
 $\mathcal C$ is a proper subvariety and the sampling argument of Theorem~\ref{thm:regime} does not
 apply. Deciding $\mathcal C\subseteq\mathcal B$ there --- equivalently deciding the existence
 question --- is open. Example~\ref{ex:thin} shows that feasibility is possible in that region, so the
-question is not vacuous.\item \emph{Bit complexity.} Theorem~\ref{thm:criterion} is polynomial for fixed compressed rank in
+question is not vacuous. What is known: the stratum is closed (Theorem~\ref{thm:closed}), so the
+question is an ideal-membership question for a closed set, and the coefficient test of
+Proposition~\ref{prop:coeff} decides it point by point; what is missing is a way to test containment
+without enumerating the stratum. A single compatible $U$ that is feasible would refute the
+conjecture that the thin stratum is always bad, and Example~\ref{ex:thin} is such a $U$ for a
+degenerate $Z''$; the open case is $Z''\neq0$ with a genuinely thin stratum.\item \emph{Bit complexity.} Theorem~\ref{thm:criterion} is polynomial for fixed compressed rank in
 the arithmetic model; its bit cost, and that of the coefficient test behind
 Theorem~\ref{thm:closed}, are not accounted for here. The bound of Theorem~\ref{thm:witness} is on
 the witness, not on the running time.
