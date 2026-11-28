@@ -79,6 +79,18 @@ hypothesis `rank H = d'` supplies, and the intrinsic form (Theorem 6).
 * **Complete — Proposition 17 (column dependence)**: `Q1Paper.PaperV.rank_lt_of_le_ker`,
   `Q1Paper.PaperV.matrix_rank_lt_of_le_ker`.
 
+* **Complete — Theorem 13's covering step**: a finite union of proper zero sets of polynomials is
+  proper, so if finitely many closed conditions cover the parameter space one of them is everything —
+  `Q1Paper.PaperV.eq_zero_of_forall_eval_eq_zero`,
+  `Q1Paper.PaperV.exists_forall_eval_ne_zero`,
+  `Q1Paper.PaperV.exists_eq_zero_of_forall_exists_eval_eq_zero`.
+
+* **Complete — the spectral form's linear algebra**: at a non-eigenvalue of `Z''` the pencil
+  `λ H - H Z''` keeps the rank of `H`, so no `d'`-minor can vanish there —
+  `Q1Paper.PaperV.rank_mul_of_det_ne_zero`,
+  `Q1Paper.PaperV.rank_smul_sub_mul_of_det_ne_zero`,
+  `Q1Paper.PaperV.exists_minor_ne_zero_of_det_ne_zero`.
+
 *Paper only*: Theorem 13 (fixed spectral factor — an incidence-variety dimension count),
 Corollary 12 and Theorem 14 (closedness — proved stratum by stratum, global case open, §VI(E)),
 Theorem 15 (infeasibility, a logical consequence of the closedness statement).
@@ -89,6 +101,10 @@ Theorem 15 (infeasibility, a logical consequence of the closedness statement).
 * **Complete — Theorem 22, structure step**: `T ≤ U` turns compatibility into invariance —
   `Q1Paper.PaperV.map_mem_of_le_sup`, `Q1Paper.PaperV.invariant_iff_compat_of_le`, together with the
   dimension step `Q1Paper.PaperV.le_of_finrank_eq_one` used to get `T ≤ U` when `t = 1`.
+
+* **Complete — Theorem 8's counting step**: a nonzero polynomial has at most `deg` roots in any
+  finite grid, so a grid larger than the degree cannot consist entirely of bad points —
+  `Q1Paper.PaperV.card_roots_le_natDegree`, `Q1Paper.PaperV.exists_ne_root_of_card`.
 
 *Paper only*: Theorem 7 (rational witness and its height), Theorem 8 (the two-grid probability
 bound and the resultant degree estimate), Theorem 19 (the regime: one-sided acceptance inside the
