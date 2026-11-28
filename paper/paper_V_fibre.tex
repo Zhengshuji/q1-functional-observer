@@ -423,18 +423,18 @@ coefficients that are polynomials in $p$. Reduce the family to two members as fo
 $f\neq0$ of the family and put $g_c=\sum_j c_j f_j$ over the remaining members. For all $c$ in a
 nonempty Zariski-open set of coefficient vectors, $\gcd(f,g_c)$ equals the gcd of the whole family
 (any common factor of $f$ and of every $g_c$ divides every $f_j$). Hence, for such a $c$,
-$$\text{the family has a common root}\iff \deg_\lambda\gcd(f,g_c)\ge1
-\iff \operatorname{Res}_\lambda(f,g_c)=0,$$
+\begin{equation}\label{eq:rootcrit}
+\text{the family has a common root}\iff \deg_\lambda\gcd(f,g_c)\ge1
+\iff \operatorname{Res}_\lambda(f,g_c)=0,
+\end{equation}
 the second equivalence being the standard root criterion for two polynomials of degree at least
 one. Now $\operatorname{Res}_\lambda(f,g_c)$, as a polynomial in $(\lambda,c,p)$, is a polynomial in
 $c$ whose coefficients are polynomials in the coefficients of the family, hence polynomials in $p$;
 the condition "$\operatorname{Res}\equiv0$ as a polynomial in $c$" is therefore the vanishing of the
 finitely many coefficient polynomials $r_j(p)$, and by the choice of $c$ it is independent of which
 $c$ in the open set is used. Degenerate cases: if every $q_{I,m}$ vanishes identically then every
-$\lambda$ is a common root and every $p$ is bad (take the single polynomial $r_1=0$); if a chosen
-$f$ is not zero but has degree zero, then it is a nonzero constant, its gcd with anything is a unit and
-the family has no common root, so take $r_1$ to be that nonzero constant's denominator -- formally,
-$r_1=1$ and the set is empty.
+$\lambda$ is a common root and every $p$ is bad, so $r_1=0$ describes the whole chart; if the family
+contains a nonzero constant, then it has no common root and the set is empty, described by $r_1=1$.
 \end{proof}
 
 \begin{cor}\label{cor:closed}
