@@ -441,8 +441,8 @@ root of a point outside $Z$ is a root of $\varphi$. Let $g$ be the gcd over $F$ 
 $k=\deg g\le d'$, and let $G=Dg\in\mathbb C[Y][\lambda]$ be a primitive representative, $D\ne0$ being its
 denominator and $\operatorname{lc}_\lambda G=D$ (Lemma~\ref{lem:specialize} applied to the minor with
 nonzero $\det H_{IJ}$ shows such a representative exists). For $Y$ outside $Z$ and outside the zero set
-of $D$ --- a dense open set --- the specialised gcd equals $G(Y,\cdot)$, which is a divisor of
-$\varphi$ because its roots are roots of $\varphi$ and it is monic of degree $k$. A monic polynomial of
+of $D$ --- a dense open set --- the specialised gcd equals $G(Y,\cdot)/D(Y)$, which is monic of degree $k$
+and divides $\varphi$, because its roots are roots of $\varphi$. A monic polynomial of
 degree $k$ that divides a fixed polynomial has only finitely many possibilities; hence $G(Y,\cdot)$
 takes finitely many values on a dense open set, so its coefficients are constant there, i.e.\ $g\in\mathbb
 C[\lambda]$. Finally $k\ge1$, because the fibre is bad, so $g$ has a root $\lambda_0\in\mathbb C$; by
@@ -464,8 +464,12 @@ On each stratum where $a=\dim(U\cap T)$ is constant, Corollary~\ref{cor:closed} 
 $\mathcal B_{\mathrm{unif}}$ is closed there, and Theorem~\ref{thm:factor} gives
 $\mathcal B=\mathcal B_{\mathrm{unif}}$ on that stratum; hence $\mathcal B$ is closed on the stratum and the
 feasible set $\mathcal C\setminus\mathcal B$ is relatively open there. Openness on the whole of $\mathcal C$
-is not claimed, for the reason recorded in Corollary~\ref{cor:closed}. Closedness of $\mathcal C$ is the
-determinantal (submatrix) nature of the condition $UZ''\subseteq U+T$. $\mathcal B$ need not be thin: when $q=d'$ the whole stratum is
+is not claimed, for the reason recorded in Corollary~\ref{cor:closed}. The compatibility stratum $\mathcal C$ is **not** closed in general: with $k=2$, $d'=1$,
+$T=\operatorname{span}\{e_1\}$ and $Z''=\begin{bsmallmatrix}0&0\\1&0\end{bsmallmatrix}$, every line
+$U\ne T$ satisfies $U+T=\mathbb C^{2}$ and hence compatibility, while $U=T$ does not, so
+$\mathcal C=\mathrm{Gr}(1,2)\setminus\{T\}$ is open. What is closed is the intersection of $\mathcal C$
+with each stratum of constant $a$, where $\dim(U+T)$ is fixed and compatibility becomes a rank
+condition. $\mathcal B$ need not be thin: when $q=d'$ the whole stratum is
 bad (\cite{paperI}, the square-pencil argument), while Example~\ref{ex:bad} exhibits a bad point that has feasible neighbours at five explicitly verified
 nearby values --- so that particular point is not isolated in $\mathcal B$'s complement; when $q=d'$ the
 set is all of the stratum.
@@ -789,9 +793,9 @@ The dimension count behind Theorem~\ref{thm:factor}, the closedness of
 Theorem~\ref{thm:closed} and the probabilistic argument of Theorem~\ref{thm:regime} are paper
 proofs and are not formalised. The examples of Section~\ref{sec:examples} are certified by exact
 rational scripts: the fibre's membership system is solved completely, the minors are computed
-symbolically over $\mathbb Q$, the gcd is taken in $\mathbb Q[\lambda]$, and the conditions
-(\ref{eq:fivea})--(\ref{eq:fiveb}) are re-verified on the original matrices for the realisable
-instances. The classification experiments that suggested Theorem~\ref{thm:factor} and the
+symbolically over $\mathbb Q$, the gcd is taken in $\mathbb Q[\lambda]$, on the compressed data $(H,Z'',T)$; the realisation of the first example as an original
+$(A,C,L_0,L)$ and the check of (\ref{eq:fivea})--(\ref{eq:fiveb}) there are recorded in the research
+repository, not in `verification/fibre.py`. The classification experiments that suggested Theorem~\ref{thm:factor} and the
 counterexample of Example~\ref{ex:thin} are recorded as such; they are not used as evidence for
 any statement in this paper.
 

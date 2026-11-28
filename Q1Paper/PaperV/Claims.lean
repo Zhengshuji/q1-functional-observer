@@ -10,7 +10,7 @@ invalidating this table.
 
 Scope.  Three groups of items:
 
-* **formalised** (twenty-four declarations, audited in `Audit.lean`);
+* **formalised** (twenty-eight declarations, audited in `Audit.lean`);
 * **partial**: the item's mathematical core is formalised, the rest is paper;
 * **paper only**: not formalised, with the reason.
 
