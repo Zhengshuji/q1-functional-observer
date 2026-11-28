@@ -42,6 +42,7 @@ jobs:
           python3 scripts/check_paperV_counts.py
           lake env lean Q1Paper/PaperV/ThinCounterexample.lean
           lake env lean Q1Paper/PaperV/DiagonalComponents.lean
+          lake env lean Q1Paper/PaperV/RhoCounterexample.lean
       - name: Claim and module indexes (Paper I and Paper II)
         run: |
           lake env lean Q1Paper/PaperI/S00_Interface/ClaimsCheck.lean
