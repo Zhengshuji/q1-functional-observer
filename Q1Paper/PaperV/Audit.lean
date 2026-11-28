@@ -36,3 +36,16 @@ exactly the eleven `#check`s of `ClaimsCheck.lean`.
 #print axioms Q1Paper.PaperV.exists_root_of_not_isUnit
 #print axioms Q1Paper.PaperV.isCoprime_iff_no_common_root
 #print axioms Q1Paper.PaperV.gcd_eq_one_iff_no_common_root
+
+-- ColumnDrop.lean (conclusion step)
+#print axioms Q1Paper.PaperV.rank_lt_of_cols_zero
+
+-- Invariant.lean
+#print axioms Q1Paper.PaperV.map_mem_of_le_sup
+#print axioms Q1Paper.PaperV.invariant_iff_compat_of_le
+
+-- CoeffTest.lean
+#print axioms Q1Paper.PaperV.evalRingHom_apply
+#print axioms Q1Paper.PaperV.eval_zero_iff_coeff_eval_zero
+#print axioms Q1Paper.PaperV.forall_eval_zero_iff_forall_coeff
+#print axioms Q1Paper.PaperV.exists_forall_eval_zero_iff_exists_forall_coeff

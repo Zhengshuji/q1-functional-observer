@@ -61,4 +61,11 @@ theorem rank_le_card_compl_of_cols_zero {K : Type*} [Field K]
     _ ≤ Jᶜ.card := by rw [hT]; exact Finset.card_image_le
     _ = Fintype.card n - J.card := Finset.card_compl J
 
+/-- **Proposition 14 (conclusion step).** If the columns in `J` vanish and `k - |J| < d'`, then
+the rank at that `λ` is below `d'`, so `(5b)` fails there for every point of the fibre. -/
+theorem rank_lt_of_cols_zero {K : Type*} [Field K] {q k : ℕ} (P : Matrix (Fin q) (Fin k) K)
+    (J : Finset (Fin k)) (h : ∀ j ∈ J, ∀ i, P i j = 0) {d : ℕ}
+    (hd : Fintype.card (Fin k) - J.card < d) : P.rank < d :=
+  lt_of_le_of_lt (rank_le_card_compl_of_cols_zero P J h) hd
+
 end Q1Paper.PaperV

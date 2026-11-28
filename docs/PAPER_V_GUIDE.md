@@ -1,4 +1,4 @@
-﻿# Paper V 鈥?the free-row fibre: reading guide
+# Paper V 鈥?the free-row fibre: reading guide
 
 Paper V is `paper/paper_V_fibre.tex` (PDF alongside).  This guide says what the paper
 proves, which part of it is machine-checked, and where every claim can be verified.
@@ -38,7 +38,7 @@ compatibility is a genuine constraint.
 | Lemma 2 (specialisation) | `natDegree_map_eval_of_leadingCoeff_const`, `map_dvd_of_dvd` | `Q1Paper/PaperV/Specialize.lean` |
 | Corollary 8 (shape) | `specialized_common_factor` | `Q1Paper/PaperV/Specialize.lean` |
 
-The axiom audit is `Q1Paper/PaperV/Audit.lean` (15 declarations, all on
+The axiom audit is `Q1Paper/PaperV/Audit.lean` (22 declarations, all on
 `propext`, `Classical.choice`, `Quot.sound`); `scripts/check.sh` runs it.  The claims
 table is `Q1Paper/PaperV/Claims.lean` and its machine check is
 `Q1Paper/PaperV/ClaimsCheck.lean` (the same eleven declarations).

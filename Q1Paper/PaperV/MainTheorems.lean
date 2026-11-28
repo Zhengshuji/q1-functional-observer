@@ -3,6 +3,8 @@ import Q1Paper.PaperV.Fibre
 import Q1Paper.PaperV.ColumnDrop
 import Q1Paper.PaperV.LeadingCoeff
 import Q1Paper.PaperV.GcdRoot
+import Q1Paper.PaperV.Invariant
+import Q1Paper.PaperV.CoeffTest
 
 /-!
 Q1Paper/PaperV/MainTheorems.lean

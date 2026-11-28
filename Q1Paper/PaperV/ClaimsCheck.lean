@@ -32,3 +32,16 @@ declarations here are exactly the eleven `#print axioms` lines of `Audit.lean`.
 #check @Q1Paper.PaperV.exists_root_of_not_isUnit
 #check @Q1Paper.PaperV.isCoprime_iff_no_common_root
 #check @Q1Paper.PaperV.gcd_eq_one_iff_no_common_root
+
+-- §IV  Proposition 14, conclusion step
+#check @Q1Paper.PaperV.rank_lt_of_cols_zero
+
+-- §V  Theorem 17, structure step
+#check @Q1Paper.PaperV.map_mem_of_le_sup
+#check @Q1Paper.PaperV.invariant_iff_compat_of_le
+
+-- §IV  Proposition 15 (coefficient test)
+#check @Q1Paper.PaperV.evalRingHom_apply
+#check @Q1Paper.PaperV.eval_zero_iff_coeff_eval_zero
+#check @Q1Paper.PaperV.forall_eval_zero_iff_forall_coeff
+#check @Q1Paper.PaperV.exists_forall_eval_zero_iff_exists_forall_coeff
