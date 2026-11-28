@@ -484,9 +484,33 @@ $j\in J$: at most $k-|J|$ columns are nonzero, so $\operatorname{rank}P(\lambda_
 every point of the fibre, and $(5b)$ fails everywhere.
 \end{proof}
 
-The converse of Proposition~\ref{prop:drop} is false; column dependencies of a more general shape,
-and the bad examples of Section~\ref{sec:examples}, show that the mechanisms are not exhausted by
-columns vanishing.
+The converse of Proposition~\ref{prop:drop} is false, and the reason is worth stating as a second,
+strictly more general mechanism: the obstruction can be a subspace of column relations rather than a
+set of vanishing columns.
+
+\begin{prop}[Column dependence]\label{prop:dependence}
+Let $A\subseteq\mathbb C^{k}$ be a subspace, $\lambda_0\in\mathbb C$, and suppose that for every
+$G'\in\mathcal F_U$
+$$(T\cap U)\,A=0\quad\text{and}\quad\bigl(\lambda_0H-HZ''-G'\bigr)A=0 .$$
+If $\dim A>k-d'$ then $U$ is bad.
+\end{prop}
+
+\begin{proof}
+For every point of the fibre the subspace $A$ lies in the kernel of $P(\lambda_0)$, so
+$\operatorname{rank}P(\lambda_0)\le k-\dim A<d'$ and $(5b)$ fails at $\lambda_0$ everywhere. The
+first condition is what makes the second independent of $G'$: the rows of $G'$ lie in $T$, and the
+part of $G'$ inside $U$ is absorbed by $(T\cap U)A=0$, so $G'A=0$ for all points of the fibre.
+\end{proof}
+
+\begin{remark}[The two mechanisms]\label{rem:two-mechanisms}
+Proposition~\ref{prop:drop} is the case $A=\operatorname{span}\{e_j: j\in J\}$ with
+$J\cap\operatorname{supp}(T)=\varnothing$: then $(T\cap U)A=0$ holds because the relevant columns of
+every element of $T$ vanish. The case $A=\operatorname{span}\{\alpha\}$ with $\alpha$ not a coordinate
+vector is genuinely different: no column vanishes, and the drop is invisible to any column count. The
+instance of Example~\ref{ex:bad} is of this second kind ($\text{column}_1+\text{column}_2=0$ at
+$\lambda_0=-3$). What the two mechanisms share, and what Theorem~\ref{thm:factor} forces when
+$q>d'$, is that the drop point $\lambda_0$ does not move with the fibre parameters.
+\end{remark}
 
 Proposition~\ref{prop:drop} is sufficient but not necessary, and the obstruction has a second shape
 that no column count detects: at a fixed $\lambda_0$ the columns of $P(\lambda_0)$ may satisfy a

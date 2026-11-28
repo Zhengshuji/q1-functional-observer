@@ -61,7 +61,9 @@ unit" for a matrix pencil over `K(t)[λ]`, and the intrinsic form (Theorem 6).
 *Paper only*: Theorem 11 (fixed spectral factor, an incidence-variety dimension count on the open
 set `Mv ≠ 0`), Theorem 12 (the bad set is closed: quantifier elimination over the coefficient
 space of the coefficient test), Theorem 13 (infeasibility ⟺ the stratum is contained in the bad
-set, a logical consequence of Theorem 12), and Proposition 15 (the coefficient test).
+set, a logical consequence of Theorem 12), Proposition 15 (the coefficient test) and
+Proposition 18 (column dependence: a subspace of column relations of dimension greater than `k - d'`
+kills the pencil at a fixed `λ₀`).
 -/
 
 /-! ## §V  Algorithms
