@@ -569,7 +569,9 @@ conjecture that the thin stratum is always bad, and Example~\ref{ex:thin} is suc
 degenerate $Z''$; the open case is $Z''\neq0$ with a genuinely thin stratum.\item \emph{Bit complexity.} Theorem~\ref{thm:criterion} is polynomial for fixed compressed rank in
 the arithmetic model; its bit cost, and that of the coefficient test behind
 Theorem~\ref{thm:closed}, are not accounted for here. The bound of Theorem~\ref{thm:witness} is on
-the witness, not on the running time.
+the witness, not on the running time. What would close it: a degree and height bound for the Bezout
+system solved by the coefficient test (the resultant route of Theorem~\ref{thm:witness} already gives
+$\deg_t D\le2d'^{2}$, so the missing piece is the coefficient height of $D$, not its degree).
 \item \emph{Algebraic witnesses.} Theorem~\ref{thm:witness} assumes $U$ rational. For $t=1$ the
 feasible $U$ are invariant subspaces of $Z''$ and may be algebraic, of degree growing with $n$; then
 the witness may be algebraic as well and its height is not bounded here.
