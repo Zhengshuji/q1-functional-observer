@@ -697,6 +697,41 @@ ambient Grassmannian gives no such guarantee, and on a thin stratum ($d'+t-k<s$)
 measure zero in the ambient space, so the ambient route is unavailable there for that additional reason. The thin stratum is therefore the first place where this particular sampling argument is
 unavailable; whether some other randomised method decides it is open (Section~\ref{sec:open}(A)).
 
+\subsection{Status of the results}\label{sec:status}
+
+For a paper meant to serve as a reference point, the status of every statement is collected here.
+``Proved'' means a complete proof in this paper; ``conditional'' means proved under a hypothesis
+that this paper states but does not establish; ``open'' means not settled here.
+
+\begin{center}
+\footnotesize
+\begin{tabular}{@{}p{0.30\columnwidth}p{0.16\columnwidth}p{0.44\columnwidth}@{}}
+\toprule
+Result & Status & Remark \\
+\midrule
+Thm.~\ref{thm:fibre} (fibre) & proved & affine; dimension $q\,a$ when nonempty \\
+Thm.~\ref{thm:criterion} (criterion) & proved & $d'\ge1$; $\mathcal F_U\ne\varnothing$ \\
+Lemma~\ref{lem:specialize}, Cor.~\ref{cor:every-bad} & proved & specialisation \\
+Thm.~\ref{thm:intrinsic} (intrinsic form) & proved & \\
+Thm.~\ref{thm:witness} (witness) & conditional & $U$ rational \\
+Thm.~\ref{thm:rp} (one-sided test) & proved & soundness; probability given grids \\
+Thm.~\ref{thm:factor} (fixed factor) & proved & $q>d'$, common direction \\
+Prop.~\ref{prop:coeff} (coefficient test) & proved & uniform badness \\
+Cor.~\ref{cor:closed} (closedness) & conditional & on each stratum $a=\mathrm{const}$; global open, (E) \\
+Thm.~\ref{thm:closed} (closed; not thin) & conditional & same stratum restriction \\
+Thm.~\ref{thm:no} (infeasibility) & conditional & $q>d'$ + common direction \\
+Prop.~\ref{prop:drop}, \ref{prop:dependence} & proved & sufficient conditions \\
+Thm.~\ref{thm:regime} (regime) & conditional & $d'+t-k\ge s$, $d'\ge\dim U_0$, $q>d'$; sampling within a stratum \\
+Thm.~\ref{thm:t1} ($t=1$) & conditional & $a\ge1$; invariant subspaces finite \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The three theorems that are not machine-checked in the artifact (13, 12/14 and 15 in the numbering
+above) are exactly the ones whose proofs use the geometry of the Grassmannian rather than linear
+algebra; the algebraic content is kernel-checked, the split being recorded in the artifact's
+documentation.
+
 \section{Open problems}\label{sec:open}
 
 \begin{enumerate}[label=(\Alph*),leftmargin=2.2em,itemsep=2pt]
