@@ -364,7 +364,9 @@ Proposition~\ref{prop:coeff} vanishes. Each $q_{I,m}$ is a polynomial in $(\lamb
 $\mathfrak S$ is the zero set of finitely many polynomials, hence closed; it is a closed subset of the
 \emph{projective} total space $\mathbb P^{1}\times G_\alpha$. The projection
 $\pi\colon\mathbb P^{1}\times G_\alpha\to G_\alpha$ is a closed map, because $\mathbb P^{1}$ is
-compact (equivalently, $\pi$ is proper). Therefore
+compact (equivalently, $\pi$ is proper). No elimination of $\lambda_0$ is performed, so the argument does
+not depend on any non-degeneracy of the coefficients --- in contrast with a criterion based on a
+resultant, whose vanishing can also signal a degree drop. Therefore
 $$\mathcal B\cap G_\alpha=\pi(\mathfrak S)$$
 is closed in $G_\alpha$. By Definition~\ref{def:bad} the set $\mathcal B$ is defined intrinsically, so
 these local descriptions are the traces of one global subset; closedness is a local property and the
@@ -465,10 +467,6 @@ every row of $G'$ lies in $T$. Hence at $\lambda_0$ the columns $P(\lambda_0)_{:
 $j\in J$: at most $k-|J|$ columns are nonzero, so $\operatorname{rank}P(\lambda_0)\le k-|J|<d'$ at
 every point of the fibre, and $(5b)$ fails everywhere.
 \end{proof}
-
-The converse of Proposition~\ref{prop:drop} is false, and the reason is worth stating as a second,
-strictly more general mechanism: the obstruction can be a subspace of column relations rather than a
-set of vanishing columns.
 
 \begin{prop}[Column dependence]\label{prop:dependence}
 Let $A\subseteq\mathbb C^{k}$ be a subspace, $\lambda_0\in\mathbb C$, and suppose that for every
@@ -592,9 +590,11 @@ With $k=3$, $q=3$, $d'=2$, $T=\operatorname{span}\{e_1,e_2\}$,
 Z''=\begin{bmatrix}-2&-2&0\\-2&1&-2\\1&0&-1\end{bmatrix},\qquad
 U=\{y:y_3=y_2\},
 \]
-the fibre is one-dimensional in each row and $\gcd=\lambda+3$: the whole fibre is bad. The
-neighbouring spaces $U_s=\{y:y_3=y_2+s\,y_1\}$, $s\ne0$, are feasible, so the bad set has empty
-interior --- the statement of Theorem~\ref{thm:closed}.
+with $H$ the $3\times3$ matrix whose rows are $e_1^{\mathsf T}$, $(0,1,1)$ and $0$, and $L_0=0$ (so
+$U_0=0$), the fibre is one-dimensional in each row and $\gcd=\lambda+3$: the whole fibre is bad. The
+neighbouring spaces $U_s=\{y:y_3=y_2+s\,y_1\}$ are feasible at $s\in\{-1,1,2,1/2,3\}$ (verified in exact
+arithmetic), so the particular bad point $s=0$ is not an interior point of $\mathcal B$. Whether every
+$s\ne0$ is feasible is not claimed.
 \end{example}
 
 \begin{example}[$d'+t-k<s$ does not by itself forbid feasibility]\label{ex:thin}
@@ -605,7 +605,9 @@ $G'_i=(y_i,0,0)$ the pencil is
 P(\lambda)=\begin{bmatrix}\lambda-y_1&0&0\\ \lambda-y_2&0&0\end{bmatrix},
 \]
 whose $1$-minors have gcd $1$ for $y_1\ne y_2$ (both nonzero entries sit in the first column, and the
-two parameters are independent). Hence the stratum is feasible although $d'+t-k=0<s=1$; sampling
+two parameters are independent). Note that here $Z''=0$, so compatibility is automatic for every $U$:
+the example refutes the heuristic "$d'+t-k<s$ implies infeasibility", but it does \emph{not} instantiate
+the open case of Section~\ref{sec:open}(A), where compatibility is a genuine constraint and $Z''\ne0$. Hence the stratum is feasible although $d'+t-k=0<s=1$; sampling
 heuristics that only compare $d'+t-k$ with $s$ are not sound.
 \end{example}
 
