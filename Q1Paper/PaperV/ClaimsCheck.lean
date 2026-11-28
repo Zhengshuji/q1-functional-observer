@@ -61,3 +61,4 @@ declarations here are exactly the twenty-eight `#print axioms` lines of `Audit.l
 #check @Q1Paper.PaperV.exists_combination_eq_one_of_gcd_eq_one
 #check @Q1Paper.PaperV.ideal_span_eq_top_of_gcd_eq_one
 #check @Q1Paper.PaperV.exists_combination_eq_one
+#check @Q1Paper.PaperV.exists_common_root_of_not_isUnit

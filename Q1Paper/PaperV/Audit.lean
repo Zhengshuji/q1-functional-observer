@@ -65,3 +65,4 @@ exactly the twenty-eight `#check`s of `ClaimsCheck.lean`.
 #print axioms Q1Paper.PaperV.exists_combination_eq_one_of_gcd_eq_one
 #print axioms Q1Paper.PaperV.ideal_span_eq_top_of_gcd_eq_one
 #print axioms Q1Paper.PaperV.exists_combination_eq_one
+#print axioms Q1Paper.PaperV.exists_common_root_of_not_isUnit

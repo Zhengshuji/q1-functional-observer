@@ -122,6 +122,34 @@ theorem gcd_eq_one_iff_no_common_root [IsAlgClosed K] (f g : K[X]) (hf : f ≠ 0
                  dvd_iff_isRoot.mp (hxd.trans (EuclideanDomain.gcd_dvd_right f g))⟩
     exact (Monic.natDegree_eq_zero hmon).mp hdeg
 
+/-- **Theorem 4 (converse shape).** Over an algebraically closed field, a gcd that is not a unit forces a
+common root: this is the step "a generic gcd of positive degree makes the fibre bad", used in the converse
+direction of the criterion. -/
+theorem exists_common_root_of_not_isUnit {K : Type*} [Field K] [IsAlgClosed K]
+    {f g : Polynomial K} (hf : f ≠ 0) (hg : g ≠ 0)
+    (h : ¬ IsUnit (EuclideanDomain.gcd f g)) :
+    ∃ x : K, f.IsRoot x ∧ g.IsRoot x := by
+  have hdvd_left : EuclideanDomain.gcd f g ∣ f := EuclideanDomain.gcd_dvd_left f g
+  have hdvd_right : EuclideanDomain.gcd f g ∣ g := EuclideanDomain.gcd_dvd_right f g
+  have hd0 : EuclideanDomain.gcd f g ≠ 0 := ne_zero_of_dvd_ne_zero hf hdvd_left
+  have hpos : 0 < (EuclideanDomain.gcd f g).natDegree := by
+    rcases Nat.eq_zero_or_pos (EuclideanDomain.gcd f g).natDegree with hzero | hpos
+    · exfalso
+      have hdeg0 : (EuclideanDomain.gcd f g).degree = 0 := by
+        rw [Polynomial.degree_eq_natDegree hd0, hzero]
+        simp
+      exact h (Polynomial.isUnit_iff_degree_eq_zero.mpr hdeg0)
+    · exact hpos
+  have hdeg : (EuclideanDomain.gcd f g).degree ≠ 0 :=
+    ne_of_gt (by rwa [Polynomial.natDegree_pos_iff_degree_pos] at hpos)
+  obtain ⟨x, hx⟩ := IsAlgClosed.exists_root (EuclideanDomain.gcd f g) hdeg
+  refine ⟨x, ?_, ?_⟩
+  · rw [Polynomial.IsRoot.def] at hx ⊢
+    exact Polynomial.eval_eq_zero_of_dvd_of_eval_eq_zero hdvd_left hx
+  · rw [Polynomial.IsRoot.def] at hx ⊢
+    exact Polynomial.eval_eq_zero_of_dvd_of_eval_eq_zero hdvd_right hx
+
+
 end Field
 
 end Q1Paper.PaperV
