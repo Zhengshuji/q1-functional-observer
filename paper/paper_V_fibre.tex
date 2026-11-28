@@ -370,31 +370,38 @@ common boundary.
 \end{cor}
 
 \begin{proof}
-Fix a chart $G_\alpha\cong\mathbb A^{N}$ with coordinates $p$, and let $\mathfrak S\subseteq
-\mathbb P^{1}\times G_\alpha$ be the set of pairs $(\lambda_0:\mu,p)$ at which every $Q_{I,m}$ below
-vanishes \emph{and} the compatibility condition $UZ''\subseteq U+T$ holds. Write
-$q_{I,m}(\lambda_0)=\sum_{e\le d'}a_{I,m,e}(p)\,\lambda_0^{e}$ and homogenise,
-$$Q_{I,m}(\lambda_0:\mu;p)=\sum_{e\le d'}a_{I,m,e}(p)\,\lambda_0^{e}\mu^{d'-e};$$
-each $Q_{I,m}$ is homogeneous of degree $d'$, and compatibility is a polynomial condition in $p$, so
-$\mathfrak S$ is the zero set of finitely many polynomials in the \emph{projective} total space
-$\mathbb P^{1}\times G_\alpha$, hence closed. At the point at infinity ($\mu=0$) the conditions reduce
-to $a_{I,m,d'}(p)=0$ for all $(I,m)$, i.e.\ to the vanishing of every $\lambda^{d'}$-coefficient; those
-coefficients include the minors $\det H_{IJ}$ of the full-rank block $H$, which do not all vanish, so
-$\mathfrak S$ has empty fibre at infinity and its affine part is exactly the set of affine solutions. The projection
-$\pi\colon\mathbb P^{1}\times G_\alpha\to G_\alpha$ is a closed map, because $\mathbb P^{1}$ is
-compact (equivalently, $\pi$ is proper). No elimination of $\lambda_0$ is performed, so the argument does
-not depend on any non-degeneracy of the coefficients --- in contrast with a criterion based on a
-resultant, whose vanishing can also signal a degree drop. Therefore
-$$\mathcal B_{\mathrm{unif}}\cap G_\alpha=\pi(\mathfrak S)$$
-is closed in $G_\alpha$. One point of care: the coefficients $a_{I,m,e}(p)$ come from a parametrisation of the fibre, and the
-dimension $a=\dim(U\cap T)$ can jump inside a chart. On the locally closed stratum where $a$ is constant and
-a fixed minor selecting a complement of $T$ in $U$ does not vanish, the fibre admits a polynomial frame
-and $a_{I,m,e}$ is a polynomial there, so $\mathfrak S$ is closed on that stratum. Passing from
-`closed on every stratum of the stratification by $a$' to `closed on the chart' requires the strata to be
-ordered so that each is open in the union of those above it, which holds when $a$ is constant on the
-chart; we therefore state the conclusion below for a fixed $a$ and record the general case as open. By Definition~\ref{def:bad} the set $\mathcal B_{\mathrm{unif}}$ is defined intrinsically, so
-these local descriptions are the traces of one global subset; closedness is a local property on each stratum, and the standard charts cover $\mathrm{Gr}(d',k)$; hence
-$\mathcal B_{\mathrm{unif}}$ is closed on every stratum of constant $a$, which is the claim.
+Fix $a$ and let $\mathcal S_a=\{U:\dim(U\cap T)=a\}$. The construction is made first on a single
+locally closed piece of $\mathcal S_a$ inside a chart $G_\alpha\cong\mathbb A^{N}$, and only afterwards
+assembled; this order matters, because the fibre's coefficients are polynomials on such a piece and not
+on all of $G_\alpha$.
+
+\emph{Step 1: a polynomial frame.} On the piece of $\mathcal S_a\cap G_\alpha$ where a fixed $a\times a$
+minor of the matrix collecting the rows of $T$ does not vanish, a basis of $T\cap U$ can be chosen
+rationally in $p$ (Cramer's rule), and the fibre $\mathcal F_U$, being a product of cosets of $T\cap U$,
+acquires a polynomial frame. In that frame each $d'$-minor is
+$f_I(\lambda,y)=\sum_e\lambda^{e}\sum_m a_{I,m,e}(p)\,y^{m}$ with $a_{I,m,e}$ a \emph{polynomial} in $p$.
+Finitely many such pieces cover $\mathcal S_a\cap G_\alpha$.
+
+\emph{Step 2: homogenise and project.} On one piece let $\mathfrak S$ be the set of
+$(\lambda_0:\mu,p)$ at which every $Q_{I,m}=\sum_{e\le d'}a_{I,m,e}(p)\,\lambda_0^{e}\mu^{d'-e}$
+vanishes and compatibility $UZ''\subseteq U+T$ holds. Each $Q_{I,m}$ is homogeneous of degree $d'$ and
+compatibility is polynomial in $p$, so $\mathfrak S$ is closed in $\mathbb P^{1}\times G_\alpha$. At
+$\mu=0$ the conditions reduce to $a_{I,m,d'}(p)=0$ for all $(I,m)$, i.e.\ to the vanishing of every
+$\lambda^{d'}$-coefficient; those coefficients include the minors $\det H_{IJ}$, not all of which
+vanish, so the fibre at infinity is empty. The projection $\pi$ is closed ($\mathbb P^1$ is proper), so
+$\mathcal B_{\mathrm{unif}}\cap(\text{piece})=\pi(\mathfrak S)$ is closed in the piece.
+
+\emph{Step 3: assemble.} A finite union of closed subsets of the pieces is closed in
+$\mathcal S_a\cap G_\alpha$; the charts cover $\mathrm{Gr}(d',k)$; and $\mathcal B_{\mathrm{unif}}$ is
+defined intrinsically, so the local descriptions are traces of one set. Hence
+$\mathcal B_{\mathrm{unif}}$ is closed in $\mathcal S_a$.
+
+\emph{What is not done.} Nothing here passes from `closed in each $\mathcal S_a$' to `closed in
+$\mathrm{Gr}(d',k)$': the strata are only locally closed and the jump locus of $a$ is their common
+boundary, so a finite union of closed-in-stratum sets need not be closed in the chart. That passage is
+left open (Section~\ref{sec:open}(E)). Also note that no elimination of $\lambda_0$ is performed, so the
+argument does not depend on any non-degeneracy of the coefficients --- in contrast with a criterion based
+on a resultant, whose vanishing can also signal a degree drop.
 \end{proof}
 
 \begin{thm}[Fixed spectral factor]\label{thm:factor}
