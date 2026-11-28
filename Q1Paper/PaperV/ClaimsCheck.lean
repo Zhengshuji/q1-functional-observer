@@ -69,3 +69,8 @@ declarations here are exactly the thirty-nine `#print axioms` lines of `Audit.le
 #check @Q1Paper.PaperV.le_rank_of_det_submatrix_ne_zero
 #check @Q1Paper.PaperV.le_rank_map_of_isUnit_gcd_minor
 #check @Q1Paper.PaperV.not_isUnit_gcd_of_forall_eval_eq_zero
+
+-- UnionZeros.lean (Theorem 13 covering step)
+#check @Q1Paper.PaperV.eq_zero_of_forall_eval_eq_zero
+#check @Q1Paper.PaperV.exists_forall_eval_ne_zero
+#check @Q1Paper.PaperV.exists_eq_zero_of_forall_exists_eval_eq_zero
