@@ -21,7 +21,8 @@ The paper proves three things about that question:
    coefficient survives every specialisation (Lemma 2).
 3. **Failure of the whole fibre is a fixed spectral factor** when `q > d'`
    (Theorem 11): the common divisor does not depend on the fibre parameters.  Hence the
-   bad set is closed (Theorem 12), the feasible set is relatively open, and infeasibility
+   bad set is closed on each stratum of constant a (Theorem 12; closedness on the whole
+Grassmannian is open, see VI(E)), the feasible set is relatively open there, and infeasibility
    is exactly the containment of the compatibility stratum in the bad set (Theorem 13).
 
 Section V turns this into procedures: a one-sided randomised decision procedure on the
