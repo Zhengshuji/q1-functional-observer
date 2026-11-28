@@ -8,14 +8,14 @@ breaks this build instead of silently invalidating the claims table.  The thirty
 declarations here are exactly the thirty-nine `#print axioms` lines of `Audit.lean`.
 -/
 
--- §II  The fibre (Theorem 1)
+-- §II  The fibre (Theorem 2)
 #check @Q1Paper.PaperV.fibre
 #check @Q1Paper.PaperV.mem_fibre
 #check @Q1Paper.PaperV.fibre_nonempty_iff
 #check @Q1Paper.PaperV.fibre_eq_coset
 #check @Q1Paper.PaperV.fibre_prod_nonempty_iff
 
--- §III  Lemma 2 and its corollary
+-- §III  Lemma 5 and its corollary (Corollary 10)
 #check @Q1Paper.PaperV.natDegree_map_eval_of_leadingCoeff_const
 #check @Q1Paper.PaperV.map_dvd_of_dvd
 #check @Q1Paper.PaperV.specialized_common_factor
@@ -24,7 +24,7 @@ declarations here are exactly the thirty-nine `#print axioms` lines of `Audit.le
 #check @Q1Paper.PaperV.coeff_det_smul_sub_X
 #check @Q1Paper.PaperV.coeff_det_smul_sub_X_ne_zero
 
--- §IV  Proposition 14, rank step
+-- §IV  Proposition 16 (column drop), rank step
 #check @Q1Paper.PaperV.rank_le_card_compl_of_cols_zero
 
 -- §III  gcd is a unit ⟺ no common root (Theorem 4's algebraic core)
@@ -33,25 +33,25 @@ declarations here are exactly the thirty-nine `#print axioms` lines of `Audit.le
 #check @Q1Paper.PaperV.isCoprime_iff_no_common_root
 #check @Q1Paper.PaperV.gcd_eq_one_iff_no_common_root
 
--- §IV  Proposition 14, conclusion step
+-- §IV  Proposition 16 (column drop), conclusion step
 #check @Q1Paper.PaperV.rank_lt_of_cols_zero
 #check @Q1Paper.PaperV.column_zero_of_mem
 
--- §V  Theorem 17, structure step
+-- §V  Theorem 22, structure step
 #check @Q1Paper.PaperV.map_mem_of_le_sup
 #check @Q1Paper.PaperV.invariant_iff_compat_of_le
 
--- §IV  Proposition 15 (coefficient test)
+-- §IV  Proposition 11 (coefficient test)
 #check @Q1Paper.PaperV.evalRingHom_apply
 #check @Q1Paper.PaperV.eval_zero_iff_coeff_eval_zero
 #check @Q1Paper.PaperV.forall_eval_zero_iff_forall_coeff
 #check @Q1Paper.PaperV.exists_forall_eval_zero_iff_exists_forall_coeff
 
--- §IV  Proposition 18 (column dependence, rank kernel)
+-- §IV  Proposition 17 (column dependence, rank kernel)
 #check @Q1Paper.PaperV.rank_lt_of_le_ker
 #check @Q1Paper.PaperV.matrix_rank_lt_of_le_ker
 
--- §II  Theorem 1, product dimension
+-- §II  Theorem 2, product dimension
 #check @Q1Paper.PaperV.mem_pi_const
 #check @Q1Paper.PaperV.finrank_pi_const
 #check @Q1Paper.PaperV.finrank_iInf_comap_proj
