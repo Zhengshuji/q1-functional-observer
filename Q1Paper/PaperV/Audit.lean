@@ -78,3 +78,7 @@ exactly the thirty-nine `#check`s of `ClaimsCheck.lean`.
 #print axioms Q1Paper.PaperV.eq_zero_of_forall_eval_eq_zero
 #print axioms Q1Paper.PaperV.exists_forall_eval_ne_zero
 #print axioms Q1Paper.PaperV.exists_eq_zero_of_forall_exists_eval_eq_zero
+
+-- Fibre.lean / FibreDim.lean (Theorem 2, assembled)
+#print axioms Q1Paper.PaperV.fibre_prod_coset
+#print axioms Q1Paper.PaperV.fibre_dir_finrank

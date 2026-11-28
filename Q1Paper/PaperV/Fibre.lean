@@ -88,4 +88,28 @@ theorem fibre_prod_nonempty_iff {q : ℕ} (T U : Submodule K E) (y : Fin q → E
     (∀ i, (fibre T U (y i)).Nonempty) ↔ ∀ i, y i ∈ U ⊔ T :=
   forall_congr' fun i => fibre_nonempty_iff T U (y i)
 
+/-- **Theorem 2 (assembled coset form).** When every row's translate lies in `U + T` --- the paper's
+`U Z'' ⊆ U + T` read row by row --- the product of the row fibres is a coset of `(T ⊓ U)^q`:
+there is a point `g` of the product such that a tuple `x` lies in the product exactly when
+`x - g` lies in `(T ⊓ U)^q` row by row. -/
+theorem fibre_prod_coset {q : ℕ} (T U : Submodule K E) (y : Fin q → E)
+    (hy : ∀ i, y i ∈ U ⊔ T) :
+    ∃ g : Fin q → E, (∀ i, g i ∈ fibre T U (y i)) ∧
+      ∀ x : Fin q → E, (∀ i, x i ∈ fibre T U (y i)) ↔ ∀ i, x i - g i ∈ T ⊓ U := by
+  choose g hg using fun i => (fibre_nonempty_iff T U (y i)).mpr (hy i)
+  refine ⟨g, hg, fun x => ?_⟩
+  constructor
+  · intro hx i
+    have h := fibre_eq_coset T U (y i) (hg i)
+    have hxi := hx i
+    rw [h] at hxi
+    obtain ⟨z, hz, hxz⟩ := hxi
+    rw [hxz]
+    simpa using hz
+  · intro hx i
+    have h := fibre_eq_coset T U (y i) (hg i)
+    rw [h]
+    exact ⟨x i - g i, hx i, by abel⟩
+
+
 end Q1Paper.PaperV

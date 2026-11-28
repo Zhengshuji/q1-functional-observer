@@ -74,3 +74,7 @@ declarations here are exactly the thirty-nine `#print axioms` lines of `Audit.le
 #check @Q1Paper.PaperV.eq_zero_of_forall_eval_eq_zero
 #check @Q1Paper.PaperV.exists_forall_eval_ne_zero
 #check @Q1Paper.PaperV.exists_eq_zero_of_forall_exists_eval_eq_zero
+
+-- Fibre.lean / FibreDim.lean (Theorem 2, assembled)
+#check @Q1Paper.PaperV.fibre_prod_coset
+#check @Q1Paper.PaperV.fibre_dir_finrank

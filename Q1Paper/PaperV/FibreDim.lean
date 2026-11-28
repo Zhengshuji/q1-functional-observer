@@ -53,4 +53,12 @@ theorem finrank_iInf_comap_proj [FiniteDimensional K E] (S : Submodule K E) (q :
   rw [Submodule.iInf_comap_proj]
   exact finrank_pi_const S q
 
+/-- **Theorem 2 (dimension).** The direction of the fibre is `(T ⊓ U)^q`, whose dimension is
+`q` times `dim (T ⊓ U)`: this is the paper's `dim F_U = q a`. -/
+theorem fibre_dir_finrank {q : ℕ} (T U : Submodule K E) [FiniteDimensional K E] :
+    Module.finrank K ↥(Submodule.pi Set.univ (fun _ : Fin q => T ⊓ U))
+      = q * Module.finrank K ↥(T ⊓ U) := by
+  simpa using Q1Paper.PaperV.finrank_pi_const (S := T ⊓ U) (q := q)
+
+
 end Q1Paper.PaperV
