@@ -389,11 +389,10 @@ $\mathcal C=\{U\supseteq U_0:\ \mathcal F_U\ne\varnothing\}$, which is itself cl
 \end{thm}
 
 \begin{proof}
-Badness is the vanishing of the coefficient polynomials $q_{I,m}$ of
-Proposition~\ref{prop:coeff} read as functions of the Plücker coordinates: the gcd of a bounded-degree
-family of univariate polynomials is one exactly when a certain Bezout system has a solution, which is
-an open condition on the coefficients; its complement is closed. Closedness of $\mathcal C$ is
-bilinearity of $UZ''\subseteq U+T$. $\mathcal B$ need not be thin: when $q=d'$ the whole stratum is
+By Proposition~\ref{prop:algebraic} (chart by chart), badness is the vanishing of finitely many
+polynomials in the chart coordinates; hence $\mathcal B$ is closed, and by
+Corollary~\ref{cor:closed} it is closed globally. Closedness of $\mathcal C$ is bilinearity of
+$UZ''\subseteq U+T$. $\mathcal B$ need not be thin: when $q=d'$ the whole stratum is
 bad (\cite{paperI}, the square-pencil argument), while Example~\ref{ex:bad} shows that it can also be
 a proper closed set with feasible points arbitrarily close.
 \end{proof}
@@ -409,6 +408,36 @@ A fixed $\lambda_0$ kills every minor at every point of the fibre exactly when e
 $f_I(\lambda_0,\cdot)$ vanishes as a polynomial in $y$, which is the same as
 $q_{I,m}(\lambda_0)=0$ for all $I,m$. So a common root exists exactly when some $\lambda_0$ makes the
 fibre bad at every point.
+\end{proof}
+
+\begin{prop}[Badness is a finite algebraic condition]\label{prop:algebraic}
+Fix $d'$ and a chart of $\mathrm{Gr}(d',k)$, and let $p$ be the Plücker coordinates of $U$ in that
+chart. Then there are finitely many polynomials $r_1,\dots,r_N\in\mathbb C[p]$ such that
+$$U\ \text{is bad}\iff r_1(p)=\dots=r_N(p)=0 .$$
+\end{prop}
+
+\begin{proof}
+By Proposition~\ref{prop:coeff}, $U$ is bad iff the family
+$\{q_{I,m}(\lambda;p)\}_{I,m}$ has a common root, the polynomials being read in $\lambda$ with
+coefficients that are polynomials in $p$; their degrees are bounded by $d'$. For a family of
+univariate polynomials of degree at most $d'$, having a common root is equivalent to its gcd having
+positive degree, and that in turn is equivalent to the vanishing of the whole subresultant chain:
+the subresultants $S_0,\dots,S_{d'}$ are polynomials in the coefficients of the family, obtained as
+determinants of Sylvester-type matrices, and $\deg\gcd\ge1$ holds exactly when
+$S_0=\dots=S_{d'}=0$. Composing with the polynomial dependence of the coefficients on $p$ gives the
+polynomials $r_j$.
+\end{proof}
+
+\begin{cor}\label{cor:closed}
+The bad set $\mathcal B$ is closed in $\mathrm{Gr}(d',k)$.
+\end{cor}
+
+\begin{proof}
+Cover $\mathrm{Gr}(d',k)$ by its standard charts, and use the notation of
+Proposition~\ref{prop:algebraic} in each of them. There, $\mathcal B$ is the zero set of the finitely
+many polynomials $r_j$, hence closed in the chart; on overlaps the chart coordinates are related by
+invertible linear changes, so the local pieces patch into a closed subset of $\mathrm{Gr}(d',k)$.
+(When the family vanishes identically, every $p$ in the chart is bad, which is also closed.)
 \end{proof}
 
 \begin{thm}[Infeasibility]\label{thm:no}
