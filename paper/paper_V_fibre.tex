@@ -763,7 +763,8 @@ question is an ideal-membership question for a closed set, and the coefficient t
 Proposition~\ref{prop:coeff} decides it point by point; what is missing is a way to test containment
 without enumerating the stratum. A single compatible $U$ that is feasible would refute the
 conjecture that the thin stratum is always bad, and Example~\ref{ex:thin} is such a $U$ for a
-degenerate $Z''$; the open case is $Z''\neq0$ with a genuinely thin stratum.\item \emph{Bit complexity.} Theorem~\ref{thm:criterion} is polynomial for fixed compressed rank in
+degenerate $Z''$; the open case is $Z''\neq0$ with a genuinely thin stratum.
+\item \emph{Bit complexity.} Theorem~\ref{thm:criterion} is polynomial for fixed compressed rank in
 the arithmetic model; its bit cost, and that of the coefficient test behind
 Theorem~\ref{thm:closed}, are not accounted for here. The bound of Theorem~\ref{thm:witness} is on
 the witness, not on the running time. What would close it: a degree and height bound for the Bezout
@@ -776,6 +777,16 @@ on the degree of the invariant subspaces carrying a feasible fibre --- note that
 is rational and that the rational case is the one the algorithm of Section~\ref{sec:algorithms}
 produces, so this is a question about \emph{which} feasible $U$ the search may have to accept, not
 about the criterion.
+\item \emph{Hardness.} No reduction is given in either direction. Since on the region
+$d'+t-k\ge s$ feasibility is \emph{accepted} one-sidedly (Theorem~\ref{thm:regime}), a hardness proof
+could target the thin stratum (A); conversely a polynomial algorithm would have to decide containment
+there. Neither direction is forced by what is proved here. Both directions are open, and neither is
+claimed. What is known: on $d'+t-k\ge s$ feasibility is accepted one-sidedly inside a stratum
+(Theorem~\ref{thm:regime}), and for each stratum infeasibility is the containment $\mathcal C_a\subseteq
+\mathcal B_a$ (Theorem~\ref{thm:no}); what is missing is either a polynomial test of that containment or a
+reduction that encodes an NP-hard problem into it. A proof either way would settle the complexity of the
+problem this paper analyses; a single stratum where the containment can be tested in polynomial time, or a
+single reduction, would be the decisive step.
 \item \emph{Global closedness of the bad set.} Corollary~\ref{cor:closed} establishes closedness on each
 stratum of constant $a=\dim(U\cap T)$, and Theorem~\ref{thm:no} and the regime statement are stated
 accordingly. Closedness on the whole of $\mathrm{Gr}(d',k)$ would follow from either of two routes we do
@@ -784,10 +795,6 @@ coordinate-free description --- ``$f_I(\lambda_0,\cdot)$ vanishes on the fibre''
 $\operatorname{row}\bigl(f_I(\lambda_0,\cdot)\bigr)\subseteq\operatorname{row}(\Lambda(p))$, where
 $\Lambda(p)$ is a polynomial matrix describing the fibre direction --- which would make the condition
 polynomial in $p$ without choosing a frame.
-\item \emph{Hardness.} No reduction is given in either direction. Since on the region
-$d'+t-k\ge s$ feasibility is \emph{accepted} one-sidedly (Theorem~\ref{thm:regime}), a hardness proof
-could target the thin stratum (A); conversely a polynomial algorithm would have to decide containment
-there. Neither direction is forced by what is proved here. Both directions are open, and neither is claimed.
 \end{enumerate}
 
 \subsection{Reproducibility and evidence}\label{sec:repro}
