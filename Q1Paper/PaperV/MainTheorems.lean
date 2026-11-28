@@ -37,13 +37,13 @@ kind this repository formalises.
   degree divisor with constant leading coefficient stays positive after specialising.
   Lemma 5 is the only non-trivial step of the criterion of Theorem 4.
 
-* **Paper only, with a recorded reason.**  Theorem 4's gcd criterion is a statement
-  about gcds in `K(t)[λ]` for a *matrix* pencil, whose formalisation needs multivariate
-  polynomial gcds and matrix minors simultaneously; Theorem 13 (fixed spectral factor)
+* **Paper only, with a recorded reason.**  Theorem 13 (fixed spectral factor)
   uses the dimension of an incidence variety; Corollary 12 and Theorem 14 (the bad set is
   closed on each stratum) use quantifier elimination over the coefficient space, and the
-  global statement is false (Example 27).  These are recorded as paper proofs
-  in the artifact's evidence table, not as Lean kernels.
+  global statement is false (Example 27); Theorem 6 (intrinsic form) is paper-side.  These
+  are recorded as paper proofs in the artifact's evidence table, not as Lean kernels.
+  Theorem 4 itself is complete in matrix form: sufficiency in `Criterion.lean`, necessity in
+  `CriterionNecessity.lean` (`rank_lt_of_gcd_pos`).
 
 * **Certified exactly, not formalised.**  The examples of §V are decided by exact
   rational arithmetic in `verification/` (minors symbolically, gcd in `ℂ(t)[λ]`, and the
