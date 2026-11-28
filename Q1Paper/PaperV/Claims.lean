@@ -10,7 +10,8 @@ invalidating this table.
 
 Scope.  Three groups of items:
 
-* **formalised** (twenty-eight declarations, audited in `Audit.lean`);
+* **formalised** (thirty-nine declarations, audited in `Audit.lean`; the gcd criterion of
+  Theorem 4 is formalised in its sufficiency direction, its algebraic core in both directions);
 * **partial**: the item's mathematical core is formalised, the rest is paper;
 * **paper only**: not formalised, with the reason.
 

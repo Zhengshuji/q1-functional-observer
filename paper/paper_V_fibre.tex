@@ -601,9 +601,12 @@ stratum} is feasible with positive probability, provided the sampling distributi
 nonempty relatively open subset of $\mathcal S_r$. Such a distribution exists explicitly, but it has to be built in the right parameter space: the objects
 sampled are the $d'$-dimensional $U$ that \emph{contain} $U_0$, and these are the points of
 $\mathrm{Gr}(d'-u,k-u)$ with $u=\dim U_0$ (the map $U\mapsto U/U_0$). Take a Plücker chart of that
-Grassmannian, defined over $\mathbb Q$; inside it $\dim(U\cap T)\ge r$ is a determinantal (hence
-Zariski-closed) condition and holds on a nonempty subset, so $\mathcal S_r$ meets the chart in a nonempty
-Zariski-open subset of the chart. A nonempty Zariski-open subset of $\mathbb A^{N}$ defined over
+Grassmannian, defined over $\mathbb Q$; inside it every condition $\dim(U\cap T)\ge j$ is determinantal, hence Zariski-closed, and these
+conditions are nested. For $U\supseteq U_0$ one always has $\dim(U\cap T)\ge\max\{s,\,d'+t-k\}=r$
+with $s=\dim(U_0\cap T)$, because $U_0\subseteq U$ contributes $s$ and $\dim U+\dim T-k$ is the generic
+value; equality is attained, so the condition $\dim(U\cap T)>r$, i.e.\ $\dim(U\cap T)\ge r+1$, is a
+\emph{proper} closed subset of the chart. Hence $\mathcal S_r$ meets the chart in a nonempty Zariski-open
+subset of it. A nonempty Zariski-open subset of $\mathbb A^{N}$ defined over
 $\mathbb Q$ has dense rational points — this is the rational-density statement used, and it is why the
 argument is tied to the Plücker chart of $\mathrm{Gr}(d'-u,k-u)$ rather than to a general variety or to
 $\mathrm{Gr}(d',k)$ itself. Enumerating those rational points and giving the $k$-th
