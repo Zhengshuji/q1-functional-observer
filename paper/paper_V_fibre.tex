@@ -736,6 +736,14 @@ family $(f,g_c)$ whose resultant is the polynomial $D$ of Theorem~\ref{thm:rp}; 
 $\deg\gcd(f,g_c)\ge1\iff\operatorname{Res}_\lambda(f,g_c)=0$ is the classical root criterion for two
 polynomials of positive degree \cite[Ch.~6]{vzgg13}.
 
+Two degenerate cases have to be separated before the lemma applies, and both are recorded in the proof
+of Proposition~\ref{prop:algebraic}: if every $q_{I,m}$ vanishes identically the chart is bad and
+$r_1=0$; if some member is a nonzero constant the family has no common root and $r_1=1$. Otherwise the
+family contains a nonzero member $f$, and the members that vanish identically are simply deleted ---
+they impose no condition --- after which Lemma~\ref{lem:generic-combo} applies to the remaining
+nonzero members. The root criterion is stated for two polynomials of positive degree; if the retained
+$f$ has degree zero it is a nonzero constant and the second case above already applies.
+
 \subsection{Charts and closedness}\label{app:charts}
 
 The standard charts of $\mathrm{Gr}(d',k)$ are the sets $G_\alpha$ of subspaces whose Plücker
@@ -744,6 +752,15 @@ charts are rational maps in the Plücker coordinates, and the only property the 
 Corollary~\ref{cor:closed} uses is that the charts are an open cover on which the same intrinsic set
 $\mathcal B$ is described. Closedness of $\mathcal B$ is then local: a subset is closed iff its
 intersection with every member of an open cover is closed in that member.
+
+Two points deserve emphasis, because they are exactly where a careless reading goes wrong.
+First, intrinsicness of $\mathcal B$ is what makes the local descriptions describe \emph{one} set; it
+does not by itself produce the polynomials. The polynomials come from
+Proposition~\ref{prop:algebraic}, chart by chart, and that proposition is where the resultant
+elimination of Appendix~\ref{app:root} is used. Second, the degenerate cases of that elimination
+(vanishing members, a vanishing family, constants) are handled there; in particular a family with an
+identically vanishing member does not make the elimination vacuous, because vanishing members are
+deleted before the generic combination is formed.
 
 \begin{thebibliography}{99}
 \bibitem{fer10} J. A. Fernando, H. Trinh, L. Jennings. Functional observability and the design of minimum order linear functional observers. \emph{IEEE Trans. Automat. Control} 55(5):1268--1273, 2010.
