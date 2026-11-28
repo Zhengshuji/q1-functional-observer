@@ -479,11 +479,18 @@ of $D$ --- a dense open set --- the normalised polynomial $G(Y,\cdot)/D(Y)$ is m
 each of its roots lies in $A$ by the previous paragraph, so it divides $\varphi$. A monic polynomial of
 degree $k$ that divides a fixed polynomial has only finitely many possibilities; hence $G(Y,\cdot)$
 takes finitely many values on a dense open set, so its coefficients are constant there, i.e.\ $g\in\mathbb
-C[\lambda]$. Finally $k\ge1$: if $k=0$ then $g=1$ over $F$, and Lemma~\ref{lem:specialize} would make the specialised
-gcd equal to $1$ at every point of the fibre, contradicting badness. So $g$ has a root
-$\lambda_0\in\mathbb C$; by
-construction $\lambda_0$ kills every minor at every point of the fibre, which is the uniform badness
-claimed.
+C[\lambda]$.
+
+It remains to produce a single parameter-free root, and here irreducibility does the work. For
+$\alpha\in A$ let
+$$E_\alpha=\{Y\in\mathbb C^{qa}:\ \text{every }d'\text{-minor of }P(Y,\cdot)\text{ vanishes at }
+\alpha\}.$$
+Each $E_\alpha$ is closed, and by the previous paragraph the dense open set $\{Y\notin Z\}$ is contained
+in $\bigcup_{\alpha\in A}E_\alpha$. The parameter space $\mathbb C^{qa}$ is irreducible and $A$ is finite,
+so some $E_{\alpha_0}$ has nonempty interior; being closed, it is all of $\mathbb C^{qa}$. Hence every
+$d'$-minor vanishes \emph{identically} at $\alpha_0$, i.e.\ $\lambda-\alpha_0$ divides $g$ in
+$F[\lambda]$, and $\alpha_0$ kills every minor at every point of the fibre. Together with $g\in\mathbb
+C[\lambda]$ this is the uniform badness claimed, and it shows $k\ge1$.
 \end{proof}
 
 \begin{thm}[Closed; not necessarily thin]\label{thm:closed}
