@@ -59,3 +59,4 @@ exactly the twenty-eight `#check`s of `ClaimsCheck.lean`.
 #print axioms Q1Paper.PaperV.mem_pi_const
 #print axioms Q1Paper.PaperV.finrank_pi_const
 #print axioms Q1Paper.PaperV.finrank_iInf_comap_proj
+#print axioms Q1Paper.PaperV.le_of_finrank_eq_one

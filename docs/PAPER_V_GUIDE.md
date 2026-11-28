@@ -39,10 +39,10 @@ compatibility is a genuine constraint.
 | Lemma 2 (specialisation) | `natDegree_map_eval_of_leadingCoeff_const`, `map_dvd_of_dvd` | `Q1Paper/PaperV/Specialize.lean` |
 | Corollary 8 (shape) | `specialized_common_factor` | `Q1Paper/PaperV/Specialize.lean` |
 
-The axiom audit is `Q1Paper/PaperV/Audit.lean` (28 declarations, all on
+The axiom audit is `Q1Paper/PaperV/Audit.lean` (29 declarations, all on
 `propext`, `Classical.choice`, `Quot.sound`); `scripts/check.sh` runs it.  The claims
 table is `Q1Paper/PaperV/Claims.lean` and its machine check is
-`Q1Paper/PaperV/ClaimsCheck.lean` (the same twenty-eight declarations).
+`Q1Paper/PaperV/ClaimsCheck.lean` (the same twenty-nine declarations).
 
 ## What is *not* machine-checked, and why
 
@@ -76,7 +76,7 @@ CI.
 4. 搂V (examples) 鈥?run `python verification/fibre.py`.
 
 
-## Coverage at a glance (28 kernel-checked declarations)
+## Coverage at a glance (29 kernel-checked declarations)
 
 | Paper item | Lean declarations | Module |
 |---|---|---|

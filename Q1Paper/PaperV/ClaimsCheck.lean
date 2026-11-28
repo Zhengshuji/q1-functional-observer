@@ -55,3 +55,4 @@ declarations here are exactly the twenty-eight `#print axioms` lines of `Audit.l
 #check @Q1Paper.PaperV.mem_pi_const
 #check @Q1Paper.PaperV.finrank_pi_const
 #check @Q1Paper.PaperV.finrank_iInf_comap_proj
+#check @Q1Paper.PaperV.le_of_finrank_eq_one
