@@ -1,46 +1,51 @@
-# Paper V — dependency table (hypotheses and uses)
+# Paper V — dependency table (paper numbering)
 
-Purpose: the third review asked for a check that every theorem's hypotheses are established
-before it is used, and that every use of a theorem still satisfies its hypotheses. This table
-is that check. It is a *meta* document; the paper itself does not contain it.
+Purpose: a check that every theorem's hypotheses are established before it is used, and that
+every use of a theorem still satisfies its hypotheses. This is a meta document; the paper does
+not contain it.
 
-Read "hypothesis source" as: where the hypothesis is either proved or explicitly assumed.
+**Numbering.** All theorem-like environments share one counter, so the actual numbers are:
+pair = 1, fibre = 2, criterion = 4, specialisation = 5, intrinsic = 6, witness = 7, one-sided
+test = 8, bad/uniformly bad (definition) = 9, cone = 10, coefficient test = 11, uniformly bad
+closed = 12, fixed spectral factor = 13, closed; not necessarily thin = 14, infeasibility = 15,
+column drop = 16, column dependence = 17, regime = 19, $t=1$ = 22, generic combination (appendix)
+= 26.
 
-| Item | Hypotheses | Hypothesis source | Used by |
+| Item | Hypotheses | Where they come from | Used by |
 |---|---|---|---|
-| Lemma 1 (pair) | none | — | Thm 2, Thm 4, Def 9 |
-| Thm 2 (fibre) | $H$, $Z''$, $T$ given | §II definitions | Thm 4 (parametrisation), Prop 14, Prop 15, Prop 18, Thm 17 |
-| Thm 4 (criterion) | $d'\ge1$; $\mathcal F_U\ne\varnothing$ | assumption; compatibility | Thm 17 |
-| Lemma 5 (specialisation) | none | — | Cor 10, Thm 11 |
-| Thm 6 (intrinsic) | none | — | §III discussion, §VI evidence |
-| Thm 7 (witness) | $U$ rational; $\mathcal F_U\ne\varnothing$; $\deg g=0$ | assumption; Thm 4 | Thm 8, Thm 16 |
-| Thm 8 (one-sided test) | $\mathcal F_U\ne\varnothing$ | assumption | Thm 16 |
-| Def 9 (bad / uniformly bad) | $\mathcal F_U\ne\varnothing$ | definition | Cor 10, Prop 15, Cor 17, Thm 11, Thm 12, Thm 13 |
-| Cor 10 | $\deg g\ge1$ | Thm 4 negation | Thm 11 |
-| Prop 15 (coefficient test) | $\mathcal F_U\ne\varnothing$ | assumption | Cor 17 |
-| Cor 17 (uniformly bad set closed) | none beyond §II | — | Thm 12, Thm 13 |
-| Thm 11 (fixed spectral factor) | $\mathcal F_U\ne\varnothing$; $q>d'$; common fibre direction | assumption; Thm 2 (direction) | Thm 12 (identifies $\mathcal B$ with $\mathcal B_{\mathrm{unif}}$), Thm 13 |
-| Thm 12 (closed; not thin) | $q>d'$ + common direction (through Thm 11) | Cor 17 + Thm 11 | Thm 13, Thm 16 |
-| Thm 13 (infeasibility) | $d'$ fixed; $\mathcal C$ the compatibility stratum | §II | §V discussion |
-| Prop 14 (column drop) | column identity on $J$; $J\cap\operatorname{supp}(T)=\varnothing$ | assumption | Remark on mechanisms |
-| Prop 18 (column dependence) | subspace $A$, $\dim A>k-d'$, the two identities | assumption | Remark on mechanisms |
-| Thm 16 (regime) | $d'+t-k\ge s$; $d'\ge\dim U_0$ | assumption | §V discussion |
-| Thm 17 ($t=1$) | $t=1$; $d'\ge1$; $a\ge1$ (hypothesis) | assumption (the rank barrier is not proved here) | §V discussion |
+| 1 pair | none | — | 2, 4, 9 |
+| 2 fibre | $H$, $Z''$, $T$ | §II | 4, 11, 16, 17, 22 |
+| 4 criterion | $d'\ge1$; $\mathcal F_U\ne\varnothing$ | assumption; compatibility | 22 |
+| 5 specialisation | none | — | 10, 13 |
+| 6 intrinsic form | none | — | §III discussion |
+| 7 witness | $U$ rational; $\mathcal F_U\ne\varnothing$; $\deg g=0$ | assumption; 4 | 19 |
+| 8 one-sided test | $\mathcal F_U\ne\varnothing$ | assumption | 19 |
+| 9 bad / uniformly bad | $\mathcal F_U\ne\varnothing$ | definition | 10, 11, 12, 13, 14, 15 |
+| 10 cone | $\deg g\ge1$ | 4 (contrapositive) | used inside 4's converse, not by 13 |
+| 11 coefficient test | $\mathcal F_U\ne\varnothing$ | assumption | 12 |
+| 12 uniformly bad closed | none beyond §II | stratification by $a$, homogenisation, properness | 14 |
+| 13 fixed spectral factor | $\mathcal F_U\ne\varnothing$; $q>d'$; common fibre direction | assumption; 2 (direction automatic) | 14 (identifies $\mathcal B$ with $\mathcal B_{\mathrm{unif}}$) |
+| 14 closed; not necessarily thin | $q>d'$ + common direction | 12 + 13 | 19 |
+| 15 infeasibility | $d'$ fixed; $\mathcal C$ the compatibility stratum | §II | §V discussion |
+| 16 column drop | column identity on $J$; $J\cap\operatorname{supp}(T)=\varnothing$ | assumption | the mechanisms remark |
+| 17 column dependence | subspace $A$, $\dim A>k-d'$, two identities | assumption | the mechanisms remark |
+| 19 regime | $d'+t-k\ge s$; $d'\ge\dim U_0$; **$q>d'$** (for the density sentence, via 14) | assumption | §V discussion |
+| 22 $t=1$ | $t=1$; $d'\ge1$; $a\ge1$ (hypothesis) | assumption (rank barrier not proved here) | §V discussion |
+| 26 generic combination | none | appendix | 13, 8 |
 
-## The chain that the third review asked about
+## The chain that closes the closure argument
 
-$$\text{Thm 11 (pointwise}\Rightarrow\text{uniform)}\ \Longrightarrow\
-\mathcal B=\mathcal B_{\mathrm{unif}}\ \Longrightarrow\
-\mathcal C\setminus\mathcal B=\{\text{feasible}\}\ \Longrightarrow\ \text{Thm 12, Thm 13, Thm 16}.$$
+$$\underbrace{\mathcal B_{\mathrm{unif}}\ \text{closed}}_{12}\ +\ \underbrace{\mathcal B=\mathcal B_{\mathrm{unif}}}_{13}
+\ \Longrightarrow\ \mathcal B\ \text{closed}\ \Longrightarrow\
+\underbrace{\{\text{feasible}\}=\mathcal C\setminus\mathcal B}_{9,\ \text{by definition}}\ \Longrightarrow\ 14,\ 19.$$
 
-Each arrow is now a named step: the first is Theorem 11, the second is the definition of
-$\mathcal B_{\mathrm{unif}}$ plus Theorem 11, the third is Theorem 13, and the openness used in
-Theorem 16 comes from Theorem 12.
+The last identification is **definitional**: 9 says a $U\in\mathcal C$ is bad when every point of its
+fibre fails, so its negation is exactly the existence of a feasible point. It is *not* a theorem, and
+the earlier version of this table wrongly attributed it to 15.
 
-## Residual assumptions that are *not* proved in the paper
+## Residual hypotheses that the paper does not prove
 
-1. $a\ge1$ in Theorem 17 (the rank barrier of the companion development; stated as a hypothesis);
-2. $U$ rational in Theorem 7 (otherwise only algebraic witnesses are available);
-3. the finiteness of the invariant subspaces in Theorem 17 (stated as a hypothesis).
-
-Each is flagged at its point of use, and none is used silently.
+1. $a\ge1$ in item 22 (the rank barrier of the companion development; stated as a hypothesis);
+2. $U$ rational in item 7 (otherwise only algebraic witnesses are available);
+3. finiteness of the invariant subspaces in item 22 (stated as a hypothesis);
+4. $q>d'$ wherever uniformity is used (stated at each use: 13, 14, 19).
