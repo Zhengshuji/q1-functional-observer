@@ -332,6 +332,64 @@ common factor at every $t_0$.
 The next theorem is the structural statement this paper is built around: the failure cannot be
 parameter-dependent once $q>d'$, because the fibre direction is common to all rows.
 
+\begin{prop}[Coefficient test]\label{prop:coeff}
+Write each nonzero $d'$-minor as $f_I(\lambda,y)=\sum_e\lambda^{e}\sum_m a_{I,e,m}y^{m}$ and put
+$q_{I,m}(\lambda)=\sum_e a_{I,e,m}\lambda^{e}\in\mathbb C[\lambda]$. Then the fibre is entirely bad
+if and only if the family $\{q_{I,m}\}_{I,m}$ has a common root.
+\end{prop}
+
+\begin{proof}
+A fixed $\lambda_0$ kills every minor at every point of the fibre exactly when each
+$f_I(\lambda_0,\cdot)$ vanishes as a polynomial in $y$, which is the same as
+$q_{I,m}(\lambda_0)=0$ for all $I,m$. So a common root exists exactly when some $\lambda_0$ makes the
+fibre bad at every point.
+\end{proof}
+
+\begin{prop}[Badness is a finite algebraic condition]\label{prop:algebraic}
+Fix $d'$ and a chart of $\mathrm{Gr}(d',k)$, and let $p$ be the Plücker coordinates of $U$ in that
+chart. Then there are finitely many polynomials $r_1,\dots,r_N\in\mathbb C[p]$ such that
+$$U\ \text{is bad}\iff r_1(p)=\dots=r_N(p)=0 .$$
+\end{prop}
+
+\begin{proof}
+By Proposition~\ref{prop:coeff}, $U$ is bad iff the family
+$\{q_{I,m}(\lambda;p)\}_{I,m}$ has a common root, the polynomials being read in $\lambda$ with
+coefficients that are polynomials in $p$. Reduce the family to two members as follows: pick a member
+$f\neq0$ of the family and put $g_c=\sum_j c_j f_j$ over the remaining members. For all $c$ in a
+nonempty Zariski-open set of coefficient vectors, $\gcd(f,g_c)$ equals the gcd of the whole family
+(any common factor of $f$ and of every $g_c$ divides every $f_j$). Hence, for such a $c$,
+\begin{equation}\label{eq:rootcrit}
+\begin{aligned}
+&\text{the family has a common root}\\
+&\iff \deg_\lambda\gcd(f,g_c)\ge1\\
+&\iff \operatorname{Res}_\lambda(f,g_c)=0,
+\end{aligned}
+\end{equation}
+the second equivalence being the standard root criterion for two polynomials of degree at least
+one. Now $\operatorname{Res}_\lambda(f,g_c)$, as a polynomial in $(\lambda,c,p)$, is a polynomial in
+$c$ whose coefficients are polynomials in the coefficients of the family, hence polynomials in $p$;
+the condition "$\operatorname{Res}\equiv0$ as a polynomial in $c$" is therefore the vanishing of the
+finitely many coefficient polynomials $r_j(p)$, and by the choice of $c$ it is independent of which
+$c$ in the open set is used. Degenerate cases: if every $q_{I,m}$ vanishes identically then every
+$\lambda$ is a common root and every $p$ is bad, so $r_1=0$ describes the whole chart; if the family
+contains a nonzero constant, then it has no common root and the set is empty, described by $r_1=1$.
+\end{proof}
+
+\begin{cor}\label{cor:closed}
+The bad set $\mathcal B$ is closed in $\mathrm{Gr}(d',k)$.
+\end{cor}
+
+\begin{proof}
+Cover $\mathrm{Gr}(d',k)$ by its standard charts and take one chart $G_\alpha$; by
+Proposition~\ref{prop:algebraic}, $\mathcal B\cap G_\alpha$ is the zero set of finitely many
+polynomials in the chart coordinates, hence closed \emph{in} $G_\alpha$. The set $\mathcal B$ itself is
+defined intrinsically --- $U$ is bad when a fixed $\lambda_0$ kills every minor on the whole fibre ---
+so these local descriptions define one and the same subset of the Grassmannian, not different local
+candidates; that is where the argument uses intrinsicness rather than any property of the chart
+transitions (which are rational, not linear). Closedness is a local property, the charts form an open
+cover, and therefore $\mathcal B$ is closed in $\mathrm{Gr}(d',k)$.
+\end{proof}
+
 \begin{thm}[Fixed spectral factor]\label{thm:factor}
 Let $U$ be such that $\mathcal F_U\ne\varnothing$, $q>d'$, and let $V^{+}$ be a left inverse of a
 full-row-rank factorisation $H=XV$. Write $B_0=HZ''V^{+}$ and suppose the fibre direction is common
@@ -395,64 +453,6 @@ Corollary~\ref{cor:closed} it is closed globally. Closedness of $\mathcal C$ is 
 $UZ''\subseteq U+T$. $\mathcal B$ need not be thin: when $q=d'$ the whole stratum is
 bad (\cite{paperI}, the square-pencil argument), while Example~\ref{ex:bad} shows that it can also be
 a proper closed set with feasible points arbitrarily close.
-\end{proof}
-
-\begin{prop}[Coefficient test]\label{prop:coeff}
-Write each nonzero $d'$-minor as $f_I(\lambda,y)=\sum_e\lambda^{e}\sum_m a_{I,e,m}y^{m}$ and put
-$q_{I,m}(\lambda)=\sum_e a_{I,e,m}\lambda^{e}\in\mathbb C[\lambda]$. Then the fibre is entirely bad
-if and only if the family $\{q_{I,m}\}_{I,m}$ has a common root.
-\end{prop}
-
-\begin{proof}
-A fixed $\lambda_0$ kills every minor at every point of the fibre exactly when each
-$f_I(\lambda_0,\cdot)$ vanishes as a polynomial in $y$, which is the same as
-$q_{I,m}(\lambda_0)=0$ for all $I,m$. So a common root exists exactly when some $\lambda_0$ makes the
-fibre bad at every point.
-\end{proof}
-
-\begin{prop}[Badness is a finite algebraic condition]\label{prop:algebraic}
-Fix $d'$ and a chart of $\mathrm{Gr}(d',k)$, and let $p$ be the Plücker coordinates of $U$ in that
-chart. Then there are finitely many polynomials $r_1,\dots,r_N\in\mathbb C[p]$ such that
-$$U\ \text{is bad}\iff r_1(p)=\dots=r_N(p)=0 .$$
-\end{prop}
-
-\begin{proof}
-By Proposition~\ref{prop:coeff}, $U$ is bad iff the family
-$\{q_{I,m}(\lambda;p)\}_{I,m}$ has a common root, the polynomials being read in $\lambda$ with
-coefficients that are polynomials in $p$. Reduce the family to two members as follows: pick a member
-$f\neq0$ of the family and put $g_c=\sum_j c_j f_j$ over the remaining members. For all $c$ in a
-nonempty Zariski-open set of coefficient vectors, $\gcd(f,g_c)$ equals the gcd of the whole family
-(any common factor of $f$ and of every $g_c$ divides every $f_j$). Hence, for such a $c$,
-\begin{equation}\label{eq:rootcrit}
-\begin{aligned}
-&\text{the family has a common root}\\
-&\iff \deg_\lambda\gcd(f,g_c)\ge1\\
-&\iff \operatorname{Res}_\lambda(f,g_c)=0,
-\end{aligned}
-\end{equation}
-the second equivalence being the standard root criterion for two polynomials of degree at least
-one. Now $\operatorname{Res}_\lambda(f,g_c)$, as a polynomial in $(\lambda,c,p)$, is a polynomial in
-$c$ whose coefficients are polynomials in the coefficients of the family, hence polynomials in $p$;
-the condition "$\operatorname{Res}\equiv0$ as a polynomial in $c$" is therefore the vanishing of the
-finitely many coefficient polynomials $r_j(p)$, and by the choice of $c$ it is independent of which
-$c$ in the open set is used. Degenerate cases: if every $q_{I,m}$ vanishes identically then every
-$\lambda$ is a common root and every $p$ is bad, so $r_1=0$ describes the whole chart; if the family
-contains a nonzero constant, then it has no common root and the set is empty, described by $r_1=1$.
-\end{proof}
-
-\begin{cor}\label{cor:closed}
-The bad set $\mathcal B$ is closed in $\mathrm{Gr}(d',k)$.
-\end{cor}
-
-\begin{proof}
-Cover $\mathrm{Gr}(d',k)$ by its standard charts and take one chart $G_\alpha$; by
-Proposition~\ref{prop:algebraic}, $\mathcal B\cap G_\alpha$ is the zero set of finitely many
-polynomials in the chart coordinates, hence closed \emph{in} $G_\alpha$. The set $\mathcal B$ itself is
-defined intrinsically --- $U$ is bad when a fixed $\lambda_0$ kills every minor on the whole fibre ---
-so these local descriptions define one and the same subset of the Grassmannian, not different local
-candidates; that is where the argument uses intrinsicness rather than any property of the chart
-transitions (which are rational, not linear). Closedness is a local property, the charts form an open
-cover, and therefore $\mathcal B$ is closed in $\mathrm{Gr}(d',k)$.
 \end{proof}
 
 \begin{thm}[Infeasibility]\label{thm:no}
