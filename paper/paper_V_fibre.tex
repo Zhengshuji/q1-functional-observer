@@ -416,9 +416,9 @@ on a resultant, whose vanishing can also signal a degree drop.
 \end{proof}
 
 \begin{thm}[Fixed spectral factor]\label{thm:factor}
-Let $U$ be such that $\mathcal F_U\ne\varnothing$, $q>d'$, and let $H=XV$ be a full-row-rank factorisation and $V^{+}$ a right inverse of $V$. Write $B_0:=H_AV^{+}$ and suppose the fibre direction is common
-to all rows, i.e.\ $H_AV^{+}=B_0+Y'M$ with $Y'\in\mathbb C^{q\times a}$, $M\in\mathbb C^{a\times d'}$
-(as it is for \eqref{eq:fibre}). If every point of the fibre fails $(5b)$ (i.e.\ $U$ is bad in the sense of Definition~\ref{def:bad}),
+Let $U$ be such that $\mathcal F_U\ne\varnothing$, $q>d'$, and let $H=XV$ be a full-row-rank factorisation and $V^{+}$ a right inverse of $V$. Suppose the fibre direction is common to all rows: writing $Y\in\mathbb C^{q\times a}$ for the fibre
+parameters, the matrix $H_AV^{+}$ is affine in them, $H_AV^{+}=B_0+YM$ with $B_0$ its value at $Y=0$ and
+$M\in\mathbb C^{a\times d'}$ the matrix of directions (as it is for \eqref{eq:fibre}). If every point of the fibre fails $(5b)$ (i.e.\ $U$ is bad in the sense of Definition~\ref{def:bad}),
 then $U$ is uniformly bad and $g\in\mathbb C[\lambda]$: the common divisor does not depend on the fibre
 parameters.
 \end{thm}
@@ -435,12 +435,7 @@ the incidence variety
 &\subseteq\mathbb C^{qa}\times\mathbb A^{1}\times\mathbb P^{d'-1}.
 \end{aligned}
 \end{equation}
-Two elementary facts are used, and one standard principle is invoked: the closure of the image of a
-constructible set under a morphism has dimension at most that of the source, and a proper closed subset of
-$\mathbb C^{qa}$ has a dense open complement. The set $A$ below is finite: choose rows $I$ with $\det X_I\ne0$; then
-$\det(\alpha X_I-(B_0)_I)$ has leading coefficient $\det X_I\ne0$ and degree $d'$, and
-$\operatorname{rank}(\alpha X-B_0)<d'$ forces this determinant to vanish, so $A$ lies in the zero set of
-a nonzero polynomial of degree $d'$. Two elementary facts are used. \emph{(i) Fibre dimension.} For fixed $(\alpha,[v])$ with $Mv\ne0$
+\emph{(i) Fibre dimension.} For fixed $(\alpha,[v])$ with $Mv\ne0$
 the solutions $Y$ of (\ref{eq:incidence}) form an affine subspace of $\mathbb C^{qa}$ of dimension
 exactly $qa-q$: the system reads $Y_i\,(Mv)=((\alpha X-B_0)_i)v$ for $i=1,\dots,q$, and since
 $Mv\neq0$ each equation is a nontrivial linear condition on the $a$ coordinates of its own row $Y_i$,
@@ -453,7 +448,9 @@ dimension $qa-q$, and the base has dimension $1+(d'-1)=d'$; hence
 \begin{equation}\label{eq:dimI}
 \dim\mathcal I^{\circ}\le qa-q+d'<qa .
 \end{equation}
-The set $Z:=\overline{\pi(\mathcal I^{\circ})}$, with $\pi:\mathcal I\to\mathbb C^{qa}$ the projection, is a
+For the next step we use the standard fact that the closure of the image of a constructible set under a
+morphism has dimension at most that of the source. The set
+$Z:=\overline{\pi(\mathcal I^{\circ})}$, with $\pi:\mathcal I\to\mathbb C^{qa}$ the projection, is a
 proper closed subset of $\mathbb C^{qa}$: it is closed by definition, and $\dim Z\le\dim\mathcal
 I^{\circ}<qa$. The closure has to be taken here --- $\pi$ is \emph{not} proper on the open part
 $\mathcal I^{\circ}$, so $\pi(\mathcal I^{\circ})$ itself need not be closed, only its closure is. So for
@@ -465,7 +462,10 @@ It remains to pass from the dense open set $\{Y\notin Z\}$ to the whole fibre. T
 hypothesis, so for \emph{every} $Y$ there is a common root, and by the previous paragraph every common
 root of a point outside $Z$ comes from the finite parameter-free set
 $$A=\{\alpha\in\mathbb C:\ \operatorname{rank}(\alpha X-B_0)<d'\}.$$
-That set is nonempty, since a point of the fibre outside $Z$ has a common root. Put
+It is finite: choosing rows $I$ with $\det X_I\ne0$, the polynomial $\det(\alpha X_I-(B_0)_I)$ has leading
+coefficient $\det X_I\ne0$ and degree $d'$, and $\operatorname{rank}(\alpha X-B_0)<d'$ forces it to vanish,
+so $A$ lies in the zero set of a nonzero polynomial of degree $d'$. It is nonempty, since a point of the
+fibre outside $Z$ has a common root. Put
 $\varphi=\prod_{\alpha\in A}(\lambda-\alpha)^{d'}$, so that $\deg\varphi\le d'|A|$ and every common
 root of a point outside $Z$ is a root of $\varphi$. Let $g$ be the gcd over $F$ of the minors, of degree
 $k=\deg g\le d'$, and let $G=Dg\in\mathbb C[Y][\lambda]$ be a primitive representative, $D\ne0$ being its
@@ -476,7 +476,9 @@ of $D$ --- a dense open set --- the normalised polynomial $G(Y,\cdot)/D(Y)$ is m
 each of its roots lies in $A$ by the previous paragraph, so it divides $\varphi$. A monic polynomial of
 degree $k$ that divides a fixed polynomial has only finitely many possibilities; hence $G(Y,\cdot)$
 takes finitely many values on a dense open set, so its coefficients are constant there, i.e.\ $g\in\mathbb
-C[\lambda]$. Finally $k\ge1$, because the fibre is bad, so $g$ has a root $\lambda_0\in\mathbb C$; by
+C[\lambda]$. Finally $k\ge1$: if $k=0$ then $g=1$ over $F$, and Lemma~\ref{lem:specialize} would make the specialised
+gcd equal to $1$ at every point of the fibre, contradicting badness. So $g$ has a root
+$\lambda_0\in\mathbb C$; by
 construction $\lambda_0$ kills every minor at every point of the fibre, which is the uniform badness
 claimed.
 \end{proof}
