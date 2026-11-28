@@ -425,9 +425,12 @@ parameters.
 
 \begin{proof}
 Work in the reduced pencil $P(Y,\lambda)=\lambda X-B_0-YM$ with $X\in\mathbb C^{q\times d'}$ of full
-column rank. The two pencils are related by $\lambda H-H_A=(\lambda X-B_0)V$, and by Cauchy--Binet every
-$d'$-minor of $\lambda H-H_A$ is a linear combination of the $d'$-minors of $\lambda X-B_0$ (and conversely,
-$V$ being of full row rank), so the two families generate the same ideal and have the same gcd. Consider
+column rank. The two pencils are related by $\lambda H-H_A=(\lambda X-B_0)V$ with $V$ of size $d'\times k$. Cauchy--Binet
+then gives, for a $d'$-minor on rows $I$ and columns $J$,
+$$\det\bigl[(\lambda H-H_A)_{I,J}\bigr]=\det\bigl[(\lambda X-B_0)_{I}\bigr]\cdot\det\bigl[V_{J}\bigr],$$
+a constant multiple of the corresponding minor of $\lambda X-B_0$; since $V$ has full row rank some of the
+scalars $\det[V_{J}]$ are nonzero, so the two families generate the same ideal in $F[\lambda]$ and have the
+same gcd. Consider
 the incidence variety
 \begin{equation}\label{eq:incidence}
 \begin{aligned}
