@@ -40,6 +40,7 @@ jobs:
           lake env lean Q1Paper/PaperV/Audit.lean > paperV_audit.log
           python3 scripts/check_paperI_axioms.py paperV_audit.log Q1Paper/PaperV/Audit.lean
           python3 scripts/check_paperV_counts.py
+          lake env lean Q1Paper/PaperV/ThinCounterexample.lean
       - name: Claim and module indexes (Paper I and Paper II)
         run: |
           lake env lean Q1Paper/PaperI/S00_Interface/ClaimsCheck.lean
