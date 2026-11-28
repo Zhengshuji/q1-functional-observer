@@ -52,7 +52,8 @@ consists of bad points. The failure test reduces to checking whether a
 certain resultant vanishes identically, which gives a one-sided (randomised) test of a single fibre; on
 an explicit parameter region --- when compatibility is automatic --- the outer existence question
 inherits the one-sided acceptance, and no exterior probability bound is claimed. We also record what the criterion does \emph{not} settle: the thin stratum where
-compatibility is a genuine constraint remains open, and no hardness result is claimed.
+compatibility is a genuine constraint can nevertheless be feasible --- a thin stratum is not
+automatically bad --- although deciding containment there remains open, and no hardness result is claimed.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -723,9 +724,29 @@ P(\lambda)=\begin{bmatrix}\lambda-y_1&0&0\\ \lambda-y_2&0&0\end{bmatrix},
 \]
 whose $1$-minors have gcd $1$ for $y_1\ne y_2$ (both nonzero entries sit in the first column, and the
 two parameters are independent). Note that here $Z''=0$, so compatibility is automatic for every $U$:
-the example refutes the heuristic "$d'+t-k<s$ implies infeasibility", but it does \emph{not} instantiate
-the open case of Section~\ref{sec:open}(A), where compatibility is a genuine constraint and $Z''\ne0$. Hence the stratum is feasible although $d'+t-k=0<s=1$; sampling
-heuristics that only compare $d'+t-k$ with $s$ are not sound.
+the example refutes the heuristic "$d'+t-k<s$ implies infeasibility"; here compatibility is automatic
+($Z''=0$), and Example~\ref{ex:thin-nonzero} below covers the case where it is a genuine constraint.
+\end{example}
+
+\begin{example}[A thin stratum with $Z''\ne0$ that is feasible]\label{ex:thin-nonzero}
+Take $k=4$, $q=3$, $d'=2$, $t=2$, $T=\operatorname{span}\{e_1,e_2\}$, $Z''=e_1e_3^{\top}$, and
+$$H=\begin{pmatrix}e_1^{\top}\\ (e_2+e_3)^{\top}\\ (e_1+e_2+e_3)^{\top}\end{pmatrix},$$
+$$U=\operatorname{row}H=\operatorname{span}\{e_1,\,e_2+e_3\},\qquad U_0=\operatorname{span}\{e_1\}.$$
+Then $a=\dim(U\cap T)=1$ and $s=\dim(U_0\cap T)=1$, so $d'+t-k=0<s$: the stratum is thin.
+Compatibility is \emph{not} automatic here, since $\dim(U+T)=3<4$, but it does hold:
+$UZ''=\mathbb Ce_3\subseteq U+T$. The fibre rows are $F_1=\{ye_1+e_2\}$, $F_2=\{ye_1\}$,
+$F_3=\{ye_1+e_2\}$. At the integer fibre point $(y_1,y_2,y_3)=(1,2,5)$ the nonzero $2$-minors of
+$\lambda H-HZ''-G'$ include $\lambda^2-\lambda-2$ and $\lambda^2-\lambda-4$, whose difference is the
+nonzero constant $2$; two polynomials differing by a nonzero constant are coprime, so the gcd of the
+family is $1$ and $U$ is feasible. Thus a genuinely constrained thin stratum with $Z''\ne0$ can contain
+feasible points.
+
+The compressed data is realised by a system of order $n=8$. Put $K_0=\ker[C;CA]$ with
+$$C=\begin{pmatrix}0&0&0&0&1&0&0&0\\0&0&0&0&0&1&0&0\end{pmatrix},\quad
+A=\begin{pmatrix}Z''&0\\ R&B\end{pmatrix},$$
+where $R$ carries $e_1,e_2$ in rows $7,8$ and $B$ carries $e_7,e_8$ in rows $5,6$. Then
+$\ker[C;CA]=\operatorname{col}[I_4;0]$, $P_1AN=Z''$ and $\operatorname{row}(P_2AN)=T$ for the
+decomposition of \eqref{eq:decomp}, while $H=LN$ for $L=[\,H\mid 0\,]$ and $\operatorname{rank}[L;C]=4$.
 \end{example}
 
 \subsection{Interface with the companion papers}\label{sec:interface}
@@ -814,16 +835,23 @@ documentation.
 \section{Open problems}\label{sec:open}
 
 \begin{enumerate}[label=(\Alph*),leftmargin=2.2em,itemsep=2pt]
-\item \emph{The thin stratum.} When $d'+t-k<s$ and compatibility is a genuine constraint,
-$\mathcal C$ is a proper subvariety and the sampling argument of Theorem~\ref{thm:regime} does not
-apply. Deciding $\mathcal C\subseteq\mathcal B$ there --- equivalently deciding the existence
-question --- is open. Example~\ref{ex:thin} shows that feasibility is possible in that region, so the
-question is not vacuous. What is known: the stratum is closed (Theorem~\ref{thm:closed}), so the
-question is an ideal-membership question for a closed set, and the coefficient test of
-Proposition~\ref{prop:coeff} decides it point by point; what is missing is a way to test containment
-without enumerating the stratum. A single compatible $U$ that is feasible would refute the
-conjecture that the thin stratum is always bad, and Example~\ref{ex:thin} is such a $U$ for a
-degenerate $Z''$; the open case is $Z''\neq0$ with a genuinely thin stratum.
+\item \emph{The thin stratum.} When $d'+t-k<s$ and compatibility is a genuine constraint, the
+compatibility locus $\mathcal C_a$ is a proper subvariety of the fixed-$(a)$ stratum and the sampling
+argument of Theorem~\ref{thm:regime} does not apply. Deciding $\mathcal C_a\subseteq\mathcal B_a$
+there --- equivalently, whether a feasible $U$ exists in that constrained stratum --- is open in
+general.
+
+\emph{What is settled here.} Thin strata are \emph{not} automatically bad, even with $Z''\ne0$ and a
+genuinely restrictive compatibility constraint: Example~\ref{ex:thin-nonzero} exhibits a compatible $U$
+in such a stratum whose fibre is feasible, and Example~\ref{ex:thin} shows the degenerate case. So the
+conjecture that every constrained thin stratum is infeasible is false, and a search that only compares
+$d'+t-k$ with $s$ is unsound.
+
+\emph{What remains open.} A uniform procedure that decides whether $\mathcal C_a\setminus\mathcal
+B_a$ is empty, or produces a feasible point when it is not, without enumerating the compatible
+subspaces. The pointwise coefficient test of Proposition~\ref{prop:coeff} and the relative closedness
+of Theorem~\ref{thm:closed} decide the question point by point but not by containment, and no
+complexity bound is claimed.
 \item \emph{Bit complexity.} Theorem~\ref{thm:criterion} is polynomial for fixed compressed rank in
 the arithmetic model; its bit cost, and that of the coefficient test behind
 Theorem~\ref{thm:closed}, are not accounted for here. The bound of Theorem~\ref{thm:witness} is on
@@ -839,8 +867,9 @@ produces, so this is a question about \emph{which} feasible $U$ the search may h
 about the criterion.
 \item \emph{Hardness.} No reduction is given in either direction. Since on the region
 $d'+t-k\ge s$ feasibility is \emph{accepted} one-sidedly (Theorem~\ref{thm:regime}), a hardness proof
-could target the thin stratum (A); conversely a polynomial algorithm would have to decide containment
-there. Neither direction is forced by what is proved here. Both directions are open, and neither is
+could target the thin stratum (A) --- which, by Example~\ref{ex:thin-nonzero}, is not uniformly
+infeasible, so a reduction cannot proceed by declaring the stratum bad; conversely a polynomial
+algorithm would have to decide containment there. Neither direction is forced by what is proved here. Both directions are open, and neither is
 claimed. What is known: on $d'+t-k\ge s$ feasibility is accepted one-sidedly inside a stratum
 (Theorem~\ref{thm:regime}), and for each stratum infeasibility is the containment $\mathcal C_a\subseteq
 \mathcal B_a$ (Theorem~\ref{thm:no}); what is missing is either a polynomial test of that containment or a
