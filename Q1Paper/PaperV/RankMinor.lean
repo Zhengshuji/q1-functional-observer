@@ -77,4 +77,20 @@ theorem exists_submatrix_det_ne_zero_of_le_rank {K : Type*} [Field K] {q k d : �
   exact Matrix.nonsingular_iff_det_ne_zero.mp
     (Matrix.Nonsingular.of_linearIndependent_col hind')
 
+/-- The converse: a nonzero `d × d` minor forces rank at least `d`. Together with
+`exists_submatrix_det_ne_zero_of_le_rank` this gives "rank ≥ d ↔ some `d`-minor is nonzero",
+which is what lets the gcd criterion of Theorem 4 be read pointwise. -/
+theorem le_rank_of_det_submatrix_ne_zero {K : Type*} [Field K] {q k d : ℕ}
+    (M : Matrix (Fin q) (Fin k) K) (e : Fin d → Fin q) (f : Fin d → Fin k)
+    (h : (M.submatrix e f).det ≠ 0) : d ≤ M.rank := by
+  have hunit : IsUnit (M.submatrix e f) := by
+    rw [Matrix.isUnit_iff_isUnit_det]
+    exact isUnit_iff_ne_zero.mpr h
+  have hrank : (M.submatrix e f).rank = d := by
+    simpa using Matrix.rank_of_isUnit (M.submatrix e f) hunit
+  have hle : (M.submatrix e f).rank ≤ M.rank := Matrix.rank_submatrix_le M e f
+  rw [hrank] at hle
+  exact hle
+
+
 end Q1Paper.PaperV
