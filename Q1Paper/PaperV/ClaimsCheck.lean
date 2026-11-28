@@ -67,3 +67,4 @@ declarations here are exactly the twenty-eight `#print axioms` lines of `Audit.l
 #check @Q1Paper.PaperV.exists_eval_ne_zero_of_isUnit_gcd
 #check @Q1Paper.PaperV.exists_submatrix_det_ne_zero_of_le_rank
 #check @Q1Paper.PaperV.le_rank_of_det_submatrix_ne_zero
+#check @Q1Paper.PaperV.le_rank_map_of_isUnit_gcd_minor

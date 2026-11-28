@@ -11,6 +11,7 @@ import Q1Paper.PaperV.UnitIdeal
 import Q1Paper.PaperV.FamilyGcd
 import Q1Paper.PaperV.MinorEval
 import Q1Paper.PaperV.RankMinor
+import Q1Paper.PaperV.Criterion
 
 /-!
 Q1Paper/PaperV/MainTheorems.lean

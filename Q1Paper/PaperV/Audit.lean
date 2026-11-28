@@ -71,3 +71,4 @@ exactly the twenty-eight `#check`s of `ClaimsCheck.lean`.
 #print axioms Q1Paper.PaperV.exists_eval_ne_zero_of_isUnit_gcd
 #print axioms Q1Paper.PaperV.exists_submatrix_det_ne_zero_of_le_rank
 #print axioms Q1Paper.PaperV.le_rank_of_det_submatrix_ne_zero
+#print axioms Q1Paper.PaperV.le_rank_map_of_isUnit_gcd_minor
