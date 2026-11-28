@@ -5,7 +5,7 @@ Q1Paper/PaperV/ClaimsCheck.lean
 
 Machine-checked index: one `#check` per formalised item of `Claims.lean`.  A rename
 breaks this build instead of silently invalidating the claims table.  The thirty-nine
-declarations here are exactly the thirty-nine `#print axioms` lines of `Audit.lean`.
+declarations here are exactly the fifty `#print axioms` lines of `Audit.lean`.
 -/
 
 -- §II  The fibre (Theorem 2)
