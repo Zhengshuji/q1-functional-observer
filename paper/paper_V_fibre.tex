@@ -430,6 +430,15 @@ The converse of Proposition~\ref{prop:drop} is false; column dependencies of a m
 and the bad examples of Section~\ref{sec:examples}, show that the mechanisms are not exhausted by
 columns vanishing.
 
+Proposition~\ref{prop:drop} is sufficient but not necessary, and the obstruction has a second shape
+that no column count detects: at a fixed $\lambda_0$ the columns of $P(\lambda_0)$ may satisfy a
+nontrivial linear relation without any of them vanishing. In the instance of Example~\ref{ex:bad} the
+relation is $\text{column}_1+\text{column}_2=0$ together with $\text{column}_3=0$ at
+$\lambda_0=-3$, so $\operatorname{rank}P(\lambda_0)\le1<d'=2$ although no more than one column is
+eaten by $HZ''$. What the two mechanisms share is that the drop point is a fixed $\lambda_0$: by
+Theorem~\ref{thm:factor} this is forced when $q>d'$, and the shared feature is exactly what makes the
+coefficient test of Proposition~\ref{prop:coeff} a test of the whole fibre rather than of one point.
+
 \section{Algorithms and examples}\label{sec:algorithms}
 
 \begin{thm}[Region with automatic compatibility]\label{thm:regime}
