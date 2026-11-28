@@ -552,8 +552,10 @@ reports a bad stratum as feasible.
 Under the hypothesis a generic $U$ satisfies $\dim(U+T)=k$, so compatibility $UZ''\subseteq U+T$ is
 automatic and $\mathcal C$ contains a dense open subset of $\mathrm{Gr}(d',k)$. On the stratum where $a$ is constant, Theorem~\ref{thm:closed} gives that the feasible set is relatively
 open and, when nonempty, dense in the component that meets it, so a $U$ drawn at random \emph{from that
-stratum} is feasible with positive probability; sampling the ambient Grassmannian gives no such guarantee
-(Remark~\ref{rem:no-outer-bound}); by Theorem~\ref{thm:witness} a
+stratum} is feasible with positive probability, provided the sampling distribution is absolutely continuous
+with respect to Lebesgue measure in a chart of the stratum (a nonempty Zariski-open subset of an
+irreducible variety has full measure for such a distribution); sampling the ambient Grassmannian gives no
+such guarantee (Remark~\ref{rem:no-outer-bound}); by Theorem~\ref{thm:witness} a
 feasible point is certified by a witness, which Theorem~\ref{thm:rp} finds with the stated
 probability. If the stratum is entirely bad no witness exists and the procedure never accepts.
 \end{proof}
@@ -688,10 +690,11 @@ Grassmannian. Consequently Theorem~\ref{thm:regime} is a statement about soundne
 outer bound would need an explicit rational chart, a degree bound for the complement of the feasible
 set there, and a specified sampling distribution --- three ingredients we do not have.
 
-This asymmetry is not an artefact of the proof: when the compatibility stratum is thin
-($d'+t-k<s$), sampling the ambient Grassmannian gives no guarantee of meeting the feasible set at all,
-because the density used in Theorem~\ref{thm:regime} is density in $\mathrm{Gr}(d',k)$, which is not
-available on a thin stratum. The thin stratum is therefore the precise place where a randomised
+This asymmetry is not an artefact of the proof, and it is not specific to thin strata: the density used in
+Theorem~\ref{thm:regime} is Zariski density \emph{within a fixed stratum}, so the argument yields positive
+probability only for distributions supported on that stratum and absolutely continuous there. Sampling the
+ambient Grassmannian gives no such guarantee, and on a thin stratum ($d'+t-k<s$) the stratum itself has
+measure zero in the ambient space, so the ambient route is unavailable there for that additional reason. The thin stratum is therefore the precise place where a randomised
 algorithm of this shape must fail, and it is the first item of Section~\ref{sec:open}.
 
 \section{Open problems}\label{sec:open}
