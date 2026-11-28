@@ -36,8 +36,8 @@ observer of order $q$ exists exactly when some matrix $L=[L_0;R]$ satisfies an a
 spectral rank condition. Whether such an $R$ exists is a quantifier alternation: one asks for a
 subspace of observer row space for which a certain family of matrices has constant rank. This paper
 studies that family directly. Fixing the compressed row space $U$ of an observer and passing to the
-free rows, the admissible values of $LA$ form an affine space --- the \emph{fibre} --- whose dimension
-is $q\,a$, where $a=\dim(U\cap T)$ and $T$ is the intrinsic space of row pairs attainable by rows
+free rows, the admissible values of $LA$ form an affine space --- the \emph{fibre} --- of dimension
+$q\,a$ when nonempty, where $a=\dim(U\cap T)$ and $T$ is the intrinsic space of row pairs attainable by rows
 that vanish on the unobservable subspace. On the fibre the spectral condition is equivalent to the
 vanishing of the degree of a single greatest common divisor, computed over the rational function field
 of the fibre; the criterion is polynomial for every fixed compressed rank and needs no drop-locus
@@ -45,9 +45,10 @@ recursion, i.e.\ no case split on which minor is nonzero. We then characterise w
 fails. If the number $q$ of observer rows
 exceeds the compressed rank $d'$ and the fibre direction is common to all rows --- which is the case
 here --- then the failure of the fibre is necessarily a fixed spectral factor: the common divisor is
-independent of the fibre parameters. Consequently the bad set is closed in the Grassmannian of
-admissible $U$, the feasible set is relatively open, and infeasibility is exactly the statement that
-the whole compatibility stratum consists of bad points. The failure test reduces to checking whether a
+independent of the fibre parameters. Consequently the bad set is closed on each stratum
+of constant $a=\dim(U\cap T)$ (closedness on the whole Grassmannian is left open), the feasible set is
+relatively open there, and infeasibility is exactly the statement that the whole compatibility stratum
+consists of bad points. The failure test reduces to checking whether a
 certain resultant vanishes identically, which gives a one-sided (randomised) test of a single fibre; on
 an explicit parameter region --- when compatibility is automatic --- the outer existence question
 inherits the one-sided acceptance, and no exterior probability bound is claimed. We also record what the criterion does \emph{not} settle: the thin stratum where
@@ -56,7 +57,7 @@ compatibility is a genuine constraint remains open, and no hardness result is cl
 
 \begin{IEEEkeywords}
 functional observer; polynomial matrix; greatest common divisor; Grassmannian; constant rank;
-randomised decision procedure.
+randomised one-sided test.
 \end{IEEEkeywords}
 
 \section{Introduction}\label{sec:intro}
@@ -387,8 +388,8 @@ and $a_{I,m,e}$ is a polynomial there, so $\mathfrak S$ is closed on that stratu
 `closed on every stratum of the stratification by $a$' to `closed on the chart' requires the strata to be
 ordered so that each is open in the union of those above it, which holds when $a$ is constant on the
 chart; we therefore state the conclusion below for a fixed $a$ and record the general case as open. By Definition~\ref{def:bad} the set $\mathcal B_{\mathrm{unif}}$ is defined intrinsically, so
-these local descriptions are the traces of one global subset; closedness is a local property and the
-standard charts cover $\mathrm{Gr}(d',k)$, hence $\mathcal B_{\mathrm{unif}}$ is closed.
+these local descriptions are the traces of one global subset; closedness is a local property on each stratum, and the standard charts cover $\mathrm{Gr}(d',k)$; hence
+$\mathcal B_{\mathrm{unif}}$ is closed on every stratum of constant $a$, which is the claim.
 \end{proof}
 
 \begin{thm}[Fixed spectral factor]\label{thm:factor}
@@ -464,16 +465,17 @@ $\mathcal B=\mathcal B_{\mathrm{unif}}$ on that stratum; hence $\mathcal B$ is c
 feasible set $\mathcal C\setminus\mathcal B$ is relatively open there. Openness on the whole of $\mathcal C$
 is not claimed, for the reason recorded in Corollary~\ref{cor:closed}. Closedness of $\mathcal C$ is the
 determinantal (submatrix) nature of the condition $UZ''\subseteq U+T$. $\mathcal B$ need not be thin: when $q=d'$ the whole stratum is
-bad (\cite{paperI}, the square-pencil argument), while Example~\ref{ex:bad} shows that it can also be
-a proper closed set with feasible points arbitrarily close --- so the particular bad point is not an interior point (the set can have interior elsewhere: when $q=d'$ it is everything).
+bad (\cite{paperI}, the square-pencil argument), while Example~\ref{ex:bad} exhibits a bad point that has feasible neighbours at five explicitly verified
+nearby values --- so that particular point is not isolated in $\mathcal B$'s complement; when $q=d'$ the
+set is all of the stratum.
 \end{proof}
 
 \begin{thm}[Infeasibility]\label{thm:no}
 Assume $q>d'$ and the common-direction hypothesis of Theorem~\ref{thm:factor}. Let $\mathcal C$ be the
 compatibility stratum for the given $d'$ and $\mathcal B$ the bad set. There
 is no feasible $U$ of dimension $d'$ if and only if $\mathcal C\subseteq\mathcal B$. If
-$\mathcal C\not\subseteq\mathcal B$ then the feasible set is dense in some irreducible component of
-$\mathcal C$.
+$\mathcal C\not\subseteq\mathcal B$ then the feasible set is dense in some irreducible component of the stratum of $\mathcal C$ on which $a$ is
+constant.
 \end{thm}
 
 \begin{proof}
@@ -488,7 +490,8 @@ bad examples.
 \begin{prop}[Column drop]\label{prop:drop}
 Let $K=HZ''+G'$ and let $\operatorname{supp}(T)$ be the set of columns in which $T$ is supported. If
 for some $\lambda_0$ and some set $J$ of columns with $|J|>k-d'$ and $J\cap\operatorname{supp}(T)=\varnothing$
-the identity $(HZ'')_{:,j}=\lambda_0H_{:,j}$ holds for $j\in J$, then $U$ is bad.
+the identity $(HZ'')_{:,j}=\lambda_0H_{:,j}$ holds for $j\in J$, then $U$ is infeasible: either
+$\mathcal F_U=\varnothing$ or $U$ is bad.
 \end{prop}
 
 \begin{proof}
