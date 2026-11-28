@@ -49,3 +49,8 @@ declarations here are exactly the eleven `#print axioms` lines of `Audit.lean`.
 -- §IV  Proposition 18 (column dependence, rank kernel)
 #check @Q1Paper.PaperV.rank_lt_of_le_ker
 #check @Q1Paper.PaperV.matrix_rank_lt_of_le_ker
+
+-- §II  Theorem 1, product dimension
+#check @Q1Paper.PaperV.mem_pi_const
+#check @Q1Paper.PaperV.finrank_pi_const
+#check @Q1Paper.PaperV.finrank_iInf_comap_proj

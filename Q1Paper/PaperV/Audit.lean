@@ -53,3 +53,8 @@ exactly the twenty-four `#check`s of `ClaimsCheck.lean`.
 -- KerRank.lean (Proposition 18, rank kernel)
 #print axioms Q1Paper.PaperV.rank_lt_of_le_ker
 #print axioms Q1Paper.PaperV.matrix_rank_lt_of_le_ker
+
+-- FibreDim.lean (Theorem 1, product dimension)
+#print axioms Q1Paper.PaperV.mem_pi_const
+#print axioms Q1Paper.PaperV.finrank_pi_const
+#print axioms Q1Paper.PaperV.finrank_iInf_comap_proj
