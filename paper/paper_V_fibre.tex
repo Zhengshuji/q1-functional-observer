@@ -340,8 +340,10 @@ parameter-dependent once $q>d'$, because the fibre direction is common to all ro
 
 \begin{prop}[Coefficient test]\label{prop:coeff}
 Write each nonzero $d'$-minor as $f_I(\lambda,y)=\sum_e\lambda^{e}\sum_m a_{I,e,m}y^{m}$ and put
-$q_{I,m}(\lambda)=\sum_e a_{I,e,m}\lambda^{e}\in\mathbb C[\lambda]$. Assume $\mathcal F_U\ne\varnothing$. Then $U$ is bad in the sense of
-Definition~\ref{def:bad} if and only if the family $\{q_{I,m}\}_{I,m}$ has a common root. The two notions of
+$q_{I,m}(\lambda)=\sum_e a_{I,e,m}\lambda^{e}\in\mathbb C[\lambda]$. Assume $\mathcal F_U\ne\varnothing$. Then $U$ is \emph{uniformly} bad in the sense of
+Definition~\ref{def:bad} (a single $\lambda_0$ works for the whole fibre) if and only if the family
+$\{q_{I,m}\}_{I,m}$ has a common root. The pointwise notion is the one characterised by the gcd
+criterion of Theorem~\ref{thm:criterion}; the two agree under Theorem~\ref{thm:factor}. The two notions of
 Definition~\ref{def:bad} coincide when $q>d'$ (Theorem~\ref{thm:factor}); when $q=d'$ every $U$ with
 nonempty fibre is pointwise bad, while $\mathcal B=\mathcal C$ may fail, so the proposition is stated for the
 uniform notion and Theorem~\ref{thm:factor} is what connects the two.
@@ -361,12 +363,16 @@ Theorem~\ref{thm:factor}, so is $\mathcal B$.
 
 \begin{proof}
 Fix a chart $G_\alpha\cong\mathbb A^{N}$ with coordinates $p$, and let $\mathfrak S\subseteq
-\mathbb P^{1}\times G_\alpha$ be the set of pairs $(\lambda_0,p)$ at which every $q_{I,m}$ of
-Proposition~\ref{prop:coeff} vanishes \emph{and} the compatibility condition
-$UZ''\subseteq U+T$ holds; compatibility is a polynomial condition in $p$, so $\mathfrak S$ is again
-the zero set of finitely many polynomials. Each $q_{I,m}$ is a polynomial in $(\lambda_0,p)$, so
-$\mathfrak S$ is the zero set of finitely many polynomials, hence closed; it is a closed subset of the
-\emph{projective} total space $\mathbb P^{1}\times G_\alpha$. The projection
+\mathbb P^{1}\times G_\alpha$ be the set of pairs $(\lambda_0:\mu,p)$ at which every $Q_{I,m}$ below
+vanishes \emph{and} the compatibility condition $UZ''\subseteq U+T$ holds. Write
+$q_{I,m}(\lambda_0)=\sum_{e\le d'}a_{I,m,e}(p)\,\lambda_0^{e}$ and homogenise,
+$$Q_{I,m}(\lambda_0:\mu;p)=\sum_{e\le d'}a_{I,m,e}(p)\,\lambda_0^{e}\mu^{d'-e};$$
+each $Q_{I,m}$ is homogeneous of degree $d'$, and compatibility is a polynomial condition in $p$, so
+$\mathfrak S$ is the zero set of finitely many polynomials in the \emph{projective} total space
+$\mathbb P^{1}\times G_\alpha$, hence closed. At the point at infinity ($\mu=0$) the conditions reduce
+to $a_{I,m,d'}(p)=0$ for all $(I,m)$, i.e.\ to the vanishing of every $\lambda^{d'}$-coefficient; those
+coefficients include the minors $\det H_{IJ}$ of the full-rank block $H$, which do not all vanish, so
+$\mathfrak S$ has empty fibre at infinity and its affine part is exactly the set of affine solutions. The projection
 $\pi\colon\mathbb P^{1}\times G_\alpha\to G_\alpha$ is a closed map, because $\mathbb P^{1}$ is
 compact (equivalently, $\pi$ is proper). No elimination of $\lambda_0$ is performed, so the argument does
 not depend on any non-degeneracy of the coefficients --- in contrast with a criterion based on a
