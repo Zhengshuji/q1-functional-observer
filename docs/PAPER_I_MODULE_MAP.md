@@ -130,7 +130,7 @@ docstring so a reader can see the author's stated purpose.
 | `Q1Paper/PaperI/S08_ChartEquivalence/Soundness.lean` | 2 | 0 | — | certificate, which characterises the complex-λ condition — complex implies real). |
 | `Q1Paper/PaperV/Audit.lean` | 0 | 0 | — | The axiom footprint of every declaration of Paper V's Lean development. |
 | `Q1Paper/PaperV/Claims.lean` | 0 | 0 | — | unfolding `Q1Paper.PaperV.mem_fibre`. |
-| `Q1Paper/PaperV/ClaimsCheck.lean` | 0 | 0 | — | declarations here are exactly the 62 `#print axioms` lines of `Audit.lean`. |
+| `Q1Paper/PaperV/ClaimsCheck.lean` | 0 | 0 | — | declarations here are exactly the 71 `#print axioms` lines of `Audit.lean`. |
 | `Q1Paper/PaperV/CoeffTest.lean` | 4 | 0 | — | fibre" is the same as "every coefficient polynomial `q_{I,m}` vanishes at `λ₀`". |
 | `Q1Paper/PaperV/ColumnDrop.lean` | 3 | 0 | — | §IV, Proposition 16 — the linear-algebra kernel of **column drop**. |
 | `Q1Paper/PaperV/Criterion.lean` | 2 | 0 | — | §III, Theorem 4 in Lean form (sufficiency direction). |
@@ -148,6 +148,7 @@ docstring so a reader can see the author's stated purpose.
 | `Q1Paper/PaperV/MainTheorems.lean` | 0 | 0 | — | specialisation lemma (Lemma 5) that carries the criterion. |
 | `Q1Paper/PaperV/MinorEval.lean` | 1 | 0 | — | §III, the evaluation bridge for minors. |
 | `Q1Paper/PaperV/Necessity.lean` | 2 | 0 | — | §III, the specialisation step of Theorem 4's necessity direction (Corollary 10). |
+| `Q1Paper/PaperV/Probability.lean` | 9 | 0 | — | roots — a proportion of at most `deg_t D_c/\|S\| ≤ 2d'²/\|S\|`. |
 | `Q1Paper/PaperV/RankMinor.lean` | 2 | 0 | — | §III, the rank-minor bridge. |
 | `Q1Paper/PaperV/Read/All.lean` | 0 | 0 | — | Reading entry point of Paper V: §II (the fibre) and §III (the specialisation lemma). |
 | `Q1Paper/PaperV/Read/S01_Fibre.lean` | 0 | 0 | — | rename breaks the build instead of silently rotting the map. |

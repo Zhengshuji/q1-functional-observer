@@ -4,8 +4,8 @@ import Q1Paper.PaperV.MainTheorems
 Q1Paper/PaperV/ClaimsCheck.lean
 
 Machine-checked index: one `#check` per formalised item of `Claims.lean`.  A rename
-breaks this build instead of silently invalidating the claims table.  The 62
-declarations here are exactly the 62 `#print axioms` lines of `Audit.lean`.
+breaks this build instead of silently invalidating the claims table.  The 71
+declarations here are exactly the 71 `#print axioms` lines of `Audit.lean`.
 -/
 
 -- §II  The fibre (Theorem 2)
@@ -105,6 +105,17 @@ declarations here are exactly the 62 `#print axioms` lines of `Audit.lean`.
 
 -- CriterionNecessity.lean (Theorem 4, necessity in matrix form)
 #check @Q1Paper.PaperV.rank_lt_of_gcd_pos
+
+-- Probability.lean (Theorem 8 / Theorem 19 counting core)
+#check @Q1Paper.PaperV.badPairs
+#check @Q1Paper.PaperV.goodPairs
+#check @Q1Paper.PaperV.schwartz_zippel_zero_count
+#check @Q1Paper.PaperV.card_badPairs_le
+#check @Q1Paper.PaperV.two_grid_bad_bound
+#check @Q1Paper.PaperV.two_grid_bad_bound_univ
+#check @Q1Paper.PaperV.one_sub_le_div_of_add_eq
+#check @Q1Paper.PaperV.two_grid_good_bound
+#check @Q1Paper.PaperV.two_grid_failure_bound_of_schwartz_zippel
 
 -- Enumeration.lean (Theorem 22, enumerative skeleton)
 #check @Q1Paper.PaperV.exists_iff_exists_mem_finset

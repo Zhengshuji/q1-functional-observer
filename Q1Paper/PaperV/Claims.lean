@@ -10,7 +10,7 @@ name below resolves, so a rename breaks the build instead of silently invalidati
 The three tiers, used for every item below and mirrored in `docs/PAPER_V_GUIDE.md`:
 
 * **complete** — the paper's statement of the item is formalised as stated (modulo the paper's
-  standing hypotheses), 62 declarations in total, audited in `Audit.lean`;
+  standing hypotheses), 71 declarations in total, audited in `Audit.lean`;
 * **partial** — the mathematical core of the item is formalised but the full statement is not
   (typically because assembling it needs multivariate gcds, Grassmannians, or probability);
 * **paper only** — not formalised, with the reason.
@@ -113,6 +113,15 @@ Theorem 15 (infeasibility, a logical consequence of the closedness statement).
 -/
 
 /-! ## §V  Algorithms
+
+* **Partial — the probabilistic counting core of Theorem 8 / Theorem 19** (`Probability.lean`):
+  Schwartz–Zippel for a constant grid in `ℂ` (`schwartz_zippel_zero_count`, a wrapper around
+  Mathlib's `MvPolynomial.schwartz_zippel_totalDegree`), the two-grid union bound for finite
+  grids (`card_badPairs_le`, `two_grid_bad_bound`, `two_grid_bad_bound_univ`,
+  `two_grid_good_bound`), and the composition with Schwartz–Zippel
+  (`two_grid_failure_bound_of_schwartz_zippel`).  Not formalised: the resultant `D_c`, its
+  bidegree bounds `deg_c D_c ≤ d'` and `deg_t D_c ≤ 2d'²`, the height bound, and the
+  one-sidedness step (bad fibre ⇒ `D_c ≡ 0`).
 
 * **Complete — Theorem 22, enumerative skeleton** (`Enumeration.lean`): if a finite list is
   complete for a predicate, the unbounded existential is the existential over the list, hence

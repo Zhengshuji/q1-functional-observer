@@ -40,10 +40,10 @@ compatibility is a genuine constraint.
 | Lemma 5 (specialisation) | `natDegree_map_eval_of_leadingCoeff_const`, `map_dvd_of_dvd` | `Q1Paper/PaperV/Specialize.lean` |
 | Corollary 10 (shape) | `specialized_common_factor` | `Q1Paper/PaperV/Specialize.lean` |
 
-The axiom audit is `Q1Paper/PaperV/Audit.lean` (62 declarations checked, all on
+The axiom audit is `Q1Paper/PaperV/Audit.lean` (71 declarations checked, all on
 `propext`, `Classical.choice`, `Quot.sound`); `scripts/check.sh` runs it.  The claims
 table is `Q1Paper/PaperV/Claims.lean` and its machine check is
-`Q1Paper/PaperV/ClaimsCheck.lean` (the same 62 declarations).  The 62 is the number of
+`Q1Paper/PaperV/ClaimsCheck.lean` (the same 71 declarations).  The 71 is the number of
 *audited declarations*, not the number of paper items: `Claims.lean` marks how many items are
 complete, which is a strictly smaller set.
 
@@ -59,8 +59,10 @@ complete, which is a strictly smaller set.
 * **Corollary 12 / Theorem 14 (closedness of the bad set)** — quantifier elimination over the
   coefficient space of the coefficient test; stratum by stratum only, and the global statement is
   false (Example 27, §VI(E)).
-* **Theorems 7 and 8** — the rational witness with its height, and the two-grid
-  Schwartz–Zippel bound.
+* **Theorem 7** — the rational witness with its height.
+* **Theorem 8 / Theorem 19's counting core** — the counting core is Lean (`Probability.lean`:
+  Schwartz–Zippel, the two-grid union bound, and their composition).  Still paper-side: the
+  resultant `D_c`, its bidegree bounds, the height bound, and the one-sidedness step.
 * **Theorem 19 (regime) and Theorem 22 (enumeration)** — one-sided acceptance inside the generic
   stratum, and the combinatorial enumeration.  Theorem 22's *logical* skeleton is Lean
   (`Enumeration.lean`); what is paper-side is the construction of the finite list.
@@ -87,7 +89,7 @@ CI.
 4. §V (examples) —run `python verification/fibre.py`.
 
 
-## Coverage at a glance (62 kernel-checked declarations)
+## Coverage at a glance (71 kernel-checked declarations)
 
 | Paper item | Lean declarations | Module |
 |---|---|---|
@@ -101,6 +103,7 @@ CI.
 | minors and pointwise evaluation | `eval_det_submatrix` | `MinorEval.lean` |
 | rank vs nonzero minor (both directions) | `exists_submatrix_det_ne_zero_of_le_rank`, `le_rank_of_det_submatrix_ne_zero` | `RankMinor.lean` |
 | Thm 8 counting step (nonzero polynomial has ≤ deg roots in a grid) | `card_roots_le_natDegree`, `exists_ne_root_of_card` | `RootBound.lean` |
+| Thm 8/19 counting core (Schwartz–Zippel + two-grid union bound) | `schwartz_zippel_zero_count`, `card_badPairs_le`, `two_grid_bad_bound`, `two_grid_good_bound`, `two_grid_failure_bound_of_schwartz_zippel` | `Probability.lean` |
 | spectral form: non-eigenvalues do not drop the rank | `rank_mul_of_det_ne_zero`, `rank_smul_sub_mul_of_det_ne_zero`, `exists_minor_ne_zero_of_det_ne_zero` | `SpectralRank.lean` |
 | Thm 13 covering step (finite union of proper zero sets is proper) | `eq_zero_of_forall_eval_eq_zero`, `exists_forall_eval_ne_zero`, `exists_eq_zero_of_forall_exists_eval_eq_zero` | `UnionZeros.lean` |
 | Bezout / unit ideal (gcd = 1 ⇒ ∑ Aᵢfᵢ = 1) | `exists_combination_eq_one_of_gcd_eq_one`, `ideal_span_eq_top_of_gcd_eq_one`, `exists_combination_eq_one` | `UnitIdeal.lean` |
@@ -123,11 +126,12 @@ specialisation/root step (`Necessity.lean`) and the Gauss step (`Gauss.lean`, vi
 properties plus one minor with nonzero constant leading coefficient.
 
 **Paper only, with the reason stated in `Claims.lean`:** Theorem 7 (rational witness and its
-height), Theorem 8 (two-grid probability bound), Theorem 13 (incidence dimension), Corollary 12 /
+height), Theorem 8 (two-grid probability bound: its counting core is Lean, the resultant and
+bidegree bounds are paper), Theorem 13 (incidence dimension), Corollary 12 /
 Theorem 14 (closedness — proved stratum by stratum; the global statement is false, Example 27 and
 §VI(E)), Theorem 15
-(infeasibility), Theorem 19 (regime), and the *construction* of the finite list in Theorem 22 (its
-logical skeleton is Lean).
+(infeasibility), Theorem 19 (regime — its counting core is Lean, the stratum assembly is paper),
+and the *construction* of the finite list in Theorem 22 (its logical skeleton is Lean).
 
 ## Status
 

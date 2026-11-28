@@ -8,8 +8,8 @@ The axiom footprint of every declaration of Paper V's Lean development.
 Hand-written (the Paper V tree is small; `scripts/generate_audit.py` generates the
 Paper II counterpart).  Every audited declaration must depend only on `propext`,
 `Classical.choice` and `Quot.sound`; `scripts/check_paperI_axioms.py` enforces this on
-the output of `lake env lean Q1Paper/PaperV/Audit.lean`.  The 62 lines here are
-exactly the 62 `#check`s of `ClaimsCheck.lean`.
+the output of `lake env lean Q1Paper/PaperV/Audit.lean`.  The 71 lines here are
+exactly the 71 `#check`s of `ClaimsCheck.lean`.
 -/
 
 -- Fibre.lean
@@ -109,6 +109,17 @@ exactly the 62 `#check`s of `ClaimsCheck.lean`.
 
 -- CriterionNecessity.lean (Theorem 4, necessity in matrix form)
 #print axioms Q1Paper.PaperV.rank_lt_of_gcd_pos
+
+-- Probability.lean (Theorem 8 / Theorem 19 counting core)
+#print axioms Q1Paper.PaperV.badPairs
+#print axioms Q1Paper.PaperV.goodPairs
+#print axioms Q1Paper.PaperV.schwartz_zippel_zero_count
+#print axioms Q1Paper.PaperV.card_badPairs_le
+#print axioms Q1Paper.PaperV.two_grid_bad_bound
+#print axioms Q1Paper.PaperV.two_grid_bad_bound_univ
+#print axioms Q1Paper.PaperV.one_sub_le_div_of_add_eq
+#print axioms Q1Paper.PaperV.two_grid_good_bound
+#print axioms Q1Paper.PaperV.two_grid_failure_bound_of_schwartz_zippel
 
 -- Enumeration.lean (Theorem 22, enumerative skeleton)
 #print axioms Q1Paper.PaperV.exists_iff_exists_mem_finset
