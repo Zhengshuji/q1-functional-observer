@@ -65,3 +65,4 @@ declarations here are exactly the twenty-eight `#print axioms` lines of `Audit.l
 #check @Q1Paper.PaperV.isUnit_gcd_iff_no_common_root
 #check @Q1Paper.PaperV.eval_det_submatrix
 #check @Q1Paper.PaperV.exists_eval_ne_zero_of_isUnit_gcd
+#check @Q1Paper.PaperV.exists_submatrix_det_ne_zero_of_le_rank

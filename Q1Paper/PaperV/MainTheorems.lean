@@ -10,6 +10,7 @@ import Q1Paper.PaperV.FibreDim
 import Q1Paper.PaperV.UnitIdeal
 import Q1Paper.PaperV.FamilyGcd
 import Q1Paper.PaperV.MinorEval
+import Q1Paper.PaperV.RankMinor
 
 /-!
 Q1Paper/PaperV/MainTheorems.lean
