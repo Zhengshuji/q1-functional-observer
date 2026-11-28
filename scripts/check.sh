@@ -22,6 +22,13 @@ lake build Q1Paper.PaperII.Read.All
 lake env lean Q1Paper/PaperII/Audit.lean > "${TMPDIR:-/tmp}/paperII_audit.log"
 python3 scripts/check_paperI_axioms.py "${TMPDIR:-/tmp}/paperII_audit.log" Q1Paper/PaperII/Audit.lean
 
+# 2c. Paper V
+lake build Q1Paper.PaperV.MainTheorems
+lake env lean Q1Paper/PaperV/ClaimsCheck.lean
+lake build Q1Paper.PaperV.Read.All
+lake env lean Q1Paper/PaperV/Audit.lean > "${TMPDIR:-/tmp}/paperV_audit.log"
+python3 scripts/check_paperI_axioms.py "${TMPDIR:-/tmp}/paperV_audit.log" Q1Paper/PaperV/Audit.lean
+
 # 3. the generated indexes must match the sources
 python3 scripts/generate_paperI_claims.py --check
 python3 scripts/generate_paperI_modules.py --check

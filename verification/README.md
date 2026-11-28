@@ -28,6 +28,21 @@ Run a script from this directory: `python ci/cNNN_<topic>.py` (the CI scripts im
 | `ci/c317_cauchy_binet_random.py` | $K(\lambda,\mu)=\sum_{I,J}f_{IJ}(\lambda)f_{IJ}(\mu)$ and the coefficient identity (Section V) |
 | `ci/c318_r0_linear_system.py` | the linear system (R0) $\iff$ the gcd test, with counts and the degree bound (Proposition 1, Appendix A) |
 | `ci/c319_encoding_and_rowspace.py` | the coefficient-vector row space, the encoding witness, necessity of the data constraints (Theorem 3, Appendix A) |
+| `ci/c773_paperV_fibre.py` | Paper V: the three examples of §V decided exactly by `fibre.py` (feasible fibre; a bad point with `gcd = λ+3`; the thin region) |
+
+## Paper V: the fibre
+
+`fibre.py` is the reusable checker for Paper V.  Given the compressed data
+`(H, Z'', T)` it solves the fibre's membership system **completely** (`x + H_i Z'' ∈ row H`
+with `x ∈ row T`, all `k` equations), asserts the rank and the nonemptiness, and only then
+reports the degree of the gcd of the `d'`-minors of `λ H - H Z'' - G'` — which is what
+Theorem 4 of Paper V decides.  Run it directly (`python fibre.py`) for the three examples of
+the paper, or through `ci/c773_paperV_fibre.py`.
+
+Two implementation traps are avoided explicitly, both of which produce a *confidently wrong*
+answer rather than an error: the membership system must not be solved one equation at a
+time, and the basis of `row H` must not be taken to be the first `rank H` rows of `H` (they
+need not be independent).  The checker asserts the ranks first for exactly this reason.
 
 ## Known limitation
 

@@ -1,0 +1,505 @@
+\documentclass[journal]{IEEEtran}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{amsthm}
+\usepackage{booktabs,array}
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+\newtheoremstyle{plainn}{}{}{\itshape}{}{\bfseries}{.}{.5em}%
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
+\theoremstyle{plainn}
+\newtheorem{thm}{Theorem}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{claim}{Claim}
+\newtheorem{defn}[thm]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[thm]{Remark}
+\newtheorem{example}[thm]{Example}
+\renewcommand{\qedsymbol}{QED}
+
+\setlength{\abovedisplayskip}{5pt plus 2pt minus 2pt}
+\setlength{\belowdisplayskip}{5pt plus 2pt minus 2pt}
+\setlength{\abovedisplayshortskip}{3pt plus 1pt}
+\setlength{\belowdisplayshortskip}{4pt plus 2pt minus 2pt}
+
+\begin{document}
+\title{The free-row fibre: a polynomial criterion and the geometry of
+functional observer feasibility}
+\author{}
+\maketitle
+
+\begin{abstract}
+For a linear system with measured output and a prescribed block $L_0$ of observer rows, a functional
+observer of order $q$ exists exactly when some matrix $L=[L_0;R]$ satisfies an algebraic and a
+spectral rank condition. Whether such an $R$ exists is a quantifier alternation: one asks for a
+subspace of observer row space for which a certain family of matrices has constant rank. This paper
+studies that family directly. Fixing the compressed row space $U$ of an observer and passing to the
+free rows, the admissible values of $LA$ form an affine space --- the \emph{fibre} --- whose dimension
+is $q\,a$, where $a=\dim(U\cap T)$ and $T$ is the intrinsic space of row pairs attainable by rows
+that vanish on the unobservable subspace. On the fibre the spectral condition is equivalent to the
+vanishing of the degree of a single greatest common divisor, computed over the rational function field
+of the fibre; the criterion is polynomial for every fixed compressed rank and does not enumerate
+maximal minors. We then characterise when the whole fibre fails. If the number $q$ of observer rows
+exceeds the compressed rank $d'$ and the fibre direction is common to all rows --- which is the case
+here --- then the failure of the fibre is necessarily a fixed spectral factor: the common divisor is
+independent of the fibre parameters. Consequently the bad set is closed in the Grassmannian of
+admissible $U$, the feasible set is relatively open, and infeasibility is exactly the statement that
+the whole compatibility stratum consists of bad points. The failure test reduces to checking whether a
+certain resultant vanishes identically, which gives a one-sided (randomised) decision procedure; on an
+explicit parameter region --- when compatibility is automatic --- the outer existence question
+inherits it. We also record what the criterion does \emph{not} settle: the thin stratum where
+compatibility is a genuine constraint remains open, and no hardness result is claimed.
+\end{abstract}
+
+\begin{IEEEkeywords}
+functional observer; polynomial matrix; greatest common divisor; Grassmannian; constant rank;
+randomised decision procedure.
+\end{IEEEkeywords}
+
+\section{Introduction}\label{sec:intro}
+
+A functional observer estimates a prescribed linear function of the state without estimating the
+state itself, and its order can be far below the order of a Luenberger observer. The design question
+is quantitative: for a given system and a given set of functionals, which orders are attainable, and
+can that be decided cheaply? The characterization is classical \cite{fer10,dar25} and has recently
+been completed order by order \cite{fer26a,fer26b}; the computational question is not settled. The
+companion paper \cite{paperI} gives parameterized upper bounds for deciding whether an observer of
+prescribed order exists; the companion paper \cite{paperII} determines the minimum order. Both work
+with the compressed object introduced below, but neither analyses the object this paper is about.
+
+The two observer conditions couple the observer matrix and its product with the system matrix: the
+same free rows produce both. Write $\mathcal L=[L_0;R]$ and $L$ for $\mathcal L$. With
+$K_0=\ker[C;CA]$ and a basis $N$ of $K_0$, the conditions are
+
+\begin{equation}\label{eq:fivea}
+\operatorname{rank}[\mathcal LA;\mathcal L;CA;C]=\operatorname{rank}[\mathcal L;CA;C],
+\end{equation}
+\begin{equation}\label{eq:fiveb}
+\operatorname{rank}[\lambda\mathcal L-\mathcal LA;CA;C]=\operatorname{rank}[\mathcal L;CA;C]
+\quad\text{for all }\lambda .
+\end{equation}
+Both depend on $L$ only through the two compressed blocks
+\begin{equation}\label{eq:HHA}
+H=LN\in\mathbb C^{q\times k},\qquad H_A=LAN\in\mathbb C^{q\times k},
+\end{equation}
+and become, respectively, a row-space inclusion and a constant-rank condition:
+\begin{equation}\label{eq:compressed}
+\operatorname{row}H_A\subseteq\operatorname{row}H,\qquad
+\operatorname{rank}(\lambda H-H_A)=\operatorname{rank}H\quad\forall\lambda .
+\end{equation}
+The pair $(H,H_A)$ is not arbitrary: it ranges over the row pairs attainable by $r$ free rows, a
+subspace of $\mathbb C^{2k}$ that depends only on $A$, $C$ and $L_0$. Choosing those rows is the
+only design freedom, and the two conditions pull in opposite directions --- $(5a)$ wants $H_A$
+small, $(5b)$ wants the pencil $\lambda H-H_A$ to keep its rank.
+
+This paper fixes $H$ and asks what happens to $(5b)$ as $H_A$ runs over the values the free rows can
+give it. The answer is an affine space, the fibre, and on that space the spectral condition is a
+single polynomial-degree condition. The three facts that make this useful are that the fibre is an
+affine space of known dimension, that its dimension is governed by $a=\dim(U\cap T)$ --- with $U$ the
+row space of $H$ and $T$ the intrinsic space of row pairs --- and that the failure of $(5b)$ on the
+whole fibre cannot be parameter-dependent when $q>d'$, the number of rows exceeding the compressed
+rank.
+
+\subsection{What is proved}
+
+Section~\ref{sec:prelim} sets up the fibre and proves that it is empty or affine of dimension $q\,a$
+(Theorem~\ref{thm:fibre}). Section~\ref{sec:criterion} proves the criterion: on the fibre,
+$(5b)$ holds for some point if and only if the greatest common divisor of all $d'$-minors of
+$\lambda H-H_A$, computed over the rational function field of the fibre, has degree zero
+(Theorem~\ref{thm:criterion}); the criterion depends only on the intrinsic attainable set
+(Theorem~\ref{thm:intrinsic}), the witness it produces has polynomial height
+(Theorem~\ref{thm:witness}), and testing it is a one-sided randomised procedure
+(Theorem~\ref{thm:rp}). Section~\ref{sec:bad} characterises the failure of the whole fibre: when
+$q>d'$ the failure is a fixed spectral factor (Theorem~\ref{thm:factor}), hence the bad set is closed
+(Theorem~\ref{thm:closed}) and infeasibility is exactly containment of the compatibility stratum in
+the bad set (Theorem~\ref{thm:no}). Section~\ref{sec:algorithms} turns this into procedures on an
+explicit region (Theorem~\ref{thm:regime}) and settles the stratum $t=1$ by enumeration
+(Theorem~\ref{thm:t1}). Section~\ref{sec:open} states what remains open.
+
+\subsection{What is not claimed}
+
+No hardness result is claimed, and no polynomial-time decision procedure for the general case. The
+criterion is polynomial for fixed compressed rank, and the randomised procedure decides the outer
+question only where the compatibility stratum is large enough to be sampled; the thin stratum where
+compatibility is a genuine constraint is left open (Section~\ref{sec:open}). We also do not claim that
+the fibre criterion is \emph{the} natural algorithm: it is the criterion that the geometry of the
+fibre supplies.
+
+\section{Preliminaries}\label{sec:prelim}
+
+\subsection{Notation}\label{sec:notation}
+
+Matrices have complex entries and rational data; $\operatorname{row}M$ is the row space and
+$\operatorname{rank}M$ its dimension. For a subspace $U$ and a matrix $X$ with $k$ columns,
+$UX=\{uX:u\in U\}$ is a subspace, and $U-X=\{u-X_i:\text{row }i\}$ is read row by row below. A pencil
+is a matrix whose entries are polynomials of degree at most one in $\lambda$. The Grassmannian of
+$d'$-dimensional subspaces of $\mathbb C^k$ is $\mathrm{Gr}(d',k)$; a subspace containing a fixed
+$U_0$ is written $U\supseteq U_0$. For a field $F$ and a set $S\subseteq F[\lambda]$, $\gcd S$ is the
+monic greatest common divisor, with $\gcd\varnothing=1$ by convention.
+
+\subsection{Attainable row pairs and the fibre}\label{sec:attainable}
+
+\begin{lem}\label{lem:pair}
+The pair $(H_i,(H_A)_i)$ of row $i$ ranges over $\operatorname{row}[N\ |\ AN]$ as $L$ ranges over the
+$q\times n$ matrices with $LN=H$ and $i$ over the rows. Consequently, with $U=\operatorname{row}H$
+and
+\begin{equation}\label{eq:Kset}
+\mathcal K(H)=\bigl\{K\in\mathbb C^{q\times k}:\ (H_i,K_i)\in\operatorname{row}[N\ |\ AN]\ \
+\forall i\bigr\},
+\end{equation}
+$H_A$ ranges over $\mathcal K(H)$, and $(5a)$ is the condition $K\in\mathcal K(H)\cap U^{q}$, i.e.\
+$K_i\in U$ for every $i$.
+\end{lem}
+
+\begin{proof}
+A row $l\in\mathbb C^{n}$ yields the pair $(lN,lAN)\in\operatorname{row}[N\ |\ AN]$; conversely every
+element of that row space is of this form because its first half determines $l$ on $K_0$ and $N$ is a
+basis of $K_0$. Gather the rows. The last claim is the definition of $(5a)$ in
+(\ref{eq:compressed}).
+\end{proof}
+
+To describe the fibre we use the space of row pairs that vanish on $K_0$. Put
+\begin{equation}\label{eq:T}
+T=\{lAN:\ lN=0\}\subseteq\mathbb C^{k}.
+\end{equation}
+This space depends only on $A$ and $K_0$, not on any choice of coordinates: if $lN=0$ then
+$lNZ'=0$ for every $Z'$, and $T=\{l(AN-NZ'):lN=0\}$. Choose $Z'\in\mathbb C^{k\times k}$ and write
+$W=AN-NZ'$; then $(lN,lAN)=(lN,\,lNZ'+lW)$, so
+\begin{equation}\label{eq:decomp}
+H_A=HZ''+G',\qquad Z''=Z'+W_{\mathrm{top}},\qquad G'\in T^{q},
+\end{equation}
+where $W_{\mathrm{top}}$ collects the rows of $W$ that are not in $T$'s complement position; the
+decomposition is the standard one of the compressed pencil. Different choices of $Z'$ translate
+$G'$ inside $T^{q}$ and leave the pencil $\lambda H-H_A$ unchanged.
+
+\begin{thm}[Fibre]\label{thm:fibre}
+Fix $H$ with $U=\operatorname{row}H$ and $d'=\operatorname{rank}H$. The set of admissible $H_A$ for
+this $H$ is $HZ''+\mathcal F_U$ with
+\begin{equation}\label{eq:fibre}
+\mathcal F_U=\prod_{i=1}^{q}\bigl(T\cap(U-H_iZ'')\bigr).
+\end{equation}
+Either $\mathcal F_U=\varnothing$, or $\mathcal F_U$ is an affine space of dimension $q\,a$ with
+$a=\dim(U\cap T)$. Moreover $\mathcal F_U\ne\varnothing$ if and only if
+$UZ''\subseteq U+T$, and then $\mathcal F_U\cong\prod_i (U\cap T)$.
+\end{thm}
+
+\begin{proof}
+By Lemma~\ref{lem:pair}, $H_A=HZ''+G'$ with $G'\in T^{q}$ is admissible for $H$ exactly when
+$H_iZ''+G_i'\in U$ for every $i$, which is $G_i'\in T\cap(U-H_iZ'')$. The set $T\cap(U-H_iZ'')$ is
+an intersection of an affine space with a subspace, hence empty or a coset of $T\cap U$. Taking
+products gives the dimension $q\cdot\dim(T\cap U)$. For nonemptiness, $T\cap(U-x)\ne\varnothing$ iff
+$x\in U+T$, and rows of $H_iZ''$ with $H_i\in U$ satisfy this for all $i$ exactly when
+$UZ''\subseteq U+T$.
+\end{proof}
+
+\begin{remark}\label{rem:T-invariant}
+$T$ is intrinsic but $Z''$ and $T$'s description change with the choice of complement in
+$\mathbb C^n$; Theorem~\ref{thm:intrinsic} below is the statement that the criterion does not depend
+on that choice. Everything is computed from $(H,Z'',T)$, and different decompositions give the same
+fibre up to translation inside $T^{q}$.
+\end{remark}
+
+\section{The criterion}\label{sec:criterion}
+
+Throughout, $F=\mathbb C(t)$ is the rational function field of the fibre parameters, and for
+$G'\in F^{q\times k}$ we write $P(\lambda)=\lambda H-HZ''-G'\in F[\lambda]^{q\times k}$. Only
+$(\lambda H-H_A)$ matters, so the criterion below is stated for a general $K=HZ''+G'\in F^{q\times
+k}$ with $G'\in T^{q}$.
+
+\begin{thm}[Criterion]\label{thm:criterion}
+Assume $\mathcal F_U\ne\varnothing$. The following are equivalent.
+\begin{enumerate}[label=(\roman*),leftmargin=2.2em,itemsep=1pt]
+\item There exists $G'\in\mathcal F_U$ such that $\operatorname{rank}P(\lambda)=d'$ for all
+$\lambda$.
+\item $\deg_\lambda g=0$, where $g$ is the greatest common divisor in $F[\lambda]$ of all $d'\times
+d'$ minors of $\lambda H-HZ''-G'$.
+\end{enumerate}
+\end{thm}
+
+\begin{proof}
+Write $f_j$ for the minors. A matrix over $F[\lambda]$ has constant rank $d'$ for every
+$\lambda\in\overline F$ if and only if the ideal generated by the $f_j$ contains a nonzero constant,
+i.e.\ $\gcd_j f_j\in F^{\times}$; this is the standard gcd criterion for a polynomial matrix to have
+no eigenvalue \cite[Ch.~6]{vzgg13}. For the equivalence with the existence of a point, note that the
+$f_j$ are polynomials in the fibre parameters $t$ with coefficients in $\mathbb C[\lambda]$, so
+$\deg g=0$ says that some finite $\mathbb Z$-combination of the $f_j$ (after clearing denominators)
+is a nonzero constant $D\in\mathbb C[t]$. Evaluating at $t_0$ with $D(t_0)\ne0$ gives a point of the
+affine space $\mathcal F_U$ at which the specialised minors have gcd one, hence constant rank $d'$;
+the converse is immediate because a common root at one point would make $\gcd$ positive at the
+generic point. Since $\mathcal F_U$ is affine over $\mathbb C$ with the coordinates $t$, and $D$ is a
+nonzero polynomial, such a $t_0$ exists.
+\end{proof}
+
+The step that makes the criterion effective is that a positive-degree common divisor cannot
+disappear under specialisation, provided its leading coefficient in $\lambda$ is a constant. That is
+the only place where the minors' structure is used, and it is machine-checked.
+
+\begin{lem}[Specialisation]\label{lem:specialize}
+Let $h\in\mathbb C[t][\lambda]$ have $\lambda$-leading coefficient equal to a nonzero constant $c$.
+Then for every $t_0$, $\operatorname{natDegree}\bigl(h(t_0,\cdot)\bigr)=\operatorname{natDegree}h$;
+consequently $h\mid f$ in $\mathbb C[t][\lambda]$ implies $h(t_0,\cdot)\mid f(t_0,\cdot)$.
+\end{lem}
+
+\begin{proof}
+Write $h=\sum_{j\le n}h_j\lambda^{j}$ with $h_n=c$. The coefficient of $\lambda^{n}$ in
+$h(t_0,\cdot)$ is $h_n(t_0)=c\ne0$, so the degree cannot drop; for the divisibility, apply the ring
+homomorphism $\mathbb C[t]\to\mathbb C$, $t\mapsto t_0$, to the identity $f=qh$.
+\end{proof}
+
+The leading coefficient of at least one $d'$-minor is a constant of this kind: the minor on rows $I$
+and columns $J$ with $\det H_{IJ}\ne0$ has leading coefficient $\det H_{IJ}$, nonzero. Hence a
+positive-degree $g$ has a primitive representative with constant leading coefficient, and
+Lemma~\ref{lem:specialize} applies: every point of the fibre is bad. This is the content of
+Corollary~\ref{cor:every-bad} below.
+
+\begin{thm}[Intrinsic form]\label{thm:intrinsic}
+The criterion of Theorem~\ref{thm:criterion} depends only on $H$ and on the attainable set
+$\mathcal K(H)$ of \eqref{eq:Kset}, not on the choice of $Z'$, of $T$'s complement, or of the basis
+of $K_0$: feasibility is the existence of $K\in\mathcal K(H)\cap U^{q}$ such that the $d'$-minors of
+$\lambda H-K$ have gcd one.
+\end{thm}
+
+\begin{proof}
+Both objects $\mathcal K(H)$ and $T$ are defined from $A$, $C$ and $K_0$ alone
+(Lemma~\ref{lem:pair}, \eqref{eq:T}), and the map $K\mapsto G'=K-HZ''$ is a bijection between
+$\mathcal K(H)\cap U^{q}$ and $\mathcal F_U$ by Theorem~\ref{thm:fibre}. A bijection between
+parametrisations does not change the function field, so the gcd is computed in the same field and its
+degree is the same.
+\end{proof}
+
+\begin{thm}[Witness]\label{thm:witness}
+Suppose $U$ is defined over $\mathbb Q$, $\mathcal F_U\ne\varnothing$ and $\deg_\lambda g=0$. Then
+there is $G'\in\mathcal F_U(\mathbb Q)$ whose entries have bit size
+$\operatorname{poly}(\mathcal L,d')$, where $\mathcal L$ is the input length.
+\end{thm}
+
+\begin{proof}
+Take two constant-coefficient combinations $F_1,F_2$ of the minors with
+$\gcd_{F[\lambda]}(F_1,F_2)=1$ (generic combinations work, since the total gcd is one). Their
+resultant $D=\operatorname{Res}_\lambda(F_1,F_2)\in\mathbb Q[t]$ is nonzero, and the adjugate of the
+Sylvester matrix gives $UF_1+VF_2=D$ with polynomial $U,V$, so no clearing of denominators is
+needed. The Sylvester matrix has order at most $2d'$ and entries of $t$-degree at most $d'$, hence
+$\deg_t D\le 2d'^{2}$. A nonzero polynomial of degree $\delta$ has a point of the grid
+$\{0,\dots,\delta\}^{N}$ where it does not vanish (induction on $N$), so a rational $t_0$ with
+$D(t_0)\ne0$ exists with coordinates of size $O(\log\delta)$. At such a point the specialised minors
+have gcd one: any common divisor $h$ would divide $F_1(t_0),F_2(t_0)$ and hence $D(t_0)\ne0$. The
+fibre coordinates are affine in $t_0$, and the free rows are recovered from $K$ by solving
+$l[N\ AN]=K_i$, which adds only polynomial height.
+\end{proof}
+
+\begin{thm}[One-sided test]\label{thm:rp}
+Let $F_1,F_2$ be generic constant-coefficient combinations of the minors and
+$D=\operatorname{Res}_\lambda(F_1,F_2)$. Then the fibre is entirely bad if and only if $D\equiv0$.
+Consequently, evaluating $D$ at a random rational point $t_0$ and declaring the fibre feasible when
+the value is nonzero is a one-sided procedure: it never reports a bad fibre as feasible, and reports
+a feasible fibre with probability at least $1-2d'^{2}/|S|$ for a grid $S$.
+\end{thm}
+
+\begin{proof}
+If every point of the fibre is bad then for every $t$ the specialised minors have a common root, so
+$F_1(t,\cdot)$ and $F_2(t,\cdot)$ have one, hence $D(t)=0$. If the fibre is feasible, then
+$\deg g=0$ and for generic combinations $\gcd(F_1,F_2)=1$, so $D\not\equiv0$; the bound is
+Schwartz--Zippel applied to $D$ of degree at most $2d'^{2}$.
+\end{proof}
+
+\section{The bad set}\label{sec:bad}
+
+\begin{defn}\label{def:bad}
+$U\in\mathrm{Gr}(d',k)$ is \emph{bad} if $\mathcal F_U\ne\varnothing$ and the fibre is entirely bad,
+i.e.\ every $G'\in\mathcal F_U$ fails $(5b)$. Write $\mathcal B$ for the bad set.
+\end{defn}
+
+\begin{cor}\label{cor:every-bad}
+If $\deg_\lambda g\ge1$ then every point of the fibre is bad: $g$'s primitive representative has
+constant leading coefficient and divides every minor, so Lemma~\ref{lem:specialize} preserves a
+common factor at every $t_0$.
+\end{cor}
+
+The next theorem is the structural statement this paper is built around: the failure cannot be
+parameter-dependent once $q>d'$, because the fibre direction is common to all rows.
+
+\begin{thm}[Fixed spectral factor]\label{thm:factor}
+Let $U$ be such that $\mathcal F_U\ne\varnothing$, $q>d'$, and $M$ be a matrix with
+$H_A=HZ''+Y'M$, $Y'\in\mathbb C^{q\times a}$, $M\in\mathbb C^{a\times d'}$ (the fibre direction is
+common to all rows, as in \eqref{eq:fibre}). If the fibre is entirely bad then $g\in\mathbb C[\lambda]$:
+the common divisor does not depend on the fibre parameters.
+\end{thm}
+
+\begin{proof}
+Write $P(Y,\lambda)=\lambda X-B_0-YM$ with $X=H$, $B_0=HZ''$. Consider the incidence variety
+\begin{equation}\label{eq:incidence}
+\begin{aligned}
+\mathcal I=\{((Y,\alpha,[v])):&\ (\alpha X-B_0-YM)v=0\}\\
+&\subseteq\mathbb C^{qa}\times\mathbb P^{1}\times\mathbb P^{d'-1}.
+\end{aligned}
+\end{equation}
+Fix $(\alpha,[v])$ with $Mv\ne0$. The equation splits by rows as
+$Y_i(Mv)=((\alpha X-B_0)_i)v$, one nontrivial linear equation on each $Y_i\in\mathbb C^{a}$, with
+disjoint sets of unknowns; hence the fibre of $\mathcal I$ over $(\alpha,[v])$ has dimension
+$qa-q$, and $\dim\mathcal I\le qa-q+1+(d'-1)=qa-q+d'<qa$ because $q>d'$. Therefore the projection of
+$\mathcal I$ to $\mathbb C^{qa}$ is contained in a proper closed subset, and for $Y$ in a dense open
+set no common root has $Mv\ne0$: every common root satisfies $Mv=0$, and then the equation reduces to
+$(\alpha X-B_0)v=0$, which does not involve $Y$. Hence all common roots come from the finite
+parameter-free set $\{\alpha:\operatorname{rank}(\alpha X-B_0)<d'\}$, and $g\in\mathbb C[\lambda]$.
+\end{proof}
+
+\begin{thm}[Closed and thin]\label{thm:closed}
+$\mathcal B$ is closed in $\mathrm{Gr}(d',k)$; the feasible set is relatively open in the
+compatibility stratum $\mathcal C=\{U:\ \mathcal F_U\ne\varnothing\}$, which is itself closed.
+Moreover $\mathcal B$ has empty interior.
+\end{thm}
+
+\begin{proof}
+Badness is the vanishing of the coefficient polynomials $q_{I,m}$ of Theorem~\ref{thm:rp} read as
+functions of the Plücker coordinates: the gcd of a bounded-degree family of univariate polynomials is
+one exactly when a certain Bezout system has a solution, which is an open condition on the
+coefficients; its complement is closed. Closedness of $\mathcal C$ is bilinearity of
+$UZ''\subseteq U+T$. Emptiness of the interior follows from the example of
+Section~\ref{sec:examples}, where a bad point has feasible points arbitrarily close.
+\end{proof}
+
+\begin{thm}[Infeasibility]\label{thm:no}
+Let $\mathcal C$ be the compatibility stratum for the given $d'$ and $\mathcal B$ the bad set. There
+is no feasible $U$ of dimension $d'$ if and only if $\mathcal C\subseteq\mathcal B$. If
+$\mathcal C\not\subseteq\mathcal B$ then the feasible set is dense in $\mathcal C$.
+\end{thm}
+
+\begin{proof}
+Immediate from Theorem~\ref{thm:closed}: the feasible set is $\mathcal C\setminus\mathcal B$, and a
+nonempty relatively open subset of an irreducible closed set is dense. (For a reducible stratum,
+apply the argument to each component.)
+\end{proof}
+
+We record a sufficient condition that is checkable in linear algebra and that explains the smallest
+bad examples.
+
+\begin{prop}[Column drop]\label{prop:drop}
+Let $K=HZ''+G'$ and suppose that for some $\lambda_0$ and some set $J$ of columns with
+$|J|>k-d'$ the columns $K_{:,j}=\lambda_0H_{:,j}$ hold identically in the fibre parameters for
+$j\in J$. Then $U$ is bad.
+\end{prop}
+
+\begin{proof}
+At $\lambda_0$, $P(\lambda_0)_{:,j}=\lambda_0H_{:,j}-K_{:,j}=0$ for $j\in J$, so at most $k-|J|$
+columns of $P(\lambda_0)$ are nonzero and $\operatorname{rank}P(\lambda_0)\le k-|J|<d'$, for every
+point of the fibre. Hence $(5b)$ fails everywhere.
+\end{proof}
+
+The converse of Proposition~\ref{prop:drop} is false; column dependencies of a more general shape,
+and the bad examples of Section~\ref{sec:examples}, show that the mechanisms are not exhausted by
+columns vanishing.
+
+\section{Algorithms and examples}\label{sec:algorithms}
+
+\begin{thm}[Region with automatic compatibility]\label{thm:regime}
+Let $s=\dim(U_0\cap T)$ and suppose $d'+t-k\ge s$ with $t=\dim T$. Then, for every $d'$,
+infeasibility of the $d'$-stratum is decidable by a one-sided randomised procedure: sample a rational
+$U\in\mathrm{Gr}(d',k)$ containing $U_0$, test the fibre with Theorem~\ref{thm:rp}, and accept when a
+witness is found.
+\end{thm}
+
+\begin{proof}
+Under the hypothesis a generic $U$ satisfies $\dim(U+T)=k$, so compatibility $UZ''\subseteq U+T$ is
+automatic and $\mathcal C$ contains a dense open subset of $\mathrm{Gr}(d',k)$. By
+Theorem~\ref{thm:closed} the feasible set is open and dense whenever nonempty, and by
+Theorem~\ref{thm:witness} a feasible point is certified by a witness; a random rational $U$ therefore
+lands in the feasible set with probability bounded below by $1-2d'^{2}/|S|$ for a grid $S$, and the
+one-sided test of Theorem~\ref{thm:rp} accepts. If the stratum is entirely bad no witness exists and
+the procedure never accepts.
+\end{proof}
+
+\begin{thm}[The stratum $t=1$]\label{thm:t1}
+If $t=1$ and $U$ is feasible then $U$ is invariant under $Z''$; consequently, for $t=1$ the existence
+question is decided by enumerating the $d'$-dimensional invariant subspaces of $Z''$ that contain
+$T$ and $U_0$, and testing each with Theorem~\ref{thm:criterion}.
+\end{thm}
+
+\begin{proof}
+Feasibility forces $a=\dim(U\cap T)\ge1$ (otherwise the fibre is a single point and the pencil is
+square, hence has an eigenvalue, so $(5b)$ fails); with $t=1$ this gives $T\subseteq U$, hence
+$U+T=U$ and compatibility reads $UZ''\subseteq U$, i.e.\ invariance. The enumeration is finite and
+each test is the criterion.
+\end{proof}
+
+\subsection{Examples}\label{sec:examples}
+
+\begin{example}[A feasible fibre at $t=2$]\label{ex:feasible}
+Take $k=3$, $q=3$, $d'=2$, $T=\operatorname{span}\{e_1,e_2\}$,
+\[
+H=\begin{bmatrix}2&2\\-1&-1\\2&1\end{bmatrix},\quad
+Z''=\begin{bmatrix}1&2\\1&1\end{bmatrix},\quad U=\operatorname{row}H=\mathbb C^{2}.
+\]
+The fibre is $\mathcal F_U=T^{\,3}$ (three free parameters), and the three nonzero $2$-minors of
+$\lambda H-HZ''-G'$ have gcd one, so the fibre is feasible by Theorem~\ref{thm:criterion}. The
+corresponding observer is realisable over $\mathbb Q$ with $n=4$, $p=1$, $r=3$, and its conditions
+(\ref{eq:fivea})--(\ref{eq:fiveb}) hold on the original matrices.
+\end{example}
+
+\begin{example}[A bad point with feasible neighbours]\label{ex:bad}
+With $k=3$, $q=3$, $d'=2$, $T=\operatorname{span}\{e_1,e_2\}$,
+\[
+Z''=\begin{bmatrix}-2&-2&0\\-2&1&-2\\1&0&-1\end{bmatrix},\qquad
+U=\{y:y_3=y_2\},
+\]
+the fibre is one-dimensional in each row and $\gcd=\lambda+3$: the whole fibre is bad. The
+neighbouring spaces $U_s=\{y:y_3=y_2+s\,y_1\}$, $s\ne0$, are feasible, so the bad set has empty
+interior --- the statement of Theorem~\ref{thm:closed}.
+\end{example}
+
+\begin{example}[The thin region can be feasible]\label{ex:thin}
+$k=3$, $t=2$, $d'=1$, $q=2$, $T=\operatorname{span}\{e_1,e_2\}$, $U=U_0=\operatorname{span}\{e_1\}$,
+$Z''=0$, $H$ with both rows $e_1$. Compatibility is automatic and the fibre is $U^{2}$; with
+$G'_i=(y_i,0,0)$ the pencil is $\operatorname{diag}(\lambda-y_1,\lambda-y_2)$ on the first two
+columns, whose $1$-minors have gcd $1$ for $y_1\ne y_2$. Hence the stratum is feasible although
+$d'+t-k=0<s=1$; sampling heuristics that only look at $d'+t-k$ versus $s$ are not sound.
+\end{example}
+
+\section{Open problems}\label{sec:open}
+
+\begin{enumerate}[label=(\Alph*),leftmargin=2.2em,itemsep=2pt]
+\item \emph{The thin stratum.} When $d'+t-k<s$ and compatibility is a genuine constraint,
+$\mathcal C$ is a proper subvariety and the sampling argument of Theorem~\ref{thm:regime} does not
+apply. Deciding $\mathcal C\subseteq\mathcal B$ there --- equivalently deciding the existence
+question --- is open. Example~\ref{ex:thin} shows that feasibility is possible in that region, so the
+question is not vacuous.
+\item \emph{Bit complexity.} Theorem~\ref{thm:criterion} is polynomial for fixed compressed rank in
+the arithmetic model; its bit cost, and that of the coefficient test behind
+Theorem~\ref{thm:closed}, are not accounted for here. The bound of Theorem~\ref{thm:witness} is on
+the witness, not on the running time.
+\item \emph{Algebraic witnesses.} Theorem~\ref{thm:witness} assumes $U$ rational. For $t=1$ the
+feasible $U$ are invariant subspaces of $Z''$ and may be algebraic, of degree growing with $n$; then
+the witness may be algebraic as well and its height is not bounded here.
+\item \emph{Hardness.} No reduction is given in either direction. Since the region
+$d'+t-k\ge s$ is decidable by a randomised procedure, a hardness proof would have to encode its
+instance into the thin stratum (A).
+\end{enumerate}
+
+\subsection{Reproducibility and evidence}\label{sec:repro}
+
+Every theorem of this paper is accompanied by evidence in the artifact repository. The Lean~4
+development formalises the core of Theorem~\ref{thm:criterion} --- the specialisation step of
+Lemma~\ref{lem:specialize}, in the form used to prove Corollary~\ref{cor:every-bad} --- together with
+the fibre identity of Theorem~\ref{thm:fibre} and the rank inequality used in the proof of
+Theorem~\ref{thm:factor}. The examples of Section~\ref{sec:examples} are certified by exact rational
+scripts: the minors are computed symbolically over $\mathbb Q$, the gcd is taken in the polynomial
+ring, and the conditions (\ref{eq:fivea})--(\ref{eq:fiveb}) are re-verified on the original matrices
+for the realisable instances. The classification experiments that suggested
+Theorem~\ref{thm:factor} and the counterexample of Example~\ref{ex:thin} are recorded as such; they
+are not used as evidence for any statement in this paper.
+
+\begin{thebibliography}{99}
+\bibitem{fer10} J. A. Fernando, H. Trinh, L. Jennings. Functional observability and the design of minimum order linear functional observers. \emph{IEEE Trans. Automat. Control} 55(5):1268--1273, 2010.
+\bibitem{dar25} M. Darouach, J. A. Fernando. On functional observability and functional observer design. \emph{Automatica}, vol. 173, Art. no. 112115, 2025, doi: 10.1016/j.automatica.2025.112115.
+\bibitem{fer26a} J. A. Fernando. A minimum-order functional observer beyond the Darouach and Luenberger constructions. arXiv:2609.33615, 2026 (preprint).
+\bibitem{fer26b} J. A. Fernando. Complete characterization of minimum-order functional observers from Darouach to Luenberger. arXiv:2609.37992, 2026 (preprint).
+\bibitem{paperI} Z. Liu. Deciding functional observer feasibility: compression, certificates, and parameterized algorithms. Companion paper (Paper I).
+\bibitem{paperII} Z. Liu. Minimum order and minimum-order construction for functional observers. Companion paper (Paper II).
+\bibitem{hj13} R. A. Horn, C. R. Johnson. \emph{Matrix Analysis}. 2nd ed. Cambridge Univ. Press, 2013.
+\bibitem{vzgg13} J. von zur Gathen, J. Gerhard. \emph{Modern Computer Algebra}. 3rd ed. Cambridge Univ. Press, 2013.
+\bibitem{lan02} S. Lang. \emph{Algebra}. Revised 3rd ed. Springer, 2002.
+\bibitem{emi99} I. Z. Emiris, B. Mourrain. Matrices in elimination theory. \emph{J. Symbolic Comput.} 28(1--2):3--44, 1999, doi: 10.1006/jsco.1998.0266.
+\end{thebibliography}
+
+\end{document}

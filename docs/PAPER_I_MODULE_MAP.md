@@ -128,6 +128,15 @@ docstring so a reader can see the author's stated purpose.
 | `Q1Paper/PaperI/S08_ChartEquivalence/ReindexAlgebraic.lean` | 2 | 0 | — | Gram field needs `minorFamily`, which wants `Fin` indices. |
 | `Q1Paper/PaperI/S08_ChartEquivalence/ReindexSpectral.lean` | 1 | 0 | — | scalar multiplication and the subtraction. |
 | `Q1Paper/PaperI/S08_ChartEquivalence/Soundness.lean` | 2 | 0 | — | certificate, which characterises the complex-λ condition — complex implies real). |
+| `Q1Paper/PaperV/Audit.lean` | 0 | 0 | — | The axiom footprint of every declaration of Paper V's Lean development. |
+| `Q1Paper/PaperV/Claims.lean` | 0 | 0 | — | order, each with the declarations that carry it. |
+| `Q1Paper/PaperV/ClaimsCheck.lean` | 0 | 0 | — | breaks this build instead of silently invalidating the claims table. |
+| `Q1Paper/PaperV/Fibre.lean` | 5 | 0 | — | §II, Theorem 1 (**the fibre is a coset of `T ⊓ U`**). |
+| `Q1Paper/PaperV/MainTheorems.lean` | 0 | 0 | — | specialisation lemma (Lemma 2) that carries the criterion. |
+| `Q1Paper/PaperV/Read/All.lean` | 0 | 0 | — | Reading entry point of Paper V: §II (the fibre) and §III (the specialisation lemma). |
+| `Q1Paper/PaperV/Read/S01_Fibre.lean` | 0 | 0 | — | rename breaks the build instead of silently rotting the map. |
+| `Q1Paper/PaperV/Read/S02_Criterion.lean` | 0 | 0 | — | §III  The criterion: the specialisation lemma. |
+| `Q1Paper/PaperV/Specialize.lean` | 3 | 0 | — | §III, Lemma 2 (**specialisation does not drop the λ-degree**). |
 | `Q1Paper/RankAdditivity.lean` | 2 | 0 | — | `rank [H_A; H] = rank H  ⟺  row H_A ⊆ row H`. |
 | `Q1Paper/RankConsistency.lean` | 3 | 0 | — | the paper (and checked by c311); this file isolates the subspace form. |
 | `Q1Paper/RankIdentity.lean` | 4 | 0 | — | the identity through which every compression step of the paper passes. |

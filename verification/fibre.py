@@ -1,0 +1,117 @@
+"""The free-row fibre of Paper V, and the criterion of Theorem 4, in exact arithmetic.
+
+Given the compressed data `(H, Z'', T)` of a functional-observer candidate -- `H = L N`
+the compressed observer block, `Z''` the compressed system block, `T` the intrinsic
+space of row pairs -- and a row `i`, the fibre of row `i` is
+
+    F_i = { x in row T : x + H_i Z'' in row H }.
+
+Theorem 1 says `F_i` is empty or a coset of `T ∩ row H`; Theorem 4 says the whole fibre
+is feasible exactly when the greatest common divisor of the `d'`-minors of
+`λ H - H Z'' - G'`, computed over the fibre's function field, has degree zero.
+
+This module is a *checker*, not a proof.  It solves the membership system completely
+(all `k` equations, not one of them), asserts the dimension it expects, and only then
+reports the gcd degree.  `Q1Paper/PaperV/Fibre.lean` and `.../Specialize.lean` carry the
+machine-checked part.
+
+Usage:
+    python fibre.py            # runs the two calibration instances of the paper
+"""
+
+from __future__ import annotations
+
+import itertools
+import sys
+
+import sympy as sp
+
+LAM = sp.symbols("lambda")
+
+
+def fibre(H, Z, T):
+    """Return `(G, params)`: the fibre of every row as a symbolic point, or `(None, None)`.
+
+    The membership system is `x + H_i Z = c·H` with `x` in `row T` and `c` ranging over
+    **all** rows of `H` (the first `rank H` rows of `H` need not be independent).
+    """
+    q, k = H.shape
+    t = T.rows
+    ps = sp.symbols(f"p0:{q * (t + q) + 1}")
+    G = sp.zeros(q, k)
+    xs = ps[: t * q]
+    for i in range(q):
+        xv = [xs[i * t + j] for j in range(t)]
+        cs = sp.symbols(f"c{i}_0:{q}")
+        x = sum((xv[j] * T.row(j) for j in range(t)), sp.zeros(1, k))
+        comb = sum((cs[l] * H.row(l) for l in range(q)), sp.zeros(1, k))
+        eqs = list(sp.expand(x + H.row(i) * Z - comb))
+        sol = sp.linsolve(eqs, list(xv) + list(cs))
+        if sol == sp.EmptySet:
+            return None, None
+        sol = list(sol)[0]
+        sub = dict(zip(list(xv) + list(cs), sol))
+        G[i, :] = sp.Matrix([[sp.simplify(x.subs(sub)[0, j]) for j in range(k)]])
+    return G, ps
+
+
+def inner_deg(H, Z, G):
+    """Degree of the gcd of all `d'`-minors of `λ H - H Z - G` (Theorem 4: `0` = feasible)."""
+    q, k = H.shape
+    d = H.rank()
+    P = LAM * H - H * Z - G
+    minors = [sp.expand(P[list(rs), list(cs)].det())
+              for rs in itertools.combinations(range(q), d)
+              for cs in itertools.combinations(range(k), d)]
+    nonzero = [m for m in minors if sp.expand(m) != 0]
+    if not nonzero:
+        return -1, None
+    g = nonzero[0]
+    for m in nonzero[1:]:
+        g = sp.gcd(g, m)
+    return (sp.degree(g, LAM) if g != 0 else -2), g
+
+
+def main() -> int:
+    # Example 1 of the paper (§V): a feasible fibre at t = 2.
+    H1 = sp.Matrix([[2, 2], [-1, -1], [2, 1]])
+    Z1 = sp.Matrix([[1, 2], [1, 1]])
+    T1 = sp.Matrix([[1, 0]])
+    G1, _ = fibre(H1, Z1, T1)
+    assert G1 is not None, "Example 1: the fibre must be nonempty"
+    assert H1.rank() == 2
+    deg1, g1 = inner_deg(H1, Z1, G1)
+    assert deg1 == 0, f"Example 1 must be feasible, got degree {deg1}"
+    assert sp.simplify(g1 - 1) == 0
+    print("Example 1 (feasible):  gcd = 1, degree 0")
+
+    # Example 2 of the paper (§V): a bad point, gcd = λ + 3.
+    H2 = sp.Matrix([[1, 0, 0], [0, 1, 1], [0, 0, 0]])
+    Z2 = sp.Matrix([[-2, -2, 0], [-2, 1, -2], [1, 0, -1]])
+    T2 = sp.Matrix([[1, 0, 0], [0, 1, 0]])
+    G2, _ = fibre(H2, Z2, T2)
+    assert G2 is not None, "Example 2: the fibre must be nonempty"
+    deg2, g2 = inner_deg(H2, Z2, G2)
+    assert deg2 == 1, f"Example 2 must be bad, got degree {deg2}"
+    assert sp.simplify(g2 - (LAM + 3)) == 0, f"expected λ+3, got {sp.factor(g2)}"
+    assert not (g2.free_symbols - {LAM}), "the bad factor must not depend on the fibre"
+    print("Example 2 (bad):       gcd = λ + 3, parameter independent")
+
+    # Example 3 of the paper (§V): the thin region can be feasible.
+    k = 3
+    T3 = sp.Matrix([[1, 0, 0], [0, 1, 0]])
+    Z3 = sp.zeros(3, 3)
+    H3 = sp.Matrix([[1, 0, 0], [1, 0, 0]])
+    G3, _ = fibre(H3, Z3, T3)
+    assert G3 is not None
+    assert H3.rank() == 1
+    deg3, g3 = inner_deg(H3, Z3, G3)
+    assert deg3 == 0, f"Example 3 must be feasible, got degree {deg3}"
+    print("Example 3 (thin):      gcd = 1, degree 0")
+
+    print("PASS: the three examples of §V are decided exactly")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -5,8 +5,9 @@ This repository is the artifact for the paper
 > **Parameterized algorithms for functional observer feasibility**
 
 It contains the Lean 4 formalization, the exact rational verification scripts, and the LaTeX sources
-of the two papers in this repository — Paper I (decision complexity, the formalised one) and Paper II
-(minimum order).  Papers III and IV exist but are **not** part of this repository.
+of the three papers in this repository — Paper I (decision complexity, the formalised one), Paper II
+(minimum order) and Paper V (the free-row fibre).  Papers III and IV exist but are **not** part of
+this repository.
 
 The paper studies the decision complexity of minimum-order functional observer design:
 given $(A,C,L_0)$ and a prescribed order $q$, decide whether an observer
@@ -20,6 +21,8 @@ $\exists\mathbb R$.
 ```
 paper/          the paper: .tex and .pdf only
                 paper_I_dec            decision complexity (Paper I)
+                paper_II_minorder      minimum order (Paper II)
+                paper_V_fibre          the free-row fibre (Paper V)
 docs/           five documents: the entry point, the mathematics, and the two maps
                 START_HERE.md                  **start here** — what this repo is, how to verify it
                 CONVENTIONS.md                 the rules: what is published, how to name, verify
@@ -53,6 +56,11 @@ Papers (`pdflatex`, two passes, or `latexmk -pdf`):
 ```text
 cd paper && pdflatex paper_I_dec.tex && pdflatex paper_I_dec.tex
 ```
+
+Paper V (the free-row fibre) is `paper/paper_V_fibre.tex`; its Lean entry point is
+`lake build Q1Paper.PaperV.MainTheorems` and its axiom audit is
+`lake env lean Q1Paper/PaperV/Audit.lean` (8 declarations).  The evidence it adds to
+§V is `verification/fibre.py` (the three examples, decided exactly).
 
 ## What is kernel-checked
 
