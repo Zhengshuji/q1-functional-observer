@@ -321,11 +321,12 @@ gives the stated bound.
 
 \begin{defn}\label{def:bad}
 Fix $U_0=\operatorname{row}(L_0N)$. For $U\in\mathrm{Gr}(d',k)$ with $U\supseteq U_0$, call $U$
-\emph{bad} if $\mathcal F_U\ne\varnothing$ and there is a single $\lambda_0$ such that every $d'$-minor
-of $\lambda_0H-HZ''-G'$ vanishes for \emph{every} $G'\in\mathcal F_U$. Write $\mathcal B$ for the bad
-set, and call $U$ \emph{pointwise bad} if merely every $G'\in\mathcal F_U$ fails $(5b)$ at some
-$\lambda$ depending on $G'$; the two notions coincide under the hypotheses of
-Theorem~\ref{thm:factor} and are distinguished up to that point.
+\emph{bad} if $\mathcal F_U\ne\varnothing$ and every $G'\in\mathcal F_U$ fails $(5b)$ at some $\lambda$
+depending on $G'$ (the pointwise notion); call $U$ \emph{uniformly bad} if moreover a single $\lambda_0$
+works for all $G'$, i.e.\ if every $d'$-minor of $\lambda_0H-HZ''-G'$ vanishes for every
+$G'\in\mathcal F_U$. Write $\mathcal B$ for the bad set and $\mathcal B_{\mathrm{unif}}$ for the uniformly
+bad set. Theorem~\ref{thm:factor} shows that the two coincide when $q>d'$ and the fibre direction is
+common to all rows.
 \end{defn}
 
 \begin{cor}\label{cor:every-bad}
@@ -353,8 +354,9 @@ $q_{I,m}(\lambda_0)=0$ for all $I,m$. So a common root exists exactly when some 
 fibre bad at every point.
 \end{proof}
 
-\begin{cor}[The bad set is closed]\label{cor:closed}
-$\mathcal B$ is closed in $\mathrm{Gr}(d',k)$.
+\begin{cor}[The uniformly bad set is closed]\label{cor:closed}
+$\mathcal B_{\mathrm{unif}}$ is closed in $\mathrm{Gr}(d',k)$; hence, under the hypotheses of
+Theorem~\ref{thm:factor}, so is $\mathcal B$.
 \end{cor}
 
 \begin{proof}
@@ -378,8 +380,9 @@ standard charts cover $\mathrm{Gr}(d',k)$, hence $\mathcal B$ is closed.
 \begin{thm}[Fixed spectral factor]\label{thm:factor}
 Let $U$ be such that $\mathcal F_U\ne\varnothing$, $q>d'$, and let $H=XV$ be a full-row-rank factorisation and $V^{+}$ a right inverse of $V$. Write $B_0:=H_AV^{+}$ and suppose the fibre direction is common
 to all rows, i.e.\ $H_AV^{+}=B_0+Y'M$ with $Y'\in\mathbb C^{q\times a}$, $M\in\mathbb C^{a\times d'}$
-(as it is for \eqref{eq:fibre}). If the fibre is bad (Definition~\ref{def:bad}) then $g\in\mathbb C[\lambda]$: the
-common divisor does not depend on the fibre parameters.
+(as it is for \eqref{eq:fibre}). If every point of the fibre fails $(5b)$ (i.e.\ $U$ is bad in the sense of Definition~\ref{def:bad}),
+then $U$ is uniformly bad and $g\in\mathbb C[\lambda]$: the common divisor does not depend on the fibre
+parameters.
 \end{thm}
 
 \begin{proof}
@@ -534,8 +537,8 @@ there, and a stated sampling distribution; we do not have them, and we do not cl
 \begin{remark}[Constants]\label{rem:constants}
 The failure probability of the test is explicit. The coefficient polynomials $q_{I,m}$ have degree at
 most $d'$ in $\lambda$, so the resultant $D$ of Theorem~\ref{thm:rp} has $t$-degree at most
-$2d'^{2}$. Sampling the fibre parameters from the grid $\{0,\dots,4d'^{2}\}^{qa}$ (so $|S|=4d'^{2}+1$) therefore misses the
-zero set of $D$ with probability at most $1/4$, i.e.\ it succeeds with probability at least $3/4$, and the coefficient grid contributes the term
+$2d'^{2}$. Sampling the fibre parameters from a grid with $|S|\ge8d'^{2}$ therefore misses the zero set of $D_{c}$
+with probability at most $1/4$, i.e.\ it succeeds with probability at least $3/4$, and the coefficient grid contributes the term
 $d'/|S_c|$ of Theorem~\ref{thm:rp}; $O(\log(1/\varepsilon))$ independent trials of the inner test
 bring its failure probability below $\varepsilon$. Everything else in the test is exact: the ranks,
 the compatibility test $UZ''\subseteq U+T$ and the evaluation of the resultant. This is a statement
