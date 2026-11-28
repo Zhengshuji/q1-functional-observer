@@ -8,6 +8,7 @@ import Q1Paper.PaperV.CoeffTest
 import Q1Paper.PaperV.KerRank
 import Q1Paper.PaperV.FibreDim
 import Q1Paper.PaperV.UnitIdeal
+import Q1Paper.PaperV.FamilyGcd
 
 /-!
 Q1Paper/PaperV/MainTheorems.lean
