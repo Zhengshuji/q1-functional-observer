@@ -130,10 +130,11 @@ docstring so a reader can see the author's stated purpose.
 | `Q1Paper/PaperI/S08_ChartEquivalence/Soundness.lean` | 2 | 0 | — | certificate, which characterises the complex-λ condition — complex implies real). |
 | `Q1Paper/PaperV/Audit.lean` | 0 | 0 | — | The axiom footprint of every declaration of Paper V's Lean development. |
 | `Q1Paper/PaperV/Claims.lean` | 0 | 0 | — | unfolding `Q1Paper.PaperV.mem_fibre`. |
-| `Q1Paper/PaperV/ClaimsCheck.lean` | 0 | 0 | — | declarations here are exactly the 61 `#print axioms` lines of `Audit.lean`. |
+| `Q1Paper/PaperV/ClaimsCheck.lean` | 0 | 0 | — | declarations here are exactly the 62 `#print axioms` lines of `Audit.lean`. |
 | `Q1Paper/PaperV/CoeffTest.lean` | 4 | 0 | — | fibre" is the same as "every coefficient polynomial `q_{I,m}` vanishes at `λ₀`". |
 | `Q1Paper/PaperV/ColumnDrop.lean` | 3 | 0 | — | §IV, Proposition 16 — the linear-algebra kernel of **column drop**. |
 | `Q1Paper/PaperV/Criterion.lean` | 2 | 0 | — | §III, Theorem 4 in Lean form (sufficiency direction). |
+| `Q1Paper/PaperV/CriterionNecessity.lean` | 2 | 0 | — | §III, Theorem 4's necessity direction in matrix form. |
 | `Q1Paper/PaperV/CriticalSet.lean` | 2 | 0 | — | §IV, the finiteness of the critical set `A` in the proof of Theorem 13. |
 | `Q1Paper/PaperV/Enumeration.lean` | 2 | 0 | — | §V, the logical skeleton of Theorem 22's enumeration. |
 | `Q1Paper/PaperV/FamilyGcd.lean` | 3 | 0 | — | §III, the finite-family form of the criterion's algebraic core. |

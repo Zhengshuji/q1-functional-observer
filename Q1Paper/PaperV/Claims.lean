@@ -10,7 +10,7 @@ name below resolves, so a rename breaks the build instead of silently invalidati
 The three tiers, used for every item below and mirrored in `docs/PAPER_V_GUIDE.md`:
 
 * **complete** — the paper's statement of the item is formalised as stated (modulo the paper's
-  standing hypotheses), 61 declarations in total, audited in `Audit.lean`;
+  standing hypotheses), 62 declarations in total, audited in `Audit.lean`;
 * **partial** — the mathematical core of the item is formalised but the full statement is not
   (typically because assembling it needs multivariate gcds, Grassmannians, or probability);
 * **paper only** — not formalised, with the reason.
@@ -32,7 +32,7 @@ Nothing is silently omitted; every "paper only" item says why.
   `T ≤ U` — `Q1Paper.PaperV.le_of_finrank_eq_one`.
 -/
 
-/-! ## §III  The criterion (Theorem 4) — complete (algebraic core; matrix instance assembled from parts)
+/-! ## §III  The criterion (Theorem 4) — complete (matrix form)
 
 * **Lemma 5 (specialisation)**: a nonzero constant λ-leading coefficient survives specialisation, so
   the λ-degree cannot drop — `Q1Paper.PaperV.natDegree_map_eval_of_leadingCoeff_const`; divisibility
@@ -64,6 +64,10 @@ Nothing is silently omitted; every "paper only" item says why.
   common root — `Q1Paper.PaperV.exists_common_root_of_gcd` and its usable form
   `Q1Paper.PaperV.exists_common_root_of_gcd_family`.  This closes the Gauss step that had been
   paper-side in the first version of the formalisation.
+* **Theorem 4, necessity in matrix form (CriterionNecessity.lean)**:
+  `Q1Paper.PaperV.rank_lt_of_gcd_pos` bundles the root and Gauss steps with the matrix minors:
+  a positive-degree monic common divisor of the `d`-minors over `ℂ(t)[λ]`, plus one minor with
+  nonzero constant leading coefficient, forces `rank < d` at some `λ` for every specialisation.
 * **Minors, evaluation, rank**: `Q1Paper.PaperV.eval_det_submatrix` (evaluating a minor is taking
   the minor of the evaluation), and both directions of "rank ≥ d ⟺ some d-minor is nonzero" —
   `Q1Paper.PaperV.exists_submatrix_det_ne_zero_of_le_rank`,

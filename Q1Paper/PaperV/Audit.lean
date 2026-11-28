@@ -8,8 +8,8 @@ The axiom footprint of every declaration of Paper V's Lean development.
 Hand-written (the Paper V tree is small; `scripts/generate_audit.py` generates the
 Paper II counterpart).  Every audited declaration must depend only on `propext`,
 `Classical.choice` and `Quot.sound`; `scripts/check_paperI_axioms.py` enforces this on
-the output of `lake env lean Q1Paper/PaperV/Audit.lean`.  The 61 lines here are
-exactly the 61 `#check`s of `ClaimsCheck.lean`.
+the output of `lake env lean Q1Paper/PaperV/Audit.lean`.  The 62 lines here are
+exactly the 62 `#check`s of `ClaimsCheck.lean`.
 -/
 
 -- Fibre.lean
@@ -106,6 +106,9 @@ exactly the 61 `#check`s of `ClaimsCheck.lean`.
 #print axioms Q1Paper.PaperV.exists_primitive_divisor_of_monic_dvd
 #print axioms Q1Paper.PaperV.exists_common_root_of_gcd
 #print axioms Q1Paper.PaperV.exists_common_root_of_gcd_family
+
+-- CriterionNecessity.lean (Theorem 4, necessity in matrix form)
+#print axioms Q1Paper.PaperV.rank_lt_of_gcd_pos
 
 -- Enumeration.lean (Theorem 22, enumerative skeleton)
 #print axioms Q1Paper.PaperV.exists_iff_exists_mem_finset

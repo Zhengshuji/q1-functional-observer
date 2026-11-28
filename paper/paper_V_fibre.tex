@@ -856,9 +856,10 @@ The three theorems that are not machine-checked in the artifact (13, 12/14 and 1
 above) are exactly the ones whose proofs use the geometry of the Grassmannian rather than linear
 algebra; the split, including the steps that remain paper-side, is recorded in the artifact's
 documentation. Theorem~\ref{thm:criterion} is the boundary case: its sufficiency direction, its
-specialisation lemma, its root step and the Gauss step from the gcd over $\mathbb C(t)[\lambda]$ to
-a primitive divisor over the coordinate ring are kernel-checked; what is not a single bundled
-declaration is the matrix instance that feeds the minors in. The global
+specialisation lemma, its root step, the Gauss step from the gcd over $\mathbb C(t)[\lambda]$ to a
+primitive divisor over the coordinate ring, and the matrix instance that feeds the minors in are
+kernel-checked (the necessity direction is the single declaration
+\texttt{rank\_lt\_of\_gcd\_pos}). The global
 closedness question of Section~\ref{sec:open}(E) is not merely unproved:
 it is false (Example~\ref{ex:noclose}), so no strengthening of Corollary~\ref{cor:closed} along the
 strata is available.
