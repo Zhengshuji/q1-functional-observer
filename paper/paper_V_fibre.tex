@@ -114,10 +114,10 @@ $\lambda H-H_A$, computed over the rational function field of the fibre, has deg
 (Theorem~\ref{thm:intrinsic}), the witness it produces has polynomial height
 (Theorem~\ref{thm:witness}), and testing it is a one-sided randomised procedure
 (Theorem~\ref{thm:rp}). Section~\ref{sec:bad} characterises the failure of the whole fibre: when
-$q>d'$ the failure is a fixed spectral factor (Theorem~\ref{thm:factor}), hence the bad set is closed
-(Theorem~\ref{thm:closed}) and infeasibility is exactly containment of the compatibility stratum in
-the bad set (Theorem~\ref{thm:no}). Section~\ref{sec:algorithms} turns this into procedures on an
-explicit region (Theorem~\ref{thm:regime}) and settles the stratum $t=1$ by enumeration
+$q>d'$ the failure is a fixed spectral factor (Theorem~\ref{thm:factor}), hence the bad set is closed on each stratum of constant $a$ (Theorem~\ref{thm:closed}; closedness on the
+whole Grassmannian is open, Section~\ref{sec:open}) and infeasibility is exactly containment of the
+compatibility stratum in the bad set (Theorem~\ref{thm:no}). Section~\ref{sec:algorithms} turns this into procedures on an
+explicit region (Theorem~\ref{thm:regime}) and settles the stratum $t=1$ by enumeration when the invariant subspaces form a finite set
 (Theorem~\ref{thm:t1}). Section~\ref{sec:open} states what remains open.
 
 \subsection{What is not claimed}
@@ -453,9 +453,10 @@ claimed.
 \begin{thm}[Closed; not necessarily thin]\label{thm:closed}
 Assume $q>d'$ and the common-direction hypothesis of Theorem~\ref{thm:factor}, so that badness at
 $U$ is equivalent to the vanishing of the coefficient polynomials $q_{I,m}$ of
-Proposition~\ref{prop:coeff} at a fixed $\lambda_0$. Then $\mathcal B$ is closed in
-$\mathrm{Gr}(d',k)$; the feasible set is relatively open in the compatibility stratum
-$\mathcal C=\{U\supseteq U_0:\ \mathcal F_U\ne\varnothing\}$, which is itself closed.
+Proposition~\ref{prop:coeff} at a fixed $\lambda_0$. Then, on each stratum of constant
+$a=\dim(U\cap T)$, the set $\mathcal B$ is closed and the feasible set is relatively open in the
+compatibility stratum $\mathcal C=\{U\supseteq U_0:\ \mathcal F_U\ne\varnothing\}$. Closedness on the
+whole of $\mathrm{Gr}(d',k)$ is left open (Section~\ref{sec:open}).
 \end{thm}
 
 \begin{proof}
@@ -727,8 +728,8 @@ $\Lambda(p)$ is a polynomial matrix describing the fibre direction --- which wou
 polynomial in $p$ without choosing a frame.
 \item \emph{Hardness.} No reduction is given in either direction. Since on the region
 $d'+t-k\ge s$ feasibility is \emph{accepted} one-sidedly (Theorem~\ref{thm:regime}), a hardness proof
-would have to encode its instance into the thin stratum (A); conversely a polynomial algorithm would
-have to decide containment there. Both directions are open, and neither is claimed.
+could target the thin stratum (A); conversely a polynomial algorithm would have to decide containment
+there. Neither direction is forced by what is proved here. Both directions are open, and neither is claimed.
 \end{enumerate}
 
 \subsection{Reproducibility and evidence}\label{sec:repro}
