@@ -53,4 +53,16 @@ theorem isUnit_gcd_iff_no_common_root {K : Type*} [Field K] [IsAlgClosed K]
       Polynomial.dvd_iff_isRoot.mp
         (dvd_trans (Polynomial.dvd_iff_isRoot.mpr hx) (Finset.gcd_dvd hi))
 
+/-- **Theorem 4, sufficiency at a point.** If the family of minors has gcd one, then at every `x` at
+least one member of the family is nonzero at `x`: this is the step "the pencil has full rank at every
+`λ`" in the criterion. -/
+theorem exists_eval_ne_zero_of_isUnit_gcd {K : Type*} [Field K] [IsAlgClosed K]
+    {ι : Type*} (s : Finset ι) (f : ι → Polynomial K) (hne : ∀ i ∈ s, f i ≠ 0)
+    (hgcd : IsUnit (s.gcd f)) (x : K) : ∃ i ∈ s, (f i).eval x ≠ 0 := by
+  have h := (isUnit_gcd_iff_no_common_root s f hne).mp hgcd x
+  push_neg at h
+  obtain ⟨i, hi, hne0⟩ := h
+  exact ⟨i, hi, by simpa [Polynomial.IsRoot.def] using hne0⟩
+
+
 end Q1Paper.PaperV

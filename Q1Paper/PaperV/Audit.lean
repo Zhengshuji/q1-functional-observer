@@ -68,3 +68,4 @@ exactly the twenty-eight `#check`s of `ClaimsCheck.lean`.
 #print axioms Q1Paper.PaperV.exists_common_root_of_not_isUnit
 #print axioms Q1Paper.PaperV.isUnit_gcd_iff_no_common_root
 #print axioms Q1Paper.PaperV.eval_det_submatrix
+#print axioms Q1Paper.PaperV.exists_eval_ne_zero_of_isUnit_gcd

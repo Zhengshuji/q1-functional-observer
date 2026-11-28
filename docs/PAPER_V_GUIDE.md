@@ -39,10 +39,10 @@ compatibility is a genuine constraint.
 | Lemma 2 (specialisation) | `natDegree_map_eval_of_leadingCoeff_const`, `map_dvd_of_dvd` | `Q1Paper/PaperV/Specialize.lean` |
 | Corollary 8 (shape) | `specialized_common_factor` | `Q1Paper/PaperV/Specialize.lean` |
 
-The axiom audit is `Q1Paper/PaperV/Audit.lean` (35 declarations, all on
+The axiom audit is `Q1Paper/PaperV/Audit.lean` (36 declarations, all on
 `propext`, `Classical.choice`, `Quot.sound`); `scripts/check.sh` runs it.  The claims
 table is `Q1Paper/PaperV/Claims.lean` and its machine check is
-`Q1Paper/PaperV/ClaimsCheck.lean` (the same thirty-five declarations).
+`Q1Paper/PaperV/ClaimsCheck.lean` (the same thirty-six declarations).
 
 ## What is *not* machine-checked, and why
 
