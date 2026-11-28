@@ -5,7 +5,7 @@ Q1Paper/PaperV/ClaimsCheck.lean
 
 Machine-checked index: one `#check` per formalised item of `Claims.lean`.  A rename
 breaks this build instead of silently invalidating the claims table.  The fifty-two
-declarations here are exactly the fifty-two `#print axioms` lines of `Audit.lean`.
+declarations here are exactly the fifty-four `#print axioms` lines of `Audit.lean`.
 -/
 
 -- §II  The fibre (Theorem 2)
@@ -89,3 +89,7 @@ declarations here are exactly the fifty-two `#print axioms` lines of `Audit.lean
 -- CriticalSet.lean (Theorem 13, finiteness of the critical set)
 #check @Q1Paper.PaperV.natDegree_det_smul_sub_X_le
 #check @Q1Paper.PaperV.card_roots_le_of_coeff_ne_zero
+
+-- UniformBadness.lean (uniform ⇒ pointwise)
+#check @Q1Paper.PaperV.exists_common_root_of_uniform_factor
+#check @Q1Paper.PaperV.map_evalRingHom_map_C

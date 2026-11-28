@@ -8,8 +8,8 @@ The axiom footprint of every declaration of Paper V's Lean development.
 Hand-written (the Paper V tree is small; `scripts/generate_audit.py` generates the
 Paper II counterpart).  Every audited declaration must depend only on `propext`,
 `Classical.choice` and `Quot.sound`; `scripts/check_paperI_axioms.py` enforces this on
-the output of `lake env lean Q1Paper/PaperV/Audit.lean`.  The fifty-two lines here are
-exactly the fifty-two `#check`s of `ClaimsCheck.lean`.
+the output of `lake env lean Q1Paper/PaperV/Audit.lean`.  The fifty-four lines here are
+exactly the fifty-four `#check`s of `ClaimsCheck.lean`.
 -/
 
 -- Fibre.lean
@@ -93,3 +93,7 @@ exactly the fifty-two `#check`s of `ClaimsCheck.lean`.
 -- CriticalSet.lean (Theorem 13, finiteness of the critical set)
 #print axioms Q1Paper.PaperV.natDegree_det_smul_sub_X_le
 #print axioms Q1Paper.PaperV.card_roots_le_of_coeff_ne_zero
+
+-- UniformBadness.lean (uniform ⇒ pointwise)
+#print axioms Q1Paper.PaperV.exists_common_root_of_uniform_factor
+#print axioms Q1Paper.PaperV.map_evalRingHom_map_C

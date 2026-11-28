@@ -16,6 +16,7 @@ import Q1Paper.PaperV.SpectralRank
 import Q1Paper.PaperV.UnionZeros
 import Q1Paper.PaperV.RootBound
 import Q1Paper.PaperV.CriticalSet
+import Q1Paper.PaperV.UniformBadness
 
 /-!
 Q1Paper/PaperV/MainTheorems.lean
