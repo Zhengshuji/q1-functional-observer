@@ -366,8 +366,7 @@ standard charts cover $\mathrm{Gr}(d',k)$, hence $\mathcal B$ is closed.
 \end{proof}
 
 \begin{thm}[Fixed spectral factor]\label{thm:factor}
-Let $U$ be such that $\mathcal F_U\ne\varnothing$, $q>d'$, and let $V^{+}$ be a left inverse of a
-full-row-rank factorisation $H=XV$. Write $B_0=HZ''V^{+}$ and suppose the fibre direction is common
+Let $U$ be such that $\mathcal F_U\ne\varnothing$, $q>d'$, and let $H=XV$ be a full-row-rank factorisation and $V^{+}$ a right inverse of $V$. Write $B_0=HZ''V^{+}$ and suppose the fibre direction is common
 to all rows, i.e.\ $H_AV^{+}=B_0+Y'M$ with $Y'\in\mathbb C^{q\times a}$, $M\in\mathbb C^{a\times d'}$
 (as it is for \eqref{eq:fibre}). If the fibre is entirely bad then $g\in\mathbb C[\lambda]$: the
 common divisor does not depend on the fibre parameters.
@@ -413,7 +412,7 @@ $Y$ and $g$ is the gcd over the function field, $g\mid h$ in $F[\lambda]$, hence
 C[\lambda]$.
 \end{proof}
 
-\begin{thm}[Closed and thin]\label{thm:closed}
+\begin{thm}[Closed; not necessarily thin]\label{thm:closed}
 Assume $q>d'$ and the common-direction hypothesis of Theorem~\ref{thm:factor}, so that badness at
 $U$ is equivalent to the vanishing of the coefficient polynomials $q_{I,m}$ of
 Proposition~\ref{prop:coeff} at a fixed $\lambda_0$. Then $\mathcal B$ is closed in
@@ -493,8 +492,7 @@ Proposition~\ref{prop:drop} is sufficient but not necessary, and the obstruction
 that no column count detects: at a fixed $\lambda_0$ the columns of $P(\lambda_0)$ may satisfy a
 nontrivial linear relation without any of them vanishing. In the instance of Example~\ref{ex:bad} the
 relation is $\text{column}_1+\text{column}_2=0$ together with $\text{column}_3=0$ at
-$\lambda_0=-3$, so $\operatorname{rank}P(\lambda_0)\le1<d'=2$ although no more than one column is
-eaten by $HZ''$. What the two mechanisms share is that the drop point is a fixed $\lambda_0$: by
+$\lambda_0=-3$, so $\operatorname{rank}P(\lambda_0)\le1<d'=2$ although two columns are eaten by $HZ''$. What the two mechanisms share is that the drop point is a fixed $\lambda_0$: by
 Theorem~\ref{thm:factor} this is forced when $q>d'$, and the shared feature is exactly what makes the
 coefficient test of Proposition~\ref{prop:coeff} a test of the whole fibre rather than of one point.
 
@@ -528,8 +526,8 @@ there, and a stated sampling distribution; we do not have them, and we do not cl
 \begin{remark}[Constants]\label{rem:constants}
 The failure probability of the test is explicit. The coefficient polynomials $q_{I,m}$ have degree at
 most $d'$ in $\lambda$, so the resultant $D$ of Theorem~\ref{thm:rp} has $t$-degree at most
-$2d'^{2}$. Sampling the fibre parameters from the grid $\{0,\dots,2d'^{2}\}^{qa}$ therefore misses the
-zero set of $D$ with probability at least $1/2$, and the coefficient grid contributes the term
+$2d'^{2}$. Sampling the fibre parameters from the grid $\{0,\dots,4d'^{2}\}^{qa}$ (so $|S|=4d'^{2}+1$) therefore misses the
+zero set of $D$ with probability at most $1/4$, i.e.\ it succeeds with probability at least $3/4$, and the coefficient grid contributes the term
 $d'/|S_c|$ of Theorem~\ref{thm:rp}; $O(\log(1/\varepsilon))$ independent trials of the inner test
 bring its failure probability below $\varepsilon$. Everything else in the test is exact: the ranks,
 the compatibility test $UZ''\subseteq U+T$ and the evaluation of the resultant. This is a statement
