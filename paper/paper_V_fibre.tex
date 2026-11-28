@@ -345,14 +345,25 @@ $\det(VV')$, so their gcd is the same). Consider the incidence variety
 &\subseteq\mathbb C^{qa}\times\mathbb P^{1}\times\mathbb P^{d'-1}.
 \end{aligned}
 \end{equation}
-Fix $(\alpha,[v])$ with $Mv\ne0$. The equation splits by rows as
-$Y_i(Mv)=((\alpha X-B_0)_i)v$, one nontrivial linear equation on each $Y_i\in\mathbb C^{a}$, with
-disjoint sets of unknowns; hence the fibre of $\mathcal I$ over $(\alpha,[v])$ has dimension
-$qa-q$, and $\dim\mathcal I\le qa-q+1+(d'-1)=qa-q+d'<qa$ because $q>d'$. Therefore the projection of
-$\mathcal I$ to $\mathbb C^{qa}$ is contained in a proper closed subset, and for $Y$ in a dense open
-set no common root has $Mv\ne0$: every common root satisfies $Mv=0$, and then the equation reduces to
-$(\alpha X-B_0)v=0$, which does not involve $Y$. Hence all common roots come from the finite
-parameter-free set $\{\alpha:\operatorname{rank}(\alpha X-B_0)<d'\}$, and $g\in\mathbb C[\lambda]$.
+Two elementary facts are used. \emph{(i) Fibre dimension.} For fixed $(\alpha,[v])$ with $Mv\ne0$
+the solutions $Y$ of (\ref{eq:incidence}) form an affine subspace of $\mathbb C^{qa}$ of dimension
+exactly $qa-q$: the system reads $Y_i\,(Mv)=((\alpha X-B_0)_i)v$ for $i=1,\dots,q$, and since
+$Mv\neq0$ each equation is a nontrivial linear condition on the $a$ coordinates of its own row $Y_i$,
+the rows having disjoint sets of unknowns. \emph{(ii) Total dimension.} On the open set
+$\{Mv\ne0\}$ the projection of $\mathcal I$ to $\mathbb P^{1}\times\mathbb P^{d'-1}$ has all fibres of
+dimension $qa-q$, and the base has dimension $1+(d'-1)=d'$; hence every component of $\mathcal I$
+meeting that open set has dimension at most $qa-q+d'$. Since $q>d'$,
+\begin{equation}\label{eq:dimI}
+\dim\mathcal I\le qa-q+d'<qa .
+\end{equation}
+Let $\pi:\mathcal I\to\mathbb C^{qa}$ be the projection and $\overline{\pi(\mathcal I)}$ its
+(closed) image. Then $\dim\overline{\pi(\mathcal I)}\le\dim\mathcal I<qa$, so
+$Z:=\overline{\pi(\mathcal I)}$ is a proper closed subset of $\mathbb C^{qa}$. For $Y\notin Z$ no
+point of $\mathcal I$ lies over $Y$ with $Mv\ne0$: every common root of $P(Y,\cdot)$ satisfies
+$Mv=0$. At such a root the equation reduces to $(\alpha X-B_0)v=0$, which does not involve $Y$ at
+all. Hence all common roots come from the finite parameter-free set
+$\{\alpha:\operatorname{rank}(\alpha X-B_0)<d'\}$, that set is nonempty (the fibre is bad), and
+$g\in\mathbb C[\lambda]$ as claimed.
 \end{proof}
 
 \begin{thm}[Closed and thin]\label{thm:closed}
