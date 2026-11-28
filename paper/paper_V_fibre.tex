@@ -552,9 +552,9 @@ reports a bad stratum as feasible.
 Under the hypothesis a generic $U$ satisfies $\dim(U+T)=k$, so compatibility $UZ''\subseteq U+T$ is
 automatic and $\mathcal C$ contains a dense open subset of $\mathrm{Gr}(d',k)$. On the stratum where $a$ is constant, Theorem~\ref{thm:closed} gives that the feasible set is relatively
 open and, when nonempty, dense in the component that meets it, so a $U$ drawn at random \emph{from that
-stratum} is feasible with positive probability, provided the sampling distribution is absolutely continuous
-with respect to Lebesgue measure in a chart of the stratum (a nonempty Zariski-open subset of an
-irreducible variety has full measure for such a distribution); sampling the ambient Grassmannian gives no
+stratum} is feasible with positive probability, provided the sampling distribution on rational points of the stratum
+assigns positive mass to every nonempty relatively open subset --- for instance the uniform distribution on
+a rational grid whose range grows, which eventually meets any nonempty open set; sampling the ambient Grassmannian gives no
 such guarantee (Remark~\ref{rem:no-outer-bound}); by Theorem~\ref{thm:witness} a
 feasible point is certified by a witness, which Theorem~\ref{thm:rp} finds with the stated
 probability. If the stratum is entirely bad no witness exists and the procedure never accepts.
@@ -694,8 +694,8 @@ This asymmetry is not an artefact of the proof, and it is not specific to thin s
 Theorem~\ref{thm:regime} is Zariski density \emph{within a fixed stratum}, so the argument yields positive
 probability only for distributions supported on that stratum and absolutely continuous there. Sampling the
 ambient Grassmannian gives no such guarantee, and on a thin stratum ($d'+t-k<s$) the stratum itself has
-measure zero in the ambient space, so the ambient route is unavailable there for that additional reason. The thin stratum is therefore the precise place where a randomised
-algorithm of this shape must fail, and it is the first item of Section~\ref{sec:open}.
+measure zero in the ambient space, so the ambient route is unavailable there for that additional reason. The thin stratum is therefore the first place where this particular sampling argument is
+unavailable; whether some other randomised method decides it is open (Section~\ref{sec:open}(A)).
 
 \section{Open problems}\label{sec:open}
 
@@ -813,8 +813,9 @@ The standard charts of $\mathrm{Gr}(d',k)$ are the sets $G_\alpha$ of subspaces 
 coordinate $\alpha$ does not vanish; each is an affine space with coordinates $p$. Transitions between
 charts are rational maps in the Plücker coordinates, and the only property the argument of
 Corollary~\ref{cor:closed} uses is that the charts are an open cover on which the same intrinsic set
-$\mathcal B$ is described. Closedness of $\mathcal B$ is then local: a subset is closed iff its
-intersection with every member of an open cover is closed in that member.
+$\mathcal B$ is described. On each stratum of constant $a=\dim(U\cap T)$ the argument is local: a subset of a chart is closed iff its
+intersection with every member of an open cover of that stratum is closed there. Closedness on the whole of
+$\mathrm{Gr}(d',k)$ is *not* obtained this way; it is left open in Section~\ref{sec:open}(E).
 
 Two points deserve emphasis, because they are exactly where a careless reading goes wrong.
 First, intrinsicness of $\mathcal B$ is what makes the local descriptions describe \emph{one} set; it
