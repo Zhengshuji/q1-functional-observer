@@ -714,6 +714,14 @@ on the degree of the invariant subspaces carrying a feasible fibre --- note that
 is rational and that the rational case is the one the algorithm of Section~\ref{sec:algorithms}
 produces, so this is a question about \emph{which} feasible $U$ the search may have to accept, not
 about the criterion.
+\item \emph{Global closedness of the bad set.} Corollary~\ref{cor:closed} establishes closedness on each
+stratum of constant $a=\dim(U\cap T)$, and Theorem~\ref{thm:no} and the regime statement are stated
+accordingly. Closedness on the whole of $\mathrm{Gr}(d',k)$ would follow from either of two routes we do
+not carry out: (i) ordering the strata so that each is open in the union of those above it, or (ii) a
+coordinate-free description --- ``$f_I(\lambda_0,\cdot)$ vanishes on the fibre'' $\iff$
+$\operatorname{row}\bigl(f_I(\lambda_0,\cdot)\bigr)\subseteq\operatorname{row}(\Lambda(p))$, where
+$\Lambda(p)$ is a polynomial matrix describing the fibre direction --- which would make the condition
+polynomial in $p$ without choosing a frame.
 \item \emph{Hardness.} No reduction is given in either direction. Since on the region
 $d'+t-k\ge s$ feasibility is \emph{accepted} one-sidedly (Theorem~\ref{thm:regime}), a hardness proof
 would have to encode its instance into the thin stratum (A); conversely a polynomial algorithm would
