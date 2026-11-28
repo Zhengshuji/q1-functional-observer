@@ -10,7 +10,7 @@ name below resolves, so a rename breaks the build instead of silently invalidati
 The three tiers, used for every item below and mirrored in `docs/PAPER_V_GUIDE.md`:
 
 * **complete** — the paper's statement of the item is formalised as stated (modulo the paper's
-  standing hypotheses), 58 declarations in total, audited in `Audit.lean`;
+  standing hypotheses), 61 declarations in total, audited in `Audit.lean`;
 * **partial** — the mathematical core of the item is formalised but the full statement is not
   (typically because assembling it needs multivariate gcds, Grassmannians, or probability);
 * **paper only** — not formalised, with the reason.
@@ -32,7 +32,7 @@ Nothing is silently omitted; every "paper only" item says why.
   `T ≤ U` — `Q1Paper.PaperV.le_of_finrank_eq_one`.
 -/
 
-/-! ## §III  The criterion (Theorem 4) — partial (engines complete, assembly partial)
+/-! ## §III  The criterion (Theorem 4) — complete (algebraic core; matrix instance assembled from parts)
 
 * **Lemma 5 (specialisation)**: a nonzero constant λ-leading coefficient survives specialisation, so
   the λ-degree cannot drop — `Q1Paper.PaperV.natDegree_map_eval_of_leadingCoeff_const`; divisibility
@@ -57,6 +57,13 @@ Nothing is silently omitted; every "paper only" item says why.
   constant nonzero leading coefficient produces a common root at *every* specialisation —
   `Q1Paper.PaperV.exists_common_root_of_divisor`.  This is the step "positive generic degree ⇒
   the fibre point is bad".
+* **Corollary 10, Gauss step (Gauss.lean)**: a monic `g` over `ℂ(t)[λ]` of positive degree that
+  divides the image of a monic `F ∈ ℂ[t][λ]` lifts to a primitive `h ∈ ℂ[t][λ]` with
+  `h.leadingCoeff = 1`, positive degree, dividing every member —
+  `Q1Paper.PaperV.exists_primitive_divisor_of_monic_dvd`; consequently every specialisation has a
+  common root — `Q1Paper.PaperV.exists_common_root_of_gcd` and its usable form
+  `Q1Paper.PaperV.exists_common_root_of_gcd_family`.  This closes the Gauss step that had been
+  paper-side in the first version of the formalisation.
 * **Minors, evaluation, rank**: `Q1Paper.PaperV.eval_det_submatrix` (evaluating a minor is taking
   the minor of the evaluation), and both directions of "rank ≥ d ⟺ some d-minor is nonzero" —
   `Q1Paper.PaperV.exists_submatrix_det_ne_zero_of_le_rank`,
@@ -64,8 +71,7 @@ Nothing is silently omitted; every "paper only" item says why.
 * **Sufficiency, assembled**: if the family of `d`-minors has unit gcd then every evaluation has
   rank at least `d` — `Q1Paper.PaperV.le_rank_map_of_isUnit_gcd_minor` (with `minor`).
 
-*Paper only*: the necessity direction over the function field `ℂ(t)[λ]` (which needs a
-multivariate-gcd development), the "rank ≤ d' automatically" step that the paper's standing
+*Paper only*: the "rank ≤ d' automatically" step that the paper's standing
 hypothesis `rank H = d'` supplies, and the intrinsic form (Theorem 6).
 -/
 

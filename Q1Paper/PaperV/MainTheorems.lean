@@ -18,6 +18,7 @@ import Q1Paper.PaperV.RootBound
 import Q1Paper.PaperV.CriticalSet
 import Q1Paper.PaperV.UniformBadness
 import Q1Paper.PaperV.Necessity
+import Q1Paper.PaperV.Gauss
 import Q1Paper.PaperV.Enumeration
 
 /-!

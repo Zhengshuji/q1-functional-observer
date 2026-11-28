@@ -40,21 +40,21 @@ compatibility is a genuine constraint.
 | Lemma 5 (specialisation) | `natDegree_map_eval_of_leadingCoeff_const`, `map_dvd_of_dvd` | `Q1Paper/PaperV/Specialize.lean` |
 | Corollary 10 (shape) | `specialized_common_factor` | `Q1Paper/PaperV/Specialize.lean` |
 
-The axiom audit is `Q1Paper/PaperV/Audit.lean` (58 declarations checked, all on
+The axiom audit is `Q1Paper/PaperV/Audit.lean` (61 declarations checked, all on
 `propext`, `Classical.choice`, `Quot.sound`); `scripts/check.sh` runs it.  The claims
 table is `Q1Paper/PaperV/Claims.lean` and its machine check is
-`Q1Paper/PaperV/ClaimsCheck.lean` (the same 58 declarations).  The 58 is the number of
+`Q1Paper/PaperV/ClaimsCheck.lean` (the same 61 declarations).  The 61 is the number of
 *audited declarations*, not the number of paper items: `Claims.lean` marks how many items are
 complete, which is a strictly smaller set.
 
 ## What is *not* machine-checked, and why
 
-* **Theorem 4's gcd criterion** — *partial*: the algebraic core (Lemma 5, the leading-coefficient
-  step, the Bezout/unit-ideal step, gcd ↔ no common root, minors vs rank) is checked, the
-  sufficiency direction is assembled (`Criterion.lean`), and the necessity side's specialisation
-  and root step is checked (`Necessity.lean`: a positive-degree divisor with constant nonzero
-  leading coefficient gives a common root at every point).  What is *not* checked is the Gauss step
-  from the gcd over `K(t)[λ]` to such a primitive divisor over the coordinate ring.
+* **Theorem 4's gcd criterion** — checked at the level of its algebraic content: the algebraic core
+  (Lemma 5, the leading-coefficient step, the Bezout/unit-ideal step, gcd ↔ no common root, minors
+  vs rank), the sufficiency direction (`Criterion.lean`), the specialisation/root step
+  (`Necessity.lean`) and the Gauss step (`Gauss.lean`) are all formalised.  The paper's matrix
+  instance is assembled from `minor` and `coeff_det_smul_sub_X` rather than a single bundled
+  declaration.
 * **Theorem 13 (fixed spectral factor)** — an incidence-variety dimension count.
 * **Corollary 12 / Theorem 14 (closedness of the bad set)** — quantifier elimination over the
   coefficient space of the coefficient test; stratum by stratum only, and the global statement is
@@ -87,7 +87,7 @@ CI.
 4. §V (examples) —run `python verification/fibre.py`.
 
 
-## Coverage at a glance (58 kernel-checked declarations)
+## Coverage at a glance (61 kernel-checked declarations)
 
 | Paper item | Lean declarations | Module |
 |---|---|---|
@@ -109,15 +109,17 @@ CI.
 | Prop 17 (column dependence) | `rank_lt_of_le_ker`, `matrix_rank_lt_of_le_ker` | `KerRank.lean` |
 | Thm 22 structure step (`T ≤ U` ⟹ compat = invariance) | `map_mem_of_le_sup`, `invariant_iff_compat_of_le` | `Invariant.lean` |
 | Cor 10 root step (positive degree ⇒ common root at every specialisation) | `exists_root_of_natDegree_pos`, `exists_common_root_of_divisor` | `Necessity.lean` |
+| Cor 10 Gauss step (monic gcd over `ℂ(t)[λ]` ⇒ primitive divisor over `ℂ[t][λ]`) | `exists_primitive_divisor_of_monic_dvd`, `exists_common_root_of_gcd`, `exists_common_root_of_gcd_family` | `Gauss.lean` |
 | Thm 22 enumeration skeleton (complete finite list ⇒ decidable search) | `exists_iff_exists_mem_finset`, `decidable_exists_of_complete_finset` | `Enumeration.lean` |
 
 Each row above is **complete** in the sense that the paper's statement of that item is formalised;
 `Claims.lean` carries the same three-tier labels.
 
-**Partial** (core formalised, full statement not): Theorem 4 — the sufficiency direction is
-assembled (`Criterion.lean`); on the necessity side the specialisation/root step is checked
-(`Necessity.lean`), but the Gauss step from the gcd over `ℂ(t)[λ]` to a primitive divisor over the
-coordinate ring is still paper-side.
+**Theorem 4** is now complete at the level of its algebraic content: sufficiency is assembled in
+`Criterion.lean`; necessity has both the specialisation/root step (`Necessity.lean`) and the Gauss
+step (`Gauss.lean`, via Mathlib's `IsIntegrallyClosed.eq_map_mul_C_of_dvd`).  What is not a single
+bundled declaration is the matrix instance — the `d'`-minors of `λH − HZ'' − G'` are fed in through
+`minor` and `coeff_det_smul_sub_X`.
 
 **Paper only, with the reason stated in `Claims.lean`:** Theorem 7 (rational witness and its
 height), Theorem 8 (two-grid probability bound), Theorem 13 (incidence dimension), Corollary 12 /

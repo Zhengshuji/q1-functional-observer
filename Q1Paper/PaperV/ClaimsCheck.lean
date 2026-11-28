@@ -4,8 +4,8 @@ import Q1Paper.PaperV.MainTheorems
 Q1Paper/PaperV/ClaimsCheck.lean
 
 Machine-checked index: one `#check` per formalised item of `Claims.lean`.  A rename
-breaks this build instead of silently invalidating the claims table.  The 58
-declarations here are exactly the 58 `#print axioms` lines of `Audit.lean`.
+breaks this build instead of silently invalidating the claims table.  The 61
+declarations here are exactly the 61 `#print axioms` lines of `Audit.lean`.
 -/
 
 -- §II  The fibre (Theorem 2)
@@ -97,6 +97,11 @@ declarations here are exactly the 58 `#print axioms` lines of `Audit.lean`.
 -- Necessity.lean (Corollary 10, root step)
 #check @Q1Paper.PaperV.exists_root_of_natDegree_pos
 #check @Q1Paper.PaperV.exists_common_root_of_divisor
+
+-- Gauss.lean (Corollary 10, Gauss step)
+#check @Q1Paper.PaperV.exists_primitive_divisor_of_monic_dvd
+#check @Q1Paper.PaperV.exists_common_root_of_gcd
+#check @Q1Paper.PaperV.exists_common_root_of_gcd_family
 
 -- Enumeration.lean (Theorem 22, enumerative skeleton)
 #check @Q1Paper.PaperV.exists_iff_exists_mem_finset
