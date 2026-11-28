@@ -4,7 +4,7 @@ Q1Paper/PaperV/Claims.lean
 The paper interface of Paper V's formalisation: the paper's items in the paper's
 order, each with the declarations that carry it.
 
-This file is narration only 鈥?it declares nothing.  `ClaimsCheck.lean` machine-checks
+This file is narration only 閳?it declares nothing.  `ClaimsCheck.lean` machine-checks
 that every name below resolves, so a rename breaks the build instead of silently
 invalidating this table.
 
@@ -15,45 +15,45 @@ the reason, in the spirit of Paper II's scope notes: they are not silently omitt
 they are not claimed as Lean.
 -/
 
-/-! ## 搂II  The fibre (Theorem 1)
+/-! ## 鎼侷I  The fibre (Theorem 1)
 
-* **The per-row fibre** `{x 鈭?T | x + y 鈭?U}` 鈥?`Q1Paper.PaperV.fibre`.
-* **Nonemptiness** `T 鈭?(U - y) 鈮?鈭?鉄?y 鈭?U + T` 鈥?`Q1Paper.PaperV.fibre_nonempty_iff`.
-* **Coset form**: any point of the fibre generates it as a coset of `T 鈯?U`, so the
-  fibre is affine with direction `T 鈯?U` and dimension `finrank (T 鈯?U)` 鈥?  `Q1Paper.PaperV.fibre_eq_coset`.
+* **The per-row fibre** `{x 閳?T | x + y 閳?U}` 閳?`Q1Paper.PaperV.fibre`.
+* **Nonemptiness** `T 閳?(U - y) 閳?閳?閴?y 閳?U + T` 閳?`Q1Paper.PaperV.fibre_nonempty_iff`.
+* **Coset form**: any point of the fibre generates it as a coset of `T 閳?U`, so the
+  fibre is affine with direction `T 閳?U` and dimension `finrank (T 閳?U)` 閳?  `Q1Paper.PaperV.fibre_eq_coset`.
 * **Product over the rows**: the fibre of the paper is nonempty exactly when every
-  row's translate lies in `U + T` (the row-wise reading of `U Z'' 鈯?U + T`) 鈥?  `Q1Paper.PaperV.fibre_prod_nonempty_iff`.
+  row's translate lies in `U + T` (the row-wise reading of `U Z'' 閳?U + T`) 閳?  `Q1Paper.PaperV.fibre_prod_nonempty_iff`.
 -/
 
-/-! ## 搂III  The criterion (Theorem 4) and its engine
+/-! ## 鎼侷II  The criterion (Theorem 4) and its engine
 
-* **Lemma 2, degree**: a nonzero constant 位-leading coefficient survives
-  specialisation, so the 位-degree cannot drop 鈥?  `Q1Paper.PaperV.natDegree_map_eval_of_leadingCoeff_const`.
-* **Lemma 2, divisibility**: `h 鈭?f` is preserved by specialisation 鈥?  `Q1Paper.PaperV.map_dvd_of_dvd`.
-* **Corollary 8**: a divisor of positive degree with constant nonzero 位-leading
+* **Lemma 2, degree**: a nonzero constant 浣?leading coefficient survives
+  specialisation, so the 浣?degree cannot drop 閳?  `Q1Paper.PaperV.natDegree_map_eval_of_leadingCoeff_const`.
+* **Lemma 2, divisibility**: `h 閳?f` is preserved by specialisation 閳?  `Q1Paper.PaperV.map_dvd_of_dvd`.
+* **Corollary 8**: a divisor of positive degree with constant nonzero 浣?leading
   coefficient keeps positive degree after every specialisation, i.e. a bad generic
-  fibre is bad at every point 鈥?`Q1Paper.PaperV.specialized_common_factor`.
+  fibre is bad at every point 閳?`Q1Paper.PaperV.specialized_common_factor`.
 
-*Paper only*: the equivalence "constant rank `d'` for all 位 鉄?gcd of the `d'`-minors is
-a unit" for a matrix pencil over `K(t)[位]`, and the intrinsic form (Theorem 6).  The
+*Paper only*: the equivalence "constant rank `d'` for all 浣?閴?gcd of the `d'`-minors is
+a unit" for a matrix pencil over `K(t)[浣峕`, and the intrinsic form (Theorem 6).  The
 first is a statement about gcds of matrix minors in a rational function field; both are
-proved in the paper (搂III, 搂III-B).
+proved in the paper (鎼侷II, 鎼侷II-B).
 -/
 
-/-! ## 搂IV  The bad set
+/-! ## 鎼侷V  The bad set
 
 *Paper only*: Theorem 11 (fixed spectral factor, an incidence-variety dimension count),
 Theorem 12 (the bad set is closed: quantifier elimination over the coefficient space of
-the coefficient test), Theorem 13 (infeasibility 鉄?the stratum is contained in the bad
+the coefficient test), Theorem 13 (infeasibility 閴?the stratum is contained in the bad
 set, a logical consequence of Theorem 12), Proposition 14 (column drop, a rank bound at
-a single 位).  The examples of 搂V are decided by exact rational arithmetic in
+a single 浣?.  The examples of 鎼俈 are decided by exact rational arithmetic in
 `verification/`, not in Lean.
 -/
 
-/-! ## 搂V  Algorithms
+/-! ## 鎼俈  Algorithms
 
 *Paper only*: Theorem 15 (the region with automatic compatibility: the argument is
-probabilistic, Schwartz鈥揨ippel plus the closedness of 搂IV) and Theorem 16 (the stratum
-`t = 1`: the implication "feasible 鉄?`U` is `Z''`-invariant" is linear algebra, the
+probabilistic, Schwartz閳ユ彣ippel plus the closedness of 鎼侷V) and Theorem 16 (the stratum
+`t = 1`: the implication "feasible 閴?`U` is `Z''`-invariant" is linear algebra, the
 enumeration is combinatorial).  Neither is claimed as Lean.
 -/

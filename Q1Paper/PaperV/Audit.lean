@@ -18,6 +18,9 @@ the output of `lake env lean Q1Paper/PaperV/Audit.lean`.
 #print axioms Q1Paper.PaperV.fibre_eq_coset
 #print axioms Q1Paper.PaperV.fibre_prod_nonempty_iff
 
+-- ColumnDrop.lean
+#print axioms Q1Paper.PaperV.rank_le_card_compl_of_cols_zero
+
 -- Specialize.lean
 #print axioms Q1Paper.PaperV.natDegree_map_eval_of_leadingCoeff_const
 #print axioms Q1Paper.PaperV.map_dvd_of_dvd

@@ -131,6 +131,7 @@ docstring so a reader can see the author's stated purpose.
 | `Q1Paper/PaperV/Audit.lean` | 0 | 0 | — | The axiom footprint of every declaration of Paper V's Lean development. |
 | `Q1Paper/PaperV/Claims.lean` | 0 | 0 | — | order, each with the declarations that carry it. |
 | `Q1Paper/PaperV/ClaimsCheck.lean` | 0 | 0 | — | breaks this build instead of silently invalidating the claims table. |
+| `Q1Paper/PaperV/ColumnDrop.lean` | 1 | 0 | — | §IV, Proposition 14 — the linear-algebra kernel of **column drop**. |
 | `Q1Paper/PaperV/Fibre.lean` | 5 | 0 | — | §II, Theorem 1 (**the fibre is a coset of `T ⊓ U`**). |
 | `Q1Paper/PaperV/MainTheorems.lean` | 0 | 0 | — | specialisation lemma (Lemma 2) that carries the criterion. |
 | `Q1Paper/PaperV/Read/All.lean` | 0 | 0 | — | Reading entry point of Paper V: §II (the fibre) and §III (the specialisation lemma). |
