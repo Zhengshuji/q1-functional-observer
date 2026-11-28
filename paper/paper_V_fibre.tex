@@ -279,9 +279,12 @@ degree is the same.
 \end{proof}
 
 \begin{thm}[Witness]\label{thm:witness}
-Suppose $U$ is defined over $\mathbb Q$, $\mathcal F_U\ne\varnothing$ and $\deg_\lambda g=0$. Then
-there is $G'\in\mathcal F_U(\mathbb Q)$ whose entries have bit size
-$\operatorname{poly}(\mathcal L,d')$, where $\mathcal L$ is the input length.
+Suppose the input $(A,C,L_0)$ has rational entries and $U$ is defined over $\mathbb Q$, that
+$\mathcal F_U\ne\varnothing$ and $\deg_\lambda g=0$. Then there is $G'\in\mathcal F_U(\mathbb Q)$ whose
+entries have bit size $\operatorname{poly}(\mathcal L,d')$, where $\mathcal L$ is the input length. If the
+only feasible $U$ are defined over an algebraic extension --- which can happen when $t\le1$, where the
+feasible $U$ are invariant subspaces of $Z''$ --- the witness may be algebraic and no height bound is
+claimed (Section~\ref{sec:open}(C)).
 \end{thm}
 
 \begin{proof}
@@ -480,17 +483,21 @@ set is all of the stratum.
 \end{proof}
 
 \begin{thm}[Infeasibility]\label{thm:no}
-Assume $q>d'$ and the common-direction hypothesis of Theorem~\ref{thm:factor}. Let $\mathcal C$ be the
-compatibility stratum for the given $d'$ and $\mathcal B$ the bad set. There
-is no feasible $U$ of dimension $d'$ if and only if $\mathcal C\subseteq\mathcal B$. If
+Assume $q>d'$ and the common-direction hypothesis of Theorem~\ref{thm:factor}, and fix
+$a\ge1$. Write $\mathcal S_a=\{U:\dim(U\cap T)=a\}$, $\mathcal C_a=\mathcal C\cap\mathcal S_a$ and
+$\mathcal B_a=\mathcal B\cap\mathcal S_a$. Then there is no feasible $U$ in $\mathcal S_a$ if and only if
+$\mathcal C_a\subseteq\mathcal B_a$; and if $\mathcal C_a\not\subseteq\mathcal B_a$ then the feasible set is
+dense in some irreducible component of $\mathcal C_a$. If
 $\mathcal C\not\subseteq\mathcal B$ then the feasible set is dense in some irreducible component of the stratum of $\mathcal C$ on which $a$ is
 constant.
 \end{thm}
 
 \begin{proof}
-Immediate from Theorem~\ref{thm:closed}: the feasible set is $\mathcal C\setminus\mathcal B$, and a
-nonempty relatively open subset of an irreducible closed set is dense. Different components can
-behave differently --- one may be entirely bad --- so density is claimed per component.
+Immediate from Theorem~\ref{thm:closed}: within $\mathcal S_a$ the feasible set is
+$\mathcal C_a\setminus\mathcal B_a$ with $\mathcal B_a$ closed in $\mathcal C_a$, so it is relatively
+open there, and a nonempty relatively open subset of an irreducible closed set is dense. Different
+components can behave differently --- one may be entirely bad --- so density is claimed per component,
+and only inside the stratum $\mathcal S_a$.
 \end{proof}
 
 We record a sufficient condition that is checkable in linear algebra and that explains the smallest
