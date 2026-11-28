@@ -281,7 +281,10 @@ degree is the same.
 \begin{thm}[Witness]\label{thm:witness}
 Suppose the input $(A,C,L_0)$ has rational entries and $U$ is defined over $\mathbb Q$, that
 $\mathcal F_U\ne\varnothing$ and $\deg_\lambda g=0$. Then there is $G'\in\mathcal F_U(\mathbb Q)$ whose
-entries have bit size $\operatorname{poly}(\mathcal L,d')$, where $\mathcal L$ is the input length. If the
+entries have bit size $\operatorname{poly}(\mathcal L,d',H_D)$, where $\mathcal L$ is the input length and
+$H_D$ is the height of the resultant $D$ constructed below; the degree of $D$ is at most $2d'^{2}$, but a
+bound on $H_D$ in terms of $\mathcal L$ is \emph{not} proved here (Section~\ref{sec:open}(B)), so the
+unconditional statement `bit size $\operatorname{poly}(\mathcal L,d')$' is not claimed. If the
 only feasible $U$ are defined over an algebraic extension --- which can happen when $t\le1$, where the
 feasible $U$ are invariant subspaces of $Z''$ --- the witness may be algebraic and no height bound is
 claimed (Section~\ref{sec:open}(C)).
@@ -744,7 +747,10 @@ set there, and a specified sampling distribution --- three ingredients we do not
 
 This asymmetry is not an artefact of the proof, and it is not specific to thin strata: the density used in
 Theorem~\ref{thm:regime} is Zariski density \emph{within a fixed stratum}, so the argument yields positive
-probability only for distributions supported on that stratum and absolutely continuous there. Sampling the
+probability only for distributions whose support is the rational points of that stratum (the explicit
+discrete distribution of Theorem~\ref{thm:regime}), so that every nonempty relatively open subset of the
+stratum carries positive mass. Such a distribution is singular with respect to Lebesgue measure, which is
+harmless here: only positive mass on open sets is used, never absolute continuity. Sampling the
 ambient Grassmannian gives no such guarantee, and on a thin stratum ($d'+t-k<s$) the stratum itself has
 measure zero in the ambient space, so the ambient route is unavailable there for that additional reason. The thin stratum is therefore the first place where this particular sampling argument is
 unavailable; whether some other randomised method decides it is open (Section~\ref{sec:open}(A)).
