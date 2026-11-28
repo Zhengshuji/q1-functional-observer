@@ -18,6 +18,10 @@ the output of `lake env lean Q1Paper/PaperV/Audit.lean`.
 #print axioms Q1Paper.PaperV.fibre_eq_coset
 #print axioms Q1Paper.PaperV.fibre_prod_nonempty_iff
 
+-- LeadingCoeff.lean
+#print axioms Q1Paper.PaperV.coeff_det_smul_sub_X
+#print axioms Q1Paper.PaperV.coeff_det_smul_sub_X_ne_zero
+
 -- ColumnDrop.lean
 #print axioms Q1Paper.PaperV.rank_le_card_compl_of_cols_zero
 

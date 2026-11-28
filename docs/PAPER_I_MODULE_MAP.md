@@ -133,6 +133,7 @@ docstring so a reader can see the author's stated purpose.
 | `Q1Paper/PaperV/ClaimsCheck.lean` | 0 | 0 | — | breaks this build instead of silently invalidating the claims table. |
 | `Q1Paper/PaperV/ColumnDrop.lean` | 1 | 0 | — | §IV, Proposition 14 — the linear-algebra kernel of **column drop**. |
 | `Q1Paper/PaperV/Fibre.lean` | 5 | 0 | — | §II, Theorem 1 (**the fibre is a coset of `T ⊓ U`**). |
+| `Q1Paper/PaperV/LeadingCoeff.lean` | 4 | 0 | — | §III, the leading coefficient step behind Theorem 4. |
 | `Q1Paper/PaperV/MainTheorems.lean` | 0 | 0 | — | specialisation lemma (Lemma 2) that carries the criterion. |
 | `Q1Paper/PaperV/Read/All.lean` | 0 | 0 | — | Reading entry point of Paper V: §II (the fibre) and §III (the specialisation lemma). |
 | `Q1Paper/PaperV/Read/S01_Fibre.lean` | 0 | 0 | — | rename breaks the build instead of silently rotting the map. |
