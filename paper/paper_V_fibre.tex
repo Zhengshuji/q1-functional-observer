@@ -920,24 +920,22 @@ open is a constructive description of the feasible set that is stable under such
 \subsection{Reproducibility and evidence}\label{sec:repro}
 
 Every theorem of this paper is accompanied by a proof in the text; selected algebraic steps are
-machine-checked, and the examples are verified independently. The split is stated below. The Lean~4
-development formalises the fibre of Theorem~\ref{thm:fibre} --- the coset description, the
-nonemptiness criterion and its row-by-row product --- and the specialisation lemma
-(Lemma~\ref{lem:specialize}) together with its corollary, which is the only non-trivial step of
-the criterion of Theorem~\ref{thm:criterion}, the leading-coefficient identity that supplies that
-lemma's hypothesis (the $\lambda^{d}$ coefficient of $\det(\lambda H-B)$ is $\det H$), and the rank
-step of Proposition~\ref{prop:drop}, and the algebraic core of the criterion (coprimality of the
-minors $\iff$ no common root, in the normalization-free form), the coefficient test of Proposition~\ref{prop:coeff} in its coefficient form, the rank step of
-Proposition~\ref{prop:drop} (together with its conclusion step) and of Proposition~\ref{prop:dependence},
-the `t=1` structure step of Theorem~\ref{thm:t1} (including the dimension step that reduces it to
-invariance), the assembled coset form of the fibre and its dimension $q\,a$ (Theorem~\ref{thm:fibre}), the Bezout/unit-ideal step behind the criterion, the evaluation bridge between minors and
-their pointwise values, the two directions of ``rank $\ge d$ $\iff$ some $d$-minor is nonzero'', the
-assembled sufficiency direction of the criterion itself, and the covering step of the proof of
-Theorem~\ref{thm:factor} (a finite union of proper zero sets of polynomials is proper); the axiom audit
-covers those fifty-four declarations. What is \emph{not} formalised is stated there too, item by item.
-The dimension count behind Theorem~\ref{thm:factor}, the closedness of
-Theorem~\ref{thm:closed} and the probabilistic argument of Theorem~\ref{thm:regime} are paper
-proofs and are not formalised. The examples of Section~\ref{sec:examples} are certified by exact
+machine-checked, and the examples are verified independently. The split is stated in the artifact.
+The Lean~4 development formalises the fibre of Theorem~\ref{thm:fibre} (coset description,
+nonemptiness, the row-by-row product and the dimension $q\,a$); the specialisation lemma
+(Lemma~\ref{lem:specialize}) with its corollary; the leading-coefficient identity of the criterion;
+its algebraic core (coprimality of the minors $\iff$ no common root); the coefficient test of
+Proposition~\ref{prop:coeff}; the rank steps of Propositions~\ref{prop:drop}
+and~\ref{prop:dependence}; the $t=1$ structure step of Theorem~\ref{thm:t1}; the Bezout/unit-ideal
+step; the minor/rank and evaluation bridges; the sufficiency direction of
+Theorem~\ref{thm:criterion}; the root step and the Gauss step of its necessity direction, and the
+matrix-form necessity as a single declaration (\texttt{rank\_lt\_of\_gcd\_pos}); the covering step
+in the proof of Theorem~\ref{thm:factor}; the counting step behind Theorem~\ref{thm:rp}; and the
+enumeration skeleton of Theorem~\ref{thm:t1}. The axiom audit covers 62 declarations. What is
+\emph{not} formalised is stated there too, item by item. The incidence-dimension count behind
+Theorem~\ref{thm:factor}, the stratum-wise closedness of Corollary~\ref{cor:closed} and
+Theorem~\ref{thm:closed}, and the probabilistic argument of Theorem~\ref{thm:rp} (beyond its
+counting step) are paper proofs and are not formalised. The examples of Section~\ref{sec:examples} are certified by exact
 rational scripts: the fibre's membership system is solved completely, the minors are computed
 symbolically over $\mathbb Q$ and the gcd is taken in $\mathbb Q[\lambda]$, all on the compressed data
 $(H,Z'',T)$. The realisation of the first example as an original $(A,C,L_0,L)$, and the check of
