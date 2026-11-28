@@ -356,9 +356,11 @@ $q_{I,m}(\lambda_0)=0$ for all $I,m$. So a common root exists exactly when some 
 fibre bad at every point.
 \end{proof}
 
-\begin{cor}[The uniformly bad set is closed]\label{cor:closed}
-$\mathcal B_{\mathrm{unif}}$ is closed in $\mathrm{Gr}(d',k)$; hence, under the hypotheses of
-Theorem~\ref{thm:factor}, so is $\mathcal B$.
+\begin{cor}[The uniformly bad set is closed on each stratum]\label{cor:closed}
+Fix the stratum where $a=\dim(U\cap T)$ is constant. Then $\mathcal B_{\mathrm{unif}}$ is closed in that
+stratum, and, under the hypotheses of Theorem~\ref{thm:factor}, so is $\mathcal B$. Closedness on the whole
+of $\mathrm{Gr}(d',k)$ is not claimed: the strata are only locally closed and the jump locus of $a$ is their
+common boundary.
 \end{cor}
 
 \begin{proof}
@@ -378,12 +380,13 @@ compact (equivalently, $\pi$ is proper). No elimination of $\lambda_0$ is perfor
 not depend on any non-degeneracy of the coefficients --- in contrast with a criterion based on a
 resultant, whose vanishing can also signal a degree drop. Therefore
 $$\mathcal B_{\mathrm{unif}}\cap G_\alpha=\pi(\mathfrak S)$$
-is closed in $G_\alpha$. One point of care: the coefficients $a_{I,m,e}(p)$ come from a parametrisation
-of the fibre, and the dimension $a=\dim(U\cap T)$ can jump inside a chart. Stratify $G_\alpha$ by $a$ and,
-inside each stratum, by a fixed nonvanishing $a\times a$ minor of the matrix whose rows span $T$; on each
-such locally closed stratum the fibre admits a polynomial frame and $a_{I,m,e}$ is a polynomial there, so
-$\mathfrak S$ is closed stratum by stratum and hence closed on $G_\alpha$, finitely many strata being
-involved. By Definition~\ref{def:bad} the set $\mathcal B_{\mathrm{unif}}$ is defined intrinsically, so
+is closed in $G_\alpha$. One point of care: the coefficients $a_{I,m,e}(p)$ come from a parametrisation of the fibre, and the
+dimension $a=\dim(U\cap T)$ can jump inside a chart. On the locally closed stratum where $a$ is constant and
+a fixed minor selecting a complement of $T$ in $U$ does not vanish, the fibre admits a polynomial frame
+and $a_{I,m,e}$ is a polynomial there, so $\mathfrak S$ is closed on that stratum. Passing from
+`closed on every stratum of the stratification by $a$' to `closed on the chart' requires the strata to be
+ordered so that each is open in the union of those above it, which holds when $a$ is constant on the
+chart; we therefore state the conclusion below for a fixed $a$ and record the general case as open. By Definition~\ref{def:bad} the set $\mathcal B_{\mathrm{unif}}$ is defined intrinsically, so
 these local descriptions are the traces of one global subset; closedness is a local property and the
 standard charts cover $\mathrm{Gr}(d',k)$, hence $\mathcal B_{\mathrm{unif}}$ is closed.
 \end{proof}
@@ -455,16 +458,19 @@ $\mathcal C=\{U\supseteq U_0:\ \mathcal F_U\ne\varnothing\}$, which is itself cl
 \end{thm}
 
 \begin{proof}
-By Corollary~\ref{cor:closed}, $\mathcal B_{\mathrm{unif}}$ is closed; by Theorem~\ref{thm:factor},
-$\mathcal B=\mathcal B_{\mathrm{unif}}$, so $\mathcal B$ is closed as well, and the feasible set
-$\mathcal C\setminus\mathcal B$ is relatively open in $\mathcal C$. Closedness of $\mathcal C$ is the
+On each stratum where $a=\dim(U\cap T)$ is constant, Corollary~\ref{cor:closed} gives that
+$\mathcal B_{\mathrm{unif}}$ is closed there, and Theorem~\ref{thm:factor} gives
+$\mathcal B=\mathcal B_{\mathrm{unif}}$ on that stratum; hence $\mathcal B$ is closed on the stratum and the
+feasible set $\mathcal C\setminus\mathcal B$ is relatively open there. Openness on the whole of $\mathcal C$
+is not claimed, for the reason recorded in Corollary~\ref{cor:closed}. Closedness of $\mathcal C$ is the
 determinantal (submatrix) nature of the condition $UZ''\subseteq U+T$. $\mathcal B$ need not be thin: when $q=d'$ the whole stratum is
 bad (\cite{paperI}, the square-pencil argument), while Example~\ref{ex:bad} shows that it can also be
 a proper closed set with feasible points arbitrarily close --- so the particular bad point is not an interior point (the set can have interior elsewhere: when $q=d'$ it is everything).
 \end{proof}
 
 \begin{thm}[Infeasibility]\label{thm:no}
-Let $\mathcal C$ be the compatibility stratum for the given $d'$ and $\mathcal B$ the bad set. There
+Assume $q>d'$ and the common-direction hypothesis of Theorem~\ref{thm:factor}. Let $\mathcal C$ be the
+compatibility stratum for the given $d'$ and $\mathcal B$ the bad set. There
 is no feasible $U$ of dimension $d'$ if and only if $\mathcal C\subseteq\mathcal B$. If
 $\mathcal C\not\subseteq\mathcal B$ then the feasible set is dense in some irreducible component of
 $\mathcal C$.
@@ -529,7 +535,9 @@ coefficient test of Proposition~\ref{prop:coeff} a test of the whole fibre rathe
 \section{Algorithms and examples}\label{sec:algorithms}
 
 \begin{thm}[Region with automatic compatibility]\label{thm:regime}
-Let $s=\dim(U_0\cap T)$ and suppose $d'+t-k\ge s$ with $t=\dim T$, and $d'\ge\dim U_0$. Then, the
+Let $s=\dim(U_0\cap T)$ and suppose $d'+t-k\ge s$ with $t=\dim T$, $d'\ge\dim U_0$, and (for the
+openness and density statements) $q>d'$ together with the common-direction hypothesis of
+Theorem~\ref{thm:factor}. Then, the
 following procedure accepts the $d'$-stratum one-sidedly: sample a rational
 $U\in\mathrm{Gr}(d',k)$ containing $U_0$, test the fibre with Theorem~\ref{thm:rp}, and accept when a
 witness is found. Acceptance is sound --- a witness is a feasible $U$ --- so the procedure never
