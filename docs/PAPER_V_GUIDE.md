@@ -95,10 +95,16 @@ CI.
 | Prop 17 (column dependence) | `rank_lt_of_le_ker`, `matrix_rank_lt_of_le_ker` | `KerRank.lean` |
 | Thm 22 structure step (`T ≤ U` ⟹ compat = invariance) | `map_mem_of_le_sup`, `invariant_iff_compat_of_le` | `Invariant.lean` |
 
-**Paper only, with the reason stated in `MainTheorems.lean` and `Claims.lean`:** the gcd
-criterion's matrix-level statement (needs multivariate gcd plus minors), Theorem 13 (incidence
-dimension), Corollary 12 / Theorem 14 (closedness — open on general strata, see §VI(E)),
-Theorem 15 (infeasibility), Theorem 19 (probabilistic regime), Theorem 22 (enumeration).
+Each row above is **complete** in the sense that the paper's statement of that item is formalised;
+`Claims.lean` carries the same three-tier labels.
+
+**Partial** (core formalised, full statement not): Theorem 4 — the sufficiency direction is
+assembled (`Criterion.lean`), the necessity direction over `ℂ(t)[λ]` is not.
+
+**Paper only, with the reason stated in `Claims.lean`:** Theorem 7 (rational witness and its
+height), Theorem 8 (two-grid probability bound), Theorem 13 (incidence dimension), Corollary 12 /
+Theorem 14 (closedness — proved stratum by stratum, global case open, §VI(E)), Theorem 15
+(infeasibility), Theorem 19 (regime), and the enumeration half of Theorem 22.
 
 ## Status
 
